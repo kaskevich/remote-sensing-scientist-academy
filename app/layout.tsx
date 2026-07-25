@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const siteUrl = new URL(
-  "https://remote-sensing-scientist-academy.littlefugee.chatgpt.site",
+  `${(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    "https://kaskevich.github.io/remote-sensing-scientist-academy"
+  ).replace(/\/$/, "")}/`,
 );
 
 export const metadata: Metadata = {
@@ -18,7 +21,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: "/og.png",
+        url: "og.png",
         width: 1536,
         height: 1024,
         alt: "Remote Sensing Scientist Academy — Read the planet. Shape what comes next.",
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     title: "Remote Sensing Scientist Academy",
     description:
       "Practical, rigorous online training for the next generation of remote sensing scientists.",
-    images: ["/og.png"],
+    images: ["og.png"],
   },
 };
 
