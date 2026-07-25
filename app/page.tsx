@@ -61,7 +61,10 @@ const outcomes = [
 
 export default function Home() {
   return (
-    <main>
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Remote Sensing Scientist Academy home">
           <span className="brand-mark" aria-hidden="true">
@@ -79,11 +82,22 @@ export default function Home() {
           <a href="#field-lab">Field Lab</a>
         </nav>
 
+        <details className="mobile-menu">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation">
+            <a href="#paths">Programs</a>
+            <a href="#curriculum">Curriculum</a>
+            <a href="#field-lab">Field Lab</a>
+            <a className="mobile-apply" href="#apply">Apply for cohort ↗</a>
+          </nav>
+        </details>
+
         <a className="header-cta" href="#apply">
           Apply for cohort <span aria-hidden="true">↗</span>
         </a>
       </header>
 
+      <main id="main-content">
       <section className="hero" id="top">
         <div className="hero-copy">
           <div className="eyebrow">
@@ -345,6 +359,7 @@ export default function Home() {
           <span>EARTH, OBSERVED WITH INTENT.</span>
         </div>
       </footer>
-    </main>
+      </main>
+    </>
   );
 }
