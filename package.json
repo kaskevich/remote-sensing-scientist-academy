@@ -10,7 +10,10 @@
     "build": "next build",
     "pages:build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit --incremental false",
+    "test": "vitest run",
+    "test:smoke": "playwright test"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -18,12 +21,14 @@
     "react-dom": "19.2.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "^4.1.10"
   },
   "type": "module"
 }

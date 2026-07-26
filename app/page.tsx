@@ -1,9 +1,17 @@
 import { Fragment } from "react";
 import content from "@/content/site.json";
+import LearnerCurriculum, { type AcademyLesson } from "@/app/components/learner-curriculum";
 
 const visibleNavigation = content.navigation.items.filter((item) => item.visible);
 const visiblePaths = content.pathsSection.items.filter((path) => path.visible);
 const visibleModules = content.curriculum.modules.filter((module) => module.visible);
+const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
+  id: `lesson-${String(index + 1).padStart(2, "0")}`,
+  week: module.week,
+  title: module.title,
+  description: module.description,
+  tools: module.tools,
+}));
 
 export default function Home() {
   const applicationTarget = content.application.openInNewTab ? "_blank" : undefined;
@@ -235,23 +243,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="module-list">
-              {visibleModules.map((module, index) => (
-                <article className="module" key={module.week}>
-                  <div className="module-index">{String(index + 1).padStart(2, "0")}</div>
-                  <div className="module-week">WEEKS {module.week}</div>
-                  <div className="module-copy">
-                    <h3>{module.title}</h3>
-                    <p>{module.description}</p>
-                    <div className="tool-list">
-                      {module.tools.map((tool) => (
-                        <span key={tool}>{tool}</span>
-                      ))}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <LearnerCurriculum lessons={learnerLessons} />
           </section>
         )}
 
