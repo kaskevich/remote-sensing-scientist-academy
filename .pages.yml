@@ -1,0 +1,450 @@
+content:
+  - name: site
+    label: Academy website
+    type: file
+    path: content/site.json
+    format: json
+    operations:
+      delete: false
+    fields:
+      - name: metadata
+        label: Search and sharing
+        type: object
+        required: true
+        fields:
+          - name: title
+            label: Site title
+            type: string
+            required: true
+          - name: description
+            label: Site description
+            type: text
+            required: true
+            options:
+              maxlength: 180
+      - name: brand
+        label: Brand
+        type: object
+        required: true
+        fields:
+          - name: mark
+            label: Logo letters
+            type: string
+            required: true
+          - name: lineOne
+            label: Brand name — first line
+            type: string
+            required: true
+          - name: lineTwo
+            label: Brand name — second line
+            type: string
+            required: true
+      - name: navigation
+        label: Navigation and header
+        type: object
+        required: true
+        fields:
+          - name: items
+            label: Menu links
+            type: object
+            list:
+              min: 1
+              max: 8
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - name: label
+                type: string
+                required: true
+              - name: href
+                label: Link
+                type: string
+                required: true
+                description: Use a section link such as #paths or a full https:// address.
+              - name: visible
+                type: boolean
+                default: true
+          - name: applyLabel
+            label: Header button text
+            type: string
+            required: true
+          - name: applyHref
+            label: Header button link
+            type: string
+            required: true
+          - name: showApplyButton
+            label: Show application button
+            type: boolean
+            default: true
+      - name: hero
+        label: Hero and satellite visual
+        type: object
+        required: true
+        fields:
+          - name: admissionsOpen
+            label: Admissions are open
+            type: boolean
+            default: true
+          - name: eyebrow
+            label: Status text
+            type: string
+            required: true
+          - name: title
+            label: Main headline
+            type: string
+            required: true
+          - name: accentTitle
+            label: Orange headline
+            type: string
+            required: true
+          - name: intro
+            label: Introduction
+            type: text
+            required: true
+          - name: primaryButtonLabel
+            label: Primary button text
+            type: string
+            required: true
+          - name: primaryButtonHref
+            label: Primary button link
+            type: string
+            required: true
+          - name: secondaryButtonLabel
+            label: Secondary button text
+            type: string
+            required: true
+          - name: secondaryButtonHref
+            label: Secondary button link
+            type: string
+            required: true
+          - name: notes
+            label: Benefit notes
+            type: string
+            list:
+              min: 1
+              max: 5
+          - name: visualAriaLabel
+            label: Visual accessibility description
+            type: text
+            required: true
+          - name: telemetryTopLabel
+            label: Top telemetry label
+            type: string
+            required: true
+          - name: telemetryTopValue
+            label: Top telemetry value
+            type: string
+            required: true
+          - name: telemetryBottomLabel
+            label: Bottom telemetry label
+            type: string
+            required: true
+          - name: telemetryBottomValue
+            label: Bottom telemetry value
+            type: string
+            required: true
+          - name: visualCaptionLeft
+            label: Visual caption — left
+            type: string
+            required: true
+          - name: visualCaptionRight
+            label: Visual caption — right
+            type: string
+            required: true
+      - name: signalStrip
+        label: Expertise strip
+        type: string
+        list:
+          min: 1
+          max: 10
+      - name: pathsSection
+        label: Programs
+        type: object
+        required: true
+        fields:
+          - name: visible
+            label: Show programs section
+            type: boolean
+            default: true
+          - name: kicker
+            type: string
+            required: true
+          - name: titleLineOne
+            label: Title — first line
+            type: string
+            required: true
+          - name: titleLineTwo
+            label: Title — second line
+            type: string
+            required: true
+          - name: summary
+            type: text
+            required: true
+          - name: items
+            label: Programs
+            type: object
+            list:
+              min: 1
+              max: 8
+              collapsible:
+                collapsed: true
+                summary: "{number} — {title}"
+            fields:
+              - name: visible
+                label: Show this program
+                type: boolean
+                default: true
+              - name: number
+                type: string
+                required: true
+              - name: label
+                type: string
+                required: true
+              - name: title
+                type: string
+                required: true
+              - name: description
+                type: text
+                required: true
+              - name: meta
+                label: Duration and level
+                type: string
+                required: true
+              - name: accent
+                label: Accent color
+                type: select
+                required: true
+                options:
+                  values:
+                    - name: lime
+                      label: Lime
+                    - name: blue
+                      label: Blue
+                    - name: orange
+                      label: Orange
+      - name: fieldLab
+        label: Field lab
+        type: object
+        required: true
+        fields:
+          - name: visible
+            label: Show field lab section
+            type: boolean
+            default: true
+          - name: mapAriaLabel
+            label: Map accessibility description
+            type: text
+            required: true
+          - name: coordinates
+            type: string
+            required: true
+          - name: legendBefore
+            label: Map legend — first label
+            type: string
+            required: true
+          - name: legendAfter
+            label: Map legend — second label
+            type: string
+            required: true
+          - name: kicker
+            type: string
+            required: true
+          - name: title
+            type: string
+            required: true
+          - name: lead
+            label: Introduction
+            type: text
+            required: true
+          - name: steps
+            type: object
+            list:
+              min: 1
+              max: 8
+              collapsible:
+                collapsed: true
+                summary: "{number} — {title}"
+            fields:
+              - name: number
+                type: string
+                required: true
+              - name: title
+                type: string
+                required: true
+              - name: description
+                type: text
+                required: true
+          - name: buttonLabel
+            label: Button text
+            type: string
+            required: true
+          - name: buttonHref
+            label: Button link
+            type: string
+            required: true
+      - name: curriculum
+        label: Curriculum
+        type: object
+        required: true
+        fields:
+          - name: visible
+            label: Show curriculum section
+            type: boolean
+            default: true
+          - name: kicker
+            type: string
+            required: true
+          - name: titleLineOne
+            label: Title — first line
+            type: string
+            required: true
+          - name: titleLineTwo
+            label: Title — second line
+            type: string
+            required: true
+          - name: cohortLabel
+            label: Cohort label
+            type: string
+            required: true
+          - name: cohortDate
+            label: Cohort date
+            type: string
+            required: true
+          - name: cohortMeta
+            label: Cohort details
+            type: string
+            required: true
+          - name: modules
+            type: object
+            list:
+              min: 1
+              max: 16
+              collapsible:
+                collapsed: true
+                summary: "Weeks {week} — {title}"
+            fields:
+              - name: visible
+                label: Show this module
+                type: boolean
+                default: true
+              - name: week
+                label: Week range
+                type: string
+                required: true
+              - name: title
+                type: string
+                required: true
+              - name: description
+                type: text
+                required: true
+              - name: tools
+                label: Tools and datasets
+                type: string
+                list:
+                  min: 1
+                  max: 10
+      - name: outcomes
+        label: Graduate outcomes
+        type: object
+        required: true
+        fields:
+          - name: visible
+            label: Show outcomes section
+            type: boolean
+            default: true
+          - name: kicker
+            type: string
+            required: true
+          - name: title
+            type: string
+            required: true
+          - name: description
+            type: text
+            required: true
+          - name: items
+            label: Statistics
+            type: object
+            list:
+              min: 1
+              max: 8
+              collapsible:
+                collapsed: true
+                summary: "{value} {label}"
+            fields:
+              - name: value
+                type: string
+                required: true
+              - name: label
+                type: string
+                required: true
+      - name: application
+        label: Application call to action
+        type: object
+        required: true
+        fields:
+          - name: visible
+            label: Show application section
+            type: boolean
+            default: true
+          - name: kicker
+            type: string
+            required: true
+          - name: title
+            type: string
+            required: true
+          - name: description
+            type: text
+            required: true
+          - name: buttonLabel
+            label: Button text
+            type: string
+            required: true
+          - name: buttonHref
+            label: Application link
+            type: string
+            required: true
+            description: Use mailto:name@example.com, a form link, or another full address.
+          - name: openInNewTab
+            label: Open application link in a new tab
+            type: boolean
+            default: false
+          - name: cohortMeta
+            label: Cohort availability
+            type: string
+            required: true
+          - name: deadlineMeta
+            label: Application deadline
+            type: string
+            required: true
+      - name: footer
+        label: Footer
+        type: object
+        required: true
+        fields:
+          - name: description
+            type: text
+            required: true
+          - name: contactLabel
+            label: Contact link text
+            type: string
+            required: true
+          - name: contactHref
+            label: Contact link
+            type: string
+            required: true
+          - name: copyright
+            type: string
+            required: true
+          - name: manifesto
+            label: Closing statement
+            type: string
+            required: true
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      update: "Update academy content via Pages CMS"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import content from "@/content/site.json";
 import "./globals.css";
 
 const siteUrl = new URL(
@@ -10,13 +11,11 @@ const siteUrl = new URL(
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Remote Sensing Scientist Academy",
-  description:
-    "Practical, rigorous online training for the next generation of remote sensing scientists.",
+  title: content.metadata.title,
+  description: content.metadata.description,
   openGraph: {
-    title: "Remote Sensing Scientist Academy",
-    description:
-      "Practical, rigorous online training for the next generation of remote sensing scientists.",
+    title: content.metadata.title,
+    description: content.metadata.description,
     type: "website",
     url: siteUrl,
     images: [
@@ -24,15 +23,14 @@ export const metadata: Metadata = {
         url: "og.png",
         width: 1536,
         height: 1024,
-        alt: "Remote Sensing Scientist Academy — Read the planet. Shape what comes next.",
+        alt: `${content.metadata.title} — ${content.hero.title} ${content.hero.accentTitle}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Remote Sensing Scientist Academy",
-    description:
-      "Practical, rigorous online training for the next generation of remote sensing scientists.",
+    title: content.metadata.title,
+    description: content.metadata.description,
     images: ["og.png"],
   },
 };

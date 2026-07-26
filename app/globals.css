@@ -275,6 +275,60 @@ a {
   box-shadow: 0 0 0 5px rgba(79, 190, 102, 0.13);
 }
 
+.status-dot-closed {
+  background: #8a93a1;
+  box-shadow: 0 0 0 5px rgba(138, 147, 161, 0.14);
+}
+
+.admin-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 70% 25%, #1a3855 0, var(--ink) 58%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}
+
+.admin-card {
+  width: min(680px, 100%);
+  padding: clamp(34px, 7vw, 72px);
+  border-top: 7px solid var(--lime);
+  background: var(--paper);
+  box-shadow: 18px 18px 0 rgba(0, 0, 0, 0.22);
+}
+
+.admin-card h1 {
+  margin-bottom: 24px;
+  font-size: clamp(52px, 8vw, 88px);
+}
+
+.admin-card > p:not(.section-kicker) {
+  max-width: 560px;
+  margin-bottom: 30px;
+  color: #405066;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.admin-card .button {
+  width: fit-content;
+}
+
+.admin-back {
+  display: block;
+  width: fit-content;
+  margin-top: 28px;
+  border-bottom: 1px solid currentColor;
+  padding: 6px 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 h1,
 h2,
 h3,

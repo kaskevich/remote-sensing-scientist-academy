@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Remote Sensing Scientist Academy",
+    "description": "Practical, rigorous online training for the next generation of remote sensing scientists."
+  },
+  "brand": {
+    "mark": "RS",
+    "lineOne": "Remote Sensing",
+    "lineTwo": "Scientist Academy"
+  },
+  "navigation": {
+    "items": [
+      {
+        "label": "Programs",
+        "href": "#paths",
+        "visible": true
+      },
+      {
+        "label": "Curriculum",
+        "href": "#curriculum",
+        "visible": true
+      },
+      {
+        "label": "Field Lab",
+        "href": "#field-lab",
+        "visible": true
+      }
+    ],
+    "applyLabel": "Apply for cohort",
+    "applyHref": "#apply",
+    "showApplyButton": true
+  },
+  "hero": {
+    "admissionsOpen": true,
+    "eyebrow": "Admissions open · Autumn cohort",
+    "title": "Read the planet.",
+    "accentTitle": "Shape what comes next.",
+    "intro": "An intensive online academy for the next generation of remote sensing scientists—built around real satellite data, rigorous analysis, and problems that matter.",
+    "primaryButtonLabel": "Explore programs",
+    "primaryButtonHref": "#paths",
+    "secondaryButtonLabel": "View a field lab",
+    "secondaryButtonHref": "#field-lab",
+    "notes": [
+      "Learn from anywhere",
+      "Work with real missions",
+      "Graduate with evidence"
+    ],
+    "visualAriaLabel": "Satellite observation data visualization",
+    "telemetryTopLabel": "AOI_59.4N",
+    "telemetryTopValue": "PASS 084",
+    "telemetryBottomLabel": "NDVI Δ",
+    "telemetryBottomValue": "+0.184",
+    "visualCaptionLeft": "LIVE TRAINING SCENE",
+    "visualCaptionRight": "S2A · 10M · 07:42 UTC"
+  },
+  "signalStrip": [
+    "OPTICAL",
+    "SAR",
+    "LIDAR",
+    "THERMAL",
+    "HYPERSPECTRAL",
+    "GEOSPATIAL AI"
+  ],
+  "pathsSection": {
+    "visible": true,
+    "kicker": "Choose your trajectory",
+    "titleLineOne": "Learn in layers.",
+    "titleLineTwo": "Advance with purpose.",
+    "summary": "Start with one focused path or combine all three into the complete Remote Sensing Scientist program.",
+    "items": [
+      {
+        "visible": true,
+        "number": "01",
+        "label": "FOUNDATIONS",
+        "title": "Earth Observation Essentials",
+        "description": "Build fluency in spectral signatures, sensor systems, resolutions, and the physics behind every pixel.",
+        "meta": "6 weeks · Beginner",
+        "accent": "lime"
+      },
+      {
+        "visible": true,
+        "number": "02",
+        "label": "ANALYSIS",
+        "title": "Geospatial Data Science",
+        "description": "Move from raw scenes to defensible insight with Python, cloud workflows, and reproducible spatial analysis.",
+        "meta": "10 weeks · Intermediate",
+        "accent": "blue"
+      },
+      {
+        "visible": true,
+        "number": "03",
+        "label": "APPLICATION",
+        "title": "Climate Intelligence",
+        "description": "Detect change, quantify risk, and communicate environmental signals across time and scale.",
+        "meta": "8 weeks · Advanced",
+        "accent": "orange"
+      }
+    ]
+  },
+  "fieldLab": {
+    "visible": true,
+    "mapAriaLabel": "Stylized wildfire recovery analysis map",
+    "coordinates": "39.74°N / 105.18°W",
+    "legendBefore": "PRE-FIRE",
+    "legendAfter": "RECOVERY",
+    "kicker": "Field lab 06 · Change detection",
+    "title": "Measure recovery after the fire.",
+    "lead": "In this guided investigation, you’ll build a multi-year recovery model from Sentinel-2 imagery and explain where—and why—the landscape is struggling to return.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Assemble the time series",
+        "description": "Filter, mask, and harmonize six years of surface reflectance."
+      },
+      {
+        "number": "02",
+        "title": "Model the signal",
+        "description": "Quantify burn severity and vegetation recovery trajectories."
+      },
+      {
+        "number": "03",
+        "title": "Defend the finding",
+        "description": "Validate uncertainty and deliver a concise scientific briefing."
+      }
+    ],
+    "buttonLabel": "See how the program works",
+    "buttonHref": "#curriculum"
+  },
+  "curriculum": {
+    "visible": true,
+    "kicker": "The complete program",
+    "titleLineOne": "From photons",
+    "titleLineTwo": "to foresight.",
+    "cohortLabel": "NEXT COHORT",
+    "cohortDate": "14 September",
+    "cohortMeta": "10 weeks · 8–10 hours/week · Online",
+    "modules": [
+      {
+        "visible": true,
+        "week": "01—03",
+        "title": "See beyond RGB",
+        "description": "Sensor physics, spectral response, atmospheric effects, and the anatomy of an Earth observation product.",
+        "tools": [
+          "Sentinel-2",
+          "Landsat",
+          "QGIS"
+        ]
+      },
+      {
+        "visible": true,
+        "week": "04—07",
+        "title": "Build the processing chain",
+        "description": "Search catalogs, prepare data cubes, engineer indices, classify land cover, and validate your results.",
+        "tools": [
+          "Python",
+          "STAC",
+          "Google Earth Engine"
+        ]
+      },
+      {
+        "visible": true,
+        "week": "08—10",
+        "title": "Turn signals into decisions",
+        "description": "Design a complete monitoring product and present findings with the uncertainty decision-makers need.",
+        "tools": [
+          "xarray",
+          "GeoPandas",
+          "Cloud Optimized GeoTIFF"
+        ]
+      }
+    ]
+  },
+  "outcomes": {
+    "visible": true,
+    "kicker": "Your evidence of work",
+    "title": "Graduate with more than a certificate.",
+    "description": "Leave with a reviewed portfolio, a reproducible analysis workflow, and the confidence to explain technical results to real decision-makers.",
+    "items": [
+      {
+        "value": "12",
+        "label": "guided field labs"
+      },
+      {
+        "value": "04",
+        "label": "portfolio projects"
+      },
+      {
+        "value": "30+",
+        "label": "satellite datasets"
+      },
+      {
+        "value": "01",
+        "label": "capstone defense"
+      }
+    ]
+  },
+  "application": {
+    "visible": true,
+    "kicker": "Applications now open",
+    "title": "The planet is already talking.",
+    "description": "Learn how to listen—then turn the signal into action.",
+    "buttonLabel": "Start your application",
+    "buttonHref": "mailto:admissions@rss.academy",
+    "openInNewTab": false,
+    "cohortMeta": "AUTUMN COHORT · 24 PLACES",
+    "deadlineMeta": "APPLICATIONS CLOSE 21 AUGUST"
+  },
+  "footer": {
+    "description": "Serious training for people who want to understand a changing planet.",
+    "contactLabel": "Contact",
+    "contactHref": "mailto:admissions@rss.academy",
+    "copyright": "© 2026 Remote Sensing Scientist Academy",
+    "manifesto": "EARTH, OBSERVED WITH INTENT."
+  }
+}

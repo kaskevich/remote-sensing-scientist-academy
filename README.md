@@ -16,6 +16,14 @@ curriculum, graduate outcomes, and the next cohort.
 - Program, curriculum, field lab, and application sections
 - Branded Open Graph and social-sharing artwork
 - Automated deployment through GitHub Pages
+- Browser-based content editing through Pages CMS
+
+## Content administration
+
+Open the academy's [admin launcher](https://kaskevich.github.io/remote-sensing-scientist-academy/admin/),
+then sign in to Pages CMS with the GitHub account that owns the repository.
+Edits are saved to `content/site.json`; each save triggers the existing GitHub
+Pages deployment automatically.
 
 ## Development
 
