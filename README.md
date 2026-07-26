@@ -1,33 +1,29 @@
 # Remote Sensing Scientist Academy
 
-A responsive academy website for practical, rigorous remote sensing education.
-The experience introduces learning paths, a field investigation, the full
-curriculum, graduate outcomes, and the next cohort.
+A practical online academy for learning remote sensing with real satellite
+data. The site includes programs, a field lab, a full curriculum, outcomes,
+and applications.
 
 ## Live site
 
 [Open Remote Sensing Scientist Academy](https://kaskevich.github.io/remote-sensing-scientist-academy/)
 
-## Highlights
+## What is included
 
-- Editorial Earth-observation visual system
-- Responsive desktop, tablet, and mobile layouts
-- Accessible keyboard navigation and mobile menu
-- Program, curriculum, field lab, and application sections
-- Branded Open Graph and social-sharing artwork
-- Automated deployment through GitHub Pages
-- Browser-based content editing through Pages CMS
+- Responsive website for desktop and mobile
+- Programs, curriculum, field lab, outcomes, and application sections
+- Content editing with Pages CMS
+- Automatic publishing with GitHub Pages
 
-## Content administration
+## Edit the content
 
 Open the academy's [admin launcher](https://kaskevich.github.io/remote-sensing-scientist-academy/admin/),
-then sign in to Pages CMS with the GitHub account that owns the repository.
-Edits are saved to `content/site.json`; each save triggers the existing GitHub
-Pages deployment automatically.
+then sign in with the GitHub account connected to this repository. Save your
+changes in Pages CMS and GitHub Pages will publish the new version.
 
 ## Development
 
-Requires Node.js 22.13 or newer.
+Requires Node.js 20.9 or newer.
 
 ```bash
 npm install
