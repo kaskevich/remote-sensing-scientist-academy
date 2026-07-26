@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Remote Sensing Scientist Academy",
-    "description": "Practical, rigorous online training for the next generation of remote sensing scientists."
+    "description": "Practical online training for the remote sensing scientists."
   },
   "brand": {
     "mark": "RS",
@@ -35,7 +35,7 @@
     "eyebrow": "Admissions open · Autumn cohort",
     "title": "Read the planet.",
     "accentTitle": "Shape what comes next.",
-    "intro": "An intensive online academy for the next generation of remote sensing scientists—built around real satellite data, rigorous analysis, and problems that matter.",
+    "intro": "An intensive online academy for remote sensing scientists—built around real satellite data, rigorous analysis, and problems that matter.",
     "primaryButtonLabel": "Explore programs",
     "primaryButtonHref": "#paths",
     "secondaryButtonLabel": "View a field lab",
@@ -199,8 +199,8 @@
     "kicker": "Applications now open",
     "title": "The planet is already talking.",
     "description": "Learn how to listen—then turn the signal into action.",
-    "buttonLabel": "Start your application",
-    "buttonHref": "mailto:admissions@rss.academy",
+    "buttonLabel": "Start your application— just let us know your motivation in a free form",
+    "buttonHref": "mailto:kaskevich@gmail.com",
     "openInNewTab": false,
     "cohortMeta": "AUTUMN COHORT · 24 PLACES",
     "deadlineMeta": "APPLICATIONS CLOSE 21 AUGUST"
@@ -208,7 +208,7 @@
   "footer": {
     "description": "Serious training for people who want to understand a changing planet.",
     "contactLabel": "Contact",
-    "contactHref": "mailto:admissions@rss.academy",
+    "contactHref": "mailto:kaskevich@gmail.com",
     "copyright": "© 2026 Remote Sensing Scientist Academy",
     "manifesto": "EARTH, OBSERVED WITH INTENT."
   }
