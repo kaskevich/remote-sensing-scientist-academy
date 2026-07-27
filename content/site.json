@@ -136,6 +136,7 @@
     "cohortMeta": "10 weeks · 8–10 hours/week · Online",
     "modules": [
       {
+        "id": "lesson-01",
         "visible": true,
         "week": "01—03",
         "title": "Understand the image",
@@ -144,9 +145,19 @@
           "Sentinel-2",
           "Landsat",
           "QGIS"
-        ]
+        ],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "",
+          "instructions": "",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
       },
       {
+        "id": "lesson-02",
         "visible": true,
         "week": "04—07",
         "title": "Build the workflow",
@@ -155,9 +166,19 @@
           "Python",
           "STAC",
           "Google Earth Engine"
-        ]
+        ],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "",
+          "instructions": "",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
       },
       {
+        "id": "lesson-03",
         "visible": true,
         "week": "08—10",
         "title": "Present a useful result",
@@ -166,7 +187,16 @@
           "xarray",
           "GeoPandas",
           "Cloud Optimized GeoTIFF"
-        ]
+        ],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "",
+          "instructions": "",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
       }
     ]
   },
