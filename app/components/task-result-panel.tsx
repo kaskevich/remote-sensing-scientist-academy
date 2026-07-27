@@ -220,7 +220,11 @@ function GuestTaskResultPanel({
       : "Learner submission prototype: private and saved only in this browser. Sign in to synchronize it and contact an instructor.";
 
   return (
-    <section className="program-task" aria-labelledby={`${lessonId}-task-title`}>
+    <section
+      className="program-task"
+      aria-busy={!hasLoaded}
+      aria-labelledby={`${lessonId}-task-title`}
+    >
       <div className="program-task-heading">
         <span>Program task</span>
         <h4 id={`${lessonId}-task-title`}>{title || "Build and explain your result"}</h4>
@@ -249,6 +253,7 @@ function GuestTaskResultPanel({
             id={`${lessonId}-result-text`}
             rows={5}
             value={result.text}
+            disabled={!hasLoaded}
             placeholder="Explain what the map or imagery shows, including uncertainty."
             onChange={(event) => setText(event.target.value)}
           />
@@ -262,6 +267,7 @@ function GuestTaskResultPanel({
             id={`${lessonId}-result-files`}
             type="file"
             multiple
+            disabled={!hasLoaded}
             accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.zip"
             onChange={(event) => {
               const files = Array.from(event.target.files ?? []);
