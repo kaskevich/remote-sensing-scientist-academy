@@ -3,13 +3,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   calculateProgress,
-  createBrowserLearnerProgressStorage,
   createEmptyLearnerProgress,
   getNextIncompleteLessonId,
   type LearnerProgressState,
-  type LearnerProgressStorage,
   type StorageLoadStatus,
 } from "@/lib/learner-progress";
+import {
+  createAuthenticatedLearnerDataProvider,
+  createGuestLearnerDataProvider,
+  type LearnerDataProvider,
+} from "@/lib/learner-data";
 import {
   LessonImageGallery,
   LessonResources,
@@ -19,6 +22,12 @@ import {
   type LessonResource,
 } from "@/app/components/lesson-materials";
 import TaskResultPanel from "@/app/components/task-result-panel";
+import AcademyAccountPanel, {
+  AcademyDashboardStats,
+} from "@/app/components/academy-account-panel";
+import { useAcademyAuth } from "@/app/components/academy-auth-provider";
+import LessonDiscussion from "@/app/components/lesson-discussion";
+import SyncedLessonResources from "@/app/components/synced-lesson-resources";
 
 export type AcademyLesson = {
   id: string;
@@ -46,8 +55,9 @@ function activityTimestamp() {
 }
 
 export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
+  const auth = useAcademyAuth();
   const lessonIds = useMemo(() => lessons.map((lesson) => lesson.id), [lessons]);
-  const storageRef = useRef<LearnerProgressStorage | null>(null);
+  const storageRef = useRef<LearnerDataProvider | null>(null);
   const [progress, setProgress] = useState<LearnerProgressState>(createEmptyLearnerProgress);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loadStatus, setLoadStatus] = useState<StorageLoadStatus>("empty");
@@ -56,26 +66,38 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
   // Browser-local state must hydrate after mount so server rendering stays deterministic.
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const storage = createBrowserLearnerProgressStorage();
-    const loaded = storage.load();
-    const summary = calculateProgress(lessonIds, loaded.state);
-    const initialState = {
-      ...loaded.state,
-      currentLessonId: summary.currentLessonId,
-    };
-
+    const storage = auth.client && auth.user
+      ? createAuthenticatedLearnerDataProvider(auth.client, auth.user.id)
+      : createGuestLearnerDataProvider();
+    let active = true;
     storageRef.current = storage;
-    setProgress(initialState);
-    setLoadStatus(loaded.status);
-    setHasLoaded(true);
-  }, [lessonIds]);
+    setHasLoaded(false);
+    void storage.load().then((loaded) => {
+      if (!active) return;
+      const summary = calculateProgress(lessonIds, loaded.state);
+      setProgress({
+        ...loaded.state,
+        currentLessonId: summary.currentLessonId,
+      });
+      setLoadStatus(loaded.status);
+      setHasLoaded(true);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [auth.client, auth.user, auth.dataRevision, lessonIds]);
 
   useEffect(() => {
     if (!hasLoaded || !storageRef.current) {
       return;
     }
 
-    setSaveFailed(!storageRef.current.save(progress));
+    const timeout = window.setTimeout(() => {
+      void storageRef.current?.save(progress).then((saved) => setSaveFailed(!saved));
+    }, storageRef.current.mode === "authenticated" ? 600 : 0);
+
+    return () => window.clearTimeout(timeout);
   }, [hasLoaded, progress]);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -120,16 +142,18 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
     }));
   }
 
-  function resetProgress() {
+  async function resetProgress() {
     const confirmed = window.confirm(
-      "Reset all lesson progress and personal notes saved in this browser?",
+      auth.user
+        ? "Reset all synchronized lesson progress and private notes in your Academy account?"
+        : "Reset all lesson progress and personal notes saved in this browser?",
     );
 
     if (!confirmed) {
       return;
     }
 
-    storageRef.current?.reset();
+    await storageRef.current?.reset();
     setProgress({
       ...createEmptyLearnerProgress(),
       currentLessonId: lessonIds[0] ?? null,
@@ -139,14 +163,19 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
   }
 
   const storageNotice = saveFailed || loadStatus === "unavailable"
-    ? "Local saving is unavailable in this browser. Progress will last only until this page closes."
+    ? auth.user
+      ? "Account synchronization is temporarily unavailable. Recent changes may not be saved."
+      : "Local saving is unavailable in this browser. Progress will last only until this page closes."
     : loadStatus === "recovered"
       ? "Unreadable browser data was safely reset. New progress will save in this browser."
-      : "Progress and notes are saved only in this browser. They are not shared with other browsers or devices.";
+      : auth.user
+        ? "Progress and private notes are synchronized securely with your Academy account."
+        : "Progress and notes are saved only in this browser. They are not shared with other browsers or devices.";
 
   return (
     <>
       <section className="learner-dashboard" aria-labelledby="learner-dashboard-title">
+        <AcademyAccountPanel />
         <div className="learner-dashboard-heading">
           <div>
             <p className="section-kicker">Your learning</p>
@@ -186,9 +215,11 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
           </div>
         </div>
 
+        <AcademyDashboardStats />
+
         <div className="learner-storage-row">
           <p>{storageNotice}</p>
-          <button className="learner-reset" type="button" onClick={resetProgress}>
+          <button className="learner-reset" type="button" onClick={() => void resetProgress()}>
             Reset progress
           </button>
         </div>
@@ -225,6 +256,8 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                   </div>
                 )}
 
+                <SyncedLessonResources lessonId={lesson.id} />
+
                 <div className="lesson-actions">
                   <label className="lesson-completion-control">
                     <input
@@ -245,7 +278,7 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
 
                 <div className="lesson-notes">
                   <label htmlFor={noteId}>
-                    Personal lesson notes <span>Autosaved locally</span>
+                    Private learner notes <span>{auth.user ? "Autosaved to your account" : "Autosaved locally"}</span>
                   </label>
                   <textarea
                     id={noteId}
@@ -263,6 +296,7 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                   referenceImages={lesson.task.referenceImages}
                   referenceMaps={lesson.task.referenceMaps}
                 />
+                <LessonDiscussion lessonId={lesson.id} lessonTitle={lesson.title} />
               </div>
             </article>
           );

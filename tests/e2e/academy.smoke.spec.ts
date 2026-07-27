@@ -15,6 +15,7 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   await page.reload();
 
   await expect(page).toHaveTitle(/Remote Sensing Scientist Academy/);
+  await expect(page.getByText("Guest workspace", { exact: true })).toBeVisible();
 
   const firstLesson = page.locator("#lesson-01");
   const completion = firstLesson.getByRole("checkbox");
@@ -41,6 +42,7 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
 
   await expect(completion).toBeChecked();
   await expect(notes).toHaveValue(noteText);
+  await expect(firstLesson.getByText("Private learner notes", { exact: false })).toBeVisible();
 
   const mobileMenu = page.locator("details.mobile-menu");
   await mobileMenu.locator("summary").click();
@@ -56,17 +58,8 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
 test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
-  await page.evaluate(
-    () =>
-      new Promise<void>((resolve) => {
-        const request = indexedDB.deleteDatabase("rs-academy-task-results-v1");
-        request.onsuccess = () => resolve();
-        request.onerror = () => resolve();
-        request.onblocked = () => resolve();
-      }),
-  );
-  await page.reload();
 
+  const firstLesson = page.locator("#lesson-01");
   const taskText = page.locator("#lesson-01-result-text");
   const resultText = "Recovery is strongest on north-facing slopes; cloud cover adds uncertainty.";
   await taskText.fill(resultText);
@@ -100,17 +93,47 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
         }),
       ),
     },
+    {
+      name: "metrics.csv",
+      mimeType: "text/csv",
+      buffer: Buffer.from("site,ndvi\nA,0.72\n"),
+    },
   ]);
 
   await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
   await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+  await expect(firstLesson.getByText("Learner submission · browser prototype", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("Private learner–instructor conversation", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("Instructor feedback", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("Shared lesson discussion", { exact: true })).toBeVisible();
+
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          new Promise<string | null>((resolve) => {
+            const request = indexedDB.open("rs-academy-task-results-v1", 1);
+            request.onerror = () => resolve(null);
+            request.onsuccess = () => {
+              const database = request.result;
+              const transaction = database.transaction("task-results", "readonly");
+              const recordRequest = transaction.objectStore("task-results").get("lesson-01");
+              recordRequest.onerror = () => resolve(null);
+              recordRequest.onsuccess = () => resolve(recordRequest.result?.text ?? null);
+            };
+          }),
+      ),
+    )
+    .toBe(resultText);
 
   await page.reload();
 
   await expect(taskText).toHaveValue(resultText);
   await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
   await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
 });
 

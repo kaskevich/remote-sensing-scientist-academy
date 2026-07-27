@@ -29,8 +29,13 @@ repository under `public/lesson-media/` and published with the website.
 ## Learner work
 
 Learners can save a written result and attach PNG, JPEG, WebP, or GeoJSON files
-to each program task. These results, lesson notes, and progress are private to
-the current browser. They are not uploaded to GitHub or shared across devices.
+to each program task. Guest work remains private to the current browser. When
+Supabase is configured, signed-in learners can synchronize progress and private
+notes, upload private submission files, and receive instructor feedback.
+
+Platform setup and security instructions are in
+[`docs/SUPABASE_SETUP.md`](docs/SUPABASE_SETUP.md). The local and synchronized
+data distinction is documented in [`docs/PRIVACY_AND_DATA.md`](docs/PRIVACY_AND_DATA.md).
 
 ## Development
 

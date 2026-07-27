@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import AuthenticatedTaskResultPanel from "@/app/components/authenticated-task-result-panel";
+import { useAcademyAuth } from "@/app/components/academy-auth-provider";
 import { GeoJsonMap } from "@/app/components/geojson-map";
 import {
   LessonImageGallery,
@@ -14,16 +16,20 @@ import {
   createBrowserTaskResultStorage,
   createEmptyTaskResult,
   type ImageTaskAttachment,
+  type FileTaskAttachment,
   type TaskAttachment,
   type TaskResult,
   type TaskResultLoadStatus,
   type TaskResultStorage,
 } from "@/lib/task-results";
+import {
+  MAX_SUBMISSION_FILES,
+  configuredMaxUploadBytes,
+  formatFileSize,
+  validateAcademyUpload,
+} from "@/lib/upload-validation";
 
-const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
-const MAX_GEOJSON_BYTES = 5 * 1024 * 1024;
-const MAX_ATTACHMENTS = 8;
-const SUPPORTED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+const MAX_UPLOAD_BYTES = configuredMaxUploadBytes();
 
 type TaskResultPanelProps = {
   lessonId: string;
@@ -55,7 +61,21 @@ function LocalTaskImage({ attachment }: { attachment: ImageTaskAttachment }) {
   return <img alt={`Uploaded task result: ${attachment.name}`} src={src} />;
 }
 
-export default function TaskResultPanel({
+function LocalTaskFile({ attachment }: { attachment: FileTaskAttachment }) {
+  const [href] = useState(() => URL.createObjectURL(attachment.blob));
+
+  useEffect(() => () => URL.revokeObjectURL(href), [href]);
+
+  return (
+    <div className="task-generic-file">
+      <span>{attachment.name.split(".").pop()?.toUpperCase() || "FILE"}</span>
+      <strong>{formatFileSize(attachment.size)}</strong>
+      <a href={href} download={attachment.name}>Download local file</a>
+    </div>
+  );
+}
+
+function GuestTaskResultPanel({
   lessonId,
   title,
   instructions,
@@ -98,11 +118,11 @@ export default function TaskResultPanel({
 
   async function addFiles(files: File[]) {
     setUploadMessage("");
-    const availableSlots = Math.max(0, MAX_ATTACHMENTS - result.attachments.length);
+    const availableSlots = Math.max(0, MAX_SUBMISSION_FILES - result.attachments.length);
     const acceptedFiles = files.slice(0, availableSlots);
 
     if (acceptedFiles.length === 0) {
-      setUploadMessage(`Each task can keep up to ${MAX_ATTACHMENTS} uploaded results.`);
+      setUploadMessage(`Each task can keep up to ${MAX_SUBMISSION_FILES} uploaded results.`);
       return;
     }
 
@@ -110,14 +130,13 @@ export default function TaskResultPanel({
     const errors: string[] = [];
 
     for (const file of acceptedFiles) {
-      const extension = file.name.split(".").pop()?.toLowerCase();
+      const validation = validateAcademyUpload(file, MAX_UPLOAD_BYTES);
+      if (!validation.valid) {
+        errors.push(validation.error);
+        continue;
+      }
 
-      if (SUPPORTED_IMAGE_TYPES.has(file.type)) {
-        if (file.size > MAX_IMAGE_BYTES) {
-          errors.push(`${file.name} is larger than 10 MB.`);
-          continue;
-        }
-
+      if (validation.previewKind === "image") {
         attachments.push({
           id: attachmentId(),
           kind: "image",
@@ -129,12 +148,7 @@ export default function TaskResultPanel({
         continue;
       }
 
-      if (extension === "geojson" || extension === "json") {
-        if (file.size > MAX_GEOJSON_BYTES) {
-          errors.push(`${file.name} is larger than 5 MB.`);
-          continue;
-        }
-
+      if (validation.previewKind === "geojson") {
         try {
           const geojson: unknown = JSON.parse(await file.text());
           if (!isDisplayableGeoJson(geojson)) {
@@ -156,7 +170,14 @@ export default function TaskResultPanel({
         continue;
       }
 
-      errors.push(`${file.name} is not a supported image or GeoJSON file.`);
+      attachments.push({
+        id: attachmentId(),
+        kind: "file",
+        name: file.name,
+        mimeType: file.type || "application/octet-stream",
+        size: file.size,
+        blob: file.slice(0, file.size, file.type || "application/octet-stream"),
+      });
     }
 
     if (attachments.length > 0) {
@@ -196,7 +217,7 @@ export default function TaskResultPanel({
     ? "Task-result storage is unavailable in this browser."
     : loadStatus === "recovered"
       ? "Unreadable task data was safely reset. New results will save in this browser."
-      : "Task results are private and saved only in this browser.";
+      : "Learner submission prototype: private and saved only in this browser. Sign in to synchronize it and contact an instructor.";
 
   return (
     <section className="program-task" aria-labelledby={`${lessonId}-task-title`}>
@@ -212,7 +233,7 @@ export default function TaskResultPanel({
       <div className="task-result-editor">
         <div className="task-result-title-row">
           <div>
-            <span>Your result</span>
+            <span>Learner submission · browser prototype</span>
             <strong>Map, imagery, and interpretation</strong>
           </div>
           {(result.text || result.attachments.length > 0) && (
@@ -241,14 +262,14 @@ export default function TaskResultPanel({
             id={`${lessonId}-result-files`}
             type="file"
             multiple
-            accept="image/png,image/jpeg,image/webp,.geojson,application/geo+json,application/json"
+            accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.zip"
             onChange={(event) => {
               const files = Array.from(event.target.files ?? []);
               event.target.value = "";
               void addFiles(files);
             }}
           />
-          <span>PNG, JPEG, WebP up to 10 MB · GeoJSON up to 5 MB</span>
+          <span>Up to {MAX_SUBMISSION_FILES} files · {Math.round(MAX_UPLOAD_BYTES / 1024 / 1024)} MB each</span>
         </div>
 
         {uploadMessage && <p className="task-upload-message" role="status">{uploadMessage}</p>}
@@ -259,8 +280,10 @@ export default function TaskResultPanel({
               <figure className={`task-result-card task-result-${attachment.kind}`} key={attachment.id}>
                 {attachment.kind === "image" ? (
                   <LocalTaskImage attachment={attachment} />
-                ) : (
+                ) : attachment.kind === "geojson" ? (
                   <GeoJsonMap data={attachment.geojson} label={`Uploaded map: ${attachment.name}`} />
+                ) : (
+                  <LocalTaskFile attachment={attachment} />
                 )}
                 <figcaption>
                   <span>{attachment.name}</span>
@@ -274,7 +297,30 @@ export default function TaskResultPanel({
         )}
 
         <p className="task-storage-notice">{storageNotice}</p>
+
+        <section className="submission-conversation submission-conversation-disabled">
+          <div>
+            <span>Private learner–instructor conversation</span>
+            <strong>Questions, revision requests, and feedback</strong>
+            <p>Sign in to share private comments with an instructor.</p>
+          </div>
+        </section>
+
+        <aside className="instructor-feedback instructor-feedback-disabled">
+          <span>Instructor feedback</span>
+          <p>Sign in and submit work to receive synchronized review feedback.</p>
+        </aside>
       </div>
     </section>
   );
+}
+
+export default function TaskResultPanel(props: TaskResultPanelProps) {
+  const auth = useAcademyAuth();
+
+  if (auth.client && auth.user) {
+    return <AuthenticatedTaskResultPanel {...props} client={auth.client} user={auth.user} />;
+  }
+
+  return <GuestTaskResultPanel {...props} />;
 }

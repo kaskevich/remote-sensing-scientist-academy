@@ -19,7 +19,16 @@ export type GeoJsonTaskAttachment = {
   geojson: Record<string, unknown>;
 };
 
-export type TaskAttachment = ImageTaskAttachment | GeoJsonTaskAttachment;
+export type FileTaskAttachment = {
+  id: string;
+  kind: "file";
+  name: string;
+  mimeType: string;
+  size: number;
+  blob: Blob;
+};
+
+export type TaskAttachment = ImageTaskAttachment | GeoJsonTaskAttachment | FileTaskAttachment;
 
 export type TaskResult = {
   version: 1;
@@ -84,6 +93,18 @@ function isGeoJsonAttachment(value: unknown): value is GeoJsonTaskAttachment {
   );
 }
 
+function isFileAttachment(value: unknown): value is FileTaskAttachment {
+  return (
+    isRecord(value) &&
+    value.kind === "file" &&
+    typeof value.id === "string" &&
+    typeof value.name === "string" &&
+    typeof value.mimeType === "string" &&
+    typeof value.size === "number" &&
+    value.blob instanceof Blob
+  );
+}
+
 function normalizeTaskResult(value: unknown, lessonId: string): TaskResult {
   if (!isRecord(value)) {
     return createEmptyTaskResult(lessonId);
@@ -92,7 +113,9 @@ function normalizeTaskResult(value: unknown, lessonId: string): TaskResult {
   const attachments = Array.isArray(value.attachments)
     ? value.attachments.filter(
         (attachment): attachment is TaskAttachment =>
-          isImageAttachment(attachment) || isGeoJsonAttachment(attachment),
+          isImageAttachment(attachment) ||
+          isGeoJsonAttachment(attachment) ||
+          isFileAttachment(attachment),
       )
     : [];
 
@@ -118,7 +141,10 @@ function isStoredTaskResult(value: unknown, lessonId: string): value is TaskResu
     typeof value.text === "string" &&
     Array.isArray(value.attachments) &&
     value.attachments.every(
-      (attachment) => isImageAttachment(attachment) || isGeoJsonAttachment(attachment),
+      (attachment) =>
+        isImageAttachment(attachment) ||
+        isGeoJsonAttachment(attachment) ||
+        isFileAttachment(attachment),
     ) &&
     (value.lastActivityTimestamp === null || isTimestamp(value.lastActivityTimestamp))
   );
