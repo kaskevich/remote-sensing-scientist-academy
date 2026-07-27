@@ -1,3 +1,23 @@
+media:
+  - name: lesson_images
+    label: Lesson and task imagery
+    input: public/lesson-media/images
+    output: /lesson-media/images
+    extensions: [png, jpg, jpeg, webp]
+    rename: safe
+  - name: lesson_files
+    label: Lesson resources
+    input: public/lesson-media/files
+    output: /lesson-media/files
+    extensions: [pdf, doc, docx, ppt, pptx, csv, zip]
+    rename: safe
+  - name: lesson_maps
+    label: GeoJSON maps
+    input: public/lesson-media/maps
+    output: /lesson-media/maps
+    extensions: [geojson, json]
+    rename: safe
+
 content:
   - name: site
     label: Academy website
@@ -322,8 +342,16 @@ content:
               max: 16
               collapsible:
                 collapsed: true
-                summary: "Weeks {week} — {title}"
+                summary: "{id} · Weeks {week} — {title}"
             fields:
+              - name: id
+                label: Stable lesson ID
+                type: string
+                required: true
+                pattern:
+                  regex: "^lesson-[a-z0-9-]+$"
+                  message: Use a stable ID such as lesson-01. Do not change it after publishing.
+                description: Used to connect learner progress and uploaded results to this lesson.
               - name: visible
                 label: Show this module
                 type: boolean
@@ -344,6 +372,108 @@ content:
                 list:
                   min: 1
                   max: 10
+              - name: lessonContent
+                label: Lesson content
+                type: rich-text
+                description: Add the lesson explanation in Markdown. Upload supporting images below.
+                options:
+                  format: markdown
+                  media: false
+              - name: lessonImages
+                label: Lesson imagery
+                type: object
+                list:
+                  max: 8
+                  collapsible:
+                    collapsed: true
+                    summary: "{alt}"
+                fields:
+                  - name: src
+                    label: Image
+                    type: image
+                    required: true
+                    options:
+                      media: lesson_images
+                  - name: alt
+                    label: Accessibility description
+                    type: string
+                    required: true
+                  - name: caption
+                    type: text
+              - name: lessonResources
+                label: Downloadable lesson resources
+                type: object
+                list:
+                  max: 8
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+                fields:
+                  - name: href
+                    label: File
+                    type: file
+                    required: true
+                    options:
+                      media: lesson_files
+                  - name: title
+                    type: string
+                    required: true
+              - name: task
+                label: Program task
+                type: object
+                required: true
+                fields:
+                  - name: title
+                    label: Task title
+                    type: string
+                  - name: instructions
+                    label: Task instructions
+                    type: rich-text
+                    options:
+                      format: markdown
+                      media: false
+                  - name: referenceImages
+                    label: Reference imagery
+                    type: object
+                    list:
+                      max: 8
+                      collapsible:
+                        collapsed: true
+                        summary: "{alt}"
+                    fields:
+                      - name: src
+                        label: Image
+                        type: image
+                        required: true
+                        options:
+                          media: lesson_images
+                      - name: alt
+                        label: Accessibility description
+                        type: string
+                        required: true
+                      - name: caption
+                        type: text
+                  - name: referenceMaps
+                    label: Reference GeoJSON maps
+                    type: object
+                    list:
+                      max: 6
+                      collapsible:
+                        collapsed: true
+                        summary: "{title}"
+                    fields:
+                      - name: src
+                        label: GeoJSON file
+                        type: file
+                        required: true
+                        options:
+                          media: lesson_maps
+                          extensions: [geojson, json]
+                      - name: title
+                        type: string
+                        required: true
+                      - name: caption
+                        type: text
       - name: outcomes
         label: Graduate outcomes
         type: object

@@ -53,6 +53,67 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   expect(hasHorizontalOverflow).toBe(false);
 });
 
+test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/");
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) => {
+        const request = indexedDB.deleteDatabase("rs-academy-task-results-v1");
+        request.onsuccess = () => resolve();
+        request.onerror = () => resolve();
+        request.onblocked = () => resolve();
+      }),
+  );
+  await page.reload();
+
+  const taskText = page.locator("#lesson-01-result-text");
+  const resultText = "Recovery is strongest on north-facing slopes; cloud cover adds uncertainty.";
+  await taskText.fill(resultText);
+
+  const fileInput = page.locator("#lesson-01-result-files");
+  await fileInput.setInputFiles([
+    {
+      name: "recovery.png",
+      mimeType: "image/png",
+      buffer: Buffer.from(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nQAAAABJRU5ErkJggg==",
+        "base64",
+      ),
+    },
+    {
+      name: "recovery.geojson",
+      mimeType: "application/geo+json",
+      buffer: Buffer.from(
+        JSON.stringify({
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              properties: {},
+              geometry: {
+                type: "Polygon",
+                coordinates: [[[24, 59], [25, 59], [25, 60], [24, 60], [24, 59]]],
+              },
+            },
+          ],
+        }),
+      ),
+    },
+  ]);
+
+  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+
+  await page.reload();
+
+  await expect(taskText).toHaveValue(resultText);
+  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+});
+
 for (const viewport of viewports) {
   test(`${viewport.name}: public and admin pages have no horizontal overflow`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });

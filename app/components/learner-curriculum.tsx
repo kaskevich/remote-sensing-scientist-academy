@@ -10,6 +10,15 @@ import {
   type LearnerProgressStorage,
   type StorageLoadStatus,
 } from "@/lib/learner-progress";
+import {
+  LessonImageGallery,
+  LessonResources,
+  MarkdownContent,
+  type LessonImage,
+  type LessonMap,
+  type LessonResource,
+} from "@/app/components/lesson-materials";
+import TaskResultPanel from "@/app/components/task-result-panel";
 
 export type AcademyLesson = {
   id: string;
@@ -17,6 +26,15 @@ export type AcademyLesson = {
   title: string;
   description: string;
   tools: string[];
+  content: string;
+  images: LessonImage[];
+  resources: LessonResource[];
+  task: {
+    title: string;
+    instructions: string;
+    referenceImages: LessonImage[];
+    referenceMaps: LessonMap[];
+  };
 };
 
 type LearnerCurriculumProps = {
@@ -199,6 +217,14 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                   ))}
                 </div>
 
+                {(lesson.content || lesson.images.length > 0 || lesson.resources.length > 0) && (
+                  <div className="lesson-managed-content">
+                    <MarkdownContent>{lesson.content}</MarkdownContent>
+                    <LessonImageGallery images={lesson.images} />
+                    <LessonResources resources={lesson.resources} />
+                  </div>
+                )}
+
                 <div className="lesson-actions">
                   <label className="lesson-completion-control">
                     <input
@@ -229,6 +255,14 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                     onChange={(event) => setLessonNote(lesson.id, event.target.value)}
                   />
                 </div>
+
+                <TaskResultPanel
+                  lessonId={lesson.id}
+                  title={lesson.task.title}
+                  instructions={lesson.task.instructions}
+                  referenceImages={lesson.task.referenceImages}
+                  referenceMaps={lesson.task.referenceMaps}
+                />
               </div>
             </article>
           );

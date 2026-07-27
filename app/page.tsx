@@ -2,15 +2,65 @@ import { Fragment } from "react";
 import content from "@/content/site.json";
 import LearnerCurriculum, { type AcademyLesson } from "@/app/components/learner-curriculum";
 
+type CurriculumModule = {
+  id: string;
+  visible: boolean;
+  week: string;
+  title: string;
+  description: string;
+  tools: string[];
+  lessonContent: string;
+  lessonImages: Array<{ src: string; alt: string; caption: string }>;
+  lessonResources: Array<{ href: string; title: string }>;
+  task: {
+    title: string;
+    instructions: string;
+    referenceImages: Array<{ src: string; alt: string; caption: string }>;
+    referenceMaps: Array<{ src: string; title: string; caption: string }>;
+  };
+};
+
+function publicAssetPath(path: string) {
+  if (!path || /^(https?:|data:|blob:)/.test(path)) {
+    return path;
+  }
+
+  const basePath = process.env.PAGES_BASE_PATH ?? "";
+  return `${basePath}/${path.replace(/^\//, "")}`;
+}
+
 const visibleNavigation = content.navigation.items.filter((item) => item.visible);
 const visiblePaths = content.pathsSection.items.filter((path) => path.visible);
-const visibleModules = content.curriculum.modules.filter((module) => module.visible);
+const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter(
+  (module) => module.visible,
+);
 const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
-  id: `lesson-${String(index + 1).padStart(2, "0")}`,
+  id: module.id || `lesson-${String(index + 1).padStart(2, "0")}`,
   week: module.week,
   title: module.title,
   description: module.description,
   tools: module.tools,
+  content: module.lessonContent,
+  images: module.lessonImages.map((image) => ({
+    ...image,
+    src: publicAssetPath(image.src),
+  })),
+  resources: module.lessonResources.map((resource) => ({
+    ...resource,
+    href: publicAssetPath(resource.href),
+  })),
+  task: {
+    title: module.task.title,
+    instructions: module.task.instructions,
+    referenceImages: module.task.referenceImages.map((image) => ({
+      ...image,
+      src: publicAssetPath(image.src),
+    })),
+    referenceMaps: module.task.referenceMaps.map((map) => ({
+      ...map,
+      src: publicAssetPath(map.src),
+    })),
+  },
 }));
 
 export default function Home() {
