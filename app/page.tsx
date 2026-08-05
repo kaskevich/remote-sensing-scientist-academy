@@ -202,26 +202,48 @@ export default function Home() {
               <p className="section-summary">{content.pathsSection.summary}</p>
             </div>
 
-            <div className="path-grid">
+            <ol className="path-progression" aria-label="One Academy journey through three stages">
+              {visiblePaths.map((path) => (
+                <li key={`progress-${path.number}`} aria-label={`${path.number} ${path.label}`}>
+                  <span>{path.number}</span>
+                </li>
+              ))}
+            </ol>
+
+            <div className="path-grid" aria-label="Academy curriculum stages">
               {visiblePaths.map((path) => (
                 <article className={`path-card path-${path.accent}`} key={path.number}>
                   <div className="path-topline">
                     <span>{path.label}</span>
                     <span>{path.number}</span>
                   </div>
-                  <div className="path-signal" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
                   <h3>{path.title}</h3>
-                  <p>{path.description}</p>
+                  <p className="path-description">{path.description}</p>
+
+                  <div className="path-details">
+                    <section className="path-detail path-learn" aria-labelledby={`learn-${path.number}`}>
+                      <h4 id={`learn-${path.number}`}>Learn</h4>
+                      <ul>
+                        {path.skills.map((skill) => (
+                          <li key={skill}>{skill}</li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section className="path-detail" aria-labelledby={`build-${path.number}`}>
+                      <h4 id={`build-${path.number}`}>Build</h4>
+                      <p>{path.build}</p>
+                    </section>
+
+                    <section className="path-detail" aria-labelledby={`outcome-${path.number}`}>
+                      <h4 id={`outcome-${path.number}`}>Outcome</h4>
+                      <p>{path.outcome}</p>
+                    </section>
+                  </div>
+
                   <div className="path-footer">
-                    <span>{path.meta}</span>
-                    <a href={content.navigation.applyHref} aria-label={`Learn more about ${path.title}`}>
-                      ↗
+                    <a href={path.href} aria-label={`${path.ctaLabel}: ${path.title}`}>
+                      {path.ctaLabel} <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </article>

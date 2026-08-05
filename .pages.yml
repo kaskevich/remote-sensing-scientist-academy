@@ -179,7 +179,7 @@ content:
           min: 1
           max: 10
       - name: pathsSection
-        label: Programs
+        label: Academy pathway
         type: object
         required: true
         fields:
@@ -202,7 +202,7 @@ content:
             type: text
             required: true
           - name: items
-            label: Programs
+            label: Stages
             type: object
             list:
               min: 1
@@ -227,10 +227,30 @@ content:
               - name: description
                 type: text
                 required: true
-              - name: meta
-                label: Duration and level
+              - name: skills
+                label: Learn
+                type: string
+                list:
+                  min: 1
+                  max: 6
+                required: true
+              - name: build
+                label: Portfolio project
                 type: string
                 required: true
+              - name: outcome
+                label: Outcome
+                type: text
+                required: true
+              - name: ctaLabel
+                label: Link text
+                type: string
+                required: true
+              - name: href
+                label: Link destination
+                type: string
+                required: true
+                description: Use a section link such as #curriculum or a full https:// address.
               - name: accent
                 label: Accent color
                 type: select

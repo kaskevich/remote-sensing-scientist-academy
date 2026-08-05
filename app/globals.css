@@ -756,8 +756,41 @@ h2 {
   border: 1px solid var(--line);
 }
 
+.path-progression {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.path-progression li {
+  display: flex;
+  align-items: center;
+  color: #5e6d7e;
+  font: 800 9px/1 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.14em;
+}
+
+.path-progression li:not(:last-child)::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  margin: 0 14px;
+  background: var(--line);
+}
+
+.path-progression li:last-child::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
 .path-card {
-  min-height: 438px;
+  min-height: 650px;
   display: flex;
   flex-direction: column;
   padding: 29px;
@@ -798,35 +831,15 @@ h2 {
 .path-footer {
   display: flex;
   justify-content: space-between;
+  text-transform: uppercase;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.16em;
 }
 
-.path-signal {
-  height: 82px;
-  display: flex;
-  align-items: end;
-  gap: 6px;
-  margin: 47px 0 31px;
-}
-
-.path-signal span {
-  display: block;
-  width: 10px;
-  background: var(--card-accent);
-  border-radius: 6px 6px 0 0;
-}
-
-.path-signal span:nth-child(1) { height: 24%; }
-.path-signal span:nth-child(2) { height: 51%; }
-.path-signal span:nth-child(3) { height: 88%; }
-.path-signal span:nth-child(4) { height: 68%; }
-.path-signal span:nth-child(5) { height: 37%; }
-
 .path-card h3 {
   max-width: 330px;
-  margin-bottom: 18px;
+  margin: 47px 0 18px;
   font-family: "Iowan Old Style", Georgia, serif;
   font-size: 29px;
   line-height: 1.05;
@@ -834,36 +847,101 @@ h2 {
   letter-spacing: -0.035em;
 }
 
-.path-card > p {
-  max-width: 390px;
+.path-description {
+  max-width: 34ch;
+  margin-bottom: 28px;
   color: #58667a;
   font-size: 13px;
   line-height: 1.65;
 }
 
+.path-details {
+  display: grid;
+  gap: 20px;
+}
+
+.path-detail {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.path-detail h4 {
+  margin: 0 0 9px;
+  color: #5e6d7e;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.path-detail p {
+  max-width: 35ch;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.path-learn ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.path-learn li {
+  position: relative;
+  padding-left: 12px;
+  color: #34485f;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.path-learn li::before {
+  content: "";
+  position: absolute;
+  top: 0.48em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--card-accent);
+}
+
 .path-footer {
-  align-items: center;
   margin-top: auto;
   padding-top: 20px;
   border-top: 1px solid var(--line);
-  color: #607084;
 }
 
 .path-footer a {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  background: var(--ink);
-  color: white;
-  font-size: 16px;
-  transition: background 180ms ease, color 180ms ease;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--ink);
+  font-size: 10px;
+  transition: color 180ms ease;
 }
 
 .path-footer a:hover,
 .path-footer a:focus-visible {
-  background: var(--card-accent);
-  color: var(--ink);
+  color: #43566d;
+}
+
+.path-footer a span {
+  color: var(--card-accent);
+  font-size: 16px;
+  transition: transform 180ms ease;
+}
+
+.path-footer a:hover span,
+.path-footer a:focus-visible span {
+  transform: translateX(4px);
 }
 
 .field-lab {
@@ -2051,11 +2129,7 @@ footer > p {
   }
 
   .path-card {
-    min-height: 370px;
-  }
-
-  .path-signal {
-    margin-top: 34px;
+    min-height: 610px;
   }
 
   .field-lab {
@@ -2200,8 +2274,20 @@ footer > p {
   }
 
   .path-card {
-    min-height: 390px;
+    min-height: 610px;
     padding: 25px;
+  }
+
+  .path-progression {
+    margin-bottom: 18px;
+  }
+
+  .path-progression li:not(:last-child)::after {
+    margin: 0 9px;
+  }
+
+  .path-card h3 {
+    margin-top: 38px;
   }
 
   .field-lab {

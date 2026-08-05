@@ -11,7 +11,7 @@
   "navigation": {
     "items": [
       {
-        "label": "Programs",
+        "label": "Pathway",
         "href": "#paths",
         "visible": true
       },
@@ -36,7 +36,7 @@
     "title": "Learn remote sensing.",
     "accentTitle": "Work with real data.",
     "intro": "A practical online academy for people who want to understand satellite data and use it with confidence. You will learn by doing, from the basics to a complete analysis.",
-    "primaryButtonLabel": "View the programs",
+    "primaryButtonLabel": "View the pathway",
     "primaryButtonHref": "#paths",
     "secondaryButtonLabel": "See a field lab",
     "secondaryButtonHref": "#field-lab",
@@ -63,36 +63,63 @@
   ],
   "pathsSection": {
     "visible": true,
-    "kicker": "Choose a starting point",
-    "titleLineOne": "Start where you are.",
-    "titleLineTwo": "Build step by step.",
-    "summary": "Take one focused program or complete all three to build the full set of remote sensing skills.",
+    "kicker": "ONE JOURNEY · THREE STAGES",
+    "titleLineOne": "From beginner to",
+    "titleLineTwo": "Earth Observation professional.",
+    "summary": "Everything you build becomes part of your professional portfolio.",
     "items": [
       {
         "visible": true,
         "number": "01",
         "label": "FOUNDATIONS",
-        "title": "Earth Observation Essentials",
-        "description": "Learn how sensors work, how resolutions differ, and what the values in each pixel mean.",
-        "meta": "6 weeks · Beginner",
+        "title": "Thinking Like a Scientific Programmer",
+        "description": "Learn Python from zero through real ecological and Earth Observation problems.",
+        "skills": [
+          "Python",
+          "Jupyter",
+          "Scientific data",
+          "Reproducible workflows"
+        ],
+        "build": "Vegetation Data Explorer",
+        "outcome": "Analyse and explain ecological datasets in Python.",
+        "ctaLabel": "Explore foundations",
+        "href": "#curriculum",
         "accent": "lime"
       },
       {
         "visible": true,
         "number": "02",
-        "label": "ANALYSIS",
+        "label": "GEOSPATIAL",
         "title": "Geospatial Data Science",
-        "description": "Use Python and cloud tools to turn raw satellite scenes into clear, reproducible results.",
-        "meta": "10 weeks · Intermediate",
+        "description": "Turn vector, raster, UAV and satellite data into reproducible spatial analyses.",
+        "skills": [
+          "GeoPandas",
+          "Rasterio",
+          "QGIS",
+          "Xarray"
+        ],
+        "build": "UAV and Satellite Analysis Pipeline",
+        "outcome": "Process, combine and interpret geospatial data correctly.",
+        "ctaLabel": "Explore geospatial analysis",
+        "href": "#curriculum",
         "accent": "blue"
       },
       {
         "visible": true,
         "number": "03",
-        "label": "APPLICATION",
-        "title": "Climate Intelligence",
-        "description": "Track environmental change, measure risk, and explain your findings in a way people can use.",
-        "meta": "8 weeks · Advanced",
+        "label": "MODELLING",
+        "title": "Remote Sensing Modelling",
+        "description": "Build defensible machine-learning and cloud Earth Observation workflows.",
+        "skills": [
+          "Machine learning",
+          "XGBoost",
+          "Google Earth Engine",
+          "Model evaluation"
+        ],
+        "build": "Environmental Monitoring Project",
+        "outcome": "Create and communicate a complete predictive Earth Observation workflow.",
+        "ctaLabel": "Explore modelling",
+        "href": "#curriculum",
         "accent": "orange"
       }
     ]
