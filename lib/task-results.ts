@@ -200,10 +200,11 @@ export class IndexedDbTaskResultStorage implements TaskResultStorage {
     try {
       const database = await this.openDatabase();
       const transaction = database.transaction(TASK_RESULTS_STORE_NAME, "readonly");
+      const completion = transactionComplete(transaction);
       const storedValue = await requestResult(
         transaction.objectStore(TASK_RESULTS_STORE_NAME).get(lessonId),
       );
-      await transactionComplete(transaction);
+      await completion;
 
       if (storedValue === undefined) {
         return { result: createEmptyTaskResult(lessonId), status: "empty" };
@@ -226,8 +227,9 @@ export class IndexedDbTaskResultStorage implements TaskResultStorage {
       const database = await this.openDatabase();
       const normalizedResult = normalizeTaskResult(result, result.lessonId);
       const transaction = database.transaction(TASK_RESULTS_STORE_NAME, "readwrite");
+      const completion = transactionComplete(transaction);
       transaction.objectStore(TASK_RESULTS_STORE_NAME).put(normalizedResult);
-      await transactionComplete(transaction);
+      await completion;
       return true;
     } catch {
       return false;
@@ -238,8 +240,9 @@ export class IndexedDbTaskResultStorage implements TaskResultStorage {
     try {
       const database = await this.openDatabase();
       const transaction = database.transaction(TASK_RESULTS_STORE_NAME, "readwrite");
+      const completion = transactionComplete(transaction);
       transaction.objectStore(TASK_RESULTS_STORE_NAME).delete(lessonId);
-      await transactionComplete(transaction);
+      await completion;
       return true;
     } catch {
       return false;

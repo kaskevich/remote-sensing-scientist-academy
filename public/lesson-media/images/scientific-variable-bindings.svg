@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Python variable names bound to ecological values</title>
+  <desc id="desc">An assignment instruction binds a meaningful Python name to a value. Examples show a text value, integer, decimal number, Boolean and None, each with a different scientific role.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c8f33d" />
+    </marker>
+    <style>
+      .heading { fill: #f7f3e9; font: 600 34px Inter, Arial, sans-serif; }
+      .eyebrow { fill: #c8f33d; font: 700 15px Inter, Arial, sans-serif; letter-spacing: 2px; }
+      .label { fill: #8da5bb; font: 700 14px Inter, Arial, sans-serif; letter-spacing: 1px; }
+      .name { fill: #f7f3e9; font: 600 19px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .value { fill: #f7f3e9; font: 600 19px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .type { fill: #4c91c8; font: 600 16px Inter, Arial, sans-serif; }
+      .copy { fill: #b7c4d1; font: 400 16px Inter, Arial, sans-serif; }
+      .code { fill: #071426; font: 600 22px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" fill="#071426" />
+  <text x="64" y="62" class="eyebrow">VARIABLES AND SCIENTIFIC DATA</text>
+  <text x="64" y="108" class="heading">A name is bound to a value</text>
+
+  <g transform="translate(64 146)">
+    <rect width="1072" height="70" rx="8" fill="#c8f33d" />
+    <text x="536" y="44" text-anchor="middle" class="code">site_name = "Saardu"</text>
+  </g>
+
+  <text x="88" y="262" class="label">MEANINGFUL NAME</text>
+  <text x="470" y="262" class="label">BOUND TO</text>
+  <text x="642" y="262" class="label">VALUE</text>
+  <text x="1006" y="262" class="label">TYPE</text>
+
+  <g transform="translate(64 286)">
+    <g>
+      <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
+      <text x="22" y="36" class="name">site_name</text>
+      <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
+      <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
+      <text x="592" y="36" class="value">"Saardu"</text>
+      <text x="936" y="36" class="type">string · text</text>
+    </g>
+    <g transform="translate(0 68)">
+      <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
+      <text x="22" y="36" class="name">species_richness</text>
+      <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
+      <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
+      <text x="592" y="36" class="value">7</text>
+      <text x="936" y="36" class="type">integer · count</text>
+    </g>
+    <g transform="translate(0 136)">
+      <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
+      <text x="22" y="36" class="name">elevation_value</text>
+      <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
+      <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
+      <text x="592" y="36" class="value">0.530</text>
+      <text x="936" y="36" class="type">float · decimal</text>
+    </g>
+    <g transform="translate(0 204)">
+      <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
+      <text x="22" y="36" class="name">biomass_sampled</text>
+      <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
+      <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
+      <text x="592" y="36" class="value">True</text>
+      <text x="936" y="36" class="type">Boolean · yes/no</text>
+    </g>
+    <g transform="translate(0 272)">
+      <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
+      <text x="22" y="36" class="name">field_note</text>
+      <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
+      <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
+      <text x="592" y="36" class="value">None</text>
+      <text x="936" y="36" class="type">no value recorded</text>
+    </g>
+  </g>
+
+  <text x="64" y="668" class="copy">A clear name carries scientific meaning. A value still needs metadata, including a definition and unit where relevant.</text>
+</svg>

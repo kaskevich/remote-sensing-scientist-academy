@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Four Python collections for ecological information</title>
+  <desc id="desc">A list preserves an ordered sequence, a tuple preserves a fixed convention, a set keeps unique values, and a dictionary connects field names with values.</desc>
+  <style>
+    .heading { fill: #f7f3e9; font: 600 34px Inter, Arial, sans-serif; }
+    .eyebrow { fill: #c8f33d; font: 700 15px Inter, Arial, sans-serif; letter-spacing: 2px; }
+    .title { fill: #f7f3e9; font: 600 23px Inter, Arial, sans-serif; }
+    .purpose { fill: #4c91c8; font: 600 15px Inter, Arial, sans-serif; }
+    .copy { fill: #b7c4d1; font: 400 16px Inter, Arial, sans-serif; }
+    .code { fill: #f7f3e9; font: 500 16px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .index { fill: #071426; font: 700 13px Inter, Arial, sans-serif; }
+    .key { fill: #c8f33d; font: 600 15px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <rect width="1200" height="760" fill="#071426" />
+  <text x="64" y="62" class="eyebrow">COLLECTIONS</text>
+  <text x="64" y="108" class="heading">Choose a structure that matches the scientific meaning</text>
+
+  <g transform="translate(64 154)">
+    <rect width="512" height="236" rx="8" fill="#10253a" stroke="#29435b" />
+    <text x="24" y="42" class="title">List [ ]</text>
+    <text x="24" y="70" class="purpose">ORDERED OBSERVATIONS · REPEATS ALLOWED</text>
+    <g transform="translate(24 98)">
+      <rect width="140" height="76" rx="5" fill="#142c43" />
+      <circle cx="18" cy="18" r="12" fill="#c8f33d" />
+      <text x="18" y="22" text-anchor="middle" class="index">0</text>
+      <text x="16" y="52" class="code">Juncus</text>
+      <text x="16" y="70" class="code">gerardii</text>
+      <rect x="150" width="140" height="76" rx="5" fill="#142c43" />
+      <circle cx="168" cy="18" r="12" fill="#c8f33d" />
+      <text x="168" y="22" text-anchor="middle" class="index">1</text>
+      <text x="166" y="52" class="code">Festuca</text>
+      <text x="166" y="70" class="code">rubra</text>
+      <rect x="300" width="140" height="76" rx="5" fill="#142c43" />
+      <circle cx="318" cy="18" r="12" fill="#c8f33d" />
+      <text x="318" y="22" text-anchor="middle" class="index">2</text>
+      <text x="316" y="52" class="code">Plantago</text>
+      <text x="316" y="70" class="code">maritima</text>
+    </g>
+    <text x="24" y="210" class="copy">Use when sequence and position matter.</text>
+  </g>
+
+  <g transform="translate(624 154)">
+    <rect width="512" height="236" rx="8" fill="#10253a" stroke="#29435b" />
+    <text x="24" y="42" class="title">Tuple ( )</text>
+    <text x="24" y="70" class="purpose">FIXED CONVENTION</text>
+    <rect x="24" y="98" width="464" height="76" rx="5" fill="#142c43" />
+    <text x="44" y="128" class="code">("latitude", "longitude")</text>
+    <text x="44" y="156" class="copy">first value · second value</text>
+    <text x="24" y="210" class="copy">Use when order must not be redefined casually.</text>
+  </g>
+
+  <g transform="translate(64 426)">
+    <rect width="512" height="250" rx="8" fill="#10253a" stroke="#29435b" />
+    <text x="24" y="42" class="title">Set { }</text>
+    <text x="24" y="70" class="purpose">UNIQUE VALUES · NO PROMISED ORDER</text>
+    <g transform="translate(24 98)">
+      <ellipse cx="220" cy="48" rx="210" ry="50" fill="#142c43" stroke="#4c91c8" />
+      <text x="54" y="54" class="code">CCI_CWM</text>
+      <text x="174" y="36" class="code">LA_CWM</text>
+      <text x="290" y="60" class="code">Sp_richness</text>
+    </g>
+    <text x="24" y="220" class="copy">Use to answer “which distinct fields are present?”</text>
+  </g>
+
+  <g transform="translate(624 426)">
+    <rect width="512" height="250" rx="8" fill="#10253a" stroke="#29435b" />
+    <text x="24" y="42" class="title">Dictionary { key: value }</text>
+    <text x="24" y="70" class="purpose">NAMED FIELDS CONNECTED TO VALUES</text>
+    <g transform="translate(24 96)">
+      <rect width="464" height="92" rx="5" fill="#142c43" />
+      <text x="18" y="29" class="key">"SampleID"</text>
+      <text x="162" y="29" class="code">→ "SALS1"</text>
+      <text x="18" y="57" class="key">"site"</text>
+      <text x="162" y="57" class="code">→ "Saardu"</text>
+      <text x="18" y="85" class="key">"Sp_richness"</text>
+      <text x="162" y="85" class="code">→ 7</text>
+    </g>
+    <text x="24" y="220" class="copy">Use to preserve what each value means.</text>
+  </g>
+
+  <text x="64" y="724" class="copy">The best collection is determined by the data relationship, not by which syntax is shortest.</text>
+</svg>

@@ -3,7 +3,7 @@ media:
     label: Lesson and task imagery
     input: public/lesson-media/images
     output: /lesson-media/images
-    extensions: [png, jpg, jpeg, webp]
+    extensions: [png, jpg, jpeg, webp, svg]
     rename: safe
   - name: lesson_files
     label: Lesson resources

@@ -15,12 +15,12 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   await page.reload();
 
   await expect(page).toHaveTitle(/Remote Sensing Scientist Academy/);
-  await expect(page.getByText("Guest workspace", { exact: true })).toBeVisible();
+  await expect(page.locator(".academy-account-panel")).toBeVisible();
 
   const firstLesson = page.locator("#lesson-01");
   const completion = firstLesson.getByRole("checkbox");
   const notes = page.locator("#lesson-01-notes");
-  const noteText = "Compare Sentinel-2 atmospheric correction methods.";
+  const noteText = "Explain why notebook execution is not scientific interpretation.";
 
   await completion.check();
   await notes.fill(noteText);
@@ -61,13 +61,13 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
 
   const firstLesson = page.locator("#lesson-01");
   const taskText = page.locator("#lesson-01-result-text");
-  const resultText = "Recovery is strongest on north-facing slopes; cloud cover adds uncertainty.";
+  const resultText = "The output confirms that Python ran the instruction; it is not yet ecological evidence.";
   await taskText.fill(resultText);
 
   const fileInput = page.locator("#lesson-01-result-files");
   await fileInput.setInputFiles([
     {
-      name: "recovery.png",
+      name: "sals1-notebook.png",
       mimeType: "image/png",
       buffer: Buffer.from(
         "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nQAAAABJRU5ErkJggg==",
@@ -75,7 +75,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
       ),
     },
     {
-      name: "recovery.geojson",
+      name: "saardu-boundary.geojson",
       mimeType: "application/geo+json",
       buffer: Buffer.from(
         JSON.stringify({
@@ -94,16 +94,16 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
       ),
     },
     {
-      name: "metrics.csv",
+      name: "plot-summary.csv",
       mimeType: "text/csv",
-      buffer: Buffer.from("site,ndvi\nA,0.72\n"),
+      buffer: Buffer.from("plot_id,species_richness\nSALS1,7\n"),
     },
   ]);
 
-  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
-  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
-  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
-  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+  await expect(page.getByText("sals1-notebook.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("saardu-boundary.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("plot-summary.csv", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
   await expect(firstLesson.getByText("Learner submission · browser prototype", { exact: true })).toBeVisible();
   await expect(firstLesson.getByText("Private learner–instructor conversation", { exact: true })).toBeVisible();
   await expect(firstLesson.getByText("Instructor feedback", { exact: true })).toBeVisible();
@@ -131,10 +131,10 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await page.reload();
 
   await expect(taskText).toHaveValue(resultText);
-  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
-  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
-  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
-  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+  await expect(page.getByText("sals1-notebook.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("saardu-boundary.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("plot-summary.csv", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
 for (const viewport of viewports) {
