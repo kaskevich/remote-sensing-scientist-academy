@@ -1323,30 +1323,149 @@ h2 {
   text-transform: uppercase;
 }
 
+.curriculum-module {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.curriculum-module-summary,
+.module-summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.curriculum-module-summary::-webkit-details-marker,
+.module-summary::-webkit-details-marker {
+  display: none;
+}
+
+.curriculum-module-summary {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 18px 0;
+  transition: background 180ms ease, padding 180ms ease;
+}
+
+.curriculum-module-summary:hover {
+  padding-inline: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.curriculum-module-summary:focus-visible,
+.module-summary:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 4px;
+}
+
+.curriculum-module-summary > span:first-child {
+  display: grid;
+  gap: 7px;
+}
+
+.curriculum-module-summary small,
+.curriculum-module-meta,
+.module-lesson-label,
+.module-status,
+.module-toggle {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.curriculum-module-summary small {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.curriculum-module-summary strong {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.curriculum-module-meta {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.curriculum-module-toggle,
+.module-toggle {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.curriculum-module-toggle i,
+.module-toggle i {
+  width: 10px;
+  height: 10px;
+  display: block;
+  border-right: 1px solid var(--lime);
+  border-bottom: 1px solid var(--lime);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 180ms ease;
+}
+
+.curriculum-module[open] .curriculum-module-toggle i,
+.module[open] .module-toggle i {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.curriculum-module-toggle-closed {
+  display: none;
+}
+
+.curriculum-module:not([open]) .curriculum-module-toggle-open {
+  display: none;
+}
+
+.curriculum-module:not([open]) .curriculum-module-toggle-closed {
+  display: inline;
+}
+
 .module-list {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .module {
-  display: grid;
   min-width: 0;
-  grid-template-columns: 70px 140px minmax(0, 1fr);
-  gap: 30px;
-  padding: 43px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   scroll-margin-top: 22px;
-  transition: padding-left 200ms ease, background 200ms ease;
+  transition: background 200ms ease;
 }
 
-.module:hover {
+.module:last-child {
+  border-bottom: 0;
+}
+
+.module-summary {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 70px 140px minmax(0, 1fr);
+  gap: 30px;
+  padding: 36px 0;
+  transition: padding 200ms ease, background 200ms ease;
+}
+
+.module-summary:hover {
   padding-left: 18px;
   background: rgba(255, 255, 255, 0.025);
 }
 
 .module-complete {
-  padding-left: 18px;
   background: rgba(200, 243, 61, 0.055);
   box-shadow: inset 4px 0 0 var(--lime);
+}
+
+.module-complete > .module-summary {
+  padding-left: 18px;
 }
 
 .module-current .module-index {
@@ -1365,7 +1484,7 @@ h2 {
   letter-spacing: 0.12em;
 }
 
-.module-copy {
+.module-overview {
   width: 100%;
   min-width: 0;
   display: grid;
@@ -1373,7 +1492,26 @@ h2 {
   column-gap: 5vw;
 }
 
-.module-copy h3 {
+.module-title-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 13px;
+}
+
+.module-lesson-label {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.module-status {
+  padding-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--lime);
+}
+
+.module-heading {
+  grid-column: 1;
   margin: 0;
   font-family: "Iowan Old Style", Georgia, serif;
   font-size: 30px;
@@ -1381,11 +1519,30 @@ h2 {
   font-weight: 500;
 }
 
-.module-copy > p {
+.module-description {
+  grid-column: 2;
   margin-bottom: 19px;
   color: rgba(255, 255, 255, 0.61);
   font-size: 13px;
   line-height: 1.65;
+}
+
+.module-toggle {
+  grid-column: 1;
+  align-self: end;
+  justify-self: start;
+  margin-top: 20px;
+}
+
+.module-body {
+  padding: 0 0 43px 270px;
+}
+
+.module-copy {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .tool-list {
@@ -2145,17 +2302,23 @@ footer > p {
     padding: 90px 7vw;
   }
 
+  .module-overview,
   .module-copy {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .module-copy > p,
+  .module-heading,
+  .module-description,
   .tool-list {
     grid-column: 1;
   }
 
-  .module-copy h3 {
+  .module-heading {
     margin-bottom: 15px;
+  }
+
+  .module-body {
+    padding-left: 100px;
   }
 
   .learner-summary-grid {
@@ -2347,10 +2510,20 @@ footer > p {
     align-self: flex-start;
   }
 
-  .module {
+  .curriculum-module-summary {
+    align-items: flex-start;
+  }
+
+  .curriculum-module-meta {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .module-summary {
     grid-template-columns: 44px minmax(0, 1fr);
     gap: 15px;
-    padding: 34px 0;
+    padding: 30px 0;
   }
 
   .module-week {
@@ -2358,9 +2531,17 @@ footer > p {
     grid-row: 1;
   }
 
-  .module-copy {
+  .module-overview {
     grid-column: 1 / -1;
     padding-left: 59px;
+  }
+
+  .module-body {
+    padding: 0 0 34px 59px;
+  }
+
+  .module-copy {
+    padding-left: 0;
   }
 
   .lesson-actions,

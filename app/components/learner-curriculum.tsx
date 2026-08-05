@@ -62,6 +62,8 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loadStatus, setLoadStatus] = useState<StorageLoadStatus>("empty");
   const [saveFailed, setSaveFailed] = useState(false);
+  const [isModuleOpen, setIsModuleOpen] = useState(true);
+  const [openLessonId, setOpenLessonId] = useState<string | null>(() => lessons[0]?.id ?? null);
 
   // Browser-local state must hydrate after mount so server rendering stays deterministic.
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -105,6 +107,8 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
   const currentLesson = lessons.find((lesson) => lesson.id === summary.currentLessonId) ?? null;
 
   function setCurrentLesson(lessonId: string) {
+    setIsModuleOpen(true);
+    setOpenLessonId(lessonId);
     setProgress((previous) => ({
       ...previous,
       currentLessonId: lessonId,
@@ -182,7 +186,14 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
             <h3 id="learner-dashboard-title">Continue from where you stopped.</h3>
           </div>
           {currentLesson && (
-            <a className="button button-primary learner-continue" href={`#${currentLesson.id}`}>
+            <a
+              className="button button-primary learner-continue"
+              href={`#${currentLesson.id}`}
+              onClick={() => {
+                setIsModuleOpen(true);
+                setOpenLessonId(currentLesson.id);
+              }}
+            >
               Continue learning <span aria-hidden="true">↓</span>
             </a>
           )}
@@ -225,83 +236,132 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
         </div>
       </section>
 
-      <div className="module-list">
-        {lessons.map((lesson, index) => {
-          const isCompleted = progress.completedLessonIds.includes(lesson.id);
-          const isCurrent = summary.currentLessonId === lesson.id;
-          const noteId = `${lesson.id}-notes`;
+      <details
+        className="curriculum-module"
+        open={isModuleOpen}
+      >
+        <summary
+          className="curriculum-module-summary"
+          onClick={(event) => {
+            event.preventDefault();
+            setIsModuleOpen((previous) => !previous);
+          }}
+        >
+          <span>
+            <small>Module navigation</small>
+            <strong>Module 1 lessons</strong>
+          </span>
+          <span className="curriculum-module-meta">
+            <span>{lessons.length} lessons</span>
+            <span className="curriculum-module-toggle">
+              <span className="curriculum-module-toggle-open">Hide lessons</span>
+              <span className="curriculum-module-toggle-closed">Show lessons</span>
+              <i aria-hidden="true" />
+            </span>
+          </span>
+        </summary>
 
-          return (
-            <article
-              className={`module${isCompleted ? " module-complete" : ""}${isCurrent ? " module-current" : ""}`}
-              id={lesson.id}
-              key={lesson.id}
-            >
-              <div className="module-index">{String(index + 1).padStart(2, "0")}</div>
-              <div className="module-week">WEEKS {lesson.week}</div>
-              <div className="module-copy">
-                <h3>{lesson.title}</h3>
-                <p>{lesson.description}</p>
-                <div className="tool-list">
-                  {lesson.tools.map((tool) => (
-                    <span key={tool}>{tool}</span>
-                  ))}
-                </div>
+        <div className="module-list">
+          {lessons.map((lesson, index) => {
+            const isCompleted = progress.completedLessonIds.includes(lesson.id);
+            const isCurrent = summary.currentLessonId === lesson.id;
+            const isOpen = openLessonId === lesson.id;
+            const noteId = `${lesson.id}-notes`;
 
-                {(lesson.content || lesson.images.length > 0 || lesson.resources.length > 0) && (
-                  <div className="lesson-managed-content">
-                    <MarkdownContent>{lesson.content}</MarkdownContent>
-                    <LessonImageGallery images={lesson.images} />
-                    <LessonResources resources={lesson.resources} />
-                  </div>
-                )}
+            return (
+              <details
+                className={`module${isCompleted ? " module-complete" : ""}${isCurrent ? " module-current" : ""}`}
+                id={lesson.id}
+                key={lesson.id}
+                open={isOpen}
+              >
+                <summary
+                  className="module-summary"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setOpenLessonId((previous) => previous === lesson.id ? null : lesson.id);
+                  }}
+                >
+                  <span className="module-index">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="module-week">WEEKS {lesson.week}</span>
+                  <span className="module-overview">
+                    <span className="module-title-row">
+                      <span className="module-lesson-label">Lesson {String(index + 1).padStart(2, "0")}</span>
+                      {isCompleted && <span className="module-status">Completed</span>}
+                      {!isCompleted && isCurrent && <span className="module-status">Current</span>}
+                    </span>
+                    <strong className="module-heading">{lesson.title}</strong>
+                    <span className="module-description">{lesson.description}</span>
+                    <span className="tool-list">
+                      {lesson.tools.map((tool) => (
+                        <span key={tool}>{tool}</span>
+                      ))}
+                    </span>
+                    <span className="module-toggle">
+                      {isOpen ? "Close lesson" : "Open lesson"}
+                      <i aria-hidden="true" />
+                    </span>
+                  </span>
+                </summary>
 
-                <SyncedLessonResources lessonId={lesson.id} />
+                <div className="module-body">
+                  <div className="module-copy">
+                    {(lesson.content || lesson.images.length > 0 || lesson.resources.length > 0) && (
+                      <div className="lesson-managed-content">
+                        <MarkdownContent>{lesson.content}</MarkdownContent>
+                        <LessonImageGallery images={lesson.images} />
+                        <LessonResources resources={lesson.resources} />
+                      </div>
+                    )}
 
-                <div className="lesson-actions">
-                  <label className="lesson-completion-control">
-                    <input
-                      type="checkbox"
-                      checked={isCompleted}
-                      onChange={(event) => setLessonCompletion(lesson.id, event.target.checked)}
+                    <SyncedLessonResources lessonId={lesson.id} />
+
+                    <div className="lesson-actions">
+                      <label className="lesson-completion-control">
+                        <input
+                          type="checkbox"
+                          checked={isCompleted}
+                          onChange={(event) => setLessonCompletion(lesson.id, event.target.checked)}
+                        />
+                        <span>{isCompleted ? "Lesson completed" : "Mark lesson complete"}</span>
+                      </label>
+                      {isCurrent ? (
+                        <span className="current-lesson-label">Current lesson</span>
+                      ) : (
+                        <button type="button" onClick={() => setCurrentLesson(lesson.id)}>
+                          Set as current
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="lesson-notes">
+                      <label htmlFor={noteId}>
+                        Private learner notes <span>{auth.user ? "Autosaved to your account" : "Autosaved locally"}</span>
+                      </label>
+                      <textarea
+                        id={noteId}
+                        rows={4}
+                        value={progress.lessonNotes[lesson.id] ?? ""}
+                        placeholder="Keep a private note for this lesson."
+                        onChange={(event) => setLessonNote(lesson.id, event.target.value)}
+                      />
+                    </div>
+
+                    <TaskResultPanel
+                      lessonId={lesson.id}
+                      title={lesson.task.title}
+                      instructions={lesson.task.instructions}
+                      referenceImages={lesson.task.referenceImages}
+                      referenceMaps={lesson.task.referenceMaps}
                     />
-                    <span>{isCompleted ? "Lesson completed" : "Mark lesson complete"}</span>
-                  </label>
-                  {isCurrent ? (
-                    <span className="current-lesson-label">Current lesson</span>
-                  ) : (
-                    <button type="button" onClick={() => setCurrentLesson(lesson.id)}>
-                      Set as current
-                    </button>
-                  )}
+                    <LessonDiscussion lessonId={lesson.id} lessonTitle={lesson.title} />
+                  </div>
                 </div>
-
-                <div className="lesson-notes">
-                  <label htmlFor={noteId}>
-                    Private learner notes <span>{auth.user ? "Autosaved to your account" : "Autosaved locally"}</span>
-                  </label>
-                  <textarea
-                    id={noteId}
-                    rows={4}
-                    value={progress.lessonNotes[lesson.id] ?? ""}
-                    placeholder="Keep a private note for this lesson."
-                    onChange={(event) => setLessonNote(lesson.id, event.target.value)}
-                  />
-                </div>
-
-                <TaskResultPanel
-                  lessonId={lesson.id}
-                  title={lesson.task.title}
-                  instructions={lesson.task.instructions}
-                  referenceImages={lesson.task.referenceImages}
-                  referenceMaps={lesson.task.referenceMaps}
-                />
-                <LessonDiscussion lessonId={lesson.id} lessonTitle={lesson.title} />
-              </div>
-            </article>
-          );
-        })}
-      </div>
+              </details>
+            );
+          })}
+        </div>
+      </details>
     </>
   );
 }

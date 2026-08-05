@@ -55,6 +55,40 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   expect(hasHorizontalOverflow).toBe(false);
 });
 
+test("module and lesson disclosures provide compact curriculum navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+
+  const curriculumModule = page.locator("details.curriculum-module");
+  const moduleSummary = curriculumModule.locator(":scope > summary");
+  const firstLesson = page.locator("#lesson-01");
+  const secondLesson = page.locator("#lesson-02");
+
+  await expect(curriculumModule).toHaveAttribute("open", "");
+  await expect(firstLesson).toHaveAttribute("open", "");
+  await expect(secondLesson).not.toHaveAttribute("open", "");
+  await expect(firstLesson.getByText("Learning Outcome", { exact: true })).toBeVisible();
+
+  await secondLesson.locator(":scope > summary").click();
+  await expect(secondLesson).toHaveAttribute("open", "");
+  await expect(firstLesson).not.toHaveAttribute("open", "");
+  await expect(secondLesson.getByText("Learning Outcome", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("Learning Outcome", { exact: true })).toBeHidden();
+
+  await moduleSummary.click();
+  await expect(curriculumModule).not.toHaveAttribute("open", "");
+  await expect(page.getByText("Show lessons", { exact: true })).toBeVisible();
+
+  await moduleSummary.click();
+  await expect(curriculumModule).toHaveAttribute("open", "");
+  await expect(secondLesson).toHaveAttribute("open", "");
+
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+  );
+  expect(hasHorizontalOverflow).toBe(false);
+});
+
 test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
