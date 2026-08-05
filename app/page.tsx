@@ -194,7 +194,7 @@ export default function Home() {
               <div>
                 <p className="section-kicker">{content.pathsSection.kicker}</p>
                 <h2>
-                  {content.pathsSection.titleLineOne}
+                  {content.pathsSection.titleLineOne}{" "}
                   <br />
                   {content.pathsSection.titleLineTwo}
                 </h2>
