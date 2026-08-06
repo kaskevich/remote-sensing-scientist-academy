@@ -50,11 +50,11 @@ describe("Module 1 pedagogical review", () => {
     expect(mappedLessons.map((lesson) => lesson.number)).toEqual(
       Array.from({ length: 12 }, (_, index) => index + 1),
     );
-    expect(mappedLessons.slice(0, 3).every((lesson) => lesson.status === "available")).toBe(true);
-    expect(mappedLessons.slice(3).every((lesson) => lesson.status === "planned")).toBe(true);
+    expect(mappedLessons.every((lesson) => lesson.status === "available")).toBe(true);
+    expect(mappedLessons.every((lesson) => lesson.lessonId)).toBe(true);
   });
 
-  it("keeps only Lessons 1–3 as interactive curriculum pages", () => {
+  it("publishes all twelve lessons as interactive curriculum pages", () => {
     expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
       "Thinking Like a Scientific Programmer",
     );
@@ -63,6 +63,15 @@ describe("Module 1 pedagogical review", () => {
       { id: "lesson-01", title: "Welcome to Scientific Programming" },
       { id: "lesson-02", title: "Variables and Scientific Data" },
       { id: "lesson-03", title: "Collections for Ecological Information" },
+      { id: "lesson-04", title: "Conditions and Data-Quality Rules" },
+      { id: "lesson-05", title: "Repetition, Loops and Vectorised Thinking" },
+      { id: "lesson-06", title: "Functions, Errors and Debugging" },
+      { id: "lesson-07", title: "NumPy and Numerical Arrays" },
+      { id: "lesson-08", title: "Open the Published Dataset with pandas" },
+      { id: "lesson-09", title: "Missing Values, Types and Data Quality" },
+      { id: "lesson-10", title: "Filter, Group and Summarise" },
+      { id: "lesson-11", title: "Join, Reshape and Visualise" },
+      { id: "lesson-12", title: "Vegetation Data Explorer Project" },
     ]);
   });
 
@@ -100,6 +109,24 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson3).toContain("Tuples and sets have supporting roles");
     expect(lesson3).toContain("no management label");
     expect(lesson3).toContain("no coordinates");
+  });
+
+  it("develops Chapters 2–4 as one complete scientific workflow", () => {
+    const requiredIdeas: Record<string, string[]> = {
+      "lesson-04": ["condition asks a precise question", "missing — do not treat as zero", "quality flag"],
+      "lesson-05": ["same method for each item", "accumulator", "Vectorised thinking"],
+      "lesson-06": ["named, testable method", "traceback", "known cases"],
+      "lesson-07": ["one-dimensional NumPy array", "Boolean mask", "59 of 120"],
+      "lesson-08": ["reproducible project folder", "(120, 25)", "SampleID"],
+      "lesson-09": ["49.2%", "field-specific", "decision log"],
+      "lesson-10": ["analysis population", "n_plots", "descriptive rather than automatically causal"],
+      "lesson-11": ["validate=\"one_to_one\"", "unsampled combinations", "scientific figure"],
+      "lesson-12": ["claim–evidence chain", "Run All", "future Earth Observation work"],
+    };
+
+    for (const [lessonId, ideas] of Object.entries(requiredIdeas)) {
+      for (const idea of ideas) expect(reviewedContent[lessonId]).toContain(idea);
+    }
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
@@ -170,7 +197,7 @@ describe("Module 1 pedagogical review", () => {
     }
   });
 
-  it("retains all three explanatory SVGs", () => {
+  it("retains one explanatory SVG for every lesson", () => {
     const referencedImages = Object.values(reviewedContent).flatMap((content) =>
       [...content.matchAll(/!\[[^\]]*\]\(([^)]+\.svg)\)/g)].map((match) => match[1]),
     );
@@ -178,6 +205,15 @@ describe("Module 1 pedagogical review", () => {
       "lesson-media/images/scientific-programming-execution.svg",
       "lesson-media/images/scientific-variable-bindings.svg",
       "lesson-media/images/ecological-collections.svg",
+      "lesson-media/images/condition-quality-path.svg",
+      "lesson-media/images/loop-vector-thinking.svg",
+      "lesson-media/images/function-debug-cycle.svg",
+      "lesson-media/images/numpy-array-mask.svg",
+      "lesson-media/images/csv-dataframe-audit.svg",
+      "lesson-media/images/data-quality-profile.svg",
+      "lesson-media/images/filter-group-summary.svg",
+      "lesson-media/images/join-reshape-figure.svg",
+      "lesson-media/images/vegetation-explorer-workflow.svg",
     ]);
     for (const imagePath of referencedImages) {
       expect(existsSync(join(process.cwd(), "public", imagePath))).toBe(true);
