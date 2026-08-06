@@ -1,0 +1,226 @@
+import { spawnSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { describe, expect, it } from "vitest";
+import {
+  module1Overview,
+  reviewedLessonDetails,
+  submissionStatusLabel,
+} from "../lib/module1-pedagogy";
+
+type CurriculumLesson = {
+  id: string;
+  title: string;
+  lessonContent: string;
+};
+
+const site = JSON.parse(
+  readFileSync(join(process.cwd(), "content/site.json"), "utf8"),
+) as {
+  curriculum: {
+    titleLineOne: string;
+    titleLineTwo: string;
+    cohortDate: string;
+    modules: CurriculumLesson[];
+  };
+};
+
+const activeLessons = site.curriculum.modules;
+const reviewedContent = Object.fromEntries(
+  Object.entries(reviewedLessonDetails).map(([lessonId, details]) => [
+    lessonId,
+    readFileSync(join(process.cwd(), details.markdownFile), "utf8"),
+  ]),
+) as Record<string, string>;
+
+function fencedPythonBlocks(markdown: string) {
+  return [...markdown.matchAll(/```python\n([\s\S]*?)```/g)].map((match) => match[1].trimEnd());
+}
+
+describe("Module 1 pedagogical review", () => {
+  it("publishes the complete four-chapter, twelve-lesson sequence", () => {
+    expect(module1Overview.title).toBe("Thinking Like a Scientific Programmer");
+    expect(module1Overview.finalProject).toBe("Vegetation Data Explorer");
+    expect(module1Overview.prerequisites).toBe("None");
+    expect(module1Overview.outcomes).toHaveLength(9);
+    expect(module1Overview.chapters).toHaveLength(4);
+
+    const mappedLessons = module1Overview.chapters.flatMap((chapter) => chapter.lessons);
+    expect(mappedLessons).toHaveLength(12);
+    expect(mappedLessons.map((lesson) => lesson.number)).toEqual(
+      Array.from({ length: 12 }, (_, index) => index + 1),
+    );
+    expect(mappedLessons.slice(0, 3).every((lesson) => lesson.status === "available")).toBe(true);
+    expect(mappedLessons.slice(3).every((lesson) => lesson.status === "planned")).toBe(true);
+  });
+
+  it("keeps only Lessons 1–3 as interactive curriculum pages", () => {
+    expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
+      "Thinking Like a Scientific Programmer",
+    );
+    expect(site.curriculum.cohortDate).toBe("Vegetation Data Explorer");
+    expect(activeLessons.map(({ id, title }) => ({ id, title }))).toEqual([
+      { id: "lesson-01", title: "Welcome to Scientific Programming" },
+      { id: "lesson-02", title: "Variables and Scientific Data" },
+      { id: "lesson-03", title: "Collections for Ecological Information" },
+    ]);
+  });
+
+  it("structures Lesson 1 as seven beginner-sized active blocks", () => {
+    const content = reviewedContent["lesson-01"];
+    const requiredBlocks = [
+      "Scientific question and computational method",
+      "Meet the notebook",
+      "Run the first instruction",
+      "Predict execution order",
+      "Cause and fix one error",
+      "Save and submit the notebook",
+      "Reflection and summary",
+    ];
+    for (const [index, block] of requiredBlocks.entries()) {
+      expect(content).toContain(`## ${index + 1}. ${block}`);
+    }
+    expect(content).toContain("Markdown cell");
+    expect(content).toContain("code cell");
+    expect(content).toContain("When code fails");
+    expect(fencedPythonBlocks(content)[0]).toBe("print()");
+  });
+
+  it("keeps one main concept in each reviewed lesson", () => {
+    const lesson2 = reviewedContent["lesson-02"];
+    expect(lesson2).toContain("A **value** is one piece of information");
+    expect(lesson2).toContain("type()");
+    expect(lesson2).toContain('The values `"72"` and `72`');
+    expect(lesson2).toContain("changing a type cannot correct an invalid measurement");
+    expect(lesson2).not.toMatch(/\bappend\(|\{\s*"SampleID"\s*:/);
+
+    const lesson3 = reviewedContent["lesson-03"];
+    expect(lesson3).toContain("Lists preserve an editable sequence");
+    expect(lesson3).toContain("Dictionaries connect field names to values");
+    expect(lesson3).toContain("Tuples and sets have supporting roles");
+    expect(lesson3).toContain("no management label");
+    expect(lesson3).toContain("no coordinates");
+  });
+
+  it.each(Object.entries(reviewedLessonDetails))(
+    "%s includes three retryable, explanatory formative checks",
+    (_lessonId, details) => {
+      expect(details.formativeChecks).toHaveLength(3);
+      expect(new Set(details.formativeChecks.map((check) => check.id)).size).toBe(3);
+      for (const check of details.formativeChecks) {
+        expect(check.options.length).toBeGreaterThanOrEqual(3);
+        expect(check.correctOption).toBeGreaterThanOrEqual(0);
+        expect(check.correctOption).toBeLessThan(check.options.length);
+        expect(check.explanation.length).toBeGreaterThan(40);
+      }
+      const content = reviewedContent[_lessonId];
+      for (const check of details.formativeChecks) {
+        expect(content).toContain(`[[CHECK:${check.id}]]`);
+      }
+    },
+  );
+
+  it.each(Object.entries(reviewedLessonDetails))(
+    "%s includes submission, rubric and technical metadata",
+    (_lessonId, details) => {
+      expect(details.submissionChecklist.length).toBeGreaterThanOrEqual(5);
+      expect(details.rubric.map((item) => item.dimension)).toEqual([
+        "Technical correctness",
+        "Conceptual understanding",
+        "Reproducibility",
+        "Scientific communication",
+      ]);
+      expect(details.technicalMetadata.pythonVersion).toBe("Python 3.12.3");
+      expect(details.technicalMetadata.jupyterEnvironment).toContain("nbformat 4.5");
+      expect(details.technicalMetadata.datasetCitation).toContain("20083250");
+      expect(details.technicalMetadata.coreReferences.length).toBeGreaterThan(0);
+    },
+  );
+
+  it("maps existing database states to the requested learner review labels", () => {
+    expect(submissionStatusLabel("not_reviewed", null)).toBe("Not submitted");
+    expect(submissionStatusLabel("not_reviewed", "2026-08-06T10:00:00Z")).toBe("Submitted");
+    expect(submissionStatusLabel("needs_revision")).toBe("Revision requested");
+    expect(submissionStatusLabel("reviewed")).toBe("Meets expectations");
+    expect(submissionStatusLabel("approved")).toBe("Portfolio ready");
+  });
+
+  it("preserves verified dataset facts and explicit provenance limits", () => {
+    const lesson2 = reviewedContent["lesson-02"];
+    expect(lesson2).toContain('plot_id = "SALS1"');
+    expect(lesson2).toContain('site_name = "Saardu"');
+    expect(lesson2).toContain("species_richness = 7");
+    expect(lesson2).toContain("elevation_value = 0.530");
+    expect(lesson2).not.toContain("elevation_m =");
+
+    const lesson3 = reviewedContent["lesson-03"];
+    expect(lesson3).toContain("does not provide the species identities or plot coordinates");
+    expect(lesson3).toContain("It does not contain plot coordinates");
+    expect(lesson3).not.toMatch(/LS means|LS stands for|metres above sea level/i);
+  });
+
+  it("keeps worked Python blocks compact and syntactically valid except the labelled error", () => {
+    for (const content of Object.values(reviewedContent)) {
+      for (const block of fencedPythonBlocks(content)) {
+        expect(block.split("\n").length).toBeLessThanOrEqual(20);
+        if (block === 'print("Baltic coastal meadow)') continue;
+        const result = spawnSync("python3", ["-c", `compile(${JSON.stringify(block)}, '<lesson>', 'exec')`]);
+        expect(result.status, result.stderr.toString()).toBe(0);
+      }
+    }
+  });
+
+  it("retains all three explanatory SVGs", () => {
+    const referencedImages = Object.values(reviewedContent).flatMap((content) =>
+      [...content.matchAll(/!\[[^\]]*\]\(([^)]+\.svg)\)/g)].map((match) => match[1]),
+    );
+    expect(referencedImages).toEqual([
+      "lesson-media/images/scientific-programming-execution.svg",
+      "lesson-media/images/scientific-variable-bindings.svg",
+      "lesson-media/images/ecological-collections.svg",
+    ]);
+    for (const imagePath of referencedImages) {
+      expect(existsSync(join(process.cwd(), "public", imagePath))).toBe(true);
+    }
+  });
+
+  it("contains no placeholder or prohibited generic-example language in published lesson text", () => {
+    const allContent = Object.values(reviewedContent).join("\n");
+    expect(allContent).not.toMatch(/lorem ipsum|shopping cart|fruit list|bank account/i);
+    expect(allContent).not.toMatch(/REPLACE THIS TEXT/i);
+  });
+});
+
+describe("Vegetation Data Explorer starter notebook", () => {
+  const notebookPath = join(
+    process.cwd(),
+    "public/lesson-resources/module-1/Vegetation_Data_Explorer_Starter.ipynb",
+  );
+  const notebook = JSON.parse(readFileSync(notebookPath, "utf8")) as {
+    nbformat: number;
+    nbformat_minor: number;
+    cells: Array<{ cell_type: string; source: string[] }>;
+  };
+
+  it("is valid current notebook JSON with the required learning structure", () => {
+    expect(notebook.nbformat).toBe(4);
+    expect(notebook.nbformat_minor).toBeGreaterThanOrEqual(5);
+    expect(notebook.cells.length).toBeGreaterThanOrEqual(12);
+    const text = notebook.cells.flatMap((cell) => cell.source).join("");
+    expect(text).toContain("Vegetation Data Explorer");
+    expect(text).toContain("Learner name or researcher identifier");
+    expect(text).toContain("Scientific question");
+    expect(text).toContain("Prediction before running");
+    expect(text).toContain("Reflection");
+    expect(text).toContain("submission checklist");
+  });
+
+  it("contains Python code cells that all compile before learner editing", () => {
+    const code = notebook.cells
+      .filter((cell) => cell.cell_type === "code")
+      .map((cell) => cell.source.join(""))
+      .join("\n");
+    const result = spawnSync("python3", ["-c", `compile(${JSON.stringify(code)}, '<starter-notebook>', 'exec')`]);
+    expect(result.status, result.stderr.toString()).toBe(0);
+  });
+});

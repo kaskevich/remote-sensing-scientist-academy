@@ -15,12 +15,12 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   await page.reload();
 
   await expect(page).toHaveTitle(/Remote Sensing Scientist Academy/);
-  await expect(page.getByText("Guest workspace", { exact: true })).toBeVisible();
+  await expect(page.locator(".academy-account-panel")).toBeVisible();
 
   const firstLesson = page.locator("#lesson-01");
   const completion = firstLesson.getByRole("checkbox");
   const notes = page.locator("#lesson-01-notes");
-  const noteText = "Compare Sentinel-2 atmospheric correction methods.";
+  const noteText = "Explain why notebook execution is not scientific interpretation.";
 
   await completion.check();
   await notes.fill(noteText);
@@ -55,19 +55,98 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   expect(hasHorizontalOverflow).toBe(false);
 });
 
+test("module and lesson disclosures provide compact curriculum navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+
+  const curriculumModule = page.locator("details.curriculum-module");
+  const moduleSummary = curriculumModule.locator(":scope > summary");
+  const firstLesson = page.locator("#lesson-01");
+  const secondLesson = page.locator("#lesson-02");
+
+  await expect(curriculumModule).toHaveAttribute("open", "");
+  await expect(firstLesson).toHaveAttribute("open", "");
+  await expect(secondLesson).not.toHaveAttribute("open", "");
+  await expect(firstLesson.getByRole("heading", { name: /Learning outcome/i })).toBeVisible();
+
+  await secondLesson.locator(":scope > summary").click();
+  await expect(secondLesson).toHaveAttribute("open", "");
+  await expect(firstLesson).not.toHaveAttribute("open", "");
+  await expect(secondLesson.getByRole("heading", { name: /Learning outcome/i })).toBeVisible();
+  await expect(firstLesson.getByRole("heading", { name: /Learning outcome/i })).toBeHidden();
+
+  await moduleSummary.click();
+  await expect(curriculumModule).not.toHaveAttribute("open", "");
+  await expect(page.getByText("Show lessons", { exact: true })).toBeVisible();
+
+  await moduleSummary.click();
+  await expect(curriculumModule).toHaveAttribute("open", "");
+  await expect(secondLesson).toHaveAttribute("open", "");
+
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+  );
+  expect(hasHorizontalOverflow).toBe(false);
+});
+
+test("module map, starter notebook, and formative checks support beginner navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
+  await page.reload();
+
+  await expect(page.locator(".module-overview-panel").getByRole("heading", { name: "Thinking Like a Scientific Programmer", exact: true })).toBeVisible();
+  await expect(page.locator(".module-syllabus li")).toHaveCount(12);
+  await expect(page.locator(".syllabus-planned")).toHaveCount(9);
+  await expect(page.locator(".module-syllabus").getByText("Conditions and Data-Quality Rules", { exact: true })).toBeVisible();
+  await expect(page.locator("#lesson-04")).toHaveCount(0);
+
+  const firstLesson = page.locator("#lesson-01");
+  const starter = firstLesson.getByRole("link", { name: /Download the Vegetation Data Explorer starter notebook/i });
+  await expect(starter).toHaveAttribute("download", "");
+  await expect(starter).toHaveAttribute("href", /Vegetation_Data_Explorer_Starter\.ipynb$/);
+
+  const firstCheck = firstLesson.locator(".formative-check").first();
+  const completion = firstLesson.getByRole("checkbox");
+  await expect(completion).not.toBeChecked();
+
+  await firstCheck.getByLabel("A code cell").focus();
+  await page.keyboard.press("Space");
+  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  await expect(firstCheck.getByText("Not quite", { exact: true })).toBeVisible();
+  await expect(firstCheck.getByText(/Markdown cells hold narrative/)).toBeVisible();
+  await expect(completion).not.toBeChecked();
+
+  await firstCheck.getByRole("button", { name: "Try again" }).click();
+  await firstCheck.getByLabel("A Markdown cell").focus();
+  await page.keyboard.press("Space");
+  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  await expect(firstCheck.getByText("Correct", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("1 of 3 checks completed", { exact: true })).toBeVisible();
+  await expect(completion).not.toBeChecked();
+
+  const controlHeights = await firstLesson.locator(":scope > summary, .formative-check button, .lesson-resource-list a").evaluateAll((elements) =>
+    elements.filter((element) => {
+      const style = window.getComputedStyle(element);
+      return style.display !== "none" && style.visibility !== "hidden";
+    }).map((element) => element.getBoundingClientRect().height),
+  );
+  expect(controlHeights.every((height) => height >= 42)).toBe(true);
+});
+
 test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
 
   const firstLesson = page.locator("#lesson-01");
   const taskText = page.locator("#lesson-01-result-text");
-  const resultText = "Recovery is strongest on north-facing slopes; cloud cover adds uncertainty.";
+  const resultText = "The output confirms that Python ran the instruction; it is not yet ecological evidence.";
   await taskText.fill(resultText);
 
   const fileInput = page.locator("#lesson-01-result-files");
   await fileInput.setInputFiles([
     {
-      name: "recovery.png",
+      name: "sals1-notebook.png",
       mimeType: "image/png",
       buffer: Buffer.from(
         "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nQAAAABJRU5ErkJggg==",
@@ -75,7 +154,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
       ),
     },
     {
-      name: "recovery.geojson",
+      name: "saardu-boundary.geojson",
       mimeType: "application/geo+json",
       buffer: Buffer.from(
         JSON.stringify({
@@ -94,16 +173,16 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
       ),
     },
     {
-      name: "metrics.csv",
+      name: "plot-summary.csv",
       mimeType: "text/csv",
-      buffer: Buffer.from("site,ndvi\nA,0.72\n"),
+      buffer: Buffer.from("plot_id,species_richness\nSALS1,7\n"),
     },
   ]);
 
-  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
-  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
-  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
-  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+  await expect(page.getByText("sals1-notebook.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("saardu-boundary.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("plot-summary.csv", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
   await expect(firstLesson.getByText("Learner submission · browser prototype", { exact: true })).toBeVisible();
   await expect(firstLesson.getByText("Private learner–instructor conversation", { exact: true })).toBeVisible();
   await expect(firstLesson.getByText("Instructor feedback", { exact: true })).toBeVisible();
@@ -131,10 +210,10 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await page.reload();
 
   await expect(taskText).toHaveValue(resultText);
-  await expect(page.getByText("recovery.png", { exact: true })).toBeVisible();
-  await expect(page.getByText("recovery.geojson", { exact: true })).toBeVisible();
-  await expect(page.getByText("metrics.csv", { exact: true })).toBeVisible();
-  await expect(page.getByRole("img", { name: "Uploaded map: recovery.geojson" })).toBeVisible();
+  await expect(page.getByText("sals1-notebook.png", { exact: true })).toBeVisible();
+  await expect(page.getByText("saardu-boundary.geojson", { exact: true })).toBeVisible();
+  await expect(page.getByText("plot-summary.csv", { exact: true })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
 for (const viewport of viewports) {

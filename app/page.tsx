@@ -1,6 +1,9 @@
 import { Fragment } from "react";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import content from "@/content/site.json";
 import LearnerCurriculum, { type AcademyLesson } from "@/app/components/learner-curriculum";
+import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
 
 type CurriculumModule = {
   id: string;
@@ -29,6 +32,14 @@ function publicAssetPath(path: string) {
   return `${basePath}/${path.replace(/^\//, "")}`;
 }
 
+function readReviewedLesson(path: string) {
+  const source = readFileSync(
+    join(/* turbopackIgnore: true */ process.cwd(), path),
+    "utf8",
+  );
+  return source.replace(/^---\n[\s\S]*?\n---\n+/, "");
+}
+
 const visibleNavigation = content.navigation.items.filter((item) => item.visible);
 const visiblePaths = content.pathsSection.items.filter((path) => path.visible);
 const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter(
@@ -40,15 +51,21 @@ const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   title: module.title,
   description: module.description,
   tools: module.tools,
-  content: module.lessonContent,
+  content: reviewedLessonDetails[module.id]
+    ? readReviewedLesson(reviewedLessonDetails[module.id].markdownFile)
+    : module.lessonContent,
   images: module.lessonImages.map((image) => ({
     ...image,
     src: publicAssetPath(image.src),
   })),
-  resources: module.lessonResources.map((resource) => ({
-    ...resource,
-    href: publicAssetPath(resource.href),
-  })),
+  resources: [
+    ...module.lessonResources,
+    ...(reviewedLessonDetails[module.id]?.additionalResources ?? []),
+  ].map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
+    })),
+  pedagogy: reviewedLessonDetails[module.id] ?? null,
   task: {
     title: module.task.title,
     instructions: module.task.instructions,
@@ -194,7 +211,7 @@ export default function Home() {
               <div>
                 <p className="section-kicker">{content.pathsSection.kicker}</p>
                 <h2>
-                  {content.pathsSection.titleLineOne}
+                  {content.pathsSection.titleLineOne}{" "}
                   <br />
                   {content.pathsSection.titleLineTwo}
                 </h2>
@@ -202,26 +219,48 @@ export default function Home() {
               <p className="section-summary">{content.pathsSection.summary}</p>
             </div>
 
-            <div className="path-grid">
+            <ol className="path-progression" aria-label="One Academy journey through three stages">
+              {visiblePaths.map((path) => (
+                <li key={`progress-${path.number}`} aria-label={`${path.number} ${path.label}`}>
+                  <span>{path.number}</span>
+                </li>
+              ))}
+            </ol>
+
+            <div className="path-grid" aria-label="Academy curriculum stages">
               {visiblePaths.map((path) => (
                 <article className={`path-card path-${path.accent}`} key={path.number}>
                   <div className="path-topline">
                     <span>{path.label}</span>
                     <span>{path.number}</span>
                   </div>
-                  <div className="path-signal" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
                   <h3>{path.title}</h3>
-                  <p>{path.description}</p>
+                  <p className="path-description">{path.description}</p>
+
+                  <div className="path-details">
+                    <section className="path-detail path-learn" aria-labelledby={`learn-${path.number}`}>
+                      <h4 id={`learn-${path.number}`}>Learn</h4>
+                      <ul>
+                        {path.skills.map((skill) => (
+                          <li key={skill}>{skill}</li>
+                        ))}
+                      </ul>
+                    </section>
+
+                    <section className="path-detail" aria-labelledby={`build-${path.number}`}>
+                      <h4 id={`build-${path.number}`}>Build</h4>
+                      <p>{path.build}</p>
+                    </section>
+
+                    <section className="path-detail" aria-labelledby={`outcome-${path.number}`}>
+                      <h4 id={`outcome-${path.number}`}>Outcome</h4>
+                      <p>{path.outcome}</p>
+                    </section>
+                  </div>
+
                   <div className="path-footer">
-                    <span>{path.meta}</span>
-                    <a href={content.navigation.applyHref} aria-label={`Learn more about ${path.title}`}>
-                      ↗
+                    <a href={path.href} aria-label={`${path.ctaLabel}: ${path.title}`}>
+                      {path.ctaLabel} <span aria-hidden="true">→</span>
                     </a>
                   </div>
                 </article>
@@ -293,7 +332,7 @@ export default function Home() {
               </div>
             </div>
 
-            <LearnerCurriculum lessons={learnerLessons} />
+            <LearnerCurriculum lessons={learnerLessons} overview={module1Overview} />
           </section>
         )}
 

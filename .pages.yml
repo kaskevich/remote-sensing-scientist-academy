@@ -3,7 +3,7 @@ media:
     label: Lesson and task imagery
     input: public/lesson-media/images
     output: /lesson-media/images
-    extensions: [png, jpg, jpeg, webp]
+    extensions: [png, jpg, jpeg, webp, svg]
     rename: safe
   - name: lesson_files
     label: Lesson resources
@@ -179,7 +179,7 @@ content:
           min: 1
           max: 10
       - name: pathsSection
-        label: Programs
+        label: Academy pathway
         type: object
         required: true
         fields:
@@ -202,7 +202,7 @@ content:
             type: text
             required: true
           - name: items
-            label: Programs
+            label: Stages
             type: object
             list:
               min: 1
@@ -227,10 +227,30 @@ content:
               - name: description
                 type: text
                 required: true
-              - name: meta
-                label: Duration and level
+              - name: skills
+                label: Learn
+                type: string
+                list:
+                  min: 1
+                  max: 6
+                required: true
+              - name: build
+                label: Portfolio project
                 type: string
                 required: true
+              - name: outcome
+                label: Outcome
+                type: text
+                required: true
+              - name: ctaLabel
+                label: Link text
+                type: string
+                required: true
+              - name: href
+                label: Link destination
+                type: string
+                required: true
+                description: Use a section link such as #curriculum or a full https:// address.
               - name: accent
                 label: Accent color
                 type: select
@@ -372,13 +392,6 @@ content:
                 list:
                   min: 1
                   max: 10
-              - name: lessonContent
-                label: Lesson content
-                type: rich-text
-                description: Add the lesson explanation in Markdown. Upload supporting images below.
-                options:
-                  format: markdown
-                  media: false
               - name: lessonImages
                 label: Lesson imagery
                 type: object
@@ -570,6 +583,38 @@ content:
             label: Closing statement
             type: string
             required: true
+
+  - name: module1_lessons
+    label: Module 1 lesson content
+    type: collection
+    path: content/lessons/module-1
+    format: yaml-frontmatter
+    operations:
+      create: false
+      rename: false
+      delete: false
+    view:
+      primary: title
+      sort: lessonId
+      order: asc
+    fields:
+      - name: title
+        label: Lesson title
+        type: string
+        required: true
+        readonly: true
+      - name: lessonId
+        label: Stable lesson ID
+        type: string
+        required: true
+        readonly: true
+      - name: body
+        label: Published lesson
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: false
 
 settings:
   content:

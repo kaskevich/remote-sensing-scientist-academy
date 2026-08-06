@@ -27,6 +27,7 @@ import {
   safeStorageFileName,
   validateAcademyUpload,
 } from "@/lib/upload-validation";
+import { submissionStatusLabel } from "@/lib/module1-pedagogy";
 
 const SUBMISSION_BUCKET = "learner-submissions";
 const MAX_UPLOAD_BYTES = configuredMaxUploadBytes();
@@ -97,10 +98,6 @@ function mapFeedback(row: Record<string, unknown>): InstructorFeedback {
     revisionNumber: Number(row.revision_number ?? 1),
     createdAt: String(row.created_at),
   };
-}
-
-function statusLabel(status: SubmissionStatus) {
-  return status.replace("_", " ");
 }
 
 function SecureFilePreview({
@@ -532,14 +529,14 @@ export default function AuthenticatedTaskResultPanel({
         )}
 
         <div className="submission-review-row">
-          <span>Status: <strong>{statusLabel(submission?.status ?? "not_reviewed")}</strong></span>
+          <span>Status: <strong>{submissionStatusLabel(submission?.status ?? "not_reviewed", submission?.submittedAt)}</strong></span>
           <button className="button button-primary" type="button" onClick={() => void sendForReview()}>
             {submission?.status === "needs_revision" ? "Send revision" : "Send for review"}
           </button>
         </div>
 
         <aside className="instructor-feedback" aria-label="Instructor feedback">
-          <span>Instructor feedback{feedback ? ` · ${statusLabel(feedback.status)}` : ""}</span>
+          <span>Instructor feedback{feedback ? ` · ${submissionStatusLabel(feedback.status, submission?.submittedAt)}` : ""}</span>
           {feedback ? (
             <>
               <p>{feedback.body}</p>
