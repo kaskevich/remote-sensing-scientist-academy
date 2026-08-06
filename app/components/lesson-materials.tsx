@@ -1,5 +1,9 @@
+"use client";
+
+import { useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
+import type { FormativeCheck } from "@/lib/module1-pedagogy";
 
 export type LessonImage = {
   src: string;
@@ -18,14 +22,168 @@ export type LessonMap = {
   caption: string;
 };
 
-export function MarkdownContent({ children }: { children: string }) {
+function nodeText(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (node && typeof node === "object" && "props" in node) {
+    return nodeText((node as { props?: { children?: ReactNode } }).props?.children);
+  }
+  return "";
+}
+
+function headingSlug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function FormativeCheckCard({
+  check,
+  lessonId,
+  completed,
+  onCompleted,
+}: {
+  check: FormativeCheck;
+  lessonId: string;
+  completed: boolean;
+  onCompleted?: (checkId: string) => void;
+}) {
+  const [selectedOption, setSelectedOption] = useState<number | null>(() => completed ? check.correctOption : null);
+  const [checkedOption, setCheckedOption] = useState<number | null>(() => completed ? check.correctOption : null);
+  const isCorrect = checkedOption === check.correctOption;
+  const checkName = `${lessonId}-${check.id}`;
+
+  function checkAnswer() {
+    if (selectedOption === null) return;
+    setCheckedOption(selectedOption);
+    if (selectedOption === check.correctOption) onCompleted?.(check.id);
+  }
+
+  return (
+    <section className="formative-check" aria-labelledby={`${checkName}-title`}>
+      <div className="formative-check-heading">
+        <span>Check your understanding</span>
+        <strong id={`${checkName}-title`}>{check.question}</strong>
+      </div>
+      <fieldset>
+        <legend className="sr-only">Choose one answer</legend>
+        {check.options.map((option, index) => (
+          <label key={option}>
+            <input
+              type="radio"
+              name={checkName}
+              checked={selectedOption === index}
+              onChange={() => setSelectedOption(index)}
+            />
+            <span>{option}</span>
+          </label>
+        ))}
+      </fieldset>
+      {checkedOption === null ? (
+        <button type="button" disabled={selectedOption === null} onClick={checkAnswer}>
+          Check answer
+        </button>
+      ) : (
+        <div className="formative-feedback" role="status">
+          <strong>{isCorrect ? "Correct" : "Not quite"}</strong>
+          <p>{check.explanation}</p>
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedOption(null);
+              setCheckedOption(null);
+            }}
+          >
+            Try again
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}
+
+type MarkdownContentProps = {
+  children: string;
+  lessonId?: string;
+  formativeChecks?: FormativeCheck[];
+  completedCheckIds?: string[];
+  onCheckCompleted?: (checkId: string) => void;
+  showTableOfContents?: boolean;
+};
+
+export function MarkdownContent({
+  children,
+  lessonId = "lesson",
+  formativeChecks = [],
+  completedCheckIds = [],
+  onCheckCompleted,
+  showTableOfContents = false,
+}: MarkdownContentProps) {
   if (!children.trim()) {
     return null;
   }
 
+  const tableOfContents = showTableOfContents
+    ? [...children.matchAll(/^##\s+(.+)$/gm)].map((match) => ({
+        label: match[1].replace(/[*_`]/g, "").replace(/^\d+\.\s*/, ""),
+        href: `#${lessonId}-${headingSlug(match[1].replace(/[*_`]/g, ""))}`,
+      }))
+    : [];
+
   return (
     <div className="lesson-rich-text">
-      <ReactMarkdown>{children}</ReactMarkdown>
+      {tableOfContents.length > 0 && (
+        <nav className="lesson-table-of-contents" aria-label="Lesson contents">
+          <span>In this lesson</span>
+          <ol>
+            {tableOfContents.map((item) => (
+              <li key={item.href}><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      <ReactMarkdown
+        components={{
+          h2: ({ children: headingChildren }) => {
+            const text = nodeText(headingChildren);
+            return <h2 id={`${lessonId}-${headingSlug(text)}`}>{headingChildren}</h2>;
+          },
+          h3: ({ children: headingChildren }) => {
+            const text = nodeText(headingChildren);
+            return <h3 id={`${lessonId}-${headingSlug(text)}`}>{headingChildren}</h3>;
+          },
+          p: ({ children: paragraphChildren }) => {
+            const text = nodeText(paragraphChildren).trim();
+            const marker = text.match(/^\[\[CHECK:([a-z0-9-]+)\]\]$/);
+            if (marker) {
+              const check = formativeChecks.find((candidate) => candidate.id === marker[1]);
+              return check ? (
+                <FormativeCheckCard
+                  check={check}
+                  lessonId={lessonId}
+                  completed={completedCheckIds.includes(check.id)}
+                  onCompleted={onCheckCompleted}
+                />
+              ) : null;
+            }
+            return <p>{paragraphChildren}</p>;
+          },
+          blockquote: ({ children: quoteChildren }) => {
+            const text = nodeText(quoteChildren).trim().toLowerCase();
+            const layer = text.startsWith("core lesson")
+              ? "core"
+              : text.startsWith("scientific note")
+                ? "scientific"
+                : text.startsWith("go deeper")
+                  ? "deeper"
+                  : "standard";
+            return <blockquote className={`lesson-callout lesson-callout-${layer}`}>{quoteChildren}</blockquote>;
+          },
+        }}
+      >
+        {children}
+      </ReactMarkdown>
     </div>
   );
 }
@@ -57,7 +215,13 @@ export function LessonResources({ resources }: { resources: LessonResource[] }) 
   return (
     <div className="lesson-resource-list">
       {resources.map((resource) => (
-        <a href={resource.href} key={`${resource.href}-${resource.title}`} target="_blank" rel="noreferrer">
+        <a
+          href={resource.href}
+          key={`${resource.href}-${resource.title}`}
+          download={resource.href.endsWith(".ipynb") ? true : undefined}
+          target={resource.href.endsWith(".ipynb") ? undefined : "_blank"}
+          rel={resource.href.endsWith(".ipynb") ? undefined : "noreferrer"}
+        >
           {resource.title || "Open lesson resource"} <span aria-hidden="true">↗</span>
         </a>
       ))}

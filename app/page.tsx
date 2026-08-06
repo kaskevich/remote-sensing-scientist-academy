@@ -1,6 +1,9 @@
 import { Fragment } from "react";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import content from "@/content/site.json";
 import LearnerCurriculum, { type AcademyLesson } from "@/app/components/learner-curriculum";
+import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
 
 type CurriculumModule = {
   id: string;
@@ -29,6 +32,14 @@ function publicAssetPath(path: string) {
   return `${basePath}/${path.replace(/^\//, "")}`;
 }
 
+function readReviewedLesson(path: string) {
+  const source = readFileSync(
+    join(/* turbopackIgnore: true */ process.cwd(), path),
+    "utf8",
+  );
+  return source.replace(/^---\n[\s\S]*?\n---\n+/, "");
+}
+
 const visibleNavigation = content.navigation.items.filter((item) => item.visible);
 const visiblePaths = content.pathsSection.items.filter((path) => path.visible);
 const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter(
@@ -40,15 +51,21 @@ const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   title: module.title,
   description: module.description,
   tools: module.tools,
-  content: module.lessonContent,
+  content: reviewedLessonDetails[module.id]
+    ? readReviewedLesson(reviewedLessonDetails[module.id].markdownFile)
+    : module.lessonContent,
   images: module.lessonImages.map((image) => ({
     ...image,
     src: publicAssetPath(image.src),
   })),
-  resources: module.lessonResources.map((resource) => ({
-    ...resource,
-    href: publicAssetPath(resource.href),
-  })),
+  resources: [
+    ...module.lessonResources,
+    ...(reviewedLessonDetails[module.id]?.additionalResources ?? []),
+  ].map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
+    })),
+  pedagogy: reviewedLessonDetails[module.id] ?? null,
   task: {
     title: module.task.title,
     instructions: module.task.instructions,
@@ -315,7 +332,7 @@ export default function Home() {
               </div>
             </div>
 
-            <LearnerCurriculum lessons={learnerLessons} />
+            <LearnerCurriculum lessons={learnerLessons} overview={module1Overview} />
           </section>
         )}
 

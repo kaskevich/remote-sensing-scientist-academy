@@ -491,10 +491,10 @@ function ReviewSubmission({ client, submission }: { client: SupabaseClient; subm
         <label>
           Review status
           <select value={status} onChange={(event) => setStatus(event.target.value as SubmissionStatus)}>
-            <option value="not_reviewed">Not reviewed</option>
-            <option value="needs_revision">Needs revision</option>
-            <option value="reviewed">Reviewed</option>
-            <option value="approved">Approved</option>
+            <option value="not_reviewed">Submitted</option>
+            <option value="needs_revision">Revision requested</option>
+            <option value="reviewed">Meets expectations</option>
+            <option value="approved">Portfolio ready</option>
           </select>
         </label>
         <label>Instructor feedback<textarea required rows={3} value={feedback} onChange={(event) => setFeedback(event.target.value)} /></label>

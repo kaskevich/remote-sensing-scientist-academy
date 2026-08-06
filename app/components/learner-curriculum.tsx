@@ -28,6 +28,10 @@ import AcademyAccountPanel, {
 import { useAcademyAuth } from "@/app/components/academy-auth-provider";
 import LessonDiscussion from "@/app/components/lesson-discussion";
 import SyncedLessonResources from "@/app/components/synced-lesson-resources";
+import type {
+  Module1Overview,
+  ReviewedLessonDetails,
+} from "@/lib/module1-pedagogy";
 
 export type AcademyLesson = {
   id: string;
@@ -44,17 +48,156 @@ export type AcademyLesson = {
     referenceImages: LessonImage[];
     referenceMaps: LessonMap[];
   };
+  pedagogy: ReviewedLessonDetails | null;
 };
 
 type LearnerCurriculumProps = {
   lessons: AcademyLesson[];
+  overview: Module1Overview;
 };
 
 function activityTimestamp() {
   return new Date().toISOString();
 }
 
-export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
+function ModuleOverview({
+  overview,
+  completedLessonIds,
+  onOpenLesson,
+}: {
+  overview: Module1Overview;
+  completedLessonIds: string[];
+  onOpenLesson: (lessonId: string) => void;
+}) {
+  return (
+    <section className="module-overview-panel" aria-labelledby="module-overview-title">
+      <div className="module-overview-intro">
+        <div>
+          <p className="section-kicker">Module 1 overview</p>
+          <h3 id="module-overview-title">{overview.title}</h3>
+          <p>{overview.purpose}</p>
+        </div>
+        <dl>
+          <div><dt>Final project</dt><dd>{overview.finalProject}</dd></div>
+          <div><dt>Prerequisites</dt><dd>{overview.prerequisites}</dd></div>
+        </dl>
+      </div>
+
+      <details className="module-outcomes" open>
+        <summary>Module outcomes</summary>
+        <p>By the end of the module, you can:</p>
+        <ul>
+          {overview.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
+        </ul>
+      </details>
+
+      <div className="module-syllabus" aria-label="Complete twelve-lesson module map">
+        {overview.chapters.map((chapter) => (
+          <section key={chapter.number}>
+            <div className="module-chapter-heading">
+              <span>Chapter {chapter.number}</span>
+              <h4>{chapter.title}</h4>
+            </div>
+            <ol>
+              {chapter.lessons.map((lesson) => {
+                const isComplete = lesson.lessonId
+                  ? completedLessonIds.includes(lesson.lessonId)
+                  : false;
+                return (
+                  <li className={lesson.status === "planned" ? "syllabus-planned" : "syllabus-available"} key={lesson.number}>
+                    <span className="syllabus-number">{String(lesson.number).padStart(2, "0")}</span>
+                    <div>
+                      {lesson.lessonId ? (
+                        <a
+                          href={`#${lesson.lessonId}`}
+                          onClick={() => onOpenLesson(lesson.lessonId as string)}
+                        >
+                          {lesson.title}
+                        </a>
+                      ) : (
+                        <strong>{lesson.title}</strong>
+                      )}
+                      <span>{lesson.status === "planned" ? "Planned syllabus" : isComplete ? "Completed" : "Available now"}</span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))}
+      </div>
+      <p className="module-planning-note">
+        Lessons 4–12 show the intended sequence only. They do not contain empty pages and cannot be marked complete.
+      </p>
+    </section>
+  );
+}
+
+function LessonSubmissionGuide({ pedagogy }: { pedagogy: ReviewedLessonDetails }) {
+  return (
+    <section className="lesson-submission-guide" aria-labelledby={`submission-guide-${pedagogy.position}`}>
+      <div className="lesson-submission-guide-heading">
+        <span>Submission guide</span>
+        <h3 id={`submission-guide-${pedagogy.position}`}>Checklist and review rubric</h3>
+      </div>
+      <div className="lesson-submission-columns">
+        <div>
+          <h4>Before submitting</h4>
+          <ul className="submission-checklist">
+            {pedagogy.submissionChecklist.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h4>Review dimensions</h4>
+          <dl className="lesson-rubric">
+            {pedagogy.rubric.map((item) => (
+              <div key={item.dimension}><dt>{item.dimension}</dt><dd>{item.expectation}</dd></div>
+            ))}
+          </dl>
+        </div>
+      </div>
+      <div className="review-status-key" aria-label="Submission review statuses">
+        <span>Review statuses</span>
+        <ul>
+          {[
+            "Not submitted",
+            "Submitted",
+            "Revision requested",
+            "Meets expectations",
+            "Portfolio ready",
+          ].map((status) => <li key={status}>{status}</li>)}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails }) {
+  const metadata = pedagogy.technicalMetadata;
+  return (
+    <details className="lesson-technical-details">
+      <summary>Technical and source information</summary>
+      <dl>
+        <div><dt>Tested Python</dt><dd>{metadata.pythonVersion}</dd></div>
+        <div><dt>Tested Jupyter environment</dt><dd>{metadata.jupyterEnvironment}</dd></div>
+        <div><dt>Last technical review</dt><dd>{metadata.reviewDate}</dd></div>
+        {metadata.datasetCitation && <div><dt>Dataset citation</dt><dd>{metadata.datasetCitation}</dd></div>}
+      </dl>
+      <div className="lesson-reference-columns">
+        <div>
+          <h4>Core references</h4>
+          <ul>{metadata.coreReferences.map((reference) => <li key={reference.href}><a href={reference.href} target="_blank" rel="noreferrer">{reference.title}</a></li>)}</ul>
+        </div>
+        <div>
+          <h4>Optional further reading</h4>
+          <ul>{metadata.furtherReading.map((reference) => <li key={reference.href}><a href={reference.href} target="_blank" rel="noreferrer">{reference.title}</a></li>)}</ul>
+        </div>
+      </div>
+    </details>
+  );
+}
+
+export default function LearnerCurriculum({ lessons, overview }: LearnerCurriculumProps) {
   const auth = useAcademyAuth();
   const lessonIds = useMemo(() => lessons.map((lesson) => lesson.id), [lessons]);
   const storageRef = useRef<LearnerDataProvider | null>(null);
@@ -64,6 +207,7 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
   const [saveFailed, setSaveFailed] = useState(false);
   const [isModuleOpen, setIsModuleOpen] = useState(true);
   const [openLessonId, setOpenLessonId] = useState<string | null>(() => lessons[0]?.id ?? null);
+  const [completedChecks, setCompletedChecks] = useState<Record<string, string[]>>({});
 
   // Browser-local state must hydrate after mount so server rendering stays deterministic.
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -178,6 +322,15 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
 
   return (
     <>
+      <ModuleOverview
+        overview={overview}
+        completedLessonIds={progress.completedLessonIds}
+        onOpenLesson={(lessonId) => {
+          setIsModuleOpen(true);
+          setOpenLessonId(lessonId);
+        }}
+      />
+
       <section className="learner-dashboard" aria-labelledby="learner-dashboard-title">
         <AcademyAccountPanel />
         <div className="learner-dashboard-heading">
@@ -249,10 +402,10 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
         >
           <span>
             <small>Module navigation</small>
-            <strong>Module 1 lessons</strong>
+            <strong>Available Module 1 lessons</strong>
           </span>
           <span className="curriculum-module-meta">
-            <span>{lessons.length} lessons</span>
+            <span>{lessons.length} available</span>
             <span className="curriculum-module-toggle">
               <span className="curriculum-module-toggle-open">Hide lessons</span>
               <span className="curriculum-module-toggle-closed">Show lessons</span>
@@ -267,6 +420,13 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
             const isCurrent = summary.currentLessonId === lesson.id;
             const isOpen = openLessonId === lesson.id;
             const noteId = `${lesson.id}-notes`;
+            const pedagogy = lesson.pedagogy;
+            const completedLessonChecks = completedChecks[lesson.id] ?? [];
+            const previousLesson = lessons[index - 1] ?? null;
+            const nextLesson = lessons[index + 1] ?? null;
+            const nextPlannedLesson = overview.chapters
+              .flatMap((chapter) => chapter.lessons)
+              .find((candidate) => candidate.number === (pedagogy?.position ?? index + 1) + 1);
 
             return (
               <details
@@ -306,9 +466,34 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
 
                 <div className="module-body">
                   <div className="module-copy">
+                    {pedagogy && (
+                      <div className="lesson-context" aria-label="Lesson position and progress">
+                        <span>Lesson {pedagogy.position} of {pedagogy.totalPositions}</span>
+                        <strong>{pedagogy.estimatedTime}</strong>
+                        <span>{completedLessonChecks.length} of {pedagogy.formativeChecks.length} checks completed</span>
+                      </div>
+                    )}
+                    <div className="lesson-layer-key" aria-label="Lesson content layers">
+                      <span><i className="layer-core" />Core lesson · required</span>
+                      <span><i className="layer-scientific" />Scientific note · applied context</span>
+                      <span><i className="layer-deeper" />Go deeper · optional</span>
+                    </div>
                     {(lesson.content || lesson.images.length > 0 || lesson.resources.length > 0) && (
                       <div className="lesson-managed-content">
-                        <MarkdownContent>{lesson.content}</MarkdownContent>
+                        <MarkdownContent
+                          lessonId={lesson.id}
+                          formativeChecks={pedagogy?.formativeChecks}
+                          completedCheckIds={completedLessonChecks}
+                          onCheckCompleted={(checkId) => {
+                            setCompletedChecks((previous) => ({
+                              ...previous,
+                              [lesson.id]: Array.from(new Set([...(previous[lesson.id] ?? []), checkId])),
+                            }));
+                          }}
+                          showTableOfContents
+                        >
+                          {lesson.content}
+                        </MarkdownContent>
                         <LessonImageGallery images={lesson.images} />
                         <LessonResources resources={lesson.resources} />
                       </div>
@@ -334,6 +519,40 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                       )}
                     </div>
 
+                    <nav className="lesson-sequence-navigation" aria-label="Previous and next lessons">
+                      {previousLesson ? (
+                        <a
+                          href={`#${previousLesson.id}`}
+                          onClick={() => {
+                            setOpenLessonId(previousLesson.id);
+                            setCurrentLesson(previousLesson.id);
+                          }}
+                        >
+                          <span>Previous lesson</span>
+                          <strong>{previousLesson.title}</strong>
+                        </a>
+                      ) : <span className="lesson-sequence-empty">Start of Module 1</span>}
+                      {nextLesson ? (
+                        <a
+                          href={`#${nextLesson.id}`}
+                          onClick={() => {
+                            setOpenLessonId(nextLesson.id);
+                            setCurrentLesson(nextLesson.id);
+                          }}
+                        >
+                          <span>Next lesson</span>
+                          <strong>{nextLesson.title}</strong>
+                        </a>
+                      ) : (
+                        <span className="lesson-sequence-planned">
+                          <span>Next planned lesson</span>
+                          <strong>{nextPlannedLesson?.title ?? "Module project continuation"}</strong>
+                        </span>
+                      )}
+                    </nav>
+
+                    {pedagogy && <LessonSubmissionGuide pedagogy={pedagogy} />}
+
                     <div className="lesson-notes">
                       <label htmlFor={noteId}>
                         Private learner notes <span>{auth.user ? "Autosaved to your account" : "Autosaved locally"}</span>
@@ -355,6 +574,7 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
                       referenceMaps={lesson.task.referenceMaps}
                     />
                     <LessonDiscussion lessonId={lesson.id} lessonTitle={lesson.title} />
+                    {pedagogy && <LessonTechnicalDetails pedagogy={pedagogy} />}
                   </div>
                 </div>
               </details>
