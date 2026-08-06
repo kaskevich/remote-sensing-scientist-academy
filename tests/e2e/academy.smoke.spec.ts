@@ -67,13 +67,13 @@ test("module and lesson disclosures provide compact curriculum navigation", asyn
   await expect(curriculumModule).toHaveAttribute("open", "");
   await expect(firstLesson).toHaveAttribute("open", "");
   await expect(secondLesson).not.toHaveAttribute("open", "");
-  await expect(firstLesson.getByText("Learning Outcome", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByRole("heading", { name: /Learning outcome/i })).toBeVisible();
 
   await secondLesson.locator(":scope > summary").click();
   await expect(secondLesson).toHaveAttribute("open", "");
   await expect(firstLesson).not.toHaveAttribute("open", "");
-  await expect(secondLesson.getByText("Learning Outcome", { exact: true })).toBeVisible();
-  await expect(firstLesson.getByText("Learning Outcome", { exact: true })).toBeHidden();
+  await expect(secondLesson.getByRole("heading", { name: /Learning outcome/i })).toBeVisible();
+  await expect(firstLesson.getByRole("heading", { name: /Learning outcome/i })).toBeHidden();
 
   await moduleSummary.click();
   await expect(curriculumModule).not.toHaveAttribute("open", "");
@@ -87,6 +87,51 @@ test("module and lesson disclosures provide compact curriculum navigation", asyn
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
   );
   expect(hasHorizontalOverflow).toBe(false);
+});
+
+test("module map, starter notebook, and formative checks support beginner navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
+  await page.reload();
+
+  await expect(page.locator(".module-overview-panel").getByRole("heading", { name: "Thinking Like a Scientific Programmer", exact: true })).toBeVisible();
+  await expect(page.locator(".module-syllabus li")).toHaveCount(12);
+  await expect(page.locator(".syllabus-planned")).toHaveCount(9);
+  await expect(page.locator(".module-syllabus").getByText("Conditions and Data-Quality Rules", { exact: true })).toBeVisible();
+  await expect(page.locator("#lesson-04")).toHaveCount(0);
+
+  const firstLesson = page.locator("#lesson-01");
+  const starter = firstLesson.getByRole("link", { name: /Download the Vegetation Data Explorer starter notebook/i });
+  await expect(starter).toHaveAttribute("download", "");
+  await expect(starter).toHaveAttribute("href", /Vegetation_Data_Explorer_Starter\.ipynb$/);
+
+  const firstCheck = firstLesson.locator(".formative-check").first();
+  const completion = firstLesson.getByRole("checkbox");
+  await expect(completion).not.toBeChecked();
+
+  await firstCheck.getByLabel("A code cell").focus();
+  await page.keyboard.press("Space");
+  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  await expect(firstCheck.getByText("Not quite", { exact: true })).toBeVisible();
+  await expect(firstCheck.getByText(/Markdown cells hold narrative/)).toBeVisible();
+  await expect(completion).not.toBeChecked();
+
+  await firstCheck.getByRole("button", { name: "Try again" }).click();
+  await firstCheck.getByLabel("A Markdown cell").focus();
+  await page.keyboard.press("Space");
+  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  await expect(firstCheck.getByText("Correct", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("1 of 3 checks completed", { exact: true })).toBeVisible();
+  await expect(completion).not.toBeChecked();
+
+  const controlHeights = await firstLesson.locator(":scope > summary, .formative-check button, .lesson-resource-list a").evaluateAll((elements) =>
+    elements.filter((element) => {
+      const style = window.getComputedStyle(element);
+      return style.display !== "none" && style.visibility !== "hidden";
+    }).map((element) => element.getBoundingClientRect().height),
+  );
+  expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
 test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {

@@ -167,7 +167,7 @@
         "visible": true,
         "week": "01",
         "title": "Welcome to Scientific Programming",
-        "description": "Understand how a scientist turns a research question into reproducible instructions, then create the first checkpoint of your Vegetation Data Explorer notebook.",
+        "description": "Understand scientific programming, learn how a notebook works, run your first Python instructions and preserve the first Vegetation Data Explorer checkpoint.",
         "tools": [
           "Jupyter Notebook",
           "Python",
@@ -188,7 +188,7 @@
         "visible": true,
         "week": "02",
         "title": "Variables and Scientific Data",
-        "description": "Represent one real vegetation plot with clear names and scientifically appropriate text, numeric, Boolean and missing values—without losing their meaning.",
+        "description": "Represent scientific values with clear variable names and appropriate strings, numbers, Booleans and missing values without confusing type with validity.",
         "tools": [
           "Python",
           "Scientific values",
@@ -208,8 +208,8 @@
         "id": "lesson-03",
         "visible": true,
         "week": "03",
-        "title": "Collections: Organizing Ecological Information",
-        "description": "Choose lists, tuples, sets and dictionaries according to the scientific relationship among species observations, coordinate conventions, trait fields and plot metadata.",
+        "title": "Collections for Ecological Information",
+        "description": "Use lists for editable species observations and dictionaries for named plot fields, with brief supporting uses for tuples and sets.",
         "tools": [
           "Python collections",
           "Vegetation metadata",
