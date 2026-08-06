@@ -56,7 +56,7 @@ function fencedPythonBlocks(markdown: string) {
 describe("Module 1 Sprint 1 curriculum", () => {
   it("publishes the requested module identity and three complete lessons", () => {
     expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
-      "Thinking Like a Scientific Programmer.",
+      "Thinking Like a Scientific Programmer",
     );
     expect(site.curriculum.cohortDate).toBe("Vegetation Data Explorer");
     expect(lessons.map(({ id, title }) => ({ id, title }))).toEqual([

@@ -183,7 +183,7 @@ export default function LearnerCurriculum({ lessons }: LearnerCurriculumProps) {
         <div className="learner-dashboard-heading">
           <div>
             <p className="section-kicker">Your learning</p>
-            <h3 id="learner-dashboard-title">Continue from where you stopped.</h3>
+            <h3 id="learner-dashboard-title">Continue from where you stopped</h3>
           </div>
           {currentLesson && (
             <a

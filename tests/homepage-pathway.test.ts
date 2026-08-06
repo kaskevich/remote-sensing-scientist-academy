@@ -27,10 +27,10 @@ describe("homepage Academy pathway", () => {
   it("presents one sequential three-stage journey", () => {
     expect(site.pathsSection.kicker).toBe("ONE JOURNEY · THREE STAGES");
     expect(`${site.pathsSection.titleLineOne} ${site.pathsSection.titleLineTwo}`).toBe(
-      "From beginner to Earth Observation professional.",
+      "From beginner to Earth Observation professional",
     );
     expect(site.pathsSection.summary).toBe(
-      "Everything you build becomes part of your professional portfolio.",
+      "Everything you build becomes part of your professional portfolio",
     );
     expect(site.pathsSection.items.map(({ number, label }) => ({ number, label }))).toEqual([
       { number: "01", label: "FOUNDATIONS" },

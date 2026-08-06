@@ -33,8 +33,8 @@
   "hero": {
     "admissionsOpen": true,
     "eyebrow": "Admissions open · Autumn cohort",
-    "title": "Learn remote sensing.",
-    "accentTitle": "Work with real data.",
+    "title": "Learn remote sensing",
+    "accentTitle": "Work with real data",
     "intro": "A practical online academy for people who want to understand satellite data and use it with confidence. You will learn by doing, from the basics to a complete analysis.",
     "primaryButtonLabel": "View the pathway",
     "primaryButtonHref": "#paths",
@@ -65,8 +65,8 @@
     "visible": true,
     "kicker": "ONE JOURNEY · THREE STAGES",
     "titleLineOne": "From beginner to",
-    "titleLineTwo": "Earth Observation professional.",
-    "summary": "Everything you build becomes part of your professional portfolio.",
+    "titleLineTwo": "Earth Observation professional",
+    "summary": "Everything you build becomes part of your professional portfolio",
     "items": [
       {
         "visible": true,
@@ -131,7 +131,7 @@
     "legendBefore": "PRE-FIRE",
     "legendAfter": "RECOVERY",
     "kicker": "Field lab 06 · Change detection",
-    "title": "Track recovery after a fire.",
+    "title": "Track recovery after a fire",
     "lead": "In this field lab, you will use Sentinel-2 images to track recovery over several years. You will find where vegetation is returning and where it is not.",
     "steps": [
       {
@@ -157,7 +157,7 @@
     "visible": true,
     "kicker": "Module 1 · Sprint 1",
     "titleLineOne": "Thinking Like a",
-    "titleLineTwo": "Scientific Programmer.",
+    "titleLineTwo": "Scientific Programmer",
     "cohortLabel": "MODULE PROJECT",
     "cohortDate": "Vegetation Data Explorer",
     "cohortMeta": "Lessons 1–3 of 12 · Beginner · One growing notebook",
@@ -230,7 +230,7 @@
   "outcomes": {
     "visible": true,
     "kicker": "What you will finish with",
-    "title": "Show your work, not only a certificate.",
+    "title": "Show your work, not only a certificate",
     "description": "You will leave with a reviewed portfolio, a repeatable workflow, and the confidence to explain your results clearly.",
     "items": [
       {
@@ -267,6 +267,6 @@
     "contactLabel": "Contact",
     "contactHref": "mailto:kaskevich@gmail.com",
     "copyright": "© 2026 Remote Sensing Scientist Academy",
-    "manifesto": "LEARN. ANALYZE. EXPLAIN."
+    "manifesto": "LEARN — ANALYZE — EXPLAIN"
   }
 }
