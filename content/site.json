@@ -160,7 +160,7 @@
     "titleLineTwo": "Scientific Programmer",
     "cohortLabel": "MODULE PROJECT",
     "cohortDate": "Vegetation Data Explorer",
-    "cohortMeta": "Lessons 1–3 of 12 · Beginner · One growing notebook",
+    "cohortMeta": "12 lessons · Beginner · One professional notebook",
     "modules": [
       {
         "id": "lesson-01",
@@ -221,6 +221,159 @@
         "task": {
           "title": "Portfolio checkpoint 03 · Vegetation metadata",
           "instructions": "Upload the extended `Vegetation_Data_Explorer.ipynb` and a screenshot of the independent challenge with visible outputs. In the written result field, use 150–220 words to defend your list, tuple, set and dictionary choices and identify one provenance limitation.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-04",
+        "visible": true,
+        "week": "04",
+        "title": "Conditions and Data-Quality Rules",
+        "description": "Translate transparent scientific criteria into auditable Python decisions while preserving missing values and source measurements.",
+        "tools": ["Python conditions", "Quality flags", "Missing-value reasoning"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 04 · Transparent quality rules",
+          "instructions": "Upload the continuing notebook with the SALS4 guided practice and SALS5 independent rule. Include a screenshot of the audit output and a 180–250 word explanation of missingness, thresholds and why a flag is not proof of error.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-05",
+        "visible": true,
+        "week": "05",
+        "title": "Repetition, Loops and Vectorised Thinking",
+        "description": "Apply one verified method consistently across several plot records and prepare to reason about whole numerical collections.",
+        "tools": ["Python loops", "Accumulators", "Hand verification"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 05 · Repeatable plot workflow",
+          "instructions": "Upload the notebook with loop traces, the six-plot challenge and hand verification. Include a screenshot of the audit summary and a 180–250 word explanation of iteration, accumulation and population limits.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-06",
+        "visible": true,
+        "week": "06",
+        "title": "Functions, Errors and Debugging",
+        "description": "Turn scientific rules into tested reusable functions and diagnose failures from tracebacks and controlled evidence.",
+        "tools": ["Python functions", "Test cases", "Debugging workflow"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 06 · Tested quality functions",
+          "instructions": "Upload the notebook with tested biomass and richness functions, three error diagnoses and the independent plot-summary function. Explain your evidence and the limits of software tests in 200–280 words.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-07",
+        "visible": true,
+        "week": "07",
+        "title": "NumPy and Numerical Arrays",
+        "description": "Represent verified ecological sequences as numerical arrays, inspect shape and dtype, and apply aligned vectorised masks.",
+        "tools": ["NumPy", "Boolean masks", "Published richness values"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 07 · Numerical-array analysis",
+          "instructions": "Upload the notebook with richness, height and moisture arrays, predictions and interpretations. Include a screenshot of the moisture mask and a 200–280 word explanation of vectorisation, shape, dtype and missingness.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-08",
+        "visible": true,
+        "week": "08",
+        "title": "Open the Published Dataset with pandas",
+        "description": "Load the complete Zenodo CSV through a reproducible project path and verify its structure before analysis.",
+        "tools": ["pandas", "Pathlib", "Zenodo dataset"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 08 · Dataset-ingestion report",
+          "instructions": "Upload the notebook with provenance, loading code, structural audit and schema note. Include a screenshot of the verified preview and a 220–300 word account of source identity, structure and open metadata questions.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-09",
+        "visible": true,
+        "week": "09",
+        "title": "Missing Values, Types and Data Quality",
+        "description": "Profile real missingness and data types, apply field-specific checks and preserve every decision in an audit trail.",
+        "tools": ["pandas quality profile", "Missingness", "Decision log"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 09 · Data-quality report",
+          "instructions": "Upload the notebook with the quality profile, flags, group coverage and decision log. Include triggered-row evidence and a 250–350 word explanation of missingness, rule scope and unresolved causes.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-10",
+        "visible": true,
+        "week": "10",
+        "title": "Filter, Group and Summarise",
+        "description": "Define a countable analysis population and produce grouped summaries that retain sample size, centre, spread and limitations.",
+        "tools": ["pandas filtering", "GroupBy", "Descriptive statistics"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 10 · Grouped vegetation summary",
+          "instructions": "Upload the notebook with named filters, site and community summaries and the biomass-coverage analysis. Include a complete table and a 250–350 word interpretation of population, grouping and design limits.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-11",
+        "visible": true,
+        "week": "11",
+        "title": "Join, Reshape and Visualise",
+        "description": "Join summaries with validated keys, expose unsampled combinations and communicate one comparison in a clear scientific figure.",
+        "tools": ["pandas merge", "Pivot tables", "Matplotlib"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Portfolio checkpoint 11 · Audited scientific figure",
+          "instructions": "Upload the notebook with the join audit, comparison matrices and two captioned figures. Include a screenshot of one final figure and a 250–350 word defence of key, reshape, chart and limitations.",
+          "referenceImages": [],
+          "referenceMaps": []
+        }
+      },
+      {
+        "id": "lesson-12",
+        "visible": true,
+        "week": "12",
+        "title": "Vegetation Data Explorer Project",
+        "description": "Assemble the complete notebook into a reproducible claim–evidence chain and deliver a defensible ecological briefing.",
+        "tools": ["Reproducible notebook", "Scientific figures", "Portfolio briefing"],
+        "lessonContent": "",
+        "lessonImages": [],
+        "lessonResources": [],
+        "task": {
+          "title": "Final project · Vegetation Data Explorer",
+          "instructions": "Submit the executed notebook, static export, derived summary, two figures, screenshot and 400–600 word scientific briefing. Include source DOI, environment versions, analysis population, quality decisions and future EO evidence needs.",
           "referenceImages": [],
           "referenceMaps": []
         }

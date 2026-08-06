@@ -97,9 +97,11 @@ test("module map, starter notebook, and formative checks support beginner naviga
 
   await expect(page.locator(".module-overview-panel").getByRole("heading", { name: "Thinking Like a Scientific Programmer", exact: true })).toBeVisible();
   await expect(page.locator(".module-syllabus li")).toHaveCount(12);
-  await expect(page.locator(".syllabus-planned")).toHaveCount(9);
+  await expect(page.locator(".syllabus-available")).toHaveCount(12);
+  await expect(page.locator(".syllabus-planned")).toHaveCount(0);
   await expect(page.locator(".module-syllabus").getByText("Conditions and Data-Quality Rules", { exact: true })).toBeVisible();
-  await expect(page.locator("#lesson-04")).toHaveCount(0);
+  await expect(page.locator("#lesson-04")).toHaveCount(1);
+  await expect(page.locator("#lesson-12")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-01");
   const starter = firstLesson.getByRole("link", { name: /Download the Vegetation Data Explorer starter notebook/i });

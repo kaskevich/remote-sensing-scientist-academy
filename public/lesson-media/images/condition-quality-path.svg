@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Condition pathway for a biomass quality check</title>
+  <desc id="desc">A plot record is checked first for missing biomass, then for an invalid negative value. Each branch produces a separate review status while preserving the source value.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#c8f33d"/></marker><style>.h{fill:#f7f3e9;font:600 31px Inter,Arial}.k{fill:#c8f33d;font:700 14px Inter,Arial;letter-spacing:2px}.t{fill:#f7f3e9;font:600 18px Inter,Arial}.s{fill:#9fb2c4;font:400 15px Inter,Arial}.y{fill:#c8f33d;font:700 14px Inter,Arial}.n{fill:#f39a4a;font:700 14px Inter,Arial}</style></defs>
+  <rect width="1200" height="620" fill="#071426"/><text x="60" y="55" class="k">CONDITIONS · ONE AUDITABLE PATH</text><text x="60" y="98" class="h">Check missingness before numerical validity</text>
+  <rect x="70" y="170" width="220" height="80" rx="10" fill="#142c43" stroke="#4c91c8"/><text x="180" y="202" text-anchor="middle" class="t">SALS3 record</text><text x="180" y="228" text-anchor="middle" class="s">AGB = None</text>
+  <line x1="290" y1="210" x2="405" y2="210" stroke="#c8f33d" stroke-width="3" marker-end="url(#a)"/>
+  <polygon points="520,150 635,210 520,270 405,210" fill="#10253a" stroke="#c8f33d" stroke-width="2"/><text x="520" y="205" text-anchor="middle" class="t">AGB is None?</text>
+  <line x1="520" y1="270" x2="520" y2="370" stroke="#c8f33d" stroke-width="3" marker-end="url(#a)"/><text x="538" y="322" class="y">YES</text>
+  <rect x="390" y="385" width="260" height="85" rx="10" fill="#183d38" stroke="#c8f33d"/><text x="520" y="420" text-anchor="middle" class="t">Status: missing</text><text x="520" y="446" text-anchor="middle" class="s">review · do not replace with 0</text>
+  <line x1="635" y1="210" x2="750" y2="210" stroke="#f39a4a" stroke-width="3" marker-end="url(#a)"/><text x="680" y="193" class="n">NO</text>
+  <polygon points="865,150 980,210 865,270 750,210" fill="#10253a" stroke="#f39a4a" stroke-width="2"/><text x="865" y="205" text-anchor="middle" class="t">AGB &lt; 0?</text>
+  <text x="60" y="560" class="s">The status is derived evidence. The original measurement remains unchanged for later review.</text>
+</svg>

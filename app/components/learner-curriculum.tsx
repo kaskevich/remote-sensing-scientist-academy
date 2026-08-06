@@ -127,7 +127,7 @@ function ModuleOverview({
         ))}
       </div>
       <p className="module-planning-note">
-        Lessons 4–12 show the intended sequence only. They do not contain empty pages and cannot be marked complete.
+        All twelve lessons are available. Each lesson extends the same Vegetation Data Explorer notebook and contributes one portfolio checkpoint.
       </p>
     </section>
   );
@@ -424,10 +424,6 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
             const completedLessonChecks = completedChecks[lesson.id] ?? [];
             const previousLesson = lessons[index - 1] ?? null;
             const nextLesson = lessons[index + 1] ?? null;
-            const nextPlannedLesson = overview.chapters
-              .flatMap((chapter) => chapter.lessons)
-              .find((candidate) => candidate.number === (pedagogy?.position ?? index + 1) + 1);
-
             return (
               <details
                 className={`module${isCompleted ? " module-complete" : ""}${isCurrent ? " module-current" : ""}`}
@@ -545,8 +541,8 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                         </a>
                       ) : (
                         <span className="lesson-sequence-planned">
-                          <span>Next planned lesson</span>
-                          <strong>{nextPlannedLesson?.title ?? "Module project continuation"}</strong>
+                          <span>End of Module 1</span>
+                          <strong>Vegetation Data Explorer portfolio complete</strong>
                         </span>
                       )}
                     </nav>
