@@ -10,6 +10,8 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
 
 # next.js
 /.next/
@@ -27,6 +29,7 @@ yarn-error.log*
 
 # local environment files
 .env*
+!.env.example
 
 # vercel
 .vercel

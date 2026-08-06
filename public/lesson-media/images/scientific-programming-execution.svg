@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scientific programming workflow in a notebook</title>
+  <desc id="desc">A scientific question is translated into a written plan and precise code. Python executes the code and produces output. The scientist interprets the output and revises the work.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8da5bb" />
+    </marker>
+    <style>
+      .heading { fill: #f7f3e9; font: 600 34px Inter, Arial, sans-serif; }
+      .eyebrow { fill: #c8f33d; font: 700 15px Inter, Arial, sans-serif; letter-spacing: 2px; }
+      .step { fill: #f7f3e9; font: 600 20px Inter, Arial, sans-serif; }
+      .copy { fill: #b7c4d1; font: 400 16px Inter, Arial, sans-serif; }
+      .small { fill: #8da5bb; font: 400 14px Inter, Arial, sans-serif; }
+      .number { fill: #071426; font: 700 14px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" fill="#071426" />
+  <text x="64" y="62" class="eyebrow">NOTEBOOK EXECUTION</text>
+  <text x="64" y="108" class="heading">How a question becomes reproducible evidence</text>
+
+  <g transform="translate(64 172)">
+    <rect width="190" height="202" rx="8" fill="#10253a" stroke="#29435b" />
+    <circle cx="30" cy="30" r="16" fill="#c8f33d" />
+    <text x="30" y="35" text-anchor="middle" class="number">1</text>
+    <text x="22" y="76" class="step">Scientific question</text>
+    <text x="22" y="112" class="copy">What varies among</text>
+    <text x="22" y="136" class="copy">coastal meadow</text>
+    <text x="22" y="160" class="copy">field plots?</text>
+  </g>
+
+  <line x1="264" y1="273" x2="292" y2="273" stroke="#8da5bb" stroke-width="2" marker-end="url(#arrow)" />
+
+  <g transform="translate(304 172)">
+    <rect width="190" height="202" rx="8" fill="#10253a" stroke="#29435b" />
+    <circle cx="30" cy="30" r="16" fill="#c8f33d" />
+    <text x="30" y="35" text-anchor="middle" class="number">2</text>
+    <text x="22" y="76" class="step">Notebook plan</text>
+    <text x="22" y="112" class="copy">Write the question,</text>
+    <text x="22" y="136" class="copy">assumptions and</text>
+    <text x="22" y="160" class="copy">method in Markdown.</text>
+  </g>
+
+  <line x1="504" y1="273" x2="532" y2="273" stroke="#8da5bb" stroke-width="2" marker-end="url(#arrow)" />
+
+  <g transform="translate(544 172)">
+    <rect width="190" height="202" rx="8" fill="#10253a" stroke="#29435b" />
+    <circle cx="30" cy="30" r="16" fill="#c8f33d" />
+    <text x="30" y="35" text-anchor="middle" class="number">3</text>
+    <text x="22" y="76" class="step">Code cell</text>
+    <text x="22" y="112" class="copy">Translate one step</text>
+    <text x="22" y="136" class="copy">into an exact Python</text>
+    <text x="22" y="160" class="copy">instruction.</text>
+  </g>
+
+  <line x1="744" y1="273" x2="772" y2="273" stroke="#8da5bb" stroke-width="2" marker-end="url(#arrow)" />
+
+  <g transform="translate(784 172)">
+    <rect width="160" height="202" rx="8" fill="#15314a" stroke="#4c91c8" />
+    <circle cx="30" cy="30" r="16" fill="#4c91c8" />
+    <text x="30" y="35" text-anchor="middle" class="number">4</text>
+    <text x="22" y="76" class="step">Python</text>
+    <text x="22" y="112" class="copy">Reads the cell</text>
+    <text x="22" y="136" class="copy">and follows the</text>
+    <text x="22" y="160" class="copy">instructions exactly.</text>
+  </g>
+
+  <line x1="954" y1="273" x2="982" y2="273" stroke="#8da5bb" stroke-width="2" marker-end="url(#arrow)" />
+
+  <g transform="translate(994 172)">
+    <rect width="142" height="202" rx="8" fill="#10253a" stroke="#29435b" />
+    <circle cx="30" cy="30" r="16" fill="#c8f33d" />
+    <text x="30" y="35" text-anchor="middle" class="number">5</text>
+    <text x="22" y="76" class="step">Output</text>
+    <text x="22" y="112" class="copy">Text, a table,</text>
+    <text x="22" y="136" class="copy">a map, a figure</text>
+    <text x="22" y="160" class="copy">or an error.</text>
+  </g>
+
+  <path d="M1065 392 C1065 470 928 474 840 474" fill="none" stroke="#8da5bb" stroke-width="2" marker-end="url(#arrow)" />
+
+  <g transform="translate(64 458)">
+    <rect width="1072" height="184" rx="8" fill="#0d2134" stroke="#c8f33d" stroke-width="2" />
+    <text x="28" y="42" class="eyebrow">THE SCIENTIST CLOSES THE LOOP</text>
+    <text x="28" y="82" class="step">Interpret the output in ecological context</text>
+    <text x="28" y="116" class="copy">Check whether the result is plausible, document uncertainty, then revise the question or instructions.</text>
+    <text x="28" y="150" class="small">The computer executes code. It does not understand coastal ecology or decide whether a result is scientifically credible.</text>
+  </g>
+</svg>

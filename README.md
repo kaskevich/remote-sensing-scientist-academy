@@ -21,6 +21,22 @@ Open the academy's [admin launcher](https://kaskevich.github.io/remote-sensing-s
 then sign in with the GitHub account connected to this repository. Save your
 changes in Pages CMS and GitHub Pages will publish the new version.
 
+In **Curriculum → Modules**, each lesson can include formatted lesson content,
+supporting imagery, downloadable resources, task instructions, reference
+imagery, and GeoJSON reference maps. Uploaded author files are stored in the
+repository under `public/lesson-media/` and published with the website.
+
+## Learner work
+
+Learners can save a written result and attach PNG, JPEG, WebP, or GeoJSON files
+to each program task. Guest work remains private to the current browser. When
+Supabase is configured, signed-in learners can synchronize progress and private
+notes, upload private submission files, and receive instructor feedback.
+
+Platform setup and security instructions are in
+[`docs/SUPABASE_SETUP.md`](docs/SUPABASE_SETUP.md). The local and synchronized
+data distinction is documented in [`docs/PRIVACY_AND_DATA.md`](docs/PRIVACY_AND_DATA.md).
+
 ## Development
 
 Requires Node.js 20.9 or newer.

@@ -10,20 +10,32 @@
     "build": "next build",
     "pages:build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit --incremental false",
+    "test": "vitest run",
+    "test:smoke": "playwright test"
   },
   "dependencies": {
-    "next": "16.2.6",
+    "@supabase/supabase-js": "^2.110.8",
+    "next": "16.2.12",
     "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react-dom": "19.2.6",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
-    "typescript": "5.9.3"
+    "eslint-config-next": "16.2.12",
+    "fake-indexeddb": "^6.2.5",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "postcss": "8.5.23",
+    "sharp": "0.35.3"
   },
   "type": "module"
 }

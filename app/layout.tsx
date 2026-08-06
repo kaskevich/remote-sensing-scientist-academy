@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import content from "@/content/site.json";
+import AcademyAuthProvider from "@/app/components/academy-auth-provider";
 import "./globals.css";
 
 const siteUrl = new URL(
@@ -42,7 +43,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AcademyAuthProvider>{children}</AcademyAuthProvider>
+      </body>
     </html>
   );
 }
