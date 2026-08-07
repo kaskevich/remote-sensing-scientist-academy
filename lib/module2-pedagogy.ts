@@ -3,6 +3,7 @@ import type {
   FormativeCheck,
   ReviewedLessonDetails,
 } from "@/lib/module1-pedagogy";
+import { module2ProfessionalNarratives } from "./module2-professional-content";
 
 export type Module2LessonSource = {
   id: string;
@@ -571,8 +572,13 @@ export const module2Overview: AcademyModuleOverview = {
 };
 
 const formatList = (items: string[]) => items.map((item) => `- ${item}`).join("\n");
+const formatNumberedList = (items: string[]) => items.map((item, index) => `${index + 1}. ${item}`).join("\n");
 
 function buildLessonContent(source: Module2LessonSource) {
+  const narrative = module2ProfessionalNarratives[source.id];
+  if (!narrative) {
+    throw new Error(`Missing professional Module 2 content for ${source.id}`);
+  }
   const codeLanguage = source.artifact.endsWith(".sql")
     ? "sql"
     : source.artifact.endsWith(".sh")
@@ -590,21 +596,25 @@ By the end of this lesson, you can **${source.outcome.charAt(0).toLowerCase()}${
 
 ## Why this matters
 
-Professional geospatial work fails when technically valid operations answer the wrong spatial question. In the Baltic coastal meadow programme, every layer must retain a defensible connection between location, measurement support, processing decision and ecological interpretation.
+${narrative.why}
 
 > **Core spatial question:** ${source.spatialQuestion}
 
 ## Scientific context
 
-You are extending the **UAV and Satellite Analysis Pipeline** for coastal meadow monitoring. This lesson adds one documented decision or processing stage that later chapters can inspect, reproduce and challenge.
+You are extending the **UAV and Satellite Analysis Pipeline** for Baltic coastal-meadow monitoring. In this lesson you will ${source.practical.charAt(0).toLowerCase()}${source.practical.slice(1)} The result becomes a documented pipeline stage rather than an isolated software exercise.
 
 ## Concept
 
-The central idea is **${source.concepts[0].toLowerCase()}**. Treat it as a spatial model, not a menu command. The full concept set is:
+${narrative.explanation.join("\n\n")}
+
+### Concepts you must be able to explain
 
 ${formatList(source.concepts)}
 
-Before processing, write down the observation unit, spatial support, reference system and uncertainty that the operation must preserve.
+### Professional decision framework
+
+${formatList(narrative.decisionFramework)}
 
 ## Predict before running
 
@@ -620,7 +630,7 @@ ${source.code}
 
 ## Code walkthrough
 
-Read the example from inputs to evidence. Imports expose only the required library. Paths identify explicit project inputs. Named parameters record the spatial decision. The final output is a diagnostic, not a declaration that the result is scientifically valid. Inspect it against your prediction and metadata.
+${narrative.walkthrough}
 
 [[CHECK:${source.id}-concept]]
 
@@ -630,32 +640,29 @@ Read the example from inputs to evidence. Imports expose only the required libra
 
 ## Guided practice
 
-1. Create a new section in your continuing Module 2 notebook or repository and state the scientific question.
-2. Record the input source, identifier, licence, CRS, extent, resolution or geometry type as relevant.
-3. Reproduce the worked example with the provided training assets.
-4. ${source.practical}
-5. Apply this QA rule: ${source.qa}
-6. Save a compact table, figure, map or log that another analyst can inspect without rerunning everything.
+${formatNumberedList(narrative.practice)}
+
+### Required QA evidence
+
+${source.qa}
 
 [[CHECK:${source.id}-qa]]
 
 ## Independent challenge
 
-Repeat the method on a second site, date, layer or parameter. Explain one result that remains stable and one that changes. Do not choose the preferred output only because it looks cleaner; justify the decision from spatial support, metadata and validation evidence.
+${narrative.challenge}
 
 ## Scientific interpretation
 
 ${source.interpretation}
 
-State what the output supports, what it does not establish and which uncertainty matters most for the next pipeline stage.
+Your interpretation must answer the core spatial question, state what the output supports, identify what it does not establish, and name the uncertainty that matters most for the next pipeline stage.
 
 [[CHECK:${source.id}-interpretation]]
 
 ## Reflection
 
-- Which spatial assumption had the greatest effect on the result?
-- What evidence would make you reject this output?
-- How will the next analyst reproduce your decision?
+${formatList(narrative.reflection)}
 
 ## Submission and portfolio artifact
 
@@ -667,7 +674,7 @@ function buildChecks(source: Module2LessonSource): FormativeCheck[] {
   return [
     {
       id: `${source.id}-concept`,
-      question: `Which question should guide ${source.title.toLowerCase()} before choosing a tool?`,
+      question: "Which spatial question should guide this lesson before you choose a tool?",
       options: [source.spatialQuestion, "Which default produces the most attractive map?", "Which operation has the shortest name?"],
       correctOption: 0,
       explanation: "The spatial question defines the required evidence and support. Software choice follows from that analytical requirement, not appearance or convenience.",
