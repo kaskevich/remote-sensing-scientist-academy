@@ -47,20 +47,22 @@ This function is computationally valid but scientifically vague. “Double” do
 
 ### Worked example
 
-Type the function and tests below, but predict all four statuses before running:
+Type the function and tests below, but predict all five statuses before running:
 
 ```python
 def classify_biomass(value):
-    """Classify one AGB value without changing it."""
+    """Classify one AGB value using Lesson 6 value types."""
     if value is None:
         return "missing"
+    if isinstance(value, bool):
+        return "invalid Boolean"
     if not isinstance(value, (int, float)):
         return "invalid type"
     if value < 0:
         return "invalid negative"
     return "recorded"
 
-test_values = [None, -1, "311.33", 311.33]
+test_values = [None, True, -1, "311.33", 311.33]
 for test_value in test_values:
     print(repr(test_value), classify_biomass(test_value))
 ```
@@ -69,6 +71,7 @@ Expected output:
 
 ```text
 None missing
+True invalid Boolean
 -1 invalid negative
 '311.33' invalid type
 311.33 recorded
@@ -79,12 +82,19 @@ None missing
 1. The function name describes one narrow task.
 2. The triple-quoted sentence is a **docstring**. It records the function’s purpose for readers and software tools.
 3. Missingness is checked first so `None` is never compared with zero.
-4. `isinstance` asks whether the input is an integer or floating-point number.
-5. Each `return` ends the current function call immediately.
-6. A negative numeric value reaches the third rule.
-7. Any remaining numeric value receives `recorded`; this means structurally acceptable, not scientifically proven.
-8. The four test values deliberately cover one case for every branch.
-9. `repr` makes the quotation marks around the string visible, helping you distinguish text from a number.
+4. The Boolean check must come before the general numeric check. In Python, `bool` is a subclass of `int`, so `isinstance(True, (int, float))` is `True` even though a quality flag is not a biomass measurement.
+5. The next `isinstance` check accepts only the ordinary integer and floating-point representations introduced so far.
+6. Each `return` ends the current function call immediately.
+7. A negative numeric value reaches the fourth rule.
+8. Any remaining numeric value receives `recorded`; this means structurally acceptable, not scientifically proven.
+9. The five test values deliberately cover one case for every branch.
+10. `repr` makes the quotation marks around the string visible, helping you distinguish text from a number.
+
+### The function has a deliberate Lesson 6 boundary
+
+At this point in the module, `None` is the missing-value representation you have learned to handle. The function is robust for that stated boundary, but it is not yet ready for a pandas column. In Lesson 7 you will meet NumPy's `np.nan`; in Lessons 8–9 you will see how pandas represents and detects missing table values. An unchanged Lesson 6 function could treat `np.nan` as an ordinary float and incorrectly return `"recorded"`.
+
+Do not hide this limitation or patch it with an unexplained special case. In Lesson 9 you will deliberately upgrade the function with `pd.isna()`. Scientific software evolves when real data introduce representations that the earlier specification did not yet cover.
 
 [[CHECK:l6-test-cases]]
 
@@ -195,4 +205,3 @@ Answer in your private notes:
 **Artifact 06 — Tested ecological quality-control functions**
 
 This checkpoint demonstrates that you can make a scientific rule reusable, expose assumptions at the function boundary and debug from controlled evidence.
-

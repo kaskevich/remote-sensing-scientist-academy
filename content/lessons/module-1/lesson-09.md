@@ -92,7 +92,50 @@ print("Unparseable present values:", new_missing.sum())
 
 [[CHECK:l9-types]]
 
-## 4. Build field-specific checks
+## 4. Upgrade an earlier function as the data become more realistic
+
+In Lesson 6, `classify_biomass()` handled `None`, the missing-value representation you had learned at that point. Its documented boundary was intentionally narrow. After meeting NumPy and pandas, you now know that a table value may also arrive as `np.nan`. Because `np.nan` is a floating-point value, the earlier function could incorrectly classify it as `"recorded"`.
+
+Do not erase the earlier version or describe it as a secret mistake. Preserve it as evidence of how the specification evolved, then add this pandas-aware version beneath it:
+
+```python
+def classify_biomass_pandas(value):
+    """Classify one scalar AGB value from a pandas workflow."""
+    if isinstance(value, (bool, np.bool_)):
+        return "invalid Boolean"
+    if pd.isna(value):
+        return "missing"
+    if not isinstance(value, (int, float, np.integer, np.floating)):
+        return "invalid type"
+    if value < 0:
+        return "invalid negative"
+    return "recorded"
+
+test_values = [None, np.nan, 311.33, -1, "311.33", True]
+for test_value in test_values:
+    print(repr(test_value), classify_biomass_pandas(test_value))
+```
+
+Predict all six results before running. Expected output:
+
+```text
+None missing
+nan missing
+311.33 recorded
+-1 invalid negative
+'311.33' invalid type
+True invalid Boolean
+```
+
+`pd.isna()` recognises both `None` and `np.nan` as missing scalar values. The Boolean check still comes first because Python Booleans belong to the integer type hierarchy; a quality flag must not become a biomass measurement. NumPy numeric scalar types are accepted because pandas columns can supply them. A numeric-looking string remains text until provenance and parsing rules justify conversion.
+
+### Learner action — compare specifications, not only outputs
+
+Create a six-row Markdown test table with columns `input`, `Lesson 6 expectation`, `Lesson 9 expectation` and `reason`. Run each value through both function versions. Identify the `np.nan` case whose result changes and explain why the new result reflects a more realistic data representation rather than an arbitrary code correction.
+
+This is iterative scientific programming: new data structures expose a limitation, the function contract is revised explicitly, and all known cases are rerun. The history matters because future reviewers need to know which assumptions changed and why.
+
+## 5. Build field-specific checks
 
 ![Data-quality diagram separating observation of missingness, types and duplicates from field-specific validity rules, documented actions and an auditable output table.](lesson-media/images/data-quality-profile.svg)
 
@@ -119,7 +162,7 @@ The checks table stores review evidence separately from the measurements. A `Fal
 
 [[CHECK:l9-rules]]
 
-## 5. Ask whether missingness follows the sampling structure
+## 6. Ask whether missingness follows the sampling structure
 
 Overall missingness is only the beginning. Compare available and missing biomass counts by site and plant community:
 
@@ -135,7 +178,7 @@ print(agb_coverage)
 
 This does not explain the missingness, but it reveals whether availability is evenly distributed among sampled groups. If missingness is related to sampling design, dropping incomplete rows could change which sites or communities dominate the analysis.
 
-## 6. Common mistakes and recovery
+## 7. Common mistakes and recovery
 
 ### Calling empty cells zero
 
@@ -161,7 +204,7 @@ This does not explain the missingness, but it reveals whether availability is ev
 
 **Recognition:** a short checks table is called “validated data.” **Fix:** describe the scope of the checks and the risks not evaluated.
 
-## 7. Guided practice — create a quality decision log
+## 8. Guided practice — create a quality decision log
 
 For `SampleID`, `Date`, `site`, `Sp_richness`, `Height_median`, `Height_max` and `AGB`:
 
@@ -174,7 +217,7 @@ For `SampleID`, `Date`, `site`, `Sp_richness`, `Height_median`, `Height_max` and
 
 Use a Markdown decision log with columns `field`, `observation`, `rule`, `triggered`, `action`, `justification`.
 
-## 8. Independent challenge, reflection and portfolio artifact
+## 9. Independent challenge, reflection and portfolio artifact
 
 Choose one future question involving `Sp_richness` and one involving `AGB`.
 
@@ -207,4 +250,3 @@ Answer in private notes:
 **Artifact 09 — Auditable ecological data-quality report**
 
 This checkpoint demonstrates that you can diagnose a real scientific table without erasing uncertainty or disguising cleaning decisions.
-

@@ -174,7 +174,7 @@ site_name = "Saardu"
 plant_community = "LS"
 species_richness = 7
 elevation_value = 0.530
-biomass_sampled = True
+biomass_value_present = True
 field_note = None
 
 print(plot_id, type(plot_id))
@@ -182,7 +182,9 @@ print(species_richness, type(species_richness))
 print(elevation_value, type(elevation_value))
 ```
 
-`plot_id` is a string because it identifies a sample. `species_richness` is an integer count. `elevation_value` is a float, but its neutral name avoids inventing a unit. `biomass_sampled` states only that a value is present; it does not represent the biomass magnitude. `field_note = None` says that no separate note is recorded.
+`plot_id` is a string because it identifies a sample. `species_richness` is an integer count. `elevation_value` is a float, but its neutral name avoids inventing a unit. `biomass_value_present` states only that this table row contains a biomass value; it does not represent the biomass magnitude. `field_note = None` says that no separate note is recorded.
+
+The Boolean name is deliberately limited to **table-value presence**. A value being present in the table is not evidence of how, when or under which protocol the biomass was sampled. Those claims require documented sampling metadata.
 
 ### Learner action
 
@@ -192,7 +194,7 @@ Before running, predict the three displayed types. Run the cell, then explain wh
 
 ### Guided practice — missing is not zero
 
-Create variables for the published plot `SALS3` using `SampleID` `SALS3`, site `Saardu`, community code `LS`, species richness `5`, biomass availability `False` and a missing biomass value represented by `None`.
+Create variables for the published plot `SALS3` using `SampleID` `SALS3`, site `Saardu`, community code `LS`, species richness `5`, biomass value presence `False` and a missing biomass value represented by `None`.
 
 1. Assign each value to a clear variable name.
 2. Predict the type of every value.
