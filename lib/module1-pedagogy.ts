@@ -20,6 +20,7 @@ export type ReviewedLessonDetails = {
   position: number;
   totalPositions: number;
   markdownFile: string;
+  content?: string;
   formativeChecks: FormativeCheck[];
   submissionChecklist: string[];
   rubric: Array<{ dimension: string; expectation: string }>;
@@ -40,16 +41,35 @@ export type ModuleChapter = {
   lessons: ModuleChapterLesson[];
 };
 
-export type Module1Overview = {
+export type AcademyModuleOverview = {
+  moduleNumber: number;
+  accent: "lime" | "blue";
+  overviewLabel: string;
+  navigationTitle: string;
+  navigationMeta: string;
+  syllabusAriaLabel: string;
+  planningNote: string;
   title: string;
   purpose: string;
   finalProject: string;
   prerequisites: string;
   outcomes: string[];
+  progression?: string[];
   chapters: ModuleChapter[];
+  capstone?: ModuleChapterLesson;
 };
 
+export type Module1Overview = AcademyModuleOverview;
+
 export const module1Overview: Module1Overview = {
+  moduleNumber: 1,
+  accent: "lime",
+  overviewLabel: "Module 1 overview",
+  navigationTitle: "Available Module 1 lessons",
+  navigationMeta: "12 lessons",
+  syllabusAriaLabel: "Complete twelve-lesson Module 1 map",
+  planningNote:
+    "All twelve lessons are available. Each lesson extends the same Vegetation Data Explorer notebook and contributes one portfolio checkpoint.",
   title: "Thinking Like a Scientific Programmer",
   purpose:
     "Learn Python from zero and become capable of inspecting, organising and explaining scientific ecological data.",

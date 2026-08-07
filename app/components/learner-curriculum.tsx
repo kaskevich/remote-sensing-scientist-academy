@@ -29,12 +29,14 @@ import { useAcademyAuth } from "@/app/components/academy-auth-provider";
 import LessonDiscussion from "@/app/components/lesson-discussion";
 import SyncedLessonResources from "@/app/components/synced-lesson-resources";
 import type {
-  Module1Overview,
+  AcademyModuleOverview,
   ReviewedLessonDetails,
 } from "@/lib/module1-pedagogy";
 
 export type AcademyLesson = {
   id: string;
+  numberLabel?: string;
+  scheduleLabel?: string;
   week: string;
   title: string;
   description: string;
@@ -51,9 +53,13 @@ export type AcademyLesson = {
   pedagogy: ReviewedLessonDetails | null;
 };
 
-type LearnerCurriculumProps = {
+export type AcademyCurriculumModule = {
+  overview: AcademyModuleOverview;
   lessons: AcademyLesson[];
-  overview: Module1Overview;
+};
+
+type LearnerCurriculumProps = {
+  modules: AcademyCurriculumModule[];
 };
 
 function activityTimestamp() {
@@ -65,16 +71,16 @@ function ModuleOverview({
   completedLessonIds,
   onOpenLesson,
 }: {
-  overview: Module1Overview;
+  overview: AcademyModuleOverview;
   completedLessonIds: string[];
   onOpenLesson: (lessonId: string) => void;
 }) {
   return (
-    <section className="module-overview-panel" aria-labelledby="module-overview-title">
+    <section className={`module-overview-panel module-overview-${overview.accent}`} aria-labelledby={`module-${overview.moduleNumber}-overview-title`}>
       <div className="module-overview-intro">
         <div>
-          <p className="section-kicker">Module 1 overview</p>
-          <h3 id="module-overview-title">{overview.title}</h3>
+          <p className="section-kicker">{overview.overviewLabel}</p>
+          <h3 id={`module-${overview.moduleNumber}-overview-title`}>{overview.title}</h3>
           <p>{overview.purpose}</p>
         </div>
         <dl>
@@ -82,6 +88,14 @@ function ModuleOverview({
           <div><dt>Prerequisites</dt><dd>{overview.prerequisites}</dd></div>
         </dl>
       </div>
+
+      {overview.progression && (
+        <ol className="module-concept-progression" aria-label={`Module ${overview.moduleNumber} conceptual progression`}>
+          {overview.progression.map((stage, index) => (
+            <li key={stage}><span>{String(index + 1).padStart(2, "0")}</span>{stage}</li>
+          ))}
+        </ol>
+      )}
 
       <details className="module-outcomes" open>
         <summary>Module outcomes</summary>
@@ -91,13 +105,14 @@ function ModuleOverview({
         </ul>
       </details>
 
-      <div className="module-syllabus" aria-label="Complete twelve-lesson module map">
+      <div className="module-syllabus" aria-label={overview.syllabusAriaLabel}>
         {overview.chapters.map((chapter) => (
-          <section key={chapter.number}>
-            <div className="module-chapter-heading">
+          <details className="module-chapter" key={chapter.number} open={chapter.number === 1}>
+            <summary className="module-chapter-heading">
               <span>Chapter {chapter.number}</span>
               <h4>{chapter.title}</h4>
-            </div>
+              <i aria-hidden="true" />
+            </summary>
             <ol>
               {chapter.lessons.map((lesson) => {
                 const isComplete = lesson.lessonId
@@ -123,12 +138,30 @@ function ModuleOverview({
                 );
               })}
             </ol>
-          </section>
+          </details>
         ))}
+        {overview.capstone && (
+          <details className="module-chapter module-capstone-map">
+            <summary className="module-chapter-heading">
+              <span>Capstone</span>
+              <h4>Professional portfolio project</h4>
+              <i aria-hidden="true" />
+            </summary>
+            <ol>
+              <li className="syllabus-available">
+                <span className="syllabus-number">CP</span>
+                <div>
+                  <a href={`#${overview.capstone.lessonId}`} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
+                    {overview.capstone.title}
+                  </a>
+                  <span>{overview.capstone.lessonId && completedLessonIds.includes(overview.capstone.lessonId) ? "Completed" : "Available now"}</span>
+                </div>
+              </li>
+            </ol>
+          </details>
+        )}
       </div>
-      <p className="module-planning-note">
-        All twelve lessons are available. Each lesson extends the same Vegetation Data Explorer notebook and contributes one portfolio checkpoint.
-      </p>
+      <p className="module-planning-note">{overview.planningNote}</p>
     </section>
   );
 }
@@ -197,7 +230,8 @@ function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails 
   );
 }
 
-export default function LearnerCurriculum({ lessons, overview }: LearnerCurriculumProps) {
+export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
+  const lessons = useMemo(() => modules.flatMap((module) => module.lessons), [modules]);
   const auth = useAcademyAuth();
   const lessonIds = useMemo(() => lessons.map((lesson) => lesson.id), [lessons]);
   const storageRef = useRef<LearnerDataProvider | null>(null);
@@ -205,14 +239,16 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loadStatus, setLoadStatus] = useState<StorageLoadStatus>("empty");
   const [saveFailed, setSaveFailed] = useState(false);
-  const [isModuleOpen, setIsModuleOpen] = useState(true);
+  const [openModuleNumbers, setOpenModuleNumbers] = useState<number[]>(() => modules[0] ? [modules[0].overview.moduleNumber] : []);
   const [openLessonId, setOpenLessonId] = useState<string | null>(() => lessons[0]?.id ?? null);
   const [completedChecks, setCompletedChecks] = useState<Record<string, string[]>>({});
+  const authenticatedStorageReady = Boolean(!auth.loading && auth.client && auth.user);
+  const storageRevision = authenticatedStorageReady ? auth.dataRevision : 0;
 
   // Browser-local state must hydrate after mount so server rendering stays deterministic.
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    const storage = auth.client && auth.user
+    const storage = authenticatedStorageReady && auth.client && auth.user
       ? createAuthenticatedLearnerDataProvider(auth.client, auth.user.id)
       : createGuestLearnerDataProvider();
     let active = true;
@@ -232,7 +268,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
     return () => {
       active = false;
     };
-  }, [auth.client, auth.user, auth.dataRevision, lessonIds]);
+  }, [auth.client, auth.user, authenticatedStorageReady, storageRevision, lessonIds]);
 
   useEffect(() => {
     if (!hasLoaded || !storageRef.current) {
@@ -245,13 +281,24 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
 
     return () => window.clearTimeout(timeout);
   }, [hasLoaded, progress]);
+
   /* eslint-enable react-hooks/set-state-in-effect */
 
   const summary = calculateProgress(lessonIds, progress);
   const currentLesson = lessons.find((lesson) => lesson.id === summary.currentLessonId) ?? null;
 
+  function moduleNumberForLesson(lessonId: string) {
+    return modules.find((module) => module.lessons.some((lesson) => lesson.id === lessonId))?.overview.moduleNumber;
+  }
+
+  function openModuleForLesson(lessonId: string) {
+    const moduleNumber = moduleNumberForLesson(lessonId);
+    if (moduleNumber === undefined) return;
+    setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
+  }
+
   function setCurrentLesson(lessonId: string) {
-    setIsModuleOpen(true);
+    openModuleForLesson(lessonId);
     setOpenLessonId(lessonId);
     setProgress((previous) => ({
       ...previous,
@@ -292,7 +339,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
 
   async function resetProgress() {
     const confirmed = window.confirm(
-      auth.user
+      authenticatedStorageReady
         ? "Reset all synchronized lesson progress and private notes in your Academy account?"
         : "Reset all lesson progress and personal notes saved in this browser?",
     );
@@ -311,25 +358,28 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
   }
 
   const storageNotice = saveFailed || loadStatus === "unavailable"
-    ? auth.user
+    ? authenticatedStorageReady
       ? "Account synchronization is temporarily unavailable. Recent changes may not be saved."
       : "Local saving is unavailable in this browser. Progress will last only until this page closes."
     : loadStatus === "recovered"
       ? "Unreadable browser data was safely reset. New progress will save in this browser."
-      : auth.user
+      : authenticatedStorageReady
         ? "Progress and private notes are synchronized securely with your Academy account."
         : "Progress and notes are saved only in this browser. They are not shared with other browsers or devices.";
 
   return (
     <>
-      <ModuleOverview
-        overview={overview}
-        completedLessonIds={progress.completedLessonIds}
-        onOpenLesson={(lessonId) => {
-          setIsModuleOpen(true);
-          setOpenLessonId(lessonId);
-        }}
-      />
+      {modules.map((module) => (
+        <ModuleOverview
+          key={module.overview.moduleNumber}
+          overview={module.overview}
+          completedLessonIds={progress.completedLessonIds}
+          onOpenLesson={(lessonId) => {
+            openModuleForLesson(lessonId);
+            setOpenLessonId(lessonId);
+          }}
+        />
+      ))}
 
       <section className="learner-dashboard" aria-labelledby="learner-dashboard-title">
         <AcademyAccountPanel />
@@ -343,7 +393,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
               className="button button-primary learner-continue"
               href={`#${currentLesson.id}`}
               onClick={() => {
-                setIsModuleOpen(true);
+                openModuleForLesson(currentLesson.id);
                 setOpenLessonId(currentLesson.id);
               }}
             >
@@ -364,7 +414,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
             </strong>
           </div>
           <div className="learner-summary-item learner-progress-summary">
-            <span>Module progress</span>
+            <span>Academy progress</span>
             <strong>{summary.completionPercent}%</strong>
             <div
               className="learner-progress-track"
@@ -389,23 +439,29 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
         </div>
       </section>
 
+      {modules.map(({ overview, lessons: moduleLessons }) => {
+        const isModuleOpen = openModuleNumbers.includes(overview.moduleNumber);
+        return (
       <details
-        className="curriculum-module"
+        className={`curriculum-module curriculum-module-${overview.accent}`}
         open={isModuleOpen}
+        key={overview.moduleNumber}
       >
         <summary
           className="curriculum-module-summary"
           onClick={(event) => {
             event.preventDefault();
-            setIsModuleOpen((previous) => !previous);
+            setOpenModuleNumbers((previous) => isModuleOpen
+              ? previous.filter((number) => number !== overview.moduleNumber)
+              : [...previous, overview.moduleNumber]);
           }}
         >
           <span>
             <small>Module navigation</small>
-            <strong>Available Module 1 lessons</strong>
+            <strong>{overview.navigationTitle}</strong>
           </span>
           <span className="curriculum-module-meta">
-            <span>{lessons.length} available</span>
+            <span>{overview.navigationMeta}</span>
             <span className="curriculum-module-toggle">
               <span className="curriculum-module-toggle-open">Hide lessons</span>
               <span className="curriculum-module-toggle-closed">Show lessons</span>
@@ -415,15 +471,15 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
         </summary>
 
         <div className="module-list">
-          {lessons.map((lesson, index) => {
+          {moduleLessons.map((lesson, index) => {
             const isCompleted = progress.completedLessonIds.includes(lesson.id);
             const isCurrent = summary.currentLessonId === lesson.id;
             const isOpen = openLessonId === lesson.id;
             const noteId = `${lesson.id}-notes`;
             const pedagogy = lesson.pedagogy;
             const completedLessonChecks = completedChecks[lesson.id] ?? [];
-            const previousLesson = lessons[index - 1] ?? null;
-            const nextLesson = lessons[index + 1] ?? null;
+            const previousLesson = moduleLessons[index - 1] ?? null;
+            const nextLesson = moduleLessons[index + 1] ?? null;
             return (
               <details
                 className={`module${isCompleted ? " module-complete" : ""}${isCurrent ? " module-current" : ""}`}
@@ -438,11 +494,17 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                     setOpenLessonId((previous) => previous === lesson.id ? null : lesson.id);
                   }}
                 >
-                  <span className="module-index">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="module-week">WEEKS {lesson.week}</span>
+                  <span className="module-index">{lesson.numberLabel ?? String(index + 1).padStart(2, "0")}</span>
+                  <span className="module-week">{lesson.scheduleLabel ?? `WEEKS ${lesson.week}`}</span>
                   <span className="module-overview">
                     <span className="module-title-row">
-                      <span className="module-lesson-label">Lesson {String(index + 1).padStart(2, "0")}</span>
+                      <span className="module-lesson-label">
+                        {lesson.numberLabel === "Capstone"
+                          ? "Capstone"
+                          : lesson.numberLabel
+                            ? `Lesson ${lesson.numberLabel}`
+                            : `Lesson ${String(index + 1).padStart(2, "0")}`}
+                      </span>
                       {isCompleted && <span className="module-status">Completed</span>}
                       {!isCompleted && isCurrent && <span className="module-status">Current</span>}
                     </span>
@@ -460,7 +522,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                   </span>
                 </summary>
 
-                <div className="module-body">
+                {isOpen && <div className="module-body">
                   <div className="module-copy">
                     {pedagogy && (
                       <div className="lesson-context" aria-label="Lesson position and progress">
@@ -527,7 +589,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                           <span>Previous lesson</span>
                           <strong>{previousLesson.title}</strong>
                         </a>
-                      ) : <span className="lesson-sequence-empty">Start of Module 1</span>}
+                      ) : <span className="lesson-sequence-empty">Start of Module {overview.moduleNumber}</span>}
                       {nextLesson ? (
                         <a
                           href={`#${nextLesson.id}`}
@@ -541,8 +603,8 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                         </a>
                       ) : (
                         <span className="lesson-sequence-planned">
-                          <span>End of Module 1</span>
-                          <strong>Vegetation Data Explorer portfolio complete</strong>
+                          <span>End of Module {overview.moduleNumber}</span>
+                          <strong>{overview.finalProject} portfolio complete</strong>
                         </span>
                       )}
                     </nav>
@@ -551,7 +613,7 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
 
                     <div className="lesson-notes">
                       <label htmlFor={noteId}>
-                        Private learner notes <span>{auth.user ? "Autosaved to your account" : "Autosaved locally"}</span>
+                        Private learner notes <span>{authenticatedStorageReady ? "Autosaved to your account" : "Autosaved locally"}</span>
                       </label>
                       <textarea
                         id={noteId}
@@ -572,12 +634,14 @@ export default function LearnerCurriculum({ lessons, overview }: LearnerCurricul
                     <LessonDiscussion lessonId={lesson.id} lessonTitle={lesson.title} />
                     {pedagogy && <LessonTechnicalDetails pedagogy={pedagogy} />}
                   </div>
-                </div>
+                </div>}
               </details>
             );
           })}
         </div>
       </details>
+        );
+      })}
     </>
   );
 }

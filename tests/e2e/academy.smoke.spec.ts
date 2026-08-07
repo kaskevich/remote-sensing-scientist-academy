@@ -59,7 +59,7 @@ test("module and lesson disclosures provide compact curriculum navigation", asyn
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
 
-  const curriculumModule = page.locator("details.curriculum-module");
+  const curriculumModule = page.locator("details.curriculum-module").first();
   const moduleSummary = curriculumModule.locator(":scope > summary");
   const firstLesson = page.locator("#lesson-01");
   const secondLesson = page.locator("#lesson-02");
@@ -77,7 +77,7 @@ test("module and lesson disclosures provide compact curriculum navigation", asyn
 
   await moduleSummary.click();
   await expect(curriculumModule).not.toHaveAttribute("open", "");
-  await expect(page.getByText("Show lessons", { exact: true })).toBeVisible();
+  await expect(curriculumModule.getByText("Show lessons", { exact: true })).toBeVisible();
 
   await moduleSummary.click();
   await expect(curriculumModule).toHaveAttribute("open", "");
@@ -95,11 +95,13 @@ test("module map, starter notebook, and formative checks support beginner naviga
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
   await page.reload();
 
-  await expect(page.locator(".module-overview-panel").getByRole("heading", { name: "Thinking Like a Scientific Programmer", exact: true })).toBeVisible();
-  await expect(page.locator(".module-syllabus li")).toHaveCount(12);
-  await expect(page.locator(".syllabus-available")).toHaveCount(12);
-  await expect(page.locator(".syllabus-planned")).toHaveCount(0);
-  await expect(page.locator(".module-syllabus").getByText("Conditions and Data-Quality Rules", { exact: true })).toBeVisible();
+  const module1Overview = page.locator(".module-overview-lime");
+  await expect(module1Overview.getByRole("heading", { name: "Thinking Like a Scientific Programmer", exact: true })).toBeVisible();
+  await expect(module1Overview.locator(".module-syllabus li")).toHaveCount(12);
+  await expect(module1Overview.locator(".syllabus-available")).toHaveCount(12);
+  await expect(module1Overview.locator(".syllabus-planned")).toHaveCount(0);
+  await module1Overview.locator(".module-chapter").nth(1).locator("summary").click();
+  await expect(module1Overview.locator(".module-syllabus").getByText("Conditions and Data-Quality Rules", { exact: true })).toBeVisible();
   await expect(page.locator("#lesson-04")).toHaveCount(1);
   await expect(page.locator("#lesson-12")).toHaveCount(1);
 
@@ -134,6 +136,35 @@ test("module map, starter notebook, and formative checks support beginner naviga
     }).map((element) => element.getBoundingClientRect().height),
   );
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
+});
+
+test("Module 2 exposes twelve compact chapters, 49 lessons, and the capstone", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+
+  const overview = page.locator(".module-overview-blue");
+  await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
+  await expect(overview.locator(".module-chapter")).toHaveCount(13);
+  await expect(overview.locator(".module-syllabus li")).toHaveCount(50);
+  await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(11).locator("summary").click();
+  await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
+
+  const moduleNavigation = page.locator("details.curriculum-module").nth(1);
+  await expect(moduleNavigation).not.toHaveAttribute("open", "");
+  await moduleNavigation.locator(":scope > summary").click();
+  await expect(moduleNavigation).toHaveAttribute("open", "");
+  await expect(moduleNavigation.getByText("49 lessons + capstone", { exact: true })).toBeVisible();
+
+  const firstLesson = page.locator("#lesson-2-01");
+  await firstLesson.locator(":scope > summary").click();
+  await expect(firstLesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("spatial_data_inventory.ipynb", { exact: true }).first()).toBeVisible();
+
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+  );
+  expect(hasHorizontalOverflow).toBe(false);
 });
 
 test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
