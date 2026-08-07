@@ -261,14 +261,14 @@ function GuestTaskResultPanel({
 
         <div className="task-upload-row">
           <label className="task-upload-button" htmlFor={`${lessonId}-result-files`}>
-            Add imagery or GeoJSON
+            Add submission files
           </label>
           <input
             id={`${lessonId}-result-files`}
             type="file"
             multiple
             disabled={!hasLoaded}
-            accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.zip"
+            accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.py,.sql,.sh,.yml,.yaml,.md,.json,.gpkg,.parquet,.zip"
             onChange={(event) => {
               const files = Array.from(event.target.files ?? []);
               event.target.value = "";

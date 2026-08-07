@@ -155,12 +155,12 @@
   },
   "curriculum": {
     "visible": true,
-    "kicker": "Module 1 · Sprint 1",
-    "titleLineOne": "Thinking Like a",
-    "titleLineTwo": "Scientific Programmer",
-    "cohortLabel": "MODULE PROJECT",
-    "cohortDate": "Vegetation Data Explorer",
-    "cohortMeta": "12 lessons · Beginner · One professional notebook",
+    "kicker": "Professional pathway",
+    "titleLineOne": "Academy",
+    "titleLineTwo": "Curriculum",
+    "cohortLabel": "AVAILABLE NOW",
+    "cohortDate": "Modules 1 and 2",
+    "cohortMeta": "61 lessons + capstone · Beginner to advanced · Portfolio pathway",
     "modules": [
       {
         "id": "lesson-01",

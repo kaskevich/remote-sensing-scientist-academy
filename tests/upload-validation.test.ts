@@ -16,6 +16,14 @@ describe("Academy upload validation", () => {
     ["report.pdf", "application/pdf"],
     ["analysis.ipynb", "application/json"],
     ["report.html", "text/html"],
+    ["alignment_check.py", "text/x-python"],
+    ["postgis_query.sql", "application/sql"],
+    ["pipeline.sh", "application/x-sh"],
+    ["workflow.yml", "application/yaml"],
+    ["readme.md", "text/markdown"],
+    ["stac_item.json", "application/json"],
+    ["study.gpkg", "application/geopackage+sqlite3"],
+    ["plots.parquet", "application/vnd.apache.parquet"],
     ["project.zip", "application/zip"],
   ])("accepts %s with a matching MIME type", (name, mimeType) => {
     expect(validateAcademyUpload(candidate(name, mimeType))).toMatchObject({ valid: true });

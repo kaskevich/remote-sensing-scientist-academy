@@ -13,6 +13,15 @@ const allowedFiles = {
   pdf: ["application/pdf"],
   ipynb: ["application/json", "text/plain", ""],
   html: ["text/html", ""],
+  py: ["text/x-python", "text/plain", "application/octet-stream", ""],
+  sql: ["application/sql", "text/x-sql", "text/plain", ""],
+  sh: ["application/x-sh", "text/x-shellscript", "text/plain", ""],
+  yml: ["application/yaml", "text/yaml", "text/plain", ""],
+  yaml: ["application/yaml", "text/yaml", "text/plain", ""],
+  md: ["text/markdown", "text/plain", ""],
+  json: ["application/json", "text/plain", ""],
+  gpkg: ["application/geopackage+sqlite3", "application/x-sqlite3", "application/octet-stream", ""],
+  parquet: ["application/vnd.apache.parquet", "application/octet-stream", ""],
   zip: ["application/zip", "application/x-zip-compressed", "application/octet-stream", ""],
 } as const;
 
