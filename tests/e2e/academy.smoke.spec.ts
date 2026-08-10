@@ -114,7 +114,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
 
   const incorrectOption = firstCheck.getByLabel("A code cell");
   const checkAnswer = firstCheck.getByRole("button", { name: "Check answer" });
-  await incorrectOption.press("Space");
+  await incorrectOption.check();
   await expect(incorrectOption).toBeChecked();
   await expect(checkAnswer).toBeEnabled();
   await checkAnswer.click();
@@ -124,7 +124,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
 
   await firstCheck.getByRole("button", { name: "Try again" }).click();
   const correctOption = firstCheck.getByLabel("A Markdown cell");
-  await correctOption.press("Space");
+  await correctOption.check();
   await expect(correctOption).toBeChecked();
   await expect(checkAnswer).toBeEnabled();
   await checkAnswer.click();
