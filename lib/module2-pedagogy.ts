@@ -843,7 +843,7 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       {
         estimatedTime: configuration.estimatedTime,
         position: index + 1,
-        totalPositions: publishedModule2Lessons.length,
+        totalPositions: module2Lessons.length - 1,
         markdownFile: configuration.markdownFile,
         formativeChecks: configuration.formativeChecks,
         submissionChecklist: configuration.submissionChecklist,

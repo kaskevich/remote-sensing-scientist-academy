@@ -120,7 +120,7 @@ function ModuleOverview({
                   : false;
                 return (
                   <li className={lesson.status === "planned" ? "syllabus-planned" : "syllabus-available"} key={lesson.number}>
-                    <span className="syllabus-number">{String(lesson.number).padStart(2, "0")}</span>
+                    <span className="syllabus-number">{overview.moduleNumber}.{lesson.number}</span>
                     <div>
                       {lesson.lessonId ? (
                         <a
@@ -530,7 +530,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                   <div className="module-copy">
                     {pedagogy && (
                       <div className="lesson-context" aria-label="Lesson position and progress">
-                        <span>Lesson {pedagogy.position} of {pedagogy.totalPositions}</span>
+                        <span>Lesson {lesson.numberLabel ?? pedagogy.position} of {pedagogy.totalPositions}</span>
                         <strong>{pedagogy.estimatedTime}</strong>
                         <span>{completedLessonChecks.length} of {pedagogy.formativeChecks.length} checks completed</span>
                       </div>

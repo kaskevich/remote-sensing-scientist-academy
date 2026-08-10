@@ -55,6 +55,7 @@ const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter
 );
 const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   id: module.id || `lesson-${String(index + 1).padStart(2, "0")}`,
+  numberLabel: `1.${index + 1}`,
   week: module.week,
   title: module.title,
   description: module.description,
