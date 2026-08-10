@@ -150,14 +150,14 @@ print("invalid", invalid.sum(), "area change", after_area - before_area)`, "Shou
 ]
 for check in qa_checks:
     print("□", check)`, "Which checks remain necessary even when the map looks visually correct?", "QGIS accelerates visual diagnosis, but the reproducible processing record remains in code. A polished map is evidence of communication, not proof of analytical validity.", "Editing the only source layer to fix a visual problem. Preserve raw inputs and export any corrected layer as a documented derivative.", { title: "QGIS training manual", href: "https://docs.qgis.org/latest/en/docs/training_manual/" }),
-  lesson(11, 3, "Raster Fundamentals", "Reason about grids, bands, transforms and NoData before opening a raster-processing library.", ["Grid", "Affine transform", "NoData"], "Explain how a raster locates and represents measurements across a regular grid.", "What physical area and variable does each cell represent?", ["Rows, columns, pixels and bands", "Origin, resolution, extent and affine transform", "Pixel values, data type and NoData", "Continuous versus categorical rasters"], "Read a raster metadata card and reconstruct the spatial meaning of one cell.", "Confirm dimensions, resolution, bounds, CRS, band meaning, data type and NoData.", "raster_spatial_model.ipynb", `width, height = 4, 3
+  lesson(11, 3, "What Is a Raster Really?", "Build a rigorous mental model of values, grids, spatial reference, valid support and measurement semantics before processing.", ["Raster model", "Affine transform", "NoData"], "Explain how an array becomes a geospatial raster and locate one cell's footprint.", "What physical quantity, footprint and validity state does each cell represent?", ["Rows, columns, cells and bands", "Origin, transform, resolution and bounds", "Data type, NoData and masks", "Continuous versus categorical semantics"], "Create a raster anatomy and metadata record for a synthetic grid.", "Confirm dimensions, transform, CRS, bounds, semantics, support and valid-data convention.", "01_raster_inventory.ipynb", `width, height = 4, 3
 x_origin, y_origin = 500000, 6500000
 pixel_size = 10
 col, row = 2, 1
 x = x_origin + (col + 0.5) * pixel_size
 y = y_origin - (row + 0.5) * pixel_size
 print("cell centre", x, y)`, "Why is one pixel-centre coordinate offset by half a pixel from the grid origin?", "A raster is not just a matrix. Its transform and CRS connect array positions to Earth locations; band metadata connects values to measured variables.", "Treating NoData as zero. Zero may be a valid measurement or category, while NoData marks unavailable or excluded support.", { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" }),
-  lesson(12, 3, "Rasterio Fundamentals", "Open rasters safely and connect their spatial profile to NumPy band arrays.", ["Rasterio", "NumPy", "Raster profile"], "Produce a reproducible raster audit before reading values into memory.", "What metadata must be true before this band can support the planned analysis?", ["Dataset context manager", "CRS, bounds, transform and resolution", "Band count, dtype and NoData", "Rasterio datasets and NumPy arrays"], "Generate a structured audit report for a UAV or satellite raster.", "Verify file identity, dimensions, band descriptions, profile and masked-value count.", "raster_audit_report.ipynb", `import rasterio
+  lesson(12, 3, "Rasterio: Read, Inspect and Write Spatial Grids", "Inspect a GeoTIFF spatial contract, read masked values and verify a written derivative through a complete round trip.", ["Rasterio", "NumPy", "Round-trip QA"], "Read, audit and write spatial grids without losing critical metadata or validity information.", "What must remain invariant, and what is intentionally changed, when this raster is written?", ["Dataset context manager", "Metadata-first audit", "Masked and windowed reads", "Profile copy and reopened validation"], "Create a structured audit for three synthetic rasters and two verified derivatives.", "Verify checksum, grid, band meaning, valid cells, representative values and output round trip.", "02_rasterio_audit.ipynb", `import rasterio
 
 with rasterio.open("data/imagery.tif") as src:
     audit = {
@@ -167,7 +167,7 @@ with rasterio.open("data/imagery.tif") as src:
         "nodata": src.nodata,
     }
 print(audit)`, "Which properties can be inspected without loading the full raster band?", "Metadata-first inspection prevents expensive or invalid processing. The array becomes meaningful only when read with its profile and mask.", "Calling read() before checking shape and dtype. A large multiband raster may exceed memory even though opening its metadata is inexpensive.", { title: "Rasterio reading datasets", href: "https://rasterio.readthedocs.io/en/stable/topics/reading.html" }),
-  lesson(13, 3, "Crop, Mask, Reproject and Resample", "Separate four operations that change extent, valid support, reference system or grid sampling.", ["Rasterio", "Resampling", "Masking"], "Choose and document crop, mask, reprojection and resampling operations correctly.", "Which spatial property must change, and which information must remain unchanged?", ["Crop changes rectangular extent", "Mask defines valid support", "Reproject changes CRS and grid", "Resampling estimates a new grid"], "Prepare a raster for one study polygon using a scientifically justified resampling method.", "Report input and output CRS, grid, extent, shape, NoData and resampling method.", "raster_preparation_log.ipynb", `from rasterio.enums import Resampling
+  lesson(13, 3, "Crop, Mask, Reproject and Resample", "Separate four transformations and choose their sequence and resampling logic from scientific meaning.", ["Rasterio", "Resampling", "Masking"], "Apply crop, mask, reprojection and resampling for separate, scientifically justified purposes.", "Which spatial property must change, and which information cannot be recovered?", ["Crop changes rectangular extent", "Mask defines valid support", "Reproject creates a destination grid", "Resampling follows variable semantics"], "Prepare continuous and categorical rasters for one study grid and record each operation.", "Reopen outputs and report CRS, transform, extent, shape, NoData, classes, range and method.", "03_reprojection_resampling.ipynb", `from rasterio.enums import Resampling
 
 resampling_by_data = {
     "land_cover": Resampling.nearest,
@@ -175,7 +175,7 @@ resampling_by_data = {
 }
 for layer, method in resampling_by_data.items():
     print(layer, method.name)`, "What false classes could bilinear interpolation create between categorical class codes 1 and 5?", "Nearest-neighbour usually preserves categorical labels; interpolation can suit continuous fields. Upsampling produces more cells, not new sensor information.", "Using the word clip for every operation. Distinguish rectangular crop from geometry mask and record whether pixels outside the polygon remain as NoData.", { title: "Rasterio reprojection", href: "https://rasterio.readthedocs.io/en/stable/topics/reproject.html" }),
-  lesson(14, 3, "Raster Alignment and Grid Integrity", "Detect sub-pixel misalignment even when rasters share a CRS and array dimensions.", ["Grid alignment", "Transforms", "QA function"], "Implement a reusable grid-integrity check for rasters used in cell-by-cell analysis.", "Do corresponding array positions describe exactly the same Earth footprint?", ["CRS and pixel transform", "Resolution, origin and bounds", "Dimensions, NoData and band order", "Tolerance and explicit diagnostics"], "Create check_raster_alignment() and test it against one deliberately shifted grid.", "Fail clearly on every mismatched property rather than returning a single vague False.", "raster_alignment_checker.py", `def check_raster_alignment(a, b):
+  lesson(14, 3, "Raster Alignment and Grid Integrity", "Detect grid mismatch, design a common lattice and prove cell-by-cell compatibility explicitly.", ["Grid alignment", "Target grid", "QA function"], "Diagnose raster alignment and create an explicit target-grid specification.", "Do corresponding row and column positions describe the same ground footprint?", ["Complete grid contract", "Origin shifts and cell centres", "Intersection versus union extent", "Snapping, tolerance and NoData"], "Create check_raster_alignment() and test all deliberate training mismatches.", "Return property-level diagnostics and fail for shifted origin, CRS, resolution and extent cases.", "04_alignment_validation.ipynb", `def check_raster_alignment(a, b):
     checks = {
         "crs": a.crs == b.crs,
         "transform": a.transform.almost_equals(b.transform),
@@ -184,19 +184,18 @@ for layer, method in resampling_by_data.items():
     }
     return checks
 
-print(check_raster_alignment(raster_a, raster_b))`, "Could two rasters have the same bounds and shape but different cell origins?", "Cell-by-cell arithmetic assumes identical footprints at every index. An unnoticed half-pixel shift can turn spectral combinations into spatial mixtures.", "Checking only CRS and shape. Neither guarantees a shared origin, transform, extent or band convention.", { title: "Rasterio transforms", href: "https://rasterio.readthedocs.io/en/stable/topics/transforms.html" }),
-  lesson(15, 3, "Raster–Vector Integration", "Extract raster evidence to field geometries while matching spatial support and handling edge effects.", ["Sampling", "Zonal statistics", "Support"], "Choose point, buffered or polygon extraction and justify its footprint.", "Why does this extraction footprint represent the field measurement?", ["Point and buffered sampling", "Polygon summaries", "Edge effects and missing samples", "Field–raster support mismatch"], "Extract EO predictor values to vegetation plots and compare point with neighbourhood summaries.", "Report valid pixel count, overlap fraction, support size and plots with no valid samples.", "field_raster_extraction.ipynb", `from rasterstats import zonal_stats
+print(check_raster_alignment(raster_a, raster_b))`, "Could two rasters share CRS, resolution and shape while using different cell origins?", "Cell-by-cell arithmetic assumes identical footprints at every index. An unnoticed half-pixel shift can turn spectral combinations into spatial mixtures.", "Checking only CRS and shape. Neither guarantees a shared origin, transform, extent or band convention.", { title: "Rasterio transforms", href: "https://rasterio.readthedocs.io/en/stable/topics/transforms.html" }),
+  lesson(15, 3, "Raster–Vector Integration", "Extract raster evidence to vector sampling units through a spatial-support decision rather than a default pixel lookup.", ["Sampling", "Zonal statistics", "Spatial support"], "Choose point, polygon, buffer or zonal extraction and justify the represented footprint.", "Does the raster extraction describe support comparable to the field measurement?", ["Point and polygon sampling", "Justified buffers", "Valid coverage and NoData", "Positional uncertainty and edge effects"], "Compare point, footprint, median and buffered extraction for synthetic plot polygons.", "Report method, valid cell count, valid fraction, value, source and support rationale.", "05_raster_vector_integration.ipynb", `import numpy as np
+from rasterio.features import geometry_mask
 
-stats = zonal_stats(
-    plot_supports,
-    "data/ndvi.tif",
-    stats=["count", "mean", "std"],
-    nodata=-9999,
-)
-plot_supports[["n", "ndvi_mean", "ndvi_sd"]] = [
-    (s["count"], s["mean"], s["std"]) for s in stats
-]`, "How should you interpret a mean derived from only one valid edge pixel?", "Extraction turns a continuous grid into plot-level evidence. Sample count and footprint must accompany the statistic to expose weak overlap and mixed support.", "Taking the nearest pixel by default. Geolocation error, plot size and pixel grain may make a buffered or area-weighted support more defensible.", { title: "Rasterio vector features", href: "https://rasterio.readthedocs.io/en/stable/topics/features.html" }),
-  lesson(16, 3, "Large Raster Processing", "Process tiled windows within memory limits and separate transient views from persisted outputs.", ["Windows", "Tiling", "WarpedVRT"], "Design a windowed raster operation that avoids unnecessary full-band loads.", "What is the smallest spatial block required to compute this output correctly?", ["Windowed reads and writes", "Block shapes and memory budgets", "WarpedVRT as a virtual view", "Temporary versus persisted outputs"], "Compute a simple raster transformation block by block.", "Preserve profile, process edge windows, propagate masks and compare sample pixels with a full-array reference.", "windowed_raster_processor.py", `import rasterio
+inside = geometry_mask([plot_geometry], out_shape=src.shape,
+                       transform=src.transform, invert=True)
+band = src.read(1, masked=True)
+valid_inside = inside & ~np.ma.getmaskarray(band)
+values = band.data[valid_inside]
+print("count", values.size)
+print("mean", values.mean() if values.size else None)`, "How should you interpret a mean derived from incomplete or edge-sensitive support?", "Extraction creates plot-level evidence only under its declared support, validity and temporal rules.", "Taking one containing cell by default. Field footprint and positional uncertainty may require a polygon or sensitivity analysis.", { title: "Rasterio vector features", href: "https://rasterio.readthedocs.io/en/stable/topics/features.html" }),
+  lesson(16, 3, "Large Raster Processing", "Estimate memory, process stored blocks and use virtual transformed views without changing numerical meaning.", ["Windows", "Blocks", "WarpedVRT"], "Design and validate a windowed raster workflow within a declared memory budget.", "What is the smallest spatial block and neighbourhood required for a correct output?", ["Memory estimation", "Windowed and tiled processing", "Halos and multi-pass operations", "WarpedVRT and equivalence checks"], "Compare full-read and block-wise transformations on the tiled training raster.", "Preserve grid and masks, process edge windows and prove output equivalence.", "06_large_raster_processing.ipynb", `import rasterio
 
 with rasterio.open("data/ndvi.tif") as src:
     profile = src.profile.copy()
@@ -204,7 +203,7 @@ with rasterio.open("data/ndvi.tif") as src:
         for _, window in src.block_windows(1):
             block = src.read(1, window=window, masked=True)
             dst.write((block * 100).filled(src.nodata), 1, window=window)`, "Why should processing follow source block windows rather than arbitrary single-row reads?", "Windowing controls memory and can align I/O with internal tiling. It does not remove the need to preserve masks, halos and global-operation assumptions.", "Assuming every algorithm is independently tileable. Filters and terrain derivatives may need neighbouring pixels or global statistics.", { title: "Rasterio windowed reading", href: "https://rasterio.readthedocs.io/en/stable/topics/windowed-rw.html" }),
-  lesson(17, 3, "Terrain Analysis", "Derive terrain predictors with correct elevation units, grid spacing and ecological interpretation.", ["DEM", "Slope", "Aspect"], "Distinguish DEM, DSM and DTM and interpret terrain derivatives responsibly.", "Which surface and vertical reference represent the ecological mechanism of interest?", ["Elevation models and surface models", "Slope and aspect", "Horizontal and vertical units", "Terrain as an ecological predictor"], "Calculate terrain predictors and relate them to moisture, exposure or vegetation structure.", "Confirm vertical units, horizontal resolution, sinks, edge behaviour and plausible value ranges.", "terrain_predictor_report.ipynb", `import numpy as np
+  lesson(17, 3, "Terrain Analysis with DEM and DSM", "Interpret elevation surfaces and derive slope, aspect and hillshade without losing vertical-reference and surface meaning.", ["DEM / DSM / DTM", "Slope and aspect", "Terrain QA"], "Distinguish elevation surfaces and derive labelled, validated terrain products.", "Which surface, grid, units and vertical reference support the intended interpretation?", ["DEM, DSM and DTM meanings", "Vertical reference and units", "Slope, circular aspect and hillshade", "Aligned surface differencing"], "Create a terrain derivative and interpretation report from synthetic DEM and DSM fixtures.", "Confirm surface type, horizontal and vertical metadata, resolution, edge treatment and plausible ranges.", "07_terrain_analysis.ipynb", `import numpy as np
 
 dz_dy, dz_dx = np.gradient(dem, y_resolution, x_resolution)
 slope_degrees = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
@@ -528,6 +527,13 @@ export const publishedModule2LessonIds = [
   "lesson-2-08",
   "lesson-2-09",
   "lesson-2-10",
+  "lesson-2-11",
+  "lesson-2-12",
+  "lesson-2-13",
+  "lesson-2-14",
+  "lesson-2-15",
+  "lesson-2-16",
+  "lesson-2-17",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -553,6 +559,14 @@ export const module2ChapterPractica = [
     tools: ["Vector QA", "Reconciliation", "Handover decision"],
     artifact: "Artifact 2.B — Analysis-ready vector handover",
   },
+  {
+    id: "module-2-chapter-3-practicum",
+    chapter: 3,
+    title: "Build an Analysis-Ready Raster Stack",
+    description: "Harmonise five deliberately different raster inputs into one validated grid with extraction and QA evidence.",
+    tools: ["Raster harmonisation", "Alignment QA", "Professional handover"],
+    artifact: "Artifact 2.C — Analysis-ready raster stack and QA report",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -560,10 +574,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "10 lessons · 2 practica available",
+  navigationMeta: "17 lessons · 3 practica available",
   syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.10 and two chapter practica are available now, completing Spatial Foundations and Vector GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.17 and three chapter practica are available now, completing Spatial Foundations, Vector GIS and Raster Science. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -1254,21 +1268,518 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
       { title: "QGIS 3.44 Gentle Introduction to GIS", href: "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/" },
     ],
   },
+  "lesson-2-11": {
+    estimatedTime: "75–90 minutes",
+    lessonType: "Concept + Visual Lab",
+    markdownFile: "content/lessons/module-2/lesson-11.md",
+    formativeChecks: [
+      {
+        id: "m2-l11-array",
+        question: "A 2 × 3 NumPy array contains six values. Which question can it not answer by itself?",
+        options: [
+          "Where cell [0, 0] lies on Earth and what physical quantity it represents",
+          "How many rows and columns it has",
+          "Which value is stored at [0, 0]",
+        ],
+        correctOption: 0,
+        explanation: "Array indices locate values in memory. A transform, CRS and measurement metadata are required to connect those positions to Earth and scientific meaning.",
+      },
+      {
+        id: "m2-l11-transform",
+        question: "Why is the centre of the first 10 m cell offset from the raster origin?",
+        options: [
+          "The origin usually identifies the upper-left grid edge, so the centre is half a cell east and south",
+          "The CRS automatically adds five metres to every coordinate",
+          "Raster rows begin at one rather than zero",
+        ],
+        correctOption: 0,
+        explanation: "For a north-up area grid, the transform commonly locates outer cell edges. Centre coordinates require an explicit half-pixel offset in both axes.",
+      },
+      {
+        id: "m2-l11-nodata",
+        question: "A cell contains zero and the raster declares -9999 as NoData. What is the defensible interpretation?",
+        options: [
+          "Zero remains a potentially valid value unless measurement semantics say otherwise",
+          "Zero and -9999 are always equivalent missing values",
+          "All non-positive values should be removed",
+        ],
+        correctOption: 0,
+        explanation: "Missingness follows the declared mask and variable contract. Zero can represent a valid continuous measurement or category and must not be discarded by convention.",
+      },
+    ],
+    submissionChecklist: [
+      "The 4 × 5 array and every metadata field are labelled synthetic",
+      "Rows, columns, bands, transform, CRS, bounds and resolution are explained correctly",
+      "Cell edge, centre and footprint are distinguished",
+      "NoData, mask, NaN and valid zero are not conflated",
+      "Continuous and categorical semantics are recorded separately from data type",
+      "The artifact states what structural metadata cannot validate scientifically",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Reconstructs cell location and raster extent correctly from a complete metadata record" },
+      { dimension: "Conceptual understanding", expectation: "Explains raster as values, grid, spatial reference, validity and measurement semantics" },
+      { dimension: "Reproducibility", expectation: "Records origin, transform, CRS, units, support and synthetic provenance explicitly" },
+      { dimension: "Scientific communication", expectation: "Separates pixel size, accuracy, cell footprint and observed quantity without overclaiming" },
+    ],
+    coreReferences: [
+      { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" },
+      { title: "GDAL raster data model", href: "https://gdal.org/en/stable/user/raster_data_model.html" },
+    ],
+    furtherReading: [
+      { title: "GDAL geotransform tutorial", href: "https://gdal.org/en/stable/tutorials/geotransforms_tut.html" },
+      { title: "NumPy array indexing", href: "https://numpy.org/doc/stable/user/basics.indexing.html" },
+    ],
+  },
+  "lesson-2-12": {
+    estimatedTime: "100–120 minutes",
+    lessonType: "Technical Lab",
+    markdownFile: "content/lessons/module-2/lesson-12.md",
+    formativeChecks: [
+      {
+        id: "m2-l12-context",
+        question: "What does Rasterio's with-block provide?",
+        options: [
+          "A dataset that is closed reliably after the indented operations",
+          "Proof that the raster metadata are scientifically correct",
+          "Automatic loading of every band into memory",
+        ],
+        correctOption: 0,
+        explanation: "The context manager manages file resources and closes the dataset. Metadata and scientific validity still require explicit inspection and evidence.",
+      },
+      {
+        id: "m2-l12-audit",
+        question: "Why should minimum and maximum be calculated from a masked read?",
+        options: [
+          "It prevents declared invalid cells such as -9999 from entering the statistic",
+          "It proves the remaining values are calibrated observations",
+          "It changes categorical data into continuous data",
+        ],
+        correctOption: 0,
+        explanation: "A masked array keeps validity attached to the values. Valid-only statistics remain structural QA and do not establish calibration or ecological truth.",
+      },
+      {
+        id: "m2-l12-window",
+        question: "A window is written as a standalone crop. Which metadata must be recalculated?",
+        options: [
+          "Its transform and dimensions, with bounds derived from the window",
+          "Only its filename",
+          "The source CRS must always be replaced",
+        ],
+        correctOption: 0,
+        explanation: "The cropped array starts at another grid position, so it needs the window transform and output shape while retaining a compatible source CRS.",
+      },
+      {
+        id: "m2-l12-roundtrip",
+        question: "What does a successful GeoTIFF write prove?",
+        options: [
+          "Only that the write operation completed; the output must be reopened and compared",
+          "That every source tag and scientific meaning were preserved",
+          "That the derivative is byte-for-byte identical",
+        ],
+        correctOption: 0,
+        explanation: "Drivers can create readable files with changed metadata, masks or values. Operation-specific round-trip checks are required before acceptance.",
+      },
+    ],
+    submissionChecklist: [
+      "Checksums, file sizes and exact source paths identify all audited inputs",
+      "Spatial metadata are inspected before unnecessary band reads",
+      "Valid and masked counts accompany valid-only statistics",
+      "The small window uses its own correctly derived transform",
+      "Raw inputs remain immutable and outputs use new paths",
+      "Both derivatives are reopened and checked against predeclared expectations",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Reads, audits, writes and reopens the training rasters with correct mask and grid handling" },
+      { dimension: "Conceptual understanding", expectation: "Distinguishes file access, array values, validity and scientific interpretation" },
+      { dimension: "Reproducibility", expectation: "Preserves input identity and records complete operation-specific round-trip evidence" },
+      { dimension: "Scientific communication", expectation: "States exactly what file integrity checks prove and what they leave unresolved" },
+    ],
+    coreReferences: [
+      { title: "Rasterio reading datasets", href: "https://rasterio.readthedocs.io/en/stable/topics/reading.html" },
+      { title: "Rasterio masks", href: "https://rasterio.readthedocs.io/en/stable/topics/masks.html" },
+      { title: "Rasterio writing datasets", href: "https://rasterio.readthedocs.io/en/stable/topics/writing.html" },
+    ],
+    furtherReading: [
+      { title: "Rasterio windows API", href: "https://rasterio.readthedocs.io/en/stable/api/rasterio.windows.html" },
+      { title: "GDAL GeoTIFF driver", href: "https://gdal.org/en/stable/drivers/raster/gtiff.html" },
+    ],
+  },
+  "lesson-2-13": {
+    estimatedTime: "120–140 minutes",
+    lessonType: "Concept + Technical Lab",
+    markdownFile: "content/lessons/module-2/lesson-13.md",
+    formativeChecks: [
+      {
+        id: "m2-l13-crop",
+        question: "What does a rectangular crop guarantee?",
+        options: [
+          "A changed rectangular extent, not that every retained cell lies inside an irregular study area",
+          "All cells outside a polygon are invalid",
+          "The raster has been reprojected",
+        ],
+        correctOption: 0,
+        explanation: "Cropping selects a rectangular window. An irregular geometry mask is a separate decision about valid support inside that rectangle.",
+      },
+      {
+        id: "m2-l13-reproject",
+        question: "Why is assigning a new CRS label not raster reprojection?",
+        options: [
+          "Reprojection transforms coordinates and creates values on a destination grid",
+          "A label always changes the stored pixel values correctly",
+          "Raster CRS metadata have no relationship to the transform",
+        ],
+        correctOption: 0,
+        explanation: "A valid reprojection requires a known source CRS, coordinate operation, destination transform, dimensions and resampling method.",
+      },
+      {
+        id: "m2-l13-resampling",
+        question: "Which starting rule is defensible for habitat class codes?",
+        options: [
+          "Use nearest neighbour and verify valid output labels against the legend",
+          "Use bilinear because smoother boundaries are more accurate",
+          "Use cubic because it always preserves source range",
+        ],
+        correctOption: 0,
+        explanation: "Nearest neighbour preserves existing discrete labels. Interpolation can invent fractional or undefined categories with no thematic meaning.",
+      },
+      {
+        id: "m2-l13-mask",
+        question: "What must be true before a polygon mask is applied to a raster?",
+        options: [
+          "The geometry must be valid and transformed into a compatible raster CRS",
+          "The polygon and raster need only share a filename prefix",
+          "Every outside cell must be replaced by numeric zero",
+        ],
+        correctOption: 0,
+        explanation: "Masking uses the geometry in raster coordinates and a declared inside, boundary and NoData rule. Zero is not a universal missing value.",
+      },
+    ],
+    submissionChecklist: [
+      "Crop, mask, reproject and resample are documented as separate effects",
+      "The target grid is explicit rather than left to independent defaults",
+      "Categorical and continuous resampling decisions follow variable semantics",
+      "Source and destination NoData are passed and checked",
+      "Upsampling is not presented as new information or improved accuracy",
+      "Every accepted output is reopened and compared with expected changes and invariants",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Performs all four operations with correct CRS, transforms, masks and variable-specific methods" },
+      { dimension: "Conceptual understanding", expectation: "Explains how the operations differ and what information each can or cannot preserve" },
+      { dimension: "Reproducibility", expectation: "Maintains an explicit transformation decision log and immutable sources" },
+      { dimension: "Scientific communication", expectation: "Justifies resampling and states the native-resolution and support limitations" },
+    ],
+    coreReferences: [
+      { title: "Rasterio reprojection", href: "https://rasterio.readthedocs.io/en/stable/topics/reproject.html" },
+      { title: "Rasterio resampling", href: "https://rasterio.readthedocs.io/en/stable/topics/resampling.html" },
+      { title: "Rasterio mask API", href: "https://rasterio.readthedocs.io/en/stable/api/rasterio.mask.html" },
+    ],
+    furtherReading: [
+      { title: "GDAL warp program", href: "https://gdal.org/en/stable/programs/gdalwarp.html" },
+      { title: "QGIS raster analysis guide", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_analysis.html" },
+    ],
+  },
+  "lesson-2-14": {
+    estimatedTime: "130–150 minutes",
+    lessonType: "Professional Practicum",
+    markdownFile: "content/lessons/module-2/lesson-14.md",
+    formativeChecks: [
+      {
+        id: "m2-l14-contract",
+        question: "Two rasters share EPSG:3301 and 10 m pixels. What else is required for cell-wise alignment?",
+        options: [
+          "Matching transform/origin, dimensions, bounds and pixel orientation under a declared tolerance",
+          "Only similar colours in QGIS",
+          "Only the same number of bands",
+        ],
+        correctOption: 0,
+        explanation: "CRS and resolution do not define the lattice. Corresponding indices require the same spatial transform, extent and dimensions.",
+      },
+      {
+        id: "m2-l14-function",
+        question: "Why should an alignment function return individual checks?",
+        options: [
+          "Property-level results expose the cause and required correction",
+          "A single False value proves the source data are scientifically invalid",
+          "It allows failed checks to be ignored silently",
+        ],
+        correctOption: 0,
+        explanation: "CRS, origin, resolution, shape and bounds mismatches require different decisions. Explicit diagnostics make the workflow reviewable.",
+      },
+      {
+        id: "m2-l14-target",
+        question: "Which rationale can justify a reference grid?",
+        options: [
+          "Its CRS, support, resolution, extent and governed origin fit the stated analysis",
+          "It has the smallest cells, so it must be most accurate",
+          "It is the first file alphabetically",
+        ],
+        correctOption: 0,
+        explanation: "Target-grid selection is a scientific design decision. Finer cells can multiply storage without adding information or accuracy.",
+      },
+      {
+        id: "m2-l14-nodata",
+        question: "Two aligned rasters use different NoData sentinels. What is the next step?",
+        options: [
+          "Audit each mask and define a documented joint-validity policy",
+          "Treat all zeros as missing in both files",
+          "Declare the grids misaligned solely because the sentinels differ",
+        ],
+        correctOption: 0,
+        explanation: "Stored NoData can differ on the same geometry. Analytical compatibility depends on actual masks, valid support and variable semantics.",
+      },
+    ],
+    submissionChecklist: [
+      "Expected pass/fail results are declared before inspecting the training cases",
+      "CRS, transform, resolution, origin, shape, bounds and NoData are reported separately",
+      "A cell-centre diagnostic quantifies the shifted-origin case",
+      "Tolerance is justified from grid construction and coordinate units",
+      "The target grid states CRS, resolution, origin, extent, shape and resampling policy",
+      "All deliberate mismatches fail for their expected reasons",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Diagnoses every deliberate mismatch and proves aligned cases with a complete grid contract" },
+      { dimension: "Conceptual understanding", expectation: "Explains lattice origin, target-grid choice, snapping, extent and joint validity" },
+      { dimension: "Reproducibility", expectation: "Provides reusable diagnostics, explicit tolerance and a recreatable target specification" },
+      { dimension: "Scientific communication", expectation: "Separates geometric alignment from semantic and scientific comparability" },
+    ],
+    coreReferences: [
+      { title: "Rasterio transforms", href: "https://rasterio.readthedocs.io/en/stable/topics/transforms.html" },
+      { title: "Rasterio warp API", href: "https://rasterio.readthedocs.io/en/stable/api/rasterio.warp.html" },
+    ],
+    furtherReading: [
+      { title: "GDAL geotransform tutorial", href: "https://gdal.org/en/stable/tutorials/geotransforms_tut.html" },
+      { title: "QGIS raster properties", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_properties.html" },
+    ],
+  },
+  "lesson-2-15": {
+    estimatedTime: "120–150 minutes",
+    lessonType: "Scientific Practicum",
+    markdownFile: "content/lessons/module-2/lesson-15.md",
+    formativeChecks: [
+      {
+        id: "m2-l15-point",
+        question: "When is a containing-cell point sample most defensible?",
+        options: [
+          "When the observation and question are point-like at the analysis scale and positional uncertainty is acceptable",
+          "Whenever it gives the strongest relationship",
+          "Whenever the raster has smaller pixels than the field plot",
+        ],
+        correctOption: 0,
+        explanation: "Point sampling is a support choice. It requires a question and positional evidence consistent with the containing cell rather than convenience.",
+      },
+      {
+        id: "m2-l15-statistic",
+        question: "Which summary is appropriate for categorical habitat codes?",
+        options: [
+          "Class counts or proportions with a documented legend and tie rule",
+          "The arithmetic mean of class identifiers",
+          "A bilinear value at the polygon centroid",
+        ],
+        correctOption: 0,
+        explanation: "Class codes label categories and do not form a continuous numeric scale. Counts, proportions or mode preserve categorical meaning.",
+      },
+      {
+        id: "m2-l15-uncertainty",
+        question: "Why must valid fraction accompany a plot mean?",
+        options: [
+          "The statistic may describe only a small valid part of the intended footprint",
+          "It proves the raster is positionally accurate",
+          "It converts missing cells to zero",
+        ],
+        correctOption: 0,
+        explanation: "Coverage evidence reveals whether the calculated value represents enough of the declared support. The acceptance threshold still needs scientific justification.",
+      },
+    ],
+    submissionChecklist: [
+      "Vector geometry is validated and transformed into the raster CRS",
+      "Point, polygon, median and buffer methods are compared under explicit support rules",
+      "Candidate count, valid count and valid fraction accompany every polygon statistic",
+      "Categorical classes are summarised without averaging codes",
+      "No valid support remains missing rather than becoming zero",
+      "The extraction table preserves source identity, method, temporal and uncertainty notes",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Extracts values under correct CRS, mask, rasterisation and valid-coverage rules" },
+      { dimension: "Conceptual understanding", expectation: "Selects a method from field support, positional uncertainty and variable semantics" },
+      { dimension: "Reproducibility", expectation: "Creates a traceable extraction table with source, grid, method and coverage evidence" },
+      { dimension: "Scientific communication", expectation: "Explains why alternative supports differ and which uncertainty remains" },
+    ],
+    coreReferences: [
+      { title: "Rasterio vector features", href: "https://rasterio.readthedocs.io/en/stable/topics/features.html" },
+      { title: "Rasterio sampling API", href: "https://rasterio.readthedocs.io/en/stable/api/rasterio.sample.html" },
+    ],
+    furtherReading: [
+      { title: "GeoPandas projections guide", href: "https://geopandas.org/en/stable/docs/user_guide/projections.html" },
+      { title: "QGIS zonal statistics", href: "https://docs.qgis.org/3.44/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html" },
+    ],
+  },
+  "lesson-2-16": {
+    estimatedTime: "100–120 minutes",
+    lessonType: "Technical Performance Lab",
+    markdownFile: "content/lessons/module-2/lesson-16.md",
+    formativeChecks: [
+      {
+        id: "m2-l16-memory",
+        question: "Why can a compressed GeoTIFF require much more RAM than its file size?",
+        options: [
+          "Pixel arrays are decompressed and may coexist with masks, outputs and temporary arrays",
+          "Compression changes every value to float64 permanently",
+          "Raster dimensions do not affect memory",
+        ],
+        correctOption: 0,
+        explanation: "Dense in-memory values follow dimensions, bands and data type. Masks, type promotion and intermediates increase the working set beyond the file size.",
+      },
+      {
+        id: "m2-l16-blocks",
+        question: "Why process source block windows rather than arbitrary one-row reads?",
+        options: [
+          "Block-aligned reads follow the file's efficient storage chunks and avoid repeated decoding",
+          "A storage block is always the correct ecological support",
+          "Blocks eliminate the need for masks",
+        ],
+        correctOption: 0,
+        explanation: "Blocks are an I/O organisation. They can improve access efficiency while the scientific operation and support remain independently defined.",
+      },
+      {
+        id: "m2-l16-halo",
+        question: "Why does a three-by-three filter need a halo around each write window?",
+        options: [
+          "Cells at the window edge require neighbouring source values outside that window",
+          "A halo changes the source CRS",
+          "Every cell-independent multiplication requires one",
+        ],
+        correctOption: 0,
+        explanation: "Neighbourhood operations need surrounding cells. Read overlap and write only the central result to avoid artificial seams at block edges.",
+      },
+      {
+        id: "m2-l16-equivalence",
+        question: "What must happen before comparing full and windowed runtime?",
+        options: [
+          "Grid, mask and numerical results must pass declared equivalence checks",
+          "The faster method should be accepted automatically",
+          "Only output file sizes should be equal",
+        ],
+        correctOption: 0,
+        explanation: "Performance is meaningful only for equivalent work. A faster result that changes valid cells or values is not an optimisation of the same method.",
+      },
+    ],
+    submissionChecklist: [
+      "Memory estimates include dimensions, bands, data type and likely intermediates",
+      "The source block layout and all edge windows are recorded",
+      "The windowed loop writes directly rather than accumulating every block",
+      "Mask and NoData behaviour are preserved",
+      "Full and windowed outputs are reopened and pass grid and numerical equivalence",
+      "Timing claims include environment, repeats and limitations",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Processes all blocks correctly, preserves masks and handles local versus neighbourhood operations" },
+      { dimension: "Conceptual understanding", expectation: "Explains memory, blocks, halos, virtual views and persistence tradeoffs" },
+      { dimension: "Reproducibility", expectation: "Records environment, window layout, outputs and operation-specific equivalence evidence" },
+      { dimension: "Scientific communication", expectation: "Reports conditional performance without presenting one timing as universal" },
+    ],
+    coreReferences: [
+      { title: "Rasterio windowed reading and writing", href: "https://rasterio.readthedocs.io/en/stable/topics/windowed-rw.html" },
+      { title: "Rasterio WarpedVRT API", href: "https://rasterio.readthedocs.io/en/stable/api/rasterio.vrt.html" },
+    ],
+    furtherReading: [
+      { title: "GDAL raster data model: blocks", href: "https://gdal.org/en/stable/user/raster_data_model.html" },
+      { title: "NumPy data types", href: "https://numpy.org/doc/stable/user/basics.types.html" },
+    ],
+  },
+  "lesson-2-17": {
+    estimatedTime: "110–140 minutes",
+    lessonType: "Scientific Application Lab",
+    markdownFile: "content/lessons/module-2/lesson-17.md",
+    formativeChecks: [
+      {
+        id: "m2-l17-surfaces",
+        question: "What does a DSM usually attempt to represent?",
+        options: [
+          "An upper visible or returned surface influenced by terrain, vegetation, structures and processing",
+          "Guaranteed bare terrain",
+          "Vegetation height independent of a terrain reference",
+        ],
+        correctOption: 0,
+        explanation: "DSM meaning depends on sensing and processing. It can include canopy, buildings, ground and artefacts and must not be relabelled as terrain automatically.",
+      },
+      {
+        id: "m2-l17-vertical",
+        question: "A raster tag says elevation units are metres, but no vertical datum is documented. What can be claimed?",
+        options: [
+          "Stored vertical values use a metre scale, but their reference surface remains undocumented",
+          "Every value is metres above sea level",
+          "The raster can be subtracted from any other metre-valued elevation product",
+        ],
+        correctOption: 0,
+        explanation: "Units and vertical reference are distinct. Differences require compatible datums, grids, timing and surface definitions.",
+      },
+      {
+        id: "m2-l17-aspect",
+        question: "Why should ordinary arithmetic not average aspects 1° and 359°?",
+        options: [
+          "Aspect is circular, so the two directions are only two degrees apart",
+          "Aspect has no units",
+          "One of the two values must be NoData",
+        ],
+        correctOption: 0,
+        explanation: "Compass direction wraps at 360 degrees. Circular statistics or sine/cosine components preserve that neighbourhood relationship.",
+      },
+      {
+        id: "m2-l17-resolution",
+        question: "What can happen when slope is derived from a finer but noisy DSM?",
+        options: [
+          "Canopy texture and reconstruction noise can create steep local gradients",
+          "Finer cells guarantee more accurate terrain slope",
+          "Resolution removes the need for vertical-reference metadata",
+        ],
+        correctOption: 0,
+        explanation: "Terrain derivatives inherit the input surface and processing scale. Smaller cells expose both real variation and noise without guaranteeing accuracy.",
+      },
+    ],
+    submissionChecklist: [
+      "DEM, DSM and DTM meanings are distinguished from product acronyms alone",
+      "Horizontal CRS, vertical units and vertical reference status are recorded separately",
+      "Slope units, aspect convention and hillshade parameters are explicit",
+      "NoData, flat aspect and edge treatment are preserved",
+      "Any surface difference passes alignment checks and remains conservatively named",
+      "Terrain outputs are reopened and checked for metadata and plausible ranges",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Derives and writes slope, aspect and hillshade with correct spacing, masks and units" },
+      { dimension: "Conceptual understanding", expectation: "Interprets surface type, vertical reference, circular aspect, resolution and differencing conditions" },
+      { dimension: "Reproducibility", expectation: "Records source surfaces, formulas, parameters, software and reopened derivative QA" },
+      { dimension: "Scientific communication", expectation: "Avoids unsupported terrain and vegetation-height claims and states remaining uncertainty" },
+    ],
+    coreReferences: [
+      { title: "USGS publication: Digital elevation models—terminology and definitions", href: "https://pubs.usgs.gov/publication/70223828" },
+      { title: "GDAL DEM processing", href: "https://gdal.org/en/stable/programs/gdaldem.html" },
+    ],
+    furtherReading: [
+      { title: "QGIS raster terrain analysis", href: "https://docs.qgis.org/3.44/en/docs/user_manual/processing_algs/qgis/rasterterrainanalysis.html" },
+      { title: "NumPy gradient", href: "https://numpy.org/doc/stable/reference/generated/numpy.gradient.html" },
+    ],
+  },
 };
 
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
+  numpy: "2.4.2",
+  rasterio: "1.4.4",
   geopandas: "1.1.4",
   shapely: "2.1.2",
   pyproj: "3.7.2",
   qgis: "3.44 LTR",
 } as const;
 
-function module2TestedVersions(includeQgis: boolean) {
+function module2TestedVersions(includeQgis: boolean, includeRaster = false) {
   return [
     { label: "GeoPandas", value: MODULE2_SOFTWARE_VERSIONS.geopandas },
     { label: "Shapely", value: MODULE2_SOFTWARE_VERSIONS.shapely },
     { label: "PyProj", value: MODULE2_SOFTWARE_VERSIONS.pyproj },
+    ...(includeRaster ? [
+      { label: "NumPy", value: MODULE2_SOFTWARE_VERSIONS.numpy },
+      { label: "Rasterio", value: MODULE2_SOFTWARE_VERSIONS.rasterio },
+    ] : []),
     ...(includeQgis ? [{ label: "QGIS", value: MODULE2_SOFTWARE_VERSIONS.qgis }] : []),
   ];
 }
@@ -1293,7 +1804,10 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
         technicalMetadata: {
           pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
           jupyterEnvironment: "JupyterLab 4 / Notebook 7",
-          testedVersions: module2TestedVersions(source.id === "lesson-2-10"),
+          testedVersions: module2TestedVersions(
+            source.id === "lesson-2-10" || source.chapter === 3,
+            source.chapter === 3,
+          ),
           reviewDate: "11 August 2026",
           datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
@@ -1309,7 +1823,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 2,
+    totalPositions: 3,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -1366,7 +1880,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 2,
+    totalPositions: 3,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -1416,6 +1930,78 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       ],
       furtherReading: [
         { title: "QGIS topology introduction", href: "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/topology.html" },
+      ],
+    },
+  },
+  "module-2-chapter-3-practicum": {
+    estimatedTime: "240–300 minutes",
+    lessonType: "Chapter Practicum",
+    position: 3,
+    totalPositions: 3,
+    markdownFile: "content/lessons/module-2/practicum-03.md",
+    formativeChecks: [
+      {
+        id: "m2-p3-target-grid",
+        question: "What should define the destination grid for a multi-raster stack?",
+        options: [
+          "A documented scientific and operational decision about CRS, resolution, origin, extent and support",
+          "Whichever file happens to be opened first",
+          "The finest available pixel size in every case",
+        ],
+        correctOption: 0,
+        explanation: "A reference raster may implement the decision, but target-grid design must follow intended use, source support, categorical constraints and computational cost rather than file order.",
+      },
+      {
+        id: "m2-p3-resampling",
+        question: "Why does the habitat layer require a different resampling rule from continuous reflectance?",
+        options: [
+          "Class codes are labels, so interpolation can invent labels with no defined meaning",
+          "Categorical rasters never require reprojection",
+          "Continuous reflectance cannot be resampled",
+        ],
+        correctOption: 0,
+        explanation: "Nearest-neighbour resampling is the defensible starting rule for discrete labels, while continuous variables may justify interpolation after considering their support and intended analysis.",
+      },
+      {
+        id: "m2-p3-alignment",
+        question: "When is the output stack ready for cell-wise analysis?",
+        options: [
+          "When every accepted layer passes the declared CRS, transform, dimensions, bounds, orientation and NoData checks",
+          "When the layers overlap visually in QGIS",
+          "When every output has the same filename suffix",
+        ],
+        correctOption: 0,
+        explanation: "Cell-wise computation assumes a shared grid contract. Visual overlap is useful QA evidence but cannot prove identical origins, transforms, masks or dimensions.",
+      },
+    ],
+    submissionChecklist: [
+      "All five supplied rasters are inventoried before transformation",
+      "One explicit target-grid contract records CRS, resolution, origin, dimensions and bounds",
+      "Continuous and categorical resampling decisions are justified separately",
+      "All aligned derivatives are reopened and pass the automated grid assertions",
+      "Point and polygon extraction outputs preserve identifiers, units and valid-cell evidence",
+      "The final QA report includes decision, limitations, checksums and reproducible environment details",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Builds an aligned five-layer raster stack and correct extraction outputs with valid masks and metadata" },
+      { dimension: "Conceptual understanding", expectation: "Justifies target-grid, support, resampling and terrain-surface decisions scientifically" },
+      { dimension: "Reproducibility", expectation: "Preserves immutable inputs, explicit parameters, automated assertions, checksums and reopened-output QA" },
+      { dimension: "Scientific communication", expectation: "Delivers a concise handover report that distinguishes passed checks from unresolved scientific uncertainty" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Baltic coastal meadow raster training pack, created for instruction; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250",
+      coreReferences: [
+        { title: "Rasterio reprojection", href: "https://rasterio.readthedocs.io/en/stable/topics/reproject.html" },
+        { title: "Rasterio resampling", href: "https://rasterio.readthedocs.io/en/stable/topics/resampling.html" },
+        { title: "GDAL raster data model", href: "https://gdal.org/en/stable/user/raster_data_model.html" },
+      ],
+      furtherReading: [
+        { title: "QGIS raster analysis", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_analysis.html" },
+        { title: "USGS digital elevation terminology", href: "https://pubs.usgs.gov/publication/70223828" },
       ],
     },
   },

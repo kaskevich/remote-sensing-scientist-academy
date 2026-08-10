@@ -1,0 +1,588 @@
+{
+  "title": "Module 2 Raster Science synthetic training pack",
+  "generatedWith": {
+    "python": "3.12.13",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2"
+  },
+  "coordinateNote": "Raster coordinates are synthetic. Support GeoJSON follows RFC 7946 longitude/latitude order.",
+  "licence": "CC0-1.0; generated synthetic data with no unpublished or personal information",
+  "assets": [
+    {
+      "filename": "aligned_continuous.tif",
+      "purpose": "Reference grid and continuous-variable example",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Reference grid; opens with 10 m cells, EPSG:3301 and one NoData cell",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "82dd2dd2a8c80e02b193d08e6341537bf456c5da217563e16bc2456ce15a6881"
+    },
+    {
+      "filename": "aligned_categorical.tif",
+      "purpose": "Categorical-variable and nearest-neighbour example",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "semanticType": "categorical habitat class",
+      "units": "class code",
+      "expectedQaBehavior": "Aligns with the reference grid; valid labels remain 1, 2 or 3",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "37a6582eb429589e6b077246d28d9590bed1d9f288671a97a2e5d923bee1cf77"
+    },
+    {
+      "filename": "shifted_origin.tif",
+      "purpose": "Half-cell origin mismatch",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500005.0,
+        0.0,
+        -10.0,
+        6500125.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500005.0,
+        6500005.0,
+        500125.0,
+        6500125.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Same CRS, resolution and shape as reference but transform, origin and bounds must fail alignment",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "0c946125af75c37b4647480a4266352ca6f9f4722b852d573a35270a91988c4d"
+    },
+    {
+      "filename": "different_crs.tif",
+      "purpose": "CRS mismatch example",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.0001,
+        0.0,
+        24.72,
+        0.0,
+        -0.0001,
+        58.59
+      ],
+      "resolution": [
+        0.0001,
+        0.0001
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        24.72,
+        58.588800000000006,
+        24.7212,
+        58.59
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "CRS and grid contract differ from EPSG:3301 reference",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "8769db004d8c668298a77a617ae7b4253f7c6d85f9276381a1877ddad6068e06"
+    },
+    {
+      "filename": "different_resolution.tif",
+      "purpose": "Resolution mismatch example",
+      "crs": "EPSG:3301",
+      "transform": [
+        20.0,
+        0.0,
+        500000.0,
+        0.0,
+        -20.0,
+        6500120.0
+      ],
+      "resolution": [
+        20.0,
+        20.0
+      ],
+      "shape": [
+        6,
+        6
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Shares broad extent and CRS but has 20 m cells and 6 by 6 shape",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "4686ffab2af05e518d07a800b2c5684e66abca9bc3272e91e321c3c9a75a76fa"
+    },
+    {
+      "filename": "cropped_extent.tif",
+      "purpose": "Cropped-extent mismatch example",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500020.0,
+        0.0,
+        -10.0,
+        6500110.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        9,
+        9
+      ],
+      "bounds": [
+        500020.0,
+        6500020.0,
+        500110.0,
+        6500110.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Resolution and CRS match but bounds and dimensions differ",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "4fb474b3744ccaa36a34693324a7dd34ed677609dbe7b4067c417a3add374fa6"
+    },
+    {
+      "filename": "conflicting_nodata.tif",
+      "purpose": "NoData-versus-valid-zero example",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous measurement with valid zero",
+      "units": "synthetic index",
+      "expectedQaBehavior": "Zero remains valid; only -9999 is masked. NoData semantics conflict with any workflow that assumes zero is missing",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "7e71ee71968dec473bff7efcfd5ef3ad0bb0465ff0408279f488c0a2144ffe67"
+    },
+    {
+      "filename": "missing_crs.tif",
+      "purpose": "Missing-CRS stop condition",
+      "crs": null,
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous surface reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Must be quarantined from reprojection or overlay until source CRS is verified",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "33947ce64aae1b7a3147705a13852ede9230d86896e2144aef13bd07791f0411"
+    },
+    {
+      "filename": "training_dem.tif",
+      "purpose": "Terrain-surface derivative exercise",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "synthetic terrain elevation model",
+      "units": "metres (synthetic; vertical datum undocumented)",
+      "expectedQaBehavior": "Aligned terrain surface with horizontal EPSG:3301; vertical datum deliberately undocumented",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "07a610783099d9dd1c7ce6395c38c27147025e5acbae708851ebfc44c1316161"
+    },
+    {
+      "filename": "training_dsm.tif",
+      "purpose": "Upper-surface interpretation exercise",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "synthetic digital surface model",
+      "units": "metres (synthetic; vertical datum undocumented)",
+      "expectedQaBehavior": "Aligned with DEM, but DSM minus DEM is only a synthetic surface difference, not validated vegetation height",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "826e9a312b2896225444bb0dd68e2ad510c7baf4a507883e3efb1d882d00ad7e"
+    },
+    {
+      "filename": "large_tiled_continuous.tif",
+      "purpose": "Windowed and block-wise processing exercise",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6502560.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        256,
+        256
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        502560.0,
+        6502560.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous synthetic raster",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Contains sixteen 64 by 64 blocks for block_windows and equivalence checks",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "2b6f1a9ca957349e02f1f95436ad1e1265412528ffc1346e5a5064694e195d1c"
+    },
+    {
+      "filename": "practicum_red.tif",
+      "purpose": "Practicum target-grid Red band",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500000.0,
+        0.0,
+        -10.0,
+        6500120.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous red reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Defines the justified target grid after inventory review",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "90822d574c760c3fa43cd236327f00299b5a040894b200d6131e216fd0e1906d"
+    },
+    {
+      "filename": "practicum_rededge_shifted.tif",
+      "purpose": "Practicum shifted-origin Red Edge band",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500005.0,
+        0.0,
+        -10.0,
+        6500125.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        500005.0,
+        6500005.0,
+        500125.0,
+        6500125.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous red-edge reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Requires snapping/reprojection to the target transform despite matching CRS and nominal resolution",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "ff3f39614a1497bd5da874a33c29849055bdba617b0861db864bad593fc66096"
+    },
+    {
+      "filename": "practicum_nir_20m.tif",
+      "purpose": "Practicum coarse NIR band",
+      "crs": "EPSG:3301",
+      "transform": [
+        20.0,
+        0.0,
+        500000.0,
+        0.0,
+        -20.0,
+        6500120.0
+      ],
+      "resolution": [
+        20.0,
+        20.0
+      ],
+      "shape": [
+        6,
+        6
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500120.0,
+        6500120.0
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "continuous near-infrared reflectance proxy",
+      "units": "unitless synthetic fraction",
+      "expectedQaBehavior": "Requires a documented continuous resampling decision to the 10 m target grid",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "bbc7a2e8a7a90522f4e6879d9c0375bcb447374f4cc83d502b030c2fbcb258a8"
+    },
+    {
+      "filename": "practicum_dsm_wgs84.tif",
+      "purpose": "Practicum DSM in a different horizontal CRS",
+      "crs": "EPSG:4326",
+      "transform": [
+        0.0001722099921055431,
+        0.0,
+        24.000000000000004,
+        0.0,
+        -8.978300956326753e-05,
+        58.64092440298666
+      ],
+      "resolution": [
+        0.0001722099921055431,
+        8.978300956326753e-05
+      ],
+      "shape": [
+        12,
+        12
+      ],
+      "bounds": [
+        24.000000000000004,
+        58.6398470068719,
+        24.00206651990527,
+        58.64092440298666
+      ],
+      "bandCount": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "semanticType": "synthetic digital surface model",
+      "units": "metres (synthetic; vertical datum undocumented)",
+      "expectedQaBehavior": "Requires reprojection to EPSG:3301 and explicit vertical-reference limitation",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "ca88e4c68b51f80d5c8163672232d67ee9d9062dd6d1ad19942ef3d00b1d0a25"
+    },
+    {
+      "filename": "practicum_habitat_cropped.tif",
+      "purpose": "Practicum categorical habitat layer with cropped extent",
+      "crs": "EPSG:3301",
+      "transform": [
+        10.0,
+        0.0,
+        500010.0,
+        0.0,
+        -10.0,
+        6500110.0
+      ],
+      "resolution": [
+        10.0,
+        10.0
+      ],
+      "shape": [
+        10,
+        10
+      ],
+      "bounds": [
+        500010.0,
+        6500010.0,
+        500110.0,
+        6500110.0
+      ],
+      "bandCount": 1,
+      "dtype": "uint8",
+      "nodata": 255.0,
+      "semanticType": "categorical habitat class",
+      "units": "class code",
+      "expectedQaBehavior": "Requires nearest-neighbour assignment and a declared union/intersection extent policy",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data",
+      "sha256": "556ab8bc8ad9124ea719d7376b65c4ea9360165630018e19baae281b18f2455b"
+    }
+  ],
+  "supportVectors": [
+    {
+      "filename": "training_site_boundary.geojson",
+      "purpose": "Synthetic study boundary",
+      "crs": "OGC:CRS84 (RFC 7946 longitude, latitude)",
+      "sha256": "2fb8e877811c9f2b8b8e1b4f8449dfaa42cc0ddf1f980044addba8575c595f6e",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data"
+    },
+    {
+      "filename": "training_plot_polygons.geojson",
+      "purpose": "Synthetic extraction support polygons",
+      "crs": "OGC:CRS84 (RFC 7946 longitude, latitude)",
+      "sha256": "e4e7c87200d5c2d4620fcfb5d2810c5e1ba079d8b02f79d1663218ad3865604b",
+      "syntheticOpenStatus": "Synthetic, openly reusable Academy training data"
+    }
+  ]
+}

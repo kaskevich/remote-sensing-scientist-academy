@@ -150,7 +150,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes the complete reviewed vector sequence and planned pathway", async ({ page }) => {
+test("Module 2 exposes the reviewed vector and raster sequences with the planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -160,8 +160,8 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(50);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(12);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(40);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(20);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(33);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
   await expect(overview.locator(".module-syllabus li .syllabus-number").nth(48)).toHaveText("2.49");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
@@ -177,7 +177,11 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(overview.getByRole("link", { name: "Accept, Review or Reject?", exact: true })).toHaveAttribute("href", "#module-2-chapter-1-practicum");
   await expect(overview.getByRole("link", { name: "Vector Handover Review", exact: true })).toHaveAttribute("href", "#module-2-chapter-2-practicum");
   await expect(overview.getByText("0/5 complete", { exact: true })).toBeVisible();
-  await expect(overview.getByRole("link", { name: "Raster Fundamentals", exact: true })).toHaveCount(0);
+  await expect(overview.getByText("What Is a Raster Really?", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(2).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "What Is a Raster Really?", exact: true })).toHaveAttribute("href", "#lesson-2-11");
+  await expect(overview.getByRole("link", { name: "Terrain Analysis with DEM and DSM", exact: true })).toHaveAttribute("href", "#lesson-2-17");
+  await expect(overview.getByRole("link", { name: "Build an Analysis-Ready Raster Stack", exact: true })).toHaveAttribute("href", "#module-2-chapter-3-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -186,11 +190,11 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("10 lessons · 2 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(12);
+  await expect(moduleNavigation.getByText("17 lessons · 3 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(20);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
-  await expect(page.locator("#lesson-2-11")).toHaveCount(0);
+  await expect(page.locator("#lesson-2-11")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
@@ -226,6 +230,18 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await qgisLesson.locator(":scope > summary").click();
   await expect(qgisLesson.getByRole("link", { name: "Download the QGIS vector QA checklist" })).toHaveAttribute("href", /QGIS_Vector_QA_Checklist\.md$/);
   await expect(qgisLesson.getByRole("link", { name: "Download the structured QGIS observation log" })).toHaveAttribute("href", /qgis_qa_observations\.csv$/);
+
+  const rasterLesson = page.locator("#lesson-2-11");
+  await rasterLesson.locator(":scope > summary").click();
+  await expect(rasterLesson.getByText("Lesson 2.11 of 49", { exact: true })).toBeVisible();
+  await expect(rasterLesson.getByRole("img", { name: /numerical values, grid location and measurement meaning/i })).toBeVisible();
+  await expect(rasterLesson.locator(".formative-check")).toHaveCount(3);
+  await expect(rasterLesson.getByRole("link", { name: "Download the raster metadata and checksum manifest" })).toHaveAttribute("href", /raster-foundations\/manifest\.json$/);
+
+  const rasterPracticum = page.locator("#module-2-chapter-3-practicum");
+  await rasterPracticum.locator(":scope > summary").click();
+  await expect(rasterPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(rasterPracticum.getByText("RASTER_QA_REPORT.md", { exact: true }).first()).toBeVisible();
 
   const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
   await chapterOnePracticum.locator(":scope > summary").click();

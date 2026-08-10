@@ -1,0 +1,108 @@
+{
+  "type": "FeatureCollection",
+  "academyStatus": "Synthetic, openly reusable Academy training data",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "RP01",
+        "support": "30 m synthetic footprint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00017221,
+              58.64065506
+            ],
+            [
+              24.00068883,
+              58.64065506
+            ],
+            [
+              24.00068884,
+              58.6409244
+            ],
+            [
+              24.00017221,
+              58.6409244
+            ],
+            [
+              24.00017221,
+              58.64065506
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "RP02",
+        "support": "30 m synthetic footprint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00086103,
+              58.64020615
+            ],
+            [
+              24.00137765,
+              58.64020614
+            ],
+            [
+              24.00137766,
+              58.64047549
+            ],
+            [
+              24.00086104,
+              58.64047549
+            ],
+            [
+              24.00086103,
+              58.64020615
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "RP03",
+        "support": "30 m synthetic footprint"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00154984,
+              58.63984701
+            ],
+            [
+              24.00206646,
+              58.63984701
+            ],
+            [
+              24.00206647,
+              58.64011635
+            ],
+            [
+              24.00154985,
+              58.64011636
+            ],
+            [
+              24.00154984,
+              58.63984701
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

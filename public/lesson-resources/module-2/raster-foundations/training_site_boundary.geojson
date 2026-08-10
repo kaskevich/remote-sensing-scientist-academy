@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "academyStatus": "Synthetic, openly reusable Academy training data",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "site_id": "SYN_SITE",
+        "status": "synthetic"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.0,
+              58.63984702
+            ],
+            [
+              24.00206646,
+              58.63984701
+            ],
+            [
+              24.00206652,
+              58.64092439
+            ],
+            [
+              24.0,
+              58.6409244
+            ],
+            [
+              24.0,
+              58.63984702
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
