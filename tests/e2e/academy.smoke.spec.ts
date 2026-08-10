@@ -112,17 +112,22 @@ test("module map, starter notebook, and formative checks support beginner naviga
   const completion = firstLesson.getByRole("checkbox");
   await expect(completion).not.toBeChecked();
 
-  await firstCheck.getByLabel("A code cell").focus();
-  await page.keyboard.press("Space");
-  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  const incorrectOption = firstCheck.getByLabel("A code cell");
+  const checkAnswer = firstCheck.getByRole("button", { name: "Check answer" });
+  await incorrectOption.press("Space");
+  await expect(incorrectOption).toBeChecked();
+  await expect(checkAnswer).toBeEnabled();
+  await checkAnswer.click();
   await expect(firstCheck.getByText("Not quite", { exact: true })).toBeVisible();
   await expect(firstCheck.getByText(/Markdown cells hold narrative/)).toBeVisible();
   await expect(completion).not.toBeChecked();
 
   await firstCheck.getByRole("button", { name: "Try again" }).click();
-  await firstCheck.getByLabel("A Markdown cell").focus();
-  await page.keyboard.press("Space");
-  await firstCheck.getByRole("button", { name: "Check answer" }).click();
+  const correctOption = firstCheck.getByLabel("A Markdown cell");
+  await correctOption.press("Space");
+  await expect(correctOption).toBeChecked();
+  await expect(checkAnswer).toBeEnabled();
+  await checkAnswer.click();
   await expect(firstCheck.getByText("Correct", { exact: true })).toBeVisible();
   await expect(firstLesson.getByText("1 of 3 checks completed", { exact: true })).toBeVisible();
   await expect(completion).not.toBeChecked();
