@@ -444,9 +444,9 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
       {
         id: "l6-test-cases",
         question: "Which test set best covers the biomass classifier?",
-        options: ["Only 311.33", "Missing, negative, text and recorded numeric values", "Two identical positive values"],
+        options: ["Only 311.33", "None, Boolean, negative, text and recorded numeric values", "Two identical positive values"],
         correctOption: 1,
-        explanation: "Each branch needs a known case so missingness, invalid type, invalid range and ordinary recorded behaviour are all exercised.",
+        explanation: "Each branch needs a known case so missingness, Boolean rejection, invalid type, invalid range and ordinary recorded behaviour are all exercised.",
       },
       {
         id: "l6-traceback",
@@ -459,6 +459,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     submissionChecklist: [
       "Functions have narrow names, parameters, docstrings and return values",
       "Normal, boundary, missing and invalid cases are tested",
+      "Boolean input is rejected before the general numeric check",
       "Three error categories are diagnosed from messages",
       "The independent function does not mutate source records",
       "Scientific validation is distinguished from software testing",
@@ -513,6 +514,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
       "Shape and dtype are inspected before calculation",
       "Vectorised comparisons and masks align correctly",
       "Missing-value policy is stated with available count",
+      "The two-dimensional bridge identifies rows, columns, shape and dimension",
       "Interpretation does not generalise beyond each subset",
     ],
     rubric: [
@@ -617,6 +619,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     ],
     submissionChecklist: [
       "Quality profile reports dtype, missingness and uniqueness",
+      "The Lesson 6 classifier is upgraded with pd.isna and all six required cases",
       "AGB missingness is quantified overall and by sampling group",
       "Field-specific flags remain separate from source measurements",
       "Decision log records action and justification",
@@ -624,7 +627,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     ],
     rubric: [
       { dimension: "Technical correctness", expectation: "Profiles, masks and group coverage calculations are accurate" },
-      { dimension: "Conceptual understanding", expectation: "Distinguishes missing, invalid and inconsistent values" },
+      { dimension: "Conceptual understanding", expectation: "Distinguishes missing, invalid and inconsistent values and explains why the earlier function contract evolves" },
       { dimension: "Reproducibility", expectation: "Quality rules and decisions are preserved in an audit trail" },
       { dimension: "Scientific communication", expectation: "Reports unresolved causes and avoids automatic deletion or imputation" },
     ],
