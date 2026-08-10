@@ -1,5 +1,5 @@
 ---
-title: QGIS for Professional QA
+title: QGIS for Professional Spatial QA
 lessonId: lesson-2-10
 ---
 
@@ -314,10 +314,10 @@ Answer in your private notes:
 - **Project:** `coastal_meadow_vector_qa.qgz` with portable layer references and diagnostic styles.
 - **File:** `qgis_visual_qa_report.pdf`, completed observation CSV and exported QA map PNG.
 - **Screenshot:** the QGIS canvas showing source/derivative comparison and at least one selected QA case.
-- **Written answer:** 300–400 words separating reproducible processing evidence, visual evidence and unresolved scientific evidence.
+- **Written answer:** 220–300 words separating reproducible processing evidence, visual evidence and unresolved scientific evidence.
 
 ### Portfolio artifact
 
-**Artifact 2.10 — Professional QGIS verification package**
+**Artifact 2.10 — Professional vector QA map and reconciliation report**
 
 This artifact demonstrates that you can connect reproducible Python processing to disciplined desktop GIS review. Add the project, structured observations, final map and feedback-to-code record to the quality-assurance stage of the UAV and Satellite Analysis Pipeline.

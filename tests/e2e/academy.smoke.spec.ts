@@ -58,6 +58,8 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
 test("module and lesson disclosures provide compact curriculum navigation", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
+  await page.reload();
 
   const curriculumModule = page.locator("details.curriculum-module").first();
   const moduleSummary = curriculumModule.locator(":scope > summary");
@@ -151,15 +153,17 @@ test("module map, starter notebook, and formative checks support beginner naviga
 test("Module 2 exposes the complete reviewed vector sequence and planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
+  await page.reload();
 
   const overview = page.locator(".module-overview-blue");
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(50);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(10);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(12);
   await expect(overview.locator(".syllabus-planned")).toHaveCount(40);
-  await expect(overview.locator(".syllabus-number").first()).toHaveText("2.1");
-  await expect(overview.locator(".syllabus-number").nth(48)).toHaveText("2.49");
+  await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
+  await expect(overview.locator(".module-syllabus li .syllabus-number").nth(48)).toHaveText("2.49");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
   await expect(overview.getByText("GeoPandas and Spatial Tables", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();
@@ -168,8 +172,11 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(overview.getByRole("link", { name: "Geometry with Shapely", exact: true })).toHaveAttribute("href", "#lesson-2-06");
   await expect(overview.getByRole("link", { name: "Spatial Joins, Overlay and Nearest Neighbours", exact: true })).toHaveAttribute("href", "#lesson-2-07");
   await expect(overview.getByRole("link", { name: "Spatial Indexing and Performance", exact: true })).toHaveAttribute("href", "#lesson-2-08");
-  await expect(overview.getByRole("link", { name: "Advanced Vector Workflows", exact: true })).toHaveAttribute("href", "#lesson-2-09");
-  await expect(overview.getByRole("link", { name: "QGIS for Professional QA", exact: true })).toHaveAttribute("href", "#lesson-2-10");
+  await expect(overview.getByRole("link", { name: "Topology, Geometry Cleaning and Data Integrity", exact: true })).toHaveAttribute("href", "#lesson-2-09");
+  await expect(overview.getByRole("link", { name: "QGIS for Professional Spatial QA", exact: true })).toHaveAttribute("href", "#lesson-2-10");
+  await expect(overview.getByRole("link", { name: "Accept, Review or Reject?", exact: true })).toHaveAttribute("href", "#module-2-chapter-1-practicum");
+  await expect(overview.getByRole("link", { name: "Vector Handover Review", exact: true })).toHaveAttribute("href", "#module-2-chapter-2-practicum");
+  await expect(overview.getByText("0/5 complete", { exact: true })).toBeVisible();
   await expect(overview.getByRole("link", { name: "Raster Fundamentals", exact: true })).toHaveCount(0);
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
@@ -179,8 +186,8 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("10 lessons available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(10);
+  await expect(moduleNavigation.getByText("10 lessons · 2 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(12);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(0);
@@ -194,6 +201,9 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
   await expect(firstLesson.getByText(/What evidence connects every observation/)).toBeVisible();
   await expect(firstLesson.getByText("spatial_data_inventory.ipynb", { exact: true }).first()).toBeVisible();
   await expect(firstLesson.getByRole("img", { name: /Diagram comparing an ordinary table/i })).toBeVisible();
+  await expect(firstLesson.getByText("Concept", { exact: true })).toBeVisible();
+  await firstLesson.getByRole("checkbox").check();
+  await expect(overview.getByText("1/5 complete", { exact: true })).toBeVisible();
 
   const vectorLesson = page.locator("#lesson-2-05");
   await vectorLesson.locator(":scope > summary").click();
@@ -210,12 +220,17 @@ test("Module 2 exposes the complete reviewed vector sequence and planned pathway
 
   const topologyLesson = page.locator("#lesson-2-09");
   await topologyLesson.locator(":scope > summary").click();
-  await expect(topologyLesson.getByRole("link", { name: "Download synthetic topology QA cases" })).toHaveAttribute("href", /training_topology_cases\.geojson$/);
+  await expect(topologyLesson.getByRole("link", { name: "Download the explicitly corrupted topology training derivative" })).toHaveAttribute("href", /training_topology_corrupted\.geojson$/);
 
   const qgisLesson = page.locator("#lesson-2-10");
   await qgisLesson.locator(":scope > summary").click();
   await expect(qgisLesson.getByRole("link", { name: "Download the QGIS vector QA checklist" })).toHaveAttribute("href", /QGIS_Vector_QA_Checklist\.md$/);
   await expect(qgisLesson.getByRole("link", { name: "Download the structured QGIS observation log" })).toHaveAttribute("href", /qgis_qa_observations\.csv$/);
+
+  const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
+  await chapterOnePracticum.locator(":scope > summary").click();
+  await expect(chapterOnePracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(chapterOnePracticum.getByText("DATA_ACCEPTANCE_DECISION.md", { exact: true }).first()).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,

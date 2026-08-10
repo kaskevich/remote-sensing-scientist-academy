@@ -1,0 +1,97 @@
+{
+  "manifestVersion": 1,
+  "reviewed": "2026-08-11",
+  "statusNote": "All listed coordinates, identifiers and classes are Academy-authored synthetic training material and are not ecological evidence.",
+  "assets": [
+    {
+      "filename": "training_field_plots.geojson",
+      "purpose": "Interior, shared-boundary TP04 and outside-site TP05 point cases for vector audits and joins",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Point",
+      "featureCount": 5,
+      "expectedQaBehavior": "Three interior cases, one boundary case and one outside/unmatched case",
+      "licenseStatus": "Academy-authored synthetic instructional asset; instructional use; not ecological evidence",
+      "sha256": "d38baaa2d3a053c321e2a37e792fe00a99609345e7e6b4987c30f0d53029ac31"
+    },
+    {
+      "filename": "training_study_area.geojson",
+      "purpose": "Clean site boundary for containment and handover checks",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Polygon",
+      "featureCount": 1,
+      "expectedQaBehavior": "Contains TP01–TP04 and leaves TP05 outside",
+      "licenseStatus": "Academy-authored synthetic instructional asset; instructional use; not ecological evidence",
+      "sha256": "af930d1a683fddc328da1beea95ddf97c384f296fedbf02b2ce61abbb2f96b53"
+    },
+    {
+      "filename": "training_management_zones.geojson",
+      "purpose": "Clean mutually adjacent management polygons for predicate and one-to-many review",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Polygon",
+      "featureCount": 2,
+      "expectedQaBehavior": "Shared vertical boundary creates a deliberate intersects ambiguity for TP04",
+      "licenseStatus": "Academy-authored synthetic instructional asset; instructional use; not ecological evidence",
+      "sha256": "8751ee896a9523bd1e2bf772276c5aef24b96c022d3355a8d67760fd5a698c13"
+    },
+    {
+      "filename": "training_vegetation_zones.geojson",
+      "purpose": "Clean adjacent habitat polygons for spatial-assignment checks",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Polygon",
+      "featureCount": 2,
+      "expectedQaBehavior": "Shared horizontal boundary supports boundary-semantics and cardinality checks",
+      "licenseStatus": "Academy-authored synthetic instructional asset; instructional use; not ecological evidence",
+      "sha256": "dab13c07e8802150a9ef4fc663217c6effcd8bd1878b38af5f0b28f2b9d35ed0"
+    },
+    {
+      "filename": "training_topology_cases.geojson",
+      "purpose": "Original topology teaching cases retained for backwards-compatible lesson evidence",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Polygon/MultiPolygon",
+      "featureCount": 5,
+      "expectedQaBehavior": "Multipart, self-intersection, exact duplicate pair and narrow-feature review cases",
+      "licenseStatus": "Academy-authored synthetic instructional asset; instructional use; not ecological evidence",
+      "sha256": "4e8a0e2e635eb1c4685df7ecf5d4076a21a6b03f5cde66e30f7652ed446076ab"
+    },
+    {
+      "filename": "training_topology_corrupted.geojson",
+      "purpose": "Explicitly corrupted derivative for Lesson 2.9 integrity diagnosis; separate from clean training layers",
+      "crs": "OGC:CRS84 / WGS 84 longitude-latitude per RFC 7946",
+      "geometryType": "Polygon",
+      "featureCount": 7,
+      "expectedQaBehavior": "Contains overlap, gap, invalid self-intersection, exact duplicate pair and sliver cases",
+      "licenseStatus": "Academy-authored intentionally corrupted synthetic derivative; instructional use only; never ecological evidence",
+      "sha256": "f24fd06d2cb11c12031446dd4fee13939c0c1712215ba88870b6f7d40a470562"
+    },
+    {
+      "filename": "QGIS_Vector_QA_Checklist.md",
+      "purpose": "Ordered desktop GIS reconciliation and delivery checklist",
+      "crs": null,
+      "geometryType": "none",
+      "featureCount": null,
+      "expectedQaBehavior": "Prompts repeatable metadata, attribute, geometry, join and export review",
+      "licenseStatus": "Academy-authored instructional document",
+      "sha256": "10613136ce4a5b4454d64fb05f910e97ed9607890e8dd0b17c614d4e7956a293"
+    },
+    {
+      "filename": "qgis_qa_observations.csv",
+      "purpose": "Structured log linking QGIS observations to feature IDs, evidence and decisions",
+      "crs": null,
+      "geometryType": "none",
+      "featureCount": null,
+      "expectedQaBehavior": "Retains observations, severity, owner and resolution state without geometry edits",
+      "licenseStatus": "Academy-authored synthetic instructional template",
+      "sha256": "804dbdec02e1ce38fc80ac2246858215ba4b6194be52f157c8c13a8eadd15468"
+    },
+    {
+      "filename": "README.md",
+      "purpose": "Scientific status, spatial convention and handling guide for the training pack",
+      "crs": null,
+      "geometryType": "none",
+      "featureCount": null,
+      "expectedQaBehavior": "Keeps synthetic status and transformation cautions with downloaded copies",
+      "licenseStatus": "Academy-authored instructional document",
+      "sha256": "be72d48a5f88bb068ba2b373f8bbe8317cd00830fb0eaa2607882532ad52b4aa"
+    }
+  ]
+}

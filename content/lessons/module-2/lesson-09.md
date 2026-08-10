@@ -1,5 +1,5 @@
 ---
-title: Advanced Vector Workflows
+title: Topology, Geometry Cleaning and Data Integrity
 lessonId: lesson-2-09
 ---
 
@@ -29,13 +29,13 @@ Those changes can affect area, sample membership and later raster summaries. A p
 
 ### Scientific context
 
-The coastal-meadow team receives a synthetic polygon handover containing deliberately designed QA cases: a multipart habitat patch, a self-intersecting polygon, two identical geometries with different records and a narrow sliver. The geometries do not describe published Baltic sites. Their purpose is to make decisions visible before the team prepares real study polygons for zonal analysis.
+The coastal-meadow team receives an explicitly corrupted synthetic training derivative containing deliberately designed overlap, gap, invalid, duplicate and sliver cases. The geometries do not describe published Baltic sites. The clean original training pack remains unchanged. The corrupted derivative exists only to make integrity decisions visible before the team prepares real study polygons for zonal analysis.
 
 Your job is not to make every warning disappear. Your job is to decide which geometry can proceed, which needs a documented transformation and which needs authoritative source review.
 
 ### Learner action
 
-Add `## Lesson 2.9 — Advanced vector workflows` to the Module 2 notebook. Create a decision-log table with these columns before editing any geometry:
+Add `## Lesson 2.9 — Topology, geometry cleaning and data integrity` to the Module 2 notebook. Create a decision-log table with these columns before editing any geometry:
 
 `feature_id`, `observed_condition`, `evidence`, `planned_action`, `expected_change`, `authority_needed`, `status`.
 
@@ -65,6 +65,20 @@ Two rows may have identical geometry while differing in date, observer, legal de
 
 Polygons intended to form a coverage may have overlaps or gaps. A narrow polygon may be a digitising sliver, a real drainage channel or a legitimate transition zone. Area alone cannot decide which interpretation is correct.
 
+An individually valid feature does **not** prove dataset-level topology. A layer can contain only valid polygons while still violating its stated model through:
+
+- overlaps where coverage is intended to be mutually exclusive
+- gaps where coverage is intended to be complete
+- slivers created by slightly different shared boundaries
+- duplicate boundaries or duplicate features
+- disconnected patches where continuity is required
+- unintended interior holes
+- adjacency relationships that contradict the specification
+
+Topology is therefore conditional. Two habitat classes may be allowed to overlap; two exclusive management zones may not. Write the coverage and adjacency expectations before running checks.
+
+Snapping and coordinate precision require the same discipline. Floating-point coordinates that differ by a tiny amount are not automatically an error, and a universal tolerance can merge real narrow features. Record the source precision, expected survey or digitising scale, snapping rule and tolerance units. Test the result at that tolerance; never snap every vertex silently because the output looks cleaner.
+
 [[CHECK:m2-l9-condition]]
 
 ## 3. Build an immutable source and staged derivatives
@@ -72,7 +86,7 @@ Polygons intended to form a coverage may have overlaps or gaps. A narrow polygon
 Keep the original file read-only. Each intervention should create a named derivative:
 
 ```text
-data/raw/training_topology_cases.geojson
+data/training/vector_foundations/training_topology_corrupted.geojson
 data/interim/01_validity_candidates.gpkg
 data/interim/02_reviewed_parts.gpkg
 data/processed/analysis_zones.gpkg
@@ -121,7 +135,7 @@ Before running, predict which audit values are allowed to change after `make_val
 from pathlib import Path
 import geopandas as gpd
 
-path = Path("data/training/vector_foundations/training_topology_cases.geojson")
+path = Path("data/training/vector_foundations/training_topology_corrupted.geojson")
 source = gpd.read_file(path)
 work = source.to_crs("EPSG:3301")
 invalid = work.geometry.notna() & ~work.geometry.is_valid
@@ -302,6 +316,8 @@ Use the downloadable topology-case layer and the synthetic training study area.
 
 Create a stage table with input/output file, operation, parameters, row count, source-ID count, geometry types, missing/empty/invalid counts, duplicate candidates, total area, area difference and reviewer decision. Every count change must be explained.
 
+Keep two deliverables separate. `vector_integrity_report.csv` records every condition, evidence, decision and unresolved authority question. `vector_topology_reviewed.gpkg` contains only the explicitly accepted repair decisions. Never infer that an absence from the repaired derivative means the original condition was unimportant.
+
 ## 13. Independent challenge — investigate an ambiguous sliver
 
 Treat the provided narrow polygon as an unresolved case. Build two candidate workflows:
@@ -328,12 +344,12 @@ Answer in your private notes:
 ### Submission
 
 - **Notebook:** the continuing pipeline notebook with source audit, candidate repairs, part handling, dissolve, clip and final verification.
-- **File:** `vector_topology_report.ipynb`, the staged GeoPackage and the topology decision-log CSV.
+- **File:** `vector_topology_report.ipynb`, `vector_integrity_report.csv` and the separately named reviewed GeoPackage derivative.
 - **Screenshot:** a before-and-after map highlighting every changed or unresolved geometry.
-- **Written answer:** 320–420 words defending the operation sequence and explaining one rejected or escalated candidate.
+- **Written answer:** 240–320 words defending the operation sequence and explaining one rejected or escalated candidate.
 
 ### Portfolio artifact
 
-**Artifact 2.9 — Audited vector-topology preparation workflow**
+**Artifact 2.9 — Vector topology and integrity report**
 
 This artifact demonstrates that you can prepare analysis geometry without erasing provenance or uncertainty. Add the stage audit, topology decision log and reviewed analysis-zone derivative to the vector-processing stage of the UAV and Satellite Analysis Pipeline.

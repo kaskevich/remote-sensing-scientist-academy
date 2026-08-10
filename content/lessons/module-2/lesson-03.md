@@ -9,7 +9,7 @@ lessonId: lesson-2-03
 
 By the end of this lesson, you will be able to distinguish spatial scale, grain, extent, raster resolution and spatial support. You will compare a one-square-metre field quadrat, a 5 cm UAV pixel and a 10 m Sentinel-2 pixel, identify mixed-pixel and scale-mismatch risks, and create a documented support-matching decision for the Baltic coastal-meadow workflow.
 
-**Prerequisites:** Complete Lessons 2.1–2.2. You should understand vector and raster representations, CRS units and why a smaller coordinate or pixel number is not automatically better evidence. Allow 95–115 minutes.
+**Prerequisites:** Complete Lessons 2.1–2.2. You should understand vector and raster representations, CRS units and why a smaller coordinate or pixel number is not automatically better evidence. Allow 90–120 minutes.
 
 ### Why this matters
 
@@ -72,6 +72,20 @@ Even if all three share a centre coordinate, they observe different neighbourhoo
 ![Nested support diagram comparing a 1 m² quadrat with 5 cm UAV pixels and a 10 m Sentinel-2 pixel, including area ratios and mismatch warnings.](lesson-media/images/spatial-support-scales.svg)
 
 [[CHECK:m2-l3-support]]
+
+### Temporal support belongs to the observation too
+
+**Temporal support** is the instant or interval over which a reported value is observed, integrated or summarised. A field measurement taken during one morning, a UAV mosaic assembled from a 25-minute flight and a monthly satellite composite do not share the same temporal support even if they use the same date label.
+
+Before combining observations, build a support matrix:
+
+| Observation | Spatial support | Temporal support | Measurement process |
+|---|---|---|---|
+| biomass quadrat | documented 1 m² footprint | harvest date and sampling interval | clipped, dried and weighed vegetation under the field protocol |
+| UAV reflectance | pixel response and extraction footprint | flight start/end time and mosaic inputs | calibrated camera observations processed into an orthomosaic |
+| Sentinel-2 reflectance | band-specific pixel support | acquisition instant; or stated composite interval | satellite sensor response and product processing |
+
+The third column prevents “same location” from becoming “same observation.” The measurement-process column prevents spatial and temporal alignment from being mistaken for equivalence of ecological meaning.
 
 ## 5. Worked example — compare nominal support areas
 
@@ -244,7 +258,7 @@ Answer in your private notes:
 
 - **Notebook:** the continuing pipeline notebook with area calculations, the support-matching table and synthetic sensitivity challenge.
 - **Screenshot:** the three-support diagram or the completed decision table with units visible.
-- **Written answer:** 220–300 words proposing a defensible comparison between one field measurement and imagery. State what each scale can observe, the extraction rule and the unresolved uncertainty.
+- **Written answer:** 180–240 words proposing a defensible comparison between one field measurement and imagery. State what each scale can observe, the extraction rule and the unresolved uncertainty.
 
 ### Portfolio artifact
 

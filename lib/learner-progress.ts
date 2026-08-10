@@ -35,6 +35,12 @@ export type ProgressSummary = {
   nextIncompleteLessonId: string | null;
 };
 
+export type ChapterProgressSummary = {
+  totalItemCount: number;
+  completedItemCount: number;
+  completionPercent: number;
+};
+
 export function createEmptyLearnerProgress(): LearnerProgressState {
   return {
     version: 1,
@@ -192,6 +198,23 @@ export function calculateProgress(
       lessonIds.length === 0 ? 0 : Math.round((completedLessonIds.size / lessonIds.length) * 100),
     currentLessonId,
     nextIncompleteLessonId: firstIncompleteLessonId,
+  };
+}
+
+export function calculateChapterProgress(
+  itemIds: readonly string[],
+  completedItemIds: readonly string[],
+): ChapterProgressSummary {
+  const availableItemIds = new Set(itemIds);
+  const completed = new Set(
+    completedItemIds.filter((itemId) => availableItemIds.has(itemId)),
+  );
+
+  return {
+    totalItemCount: itemIds.length,
+    completedItemCount: completed.size,
+    completionPercent:
+      itemIds.length === 0 ? 0 : Math.round((completed.size / itemIds.length) * 100),
   };
 }
 

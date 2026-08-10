@@ -2044,6 +2044,32 @@ h2 {
   font-weight: 500;
 }
 
+.module-chapter-progress {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.58) !important;
+  font-size: 9px !important;
+}
+
+.module-chapter-progressbar {
+  height: 3px;
+  margin: -1px 0 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.module-chapter-progressbar > span {
+  display: block;
+  height: 100%;
+  background: var(--module-accent, var(--lime));
+  transition: width 180ms ease;
+}
+
+.module-chapter-heading:focus-visible {
+  outline: 2px solid var(--module-accent, var(--lime));
+  outline-offset: 4px;
+}
+
 .module-syllabus ol {
   display: grid;
   gap: 0;
@@ -2053,6 +2079,11 @@ h2 {
 }
 
 .module-chapter:not([open]) ol {
+  display: none;
+}
+
+.module-chapter:not([open]) .module-chapter-progressbar,
+.module-chapter:not([open]) .module-practicum-row {
   display: none;
 }
 
@@ -2096,6 +2127,42 @@ h2 {
 
 .module-syllabus li div > span {
   color: rgba(255, 255, 255, 0.4);
+}
+
+.module-practicum-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 11px;
+  padding: 16px 0 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.module-practicum-row > div {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.module-practicum-row a,
+.module-practicum-row strong {
+  color: white;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.module-practicum-row a {
+  text-decoration: underline;
+  text-decoration-color: var(--module-accent, var(--lime));
+  text-underline-offset: 4px;
+}
+
+.module-practicum-row > div > span {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
 
 .syllabus-planned {

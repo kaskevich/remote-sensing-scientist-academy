@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   LEARNER_PROGRESS_STORAGE_KEY,
   LocalStorageLearnerProgressAdapter,
+  calculateChapterProgress,
   calculateProgress,
   createEmptyLearnerProgress,
   getNextIncompleteLessonId,
@@ -110,5 +111,26 @@ describe("progress calculation", () => {
       "lesson-03",
     );
     expect(getNextIncompleteLessonId(lessonIds, lessonIds, "lesson-03")).toBeNull();
+  });
+
+  it("calculates chapter progress from lessons and an unnumbered practicum", () => {
+    const chapterItems = ["lesson-2-01", "lesson-2-02", "module-2-chapter-1-practicum"];
+    expect(calculateChapterProgress(chapterItems, [
+      "lesson-2-01",
+      "module-2-chapter-1-practicum",
+      "another-module-item",
+    ])).toEqual({
+      totalItemCount: 3,
+      completedItemCount: 2,
+      completionPercent: 67,
+    });
+  });
+
+  it("returns safe zero chapter progress when no items are available", () => {
+    expect(calculateChapterProgress([], ["unknown"])).toEqual({
+      totalItemCount: 0,
+      completedItemCount: 0,
+      completionPercent: 0,
+    });
   });
 });

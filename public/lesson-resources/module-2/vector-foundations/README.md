@@ -18,7 +18,9 @@ The files follow RFC 7946 GeoJSON position order: longitude first, latitude seco
 - `training_study_area.geojson` — one rectangular instructional site boundary
 - `training_management_zones.geojson` — two polygons sharing a vertical boundary
 - `training_vegetation_zones.geojson` — two polygons sharing a horizontal boundary
-- `training_topology_cases.geojson` — five deliberate QA cases covering multipart, invalid, duplicate and narrow polygon conditions
+- `training_topology_cases.geojson` — five original deliberate QA cases covering multipart, invalid, duplicate and narrow polygon conditions
+- `training_topology_corrupted.geojson` — separate, explicitly corrupted derivative containing overlap, gap, invalid, duplicate and sliver cases for Lesson 2.9; never substitute it for the clean pack
+- `training_data_manifest.json` — machine-readable purpose, geometry, CRS, feature-count, QA expectation, status and checksum record
 - `QGIS_Vector_QA_Checklist.md` — ordered visual-verification protocol for the QGIS checkpoint
 - `qgis_qa_observations.csv` — structured observation log linking visual findings to features, evidence and decisions
 
@@ -28,4 +30,4 @@ The topology cases are designed to provoke inspection rather than automatic repa
 
 ## Provenance
 
-Created for Remote Sensing Scientist Academy. Last reviewed 10 August 2026. Preserve this README with downloaded copies and record any transformations or derivatives in the learner notebook.
+Created for Remote Sensing Scientist Academy. Last reviewed 11 August 2026. Preserve this README with downloaded copies and record any transformations or derivatives in the learner notebook.

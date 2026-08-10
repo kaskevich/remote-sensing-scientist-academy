@@ -9,13 +9,13 @@ lessonId: lesson-2-08
 
 By the end of this lesson, you will be able to explain why naive pairwise spatial checking becomes expensive; distinguish a bounding-box candidate from an exact geometric match; describe the two-stage logic of a spatial index; use a GeoPandas spatial index to query candidate and exact pairs; compare indexed and naive results through stable identifiers; and report timing evidence without presenting one run as a universal benchmark.
 
-**Prerequisites:** Complete Lessons 2.5–2.7. You should understand GeoDataFrames, projected CRSs, predicates, joins and one-to-many results. Allow 115–140 minutes.
+**Prerequisites:** Complete Lessons 2.5–2.7. You should understand GeoDataFrames, projected CRSs, predicates, joins and one-to-many results. Allow 90–120 minutes.
 
 ### Why this matters
 
 Remote-sensing workflows frequently combine thousands of field observations, parcel boundaries, habitat polygons and image footprints. A direct comparison between every feature in one layer and every feature in another may be correct, but its work grows rapidly.
 
-If 1,200 candidate plot locations are compared with 100 management polygons, the naive approach can ask 120,000 exact geometry questions. Ten thousand observations and 20,000 polygons imply 200 million possible pairs. Most are obviously far apart.
+If 1,200 candidate plot locations are compared with 100 management polygons, the naive approach can ask 120,000 exact geometry questions. Ten thousand observations and 10,000 polygons imply 100 million possible pairs. Most are obviously far apart.
 
 Performance is not separate from science. A workflow that is prohibitively slow may encourage unrecorded subsampling, incomplete QA or manual shortcuts. But a fast workflow that changes the set of matches is worse. Optimisation is acceptable only when the analytical relationship remains equivalent.
 
@@ -130,31 +130,31 @@ naive = {(p.plot_id, z.zone_id) for p in plots.itertuples()
 naive_s = perf_counter() - started
 
 started = perf_counter()
-pairs = zones.sindex.query(plots.geometry, predicate="intersects")
-indexed = {(plots.iloc[i].plot_id, zones.iloc[j].zone_id)
-           for i, j in zip(*pairs)}
-indexed_s = perf_counter() - started
+joined = plots.sjoin(zones[["zone_id", "geometry"]],
+                     how="left", predicate="intersects")
+join_s = perf_counter() - started
+matched = joined.dropna(subset=["index_right"])
+indexed = set(matched[["plot_id", "zone_id"]].itertuples(index=False, name=None))
+unmatched = joined.loc[joined["index_right"].isna(), "plot_id"].nunique()
+one_to_many = int((joined["plot_id"].value_counts() > 1).sum())
 
-print("same matches:", naive == indexed, "matches:", len(indexed))
-print("seconds:", {"naive": naive_s, "indexed": indexed_s})
+print("same matches:", naive == indexed)
+print("rows/matches/unmatched/one-to-many:", len(joined), len(indexed), unmatched, one_to_many)
+print("seconds:", {"naive": naive_s, "spatial_join": join_s})
 ```
 
 ### Code walkthrough
 
-1. `perf_counter` provides a high-resolution elapsed-time clock.
-2. `started` records the beginning of the naive operation.
-3. The nested comprehension visits every plot–zone pair.
-4. `intersects` is the exact predicate used by both methods.
-5. Stable `plot_id`–`zone_id` pairs are stored in a set, making comparison independent of row order.
-6. The first elapsed time includes the complete naive search.
-7. The second clock starts immediately before the indexed query.
-8. `zones.sindex` obtains the spatial index for the stored zone geometries.
-9. Passing the plot geometry array performs a bulk query.
-10. `predicate="intersects"` requests exact filtering after bounding-box search.
-11. For an array query, the first returned row contains plot positions and the second contains indexed-zone positions.
-12. `iloc` maps positions back to stable scientific identifiers.
-13. The equality check is the most important result: optimisation must preserve the match set.
-14. The timing dictionary reports this run without implying universal performance.
+1. `perf_counter` records elapsed time around two declared operations.
+2. The nested comprehension visits every plot–zone pair and applies `intersects` directly.
+3. Stable `plot_id`–`zone_id` pairs make correctness independent of output order.
+4. `sjoin(..., how="left", predicate="intersects")` uses GeoPandas' indexed join while retaining unmatched plots.
+5. `matched` separates rows with an actual right-side geometry before building the second stable-ID set.
+6. `unmatched` counts unique left-side plots without a match.
+7. `one_to_many` reveals plots represented by more than one joined row.
+8. Row, matched, unmatched and repeated-ID evidence tests relational equivalence—not only set equality.
+9. `naive == indexed` remains the decisive correctness check for matched pairs.
+10. The timing dictionary reports one controlled run without implying universal performance.
 
 If `same matches` is false, stop. Do not interpret the faster timing until you have found the difference in predicate, CRS, missing geometry, identifier mapping or result construction.
 
@@ -190,6 +190,8 @@ A defensible beginner profile records:
 - confirmation that stable match-ID sets are equal.
 
 Use `timeit` for more controlled repetition after you understand which operation is timed. Do not optimise display, file reading and geometry comparison in one combined cell and then claim the spatial index caused the whole difference.
+
+Speed is not the only resource constraint. A left spatial join materialises rows, attributes and geometry references; one-to-many relationships can make the output much larger than either input. A lower-level index query may use less intermediate tabular memory when only index pairs are required, while `sjoin()` provides clearer relational output for auditing. Record peak or approximate memory when scale makes it material, select only needed columns, and never discard unmatched or repeated rows merely to reduce memory.
 
 [[CHECK:m2-l8-profile]]
 
@@ -277,6 +279,6 @@ Answer in your private notes:
 
 ### Portfolio artifact
 
-**Artifact 2.8 — Verified spatial-index performance profile**
+**Artifact 2.8 — Spatial performance benchmark and equivalence audit**
 
 This artifact demonstrates that you can improve a geospatial workflow without changing its scientific relationship. Add the equivalence assertion, candidate-efficiency table and conditional performance interpretation to the vector-processing stage of the UAV and Satellite Analysis Pipeline.

@@ -9,7 +9,7 @@ lessonId: lesson-2-06
 
 By the end of this lesson, you will be able to distinguish geometry types, predicates, constructive operations and set operations; use Shapely geometry through GeoPandas; create metre-based plot-neighbourhood buffers; inspect validity and multipart results; and decide whether a computationally valid operation represents a defensible ecological support. You will add a documented geometry-decision record to the Module 2 pipeline.
 
-**Prerequisites:** Complete Lesson 2.5. You should be able to audit a GeoDataFrame, identify its active geometry and CRS, and transform a copy to an appropriate projected CRS. Allow 115–135 minutes.
+**Prerequisites:** Complete Lesson 2.5. You should be able to audit a GeoDataFrame, identify its active geometry and CRS, and transform a copy to an appropriate projected CRS. Allow 90–120 minutes.
 
 ### Why this matters
 
@@ -260,7 +260,7 @@ Answer in your private notes:
 - **Notebook:** the continuing pipeline notebook with the worked buffer, three-question guided practice and independent support review.
 - **File:** `plot_neighbourhoods.ipynb` plus a GeoPackage layer containing the clearly labelled training derivatives.
 - **Screenshot:** original points, three buffer radii and clipped support, with units and synthetic status visible.
-- **Written answer:** 260–340 words defending one support rule and stating what it does not prove.
+- **Written answer:** 180–250 words defending one support rule and stating what it does not prove.
 
 ### Portfolio artifact
 

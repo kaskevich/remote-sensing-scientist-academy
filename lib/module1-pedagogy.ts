@@ -10,6 +10,7 @@ export type LessonTechnicalMetadata = {
   pythonVersion: string;
   jupyterEnvironment: string;
   reviewDate: string;
+  testedVersions?: Array<{ label: string; value: string }>;
   datasetCitation?: string;
   coreReferences: Array<{ title: string; href: string }>;
   furtherReading: Array<{ title: string; href: string }>;
@@ -17,6 +18,7 @@ export type LessonTechnicalMetadata = {
 
 export type ReviewedLessonDetails = {
   estimatedTime: string;
+  lessonType?: string;
   position: number;
   totalPositions: number;
   markdownFile: string;
@@ -39,6 +41,11 @@ export type ModuleChapter = {
   number: number;
   title: string;
   lessons: ModuleChapterLesson[];
+  practicum?: {
+    title: string;
+    status: "available" | "planned";
+    lessonId?: string;
+  };
 };
 
 export type AcademyModuleOverview = {

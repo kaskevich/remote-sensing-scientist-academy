@@ -9,7 +9,7 @@ lessonId: lesson-2-02
 
 By the end of this lesson, you will be able to inspect a coordinate reference system, distinguish geographic and projected coordinates, choose an analysis CRS for a stated purpose, and transform vector data without confusing CRS assignment with coordinate transformation. You will add a before-and-after CRS audit to the UAV and Satellite Analysis Pipeline.
 
-**Prerequisites:** Complete Lesson 2.1. You should be able to distinguish tabular, vector and raster representations and explain why coordinates without a CRS are ambiguous. Allow 110–130 minutes.
+**Prerequisites:** Complete Lesson 2.1. You should be able to distinguish tabular, vector and raster representations and explain why coordinates without a CRS are ambiguous. Allow 90–120 minutes.
 
 ### Why this matters
 
@@ -34,18 +34,18 @@ Your task is to place both in one justified analysis CRS while preserving the sa
 
 Add `## Lesson 2.2 — Coordinate reference systems` to the Module 2 notebook. Before writing code, record the analysis you intend to perform: compare a point with a management zone and later measure distances in metres. This purpose will guide the CRS decision.
 
-## 2. A datum connects coordinates to an Earth model
+## 2. A reference frame connects coordinates to Earth
 
 Earth is irregular and curved. A coordinate reference system uses a mathematical Earth model and a set of conventions to describe positions.
 
 At an introductory level, separate four components:
 
-1. **Datum:** the reference framework connecting coordinates to an ellipsoid and, ultimately, Earth. WGS 84 is a global datum used for navigation and many geographic datasets.
+1. **Datum or reference frame:** the realised system that connects coordinates to Earth through defined reference points, observations, models and an ellipsoid. Modern reference frames can also include a reference epoch because Earth changes through time.
 2. **Coordinate system:** the axes, axis directions and units used to express a position.
 3. **Projection:** a mathematical method that represents the curved surface on a plane.
 4. **Area of use:** the region where the CRS is intended to provide controlled distortion.
 
-A datum is not simply a unit label. Coordinates expressed with different datums can refer to different Earth locations even when their numbers look similar. Modern transformation software uses defined operations—and sometimes transformation grids—to move between reference frames. Record package versions and warnings because the available transformation can depend on the environment.
+A datum is not merely “ellipsoid plus origin,” and it is not a unit label. Coordinates expressed in different reference frames can refer to different Earth locations even when their numbers look similar. Modern transformations use defined coordinate operations and may depend on grids, epochs and installed resources. Record package versions, operation details and warnings because the best available transformation can depend on the environment.
 
 ## 3. Geographic and projected CRSs answer different needs
 
@@ -58,6 +58,32 @@ A **projected CRS** converts part of the curved surface to planar coordinates su
 For an Estonia-focused analysis, EPSG:3301 provides a nationally used projected CRS with metre units and a relevant area of use. It is a defensible candidate for local overlay and distance work, provided the full study extent and accuracy requirements are compatible. A global web map projection is not automatically the right analytical CRS merely because a basemap uses it.
 
 [[CHECK:m2-l2-units]]
+
+### Go deeper — horizontal, vertical, geodesic and projected questions
+
+A horizontal CRS describes position across Earth. A **vertical CRS** or stated vertical reference explains what a height is measured relative to. Ellipsoidal height from a satellite-positioning workflow and orthometric height related to a gravity-based surface are not interchangeable.
+
+This matters for UAV surface products:
+
+- a **DSM** represents the elevation of visible surfaces such as vegetation, buildings and ground
+- a **DTM** estimates the terrain surface after an explicit ground-classification and interpolation process
+- subtracting DTM from DSM can support a height-above-terrain product only when grids, units and horizontal **and vertical** references are compatible
+
+Do not call an elevation field “metres above sea level” unless its vertical reference and processing support that statement.
+
+Distance also has two legitimate approaches. A **projected distance** uses planar coordinates in a CRS chosen for the area and task. A **geodesic distance** follows the reference ellipsoid and is useful when working directly with longitude and latitude or over extents where one planar choice is unsuitable. PyProj exposes forward and inverse geodesic computations through `Geod`:
+
+```python
+from pyproj import Geod
+
+geod = Geod(ellps="WGS84")
+azimuth, back_azimuth, distance_m = geod.inv(
+    24.75, 59.45, 24.76, 59.46
+)
+print(round(distance_m, 1), "m")
+```
+
+Before running, predict whether this number should be interpreted as a planar map distance or an ellipsoidal geodesic. The answer is geodesic: `Geod.inv()` solves the inverse problem between two longitude–latitude positions on the specified ellipsoid. It does not validate the coordinates or their positional accuracy. For a local workflow, compare it with distance in a justified projected CRS and explain any difference rather than assuming the methods are identical.
 
 ## 4. EPSG identifiers are references, not explanations
 
@@ -238,7 +264,7 @@ Answer in your private notes:
 
 - **Notebook:** the continuing pipeline notebook with the worked example, two-layer guided practice and CRS failure protocol.
 - **Screenshot:** before-and-after audit showing CRS, units, bounds and sample coordinates.
-- **Written answer:** 220–300 words explaining the difference between assigning and transforming a CRS, why the target CRS fits the task, and what the transformation cannot validate.
+- **Written answer:** 180–240 words explaining the difference between assigning and transforming a CRS, why the target CRS fits the task, and what the transformation cannot validate.
 
 ### Portfolio artifact
 

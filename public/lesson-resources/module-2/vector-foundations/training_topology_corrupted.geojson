@@ -1,0 +1,99 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_topology_corrupted",
+  "description": "Explicitly corrupted synthetic derivative for Module 2 Lesson 2.9. Not ecological evidence.",
+  "bbox": [24.6000, 58.7000, 24.6060, 58.7040],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "COR-OVERLAP-W",
+      "properties": {
+        "feature_id": "COR-OVERLAP-W",
+        "qa_case": "overlap west member",
+        "expected_behavior": "overlaps COR-OVERLAP-E; retain as evidence until coverage rule is reviewed"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6000, 58.7000], [24.6022, 58.7000], [24.6022, 58.7020], [24.6000, 58.7020], [24.6000, 58.7000]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-OVERLAP-E",
+      "properties": {
+        "feature_id": "COR-OVERLAP-E",
+        "qa_case": "overlap east member",
+        "expected_behavior": "overlaps COR-OVERLAP-W; do not clip or snap automatically"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6020, 58.7000], [24.6040, 58.7000], [24.6040, 58.7020], [24.6020, 58.7020], [24.6020, 58.7000]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-GAP-N",
+      "properties": {
+        "feature_id": "COR-GAP-N",
+        "qa_case": "coverage gap",
+        "expected_behavior": "0.0002-degree gap south of feature; diagnose in projected units"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6000, 58.7022], [24.6040, 58.7022], [24.6040, 58.7040], [24.6000, 58.7040], [24.6000, 58.7022]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-INVALID",
+      "properties": {
+        "feature_id": "COR-INVALID",
+        "qa_case": "self-intersection",
+        "expected_behavior": "is_valid false; make_valid result requires type and area review"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6043, 58.7001], [24.6057, 58.7015], [24.6043, 58.7015], [24.6057, 58.7001], [24.6043, 58.7001]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-DUP-A",
+      "properties": {
+        "feature_id": "COR-DUP-A",
+        "qa_case": "exact geometry duplicate A",
+        "expected_behavior": "topologically equal to COR-DUP-B; records must not be dropped without provenance review"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6043, 58.7020], [24.6054, 58.7020], [24.6054, 58.7030], [24.6043, 58.7030], [24.6043, 58.7020]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-DUP-B",
+      "properties": {
+        "feature_id": "COR-DUP-B",
+        "qa_case": "exact geometry duplicate B",
+        "expected_behavior": "topologically equal to COR-DUP-A; different ID preserves duplicate-record evidence"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6043, 58.7020], [24.6054, 58.7020], [24.6054, 58.7030], [24.6043, 58.7030], [24.6043, 58.7020]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "COR-SLIVER",
+      "properties": {
+        "feature_id": "COR-SLIVER",
+        "qa_case": "narrow sliver",
+        "expected_behavior": "review area, width, neighbours, source precision and intended minimum mapping unit"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.60555, 58.7021], [24.60562, 58.7021], [24.6060, 58.7040], [24.60590, 58.7040], [24.60555, 58.7021]]]
+      }
+    }
+  ]
+}
