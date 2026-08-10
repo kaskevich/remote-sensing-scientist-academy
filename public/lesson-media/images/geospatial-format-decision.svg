@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Geospatial format decision framework</title>
+  <desc id="desc">A flow from data structure through access pattern, scale, interoperability and preservation to conditional vector, raster and multidimensional format families.</desc>
+  <rect width="1200" height="700" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="66" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">Choose the format from the workflow</text>
+  <text x="60" y="101" fill="#526272" font-family="Arial, sans-serif" font-size="17">The extension is the result of a decision — not the starting point</text>
+
+  <g font-family="Arial, sans-serif">
+    <g transform="translate(60 145)">
+      <rect width="190" height="92" rx="16" fill="#0b1f35"/>
+      <text x="95" y="38" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">1 · STRUCTURE</text>
+      <text x="95" y="65" text-anchor="middle" fill="#dbe7ef" font-size="14">vector · raster · cube</text>
+    </g>
+    <path d="M250 191H278" stroke="#1d79c4" stroke-width="4"/><path d="M268 181L282 191L268 201" fill="none" stroke="#1d79c4" stroke-width="4"/>
+    <g transform="translate(282 145)">
+      <rect width="190" height="92" rx="16" fill="#eaf4fc" stroke="#1d79c4" stroke-width="2"/>
+      <text x="95" y="38" text-anchor="middle" fill="#0b1f35" font-size="16" font-weight="700">2 · ACCESS</text>
+      <text x="95" y="65" text-anchor="middle" fill="#526272" font-size="14">edit · scan · subset</text>
+    </g>
+    <path d="M472 191H500" stroke="#1d79c4" stroke-width="4"/><path d="M490 181L504 191L490 201" fill="none" stroke="#1d79c4" stroke-width="4"/>
+    <g transform="translate(504 145)">
+      <rect width="190" height="92" rx="16" fill="#eef5e1" stroke="#72ad2c" stroke-width="2"/>
+      <text x="95" y="38" text-anchor="middle" fill="#0b1f35" font-size="16" font-weight="700">3 · SCALE</text>
+      <text x="95" y="65" text-anchor="middle" fill="#526272" font-size="14">features · cells · time</text>
+    </g>
+    <path d="M694 191H722" stroke="#1d79c4" stroke-width="4"/><path d="M712 181L726 191L712 201" fill="none" stroke="#1d79c4" stroke-width="4"/>
+    <g transform="translate(726 145)">
+      <rect width="190" height="92" rx="16" fill="#fff4e8" stroke="#f28c28" stroke-width="2"/>
+      <text x="95" y="38" text-anchor="middle" fill="#0b1f35" font-size="15" font-weight="700">4 · INTEROPERABILITY</text>
+      <text x="95" y="65" text-anchor="middle" fill="#526272" font-size="14">people · tools · archive</text>
+    </g>
+    <path d="M916 191H944" stroke="#1d79c4" stroke-width="4"/><path d="M934 181L948 191L934 201" fill="none" stroke="#1d79c4" stroke-width="4"/>
+    <g transform="translate(948 145)">
+      <rect width="190" height="92" rx="16" fill="#ffffff" stroke="#9aabb7" stroke-width="2"/>
+      <text x="95" y="38" text-anchor="middle" fill="#0b1f35" font-size="16" font-weight="700">5 · PRESERVE</text>
+      <text x="95" y="65" text-anchor="middle" fill="#526272" font-size="14">CRS · schema · NoData</text>
+    </g>
+  </g>
+
+  <path d="M600 237V292" stroke="#1d79c4" stroke-width="4"/><path d="M590 282L600 296L610 282" fill="none" stroke="#1d79c4" stroke-width="4"/>
+
+  <g transform="translate(60 305)" font-family="Arial, sans-serif">
+    <rect width="330" height="260" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="330" height="9" rx="5" fill="#1d79c4"/>
+    <text x="24" y="52" fill="#0b1f35" font-size="21" font-weight="700">VECTOR FAMILY</text>
+    <text x="24" y="86" fill="#17649f" font-size="16" font-weight="700">GeoPackage</text>
+    <text x="24" y="110" fill="#526272" font-size="14">local editing and interchange</text>
+    <text x="24" y="148" fill="#17649f" font-size="16" font-weight="700">GeoJSON</text>
+    <text x="24" y="172" fill="#526272" font-size="14">compact web delivery</text>
+    <text x="24" y="210" fill="#17649f" font-size="16" font-weight="700">GeoParquet</text>
+    <text x="24" y="234" fill="#526272" font-size="14">large analytical scans</text>
+  </g>
+
+  <g transform="translate(435 305)" font-family="Arial, sans-serif">
+    <rect width="330" height="260" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="330" height="9" rx="5" fill="#72ad2c"/>
+    <text x="24" y="52" fill="#0b1f35" font-size="21" font-weight="700">RASTER FAMILY</text>
+    <text x="24" y="94" fill="#437f32" font-size="16" font-weight="700">GeoTIFF</text>
+    <text x="24" y="120" fill="#526272" font-size="14">referenced raster exchange</text>
+    <text x="24" y="169" fill="#437f32" font-size="16" font-weight="700">Cloud Optimized GeoTIFF</text>
+    <text x="24" y="195" fill="#526272" font-size="14">partial reads over HTTP</text>
+    <text x="24" y="228" fill="#526272" font-size="13">Validate tiling, overviews and layout</text>
+  </g>
+
+  <g transform="translate(810 305)" font-family="Arial, sans-serif">
+    <rect width="330" height="260" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="330" height="9" rx="5" fill="#f28c28"/>
+    <text x="24" y="52" fill="#0b1f35" font-size="21" font-weight="700">ARRAY FAMILY</text>
+    <text x="24" y="102" fill="#c45f12" font-size="16" font-weight="700">NetCDF</text>
+    <text x="24" y="128" fill="#526272" font-size="14">self-describing scientific exchange</text>
+    <text x="24" y="181" fill="#c45f12" font-size="16" font-weight="700">Zarr</text>
+    <text x="24" y="207" fill="#526272" font-size="14">chunked object-store access</text>
+    <text x="24" y="238" fill="#526272" font-size="13">Design chunks from real queries</text>
+  </g>
+
+  <rect x="142" y="600" width="916" height="52" rx="18" fill="#0b1f35"/>
+  <text x="600" y="632" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700">After conversion: reopen · compare · document · retain provenance</text>
+</svg>

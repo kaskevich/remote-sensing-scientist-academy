@@ -9,8 +9,8 @@ import LearnerCurriculum, {
 import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
 import {
   module2LessonDetails,
-  module2Lessons,
   module2Overview,
+  publishedModule2Lessons,
 } from "@/lib/module2-pedagogy";
 
 type CurriculumModule = {
@@ -89,7 +89,7 @@ const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   },
 }));
 
-const module2AcademyLessons: AcademyLesson[] = module2Lessons.map((source) => {
+const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
   const pedagogy = module2LessonDetails[source.id];
   return {
     id: source.id,
@@ -99,7 +99,7 @@ const module2AcademyLessons: AcademyLesson[] = module2Lessons.map((source) => {
     title: source.title,
     description: source.description,
     tools: source.tools,
-    content: pedagogy.content ?? "",
+    content: pedagogy.content ?? readReviewedLesson(pedagogy.markdownFile),
     images: [],
     resources: source.id === "lesson-2-01"
       ? [{

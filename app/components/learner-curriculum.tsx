@@ -148,13 +148,17 @@ function ModuleOverview({
               <i aria-hidden="true" />
             </summary>
             <ol>
-              <li className="syllabus-available">
+              <li className={overview.capstone.status === "planned" ? "syllabus-planned" : "syllabus-available"}>
                 <span className="syllabus-number">CP</span>
                 <div>
-                  <a href={`#${overview.capstone.lessonId}`} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
-                    {overview.capstone.title}
-                  </a>
-                  <span>{overview.capstone.lessonId && completedLessonIds.includes(overview.capstone.lessonId) ? "Completed" : "Available now"}</span>
+                  {overview.capstone.lessonId ? (
+                    <a href={`#${overview.capstone.lessonId}`} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
+                      {overview.capstone.title}
+                    </a>
+                  ) : (
+                    <strong>{overview.capstone.title}</strong>
+                  )}
+                  <span>{overview.capstone.status === "planned" ? "Planned syllabus" : overview.capstone.lessonId && completedLessonIds.includes(overview.capstone.lessonId) ? "Completed" : "Available now"}</span>
                 </div>
               </li>
             </ol>

@@ -3,7 +3,6 @@ import type {
   FormativeCheck,
   ReviewedLessonDetails,
 } from "@/lib/module1-pedagogy";
-import { module2ProfessionalNarratives } from "./module2-professional-content";
 
 export type Module2LessonSource = {
   id: string;
@@ -518,15 +517,28 @@ const chapterTitles = [
   "Production Geospatial Computing",
 ];
 
+export const publishedModule2LessonIds = [
+  "lesson-2-01",
+  "lesson-2-02",
+  "lesson-2-03",
+  "lesson-2-04",
+] as const;
+
+const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
+
+export const publishedModule2Lessons = module2Lessons.filter((source) =>
+  publishedModule2LessonIdSet.has(source.id),
+);
+
 export const module2Overview: AcademyModuleOverview = {
   moduleNumber: 2,
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "49 lessons + capstone",
+  navigationMeta: "4 lessons available",
   syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
   planningNote:
-    "All 49 lessons are available across twelve collapsible chapters. Each lesson advances the same UAV and Satellite Analysis Pipeline and contributes a reviewable portfolio artifact.",
+    "Chapter 1 is available now. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -559,175 +571,292 @@ export const module2Overview: AcademyModuleOverview = {
       .map((item) => ({
         number: Number(item.number.split(".")[1]),
         title: item.title,
-        status: "available" as const,
-        lessonId: item.id,
+        status: publishedModule2LessonIdSet.has(item.id) ? "available" as const : "planned" as const,
+        lessonId: publishedModule2LessonIdSet.has(item.id) ? item.id : undefined,
       })),
   })),
   capstone: {
     number: 50,
     title: "UAV and Satellite Analysis Pipeline",
-    status: "available",
-    lessonId: "lesson-2-capstone",
+    status: "planned",
   },
 };
 
-const formatList = (items: string[]) => items.map((item) => `- ${item}`).join("\n");
-const formatNumberedList = (items: string[]) => items.map((item, index) => `${index + 1}. ${item}`).join("\n");
+type PublishedLessonConfiguration = {
+  estimatedTime: string;
+  markdownFile: string;
+  formativeChecks: FormativeCheck[];
+  submissionChecklist: string[];
+  rubric: ReviewedLessonDetails["rubric"];
+  coreReferences: Array<{ title: string; href: string }>;
+  furtherReading: Array<{ title: string; href: string }>;
+};
 
-function buildLessonContent(source: Module2LessonSource) {
-  const narrative = module2ProfessionalNarratives[source.id];
-  if (!narrative) {
-    throw new Error(`Missing professional Module 2 content for ${source.id}`);
-  }
-  const codeLanguage = source.artifact.endsWith(".sql")
-    ? "sql"
-    : source.artifact.endsWith(".sh")
-      ? "bash"
-      : source.artifact.endsWith(".yml") || source.artifact.endsWith(".yaml")
-        ? "yaml"
-        : source.artifact.includes("container")
-          ? "dockerfile"
-          : "python";
-  return `# ${source.number} ${source.title}
-
-## Learning outcome
-
-By the end of this lesson, you can **${source.outcome.charAt(0).toLowerCase()}${source.outcome.slice(1)}**
-
-## Why this matters
-
-${narrative.why}
-
-> **Core spatial question:** ${source.spatialQuestion}
-
-## Scientific context
-
-You are extending the **UAV and Satellite Analysis Pipeline** for Baltic coastal-meadow monitoring. In this lesson you will ${source.practical.charAt(0).toLowerCase()}${source.practical.slice(1)} The result becomes a documented pipeline stage rather than an isolated software exercise.
-
-## Concept
-
-${narrative.explanation.join("\n\n")}
-
-### Concepts you must be able to explain
-
-${formatList(source.concepts)}
-
-### Professional decision framework
-
-${formatList(narrative.decisionFramework)}
-
-## Predict before running
-
-${source.prediction}
-
-Write your prediction and the evidence behind it before executing the example. A prediction makes a silent assumption visible and gives you something specific to compare with the output.
-
-## Worked example
-
-\`\`\`${codeLanguage}
-${source.code}
-\`\`\`
-
-## Code walkthrough
-
-${narrative.walkthrough}
-
-[[CHECK:${source.id}-concept]]
-
-## Common mistake
-
-**${source.commonMistake}** This mistake is common because software can return a polished result even when the spatial assumptions are wrong. Recognise it by comparing input and output metadata and by asking whether the operation preserved the intended physical support.
-
-## Guided practice
-
-${formatNumberedList(narrative.practice)}
-
-### Required QA evidence
-
-${source.qa}
-
-[[CHECK:${source.id}-qa]]
-
-## Independent challenge
-
-${narrative.challenge}
-
-## Scientific interpretation
-
-${source.interpretation}
-
-Your interpretation must answer the core spatial question, state what the output supports, identify what it does not establish, and name the uncertainty that matters most for the next pipeline stage.
-
-[[CHECK:${source.id}-interpretation]]
-
-## Reflection
-
-${formatList(narrative.reflection)}
-
-## Submission and portfolio artifact
-
-Submit the relevant notebook or code, one QA screenshot or map, and a 100–150 word interpretation. Add **${source.artifact}** to the Module 2 portfolio. Your submission should make the input, method, QA evidence and limitation easy to locate.
-`;
-}
-
-function buildChecks(source: Module2LessonSource): FormativeCheck[] {
-  return [
-    {
-      id: `${source.id}-concept`,
-      question: "Which spatial question should guide this lesson before you choose a tool?",
-      options: [source.spatialQuestion, "Which default produces the most attractive map?", "Which operation has the shortest name?"],
-      correctOption: 0,
-      explanation: "The spatial question defines the required evidence and support. Software choice follows from that analytical requirement, not appearance or convenience.",
-    },
-    {
-      id: `${source.id}-qa`,
-      question: "Which action provides the strongest reproducibility evidence for this lesson?",
-      options: ["Record inputs, parameters, metadata checks and output diagnostics", "Keep only the final image", "Rely on the software completing without an error"],
-      correctOption: 0,
-      explanation: `A reproducible record connects the result to its source and decisions. This lesson specifically requires: ${source.qa}`,
-    },
-    {
-      id: `${source.id}-interpretation`,
-      question: "A technically successful result is produced. What can you conclude?",
-      options: ["The operation ran; scientific fitness still requires QA and interpretation", "The ecological claim is proven", "Spatial uncertainty can now be ignored"],
-      correctOption: 0,
-      explanation: "Execution confirms computational completion, not scientific validity. Spatial support, metadata, uncertainty and independent evidence still govern interpretation.",
-    },
-  ];
-}
+const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-01": {
+    estimatedTime: "90–110 minutes",
+    markdownFile: "content/lessons/module-2/lesson-01.md",
+    formativeChecks: [
+      {
+        id: "m2-l1-spatial-evidence",
+        question: "The Baltic field table contains site names and sample identifiers but no coordinates or geometry. What can you conclude?",
+        options: [
+          "It is tabular data with location-related attributes, but it cannot yet be mapped as features",
+          "Every row is automatically a point feature",
+          "The site name proves an EPSG code",
+        ],
+        correctOption: 0,
+        explanation: "Names can support a later documented join, but they do not supply geometry, coordinates or a spatial reference by themselves.",
+      },
+      {
+        id: "m2-l1-vector-raster",
+        question: "Which distinction best separates vector and raster representations?",
+        options: [
+          "Vector stores discrete geometries; raster stores values on a referenced grid",
+          "Vector is always accurate; raster is always approximate",
+          "Vector contains attributes; raster never does",
+        ],
+        correctOption: 0,
+        explanation: "Both are spatial models. Their suitability depends on the phenomenon, observation process, resolution and intended operation.",
+      },
+      {
+        id: "m2-l1-crs-missing",
+        question: "A table contains x = 650000 and y = 6430000 but no CRS. What is the defensible next action?",
+        options: [
+          "Quarantine it as spatial data with unverified CRS metadata and investigate provenance",
+          "Assume longitude and latitude because there are two numbers",
+          "Plot it and keep whichever map looks plausible",
+        ],
+        correctOption: 0,
+        explanation: "Coordinate values are ambiguous without axis definitions, units, datum and reference system. Visual plausibility is not provenance.",
+      },
+    ],
+    submissionChecklist: [
+      "All four data cards are classified with evidence rather than filename alone",
+      "Geometry, coordinate, grid and CRS evidence are recorded separately",
+      "The published field table is not presented as mapped plot data",
+      "Unknown CRS metadata is reported as unresolved rather than guessed",
+      "The inventory includes a next action and scientific risk for every asset",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Classifies tabular, vector, raster and incomplete spatial data accurately" },
+      { dimension: "Conceptual understanding", expectation: "Explains how location, representation and spatial reference work together" },
+      { dimension: "Reproducibility", expectation: "Records evidence, provenance and next actions in a reusable inventory" },
+      { dimension: "Scientific communication", expectation: "Separates known spatial facts from unsupported assumptions" },
+    ],
+    coreReferences: [
+      { title: "OGC Simple Feature Access standard", href: "https://www.ogc.org/standards/sfa/" },
+      { title: "RFC 7946: The GeoJSON Format", href: "https://www.rfc-editor.org/rfc/rfc7946" },
+    ],
+    furtherReading: [
+      { title: "Baltic coastal plant traits dataset", href: "https://zenodo.org/records/20083250" },
+      { title: "The Turing Way: data provenance", href: "https://book.the-turing-way.org/reproducible-research/rdm/rdm-provenance" },
+    ],
+  },
+  "lesson-2-02": {
+    estimatedTime: "110–130 minutes",
+    markdownFile: "content/lessons/module-2/lesson-02.md",
+    formativeChecks: [
+      {
+        id: "m2-l2-assign-transform",
+        question: "What is the difference between set_crs() and to_crs()?",
+        options: [
+          "set_crs() labels existing coordinates; to_crs() calculates new coordinates for the same Earth locations",
+          "Both functions transform coordinate values in the same way",
+          "set_crs() is for rasters and to_crs() is for vectors",
+        ],
+        correctOption: 0,
+        explanation: "Assign a CRS only when the original reference system is known. Transform only after trustworthy source CRS metadata exists.",
+      },
+      {
+        id: "m2-l2-units",
+        question: "Why are longitude–latitude degrees unsuitable for a five-metre buffer?",
+        options: [
+          "Degrees are angular units whose ground distance varies by location and direction",
+          "Degrees cannot store decimal values",
+          "Projected CRSs remove all distortion everywhere",
+        ],
+        correctOption: 0,
+        explanation: "A suitable projected CRS provides linear units and controlled distortion for a defined area of use; it does not make the curved Earth distortion-free.",
+      },
+      {
+        id: "m2-l2-qa",
+        question: "Which evidence best verifies a coordinate transformation?",
+        options: [
+          "Source and target CRS, units, bounds, sample coordinates and an independent location check",
+          "The layer draws without an error",
+          "The target EPSG number is larger than the source number",
+        ],
+        correctOption: 0,
+        explanation: "Transformation QA combines metadata, numerical plausibility and an independent spatial reference; display alone can hide a wrong assignment.",
+      },
+    ],
+    submissionChecklist: [
+      "Source CRS and its evidence are recorded before any operation",
+      "Target CRS is justified from purpose, area of use and units",
+      "set_crs() and to_crs() are used only for their distinct purposes",
+      "Bounds and sample coordinates are documented before and after transformation",
+      "An independent spatial check confirms that Earth locations were preserved",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Transforms both instructional datasets into one justified analysis CRS without relabelling errors" },
+      { dimension: "Conceptual understanding", expectation: "Explains datum, geographic/projected CRS, distortion, axis order and units at an applied level" },
+      { dimension: "Reproducibility", expectation: "Preserves a complete before-and-after CRS audit" },
+      { dimension: "Scientific communication", expectation: "States why the selected projection is suitable and where it remains limited" },
+    ],
+    coreReferences: [
+      { title: "GeoPandas set_crs documentation", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.set_crs.html" },
+      { title: "GeoPandas to_crs documentation", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_crs.html" },
+    ],
+    furtherReading: [
+      { title: "pyproj CRS documentation", href: "https://pyproj4.github.io/pyproj/stable/api/crs/crs.html" },
+      { title: "EPSG Dataset", href: "https://epsg.org/home.html" },
+    ],
+  },
+  "lesson-2-03": {
+    estimatedTime: "95–115 minutes",
+    markdownFile: "content/lessons/module-2/lesson-03.md",
+    formativeChecks: [
+      {
+        id: "m2-l3-support",
+        question: "What does spatial support describe?",
+        options: [
+          "The physical area and geometry over which one value is observed or aggregated",
+          "Only the pixel width written in a filename",
+          "The total number of rows in a table",
+        ],
+        correctOption: 0,
+        explanation: "Support belongs to the observation itself. A quadrat measurement and a raster pixel can have different support even when their centres coincide.",
+      },
+      {
+        id: "m2-l3-resolution",
+        question: "A 5 cm UAV pixel is smaller than a 10 m Sentinel-2 pixel. What follows?",
+        options: [
+          "It samples a finer grid, but accuracy and ecological relevance still require separate evidence",
+          "It is automatically more accurate for every variable",
+          "It can be compared directly with one square-metre biomass without aggregation",
+        ],
+        correctOption: 0,
+        explanation: "Pixel size is one part of resolution. Calibration, point-spread response, registration, timing and process scale also matter.",
+      },
+      {
+        id: "m2-l3-maup",
+        question: "Why should an aggregation boundary be chosen before inspecting preferred results?",
+        options: [
+          "Changing zones can change the statistic, so the choice needs an independent scientific rationale",
+          "All boundaries produce identical summaries",
+          "Aggregation removes mixed pixels",
+        ],
+        correctOption: 0,
+        explanation: "This is the practical warning behind MAUP: summaries can depend on the size and arrangement of reporting units.",
+      },
+    ],
+    submissionChecklist: [
+      "Grain, extent, support geometry and observation time are distinguished",
+      "Area ratios for quadrat, UAV and Sentinel-2 supports are calculated correctly",
+      "Mixed-pixel and registration risks are identified",
+      "Aggregation is justified from the ecological question rather than convenience",
+      "Remaining scale mismatch is reported explicitly",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Computes and compares physical support without confusing linear and area units" },
+      { dimension: "Conceptual understanding", expectation: "Distinguishes scale, grain, extent, resolution, support, mixed pixels and introductory MAUP" },
+      { dimension: "Reproducibility", expectation: "Records a support-matching decision table with units and aggregation rules" },
+      { dimension: "Scientific communication", expectation: "Explains what each observation scale can and cannot support" },
+    ],
+    coreReferences: [
+      { title: "ESA Sentinel-2 facts and figures", href: "https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-2/Facts_and_figures" },
+    ],
+    furtherReading: [
+      { title: "NASA Earthdata: spatial resolution", href: "https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/spatial-resolution" },
+      { title: "The Turing Way: documenting data", href: "https://book.the-turing-way.org/reproducible-research/rdm/rdm-metadata" },
+    ],
+  },
+  "lesson-2-04": {
+    estimatedTime: "105–125 minutes",
+    markdownFile: "content/lessons/module-2/lesson-04.md",
+    formativeChecks: [
+      {
+        id: "m2-l4-format",
+        question: "Which format is the strongest default for an editable multi-layer local vector project?",
+        options: ["GeoPackage", "A loose Shapefile component", "A screenshot of the map"],
+        correctOption: 0,
+        explanation: "GeoPackage is a single SQLite container with modern schema and CRS support. The final decision still depends on the receiving systems and governance requirements.",
+      },
+      {
+        id: "m2-l4-cog",
+        question: "What makes a Cloud Optimized GeoTIFF useful for remote access?",
+        options: [
+          "Internal tiling, overviews and file organisation that support HTTP range requests",
+          "It removes the need for CRS and NoData metadata",
+          "It converts every raster into a multidimensional data cube",
+        ],
+        correctOption: 0,
+        explanation: "COG changes how a GeoTIFF is organised for efficient partial reads; it does not change the scientific meaning of the raster values.",
+      },
+      {
+        id: "m2-l4-conversion",
+        question: "When is a format conversion complete?",
+        options: [
+          "After reopening the derivative and verifying schema, CRS, counts, NoData and provenance",
+          "As soon as the output path exists",
+          "When the file extension looks modern",
+        ],
+        correctOption: 0,
+        explanation: "A successful write proves only that bytes were produced. Scientific and operational properties must survive the conversion.",
+      },
+    ],
+    submissionChecklist: [
+      "Each format choice follows structure, scale, access and interoperability requirements",
+      "Shapefile limitations are explained without claiming that every legacy dataset is unusable",
+      "GeoTIFF and COG, and NetCDF and Zarr, are distinguished accurately",
+      "Conversion QA covers schema, CRS, geometry/grid, NoData and provenance",
+      "The decision matrix records one limitation and rejected alternative for each product",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Matches field points, large vectors, analysis rasters and EO cubes to defensible formats" },
+      { dimension: "Conceptual understanding", expectation: "Explains how format structure and access pattern affect scientific workflows" },
+      { dimension: "Reproducibility", expectation: "Defines post-conversion checks and preserves source provenance" },
+      { dimension: "Scientific communication", expectation: "Communicates choices as conditional decisions rather than universal rankings" },
+    ],
+    coreReferences: [
+      { title: "GDAL ESRI Shapefile driver", href: "https://gdal.org/en/stable/drivers/vector/shapefile.html" },
+      { title: "OGC GeoPackage standard", href: "https://www.ogc.org/standards/geopackage/" },
+      { title: "Cloud Optimized GeoTIFF", href: "https://cogeo.org/" },
+    ],
+    furtherReading: [
+      { title: "GeoParquet specification", href: "https://geoparquet.org/" },
+      { title: "Zarr specifications", href: "https://zarr-specs.readthedocs.io/" },
+      { title: "Unidata netCDF documentation", href: "https://docs.unidata.ucar.edu/netcdf-c/current/" },
+    ],
+  },
+};
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
-  module2Lessons.map((source, index) => [
-    source.id,
-    {
-      estimatedTime: "90–120 minutes",
-      position: index + 1,
-      totalPositions: module2Lessons.length,
-      markdownFile: "",
-      content: buildLessonContent(source),
-      formativeChecks: buildChecks(source),
-      submissionChecklist: [
-        "Scientific question, analysis unit and spatial support are explicit",
-        "Inputs, identifiers, provenance and relevant metadata are recorded",
-        "The practical output is complete and reproducible",
-        `Required QA is reported: ${source.qa}`,
-        "Interpretation separates evidence, limitation and next decision",
-      ],
-      rubric: [
-        { dimension: "Technical correctness", expectation: "Method runs and produces the intended spatial output without hidden failures" },
-        { dimension: "Conceptual understanding", expectation: `Explains ${source.concepts[0].toLowerCase()} and why the operation is justified` },
-        { dimension: "Reproducibility", expectation: "Inputs, environment, parameters, QA and outputs are traceable" },
-        { dimension: "Scientific communication", expectation: "Communicates spatial support, uncertainty and limits without overclaiming" },
-      ],
-      technicalMetadata: {
-        pythonVersion: "Python 3.12",
-        jupyterEnvironment: "JupyterLab 4 / Notebook 7; geospatial package versions recorded by the learner",
-        reviewDate: "7 August 2026",
-        coreReferences: [source.reference],
-        furtherReading: [
-          { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
-        ],
-      },
-    } satisfies ReviewedLessonDetails,
-  ]),
+  publishedModule2Lessons.map((source, index) => {
+    const configuration = publishedLessonConfigurations[source.id];
+    if (!configuration) {
+      throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
+    }
+    return [
+      source.id,
+      {
+        estimatedTime: configuration.estimatedTime,
+        position: index + 1,
+        totalPositions: publishedModule2Lessons.length,
+        markdownFile: configuration.markdownFile,
+        formativeChecks: configuration.formativeChecks,
+        submissionChecklist: configuration.submissionChecklist,
+        rubric: configuration.rubric,
+        technicalMetadata: {
+          pythonVersion: "Python 3.12",
+          jupyterEnvironment: "JupyterLab 4 / Notebook 7; GeoPandas and pyproj versions recorded by the learner",
+          reviewDate: "10 August 2026",
+          datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+          coreReferences: configuration.coreReferences,
+          furtherReading: configuration.furtherReading,
+        },
+      } satisfies ReviewedLessonDetails,
+    ];
+  }),
 );

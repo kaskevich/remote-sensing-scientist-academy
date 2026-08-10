@@ -143,7 +143,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes twelve compact chapters, 49 lessons, and the capstone", async ({ page }) => {
+test("Module 2 exposes the reviewed first chapter and the planned professional pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
 
@@ -151,6 +151,13 @@ test("Module 2 exposes twelve compact chapters, 49 lessons, and the capstone", a
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(50);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(4);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(46);
+  await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
+  await expect(overview.getByText("GeoPandas and Spatial Tables", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(1).locator("summary").click();
+  await expect(overview.getByText("GeoPandas and Spatial Tables", { exact: true })).toBeVisible();
+  await expect(overview.getByRole("link", { name: "GeoPandas and Spatial Tables", exact: true })).toHaveCount(0);
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -159,12 +166,16 @@ test("Module 2 exposes twelve compact chapters, 49 lessons, and the capstone", a
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("49 lessons + capstone", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.getByText("4 lessons available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(4);
+  await expect(page.locator("#lesson-2-05")).toHaveCount(0);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
   await expect(firstLesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
+  await expect(firstLesson.getByText(/What evidence connects every observation/)).toBeVisible();
   await expect(firstLesson.getByText("spatial_data_inventory.ipynb", { exact: true }).first()).toBeVisible();
+  await expect(firstLesson.getByRole("img", { name: /Diagram comparing an ordinary table/i })).toBeVisible();
 
   const hasHorizontalOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
