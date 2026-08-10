@@ -1,6 +1,6 @@
 # Module 2 vector-foundations training data
 
-These small GeoJSON files support Lessons 2.5–2.7 of Remote Sensing Scientist Academy.
+These small GeoJSON and QA-support files support Lessons 2.5–2.10 of Remote Sensing Scientist Academy.
 
 ## Scientific status
 
@@ -18,8 +18,13 @@ The files follow RFC 7946 GeoJSON position order: longitude first, latitude seco
 - `training_study_area.geojson` — one rectangular instructional site boundary
 - `training_management_zones.geojson` — two polygons sharing a vertical boundary
 - `training_vegetation_zones.geojson` — two polygons sharing a horizontal boundary
+- `training_topology_cases.geojson` — five deliberate QA cases covering multipart, invalid, duplicate and narrow polygon conditions
+- `QGIS_Vector_QA_Checklist.md` — ordered visual-verification protocol for the QGIS checkpoint
+- `qgis_qa_observations.csv` — structured observation log linking visual findings to features, evidence and decisions
 
 The deliberately ambiguous boundary point makes predicate behaviour and one-to-many outcomes visible. The outlying point makes unmatched and nearest-neighbour decisions visible.
+
+The topology cases are designed to provoke inspection rather than automatic repair. A condition named in `qa_case` is not an instruction to delete or alter a feature. Learners must preserve the source, create reviewed candidates and document every decision.
 
 ## Provenance
 

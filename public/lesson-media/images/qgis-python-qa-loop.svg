@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Python and QGIS quality assurance loop</title>
+  <desc id="desc">Python creates reproducible derivatives and numerical audits. QGIS provides metadata, spatial, attribute and delivery inspection. Structured observations return to the pipeline as tests, decisions or unresolved issues before a verified map is exported.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="31" font-weight="700">Visual QA closes the loop—it does not replace the pipeline</text>
+  <text x="58" y="97" fill="#44516a" font-family="Arial, sans-serif" font-size="17">Use each environment for the evidence it exposes best</text>
+
+  <rect x="58" y="142" width="320" height="314" rx="20" fill="#0c1a34"/>
+  <text x="86" y="184" fill="#c8f33d" font-family="Arial, sans-serif" font-size="20" font-weight="700">PYTHON PIPELINE</text>
+  <g font-family="Arial, sans-serif" font-size="15">
+    <text x="86" y="228" fill="#fff">• immutable source paths</text>
+    <text x="86" y="264" fill="#fff">• declared transformations</text>
+    <text x="86" y="300" fill="#fff">• counts, IDs and assertions</text>
+    <text x="86" y="336" fill="#fff">• versioned derivative</text>
+    <text x="86" y="372" fill="#fff">• automated regression tests</text>
+  </g>
+  <rect x="86" y="402" width="264" height="34" rx="17" fill="#243654"/>
+  <text x="218" y="424" text-anchor="middle" fill="#b7c1d4" font-family="Arial, sans-serif" font-size="13">REPEATABLE NUMERICAL EVIDENCE</text>
+
+  <path d="M398 234 H471" stroke="#ef8b42" stroke-width="4"/><path d="M463 224 L477 234 L463 244" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <text x="437" y="216" text-anchor="middle" fill="#44516a" font-family="Arial, sans-serif" font-size="13">derivative + audit</text>
+
+  <rect x="497" y="142" width="318" height="314" rx="20" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="525" y="184" fill="#0c1a34" font-family="Arial, sans-serif" font-size="20" font-weight="700">QGIS VERIFICATION</text>
+  <g font-family="Arial, sans-serif" font-size="15" fill="#44516a">
+    <text x="525" y="228">1 · metadata and CRS</text>
+    <text x="525" y="264">2 · attributes and identity</text>
+    <text x="525" y="300">3 · geometry and overlays</text>
+    <text x="525" y="336">4 · styling and missing classes</text>
+    <text x="525" y="372">5 · layout and delivery</text>
+  </g>
+  <rect x="525" y="402" width="262" height="34" rx="17" fill="#dfeaf7"/>
+  <text x="656" y="424" text-anchor="middle" fill="#306fbd" font-family="Arial, sans-serif" font-size="13" font-weight="700">STRUCTURED VISUAL EVIDENCE</text>
+
+  <path d="M835 234 H908" stroke="#ef8b42" stroke-width="4"/><path d="M900 224 L914 234 L900 244" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <text x="875" y="216" text-anchor="middle" fill="#44516a" font-family="Arial, sans-serif" font-size="13">verified output</text>
+
+  <rect x="934" y="142" width="208" height="314" rx="20" fill="#e7f2ce" stroke="#7ba32b" stroke-width="2"/>
+  <text x="962" y="184" fill="#0c1a34" font-family="Arial, sans-serif" font-size="20" font-weight="700">DELIVER</text>
+  <g font-family="Arial, sans-serif" font-size="15" fill="#44516a">
+    <text x="962" y="232">QA report</text>
+    <text x="962" y="272">observation log</text>
+    <text x="962" y="312">PDF + PNG map</text>
+    <text x="962" y="352">project file</text>
+    <text x="962" y="392">limitations</text>
+  </g>
+
+  <path d="M656 478 V523 H218 V478" fill="none" stroke="#3c7fc4" stroke-width="4"/>
+  <path d="M208 491 L218 477 L228 491" fill="none" stroke="#3c7fc4" stroke-width="4"/>
+  <rect x="346" y="505" width="366" height="52" rx="26" fill="#dfeaf7"/>
+  <text x="529" y="528" text-anchor="middle" fill="#0c1a34" font-family="Arial, sans-serif" font-size="15" font-weight="700">OBSERVATION → TEST · DECISION · ISSUE</text>
+  <text x="529" y="548" text-anchor="middle" fill="#44516a" font-family="Arial, sans-serif" font-size="13">fix the reproducible workflow, then inspect again</text>
+
+  <text x="600" y="610" text-anchor="middle" fill="#0c1a34" font-family="Arial, sans-serif" font-size="16" font-weight="700">A polished map communicates evidence; it does not prove analytical validity</text>
+</svg>

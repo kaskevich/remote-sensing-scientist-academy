@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Two-stage spatial index query</title>
+  <desc id="desc">A naive search tests every point against every zone. A spatial index first keeps bounding-box candidates and then applies the same exact predicate. Stable identifier pairs must agree before runtime is compared.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="31" font-weight="700">Index the search space—not the scientific conclusion</text>
+  <text x="58" y="97" fill="#44516a" font-family="Arial, sans-serif" font-size="17">Bounding boxes remove impossible pairs; the exact predicate still defines the relationship</text>
+
+  <rect x="58" y="140" width="325" height="350" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="84" y="178" fill="#0c1a34" font-family="Arial, sans-serif" font-size="18" font-weight="700">1 · ALL PAIRS</text>
+  <text x="84" y="207" fill="#59657b" font-family="Arial, sans-serif" font-size="15">1,200 points × 80 zones</text>
+  <g fill="#9ca6b7">
+    <circle cx="109" cy="253" r="7"/><circle cx="159" cy="253" r="7"/><circle cx="209" cy="253" r="7"/><circle cx="259" cy="253" r="7"/><circle cx="309" cy="253" r="7"/>
+  </g>
+  <g fill="#dfeaf7" stroke="#3c7fc4" stroke-width="2">
+    <rect x="91" y="302" width="66" height="52"/><rect x="188" y="302" width="66" height="52"/><rect x="285" y="302" width="66" height="52"/>
+  </g>
+  <g stroke="#d6dbe3" stroke-width="1.5">
+    <path d="M109 260 L124 302 M109 260 L221 302 M109 260 L318 302 M159 260 L124 302 M159 260 L221 302 M159 260 L318 302 M209 260 L124 302 M209 260 L221 302 M209 260 L318 302 M259 260 L124 302 M259 260 L221 302 M259 260 L318 302 M309 260 L124 302 M309 260 L221 302 M309 260 L318 302"/>
+  </g>
+  <text x="84" y="403" fill="#0c1a34" font-family="Arial, sans-serif" font-size="25" font-weight="700">96,000</text>
+  <text x="84" y="430" fill="#59657b" font-family="Arial, sans-serif" font-size="15">possible exact checks</text>
+  <text x="84" y="461" fill="#ef8b42" font-family="Arial, sans-serif" font-size="14" font-weight="700">TRANSPARENT · EXPENSIVE</text>
+
+  <path d="M405 316 H440" stroke="#ef8b42" stroke-width="4"/><path d="M432 306 L446 316 L432 326" fill="none" stroke="#ef8b42" stroke-width="4"/>
+
+  <rect x="466" y="140" width="294" height="350" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="492" y="178" fill="#0c1a34" font-family="Arial, sans-serif" font-size="18" font-weight="700">2 · BBOX CANDIDATES</text>
+  <rect x="514" y="234" width="154" height="132" rx="6" fill="#dfeaf7" stroke="#3c7fc4" stroke-width="3" stroke-dasharray="8 6"/>
+  <path d="M540 334 C518 296 548 245 594 265 C638 230 685 279 650 321 C626 358 570 366 540 334Z" fill="#e7f2ce" stroke="#7ba32b" stroke-width="3"/>
+  <circle cx="574" cy="298" r="9" fill="#0c1a34"/>
+  <circle cx="654" cy="250" r="9" fill="#ef8b42"/>
+  <text x="492" y="405" fill="#0c1a34" font-family="Arial, sans-serif" font-size="16" font-weight="700">rectangle overlap = candidate</text>
+  <text x="492" y="434" fill="#59657b" font-family="Arial, sans-serif" font-size="15">some candidates remain false</text>
+  <text x="492" y="463" fill="#3c7fc4" font-family="Arial, sans-serif" font-size="14" font-weight="700">CHEAP BROAD PHASE</text>
+
+  <path d="M782 316 H817" stroke="#ef8b42" stroke-width="4"/><path d="M809 306 L823 316 L809 326" fill="none" stroke="#ef8b42" stroke-width="4"/>
+
+  <rect x="843" y="140" width="299" height="350" rx="18" fill="#0c1a34"/>
+  <text x="870" y="178" fill="#c8f33d" font-family="Arial, sans-serif" font-size="18" font-weight="700">3 · EXACT PREDICATE</text>
+  <path d="M902 337 C880 299 910 248 956 268 C1000 233 1047 282 1012 324 C988 361 932 369 902 337Z" fill="#3c7fc4" stroke="#8db7e6" stroke-width="3"/>
+  <circle cx="936" cy="301" r="10" fill="#c8f33d"/>
+  <circle cx="1016" cy="253" r="10" fill="#ef8b42" opacity=".45"/>
+  <path d="M1008 245 L1024 261 M1024 245 L1008 261" stroke="#fff" stroke-width="3"/>
+  <text x="870" y="405" fill="#fff" font-family="Arial, sans-serif" font-size="16" font-weight="700">intersects / within / contains</text>
+  <text x="870" y="434" fill="#b7c1d4" font-family="Arial, sans-serif" font-size="15">same declared relationship</text>
+  <text x="870" y="463" fill="#c8f33d" font-family="Arial, sans-serif" font-size="14" font-weight="700">EXACT NARROW PHASE</text>
+
+  <rect x="126" y="536" width="948" height="60" rx="30" fill="#0c1a34"/>
+  <text x="600" y="562" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="15" font-weight="700">VALIDATE BEFORE PROFILING</text>
+  <text x="600" y="584" text-anchor="middle" fill="#c8f33d" font-family="Arial, sans-serif" font-size="16">naive stable-ID pairs = indexed stable-ID pairs</text>
+</svg>

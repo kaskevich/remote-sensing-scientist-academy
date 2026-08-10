@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_topology_cases",
+  "bbox": [24.6004, 58.7003, 24.6057, 58.7037],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "TC-MULTI",
+      "properties": {
+        "feature_id": "TC-MULTI",
+        "management": "training mowing",
+        "survey_date": "2026-06-15",
+        "qa_case": "multipart geometry"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [[[24.6004, 58.7004], [24.6014, 58.7004], [24.6014, 58.7012], [24.6004, 58.7012], [24.6004, 58.7004]]],
+          [[[24.6006, 58.7024], [24.6016, 58.7024], [24.6016, 58.7032], [24.6006, 58.7032], [24.6006, 58.7024]]]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TC-BOW",
+      "properties": {
+        "feature_id": "TC-BOW",
+        "management": "training grazing",
+        "survey_date": "2026-06-15",
+        "qa_case": "self-intersection candidate"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6020, 58.7005], [24.6035, 58.7018], [24.6020, 58.7018], [24.6035, 58.7005], [24.6020, 58.7005]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TC-DUP-A",
+      "properties": {
+        "feature_id": "TC-DUP-A",
+        "management": "training mowing",
+        "survey_date": "2026-06-15",
+        "qa_case": "exact geometry duplicate A"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6040, 58.7005], [24.6053, 58.7005], [24.6053, 58.7015], [24.6040, 58.7015], [24.6040, 58.7005]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TC-DUP-B",
+      "properties": {
+        "feature_id": "TC-DUP-B",
+        "management": "training monitoring",
+        "survey_date": "2026-07-01",
+        "qa_case": "exact geometry duplicate B"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6040, 58.7005], [24.6053, 58.7005], [24.6053, 58.7015], [24.6040, 58.7015], [24.6040, 58.7005]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "TC-SLIVER",
+      "properties": {
+        "feature_id": "TC-SLIVER",
+        "management": "training unresolved",
+        "survey_date": "2026-06-15",
+        "qa_case": "narrow polygon requiring domain review"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.60545, 58.7018], [24.60555, 58.7018], [24.6057, 58.7037], [24.60558, 58.7037], [24.60545, 58.7018]]]
+      }
+    }
+  ]
+}
