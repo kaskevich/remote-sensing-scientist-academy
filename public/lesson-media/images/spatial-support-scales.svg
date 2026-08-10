@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+  <title id="title">Field, UAV and Sentinel-2 spatial support</title>
+  <desc id="desc">A diagram compares a one-square-metre quadrat, a five-centimetre UAV cell and a ten-metre Sentinel-2 cell, showing their nominal areas and why matching centres does not match spatial support.</desc>
+  <rect width="1200" height="670" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="66" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">One centre coordinate, three different supports</text>
+  <text x="60" y="101" fill="#526272" font-family="Arial, sans-serif" font-size="17">Nominal area comparison — not a claim of georegistration or sensor equivalence</text>
+
+  <g transform="translate(60 145)">
+    <rect width="520" height="430" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect x="55" y="52" width="360" height="300" fill="#dceaf6" stroke="#1d79c4" stroke-width="4"/>
+    <g stroke="#a9c9e4" stroke-width="1">
+      <path d="M91 52V352M127 52V352M163 52V352M199 52V352M235 52V352M271 52V352M307 52V352M343 52V352M379 52V352"/>
+      <path d="M55 82H415M55 112H415M55 142H415M55 172H415M55 202H415M55 232H415M55 262H415M55 292H415M55 322H415"/>
+    </g>
+    <rect x="219" y="187" width="36" height="30" fill="#f28c28" stroke="#9f4b10" stroke-width="2"/>
+    <circle cx="237" cy="202" r="6" fill="#0b1f35"/>
+    <text x="440" y="84" fill="#17649f" font-family="Arial, sans-serif" font-size="15" font-weight="700">Sentinel-2</text>
+    <text x="440" y="108" fill="#526272" font-family="Arial, sans-serif" font-size="14">10 m × 10 m</text>
+    <text x="440" y="130" fill="#526272" font-family="Arial, sans-serif" font-size="14">100 m²</text>
+    <path d="M416 92H433" stroke="#1d79c4" stroke-width="3"/>
+    <text x="440" y="199" fill="#9f4b10" font-family="Arial, sans-serif" font-size="15" font-weight="700">Field quadrat</text>
+    <text x="440" y="223" fill="#526272" font-family="Arial, sans-serif" font-size="14">1 m × 1 m</text>
+    <text x="440" y="245" fill="#526272" font-family="Arial, sans-serif" font-size="14">1 m²</text>
+    <path d="M257 202H431" stroke="#f28c28" stroke-width="3"/>
+    <text x="55" y="392" fill="#526272" font-family="Arial, sans-serif" font-size="15">The quadrat occupies 1% of the nominal S2 cell area</text>
+  </g>
+
+  <g transform="translate(630 145)">
+    <rect width="510" height="430" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <text x="32" y="48" fill="#0b1f35" font-family="Arial, sans-serif" font-size="20" font-weight="700">Inside the 1 m² quadrat</text>
+    <g transform="translate(62 78)" stroke="#ffffff" stroke-width="1">
+      <rect width="300" height="300" fill="#dcebc1" stroke="#72ad2c" stroke-width="4"/>
+      <path d="M15 0V300M30 0V300M45 0V300M60 0V300M75 0V300M90 0V300M105 0V300M120 0V300M135 0V300M150 0V300M165 0V300M180 0V300M195 0V300M210 0V300M225 0V300M240 0V300M255 0V300M270 0V300M285 0V300"/>
+      <path d="M0 15H300M0 30H300M0 45H300M0 60H300M0 75H300M0 90H300M0 105H300M0 120H300M0 135H300M0 150H300M0 165H300M0 180H300M0 195H300M0 210H300M0 225H300M0 240H300M0 255H300M0 270H300M0 285H300"/>
+      <rect x="150" y="135" width="15" height="15" fill="#1d79c4"/>
+    </g>
+    <text x="382" y="122" fill="#437f32" font-family="Arial, sans-serif" font-size="15" font-weight="700">UAV cells</text>
+    <text x="382" y="147" fill="#526272" font-family="Arial, sans-serif" font-size="14">5 cm × 5 cm</text>
+    <text x="382" y="170" fill="#526272" font-family="Arial, sans-serif" font-size="14">0.0025 m²</text>
+    <text x="382" y="220" fill="#17649f" font-family="Arial, sans-serif" font-size="15" font-weight="700">Nominal ratio</text>
+    <text x="382" y="245" fill="#526272" font-family="Arial, sans-serif" font-size="14">400 cells</text>
+    <text x="382" y="268" fill="#526272" font-family="Arial, sans-serif" font-size="14">per quadrat area</text>
+    <path d="M365 143H375" stroke="#72ad2c" stroke-width="3"/>
+    <text x="62" y="408" fill="#526272" font-family="Arial, sans-serif" font-size="15">Rotation, masks and positional error change actual contributing cells</text>
+  </g>
+
+  <rect x="154" y="606" width="892" height="40" rx="20" fill="#0b1f35"/>
+  <text x="600" y="632" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700">Matching centres does not match footprint, timing, sensor response or ecological meaning</text>
+</svg>

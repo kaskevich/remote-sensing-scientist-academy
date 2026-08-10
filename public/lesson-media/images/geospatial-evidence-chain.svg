@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Evidence that connects data to Earth</title>
+  <desc id="desc">Three panels compare a table, vector geometries and a raster grid, followed by a shared spatial contract containing location, representation, CRS, support and provenance.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f5f7f4"/>
+  <text x="64" y="70" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">What evidence makes the data geospatial?</text>
+  <text x="64" y="104" fill="#526272" font-family="Arial, sans-serif" font-size="18">A mapable appearance is not enough — representation and reference must be explicit</text>
+
+  <g transform="translate(64 145)">
+    <rect width="320" height="300" rx="18" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="320" height="9" rx="4" fill="#f28c28"/>
+    <text x="24" y="52" fill="#0b1f35" font-family="Arial, sans-serif" font-size="21" font-weight="700">TABULAR</text>
+    <text x="24" y="82" fill="#526272" font-family="Arial, sans-serif" font-size="15">Rows and attributes</text>
+    <g transform="translate(24 110)" fill="none" stroke="#9aabb7" stroke-width="2">
+      <rect width="272" height="116" rx="5" fill="#f8faf9"/>
+      <path d="M0 38H272M0 76H272M82 0V116M181 0V116"/>
+    </g>
+    <text x="38" y="135" fill="#0b1f35" font-family="monospace" font-size="13">SampleID</text>
+    <text x="126" y="135" fill="#0b1f35" font-family="monospace" font-size="13">site</text>
+    <text x="220" y="135" fill="#0b1f35" font-family="monospace" font-size="13">AGB</text>
+    <text x="38" y="174" fill="#526272" font-family="monospace" font-size="13">SALS1</text>
+    <text x="126" y="174" fill="#526272" font-family="monospace" font-size="13">Saardu</text>
+    <text x="220" y="174" fill="#526272" font-family="monospace" font-size="13">311.33</text>
+    <text x="24" y="264" fill="#c45f12" font-family="Arial, sans-serif" font-size="15" font-weight="700">Place label ≠ geometry</text>
+  </g>
+
+  <g transform="translate(440 145)">
+    <rect width="320" height="300" rx="18" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="320" height="9" rx="4" fill="#1d79c4"/>
+    <text x="24" y="52" fill="#0b1f35" font-family="Arial, sans-serif" font-size="21" font-weight="700">VECTOR</text>
+    <text x="24" y="82" fill="#526272" font-family="Arial, sans-serif" font-size="15">Discrete geometry + attributes</text>
+    <circle cx="66" cy="166" r="10" fill="#1d79c4"/>
+    <path d="M108 205C145 115 185 232 222 132" fill="none" stroke="#0b1f35" stroke-width="7" stroke-linecap="round"/>
+    <path d="M246 126L292 150L280 211L230 222L207 176Z" fill="#d9eafb" stroke="#1d79c4" stroke-width="4"/>
+    <text x="47" y="255" fill="#526272" font-family="Arial, sans-serif" font-size="14">point</text>
+    <text x="139" y="255" fill="#526272" font-family="Arial, sans-serif" font-size="14">line</text>
+    <text x="241" y="255" fill="#526272" font-family="Arial, sans-serif" font-size="14">polygon</text>
+  </g>
+
+  <g transform="translate(816 145)">
+    <rect width="320" height="300" rx="18" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="320" height="9" rx="4" fill="#96c83d"/>
+    <text x="24" y="52" fill="#0b1f35" font-family="Arial, sans-serif" font-size="21" font-weight="700">RASTER</text>
+    <text x="24" y="82" fill="#526272" font-family="Arial, sans-serif" font-size="15">Values on a referenced grid</text>
+    <g transform="translate(66 110)" stroke="#ffffff" stroke-width="3">
+      <rect width="48" height="48" fill="#dfeec1"/><rect x="48" width="48" height="48" fill="#bddd7b"/><rect x="96" width="48" height="48" fill="#8fc63c"/><rect x="144" width="48" height="48" fill="#72ad2c"/>
+      <rect y="48" width="48" height="48" fill="#c6e293"/><rect x="48" y="48" width="48" height="48" fill="#98cc4e"/><rect x="96" y="48" width="48" height="48" fill="#61a22b"/><rect x="144" y="48" width="48" height="48" fill="#437f32"/>
+      <rect y="96" width="48" height="48" fill="#e6efc9"/><rect x="48" y="96" width="48" height="48" fill="#c2dd83"/><rect x="96" y="96" width="48" height="48" fill="#83b942"/><rect x="144" y="96" width="48" height="48" fill="#5b9134"/>
+    </g>
+    <path d="M52 107V269M52 107H272" fill="none" stroke="#1d79c4" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="24" y="286" fill="#526272" font-family="Arial, sans-serif" font-size="14">transform + CRS + bands + NoData</text>
+  </g>
+
+  <path d="M224 466V498M600 466V498M976 466V498" stroke="#1d79c4" stroke-width="3"/>
+  <path d="M224 498H976" stroke="#1d79c4" stroke-width="3"/>
+  <path d="M600 498V525" stroke="#1d79c4" stroke-width="3"/>
+  <rect x="118" y="525" width="964" height="82" rx="18" fill="#0b1f35"/>
+  <text x="600" y="559" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="700">SPATIAL CONTRACT</text>
+  <text x="600" y="586" text-anchor="middle" fill="#dbe7ef" font-family="Arial, sans-serif" font-size="16">location · representation · CRS · spatial support · time · provenance</text>
+</svg>

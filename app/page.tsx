@@ -2,8 +2,16 @@ import { Fragment } from "react";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import content from "@/content/site.json";
-import LearnerCurriculum, { type AcademyLesson } from "@/app/components/learner-curriculum";
+import LearnerCurriculum, {
+  type AcademyCurriculumModule,
+  type AcademyLesson,
+} from "@/app/components/learner-curriculum";
 import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
+import {
+  module2LessonDetails,
+  module2Overview,
+  publishedModule2Lessons,
+} from "@/lib/module2-pedagogy";
 
 type CurriculumModule = {
   id: string;
@@ -47,13 +55,15 @@ const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter
 );
 const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   id: module.id || `lesson-${String(index + 1).padStart(2, "0")}`,
+  numberLabel: `1.${index + 1}`,
   week: module.week,
   title: module.title,
   description: module.description,
   tools: module.tools,
-  content: reviewedLessonDetails[module.id]
-    ? readReviewedLesson(reviewedLessonDetails[module.id].markdownFile)
-    : module.lessonContent,
+  content: reviewedLessonDetails[module.id]?.content
+    ?? (reviewedLessonDetails[module.id]
+      ? readReviewedLesson(reviewedLessonDetails[module.id].markdownFile)
+      : module.lessonContent),
   images: module.lessonImages.map((image) => ({
     ...image,
     src: publicAssetPath(image.src),
@@ -79,6 +89,39 @@ const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
     })),
   },
 }));
+
+const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
+  const pedagogy = module2LessonDetails[source.id];
+  return {
+    id: source.id,
+    numberLabel: source.number,
+    scheduleLabel: source.chapter === 13 ? "CAPSTONE" : `CHAPTER ${source.chapter}`,
+    week: `CHAPTER ${source.chapter}`,
+    title: source.title,
+    description: source.description,
+    tools: source.tools,
+    content: pedagogy.content ?? readReviewedLesson(pedagogy.markdownFile),
+    images: [],
+    resources: source.id === "lesson-2-01"
+      ? [{
+          href: publicAssetPath("lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
+          title: "Download the Module 2 pipeline starter notebook",
+        }]
+      : [],
+    pedagogy,
+    task: {
+      title: `Submit ${source.artifact}`,
+      instructions: `Upload ${source.artifact}, one QA image or map, and your scientific interpretation. Keep source data, processing decisions and limitations traceable.`,
+      referenceImages: [],
+      referenceMaps: [],
+    },
+  };
+});
+
+const academyCurriculumModules: AcademyCurriculumModule[] = [
+  { overview: module1Overview, lessons: learnerLessons },
+  { overview: module2Overview, lessons: module2AcademyLessons },
+];
 
 export default function Home() {
   const applicationTarget = content.application.openInNewTab ? "_blank" : undefined;
@@ -332,7 +375,7 @@ export default function Home() {
               </div>
             </div>
 
-            <LearnerCurriculum lessons={learnerLessons} overview={module1Overview} />
+            <LearnerCurriculum modules={academyCurriculumModules} />
           </section>
         )}
 

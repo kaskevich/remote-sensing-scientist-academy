@@ -486,7 +486,7 @@ export default function AuthenticatedTaskResultPanel({
             type="file"
             multiple
             disabled={uploads.some((upload) => upload.status === "uploading")}
-            accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.zip"
+            accept=".png,.jpg,.jpeg,.webp,.geojson,.tif,.tiff,.csv,.pdf,.ipynb,.html,.py,.sql,.sh,.yml,.yaml,.md,.json,.gpkg,.parquet,.zip"
             onChange={(event) => {
               const selectedFiles = Array.from(event.target.files ?? []);
               event.target.value = "";

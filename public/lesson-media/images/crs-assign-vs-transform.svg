@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Assigning a CRS versus transforming coordinates</title>
+  <desc id="desc">A split diagram shows set_crs adding verified metadata without changing coordinate numbers, while to_crs recalculates coordinate numbers and units for the same Earth location.</desc>
+  <rect width="1200" height="620" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="66" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">Two operations with different scientific meanings</text>
+
+  <g transform="translate(60 112)">
+    <rect width="510" height="440" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="510" height="10" rx="5" fill="#f28c28"/>
+    <text x="28" y="58" fill="#0b1f35" font-family="Arial, sans-serif" font-size="24" font-weight="700">ASSIGN · set_crs()</text>
+    <text x="28" y="90" fill="#526272" font-family="Arial, sans-serif" font-size="16">Use only when the original CRS is known</text>
+    <rect x="28" y="126" width="196" height="96" rx="12" fill="#fff4e8" stroke="#f28c28"/>
+    <text x="126" y="159" text-anchor="middle" fill="#0b1f35" font-family="monospace" font-size="16">24.75, 59.45</text>
+    <text x="126" y="190" text-anchor="middle" fill="#c45f12" font-family="Arial, sans-serif" font-size="14">CRS label missing</text>
+    <path d="M236 174H310" stroke="#f28c28" stroke-width="4"/>
+    <path d="M300 164L314 174L300 184" fill="none" stroke="#f28c28" stroke-width="4"/>
+    <rect x="326" y="126" width="156" height="96" rx="12" fill="#fff4e8" stroke="#f28c28"/>
+    <text x="404" y="159" text-anchor="middle" fill="#0b1f35" font-family="monospace" font-size="16">24.75, 59.45</text>
+    <text x="404" y="190" text-anchor="middle" fill="#c45f12" font-family="Arial, sans-serif" font-size="14">EPSG:4326</text>
+    <text x="28" y="271" fill="#0b1f35" font-family="Arial, sans-serif" font-size="17" font-weight="700">Coordinate numbers</text>
+    <text x="238" y="271" fill="#526272" font-family="Arial, sans-serif" font-size="17">do not change</text>
+    <text x="28" y="306" fill="#0b1f35" font-family="Arial, sans-serif" font-size="17" font-weight="700">Scientific requirement</text>
+    <text x="28" y="335" fill="#526272" font-family="Arial, sans-serif" font-size="16">External evidence proves the source CRS</text>
+    <rect x="28" y="370" width="454" height="44" rx="10" fill="#fff0e3"/>
+    <text x="255" y="398" text-anchor="middle" fill="#9f4b10" font-family="Arial, sans-serif" font-size="15" font-weight="700">Guessing here creates false locations</text>
+  </g>
+
+  <g transform="translate(630 112)">
+    <rect width="510" height="440" rx="20" fill="#ffffff" stroke="#c9d4dc" stroke-width="2"/>
+    <rect width="510" height="10" rx="5" fill="#1d79c4"/>
+    <text x="28" y="58" fill="#0b1f35" font-family="Arial, sans-serif" font-size="24" font-weight="700">TRANSFORM · to_crs()</text>
+    <text x="28" y="90" fill="#526272" font-family="Arial, sans-serif" font-size="16">Use after the source CRS is trustworthy</text>
+    <rect x="28" y="126" width="176" height="96" rx="12" fill="#eaf4fc" stroke="#1d79c4"/>
+    <text x="116" y="159" text-anchor="middle" fill="#0b1f35" font-family="monospace" font-size="15">24.75, 59.45</text>
+    <text x="116" y="190" text-anchor="middle" fill="#17649f" font-family="Arial, sans-serif" font-size="14">degrees · EPSG:4326</text>
+    <path d="M216 174H294" stroke="#1d79c4" stroke-width="4"/>
+    <path d="M284 164L298 174L284 184" fill="none" stroke="#1d79c4" stroke-width="4"/>
+    <rect x="310" y="126" width="172" height="96" rx="12" fill="#eaf4fc" stroke="#1d79c4"/>
+    <text x="396" y="159" text-anchor="middle" fill="#0b1f35" font-family="monospace" font-size="14">E, N recalculated</text>
+    <text x="396" y="190" text-anchor="middle" fill="#17649f" font-family="Arial, sans-serif" font-size="14">metres · EPSG:3301</text>
+    <text x="28" y="271" fill="#0b1f35" font-family="Arial, sans-serif" font-size="17" font-weight="700">Coordinate numbers</text>
+    <text x="238" y="271" fill="#526272" font-family="Arial, sans-serif" font-size="17">and units change</text>
+    <text x="28" y="306" fill="#0b1f35" font-family="Arial, sans-serif" font-size="17" font-weight="700">Scientific requirement</text>
+    <text x="28" y="335" fill="#526272" font-family="Arial, sans-serif" font-size="16">Same Earth location; justified target CRS</text>
+    <rect x="28" y="370" width="454" height="44" rx="10" fill="#eaf4fc"/>
+    <text x="255" y="398" text-anchor="middle" fill="#17649f" font-family="Arial, sans-serif" font-size="15" font-weight="700">Verify metadata, bounds and a known position</text>
+  </g>
+</svg>

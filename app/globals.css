@@ -1860,6 +1860,38 @@ h2 {
   font-size: 18px;
 }
 
+.module-concept-progression {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  list-style: none;
+}
+
+.module-concept-progression li {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.module-concept-progression li:not(:last-child)::after {
+  width: 18px;
+  height: 1px;
+  margin: 0 10px;
+  background: rgba(87, 183, 232, 0.55);
+  content: "";
+}
+
+.module-concept-progression span {
+  margin-right: 6px;
+  color: var(--blue);
+  font: 700 9px/1 monospace;
+}
+
 .module-outcomes {
   padding: 22px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -1902,10 +1934,97 @@ h2 {
   padding-top: 24px;
 }
 
-.module-syllabus > section {
+.module-syllabus > .module-chapter {
   min-width: 0;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.module-overview-panel + .module-overview-panel {
+  margin-top: 0;
+}
+
+.module-overview-blue,
+.curriculum-module-blue {
+  --module-accent: var(--blue);
+}
+
+.module-overview-lime,
+.curriculum-module-lime {
+  --module-accent: var(--lime);
+}
+
+.module-overview-blue {
+  border-color: rgba(51, 154, 240, 0.42);
+  background: linear-gradient(135deg, rgba(51, 154, 240, 0.09), rgba(255, 255, 255, 0.025) 42%);
+}
+
+.module-overview-panel.module-overview-blue .section-kicker,
+.module-overview-panel.module-overview-blue .module-outcomes summary,
+.module-overview-panel.module-overview-blue .module-chapter-heading span,
+.module-overview-panel.module-overview-blue .syllabus-number {
+  color: var(--blue);
+}
+
+.module-overview-panel.module-overview-blue .module-overview-intro dl div {
+  border-left-color: var(--blue);
+}
+
+.module-overview-panel.module-overview-blue .module-syllabus li a {
+  text-decoration-color: rgba(51, 154, 240, 0.7);
+}
+
+.curriculum-module-blue .module-index,
+.curriculum-module-blue .module-status,
+.curriculum-module-blue .lesson-context strong {
+  color: var(--blue);
+}
+
+.curriculum-module-blue .curriculum-module-toggle i,
+.curriculum-module-blue .module-toggle i {
+  border-color: var(--blue);
+}
+
+.curriculum-module-blue .module-summary:focus-visible,
+.curriculum-module-blue .curriculum-module-summary:focus-visible {
+  outline-color: var(--blue);
+}
+
+.curriculum-module-blue .module-complete {
+  background: rgba(87, 183, 232, 0.065);
+  box-shadow: inset 4px 0 0 var(--blue);
+}
+
+.module-chapter {
+  align-self: start;
+}
+
+.module-chapter-heading {
+  position: relative;
+  padding-right: 28px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.module-chapter-heading::-webkit-details-marker {
+  display: none;
+}
+
+.module-chapter-heading i {
+  position: absolute;
+  top: 19px;
+  right: 2px;
+  width: 9px;
+  height: 9px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  color: var(--module-accent, var(--lime));
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.module-chapter[open] .module-chapter-heading i {
+  transform: rotate(-135deg);
 }
 
 .module-chapter-heading {
@@ -1931,6 +2050,10 @@ h2 {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.module-chapter:not([open]) ol {
+  display: none;
 }
 
 .module-syllabus li {
@@ -2392,6 +2515,7 @@ h2 {
 }
 
 .program-task-heading {
+  min-width: 0;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -2410,6 +2534,7 @@ h2 {
 }
 
 .program-task-heading h4 {
+  min-width: 0;
   max-width: 680px;
   margin: 0;
   font-family: "Iowan Old Style", Georgia, serif;
@@ -2417,6 +2542,7 @@ h2 {
   font-weight: 500;
   line-height: 1.1;
   text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .lesson-map-list {
@@ -3083,7 +3209,7 @@ footer > p {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .module-syllabus > section {
+  .module-syllabus > .module-chapter {
     padding: 16px;
   }
 

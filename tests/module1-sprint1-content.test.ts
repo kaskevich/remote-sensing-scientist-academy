@@ -56,9 +56,9 @@ describe("Module 1 pedagogical review", () => {
 
   it("publishes all twelve lessons as interactive curriculum pages", () => {
     expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
-      "Thinking Like a Scientific Programmer",
+      "Academy Curriculum",
     );
-    expect(site.curriculum.cohortDate).toBe("Vegetation Data Explorer");
+    expect(site.curriculum.cohortDate).toBe("Module 1 + Module 2 Chapter 1");
     expect(activeLessons.map(({ id, title }) => ({ id, title }))).toEqual([
       { id: "lesson-01", title: "Welcome to Scientific Programming" },
       { id: "lesson-02", title: "Variables and Scientific Data" },
