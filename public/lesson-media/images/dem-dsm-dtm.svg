@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">DEM, DSM and DTM surface meanings</title>
+  <desc id="desc">A coastal meadow profile distinguishes a digital surface model following visible vegetation and structures from a digital terrain model representing estimated bare terrain, with DEM shown as the general elevation-model term.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="64" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">Name the elevation surface before deriving terrain</text>
+  <text x="60" y="98" fill="#526272" font-family="Arial, sans-serif" font-size="17">DEM is a broad term; DSM and DTM communicate how intervening surfaces were treated</text>
+  <g transform="translate(70 145)" font-family="Arial, sans-serif">
+    <rect width="1060" height="350" rx="18" fill="#fff" stroke="#9db8cd" stroke-width="2"/>
+    <path d="M45 270C180 245 240 278 360 225C480 170 570 235 700 195C820 158 890 205 1015 165" fill="none" stroke="#8a7354" stroke-width="8"/>
+    <path d="M45 250C125 222 160 150 205 232C255 175 305 118 360 210C435 147 505 88 570 218C640 155 715 108 760 188C825 120 905 145 1015 150" fill="none" stroke="#17649f" stroke-width="6"/>
+    <g fill="#72ad2c"><path d="M180 240L198 155L216 240Z"/><path d="M300 226L322 125L344 226Z"/><path d="M520 214L550 82L580 214Z"/><path d="M730 194L753 115L776 194Z"/><path d="M870 183L895 108L920 183Z"/></g>
+    <rect x="635" y="140" width="65" height="60" fill="#9db8cd"/><path d="M625 140L667 105L710 140Z" fill="#526272"/>
+    <text x="55" y="45" fill="#17649f" font-size="17" font-weight="700">DSM — upper returned / visible surface</text>
+    <path d="M400 52L440 115" stroke="#17649f" stroke-width="3"/>
+    <text x="55" y="325" fill="#8a7354" font-size="17" font-weight="700">DTM — estimated bare-terrain surface</text>
+    <path d="M410 318L475 245" stroke="#8a7354" stroke-width="3"/>
+  </g>
+  <g transform="translate(140 530)" font-family="Arial, sans-serif">
+    <rect width="920" height="68" rx="18" fill="#0b1f35"/>
+    <text x="460" y="29" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">DSM − DTM is interpretable only after grid, time, vertical reference and quality checks</text>
+    <text x="460" y="52" text-anchor="middle" fill="#c9dbea" font-size="15">A surface difference is not automatically vegetation height</text>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Affine transform from grid indices to map coordinates</title>
+  <desc id="desc">A north-up raster grid shows its upper-left origin, ten-metre cell size, negative y step, cell edges and the centre of row one column two.</desc>
+  <rect width="1200" height="640" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="64" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">The transform locates every row and column</text>
+  <text x="60" y="98" fill="#526272" font-family="Arial, sans-serif" font-size="17">North-up example: origin is a grid corner; a cell centre is offset by half a pixel</text>
+  <g transform="translate(100 150)">
+    <g fill="#e5f1f9" stroke="#438dc2" stroke-width="2">
+      <rect width="150" height="100"/><rect x="150" width="150" height="100"/><rect x="300" width="150" height="100"/><rect x="450" width="150" height="100"/>
+      <rect y="100" width="150" height="100"/><rect x="150" y="100" width="150" height="100"/><rect x="300" y="100" width="150" height="100" fill="#8cc3e8"/><rect x="450" y="100" width="150" height="100"/>
+      <rect y="200" width="150" height="100"/><rect x="150" y="200" width="150" height="100"/><rect x="300" y="200" width="150" height="100"/><rect x="450" y="200" width="150" height="100"/>
+    </g>
+    <circle cx="375" cy="150" r="8" fill="#f28c28"/>
+    <text x="375" y="145" text-anchor="middle" fill="#0b1f35" font-family="Arial, sans-serif" font-size="14" font-weight="700">[1,2]</text>
+    <circle cx="0" cy="0" r="8" fill="#0b1f35"/>
+    <text x="12" y="-13" fill="#0b1f35" font-family="Arial, sans-serif" font-size="16" font-weight="700">origin (500000, 6500120)</text>
+    <path d="M0 -35H150" stroke="#17649f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="75" y="-48" text-anchor="middle" fill="#17649f" font-family="Arial, sans-serif" font-size="15">+10 m per column</text>
+    <path d="M-38 0V100" stroke="#17649f" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="-54" y="50" text-anchor="middle" transform="rotate(-90 -54 50)" fill="#17649f" font-family="Arial, sans-serif" font-size="15">−10 m per row</text>
+  </g>
+  <g transform="translate(770 155)" font-family="Arial, sans-serif">
+    <rect width="350" height="300" rx="18" fill="#fff" stroke="#9db8cd" stroke-width="2"/>
+    <text x="24" y="42" fill="#17649f" font-size="18" font-weight="700">NORTH-UP TRANSFORM</text>
+    <text x="24" y="85" fill="#0b1f35" font-size="17">x = x₀ + column × 10</text>
+    <text x="24" y="119" fill="#0b1f35" font-size="17">y = y₀ + row × (−10)</text>
+    <path d="M24 145H326" stroke="#c9d4dc" stroke-width="2"/>
+    <text x="24" y="181" fill="#526272" font-size="15">Cell [1,2] upper-left edge:</text>
+    <text x="24" y="207" fill="#0b1f35" font-size="17" font-weight="700">(500020, 6500110)</text>
+    <text x="24" y="244" fill="#526272" font-size="15">Cell [1,2] centre:</text>
+    <text x="24" y="270" fill="#0b1f35" font-size="17" font-weight="700">(500025, 6500105)</text>
+  </g>
+  <rect x="168" y="520" width="864" height="62" rx="18" fill="#0b1f35"/>
+  <text x="600" y="558" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="19" font-weight="700">Raster bounds describe outer edges; a cell value has a footprint, not only a centre point</text>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#17649f"/></marker></defs>
+</svg>

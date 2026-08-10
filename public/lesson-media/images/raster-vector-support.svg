@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Raster extraction strategies and spatial support</title>
+  <desc id="desc">A point, plot polygon and justified buffer overlap a raster grid differently, producing different supporting cells and requiring valid coverage evidence.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f5f7f4"/>
+  <text x="60" y="64" fill="#0b1f35" font-family="Arial, sans-serif" font-size="30" font-weight="700">Choose extraction from the field support</text>
+  <text x="60" y="98" fill="#526272" font-family="Arial, sans-serif" font-size="17">The same nominal location yields different evidence under point, footprint and buffer rules</text>
+  <g transform="translate(60 145)" font-family="Arial, sans-serif">
+    <g><rect width="330" height="350" rx="18" fill="#fff" stroke="#9db8cd" stroke-width="2"/><text x="24" y="40" fill="#17649f" font-size="18" font-weight="700">POINT SAMPLE</text><g transform="translate(55 75)" fill="#e8f2fa" stroke="#438dc2"><rect width="220" height="200"/><path d="M55 0V200M110 0V200M165 0V200M0 50H220M0 100H220M0 150H220"/></g><circle cx="180" cy="200" r="9" fill="#f28c28"/><rect x="165" y="175" width="55" height="50" fill="none" stroke="#f28c28" stroke-width="4"/><text x="24" y="320" fill="#526272" font-size="15">one containing cell · support mismatch risk</text></g>
+    <g transform="translate(375)"><rect width="330" height="350" rx="18" fill="#fff" stroke="#9db8cd" stroke-width="2"/><text x="24" y="40" fill="#17649f" font-size="18" font-weight="700">PLOT FOOTPRINT</text><g transform="translate(55 75)" fill="#e8f2fa" stroke="#438dc2"><rect width="220" height="200"/><path d="M55 0V200M110 0V200M165 0V200M0 50H220M0 100H220M0 150H220"/></g><path d="M115 130L230 118L250 226L132 246Z" fill="#f28c2833" stroke="#f28c28" stroke-width="4"/><text x="24" y="320" fill="#526272" font-size="15">polygon cells · count and valid fraction</text></g>
+    <g transform="translate(750)"><rect width="330" height="350" rx="18" fill="#fff" stroke="#9db8cd" stroke-width="2"/><text x="24" y="40" fill="#17649f" font-size="18" font-weight="700">JUSTIFIED BUFFER</text><g transform="translate(55 75)" fill="#e8f2fa" stroke="#438dc2"><rect width="220" height="200"/><path d="M55 0V200M110 0V200M165 0V200M0 50H220M0 100H220M0 150H220"/></g><circle cx="165" cy="175" r="70" fill="#f28c2828" stroke="#f28c28" stroke-width="4"/><circle cx="165" cy="175" r="7" fill="#0b1f35"/><text x="24" y="320" fill="#526272" font-size="15">only with uncertainty or process rationale</text></g>
+  </g>
+  <rect x="145" y="550" width="910" height="54" rx="18" fill="#0b1f35"/>
+  <text x="600" y="584" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700">Report method · valid cells · valid fraction · statistic · source · support rationale</text>
+</svg>

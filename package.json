@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit --incremental false",
     "test": "vitest run",
+    "test:raster": "python3 scripts/validate_raster_training_pack.py",
     "test:smoke": "playwright test"
   },
   "dependencies": {

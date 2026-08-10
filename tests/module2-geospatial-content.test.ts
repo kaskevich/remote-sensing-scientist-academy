@@ -45,16 +45,17 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(chapterLessons.map((item) => item.number)).toEqual(
       Array.from({ length: 49 }, (_, index) => index + 1),
     );
-    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(10);
-    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(39);
-    expect(chapterLessons.slice(0, 10).every((item) => item.lessonId)).toBe(true);
-    expect(chapterLessons.slice(10).every((item) => item.lessonId === undefined)).toBe(true);
+    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(17);
+    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(32);
+    expect(chapterLessons.slice(0, 17).every((item) => item.lessonId)).toBe(true);
+    expect(chapterLessons.slice(17).every((item) => item.lessonId === undefined)).toBe(true);
     expect(module2Overview.capstone?.status).toBe("planned");
     expect(module2Overview.capstone?.lessonId).toBeUndefined();
-    expect(module2Overview.navigationMeta).toBe("10 lessons · 2 practica available");
+    expect(module2Overview.navigationMeta).toBe("17 lessons · 3 practica available");
     expect(module2Overview.chapters[0].practicum?.lessonId).toBe("module-2-chapter-1-practicum");
     expect(module2Overview.chapters[1].practicum?.lessonId).toBe("module-2-chapter-2-practicum");
-    expect(module2Overview.chapters.slice(2).every((chapter) => chapter.practicum === undefined)).toBe(true);
+    expect(module2Overview.chapters[2].practicum?.lessonId).toBe("module-2-chapter-3-practicum");
+    expect(module2Overview.chapters.slice(3).every((chapter) => chapter.practicum === undefined)).toBe(true);
   });
 
   it("uses unique stable IDs for the 49-lesson syllabus and capstone", () => {
@@ -67,7 +68,7 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(ids.at(-1)).toBe("lesson-2-capstone");
   });
 
-  it("publishes Spatial Foundations and the reviewed vector-analysis sequence", () => {
+  it("publishes the three fully reviewed opening chapters", () => {
     expect(publishedModule2LessonIds).toEqual([
       "lesson-2-01",
       "lesson-2-02",
@@ -79,10 +80,17 @@ describe("Module 2 Geospatial Data Science", () => {
       "lesson-2-08",
       "lesson-2-09",
       "lesson-2-10",
+      "lesson-2-11",
+      "lesson-2-12",
+      "lesson-2-13",
+      "lesson-2-14",
+      "lesson-2-15",
+      "lesson-2-16",
+      "lesson-2-17",
     ]);
     expect(publishedModule2Lessons.map((item) => item.id)).toEqual(publishedModule2LessonIds);
     expect(Object.keys(module2LessonDetails)).toEqual(publishedModule2LessonIds);
-    expect(module2Lessons.slice(10).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
+    expect(module2Lessons.slice(17).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
   });
 
   it.each(publishedModule2Lessons)("$number $title is a complete reviewed lesson", (source) => {
@@ -130,10 +138,11 @@ describe("Module 2 Geospatial Data Science", () => {
     ]));
   });
 
-  it("adds two unnumbered, reviewed chapter practica", () => {
+  it("adds three unnumbered, reviewed chapter practica", () => {
     expect(module2ChapterPractica.map((item) => item.id)).toEqual([
       "module-2-chapter-1-practicum",
       "module-2-chapter-2-practicum",
+      "module-2-chapter-3-practicum",
     ]);
     for (const practicum of module2ChapterPractica) {
       const details = module2PracticumDetails[practicum.id];
@@ -149,6 +158,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(practicumMarkdown("module-2-chapter-1-practicum")).toMatch(/250–350 words maximum/i);
     expect(practicumMarkdown("module-2-chapter-2-practicum")).toContain("Vector Handover Review");
     expect(practicumMarkdown("module-2-chapter-2-practicum")).toContain("Professional Mistakes — Vector GIS");
+    expect(practicumMarkdown("module-2-chapter-3-practicum")).toContain("Professional Mistakes — Raster Science");
+    expect(practicumMarkdown("module-2-chapter-3-practicum")).toContain("RASTER_QA_REPORT.md");
   });
 
   it("covers the required professional reasoning in each lesson", () => {
@@ -265,6 +276,13 @@ describe("Module 2 Geospatial Data Science", () => {
       "spatial-index-two-stage.svg",
       "vector-cleaning-decision-log.svg",
       "qgis-python-qa-loop.svg",
+      "raster-anatomy.svg",
+      "affine-transform-grid.svg",
+      "crop-mask-reproject-resample.svg",
+      "raster-grid-alignment.svg",
+      "raster-vector-support.svg",
+      "windowed-raster-processing.svg",
+      "dem-dsm-dtm.svg",
     ]) {
       expect(allContent).toContain(`lesson-media/images/${diagram}`);
       expect(existsSync(join(process.cwd(), "public/lesson-media/images", diagram))).toBe(true);
@@ -333,16 +351,102 @@ describe("Module 2 Geospatial Data Science", () => {
     }
   });
 
-  it("extends the portfolio starter through the complete vector chapter", () => {
+  it("teaches the complete Raster Science decision chain", () => {
+    const rasterLessons = Array.from({ length: 7 }, (_, index) =>
+      lessonMarkdown(`lesson-2-${String(index + 11).padStart(2, "0")}`),
+    );
+    const [anatomy, rasterio, operations, alignment, extraction, largeRaster, terrain] = rasterLessons;
+
+    for (const term of ["transform", "CRS", "NoData", "mask", "cell centre", "categorical", "continuous"]) {
+      expect(anatomy).toMatch(new RegExp(term, "i"));
+    }
+    expect(rasterio).toMatch(/context manager/i);
+    expect(rasterio).toMatch(/reopen/i);
+    for (const operation of ["crop", "mask", "reproject", "resample"]) {
+      expect(operations).toMatch(new RegExp(operation, "i"));
+    }
+    expect(operations).toMatch(/nearest neighbour/i);
+    expect(alignment).toMatch(/same CRS[\s\S]*not enough|same CRS is not enough/i);
+    expect(alignment).toMatch(/transform[\s\S]*resolution[\s\S]*shape[\s\S]*bounds/i);
+    expect(extraction).toMatch(/point sampling/i);
+    expect(extraction).toMatch(/zonal statistics/i);
+    expect(largeRaster).toMatch(/window/i);
+    expect(largeRaster).toMatch(/halo/i);
+    expect(terrain).toMatch(/DEM[\s\S]*DSM[\s\S]*DTM/i);
+    expect(terrain).toMatch(/vertical reference/i);
+    expect(terrain).toMatch(/slope[\s\S]*aspect[\s\S]*hillshade/i);
+
+    for (const source of publishedModule2Lessons.filter((item) => item.chapter === 3)) {
+      expect(module2LessonDetails[source.id].technicalMetadata.testedVersions).toEqual(expect.arrayContaining([
+        { label: "NumPy", value: MODULE2_SOFTWARE_VERSIONS.numpy },
+        { label: "Rasterio", value: MODULE2_SOFTWARE_VERSIONS.rasterio },
+        { label: "QGIS", value: MODULE2_SOFTWARE_VERSIONS.qgis },
+      ]));
+    }
+  });
+
+  it("ships a complete checksummed synthetic raster training pack", () => {
+    const folder = join(process.cwd(), "public/lesson-resources/module-2/raster-foundations");
+    const manifest = JSON.parse(readFileSync(join(folder, "manifest.json"), "utf8")) as {
+      licence: string;
+      assets: Array<{
+        filename: string;
+        purpose: string;
+        crs: string | null;
+        transform: number[];
+        resolution: number[];
+        shape: number[];
+        bounds: number[];
+        bandCount: number;
+        dtype: string;
+        nodata: number | null;
+        semanticType: string;
+        units: string;
+        expectedQaBehavior: string;
+        syntheticOpenStatus: string;
+        sha256: string;
+      }>;
+      supportVectors: Array<{ filename: string; sha256: string }>;
+    };
+
+    expect(manifest.licence).toMatch(/^CC0/);
+    expect(manifest.assets.length).toBeGreaterThanOrEqual(15);
+    for (const asset of manifest.assets) {
+      expect(asset.purpose).toBeTruthy();
+      expect(asset.transform).toHaveLength(6);
+      expect(asset.resolution).toHaveLength(2);
+      expect(asset.shape).toHaveLength(2);
+      expect(asset.bounds).toHaveLength(4);
+      expect(asset.bandCount).toBeGreaterThanOrEqual(1);
+      expect(asset.dtype).toBeTruthy();
+      expect(asset.semanticType).toBeTruthy();
+      expect(asset.units).toBeTruthy();
+      expect(asset.expectedQaBehavior).toBeTruthy();
+      expect(asset.syntheticOpenStatus).toMatch(/synthetic/i);
+      const actual = createHash("sha256").update(readFileSync(join(folder, asset.filename))).digest("hex");
+      expect(actual, `${asset.filename} checksum`).toBe(asset.sha256);
+    }
+    for (const vector of manifest.supportVectors) {
+      const actual = createHash("sha256").update(readFileSync(join(folder, vector.filename))).digest("hex");
+      expect(actual, `${vector.filename} checksum`).toBe(vector.sha256);
+    }
+    const guide = readFileSync(join(folder, "README.md"), "utf8");
+    expect(guide).toMatch(/synthetic/i);
+    expect(guide).toMatch(/EPSG:3301/);
+    expect(guide).toMatch(/NoData/i);
+  });
+
+  it("extends the portfolio starter through the complete raster chapter", () => {
     const notebook = JSON.parse(readFileSync(
       join(process.cwd(), "public/lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
       "utf8",
     )) as { cells: Array<{ source: string[] }> };
     const source = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (const lesson of ["2.8", "2.9", "2.10"]) {
+    for (const lesson of ["2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.17"]) {
       expect(source).toContain(`Lesson ${lesson} checkpoint`);
     }
     expect(source).toContain("Chapter 1 Practicum checkpoint");
     expect(source).toContain("Chapter 2 Practicum checkpoint");
+    expect(source).toContain("Chapter 3 Practicum checkpoint");
   });
 });

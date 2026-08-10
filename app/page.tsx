@@ -151,6 +151,36 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
       title: "Download the structured QGIS observation log",
     },
   ],
+  "lesson-2-11": [
+    { href: "lesson-resources/module-2/raster-foundations/README.md", title: "Read the synthetic raster training-pack guide" },
+    { href: "lesson-resources/module-2/raster-foundations/manifest.json", title: "Download the raster metadata and checksum manifest" },
+  ],
+  "lesson-2-12": [
+    { href: "lesson-resources/module-2/raster-foundations/aligned_continuous.tif", title: "Download the aligned continuous GeoTIFF" },
+    { href: "lesson-resources/module-2/raster-foundations/aligned_categorical.tif", title: "Download the aligned categorical GeoTIFF" },
+    { href: "lesson-resources/module-2/raster-foundations/conflicting_nodata.tif", title: "Download the conflicting-NoData training raster" },
+  ],
+  "lesson-2-13": [
+    { href: "lesson-resources/module-2/raster-foundations/training_site_boundary.geojson", title: "Download the synthetic site boundary" },
+    { href: "lesson-resources/module-2/raster-foundations/different_crs.tif", title: "Download the different-CRS training raster" },
+    { href: "lesson-resources/module-2/raster-foundations/different_resolution.tif", title: "Download the different-resolution training raster" },
+  ],
+  "lesson-2-14": [
+    { href: "lesson-resources/module-2/raster-foundations/shifted_origin.tif", title: "Download the shifted-origin raster" },
+    { href: "lesson-resources/module-2/raster-foundations/cropped_extent.tif", title: "Download the cropped-extent raster" },
+    { href: "lesson-resources/module-2/raster-foundations/missing_crs.tif", title: "Download the deliberately missing-CRS raster" },
+  ],
+  "lesson-2-15": [
+    { href: "lesson-resources/module-2/raster-foundations/training_plot_polygons.geojson", title: "Download the synthetic plot polygons" },
+    { href: "lesson-resources/module-2/raster-foundations/aligned_continuous.tif", title: "Download the extraction training raster" },
+  ],
+  "lesson-2-16": [
+    { href: "lesson-resources/module-2/raster-foundations/large_tiled_continuous.tif", title: "Download the tiled window-processing raster" },
+  ],
+  "lesson-2-17": [
+    { href: "lesson-resources/module-2/raster-foundations/training_dem.tif", title: "Download the synthetic DEM" },
+    { href: "lesson-resources/module-2/raster-foundations/training_dsm.tif", title: "Download the synthetic DSM" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -181,6 +211,15 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
+  const resources = source.chapter === 3
+    ? [
+        { href: "lesson-resources/module-2/raster-foundations/README.md", title: "Read the raster practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/raster-foundations/manifest.json", title: "Download the raster training-data manifest" },
+      ]
+    : [{
+        href: "lesson-resources/module-2/vector-foundations/training_data_manifest.json",
+        title: "Download the vector training-data manifest",
+      }];
   return {
     id: source.id,
     kind: "practicum",
@@ -192,10 +231,10 @@ const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.m
     tools: [...source.tools],
     content: readReviewedLesson(pedagogy.markdownFile),
     images: [],
-    resources: [{
-      href: publicAssetPath("lesson-resources/module-2/vector-foundations/training_data_manifest.json"),
-      title: "Download the vector training-data manifest",
-    }],
+    resources: resources.map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
+    })),
     pedagogy,
     task: {
       title: `Submit ${source.artifact}`,
@@ -212,6 +251,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-10") {
     return [lesson, module2PracticumAcademyLessons[1]];
+  }
+  if (lesson.id === "lesson-2-17") {
+    return [lesson, module2PracticumAcademyLessons[2]];
   }
   return [lesson];
 });
