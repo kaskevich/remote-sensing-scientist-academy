@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_study_area",
+  "bbox": [24.6, 58.7, 24.606, 58.704],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "TS01",
+      "properties": { "site_id": "TS01", "site_name": "Synthetic coastal-meadow training area" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6, 58.7], [24.606, 58.7], [24.606, 58.704], [24.6, 58.704], [24.6, 58.7]]]
+      }
+    }
+  ]
+}

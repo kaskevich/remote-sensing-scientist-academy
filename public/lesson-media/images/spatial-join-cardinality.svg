@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Spatial join predicate and cardinality audit</title>
+  <desc id="desc">Interior, boundary and outside points produce different results with within and intersects predicates. A left spatial join preserves unmatched points and may duplicate a boundary point when it matches multiple zones, so row counts and identifiers must be audited.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="30" font-weight="700">The predicate determines the match; cardinality reveals the consequence</text>
+  <text x="58" y="96" fill="#44516a" font-family="Arial, sans-serif" font-size="17">Keep unmatched features visible and treat duplicated rows as evidence to diagnose</text>
+
+  <rect x="58" y="136" width="490" height="374" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="84" y="174" fill="#0c1a34" font-family="Arial, sans-serif" font-size="18" font-weight="700">INPUT GEOMETRY</text>
+  <rect x="98" y="213" width="196" height="222" fill="#dfeaf7" stroke="#3c7fc4" stroke-width="3"/>
+  <rect x="294" y="213" width="196" height="222" fill="#e7f2ce" stroke="#7ba32b" stroke-width="3"/>
+  <text x="196" y="244" text-anchor="middle" fill="#306fbd" font-family="Arial, sans-serif" font-size="15" font-weight="700">ZONE W</text>
+  <text x="392" y="244" text-anchor="middle" fill="#58771f" font-family="Arial, sans-serif" font-size="15" font-weight="700">ZONE E</text>
+  <circle cx="173" cy="328" r="10" fill="#0c1a34"/><text x="156" y="357" fill="#44516a" font-family="Arial, sans-serif" font-size="14">inside</text>
+  <circle cx="294" cy="328" r="10" fill="#ef8b42" stroke="#0c1a34" stroke-width="2"/><text x="270" y="357" fill="#44516a" font-family="Arial, sans-serif" font-size="14">boundary</text>
+  <circle cx="517" cy="328" r="10" fill="#9ca6b7"/><text x="486" y="357" fill="#44516a" font-family="Arial, sans-serif" font-size="14">outside</text>
+  <text x="84" y="474" fill="#44516a" font-family="Arial, sans-serif" font-size="14">Three input points · two polygons · one shared boundary</text>
+
+  <path d="M576 318 H630" stroke="#ef8b42" stroke-width="4"/>
+  <path d="M622 308 L636 318 L622 328" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <rect x="660" y="136" width="482" height="374" rx="18" fill="#0c1a34"/>
+  <text x="690" y="176" fill="#c8f33d" font-family="Arial, sans-serif" font-size="18" font-weight="700">LEFT JOIN AUDIT</text>
+  <g font-family="Arial, sans-serif" font-size="15">
+    <text x="690" y="221" fill="#b7c1d4">predicate</text><text x="825" y="221" fill="#b7c1d4">boundary</text><text x="964" y="221" fill="#b7c1d4">rows</text><text x="1041" y="221" fill="#b7c1d4">outside</text>
+    <line x1="690" y1="238" x2="1112" y2="238" stroke="#394760"/>
+    <text x="690" y="277" fill="#fff" font-weight="700">within</text><text x="825" y="277" fill="#efb07f">unmatched</text><text x="964" y="277" fill="#fff">3</text><text x="1041" y="277" fill="#fff">kept</text>
+    <text x="690" y="326" fill="#fff" font-weight="700">intersects</text><text x="825" y="326" fill="#c8f33d">2 matches</text><text x="964" y="326" fill="#fff">4</text><text x="1041" y="326" fill="#fff">kept</text>
+    <line x1="690" y1="351" x2="1112" y2="351" stroke="#394760"/>
+    <text x="690" y="391" fill="#fff">Input rows</text><text x="964" y="391" fill="#fff" font-weight="700">3</text>
+    <text x="690" y="430" fill="#fff">Unmatched IDs</text><text x="964" y="430" fill="#fff" font-weight="700">report</text>
+    <text x="690" y="469" fill="#fff">Duplicate IDs</text><text x="964" y="469" fill="#fff" font-weight="700">explain</text>
+  </g>
+  <rect x="128" y="550" width="944" height="48" rx="24" fill="#0c1a34"/>
+  <text x="600" y="580" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700">Never drop duplicates until you know whether they represent valid one-to-many evidence or a topology problem</text>
+</svg>

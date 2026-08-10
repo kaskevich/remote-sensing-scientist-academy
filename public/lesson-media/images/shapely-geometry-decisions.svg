@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Shapely geometry decisions</title>
+  <desc id="desc">Predicates return true or false, constructive and set operations create new geometry, and both require projected units, validity checks and a scientific justification for the represented support.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="30" font-weight="700">Geometry can answer a relation or create a new support</text>
+  <text x="58" y="96" fill="#44516a" font-family="Arial, sans-serif" font-size="17">The software result is only defensible when units, topology and ecological meaning agree</text>
+
+  <rect x="58" y="136" width="335" height="348" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="86" y="177" fill="#306fbd" font-family="Arial, sans-serif" font-size="18" font-weight="700">PREDICATE</text>
+  <text x="86" y="205" fill="#44516a" font-family="Arial, sans-serif" font-size="15">Returns True or False</text>
+  <path d="M121 284 C121 238 182 226 211 256 C239 222 314 239 314 295 C314 350 252 375 211 343 C168 376 121 344 121 284Z" fill="#dfeaf7" stroke="#3c7fc4" stroke-width="3"/>
+  <circle cx="209" cy="293" r="10" fill="#ef8b42" stroke="#0c1a34" stroke-width="3"/>
+  <text x="86" y="411" fill="#0c1a34" font-family="Arial, sans-serif" font-size="16" font-weight="700">point.within(polygon)</text>
+  <text x="86" y="441" fill="#44516a" font-family="Arial, sans-serif" font-size="15">Does not alter either geometry</text>
+
+  <rect x="433" y="136" width="335" height="348" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="461" y="177" fill="#8b6819" font-family="Arial, sans-serif" font-size="18" font-weight="700">CONSTRUCTIVE</text>
+  <text x="461" y="205" fill="#44516a" font-family="Arial, sans-serif" font-size="15">Creates a new geometry</text>
+  <circle cx="599" cy="295" r="88" fill="#f8e2d2" stroke="#ef8b42" stroke-width="3" stroke-dasharray="8 6"/>
+  <circle cx="599" cy="295" r="10" fill="#0c1a34"/>
+  <line x1="599" y1="295" x2="687" y2="295" stroke="#ef8b42" stroke-width="3"/>
+  <text x="625" y="282" fill="#8b4a18" font-family="Arial, sans-serif" font-size="14" font-weight="700">5 m</text>
+  <text x="461" y="411" fill="#0c1a34" font-family="Arial, sans-serif" font-size="16" font-weight="700">point.buffer(5)</text>
+  <text x="461" y="441" fill="#44516a" font-family="Arial, sans-serif" font-size="15">Defines an analytical neighbourhood</text>
+
+  <rect x="808" y="136" width="334" height="348" rx="18" fill="#0c1a34"/>
+  <text x="838" y="177" fill="#c8f33d" font-family="Arial, sans-serif" font-size="18" font-weight="700">DECISION GATE</text>
+  <g fill="#fff" font-family="Arial, sans-serif" font-size="16">
+    <text x="838" y="231">1  Are coordinates projected?</text>
+    <text x="838" y="278">2  Are units appropriate?</text>
+    <text x="838" y="325">3  Is geometry valid?</text>
+    <text x="838" y="372">4  Did type or area change?</text>
+    <text x="838" y="419">5  Does support answer the</text>
+    <text x="858" y="444">scientific question?</text>
+  </g>
+
+  <rect x="88" y="526" width="1024" height="76" rx="18" fill="#e9eef8" stroke="#c8cfda"/>
+  <text x="600" y="558" text-anchor="middle" fill="#0c1a34" font-family="Arial, sans-serif" font-size="18" font-weight="700">Valid geometry ≠ valid scientific design</text>
+  <text x="600" y="585" text-anchor="middle" fill="#44516a" font-family="Arial, sans-serif" font-size="15">A five-metre buffer is mathematically executable; its ecological meaning still needs field protocol, positional accuracy and process evidence</text>
+</svg>

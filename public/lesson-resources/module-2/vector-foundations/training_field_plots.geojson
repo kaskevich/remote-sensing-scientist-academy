@@ -1,0 +1,37 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_field_plots",
+  "bbox": [24.601, 58.701, 24.607, 58.705],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "TP01",
+      "properties": { "plot_id": "TP01", "qa_status": "reviewed", "training_role": "interior west-low" },
+      "geometry": { "type": "Point", "coordinates": [24.601, 58.701] }
+    },
+    {
+      "type": "Feature",
+      "id": "TP02",
+      "properties": { "plot_id": "TP02", "qa_status": "reviewed", "training_role": "interior east-low" },
+      "geometry": { "type": "Point", "coordinates": [24.604, 58.701] }
+    },
+    {
+      "type": "Feature",
+      "id": "TP03",
+      "properties": { "plot_id": "TP03", "qa_status": "reviewed", "training_role": "interior west-high" },
+      "geometry": { "type": "Point", "coordinates": [24.602, 58.703] }
+    },
+    {
+      "type": "Feature",
+      "id": "TP04",
+      "properties": { "plot_id": "TP04", "qa_status": "review", "training_role": "shared-boundary case" },
+      "geometry": { "type": "Point", "coordinates": [24.603, 58.702] }
+    },
+    {
+      "type": "Feature",
+      "id": "TP05",
+      "properties": { "plot_id": "TP05", "qa_status": "review", "training_role": "outside-site case" },
+      "geometry": { "type": "Point", "coordinates": [24.607, 58.705] }
+    }
+  ]
+}
