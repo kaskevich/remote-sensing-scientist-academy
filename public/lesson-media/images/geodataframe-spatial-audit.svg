@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Anatomy and audit of a GeoDataFrame</title>
+  <desc id="desc">A spatial table combines identifiers and attributes with an active geometry column and one coordinate reference system. A professional audit checks rows, identifiers, geometry types, missing and empty geometry, CRS and total bounds before analysis.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="30" font-weight="700">A GeoDataFrame is a table with a spatial contract</text>
+  <text x="58" y="96" fill="#44516a" font-family="Arial, sans-serif" font-size="17">Rows and attributes remain familiar from pandas; geometry and CRS add spatial meaning</text>
+
+  <rect x="58" y="132" width="675" height="410" rx="18" fill="#ffffff" stroke="#c8cfda" stroke-width="2"/>
+  <rect x="58" y="132" width="675" height="58" rx="18" fill="#0c1a34"/>
+  <rect x="58" y="172" width="675" height="18" fill="#0c1a34"/>
+  <text x="82" y="168" fill="#ffffff" font-family="Arial, sans-serif" font-size="18" font-weight="700">FIELD-PLOT GEODATAFRAME</text>
+  <line x1="205" y1="190" x2="205" y2="510" stroke="#d9dee6"/>
+  <line x1="360" y1="190" x2="360" y2="510" stroke="#d9dee6"/>
+  <line x1="510" y1="190" x2="510" y2="510" stroke="#d9dee6"/>
+  <line x1="58" y1="246" x2="733" y2="246" stroke="#d9dee6"/>
+  <line x1="58" y1="312" x2="733" y2="312" stroke="#d9dee6"/>
+  <line x1="58" y1="378" x2="733" y2="378" stroke="#d9dee6"/>
+  <line x1="58" y1="444" x2="733" y2="444" stroke="#d9dee6"/>
+  <line x1="58" y1="510" x2="733" y2="510" stroke="#d9dee6"/>
+  <g fill="#0c1a34" font-family="Arial, sans-serif" font-size="15" font-weight="700">
+    <text x="82" y="225">plot_id</text><text x="229" y="225">qa_status</text><text x="384" y="225">site_id</text><text x="534" y="225">geometry ★</text>
+  </g>
+  <g fill="#44516a" font-family="Arial, sans-serif" font-size="15">
+    <text x="82" y="286">TP01</text><text x="229" y="286">reviewed</text><text x="384" y="286">TS01</text><text x="534" y="286">POINT (…)</text>
+    <text x="82" y="352">TP02</text><text x="229" y="352">reviewed</text><text x="384" y="352">TS01</text><text x="534" y="352">POINT (…)</text>
+    <text x="82" y="418">TP03</text><text x="229" y="418">reviewed</text><text x="384" y="418">TS01</text><text x="534" y="418">POINT (…)</text>
+    <text x="82" y="484">TP04</text><text x="229" y="484">review</text><text x="384" y="484">—</text><text x="534" y="484">POINT (…)</text>
+  </g>
+  <rect x="58" y="510" width="675" height="32" rx="0" fill="#e9eef8"/>
+  <text x="82" y="532" fill="#306fbd" font-family="Arial, sans-serif" font-size="14" font-weight="700">Active geometry: geometry   ·   CRS: OGC:CRS84 / WGS 84 longitude–latitude</text>
+
+  <path d="M756 330 H812" stroke="#ef8b42" stroke-width="4"/>
+  <path d="M804 320 L818 330 L804 340" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <rect x="836" y="132" width="306" height="410" rx="18" fill="#0c1a34"/>
+  <text x="870" y="175" fill="#c8f33d" font-family="Arial, sans-serif" font-size="17" font-weight="700">AUDIT BEFORE ANALYSIS</text>
+  <g font-family="Arial, sans-serif">
+    <circle cx="879" cy="225" r="13" fill="#3c7fc4"/><text x="874" y="231" fill="#fff" font-size="14" font-weight="700">1</text><text x="908" y="230" fill="#fff" font-size="17">Row count and IDs</text>
+    <circle cx="879" cy="282" r="13" fill="#3c7fc4"/><text x="874" y="288" fill="#fff" font-size="14" font-weight="700">2</text><text x="908" y="287" fill="#fff" font-size="17">Geometry type</text>
+    <circle cx="879" cy="339" r="13" fill="#3c7fc4"/><text x="874" y="345" fill="#fff" font-size="14" font-weight="700">3</text><text x="908" y="344" fill="#fff" font-size="17">Missing and empty</text>
+    <circle cx="879" cy="396" r="13" fill="#3c7fc4"/><text x="874" y="402" fill="#fff" font-size="14" font-weight="700">4</text><text x="908" y="401" fill="#fff" font-size="17">CRS and units</text>
+    <circle cx="879" cy="453" r="13" fill="#3c7fc4"/><text x="874" y="459" fill="#fff" font-size="14" font-weight="700">5</text><text x="908" y="458" fill="#fff" font-size="17">Total bounds</text>
+    <text x="870" y="505" fill="#b7c1d4" font-size="14">Then filter, plot or write a derivative</text>
+  </g>
+  <rect x="210" y="574" width="780" height="46" rx="23" fill="#0c1a34"/>
+  <text x="600" y="603" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700">A successful read proves file access — not spatial fitness, identity integrity or scientific validity</text>
+</svg>

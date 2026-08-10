@@ -522,6 +522,9 @@ export const publishedModule2LessonIds = [
   "lesson-2-02",
   "lesson-2-03",
   "lesson-2-04",
+  "lesson-2-05",
+  "lesson-2-06",
+  "lesson-2-07",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -535,10 +538,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "4 lessons available",
+  navigationMeta: "7 lessons available",
   syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
   planningNote:
-    "Chapter 1 is available now. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.7 are available now. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -830,6 +833,189 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
       { title: "Unidata netCDF documentation", href: "https://docs.unidata.ucar.edu/netcdf-c/current/" },
     ],
   },
+  "lesson-2-05": {
+    estimatedTime: "110–130 minutes",
+    markdownFile: "content/lessons/module-2/lesson-05.md",
+    formativeChecks: [
+      {
+        id: "m2-l5-geodataframe",
+        question: "What makes a GeoDataFrame spatial rather than an ordinary pandas DataFrame?",
+        options: [
+          "An active geometry column and CRS connect tabular records to a spatial representation",
+          "Every column must contain coordinates",
+          "Its index automatically becomes a scientifically stable feature identifier",
+        ],
+        correctOption: 0,
+        explanation: "A GeoDataFrame retains pandas rows and attributes while adding geometry-aware behaviour. Stable identifiers, CRS truth and scientific fitness still require validation.",
+      },
+      {
+        id: "m2-l5-audit",
+        question: "Which evidence should be recorded before using a newly opened point layer?",
+        options: [
+          "Row and ID checks, geometry types, missing and empty geometry, CRS and bounds",
+          "Only a screenshot showing that the points draw",
+          "Only the file extension and modification date",
+        ],
+        correctOption: 0,
+        explanation: "A plot can hide duplicated identity, empty geometry and incorrect reference metadata. A structured numerical audit makes those conditions testable and reproducible.",
+      },
+      {
+        id: "m2-l5-roundtrip",
+        question: "When is the new GeoPackage derivative ready for analytical use?",
+        options: [
+          "After it is reopened and row count, IDs, geometry, CRS and bounds are compared with the intended source transformation",
+          "When to_file() returns without raising an exception",
+          "When its file size is smaller than the GeoJSON input",
+        ],
+        correctOption: 0,
+        explanation: "Writing bytes is not preservation evidence. Reopening and comparing the derivative detects schema, geometry and metadata loss while the immutable source remains available.",
+      },
+    ],
+    submissionChecklist: [
+      "All four synthetic training layers are identified as instructional rather than published field evidence",
+      "Row count, stable IDs, geometry types, missing, empty, validity, CRS and bounds are audited",
+      "Filtering decisions preserve excluded IDs and an explicit scientific rule",
+      "GeoPackage layers are written as derivatives and reopened for round-trip verification",
+      "The stop/go audit detects at least one deliberately introduced defect",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Reads, audits, filters, plots and writes GeoDataFrames without losing their spatial contract" },
+      { dimension: "Conceptual understanding", expectation: "Explains active geometry, CRS, stable identity, per-feature bounds and total bounds" },
+      { dimension: "Reproducibility", expectation: "Uses portable paths, preserves raw inputs and verifies every written GeoPackage layer" },
+      { dimension: "Scientific communication", expectation: "Separates structural fitness from positional accuracy and ecological validity" },
+    ],
+    coreReferences: [
+      { title: "GeoPandas GeoDataFrame reference", href: "https://geopandas.org/en/stable/docs/reference/geodataframe.html" },
+      { title: "GeoPandas reading and writing files", href: "https://geopandas.org/en/stable/docs/user_guide/io.html" },
+      { title: "RFC 7946: The GeoJSON Format", href: "https://www.rfc-editor.org/rfc/rfc7946" },
+    ],
+    furtherReading: [
+      { title: "GeoPandas read_file reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.read_file.html" },
+      { title: "OGC GeoPackage standard", href: "https://www.ogc.org/standards/geopackage/" },
+    ],
+  },
+  "lesson-2-06": {
+    estimatedTime: "115–135 minutes",
+    markdownFile: "content/lessons/module-2/lesson-06.md",
+    formativeChecks: [
+      {
+        id: "m2-l6-predicate",
+        question: "A point lies exactly on a polygon boundary. Which statement is correct?",
+        options: [
+          "It intersects the polygon but is not within its interior under the usual topological definition",
+          "It is always within and never touches the polygon",
+          "The result depends only on the point's attribute table",
+        ],
+        correctOption: 0,
+        explanation: "Predicates encode distinct topological relationships. Boundary behaviour must be matched to the scientific assignment rule rather than chosen for convenience.",
+      },
+      {
+        id: "m2-l6-validity",
+        question: "What does a valid polygon establish?",
+        options: [
+          "Its topology is well formed; scientific meaning, positional accuracy and appropriate support still need evidence",
+          "Its boundary is ecologically correct and current",
+          "Its centroid must lie inside and represent a sampled location",
+        ],
+        correctOption: 0,
+        explanation: "Validity is a computational topology property. It cannot certify field provenance, ecological interpretation or suitability for a remote-sensing analysis.",
+      },
+      {
+        id: "m2-l6-support",
+        question: "When can buffer(5) be interpreted as a five-metre ecological neighbourhood?",
+        options: [
+          "When the CRS uses suitable metre units and independent scientific evidence justifies that support",
+          "Whenever the layer appears on a web map",
+          "Whenever every output polygon is valid",
+        ],
+        correctOption: 0,
+        explanation: "Projected units make the numerical distance interpretable. Field protocol, positional uncertainty and process knowledge are still required to give the buffer ecological meaning.",
+      },
+    ],
+    submissionChecklist: [
+      "Point, LineString, Polygon and multipart geometry are interpreted as models rather than accuracy claims",
+      "Predicates, constructive operations and set operations are distinguished",
+      "Every distance, buffer and area operation uses an inspected projected CRS and explicit units",
+      "Geometry-changing steps preserve IDs and compare type, count, validity and area before and after",
+      "The selected neighbourhood support is justified and tested across plausible alternatives",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Creates, inspects and audits predicates, buffers and set-operation derivatives in appropriate units" },
+      { dimension: "Conceptual understanding", expectation: "Separates topology, geometry type and mathematical validity from scientific support" },
+      { dimension: "Reproducibility", expectation: "Records parameters and before-and-after geometry evidence without overwriting sources" },
+      { dimension: "Scientific communication", expectation: "Defends or rejects a support rule without presenting derived geometry as observed evidence" },
+    ],
+    coreReferences: [
+      { title: "Shapely predicates", href: "https://shapely.readthedocs.io/en/stable/predicates.html" },
+      { title: "Shapely buffer reference", href: "https://shapely.readthedocs.io/en/stable/reference/shapely.buffer.html" },
+      { title: "Shapely make_valid reference", href: "https://shapely.readthedocs.io/en/stable/reference/shapely.make_valid.html" },
+    ],
+    furtherReading: [
+      { title: "Shapely user manual", href: "https://shapely.readthedocs.io/en/stable/manual.html" },
+      { title: "Shapely intersection reference", href: "https://shapely.readthedocs.io/en/stable/reference/shapely.intersection.html" },
+    ],
+  },
+  "lesson-2-07": {
+    estimatedTime: "120–145 minutes",
+    markdownFile: "content/lessons/module-2/lesson-07.md",
+    formativeChecks: [
+      {
+        id: "m2-l7-join-type",
+        question: "A validated site_id exists in both the plot table and site metadata table. What relationship should be considered first?",
+        options: [
+          "A validated attribute join, because the shared key already defines the relationship",
+          "A nearest spatial join with no distance limit",
+          "An overlay that splits every plot geometry",
+        ],
+        correctOption: 0,
+        explanation: "Join evidence should match the data contract. Geometry is not automatically stronger than a governed identifier, and key integrity must still be audited.",
+      },
+      {
+        id: "m2-l7-cardinality",
+        question: "A left spatial join produces more rows than the input plot layer. What should you do first?",
+        options: [
+          "Identify repeated plot IDs and diagnose legitimate one-to-many matches, overlaps or topology problems",
+          "Drop duplicated plot IDs and keep the first row",
+          "Switch to an inner join so the table looks cleaner",
+        ],
+        correctOption: 0,
+        explanation: "Row expansion is evidence about cardinality. Deleting repetitions before diagnosis can erase boundary ambiguity or valid multi-membership.",
+      },
+      {
+        id: "m2-l7-nearest",
+        question: "What makes a nearest-neighbour spatial join scientifically reviewable?",
+        options: [
+          "Projected units, a justified maximum distance, an output distance column and explicit tie/unmatched checks",
+          "Assigning a nearest feature to every point regardless of distance",
+          "Removing the distance column after the join",
+        ],
+        correctOption: 0,
+        explanation: "Nearest is a proximity hypothesis, not a neutral missing-value repair. Thresholds, distances, ties and unmatched cases expose whether the proposed relationship is defensible.",
+      },
+    ],
+    submissionChecklist: [
+      "Attribute and spatial joins are selected from the actual relationship evidence",
+      "Predicate direction, boundary rule, join type and expected cardinality are stated before execution",
+      "Every join reports input/output counts, unmatched IDs, repeated IDs and unused right-side IDs",
+      "Nearest-neighbour analysis uses projected metres, justified thresholds and a distance column",
+      "Overlay is audited as a geometry-changing operation with count, type and area checks",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Produces traceable site, management and vegetation assignments while preserving ambiguous cases" },
+      { dimension: "Conceptual understanding", expectation: "Explains predicate direction, boundary behaviour, cardinality, nearest distance and overlay" },
+      { dimension: "Reproducibility", expectation: "Records complete join and overlay audits with stable left and right identifiers" },
+      { dimension: "Scientific communication", expectation: "States assignment policy, unresolved evidence and downstream consequences without forcing completeness" },
+    ],
+    coreReferences: [
+      { title: "GeoPandas spatial join reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.sjoin.html" },
+      { title: "GeoPandas nearest spatial join reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.sjoin_nearest.html" },
+      { title: "GeoPandas overlay reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.overlay.html" },
+    ],
+    furtherReading: [
+      { title: "GeoPandas merging data guide", href: "https://geopandas.org/en/stable/docs/user_guide/mergingdata.html" },
+      { title: "GeoPandas spatial joins gallery", href: "https://geopandas.org/en/stable/gallery/spatial_joins.html" },
+    ],
+  },
 };
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
@@ -850,7 +1036,7 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
         rubric: configuration.rubric,
         technicalMetadata: {
           pythonVersion: "Python 3.12",
-          jupyterEnvironment: "JupyterLab 4 / Notebook 7; GeoPandas and pyproj versions recorded by the learner",
+          jupyterEnvironment: "JupyterLab 4 / Notebook 7; GeoPandas, Shapely and pyproj versions recorded by the learner",
           reviewDate: "10 August 2026",
           datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,

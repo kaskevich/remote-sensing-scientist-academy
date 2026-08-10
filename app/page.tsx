@@ -90,6 +90,35 @@ const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
   },
 }));
 
+const module2LessonResources: Record<string, Array<{ href: string; title: string }>> = {
+  "lesson-2-01": [{
+    href: "lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb",
+    title: "Download the Module 2 pipeline starter notebook",
+  }],
+  "lesson-2-05": [
+    {
+      href: "lesson-resources/module-2/vector-foundations/README.md",
+      title: "Read the synthetic vector training-data guide",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_field_plots.geojson",
+      title: "Download synthetic training field plots",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_study_area.geojson",
+      title: "Download the synthetic training study area",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_management_zones.geojson",
+      title: "Download synthetic training management zones",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_vegetation_zones.geojson",
+      title: "Download synthetic training vegetation zones",
+    },
+  ],
+};
+
 const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
   const pedagogy = module2LessonDetails[source.id];
   return {
@@ -102,12 +131,10 @@ const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((sour
     tools: source.tools,
     content: pedagogy.content ?? readReviewedLesson(pedagogy.markdownFile),
     images: [],
-    resources: source.id === "lesson-2-01"
-      ? [{
-          href: publicAssetPath("lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
-          title: "Download the Module 2 pipeline starter notebook",
-        }]
-      : [],
+    resources: (module2LessonResources[source.id] ?? []).map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
+    })),
     pedagogy,
     task: {
       title: `Submit ${source.artifact}`,

@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_vegetation_zones",
+  "bbox": [24.6, 58.7, 24.606, 58.704],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "VZ-L",
+      "properties": { "vegetation_id": "VZ-L", "vegetation_label": "training lower zone" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6, 58.7], [24.606, 58.7], [24.606, 58.702], [24.6, 58.702], [24.6, 58.7]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "VZ-U",
+      "properties": { "vegetation_id": "VZ-U", "vegetation_label": "training upper zone" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6, 58.702], [24.606, 58.702], [24.606, 58.704], [24.6, 58.704], [24.6, 58.702]]]
+      }
+    }
+  ]
+}

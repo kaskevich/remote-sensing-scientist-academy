@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "name": "training_management_zones",
+  "bbox": [24.6, 58.7, 24.606, 58.704],
+  "features": [
+    {
+      "type": "Feature",
+      "id": "MZ-W",
+      "properties": { "management_id": "MZ-W", "management_label": "training west" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.6, 58.7], [24.603, 58.7], [24.603, 58.704], [24.6, 58.704], [24.6, 58.7]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MZ-E",
+      "properties": { "management_id": "MZ-E", "management_label": "training east" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[24.603, 58.7], [24.606, 58.7], [24.606, 58.704], [24.603, 58.704], [24.603, 58.7]]]
+      }
+    }
+  ]
+}
