@@ -9,7 +9,7 @@ lessonId: lesson-2-01
 
 By the end of this lesson, you will be able to decide whether a dataset is tabular, vector, raster, or spatial with incomplete reference metadata. You will identify the evidence for location, geometry, grid structure and spatial reference, and create the first component of your Module 2 portfolio: `spatial_data_inventory.ipynb`.
 
-**Prerequisites:** Module 1 or equivalent confidence with Jupyter, Python dictionaries, lists, loops and pandas-style tables. No GIS software experience is assumed. Allow 90–110 minutes.
+**Prerequisites:** Module 1 or equivalent confidence with Jupyter, Python dictionaries, lists, loops and pandas-style tables. No GIS software experience is assumed. Allow 60–80 minutes.
 
 ### Why this matters
 
@@ -100,6 +100,22 @@ Do not guess a CRS by trying several options until the layer lands somewhere fam
 GeoJSON requires special care. The current GeoJSON standard, RFC 7946, defines positions using WGS 84 longitude and latitude in decimal degrees, with longitude first. Older files and software may contain non-standard conventions. Check the file history and the software that produced it instead of relying only on the extension.
 
 [[CHECK:m2-l1-crs-missing]]
+
+### Accuracy, precision, resolution, uncertainty and error
+
+These words answer different questions. Keep them separate when accepting spatial data:
+
+| Term | Practical meaning | Coastal-meadow example |
+|---|---|---|
+| accuracy | closeness to a trusted reference or true value | how close a mapped plot position is to independently surveyed control |
+| precision | repeatability or numerical/detail consistency | repeated GNSS fixes cluster tightly, even if the cluster is displaced |
+| resolution | smallest sampling interval or detail represented | a UAV orthomosaic is delivered with 5 cm pixels |
+| uncertainty | quantified or described limits on what is known | horizontal position is reported with a 95% uncertainty interval |
+| error | difference from a reference value when that reference is available | mapped checkpoint minus surveyed checkpoint position |
+
+Fine resolution does not prove high accuracy. High precision does not prevent systematic error. Uncertainty is not carelessness; it is evidence about the limits of a result. Add separate inventory fields whenever these properties affect the proposed use.
+
+[[CHECK:m2-l1-resolution-accuracy]]
 
 ## 6. Worked example — build an evidence-based inventory
 
@@ -233,7 +249,7 @@ Answer in your private notes:
 
 - **Notebook:** `spatial_data_inventory.ipynb` or the Module 2 starter notebook containing the four-card inventory and independent asset audit.
 - **Screenshot:** the completed inventory with the CRS and next-action columns visible.
-- **Written answer:** 180–250 words explaining why one asset is ready for limited spatial work and why another must be reviewed. Separate observed evidence from assumptions.
+- **Written answer:** 120–180 words explaining why one asset is ready for limited spatial work and why another must be reviewed. Separate observed evidence from assumptions.
 
 ### Portfolio artifact
 

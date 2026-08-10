@@ -9,7 +9,7 @@ lessonId: lesson-2-07
 
 By the end of this lesson, you will be able to distinguish attribute joins, predicate-based spatial joins, nearest-neighbour joins and overlay; select a relationship that matches the scientific question; retain unmatched features; detect one-to-many outcomes and duplicated identifiers; and produce a cardinality audit before accepting joined data. You will add site, management and vegetation assignments to the synthetic training points without forcing ambiguous cases into one category.
 
-**Prerequisites:** Complete Lessons 2.5–2.6. You should be able to audit GeoDataFrames, transform layers to a common projected CRS and explain `within`, `contains` and `intersects`. Allow 120–145 minutes.
+**Prerequisites:** Complete Lessons 2.5–2.6. You should be able to audit GeoDataFrames, transform layers to a common projected CRS and explain `within`, `contains` and `intersects`. Allow 120–150 minutes.
 
 ### Why this matters
 
@@ -305,7 +305,7 @@ Answer in your private notes:
 - **Notebook:** the continuing pipeline notebook with predicate comparison, complete three-level assignment audit, overlay analysis and nearest-neighbour challenge.
 - **File:** `spatial_join_audit.ipynb` and a GeoPackage containing clearly named joined and overlay derivatives.
 - **Screenshot:** assignment map highlighting interior, boundary, outside and one-to-many cases.
-- **Written answer:** 280–360 words explaining the chosen assignment rules, unresolved cases and downstream scientific consequences.
+- **Written answer:** 200–280 words explaining the chosen assignment rules, unresolved cases and downstream scientific consequences.
 
 ### Portfolio artifact
 

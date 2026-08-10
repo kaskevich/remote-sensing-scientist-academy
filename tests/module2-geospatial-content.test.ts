@@ -1,17 +1,27 @@
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  MODULE2_SOFTWARE_VERSIONS,
+  module2ChapterPractica,
   module2LessonDetails,
   module2Lessons,
   module2Overview,
+  module2PracticumDetails,
   publishedModule2LessonIds,
   publishedModule2Lessons,
 } from "../lib/module2-pedagogy";
 
 function lessonMarkdown(lessonId: string) {
   const details = module2LessonDetails[lessonId];
+  return readFileSync(join(process.cwd(), details.markdownFile), "utf8")
+    .replace(/^---\n[\s\S]*?\n---\n+/, "");
+}
+
+function practicumMarkdown(practicumId: string) {
+  const details = module2PracticumDetails[practicumId];
   return readFileSync(join(process.cwd(), details.markdownFile), "utf8")
     .replace(/^---\n[\s\S]*?\n---\n+/, "");
 }
@@ -41,7 +51,10 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(chapterLessons.slice(10).every((item) => item.lessonId === undefined)).toBe(true);
     expect(module2Overview.capstone?.status).toBe("planned");
     expect(module2Overview.capstone?.lessonId).toBeUndefined();
-    expect(module2Overview.navigationMeta).toBe("10 lessons available");
+    expect(module2Overview.navigationMeta).toBe("10 lessons · 2 practica available");
+    expect(module2Overview.chapters[0].practicum?.lessonId).toBe("module-2-chapter-1-practicum");
+    expect(module2Overview.chapters[1].practicum?.lessonId).toBe("module-2-chapter-2-practicum");
+    expect(module2Overview.chapters.slice(2).every((chapter) => chapter.practicum === undefined)).toBe(true);
   });
 
   it("uses unique stable IDs for the 49-lesson syllabus and capstone", () => {
@@ -92,8 +105,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(content).toContain(source.artifact);
     expect(wordCount(content)).toBeGreaterThanOrEqual(1_700);
 
-    expect(details.formativeChecks).toHaveLength(3);
-    expect(new Set(details.formativeChecks.map((check) => check.id)).size).toBe(3);
+    expect(details.formativeChecks.length).toBeGreaterThanOrEqual(3);
+    expect(new Set(details.formativeChecks.map((check) => check.id)).size).toBe(details.formativeChecks.length);
     for (const check of details.formativeChecks) {
       expect(content).toContain(`[[CHECK:${check.id}]]`);
       expect(check.options.length).toBeGreaterThanOrEqual(3);
@@ -108,6 +121,34 @@ describe("Module 2 Geospatial Data Science", () => {
     ]);
     expect(details.technicalMetadata.coreReferences.every((item) => item.href.startsWith("https://"))).toBe(true);
     expect(details.technicalMetadata.furtherReading.every((item) => item.href.startsWith("https://"))).toBe(true);
+    expect(details.lessonType).toBeTruthy();
+    expect(details.technicalMetadata.pythonVersion).toBe(MODULE2_SOFTWARE_VERSIONS.python);
+    expect(details.technicalMetadata.testedVersions).toEqual(expect.arrayContaining([
+      { label: "GeoPandas", value: MODULE2_SOFTWARE_VERSIONS.geopandas },
+      { label: "Shapely", value: MODULE2_SOFTWARE_VERSIONS.shapely },
+      { label: "PyProj", value: MODULE2_SOFTWARE_VERSIONS.pyproj },
+    ]));
+  });
+
+  it("adds two unnumbered, reviewed chapter practica", () => {
+    expect(module2ChapterPractica.map((item) => item.id)).toEqual([
+      "module-2-chapter-1-practicum",
+      "module-2-chapter-2-practicum",
+    ]);
+    for (const practicum of module2ChapterPractica) {
+      const details = module2PracticumDetails[practicum.id];
+      const content = practicumMarkdown(practicum.id);
+      expect(details.lessonType).toBe("Chapter Practicum");
+      expect(details.formativeChecks).toHaveLength(3);
+      expect(content).toContain(practicum.artifact);
+      for (const check of details.formativeChecks) {
+        expect(content).toContain(`[[CHECK:${check.id}]]`);
+      }
+    }
+    expect(practicumMarkdown("module-2-chapter-1-practicum")).toContain("DATA_ACCEPTANCE_DECISION.md");
+    expect(practicumMarkdown("module-2-chapter-1-practicum")).toMatch(/250–350 words maximum/i);
+    expect(practicumMarkdown("module-2-chapter-2-practicum")).toContain("Vector Handover Review");
+    expect(practicumMarkdown("module-2-chapter-2-practicum")).toContain("Professional Mistakes — Vector GIS");
   });
 
   it("covers the required professional reasoning in each lesson", () => {
@@ -116,12 +157,20 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson1).toMatch(/referenced grid/i);
     expect(lesson1).toMatch(/coordinates without a verified CRS/i);
     expect(lesson1).toMatch(/not claimed to contain published Baltic plot locations/i);
+    for (const term of ["accuracy", "precision", "resolution", "uncertainty", "error"]) {
+      expect(lesson1).toMatch(new RegExp(term, "i"));
+    }
 
     const lesson2 = lessonMarkdown("lesson-2-02");
     expect(lesson2).toMatch(/geographic and projected CRSs/i);
     expect(lesson2).toContain("set_crs()");
     expect(lesson2).toContain("to_crs()");
     expect(lesson2).toMatch(/area of use/i);
+    expect(lesson2).toMatch(/vertical CRS|vertical reference/i);
+    expect(lesson2).toContain("DSM");
+    expect(lesson2).toContain("DTM");
+    expect(lesson2).toContain("Geod");
+    expect(lesson2).toMatch(/geodesic distance/i);
 
     const lesson3 = lessonMarkdown("lesson-2-03");
     expect(lesson3).toMatch(/spatial support/i);
@@ -129,6 +178,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson3).toContain("MAUP");
     expect(lesson3).toMatch(/5 cm UAV pixel/i);
     expect(lesson3).toMatch(/10 m Sentinel-2 pixel/i);
+    expect(lesson3).toMatch(/temporal support/i);
+    expect(lesson3).toMatch(/measurement process/i);
 
     const lesson4 = lessonMarkdown("lesson-2-04");
     for (const format of ["Shapefile", "GeoPackage", "GeoJSON", "GeoParquet", "GeoTIFF", "COG", "NetCDF", "Zarr"]) {
@@ -162,6 +213,9 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson8).toContain("sindex.query");
     expect(lesson8).toMatch(/stable identifier-pair sets/i);
     expect(lesson8).toMatch(/already use spatial indexing/i);
+    expect(lesson8).toContain("sjoin(");
+    expect(lesson8).toMatch(/rows\/matches\/unmatched\/one-to-many/i);
+    expect(lesson8).toMatch(/memory/i);
 
     const lesson9 = lessonMarkdown("lesson-2-09");
     for (const operation of ["make_valid()", "explode()", "dissolve", "clip"]) {
@@ -171,6 +225,10 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson9).toMatch(/no universal sliver-area threshold/i);
     expect(lesson9).toMatch(/normalise coordinate ordering/i);
     expect(lesson9).toMatch(/validity is a computational property/i);
+    expect(lesson9).toMatch(/individually valid feature does \*\*not\*\* prove dataset-level topology/i);
+    for (const condition of ["overlap", "gap", "unintended interior holes", "adjacency", "snapping", "floating-point", "tolerance"]) {
+      expect(lesson9).toMatch(new RegExp(condition, "i"));
+    }
 
     const lesson10 = lessonMarkdown("lesson-2-10");
     expect(lesson10).toMatch(/Python performs reproducible processing/i);
@@ -179,6 +237,9 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson10).toMatch(/raster[\s\S]*CRS[\s\S]*extent[\s\S]*dimensions[\s\S]*pixel size[\s\S]*bands[\s\S]*data type[\s\S]*NoData/i);
     expect(lesson10).toMatch(/Export both PDF and PNG/i);
     expect(lesson10).toMatch(/reopen both/i);
+    expect(lesson10).toMatch(/TP04/);
+    expect(lesson10).toMatch(/TP05/);
+    expect(lesson10).toMatch(/Visual agreement[\s\S]*cannot establish/i);
   });
 
   it("keeps worked Python examples compact and syntactically valid", () => {
@@ -219,6 +280,7 @@ describe("Module 2 Geospatial Data Science", () => {
       ["training_management_zones.geojson", 2],
       ["training_vegetation_zones.geojson", 2],
       ["training_topology_cases.geojson", 5],
+      ["training_topology_corrupted.geojson", 7],
     ] as const;
 
     for (const [filename, featureCount] of expectedFiles) {
@@ -242,6 +304,33 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(qgisChecklist).toMatch(/not permission to edit source data/i);
     expect(qgisLog).toContain("affected_ids");
     expect(qgisLog).toContain("decision_owner");
+
+    const corrupted = readFileSync(join(folder, "training_topology_corrupted.geojson"), "utf8");
+    for (const condition of ["overlap", "gap", "self-intersection", "duplicate", "sliver"]) {
+      expect(corrupted).toMatch(new RegExp(condition, "i"));
+    }
+
+    const manifest = JSON.parse(readFileSync(join(folder, "training_data_manifest.json"), "utf8")) as {
+      assets: Array<{
+        filename: string;
+        purpose: string;
+        crs: string | null;
+        geometryType: string;
+        featureCount: number | null;
+        expectedQaBehavior: string;
+        licenseStatus: string;
+        sha256: string;
+      }>;
+    };
+    expect(manifest.assets.length).toBeGreaterThanOrEqual(8);
+    for (const asset of manifest.assets) {
+      expect(asset.purpose).toBeTruthy();
+      expect(asset.geometryType).toBeTruthy();
+      expect(asset.expectedQaBehavior).toBeTruthy();
+      expect(asset.licenseStatus).toBeTruthy();
+      const actual = createHash("sha256").update(readFileSync(join(folder, asset.filename))).digest("hex");
+      expect(actual, `${asset.filename} checksum`).toBe(asset.sha256);
+    }
   });
 
   it("extends the portfolio starter through the complete vector chapter", () => {
@@ -253,5 +342,7 @@ describe("Module 2 Geospatial Data Science", () => {
     for (const lesson of ["2.8", "2.9", "2.10"]) {
       expect(source).toContain(`Lesson ${lesson} checkpoint`);
     }
+    expect(source).toContain("Chapter 1 Practicum checkpoint");
+    expect(source).toContain("Chapter 2 Practicum checkpoint");
   });
 });

@@ -8,8 +8,10 @@ import LearnerCurriculum, {
 } from "@/app/components/learner-curriculum";
 import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
 import {
+  module2ChapterPractica,
   module2LessonDetails,
   module2Overview,
+  module2PracticumDetails,
   publishedModule2Lessons,
 } from "@/lib/module2-pedagogy";
 
@@ -97,6 +99,10 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
   }],
   "lesson-2-05": [
     {
+      href: "lesson-resources/module-2/vector-foundations/training_data_manifest.json",
+      title: "Download the vector training-data manifest",
+    },
+    {
       href: "lesson-resources/module-2/vector-foundations/README.md",
       title: "Read the synthetic vector training-data guide",
     },
@@ -123,12 +129,16 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
       title: "Read the synthetic vector training-data guide",
     },
     {
-      href: "lesson-resources/module-2/vector-foundations/training_topology_cases.geojson",
-      title: "Download synthetic topology QA cases",
+      href: "lesson-resources/module-2/vector-foundations/training_topology_corrupted.geojson",
+      title: "Download the explicitly corrupted topology training derivative",
     },
     {
       href: "lesson-resources/module-2/vector-foundations/training_study_area.geojson",
       title: "Download the synthetic training study area",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_data_manifest.json",
+      title: "Download the vector training-data manifest",
     },
   ],
   "lesson-2-10": [
@@ -143,7 +153,7 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
   ],
 };
 
-const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
+const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
   const pedagogy = module2LessonDetails[source.id];
   return {
     id: source.id,
@@ -167,6 +177,43 @@ const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((sour
       referenceMaps: [],
     },
   };
+});
+
+const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
+  const pedagogy = module2PracticumDetails[source.id];
+  return {
+    id: source.id,
+    kind: "practicum",
+    numberLabel: "PRACTICUM",
+    scheduleLabel: `CHAPTER ${source.chapter}`,
+    week: `CHAPTER ${source.chapter}`,
+    title: source.title,
+    description: source.description,
+    tools: [...source.tools],
+    content: readReviewedLesson(pedagogy.markdownFile),
+    images: [],
+    resources: [{
+      href: publicAssetPath("lesson-resources/module-2/vector-foundations/training_data_manifest.json"),
+      title: "Download the vector training-data manifest",
+    }],
+    pedagogy,
+    task: {
+      title: `Submit ${source.artifact}`,
+      instructions: `Upload the practicum decision record, supporting QA evidence and your scientific interpretation. Keep every decision linked to evidence, risk and a next action.`,
+      referenceImages: [],
+      referenceMaps: [],
+    },
+  };
+});
+
+const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.flatMap((lesson) => {
+  if (lesson.id === "lesson-2-04") {
+    return [lesson, module2PracticumAcademyLessons[0]];
+  }
+  if (lesson.id === "lesson-2-10") {
+    return [lesson, module2PracticumAcademyLessons[1]];
+  }
+  return [lesson];
 });
 
 const academyCurriculumModules: AcademyCurriculumModule[] = [

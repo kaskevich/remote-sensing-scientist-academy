@@ -9,7 +9,7 @@ lessonId: lesson-2-05
 
 By the end of this lesson, you will be able to read a vector file as a GeoDataFrame, explain how geometry and CRS extend an ordinary pandas table, filter features without losing spatial meaning, inspect feature and dataset bounds, create a diagnostic plot, and write a verified GeoPackage derivative. You will add a reusable vector-layer audit to the UAV and Satellite Analysis Pipeline.
 
-**Prerequisites:** Complete Lessons 2.1–2.4. You should understand vector geometry, CRS evidence, scale and format choice, and be comfortable filtering a pandas DataFrame. Allow 110–130 minutes.
+**Prerequisites:** Complete Lessons 2.1–2.4. You should understand vector geometry, CRS evidence, scale and format choice, and be comfortable filtering a pandas DataFrame. Allow 90–120 minutes.
 
 ### Why this matters
 
@@ -285,7 +285,7 @@ Answer in your private notes:
 - **Notebook:** the continuing pipeline notebook with the worked audit, complete four-layer audit and stop/go challenge.
 - **Files:** `vector_spatial_audit.ipynb` and the derived `vector_foundations.gpkg`; do not upload a renamed copy of the raw inputs as a derivative.
 - **Screenshot:** the diagnostic layer plot beside the audit table.
-- **Written answer:** 230–310 words explaining what the audit proves, which evidence remains unresolved and why the training coordinates cannot be treated as published plots.
+- **Written answer:** 150–220 words explaining what the audit proves, which evidence remains unresolved and why the training coordinates cannot be treated as published plots.
 
 ### Portfolio artifact
 

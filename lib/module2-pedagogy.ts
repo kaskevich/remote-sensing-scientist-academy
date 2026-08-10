@@ -132,7 +132,7 @@ candidates = tree.query(plots.geometry, predicate="intersects")
 elapsed = perf_counter() - started
 print("candidate pairs", candidates.shape[1])
 print("seconds", round(elapsed, 4))`, "Does a bounding-box hit prove two geometries intersect?", "An index narrows the candidate set; the exact predicate still determines the result. Performance improvements must preserve analytical equivalence.", "Reporting one timing as a universal benchmark. Runtime depends on geometry complexity, hardware, caching and data distribution.", { title: "GeoPandas spatial indexing", href: "https://geopandas.org/en/stable/docs/user_guide/spatial_indexing.html" }),
-  lesson(9, 2, "Advanced Vector Workflows", "Clean multipart, invalid and duplicated geometries while retaining an explicit topology decision log.", ["Dissolve", "Explode", "Topology QA"], "Prepare a polygon layer for analysis without silently changing its intended boundaries.", "Which defects prevent computation, and which apparent defects reflect valid real-world topology?", ["Dissolve, explode and clip", "Validity and geometry repair", "Slivers and duplicate geometry", "Topology QA with provenance"], "Audit and prepare a study-area polygon dataset for zonal analysis.", "Track feature counts and total area before and after every repair or aggregation.", "vector_topology_report.ipynb", `import geopandas as gpd
+  lesson(9, 2, "Topology, Geometry Cleaning and Data Integrity", "Clean multipart, invalid and duplicated geometries while retaining an explicit topology decision log.", ["Dissolve", "Explode", "Topology QA"], "Prepare a polygon layer for analysis without silently changing its intended boundaries.", "Which defects prevent computation, and which apparent defects reflect valid real-world topology?", ["Dissolve, explode and clip", "Validity and geometry repair", "Slivers and duplicate geometry", "Topology QA with provenance"], "Audit and prepare a study-area polygon dataset for zonal analysis.", "Track feature counts and total area before and after every repair or aggregation.", "vector_topology_report.ipynb", `import geopandas as gpd
 
 zones = gpd.read_file("data/study_zones.gpkg")
 before_area = zones.to_crs("EPSG:3301").area.sum()
@@ -141,7 +141,7 @@ clean = zones.copy()
 clean.loc[invalid, "geometry"] = clean.loc[invalid].geometry.make_valid()
 after_area = clean.to_crs("EPSG:3301").area.sum()
 print("invalid", invalid.sum(), "area change", after_area - before_area)`, "Should make_valid() be applied to every geometry automatically?", "Geometry repair is a documented intervention. Stable area and feature counts are useful QA signals, but domain review must confirm the repaired topology.", "Using buffer(0) as an unexplained universal repair. It can alter polygon structure and conceal the reason a geometry was invalid.", { title: "GeoPandas geometry validity", href: "https://geopandas.org/en/stable/docs/user_guide/geometric_manipulations.html" }),
-  lesson(10, 2, "QGIS for Professional QA", "Use QGIS as a visual verification companion to reproducible Python processing.", ["QGIS", "Visual QA", "Map export"], "Inspect CRS, attributes, geometry, raster behaviour and styled outputs in a repeatable QA protocol.", "What spatial defect can visual inspection reveal that a summary table may miss?", ["Layer and CRS inspection", "Geometry validation and processing tools", "Attribute joins and field calculations", "Professional map export"], "Load Python-produced vectors and rasters into QGIS, inspect them against source layers and export one QA map.", "Record QGIS version, project CRS, layer sources, symbology rules and every observed anomaly.", "qgis_visual_qa_report.pdf", `qa_checks = [
+  lesson(10, 2, "QGIS for Professional Spatial QA", "Use QGIS as a visual verification companion to reproducible Python processing.", ["QGIS", "Visual QA", "Map export"], "Inspect CRS, attributes, geometry, raster behaviour and styled outputs in a repeatable QA protocol.", "What spatial defect can visual inspection reveal that a summary table may miss?", ["Layer and CRS inspection", "Geometry validation and processing tools", "Attribute joins and field calculations", "Professional map export"], "Load Python-produced vectors and rasters into QGIS, inspect them against source layers and export one QA map.", "Record QGIS version, project CRS, layer sources, symbology rules and every observed anomaly.", "qgis_visual_qa_report.pdf", `qa_checks = [
     "CRS and extent agree",
     "features overlay expected basemap locations",
     "attributes and IDs match source",
@@ -536,15 +536,34 @@ export const publishedModule2Lessons = module2Lessons.filter((source) =>
   publishedModule2LessonIdSet.has(source.id),
 );
 
+export const module2ChapterPractica = [
+  {
+    id: "module-2-chapter-1-practicum",
+    chapter: 1,
+    title: "Accept, Review or Reject?",
+    description: "Make a documented data-acceptance decision from incomplete spatial evidence before analysis begins.",
+    tools: ["Evidence review", "Risk classification", "Decision record"],
+    artifact: "Artifact 2.A — Geospatial data acceptance decision",
+  },
+  {
+    id: "module-2-chapter-2-practicum",
+    chapter: 2,
+    title: "Vector Handover Review",
+    description: "Audit a vector delivery as if you were accepting responsibility for the next professional analysis stage.",
+    tools: ["Vector QA", "Reconciliation", "Handover decision"],
+    artifact: "Artifact 2.B — Analysis-ready vector handover",
+  },
+] as const;
+
 export const module2Overview: AcademyModuleOverview = {
   moduleNumber: 2,
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "10 lessons available",
+  navigationMeta: "10 lessons · 2 practica available",
   syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.10 are available now, completing Spatial Foundations and Vector GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.10 and two chapter practica are available now, completing Spatial Foundations and Vector GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -569,18 +588,26 @@ export const module2Overview: AcademyModuleOverview = {
     "Cloud and databases",
     "Delivery and production",
   ],
-  chapters: chapterTitles.map((title, index) => ({
-    number: index + 1,
-    title,
-    lessons: module2Lessons
-      .filter((item) => item.chapter === index + 1)
-      .map((item) => ({
-        number: Number(item.number.split(".")[1]),
-        title: item.title,
-        status: publishedModule2LessonIdSet.has(item.id) ? "available" as const : "planned" as const,
-        lessonId: publishedModule2LessonIdSet.has(item.id) ? item.id : undefined,
-      })),
-  })),
+  chapters: chapterTitles.map((title, index) => {
+    const practicum = module2ChapterPractica.find((item) => item.chapter === index + 1);
+    return {
+      number: index + 1,
+      title,
+      lessons: module2Lessons
+        .filter((item) => item.chapter === index + 1)
+        .map((item) => ({
+          number: Number(item.number.split(".")[1]),
+          title: item.title,
+          status: publishedModule2LessonIdSet.has(item.id) ? "available" as const : "planned" as const,
+          lessonId: publishedModule2LessonIdSet.has(item.id) ? item.id : undefined,
+        })),
+      practicum: practicum ? {
+        title: practicum.title,
+        status: "available" as const,
+        lessonId: practicum.id,
+      } : undefined,
+    };
+  }),
   capstone: {
     number: 50,
     title: "UAV and Satellite Analysis Pipeline",
@@ -590,6 +617,7 @@ export const module2Overview: AcademyModuleOverview = {
 
 type PublishedLessonConfiguration = {
   estimatedTime: string;
+  lessonType: string;
   markdownFile: string;
   formativeChecks: FormativeCheck[];
   submissionChecklist: string[];
@@ -600,7 +628,8 @@ type PublishedLessonConfiguration = {
 
 const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
   "lesson-2-01": {
-    estimatedTime: "90–110 minutes",
+    estimatedTime: "60–80 minutes",
+    lessonType: "Concept",
     markdownFile: "content/lessons/module-2/lesson-01.md",
     formativeChecks: [
       {
@@ -636,6 +665,17 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
         correctOption: 0,
         explanation: "Coordinate values are ambiguous without axis definitions, units, datum and reference system. Visual plausibility is not provenance.",
       },
+      {
+        id: "m2-l1-resolution-accuracy",
+        question: "Which statement confuses resolution with accuracy?",
+        options: [
+          "A 5 cm pixel proves that every mapped boundary is accurate to 5 cm",
+          "A 5 cm pixel describes the nominal grid-cell size",
+          "Positional accuracy requires independent reference evidence",
+        ],
+        correctOption: 0,
+        explanation: "Resolution describes the detail or sampling interval represented. Accuracy describes closeness to a reference or truth and must be evaluated separately.",
+      },
     ],
     submissionChecklist: [
       "All four data cards are classified with evidence rather than filename alone",
@@ -660,7 +700,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-02": {
-    estimatedTime: "110–130 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Concept + Lab",
     markdownFile: "content/lessons/module-2/lesson-02.md",
     formativeChecks: [
       {
@@ -720,7 +761,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-03": {
-    estimatedTime: "95–115 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Concept + Design Lab",
     markdownFile: "content/lessons/module-2/lesson-03.md",
     formativeChecks: [
       {
@@ -779,7 +821,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-04": {
-    estimatedTime: "105–125 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Professional Decision Lab",
     markdownFile: "content/lessons/module-2/lesson-04.md",
     formativeChecks: [
       {
@@ -837,7 +880,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-05": {
-    estimatedTime: "110–130 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Technical Lab",
     markdownFile: "content/lessons/module-2/lesson-05.md",
     formativeChecks: [
       {
@@ -898,7 +942,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-06": {
-    estimatedTime: "115–135 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Technical Lab",
     markdownFile: "content/lessons/module-2/lesson-06.md",
     formativeChecks: [
       {
@@ -959,7 +1004,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-07": {
-    estimatedTime: "120–145 minutes",
+    estimatedTime: "120–150 minutes",
+    lessonType: "Professional Practicum",
     markdownFile: "content/lessons/module-2/lesson-07.md",
     formativeChecks: [
       {
@@ -1020,7 +1066,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-08": {
-    estimatedTime: "115–140 minutes",
+    estimatedTime: "90–120 minutes",
+    lessonType: "Technical Lab",
     markdownFile: "content/lessons/module-2/lesson-08.md",
     formativeChecks: [
       {
@@ -1081,7 +1128,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-09": {
-    estimatedTime: "135–165 minutes",
+    estimatedTime: "120–150 minutes",
+    lessonType: "Professional Practicum",
     markdownFile: "content/lessons/module-2/lesson-09.md",
     formativeChecks: [
       {
@@ -1144,7 +1192,8 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
     ],
   },
   "lesson-2-10": {
-    estimatedTime: "140–180 minutes",
+    estimatedTime: "120–150 minutes",
+    lessonType: "Professional Practicum",
     markdownFile: "content/lessons/module-2/lesson-10.md",
     formativeChecks: [
       {
@@ -1196,16 +1245,33 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
       { dimension: "Scientific communication", expectation: "Produces a legible QA package that states sources, purpose and unresolved limitations" },
     ],
     coreReferences: [
-      { title: "QGIS User Guide: vector properties", href: "https://docs.qgis.org/latest/en/docs/user_manual/working_with_vector/vector_properties.html" },
-      { title: "QGIS User Guide: vector geometry algorithms", href: "https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html" },
-      { title: "QGIS User Guide: creating an output", href: "https://docs.qgis.org/latest/en/docs/user_manual/print_composer/create_output.html" },
+      { title: "QGIS 3.44 User Guide: vector properties", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_vector/vector_properties.html" },
+      { title: "QGIS 3.44 User Guide: vector geometry algorithms", href: "https://docs.qgis.org/3.44/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html" },
+      { title: "QGIS 3.44 User Guide: creating an output", href: "https://docs.qgis.org/3.44/en/docs/user_manual/print_composer/create_output.html" },
     ],
     furtherReading: [
-      { title: "QGIS Training Manual", href: "https://docs.qgis.org/latest/en/docs/training_manual/" },
-      { title: "A Gentle Introduction to GIS", href: "https://docs.qgis.org/latest/en/docs/gentle_gis_introduction/" },
+      { title: "QGIS 3.44 Training Manual", href: "https://docs.qgis.org/3.44/en/docs/training_manual/" },
+      { title: "QGIS 3.44 Gentle Introduction to GIS", href: "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/" },
     ],
   },
 };
+
+export const MODULE2_SOFTWARE_VERSIONS = {
+  python: "3.12.13",
+  geopandas: "1.1.4",
+  shapely: "2.1.2",
+  pyproj: "3.7.2",
+  qgis: "3.44 LTR",
+} as const;
+
+function module2TestedVersions(includeQgis: boolean) {
+  return [
+    { label: "GeoPandas", value: MODULE2_SOFTWARE_VERSIONS.geopandas },
+    { label: "Shapely", value: MODULE2_SOFTWARE_VERSIONS.shapely },
+    { label: "PyProj", value: MODULE2_SOFTWARE_VERSIONS.pyproj },
+    ...(includeQgis ? [{ label: "QGIS", value: MODULE2_SOFTWARE_VERSIONS.qgis }] : []),
+  ];
+}
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
   publishedModule2Lessons.map((source, index) => {
@@ -1217,6 +1283,7 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       source.id,
       {
         estimatedTime: configuration.estimatedTime,
+        lessonType: configuration.lessonType,
         position: index + 1,
         totalPositions: module2Lessons.length - 1,
         markdownFile: configuration.markdownFile,
@@ -1224,11 +1291,10 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
         submissionChecklist: configuration.submissionChecklist,
         rubric: configuration.rubric,
         technicalMetadata: {
-          pythonVersion: "Python 3.12",
-          jupyterEnvironment: source.id === "lesson-2-10"
-            ? "QGIS 3.44; JupyterLab 4 / Notebook 7; QGIS, GeoPandas, Shapely and pyproj versions recorded by the learner"
-            : "JupyterLab 4 / Notebook 7; GeoPandas, Shapely and pyproj versions recorded by the learner",
-          reviewDate: "10 August 2026",
+          pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+          jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+          testedVersions: module2TestedVersions(source.id === "lesson-2-10"),
+          reviewDate: "11 August 2026",
           datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
@@ -1237,3 +1303,120 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
     ];
   }),
 );
+
+export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
+  "module-2-chapter-1-practicum": {
+    estimatedTime: "120–150 minutes",
+    lessonType: "Chapter Practicum",
+    position: 1,
+    totalPositions: 2,
+    markdownFile: "content/lessons/module-2/practicum-01.md",
+    formativeChecks: [
+      {
+        id: "m2-p1-evidence",
+        question: "A raster has a CRS and opens correctly, but its acquisition date and band meaning are absent. What is the defensible decision?",
+        options: ["Review before scientific use", "Accept without conditions", "Reject and delete the source"],
+        correctOption: 0,
+        explanation: "The spatial structure may be usable, but missing measurement metadata blocks interpretation. Review preserves the asset while escalating the missing evidence.",
+      },
+      {
+        id: "m2-p1-risk",
+        question: "What should an acceptance decision connect?",
+        options: ["Evidence, intended use, risk and next action", "Filename and visual appearance", "File size and creation date only"],
+        correctOption: 0,
+        explanation: "Fitness is conditional on purpose. A reviewable decision links what is known to a specific use, consequence and owner.",
+      },
+      {
+        id: "m2-p1-reject",
+        question: "When is rejection appropriate?",
+        options: ["When a blocking risk cannot be resolved for the intended use", "Whenever metadata need review", "Whenever the format is unfamiliar"],
+        correctOption: 0,
+        explanation: "Rejecting data is a governed decision, not a reaction to uncertainty. State the blocking condition and what new evidence could change the decision.",
+      },
+    ],
+    submissionChecklist: [
+      "All supplied evidence is separated from assumptions",
+      "Every asset receives an accept, review or reject decision for a stated use",
+      "Blocking risks, owners and next actions are explicit",
+      "The decision record stays within 250–350 words",
+      "DATA_ACCEPTANCE_DECISION.md is included in the portfolio pipeline",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Classifies spatial evidence and blockers accurately" },
+      { dimension: "Conceptual understanding", expectation: "Distinguishes readiness, fitness for purpose and unresolved uncertainty" },
+      { dimension: "Reproducibility", expectation: "Links every decision to evidence, risk, owner and next action" },
+      { dimension: "Scientific communication", expectation: "Produces a concise decision another analyst can act on" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(false),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+      coreReferences: [
+        { title: "OGC Simple Feature Access standard", href: "https://www.ogc.org/standards/sfa/" },
+        { title: "RFC 7946: The GeoJSON Format", href: "https://www.rfc-editor.org/rfc/rfc7946" },
+      ],
+      furtherReading: [
+        { title: "EPSG Dataset", href: "https://epsg.org/home.html" },
+      ],
+    },
+  },
+  "module-2-chapter-2-practicum": {
+    estimatedTime: "120–150 minutes",
+    lessonType: "Chapter Practicum",
+    position: 2,
+    totalPositions: 2,
+    markdownFile: "content/lessons/module-2/practicum-02.md",
+    formativeChecks: [
+      {
+        id: "m2-p2-validity",
+        question: "Every feature is individually valid. What still requires review?",
+        options: ["Dataset-level overlaps, gaps, duplicates and coverage rules", "Nothing; feature validity proves the handover", "Only map colours"],
+        correctOption: 0,
+        explanation: "Individual validity does not prove that features form the intended coverage or relationships as a collection.",
+      },
+      {
+        id: "m2-p2-reconcile",
+        question: "Python and QGIS show different assignment counts. What comes first?",
+        options: ["Reconcile inputs, CRS, predicate, filters and versions", "Keep whichever output has fewer nulls", "Manually edit the QGIS table"],
+        correctOption: 0,
+        explanation: "A discrepancy is evidence to investigate. Choosing the more convenient output hides the cause and breaks reproducibility.",
+      },
+      {
+        id: "m2-p2-handover",
+        question: "What makes a vector derivative ready for handover?",
+        options: ["Traceable inputs, passed QA, declared limitations and reproducible outputs", "A visually attractive map", "A successful file write"],
+        correctOption: 0,
+        explanation: "Professional handover includes evidence that the derivative can be inspected, reproduced and used within stated limits.",
+      },
+    ],
+    submissionChecklist: [
+      "All fifteen handover-review steps are completed",
+      "Clean sources and corrupted topology training data remain separate",
+      "Python and QGIS evidence is reconciled by stable feature ID",
+      "The integrity report and repaired derivative remain distinct outputs",
+      "Artifact 2.B contains a decision, limitations and follow-up actions",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Audits CRS, geometry, joins, topology and exported derivatives accurately" },
+      { dimension: "Conceptual understanding", expectation: "Connects local feature checks to dataset-level integrity and scientific use" },
+      { dimension: "Reproducibility", expectation: "Preserves immutable inputs, explicit decisions and reconciled evidence" },
+      { dimension: "Scientific communication", expectation: "Delivers a clear accept, conditional accept or reject handover decision" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+      coreReferences: [
+        { title: "GeoPandas testing reference", href: "https://geopandas.org/en/stable/docs/reference/testing.html" },
+        { title: "QGIS 3.44 vector data guide", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_vector/" },
+      ],
+      furtherReading: [
+        { title: "QGIS topology introduction", href: "https://docs.qgis.org/3.44/en/docs/gentle_gis_introduction/topology.html" },
+      ],
+    },
+  },
+};

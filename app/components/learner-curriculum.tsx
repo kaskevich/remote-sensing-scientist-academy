@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  calculateChapterProgress,
   calculateProgress,
   createEmptyLearnerProgress,
   getNextIncompleteLessonId,
@@ -35,6 +36,7 @@ import type {
 
 export type AcademyLesson = {
   id: string;
+  kind?: "lesson" | "practicum";
   numberLabel?: string;
   scheduleLabel?: string;
   week: string;
@@ -107,38 +109,13 @@ function ModuleOverview({
 
       <div className="module-syllabus" aria-label={overview.syllabusAriaLabel}>
         {overview.chapters.map((chapter) => (
-          <details className="module-chapter" key={chapter.number} open={chapter.number === 1}>
-            <summary className="module-chapter-heading">
-              <span>Chapter {chapter.number}</span>
-              <h4>{chapter.title}</h4>
-              <i aria-hidden="true" />
-            </summary>
-            <ol>
-              {chapter.lessons.map((lesson) => {
-                const isComplete = lesson.lessonId
-                  ? completedLessonIds.includes(lesson.lessonId)
-                  : false;
-                return (
-                  <li className={lesson.status === "planned" ? "syllabus-planned" : "syllabus-available"} key={lesson.number}>
-                    <span className="syllabus-number">{overview.moduleNumber}.{lesson.number}</span>
-                    <div>
-                      {lesson.lessonId ? (
-                        <a
-                          href={`#${lesson.lessonId}`}
-                          onClick={() => onOpenLesson(lesson.lessonId as string)}
-                        >
-                          {lesson.title}
-                        </a>
-                      ) : (
-                        <strong>{lesson.title}</strong>
-                      )}
-                      <span>{lesson.status === "planned" ? "Planned syllabus" : isComplete ? "Completed" : "Available now"}</span>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </details>
+          <ChapterOverview
+            key={chapter.number}
+            chapter={chapter}
+            moduleNumber={overview.moduleNumber}
+            completedLessonIds={completedLessonIds}
+            onOpenLesson={onOpenLesson}
+          />
         ))}
         {overview.capstone && (
           <details className="module-chapter module-capstone-map">
@@ -170,12 +147,90 @@ function ModuleOverview({
   );
 }
 
-function LessonSubmissionGuide({ pedagogy }: { pedagogy: ReviewedLessonDetails }) {
+function ChapterOverview({
+  chapter,
+  moduleNumber,
+  completedLessonIds,
+  onOpenLesson,
+}: {
+  chapter: AcademyModuleOverview["chapters"][number];
+  moduleNumber: number;
+  completedLessonIds: string[];
+  onOpenLesson: (lessonId: string) => void;
+}) {
+  const availableIds = [
+    ...chapter.lessons.flatMap((lesson) => lesson.lessonId ? [lesson.lessonId] : []),
+    ...(chapter.practicum?.lessonId ? [chapter.practicum.lessonId] : []),
+  ];
+  const progress = calculateChapterProgress(availableIds, completedLessonIds);
+
   return (
-    <section className="lesson-submission-guide" aria-labelledby={`submission-guide-${pedagogy.position}`}>
+    <details className="module-chapter" open={chapter.number === 1}>
+      <summary className="module-chapter-heading">
+        <span>Chapter {chapter.number}</span>
+        <h4>{chapter.title}</h4>
+        {progress.totalItemCount > 0 && (
+          <span className="module-chapter-progress">
+            {progress.completedItemCount}/{progress.totalItemCount} complete
+          </span>
+        )}
+        <i aria-hidden="true" />
+      </summary>
+      {progress.totalItemCount > 0 && (
+        <div className="module-chapter-progressbar" role="progressbar" aria-label={`Chapter ${chapter.number} progress`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress.completionPercent}>
+          <span style={{ width: `${progress.completionPercent}%` }} />
+        </div>
+      )}
+      <ol>
+              {chapter.lessons.map((lesson) => {
+                const isComplete = lesson.lessonId
+                  ? completedLessonIds.includes(lesson.lessonId)
+                  : false;
+                return (
+                  <li className={lesson.status === "planned" ? "syllabus-planned" : "syllabus-available"} key={lesson.number}>
+                    <span className="syllabus-number">{moduleNumber}.{lesson.number}</span>
+                    <div>
+                      {lesson.lessonId ? (
+                        <a
+                          href={`#${lesson.lessonId}`}
+                          onClick={() => onOpenLesson(lesson.lessonId as string)}
+                        >
+                          {lesson.title}
+                        </a>
+                      ) : (
+                        <strong>{lesson.title}</strong>
+                      )}
+                      <span>{lesson.status === "planned" ? "Planned syllabus" : isComplete ? "Completed" : "Available now"}</span>
+                    </div>
+                  </li>
+                );
+              })}
+      </ol>
+      {chapter.practicum && (
+        <div className={`module-practicum-row ${chapter.practicum.status === "planned" ? "syllabus-planned" : "syllabus-available"}`}>
+          <span className="syllabus-number">PRACTICUM</span>
+          <div>
+            {chapter.practicum.lessonId ? (
+              <a href={`#${chapter.practicum.lessonId}`} onClick={() => onOpenLesson(chapter.practicum?.lessonId as string)}>
+                {chapter.practicum.title}
+              </a>
+            ) : (
+              <strong>{chapter.practicum.title}</strong>
+            )}
+            <span>{chapter.practicum.status === "planned" ? "Planned syllabus" : chapter.practicum.lessonId && completedLessonIds.includes(chapter.practicum.lessonId) ? "Completed" : "Available now"}</span>
+          </div>
+        </div>
+      )}
+    </details>
+  );
+}
+
+function LessonSubmissionGuide({ lessonId, pedagogy }: { lessonId: string; pedagogy: ReviewedLessonDetails }) {
+  return (
+    <section className="lesson-submission-guide" aria-labelledby={`submission-guide-${lessonId}`}>
       <div className="lesson-submission-guide-heading">
         <span>Submission guide</span>
-        <h3 id={`submission-guide-${pedagogy.position}`}>Checklist and review rubric</h3>
+        <h3 id={`submission-guide-${lessonId}`}>Checklist and review rubric</h3>
       </div>
       <div className="lesson-submission-columns">
         <div>
@@ -215,6 +270,9 @@ function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails 
     <details className="lesson-technical-details">
       <summary>Technical and source information</summary>
       <dl>
+        {metadata.testedVersions?.map((item) => (
+          <div key={item.label}><dt>Tested {item.label}</dt><dd>{item.value}</dd></div>
+        ))}
         <div><dt>Tested Python</dt><dd>{metadata.pythonVersion}</dd></div>
         <div><dt>Tested Jupyter environment</dt><dd>{metadata.jupyterEnvironment}</dd></div>
         <div><dt>Last technical review</dt><dd>{metadata.reviewDate}</dd></div>
@@ -503,7 +561,9 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                   <span className="module-overview">
                     <span className="module-title-row">
                       <span className="module-lesson-label">
-                        {lesson.numberLabel === "Capstone"
+                        {lesson.kind === "practicum"
+                          ? "Chapter practicum"
+                          : lesson.numberLabel === "Capstone"
                           ? "Capstone"
                           : lesson.numberLabel
                             ? `Lesson ${lesson.numberLabel}`
@@ -530,7 +590,8 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                   <div className="module-copy">
                     {pedagogy && (
                       <div className="lesson-context" aria-label="Lesson position and progress">
-                        <span>Lesson {lesson.numberLabel ?? pedagogy.position} of {pedagogy.totalPositions}</span>
+                        <span>{lesson.kind === "practicum" ? "Chapter practicum" : `Lesson ${lesson.numberLabel ?? pedagogy.position} of ${pedagogy.totalPositions}`}</span>
+                        {pedagogy.lessonType && <span>{pedagogy.lessonType}</span>}
                         <strong>{pedagogy.estimatedTime}</strong>
                         <span>{completedLessonChecks.length} of {pedagogy.formativeChecks.length} checks completed</span>
                       </div>
@@ -613,7 +674,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       )}
                     </nav>
 
-                    {pedagogy && <LessonSubmissionGuide pedagogy={pedagogy} />}
+                    {pedagogy && <LessonSubmissionGuide lessonId={lesson.id} pedagogy={pedagogy} />}
 
                     <div className="lesson-notes">
                       <label htmlFor={noteId}>

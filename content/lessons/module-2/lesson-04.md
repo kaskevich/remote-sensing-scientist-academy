@@ -9,7 +9,7 @@ lessonId: lesson-2-04
 
 By the end of this lesson, you will be able to choose an appropriate format for field points, large analytical vector data, analysis-ready rasters and multidimensional Earth Observation data. You will explain the tradeoffs among Shapefile, GeoPackage, GeoJSON, GeoParquet, GeoTIFF, Cloud Optimized GeoTIFF, NetCDF and Zarr, and define post-conversion checks that protect scientific meaning.
 
-**Prerequisites:** Complete Lessons 2.1–2.3. You should understand spatial models, CRS, extent, grid structure and spatial support. Allow 105–125 minutes.
+**Prerequisites:** Complete Lessons 2.1–2.3. You should understand spatial models, CRS, extent, grid structure and spatial support. Allow 90–120 minutes.
 
 ### Why this matters
 
@@ -314,7 +314,7 @@ Answer in your private notes:
 
 - **Notebook:** the continuing pipeline notebook containing the worked register, four-product selection matrix and two-audience challenge.
 - **Screenshot:** the completed matrix with access pattern, limitation and QA columns visible.
-- **Written answer:** 250–330 words defending two format choices and explaining how you will prove that their scientific content survived conversion.
+- **Written answer:** 180–240 words defending two format choices and explaining how you will prove that their scientific content survived conversion.
 
 ### Portfolio artifact
 
