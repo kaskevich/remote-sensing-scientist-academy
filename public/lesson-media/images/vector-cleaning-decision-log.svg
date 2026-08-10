@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Audited vector topology workflow</title>
+  <desc id="desc">An immutable source flows through diagnosis, candidate repair, review and justified vector operations. Every derivative has a snapshot and decision record, while unresolved geometry is escalated rather than silently changed.</desc>
+  <rect width="1200" height="650" rx="28" fill="#f4f5f2"/>
+  <text x="58" y="62" fill="#0c1a34" font-family="Arial, sans-serif" font-size="31" font-weight="700">Geometry preparation is a chain of reviewable decisions</text>
+  <text x="58" y="97" fill="#44516a" font-family="Arial, sans-serif" font-size="17">Preserve the source, measure every change and allow unresolved cases to remain unresolved</text>
+
+  <rect x="58" y="139" width="218" height="174" rx="18" fill="#0c1a34"/>
+  <text x="84" y="178" fill="#c8f33d" font-family="Arial, sans-serif" font-size="17" font-weight="700">IMMUTABLE SOURCE</text>
+  <path d="M104 218 L140 190 L176 218 L212 190" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <path d="M104 244 L140 272 L176 244 L212 272" fill="none" stroke="#3c7fc4" stroke-width="4"/>
+  <text x="84" y="295" fill="#b7c1d4" font-family="Arial, sans-serif" font-size="14">never overwritten</text>
+
+  <path d="M290 226 H334" stroke="#ef8b42" stroke-width="4"/><path d="M326 216 L340 226 L326 236" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <rect x="358" y="139" width="226" height="174" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="384" y="178" fill="#0c1a34" font-family="Arial, sans-serif" font-size="17" font-weight="700">DIAGNOSE</text>
+  <g fill="#44516a" font-family="Arial, sans-serif" font-size="14">
+    <text x="384" y="216">missing · empty · invalid</text>
+    <text x="384" y="244">multipart · duplicates</text>
+    <text x="384" y="272">coverage · slivers</text>
+  </g>
+
+  <path d="M598 226 H642" stroke="#ef8b42" stroke-width="4"/><path d="M634 216 L648 226 L634 236" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <rect x="666" y="139" width="222" height="174" rx="18" fill="#fff" stroke="#c8cfda" stroke-width="2"/>
+  <text x="692" y="178" fill="#0c1a34" font-family="Arial, sans-serif" font-size="17" font-weight="700">CANDIDATE</text>
+  <g fill="#44516a" font-family="Arial, sans-serif" font-size="14">
+    <text x="692" y="216">repair selected cases</text>
+    <text x="692" y="244">compare type · parts · area</text>
+    <text x="692" y="272">retain source identity</text>
+  </g>
+
+  <path d="M902 226 H946" stroke="#ef8b42" stroke-width="4"/><path d="M938 216 L952 226 L938 236" fill="none" stroke="#ef8b42" stroke-width="4"/>
+  <rect x="970" y="139" width="172" height="174" rx="18" fill="#e7f2ce" stroke="#7ba32b" stroke-width="2"/>
+  <text x="996" y="178" fill="#0c1a34" font-family="Arial, sans-serif" font-size="17" font-weight="700">REVIEW</text>
+  <g fill="#44516a" font-family="Arial, sans-serif" font-size="14">
+    <text x="996" y="216">accept</text>
+    <text x="996" y="244">reject</text>
+    <text x="996" y="272">escalate</text>
+  </g>
+
+  <path d="M1055 328 V372" stroke="#7ba32b" stroke-width="4"/><path d="M1045 364 L1055 378 L1065 364" fill="none" stroke="#7ba32b" stroke-width="4"/>
+  <rect x="58" y="384" width="1084" height="126" rx="18" fill="#0c1a34"/>
+  <text x="84" y="423" fill="#c8f33d" font-family="Arial, sans-serif" font-size="17" font-weight="700">JUSTIFIED DERIVATIVE OPERATIONS</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="84" y="445" width="185" height="42" rx="8" fill="#243654"/><text x="176" y="472" text-anchor="middle" fill="#fff" font-size="15">EXPLODE PARTS</text>
+    <rect x="290" y="445" width="185" height="42" rx="8" fill="#243654"/><text x="382" y="472" text-anchor="middle" fill="#fff" font-size="15">DISSOLVE GROUPS</text>
+    <rect x="496" y="445" width="185" height="42" rx="8" fill="#243654"/><text x="588" y="472" text-anchor="middle" fill="#fff" font-size="15">CLIP TO MASK</text>
+    <rect x="702" y="445" width="185" height="42" rx="8" fill="#243654"/><text x="794" y="472" text-anchor="middle" fill="#fff" font-size="15">FINAL AUDIT</text>
+    <rect x="908" y="445" width="208" height="42" rx="8" fill="#243654"/><text x="1012" y="472" text-anchor="middle" fill="#fff" font-size="15">VERIFIED EXPORT</text>
+  </g>
+
+  <rect x="155" y="546" width="890" height="52" rx="26" fill="#dfeaf7" stroke="#3c7fc4" stroke-width="2"/>
+  <text x="600" y="570" text-anchor="middle" fill="#0c1a34" font-family="Arial, sans-serif" font-size="15" font-weight="700">EVERY STAGE → counts · types · IDs · area · validity · decision</text>
+  <text x="600" y="590" text-anchor="middle" fill="#44516a" font-family="Arial, sans-serif" font-size="13">A clean-looking map is not a provenance record</text>
+</svg>

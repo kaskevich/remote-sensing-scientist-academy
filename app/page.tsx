@@ -117,6 +117,30 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
       title: "Download synthetic training vegetation zones",
     },
   ],
+  "lesson-2-09": [
+    {
+      href: "lesson-resources/module-2/vector-foundations/README.md",
+      title: "Read the synthetic vector training-data guide",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_topology_cases.geojson",
+      title: "Download synthetic topology QA cases",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/training_study_area.geojson",
+      title: "Download the synthetic training study area",
+    },
+  ],
+  "lesson-2-10": [
+    {
+      href: "lesson-resources/module-2/vector-foundations/QGIS_Vector_QA_Checklist.md",
+      title: "Download the QGIS vector QA checklist",
+    },
+    {
+      href: "lesson-resources/module-2/vector-foundations/qgis_qa_observations.csv",
+      title: "Download the structured QGIS observation log",
+    },
+  ],
 };
 
 const module2AcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {

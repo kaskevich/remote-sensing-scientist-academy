@@ -525,6 +525,9 @@ export const publishedModule2LessonIds = [
   "lesson-2-05",
   "lesson-2-06",
   "lesson-2-07",
+  "lesson-2-08",
+  "lesson-2-09",
+  "lesson-2-10",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -538,10 +541,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "7 lessons available",
+  navigationMeta: "10 lessons available",
   syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.7 are available now. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.10 are available now, completing Spatial Foundations and Vector GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -1016,6 +1019,192 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
       { title: "GeoPandas spatial joins gallery", href: "https://geopandas.org/en/stable/gallery/spatial_joins.html" },
     ],
   },
+  "lesson-2-08": {
+    estimatedTime: "115–140 minutes",
+    markdownFile: "content/lessons/module-2/lesson-08.md",
+    formativeChecks: [
+      {
+        id: "m2-l8-growth",
+        question: "A layer with 1,200 points is checked naively against 80 polygons. How many possible geometry pairs are visited?",
+        options: [
+          "96,000 pairs",
+          "1,280 pairs",
+          "15 pairs",
+        ],
+        correctOption: 0,
+        explanation: "A nested all-pairs comparison performs n × m checks: 1,200 × 80 = 96,000. Most pairs may be spatially impossible, which motivates an index.",
+      },
+      {
+        id: "m2-l8-bbox",
+        question: "What does an overlapping spatial-index bounding box establish?",
+        options: [
+          "Only that the pair is a candidate requiring the declared exact predicate",
+          "That the two geometries definitely intersect",
+          "That both geometries have the same CRS",
+        ],
+        correctOption: 0,
+        explanation: "Bounding boxes provide a cheap broad-phase filter. Complex geometries can have overlapping boxes while the geometries themselves remain disjoint.",
+      },
+      {
+        id: "m2-l8-profile",
+        question: "Which result must be checked before interpreting indexed and naive runtimes?",
+        options: [
+          "The stable identifier-pair sets are equal under the same predicate",
+          "The indexed result appears first in the notebook",
+          "The two methods return rows in exactly the same order",
+        ],
+        correctOption: 0,
+        explanation: "Optimisation is acceptable only after correctness equivalence. Index traversal order can vary, so compare stable scientific identifiers rather than display order.",
+      },
+    ],
+    submissionChecklist: [
+      "The naive pair count is calculated before execution for every scene",
+      "Bounding-box candidates and exact predicate matches are reported separately",
+      "Naive and indexed results are compared as stable identifier-pair sets",
+      "Timing boundaries, repetitions, versions, CRS and input geometry counts are recorded",
+      "Performance conclusions remain conditional on scale, geometry complexity and spatial arrangement",
+      "Every generated geometry is labelled as synthetic rather than published field evidence",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Implements naive and indexed searches with the same exact predicate and equivalent match sets" },
+      { dimension: "Conceptual understanding", expectation: "Explains all-pairs growth, bounding-box filtering, exact refinement and index limitations" },
+      { dimension: "Reproducibility", expectation: "Records controlled inputs, candidate counts, repeated timings, versions and equivalence evidence" },
+      { dimension: "Scientific communication", expectation: "Reports performance as conditional evidence without implying that indexing improves spatial validity" },
+    ],
+    coreReferences: [
+      { title: "GeoPandas spatial indexing guide", href: "https://geopandas.org/en/stable/docs/user_guide/spatial_indexing.html" },
+      { title: "Shapely STRtree reference", href: "https://shapely.readthedocs.io/en/stable/strtree.html" },
+    ],
+    furtherReading: [
+      { title: "GeoPandas spatial index query reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.sindex.SpatialIndex.query.html" },
+      { title: "Python perf_counter reference", href: "https://docs.python.org/3/library/time.html#time.perf_counter" },
+    ],
+  },
+  "lesson-2-09": {
+    estimatedTime: "135–165 minutes",
+    markdownFile: "content/lessons/module-2/lesson-09.md",
+    formativeChecks: [
+      {
+        id: "m2-l9-condition",
+        question: "A MultiPolygon contains two separated patches with one shared habitat record. What should you conclude first?",
+        options: [
+          "Multipart geometry may be correct; confirm whether one record genuinely applies to both patches",
+          "One part must be deleted because every feature should be a Polygon",
+          "The geometry is invalid because its parts are separated",
+        ],
+        correctOption: 0,
+        explanation: "Multipart geometry can faithfully represent one discontinuous unit. Whether it should be exploded depends on observation identity and the intended analysis.",
+      },
+      {
+        id: "m2-l9-repair",
+        question: "What does a successful make_valid() result prove?",
+        options: [
+          "It provides a computational repair candidate that still requires type, area, provenance and domain review",
+          "The repaired boundary is ecologically true",
+          "The result should replace the source file immediately",
+        ],
+        correctOption: 0,
+        explanation: "Validity repair resolves topology rules, but it can split, collapse or change geometry. Scientific acceptance requires explicit before-and-after evidence.",
+      },
+      {
+        id: "m2-l9-operations",
+        question: "Why must dissolve include an explicit attribute aggregation policy?",
+        options: [
+          "Unioned geometry combines rows, so dates, observations and other attributes need scientifically defensible handling",
+          "Dissolve changes only map colour and never changes rows",
+          "Every non-group attribute should automatically use its first value",
+        ],
+        correctOption: 0,
+        explanation: "Dissolve is both a geometry union and a group aggregation. An arbitrary first value can attach misleading metadata to the combined feature.",
+      },
+    ],
+    submissionChecklist: [
+      "Raw source geometry remains immutable and every derivative has a named stage",
+      "Missing, empty, invalid, multipart, duplicate and coverage conditions are diagnosed separately",
+      "Validity reasons and before-and-after type, count and area evidence accompany repair candidates",
+      "Explode, dissolve and clip are used only with declared identity and attribute rules",
+      "Duplicate and sliver decisions use provenance and spatial scale rather than appearance alone",
+      "The final GeoPackage is reopened and passes the complete snapshot audit",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Produces a valid, traceable analysis derivative while preserving identity and unresolved cases" },
+      { dimension: "Conceptual understanding", expectation: "Distinguishes feature validity, multipart structure, coverage topology, duplicates and slivers" },
+      { dimension: "Reproducibility", expectation: "Maintains immutable sources, staged derivatives and a complete topology decision log" },
+      { dimension: "Scientific communication", expectation: "Explains every geometry intervention and clearly escalates decisions unsupported by evidence" },
+    ],
+    coreReferences: [
+      { title: "GeoPandas make_valid reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.make_valid.html" },
+      { title: "GeoPandas dissolve reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.dissolve.html" },
+      { title: "GeoPandas explode reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.explode.html" },
+      { title: "GeoPandas clip reference", href: "https://geopandas.org/en/stable/docs/reference/api/geopandas.clip.html" },
+    ],
+    furtherReading: [
+      { title: "Shapely make_valid reference", href: "https://shapely.readthedocs.io/en/stable/reference/shapely.make_valid.html" },
+      { title: "GeoPandas geometric manipulations guide", href: "https://geopandas.org/en/stable/docs/user_guide/geometric_manipulations.html" },
+    ],
+  },
+  "lesson-2-10": {
+    estimatedTime: "140–180 minutes",
+    markdownFile: "content/lessons/module-2/lesson-10.md",
+    formativeChecks: [
+      {
+        id: "m2-l10-crs-display",
+        question: "Two layers appear aligned in the QGIS canvas. What has this established?",
+        options: [
+          "Only visual agreement under the current project display; layer CRS provenance still requires verification",
+          "Both source files definitely contain correctly assigned CRS metadata",
+          "QGIS has permanently reprojected both source files",
+        ],
+        correctOption: 0,
+        explanation: "QGIS can transform layers on the fly for display. Inspect each layer's source CRS, extent and provenance before treating alignment as analytical evidence.",
+      },
+      {
+        id: "m2-l10-role",
+        question: "QGIS reveals a suspicious repaired boundary. What is the professional next step?",
+        options: [
+          "Record the affected ID and evidence, correct the governed Python rule if justified, regenerate and inspect again",
+          "Move the boundary in the only raw file until it looks right",
+          "Hide the source layer and keep the displayed derivative",
+        ],
+        correctOption: 0,
+        explanation: "Visual QA should feed structured evidence back into the reproducible workflow. A canvas-only edit creates an unreviewable result and risks source loss.",
+      },
+      {
+        id: "m2-l10-export",
+        question: "Which statement best describes a professional QA map export?",
+        options: [
+          "It communicates source, purpose, CRS, classes and limitations and is reopened after export for verification",
+          "Its attractive styling proves the analysis is correct",
+          "It needs every decorative map element regardless of purpose",
+        ],
+        correctOption: 0,
+        explanation: "A QA map is a communication artifact. Clear provenance and post-export inspection make it reviewable, but it does not replace analytical validation.",
+      },
+    ],
+    submissionChecklist: [
+      "The QGIS version, project CRS and every layer source path are recorded",
+      "Layer metadata, row counts and stable IDs reconcile with the Python audit",
+      "Diagnostic styling exposes null, changed and unresolved cases instead of hiding them",
+      "Validity and join checks are compared with the reproducible Python results",
+      "Every anomaly is linked to affected IDs, evidence, severity, owner and resolution state",
+      "PDF and PNG map exports are reopened and verified for legibility and completeness",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Builds a controlled QGIS project and completes metadata, geometry, join and export checks accurately" },
+      { dimension: "Conceptual understanding", expectation: "Separates layer/project CRS, display transformation, visual evidence and reproducible processing" },
+      { dimension: "Reproducibility", expectation: "Links structured QGIS observations back to files, stable IDs, pipeline decisions and tests" },
+      { dimension: "Scientific communication", expectation: "Produces a legible QA package that states sources, purpose and unresolved limitations" },
+    ],
+    coreReferences: [
+      { title: "QGIS User Guide: vector properties", href: "https://docs.qgis.org/latest/en/docs/user_manual/working_with_vector/vector_properties.html" },
+      { title: "QGIS User Guide: vector geometry algorithms", href: "https://docs.qgis.org/latest/en/docs/user_manual/processing_algs/qgis/vectorgeometry.html" },
+      { title: "QGIS User Guide: creating an output", href: "https://docs.qgis.org/latest/en/docs/user_manual/print_composer/create_output.html" },
+    ],
+    furtherReading: [
+      { title: "QGIS Training Manual", href: "https://docs.qgis.org/latest/en/docs/training_manual/" },
+      { title: "A Gentle Introduction to GIS", href: "https://docs.qgis.org/latest/en/docs/gentle_gis_introduction/" },
+    ],
+  },
 };
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
@@ -1036,7 +1225,9 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
         rubric: configuration.rubric,
         technicalMetadata: {
           pythonVersion: "Python 3.12",
-          jupyterEnvironment: "JupyterLab 4 / Notebook 7; GeoPandas, Shapely and pyproj versions recorded by the learner",
+          jupyterEnvironment: source.id === "lesson-2-10"
+            ? "QGIS 3.44; JupyterLab 4 / Notebook 7; QGIS, GeoPandas, Shapely and pyproj versions recorded by the learner"
+            : "JupyterLab 4 / Notebook 7; GeoPandas, Shapely and pyproj versions recorded by the learner",
           reviewDate: "10 August 2026",
           datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,

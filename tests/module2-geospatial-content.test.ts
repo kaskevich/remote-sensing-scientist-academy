@@ -35,13 +35,13 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(chapterLessons.map((item) => item.number)).toEqual(
       Array.from({ length: 49 }, (_, index) => index + 1),
     );
-    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(7);
-    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(42);
-    expect(chapterLessons.slice(0, 7).every((item) => item.lessonId)).toBe(true);
-    expect(chapterLessons.slice(7).every((item) => item.lessonId === undefined)).toBe(true);
+    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(10);
+    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(39);
+    expect(chapterLessons.slice(0, 10).every((item) => item.lessonId)).toBe(true);
+    expect(chapterLessons.slice(10).every((item) => item.lessonId === undefined)).toBe(true);
     expect(module2Overview.capstone?.status).toBe("planned");
     expect(module2Overview.capstone?.lessonId).toBeUndefined();
-    expect(module2Overview.navigationMeta).toBe("7 lessons available");
+    expect(module2Overview.navigationMeta).toBe("10 lessons available");
   });
 
   it("uses unique stable IDs for the 49-lesson syllabus and capstone", () => {
@@ -63,10 +63,13 @@ describe("Module 2 Geospatial Data Science", () => {
       "lesson-2-05",
       "lesson-2-06",
       "lesson-2-07",
+      "lesson-2-08",
+      "lesson-2-09",
+      "lesson-2-10",
     ]);
     expect(publishedModule2Lessons.map((item) => item.id)).toEqual(publishedModule2LessonIds);
     expect(Object.keys(module2LessonDetails)).toEqual(publishedModule2LessonIds);
-    expect(module2Lessons.slice(7).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
+    expect(module2Lessons.slice(10).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
   });
 
   it.each(publishedModule2Lessons)("$number $title is a complete reviewed lesson", (source) => {
@@ -151,6 +154,31 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson7).toMatch(/one-to-many/i);
     expect(lesson7).toMatch(/input and output row counts/i);
     expect(lesson7).toMatch(/overlay creates new geometry/i);
+
+    const lesson8 = lessonMarkdown("lesson-2-08");
+    expect(lesson8).toMatch(/n × m/i);
+    expect(lesson8).toMatch(/bounding-box candidate/i);
+    expect(lesson8).toMatch(/broad phase/i);
+    expect(lesson8).toContain("sindex.query");
+    expect(lesson8).toMatch(/stable identifier-pair sets/i);
+    expect(lesson8).toMatch(/already use spatial indexing/i);
+
+    const lesson9 = lessonMarkdown("lesson-2-09");
+    for (const operation of ["make_valid()", "explode()", "dissolve", "clip"]) {
+      expect(lesson9).toContain(operation);
+    }
+    expect(lesson9).toMatch(/immutable source/i);
+    expect(lesson9).toMatch(/no universal sliver-area threshold/i);
+    expect(lesson9).toMatch(/normalise coordinate ordering/i);
+    expect(lesson9).toMatch(/validity is a computational property/i);
+
+    const lesson10 = lessonMarkdown("lesson-2-10");
+    expect(lesson10).toMatch(/Python performs reproducible processing/i);
+    expect(lesson10).toMatch(/on the fly/i);
+    expect(lesson10).toContain("Check validity");
+    expect(lesson10).toMatch(/raster[\s\S]*CRS[\s\S]*extent[\s\S]*dimensions[\s\S]*pixel size[\s\S]*bands[\s\S]*data type[\s\S]*NoData/i);
+    expect(lesson10).toMatch(/Export both PDF and PNG/i);
+    expect(lesson10).toMatch(/reopen both/i);
   });
 
   it("keeps worked Python examples compact and syntactically valid", () => {
@@ -173,6 +201,9 @@ describe("Module 2 Geospatial Data Science", () => {
       "geodataframe-spatial-audit.svg",
       "shapely-geometry-decisions.svg",
       "spatial-join-cardinality.svg",
+      "spatial-index-two-stage.svg",
+      "vector-cleaning-decision-log.svg",
+      "qgis-python-qa-loop.svg",
     ]) {
       expect(allContent).toContain(`lesson-media/images/${diagram}`);
       expect(existsSync(join(process.cwd(), "public/lesson-media/images", diagram))).toBe(true);
@@ -187,6 +218,7 @@ describe("Module 2 Geospatial Data Science", () => {
       ["training_study_area.geojson", 1],
       ["training_management_zones.geojson", 2],
       ["training_vegetation_zones.geojson", 2],
+      ["training_topology_cases.geojson", 5],
     ] as const;
 
     for (const [filename, featureCount] of expectedFiles) {
@@ -203,5 +235,23 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(readme).toMatch(/synthetic and exists only for instruction/i);
     expect(readme).toMatch(/do not contain published Baltic coastal-meadow plot locations/i);
     expect(readme).toContain("Zenodo record 20083250");
+
+    const qgisChecklist = readFileSync(join(folder, "QGIS_Vector_QA_Checklist.md"), "utf8");
+    const qgisLog = readFileSync(join(folder, "qgis_qa_observations.csv"), "utf8");
+    expect(qgisChecklist).toMatch(/project CRS and measurement units/i);
+    expect(qgisChecklist).toMatch(/not permission to edit source data/i);
+    expect(qgisLog).toContain("affected_ids");
+    expect(qgisLog).toContain("decision_owner");
+  });
+
+  it("extends the portfolio starter through the complete vector chapter", () => {
+    const notebook = JSON.parse(readFileSync(
+      join(process.cwd(), "public/lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
+      "utf8",
+    )) as { cells: Array<{ source: string[] }> };
+    const source = notebook.cells.flatMap((cell) => cell.source).join("");
+    for (const lesson of ["2.8", "2.9", "2.10"]) {
+      expect(source).toContain(`Lesson ${lesson} checkpoint`);
+    }
   });
 });
