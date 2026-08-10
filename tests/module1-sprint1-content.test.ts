@@ -186,6 +186,51 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson3).not.toMatch(/LS means|LS stands for|metres above sea level/i);
   });
 
+  it("refines scientific representations progressively without hiding earlier limits", () => {
+    const lesson2 = reviewedContent["lesson-02"];
+    expect(lesson2).toContain("biomass_value_present = True");
+    expect(lesson2).toContain("table-value presence");
+    expect(lesson2).toContain("not evidence of how, when or under which protocol");
+    expect(lesson2).not.toContain("biomass_sampled");
+    expect(JSON.stringify(site)).not.toContain("biomass_sampled");
+
+    const lesson6 = reviewedContent["lesson-06"];
+    expect(lesson6).toContain("if isinstance(value, bool)");
+    expect(lesson6).toContain("bool` is a subclass of `int`");
+    expect(lesson6).toContain("`None` is the missing-value representation");
+    expect(lesson6).toContain("could treat `np.nan` as an ordinary float");
+    expect(lesson6).toContain("In Lesson 9 you will deliberately upgrade the function");
+
+    const classifierBlock = fencedPythonBlocks(lesson6).find((block) =>
+      block.includes("def classify_biomass(value)"),
+    );
+    expect(classifierBlock).toBeDefined();
+    const classifierRun = spawnSync("python3", ["-c", classifierBlock ?? ""]);
+    expect(classifierRun.status, classifierRun.stderr.toString()).toBe(0);
+    expect(classifierRun.stdout.toString().trim().split("\n")).toEqual([
+      "None missing",
+      "True invalid Boolean",
+      "-1 invalid negative",
+      "'311.33' invalid type",
+      "311.33 recorded",
+    ]);
+
+    const lesson7 = reviewedContent["lesson-07"];
+    expect(lesson7).toContain("## 7. From a column to a grid");
+    expect(lesson7).toContain("reflectance_grid.shape");
+    expect(lesson7).toContain("reflectance_grid.ndim");
+    expect(lesson7).toContain("reflectance_grid[0, 0]");
+    expect(lesson7).toContain("reflectance_grid[0, :]");
+    expect(lesson7).toContain("reflectance_grid[:, 0]");
+    expect(lesson7).toContain("does not become geospatial merely because it has rows and columns");
+
+    const lesson9 = reviewedContent["lesson-09"];
+    expect(lesson9).toContain("## 4. Upgrade an earlier function as the data become more realistic");
+    expect(lesson9).toContain("pd.isna(value)");
+    expect(lesson9).toContain('[None, np.nan, 311.33, -1, "311.33", True]');
+    expect(lesson9).toContain("iterative scientific programming");
+  });
+
   it("keeps worked Python blocks compact and syntactically valid except the labelled error", () => {
     for (const content of Object.values(reviewedContent)) {
       for (const block of fencedPythonBlocks(content)) {

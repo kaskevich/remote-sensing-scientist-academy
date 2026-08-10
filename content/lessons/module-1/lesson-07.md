@@ -7,7 +7,7 @@ lessonId: lesson-07
 
 ### Learning outcome
 
-By the end of this lesson, you will be able to create and inspect a one-dimensional NumPy array, apply a vectorised comparison and summary, and explain how shape, data type and missing values affect scientific interpretation. You will introduce a verified subset of the published Baltic dataset into your portfolio notebook.
+By the end of this lesson, you will be able to create and inspect a one-dimensional NumPy array, apply a vectorised comparison and summary, and explain how shape, data type and missing values affect scientific interpretation. You will also recognise rows and columns in one small two-dimensional array as preparation for raster grids in Module 2. You will introduce a verified subset of the published Baltic dataset into your portfolio notebook.
 
 **Prerequisites:** Complete Lessons 1–6. You should understand lists, loops, functions and conditions. NumPy is included in common scientific Python environments. Allow 80–95 minutes.
 
@@ -130,7 +130,35 @@ print(np.nanmean(biomass))
 
 The ordinary mean returns `nan` because missingness propagates. `np.nanmean` excludes missing values, but that exclusion is a scientific decision. Report both the number of available observations and the policy used. In the full dataset, 59 of 120 `AGB` cells are empty; missingness is substantial, not incidental.
 
-## 7. Common mistakes and recovery
+## 7. From a column to a grid
+
+The richness array has one dimension: one sequence of values. Remote-sensing rasters are commonly represented by **two-dimensional arrays** whose first dimension contains rows and whose second dimension contains columns. This small synthetic reflectance grid is not part of the published field table and is not yet a georeferenced raster. It introduces only the array structure you will use in Module 2.
+
+Before running, predict the shape, the number of dimensions, the upper-left value, the first row and the first column:
+
+```python
+reflectance_grid = np.array([
+    [0.18, 0.21, 0.24, 0.20],
+    [0.25, 0.29, 0.31, 0.27],
+    [0.22, 0.26, 0.28, 0.23],
+])
+
+print("Shape:", reflectance_grid.shape)
+print("Dimensions:", reflectance_grid.ndim)
+print("Upper-left value:", reflectance_grid[0, 0])
+print("First row:", reflectance_grid[0, :])
+print("First column:", reflectance_grid[:, 0])
+```
+
+Expected structural results are shape `(3, 4)` and `ndim` equal to `2`: three rows by four columns. In `array[row, column]`, `reflectance_grid[0, 0]` selects one value. The colon means “all positions” along that dimension, so `[0, :]` selects every column in the first row and `[:, 0]` selects the first column across every row.
+
+> **Bridge to Module 2:** a numerical grid does not become geospatial merely because it has rows and columns. A raster also needs spatial metadata connecting those positions to an extent, resolution and coordinate reference system.
+
+### Learner action
+
+Run the grid cell, compare each output with your prediction and change only the value at row 1, column 2. Explain why Python uses zero-based positions and why the array shape alone cannot tell you where this grid is located on Earth.
+
+## 8. Common mistakes and recovery
 
 ### Mixing incompatible meanings
 
@@ -152,7 +180,7 @@ The ordinary mean returns `nan` because missingness propagates. `np.nanmean` exc
 
 **Recognition:** a plausible mean hides that nearly half the biomass records were absent. **Fix:** count available and missing observations and state the exclusion policy with the result.
 
-## 8. Guided practice, independent challenge and portfolio artifact
+## 9. Guided practice, independent challenge and portfolio artifact
 
 ### Guided practice — a second published field
 
@@ -192,4 +220,3 @@ Answer in private notes:
 **Artifact 07 — Verified numerical-array analysis**
 
 This checkpoint demonstrates that you can move from small Python collections to structured scientific arrays while preserving provenance and interpretation limits.
-
