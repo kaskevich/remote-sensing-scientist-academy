@@ -3,6 +3,24 @@ title: Open the Published Dataset with pandas
 lessonId: lesson-08
 ---
 
+## Learning pathway
+
+### You already know
+
+Lessons 2–3 established value and record contracts. Lessons 5–7 added population accounting, executable checks and array structure. Until now, however, most values were copied into the notebook for controlled learning.
+
+### In this lesson
+
+You will create a traceable boundary between an unchanged published file and an in-memory pandas table. You will record file identity and parsing choices, then test the loaded structure against documented expectations before analysis.
+
+### Why this comes now
+
+Data-quality work is meaningful only when the input can be identified and reopened. A successful parser call is not enough: the wrong file or wrong schema can still produce a plausible DataFrame.
+
+### You will use this later
+
+Lesson 9 profiles value quality, Lesson 10 defines analysis populations, Lesson 11 joins derived summaries and Lesson 12 assembles the handover. Module 2 applies the same immutable-input and intake-audit pattern to vectors, rasters and UAV products.
+
 ## 1. Open data as a documented scientific table
 
 ### Learning outcome
@@ -31,6 +49,17 @@ Use the exact source filename:
 
 Add `## Lesson 8 — Open the published dataset` to your notebook. Create a Markdown provenance block containing the dataset title, creators as listed by Zenodo, DOI, download date, licence and unchanged filename.
 
+### Define the intake contract
+
+| Intake element | Expected evidence | What it does not establish |
+|---|---|---|
+| source identity | Zenodo record, DOI, creators, licence and filename | that your local bytes are unchanged |
+| local identity | file size and checksum recorded after download | measurement validity or semantic equivalence |
+| parser contract | encoding, date field and day-first convention | that every inferred dtype is scientifically correct |
+| structural contract | 120 rows, 25 fields and expected identifiers | that every value is valid or complete |
+| immutability | raw CSV is read, never overwritten | that derived outputs are correct |
+| handover decision | accept for quality audit, review or stop | permission to begin interpretation immediately |
+
 ## 2. Create a project structure without using a terminal
 
 In the Jupyter file browser:
@@ -52,6 +81,21 @@ Vegetation_Data_Explorer/
 ```
 
 The **relative path** from the notebook to the dataset is `data/Baltic_coastal_plant_traits2024.csv`. A relative path makes the project easier to move than a machine-specific absolute path such as `/Users/name/Downloads/...`.
+
+After placing the file, record its byte identity without changing it:
+
+```python
+from pathlib import Path
+import hashlib
+
+data_path = Path("data") / "Baltic_coastal_plant_traits2024.csv"
+file_size = data_path.stat().st_size
+file_sha256 = hashlib.sha256(data_path.read_bytes()).hexdigest()
+print("Bytes:", file_size)
+print("SHA-256:", file_sha256)
+```
+
+Keep this value in the provenance block. A matching checksum later proves byte-for-byte identity with your recorded local copy. It does not prove that two files with different metadata or formatting contain different scientific values, and it cannot validate the measurements.
 
 [[CHECK:l8-path]]
 
@@ -93,6 +137,23 @@ The shape should be `(120, 25)`: 120 data rows and 25 columns. The first sample 
 9. `.shape` returns `(rows, columns)`.
 10. Double brackets select four named columns; `.head()` displays the first five rows without altering the table.
 
+Record `pd.__version__` beside the parser choices. This is not a complete reproducible environment specification, but it gives a reviewer useful evidence if parsing behaviour differs later.
+
+### Make the structural expectations executable
+
+```python
+required_fields = {"SampleID", "site", "plantcommunity", "Date", "Sp_richness", "AGB"}
+expected_first_ids = ["SALS1", "SALS2", "SALS3", "SALS4", "SALS5"]
+
+assert meadows.shape == (120, 25)
+assert required_fields.issubset(meadows.columns)
+assert meadows["SampleID"].head().tolist() == expected_first_ids
+assert meadows["SampleID"].notna().all()
+assert not meadows["SampleID"].duplicated().any()
+```
+
+If an assertion fails, stop before value analysis. Inspect the source, filename, parser arguments and unexpected structure; do not edit the expected values merely to make the cell pass.
+
 [[CHECK:l8-load]]
 
 ## 4. Understand the DataFrame structure
@@ -132,6 +193,8 @@ print("Duplicate IDs:", meadows["SampleID"].duplicated().sum())
 ```
 
 You should find 120 unique sample IDs, four site labels and four community codes, with no duplicated `SampleID` values. These checks establish structural facts about the loaded file. They do not show that every measurement is correct or that every site–community combination was sampled equally.
+
+Also print the minimum and maximum parsed date and the count of missing dates. A date column with the expected dtype can still contain missing or unexpectedly parsed values. Compare the result with the stated July 2024 collection context before continuing.
 
 > **Scientific note:** the table contains 40 Kudani rows and 30 each for Keemu and Koera, but 20 Saardu rows. Unequal row counts matter when interpreting pooled summaries.
 
@@ -184,6 +247,16 @@ Choose six fields that will matter to the Vegetation Data Explorer: one identifi
 
 Then select only those six columns into `analysis_preview`. Display the first eight rows and explain why selection does not change the source `meadows` table.
 
+### Professional intake decision
+
+Classify the dataset as:
+
+- `accepted for Lesson 9 quality audit` when provenance, local identity, path, parser choices and all structural assertions are recorded and pass;
+- `review` when the file loads but one expectation or metadata element is unresolved;
+- `stop` when file identity, required fields, identifier completeness or identifier uniqueness differs unexpectedly.
+
+An intake acceptance is permission to begin quality assessment, not a statement that the data are analysis-ready. Record the reason and unresolved field definitions in the notebook.
+
 ### Scientific interpretation
 
 At the end of this lesson, you have verified that a file with the expected structure has been loaded. You have not yet established measurement validity, handled missingness or selected an analysis population. Structural confidence is necessary, but it is only the first layer of data quality.
@@ -196,6 +269,7 @@ Answer in private notes:
 2. What does `(120, 25)` establish, and what does it not establish?
 3. Why is `SampleID` different from the pandas index?
 4. Which parsing choice would you report in a methods section?
+5. What does a matching file checksum establish, and what can it not validate?
 
 ### Submission
 
@@ -207,5 +281,4 @@ Answer in private notes:
 
 **Artifact 08 — Reproducible dataset-ingestion report**
 
-This checkpoint demonstrates that you can bring a published table into Python without hiding its source, location or parsing assumptions.
-
+This eighth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can bring a published table into Python without hiding its source, byte identity, location, parsing assumptions or unresolved metadata.

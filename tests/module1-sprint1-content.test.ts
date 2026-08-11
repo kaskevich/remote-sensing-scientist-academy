@@ -194,6 +194,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson7).toContain("np.isnan");
     expect(lesson7).toContain("spatial meaning not assigned");
     expect(lesson7).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson8 = reviewedContent["lesson-08"];
+    expect(lesson8).toContain("## Learning pathway");
+    expect(lesson8).toContain("Define the intake contract");
+    expect(lesson8).toContain("SHA-256");
+    expect(lesson8).toContain("Make the structural expectations executable");
+    expect(lesson8).toContain("accepted for Lesson 9 quality audit");
+    expect(lesson8).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
