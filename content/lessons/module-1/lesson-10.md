@@ -3,6 +3,24 @@ title: Filter, Group and Summarise
 lessonId: lesson-10
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 9 produced question-specific readiness decisions, source-preserving flags and group-coverage evidence. Those decisions now determine which rows and fields may enter each summary.
+
+### In this lesson
+
+You will write an analysis specification, create and audit its population mask, summarise defined groups with denominators and spread, and test whether grouped results reconcile with the selected rows.
+
+### Why this comes now
+
+A statistically correct aggregation can answer the wrong question when the population or grouping structure is hidden. Analysis starts only after intake and quality evidence establish what can be compared.
+
+### You will use this later
+
+Lesson 11 joins and reshapes these audited summaries, and Lesson 12 uses them in a claim–evidence chain. Later EO modules apply the same logic to pixels, dates, validation samples and model-error groups.
+
 ## 1. Match the table operation to the scientific question
 
 ### Learning outcome
@@ -26,6 +44,19 @@ The table contains four sites with unequal row counts: Kudani 40, Keemu 30, Koer
 ### Learner action
 
 Add `## Lesson 10 — Filter, group and summarise`. Write one complete analytical question in this form: “Among [explicit rows], how does [named variable] differ by [group]?”
+
+### Write the analysis specification
+
+| Element | Required statement | Review question |
+|---|---|---|
+| unit represented by one row | one published quadrat record | does the design support treating records as independent? |
+| analysis population | explicit inclusion and missingness criteria | how many source rows are included and excluded? |
+| response | exact field, meaning and unresolved unit status | are values comparable under one summary? |
+| grouping | exact categorical field and observed levels | is group composition confounded with another field? |
+| estimands | `n`, mean, median and standard deviation | what does each statistic describe? |
+| interpretation scope | sampled records in this table | which causal or regional claims remain unsupported? |
+
+`n_plots` counts distinct sample identifiers here. Do not call this a count of independent observations unless the sampling design supports independence.
 
 ## 2. Build a Boolean filter you can count and inspect
 
@@ -90,6 +121,21 @@ The site means should be approximately Keemu 13.10, Koera 12.07, Saardu 8.45 and
 7. Sorting changes presentation order, not the group calculations.
 8. Rounding is applied only for display.
 
+Standard deviation describes variation among observed values within each group. It is not a confidence interval, standard error or direct measure of uncertainty in the group mean.
+
+### Reconcile the grouped result with its population
+
+```python
+assert site_summary["n_plots"].sum() == analysis["SampleID"].nunique()
+
+weighted_mean = (
+    site_summary["richness_mean"] * site_summary["n_plots"]
+).sum() / site_summary["n_plots"].sum()
+assert np.isclose(weighted_mean, analysis["Sp_richness"].mean())
+```
+
+The first check detects lost or duplicated identifiers across mutually exclusive site groups. The second shows why an unweighted mean of four site means would not reproduce the plot-level mean when group sizes differ.
+
 [[CHECK:l10-group]]
 
 ## 4. Read summaries as distributions, not rankings alone
@@ -98,7 +144,8 @@ The site means should be approximately Keemu 13.10, Koera 12.07, Saardu 8.45 and
 
 A professional summary should answer:
 
-- how many independent observations contributed?
+- how many records and distinct sample identifiers contributed?
+- what evidence supports or limits independence?
 - which measure of centre was used?
 - how variable were observations within the group?
 - were missing values excluded, and how many?
@@ -126,6 +173,8 @@ print(community_summary.round(2))
 ```
 
 The four community-code means are approximately TG 15.93, US 11.70, LS 5.60 and OP 4.30. Preserve the codes exactly; do not invent expanded names. Compare site and community summaries and notice that these factors are not distributed in a complete balanced grid.
+
+Create a site-by-community count table before interpreting either grouping. Empty or sparse combinations show where a site mean represents a different community composition. Stratified description can expose this pattern, but it does not by itself remove confounding or establish a causal site effect.
 
 ## 6. Common mistakes and recovery
 
@@ -178,12 +227,23 @@ Choose either `Height_median` or `CCI_CWM` as the response.
 - Select the underlying rows for that group and inspect whether unusual values may contribute.
 - Write a cautious 150-word interpretation without causal claims.
 
+### Professional analysis decision
+
+Classify the result as:
+
+- `ready for descriptive handover` when the question, population, denominators, missingness policy, reconciliation checks and design limits are explicit;
+- `review` when group composition, sparse cells or unusual values materially affect interpretation;
+- `stop` when the required field was not conditionally ready in Lesson 9 or the selected rows cannot be reconstructed.
+
+Record the exact input flags and mask used. A summary table without a reproducible route back to its records is not a complete portfolio artifact.
+
 Answer in private notes:
 
 1. What exact rows does your result represent?
 2. Why is `n` part of the scientific result?
 3. When might median communicate centre better than mean?
 4. Which design feature prevents a simple site comparison from isolating cause?
+5. Why does within-group standard deviation not quantify uncertainty in the mean by itself?
 
 ### Submission
 
@@ -195,5 +255,4 @@ Answer in private notes:
 
 **Artifact 10 — Reproducible grouped vegetation summary**
 
-This checkpoint demonstrates that you can move from a research question to an explicit analytical population and an appropriately qualified comparison.
-
+This tenth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can move from a research question to an explicit analytical population, reconcile grouped results with source records and communicate an appropriately qualified comparison.

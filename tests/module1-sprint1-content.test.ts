@@ -210,6 +210,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson9).toContain("missingness masks and count disagreements");
     expect(lesson9).toContain("conditionally ready");
     expect(lesson9).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson10 = reviewedContent["lesson-10"];
+    expect(lesson10).toContain("## Learning pathway");
+    expect(lesson10).toContain("Write the analysis specification");
+    expect(lesson10).toContain("Reconcile the grouped result with its population");
+    expect(lesson10).toContain("site-by-community count table");
+    expect(lesson10).toContain("ready for descriptive handover");
+    expect(lesson10).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
