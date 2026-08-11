@@ -799,10 +799,12 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     ],
     submissionChecklist: [
       "The question is focused, descriptive and supported by available fields",
-      "Provenance, schema, quality decisions and population are explicit",
-      "Tested functions, summaries, validated structure and two figures are included",
-      "Every result is traceable and the notebook passes a clean Run All",
-      "The briefing states limitations and the evidence needed for future EO work",
+      "Data, computation, science and communication gates have visible evidence",
+      "Every claim appears in an evidence map linked to source, population, method and limitation",
+      "Tested functions, reconciled summaries, validated structure and two accessible figures are included",
+      "The notebook passes clean Run All and every manifest-listed export reopens",
+      "An independent handover reproduces one number and records remaining risks",
+      "Graduate-profile evidence is framed as foundation rather than completed professional readiness",
     ],
     rubric: [
       { dimension: "Technical correctness", expectation: "The complete notebook executes and all reported values match visible outputs" },

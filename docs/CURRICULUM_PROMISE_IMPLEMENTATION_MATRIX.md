@@ -18,7 +18,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Learn remote sensing | Hero | Academy | 2.3, 2.11–2.25 | Partial: raster/UAV | Yes | Yes | Raster and UAV artifacts | PARTIAL |
 | Work with real data | Hero | Academy | 1.8–1.12 use published ecological data | Yes for field table | Yes | Yes | Vegetation Data Explorer | PARTIAL |
 | Use real satellite data | Hero and README | Academy | Only planned 2.26 onward | No | No | No | No | MISSING |
-| Build a portfolio | Hero/pathway | Academy | Every lesson names an artifact | Yes | Yes | Variable | Many checkpoints, not yet consolidated | PARTIAL |
+| Build a portfolio | Hero/pathway | Academy | 1.1–1.12 plus Module 2 practica | Yes | Yes | Yes in reviewed Module 1 | Portfolio Project 1 consolidated; Module 2 packages await final QA | PARTIAL |
 | Complete analysis | Hero/README | Academy | 1.12 and practica 2.C/2.D | Yes | Yes | Yes | Three substantial packages | PARTIAL |
 | Sentinel-2 recovery field lab | Homepage field lab | Future satellite module | No implemented lesson | No | No | No | No | MISSING |
 | Surface-reflectance preparation | Field-lab step | Future satellite module | No implemented lesson | No | No | No | No | MISSING |
@@ -53,7 +53,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Shapely | Academy goals | 2 | 2.6–2.9 | Yes | Yes | Yes | Geometry/topology record | COMPLETE |
 | Rasterio | Geospatial card | 2 | 2.12–2.17, 2.23–2.25 | Yes | Yes | Yes | Raster stack and UAV subset | COMPLETE |
 | Xarray | Geospatial card/module outcome | Planned | Planned 2.38–2.42 | No | No | No | No | MISSING |
-| Matplotlib and scientific plotting | Academy goals/module outcome | 1 | 1.11–1.12 | Partial | Yes | Yes | Scientific figure | PARTIAL |
+| Matplotlib and scientific plotting | Academy goals/module outcome | 1 | 1.11–1.12 | Yes for descriptive tables | Yes | Yes | Audited accessible figures with PNG/SVG handover | COMPLETE |
 | File handling and relative paths | Academy goals | 1/2 | 1.8, 2.4–2.5 | Yes | Yes | Yes | Project folders | COMPLETE |
 | Reproducible scripts | Academy goals | 1/2 | Functions/notebooks taught; scripts mainly planned | Partial | Limited | Limited | Notebook code, no package/script | TOO SHALLOW |
 | Notebook workflows | Pathway/module outcome | 1/2 | All implemented lessons | Yes | Yes | Yes | Main notebooks | COMPLETE |

@@ -226,6 +226,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson11).toContain("PNG and SVG");
     expect(lesson11).toContain("ready for portfolio handover");
     expect(lesson11).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson12 = reviewedContent["lesson-12"];
+    expect(lesson12).toContain("## Learning pathway");
+    expect(lesson12).toContain("Define four completion gates");
+    expect(lesson12).toContain("evidence map");
+    expect(lesson12).toContain("output manifest");
+    expect(lesson12).toContain("ready for Module 1 portfolio");
+    expect(lesson12).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(

@@ -34,7 +34,7 @@ A lesson is complete only when it supports the full progression:
 | 1.9 Missing Values, Types and Data Quality | Question-specific pandas quality assessment | Protect population before analysis | Four-dimension audit-trail diagram | Guided decision log + independent question profiles | Assertions, coercion, co-missingness, group coverage and reversible actions | Project 1 data-quality checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
 | 1.10 Filter, Group and Summarise | Reconciled descriptive analysis | Convert quality evidence into scoped summaries | Composition-aware grouping diagram | Guided biomass + independent response analysis | Population, denominator, weighted reconciliation and composition | Project 1 grouped-analysis checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
 | 1.11 Join, Reshape and Visualise | Entity-safe restructuring and accessible figures | Communicate audited summaries without structural loss | Existing join-to-figure workflow | Guided site package + independent community figure | Contract, cardinality, unmatched keys, pivot alignment and reopened exports | Project 1 communication checkpoint | Content, type, notebook and export | COMPLETE |
-| 1.12 Vegetation Data Explorer Project | Not reviewed | Not reviewed | Existing workflow diagram | Not reviewed | Not reviewed | Complete Module 1 project | No | NOT STARTED |
+| 1.12 Vegetation Data Explorer Project | Four-gate claim–evidence synthesis | Consolidate all foundations into one defensible handover | Gate-aware end-to-end workflow | Three pathways + independent reviewer handover | Evidence map, clean run, manifests, reopened exports and profile-boundary decision | Complete Portfolio Project 1 | Full suite and production export | COMPLETE |
 
 ## Module 2 — Geospatial Data Science, implemented release
 
@@ -74,7 +74,7 @@ A lesson is complete only when it supports the full progression:
 
 | Gate | Coverage | Depth | Progression | Practice | Independence | Portfolio | Accuracy | UX | Status |
 |---|---|---|---|---|---|---|---|---|---|
-| Module 1 final QA | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending | NOT STARTED |
+| Module 1 final QA | Complete | Complete | Complete | Complete | Complete | Complete | Complete | 320/375/768/desktop smoke suite passed | COMPLETE |
 | Module 2 implemented-release QA | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Pending | NOT STARTED |
 | Whole-Academy promise audit | Baseline recorded | Pending final reconciliation | Pending | Pending | Pending | Pending | Pending | Pending | AUDITING |
 
@@ -194,3 +194,22 @@ After each lesson commit, update that lesson row, update every affected promise-
 - **Changes made:** added the four-part pathway, join-contract table, outer-merge indicator audit, key/result assertions, pivot-alignment requirements, PNG/SVG reopen and provenance record, text alternative, evidence-led handover decision, starter cells, assessment metadata and Project 1 framing.
 - **Validation:** 38 Module 1 content tests plus the shared Markdown-rendering test, TypeScript and notebook JSON passed; production export is included in the lesson commit gate.
 - **Matrix contribution:** strengthens join safety, reshaping, scientific visualisation, accessibility, handover practice and the eleventh checkpoint of Portfolio Project 1.
+
+### Lesson 1.12 — Vegetation Data Explorer Project
+
+- **Purpose:** synthesize all Module 1 decisions into a reproducible scientific argument and independently test its handover quality.
+- **Existing strengths:** appropriately scoped pathways, professional notebook architecture, tested analysis function, strict EO boundary, export requirements, clean-run review and a substantial scientific briefing.
+- **Gaps found:** no explicit dependency path; completion evidence was not organised into distinct data/computation/science/communication gates; claims lacked a compact evidence map; exports lacked checksummed inventory and reopen checks; handover review was informal; and graduate-profile evidence was not bounded explicitly.
+- **Changes made:** added the four-part learning pathway, four completion gates, claim evidence map, checksummed output manifest, artifact reopen checks, independent reproduction handover, evidence-led portfolio decision, cautiously bounded profile mapping, starter-notebook capstone cells, stronger assessment metadata and a gate-aware workflow visual.
+- **Validation:** all 136 unit/content/integration tests, 10 browser smoke tests, ESLint, TypeScript, notebook JSON, SVG XML, raster-pack validator, UAV-pack validator and GitHub Pages production export passed.
+- **Matrix contribution:** completes Portfolio Project 1 and makes Module 1 a coherent foundation for all three graduate profiles without claiming later spatial, imagery, EO or modelling competence.
+
+## Module 1 final gate record
+
+- **Coverage:** all twelve lessons now include theory, decision-making, guided practice, independent application, QA/QC and one continuous portfolio checkpoint.
+- **Progression:** notebook → values → records → rules → batch processing → tested functions → arrays → published table → quality → analysis → communication → independent handover.
+- **Independence:** later lessons require learners to specify, test, reconcile, decide and defend rather than copy a completed result.
+- **Portfolio integrity:** twelve checkpoints consolidate into one checksummed, reproducible Vegetation Data Explorer rather than twelve disconnected mini-projects.
+- **Graduate-profile boundary:** Module 1 supplies credible foundations for the GIS/Remote Sensing Engineer, Geospatial Data Analyst and Remote Sensing Researcher profiles; it does not claim spatial, satellite, UAV or modelling readiness by itself.
+- **Release validation:** 136 automated tests and 10 browser tests passed; mobile and admin pages had no horizontal overflow at 320, 375, 768 and desktop widths; production static export succeeded.
+- **Gate decision:** `COMPLETE` for Module 1. Module 2 lesson-by-lesson review remains required before the whole-Academy gate can close.
