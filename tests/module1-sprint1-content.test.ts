@@ -140,6 +140,11 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson3).toContain("Tuples and sets have supporting roles");
     expect(lesson3).toContain("no management label");
     expect(lesson3).toContain("no coordinates");
+    expect(lesson3).toContain("## Learning pathway");
+    expect(lesson3).toContain("Make the relationship decision first");
+    expect(lesson3).toContain("required_fields - available_fields");
+    expect(lesson3).toContain("Professional QA decision");
+    expect(lesson3).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it("develops Chapters 2–4 as one complete scientific workflow", () => {

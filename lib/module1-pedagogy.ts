@@ -277,7 +277,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     },
   },
   "lesson-03": {
-    estimatedTime: "75–90 minutes",
+    estimatedTime: "90–105 minutes",
     position: 3,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-03.md",
@@ -314,15 +314,16 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     submissionChecklist: [
       "A species list is created, indexed and updated",
       "A plot dictionary is created and its values are accessed and updated",
-      "The submission uses appropriate indexing and key access",
-      "The written answer explains why each collection type was chosen",
-      "Published values are distinguished from instructional examples",
+      "A required-versus-available field audit reports missing and unexpected fields",
+      "The written answer explains what each collection preserves and may discard",
+      "Published values are distinguished from instructional examples in a provenance table",
+      "A justified structure ready, provenance review or stop decision is recorded",
     ],
     rubric: [
-      { dimension: "Technical correctness", expectation: "List and dictionary operations run and retrieve the intended values" },
-      { dimension: "Conceptual understanding", expectation: "Collection choices match order, naming, fixed position or uniqueness" },
-      { dimension: "Reproducibility", expectation: "The record is readable and runs in the continuing notebook" },
-      { dimension: "Scientific communication", expectation: "Provenance limits and collection choices are stated concisely" },
+      { dimension: "Technical correctness", expectation: "Collection operations and the field-set audit run and retrieve the intended values" },
+      { dimension: "Conceptual understanding", expectation: "Collection choices match order, naming, fixed position or uniqueness and acknowledge information loss" },
+      { dimension: "Reproducibility", expectation: "The record, expected schema and QA output run in the continuing notebook" },
+      { dimension: "Scientific communication", expectation: "Provenance limits and the evidence-based handover decision are stated concisely" },
     ],
     technicalMetadata: {
       ...sharedTechnicalMetadata,
