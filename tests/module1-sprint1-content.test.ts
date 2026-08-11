@@ -186,6 +186,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson6).toContain("regression testing");
     expect(lesson6).toContain("not ready for pandas data");
     expect(lesson6).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson7 = reviewedContent["lesson-07"];
+    expect(lesson7).toContain("## Learning pathway");
+    expect(lesson7).toContain("Record an array contract");
+    expect(lesson7).toContain("Prove equivalence with the Lesson 5 loop");
+    expect(lesson7).toContain("np.isnan");
+    expect(lesson7).toContain("spatial meaning not assigned");
+    expect(lesson7).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
