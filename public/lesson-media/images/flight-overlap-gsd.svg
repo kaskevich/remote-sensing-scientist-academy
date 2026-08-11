@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">Flight altitude, footprint, ground sampling distance and overlap</title><desc id="desc">A camera above overlapping image footprints with labelled forward and side overlap, cell size, altitude and spacing relationships.</desc>
+  <style>.f{fill:#dcecff;stroke:#1261a6;stroke-width:2;fill-opacity:.65}.g{stroke:#7c8796;stroke-width:1}.a{stroke:#1261a6;stroke-width:3;fill:none}.t{font:600 17px system-ui;fill:#10233f}.s{font:14px system-ui;fill:#33445c}.lime{fill:#dff25f;stroke:#536500;stroke-width:2}</style>
+  <path class="a" d="M145 55L120 95H170Z"/><text class="t" x="85" y="35">Camera</text><path class="a" d="M145 95L55 350M145 95L330 350"/><path class="a" d="M145 100V330"/><text class="s" x="158" y="220">height above ground</text>
+  <rect class="f" x="55" y="260" width="275" height="100"/><rect class="f" x="230" y="260" width="275" height="100"/><rect class="f" x="55" y="335" width="275" height="85"/><rect class="f" x="230" y="335" width="275" height="85"/>
+  <text class="t" x="550" y="75">Mission geometry</text><text class="s" x="550" y="115">footprint ← sensor size, focal length, height</text><text class="s" x="550" y="150">forward spacing = footprint length × (1 − overlap)</text><text class="s" x="550" y="185">side spacing = footprint width × (1 − overlap)</text>
+  <g transform="translate(550 230)"><rect class="lime" width="30" height="30"/><path class="g" d="M10 0V30M20 0V30M0 10H30M0 20H30"/><text class="s" x="45" y="20">GSD: nominal ground distance per image pixel</text></g>
+  <text class="s" x="550" y="310">GSD ≠ positional accuracy ≠ optical resolution</text><text class="s" x="550" y="345">Overlap supplies repeated views; it does not guarantee matches</text><text class="s" x="550" y="380">Terrain changes height above ground, footprint and overlap</text>
+</svg>

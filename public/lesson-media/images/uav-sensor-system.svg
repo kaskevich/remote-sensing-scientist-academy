@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="title desc">
+  <title id="title">UAV remote-sensing system and derived products</title><desc id="desc">A technical flow from platform, sensor, navigation, storage and flight control through raw measurements to derived point clouds, surface models and orthomosaics.</desc>
+  <style>.b{fill:#eef5ff;stroke:#1261a6;stroke-width:2}.n{fill:#f7f9fc;stroke:#6b7787;stroke-width:2}.t{font:600 17px system-ui;fill:#10233f}.s{font:14px system-ui;fill:#33445c}.a{stroke:#1261a6;stroke-width:3;fill:none;marker-end:url(#m)}</style>
+  <defs><marker id="m" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4 0 8Z" fill="#1261a6"/></marker></defs>
+  <rect class="b" x="30" y="40" width="250" height="260" rx="12"/><text class="t" x="55" y="75">Acquisition system</text>
+  <text class="s" x="55" y="112">Platform and flight control</text><text class="s" x="55" y="145">Sensor / payload</text><text class="s" x="55" y="178">GNSS and orientation</text><text class="s" x="55" y="211">Timing and storage</text><text class="s" x="55" y="244">Mission and illumination</text>
+  <path class="a" d="M280 170H375"/><rect class="n" x="375" y="105" width="205" height="130" rx="12"/><text class="t" x="400" y="142">Direct records</text><text class="s" x="400" y="178">Image measurements</text><text class="s" x="400" y="207">Metadata / geotags</text>
+  <path class="a" d="M580 170H675"/><rect class="b" x="675" y="40" width="255" height="260" rx="12"/><text class="t" x="700" y="75">Derived products</text><text class="s" x="700" y="112">Sparse / dense cloud</text><text class="s" x="700" y="145">DSM / interpreted DTM</text><text class="s" x="700" y="178">Orthorectified images</text><text class="s" x="700" y="211">Orthomosaic</text><text class="s" x="700" y="244">Reflectance / indices</text><text class="s" x="700" y="278">Each inherits decisions</text>
+</svg>

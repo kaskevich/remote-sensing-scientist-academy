@@ -333,6 +333,26 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
   }, [auth.client, auth.user, authenticatedStorageReady, storageRevision, lessonIds]);
 
   useEffect(() => {
+    function openLessonFromHash() {
+      const lessonId = decodeURIComponent(window.location.hash.slice(1));
+      if (!lessonIds.includes(lessonId)) return;
+
+      const moduleNumber = modules.find((module) =>
+        module.lessons.some((lesson) => lesson.id === lessonId),
+      )?.overview.moduleNumber;
+
+      if (moduleNumber !== undefined) {
+        setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
+      }
+      setOpenLessonId(lessonId);
+    }
+
+    openLessonFromHash();
+    window.addEventListener("hashchange", openLessonFromHash);
+    return () => window.removeEventListener("hashchange", openLessonFromHash);
+  }, [lessonIds, modules]);
+
+  useEffect(() => {
     if (!hasLoaded || !storageRef.current) {
       return;
     }
@@ -508,6 +528,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
         className={`curriculum-module curriculum-module-${overview.accent}`}
         open={isModuleOpen}
         key={overview.moduleNumber}
+        suppressHydrationWarning
       >
         <summary
           className="curriculum-module-summary"
@@ -548,6 +569,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                 id={lesson.id}
                 key={lesson.id}
                 open={isOpen}
+                suppressHydrationWarning
               >
                 <summary
                   className="module-summary"
