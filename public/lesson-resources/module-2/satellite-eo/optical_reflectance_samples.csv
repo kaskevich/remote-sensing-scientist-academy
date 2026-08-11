@@ -1,0 +1,9 @@
+plot_id,observation_id,green_reflectance,red_reflectance,red_edge_reflectance,nir_reflectance,qa_cloud,qa_shadow,valid_support_fraction,source_status
+SAL01,SYN_S2A_20240603_CLEAR,0.091,0.066,0.184,0.428,false,false,1.00,synthetic
+SAL02,SYN_S2A_20240603_CLEAR,0.108,0.084,0.202,0.401,false,false,0.96,synthetic
+SAL03,SYN_S2A_20240603_CLEAR,0.137,0.128,0.219,0.344,false,false,0.91,synthetic
+SAL04,SYN_S2A_20240603_CLEAR,0.082,0.057,0.171,0.456,false,false,0.98,synthetic
+SAL05,SYN_S2A_20240618_CLOUD,0.312,0.284,0.301,0.338,true,false,0.34,synthetic deliberate cloud
+SAL06,SYN_S2A_20240618_CLOUD,0.041,0.038,0.064,0.086,false,true,0.48,synthetic deliberate shadow
+SAL07,SYN_S2A_20240708_HAZE,0.164,0.141,0.226,0.351,false,false,0.78,synthetic deliberate haze
+SAL08,SYN_S2A_20240708_HAZE,0.119,0.096,0.213,0.389,false,false,0.85,synthetic

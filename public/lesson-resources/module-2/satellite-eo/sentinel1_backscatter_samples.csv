@@ -1,0 +1,9 @@
+plot_id,observation_id,acquired_utc,orbit_direction,relative_orbit,incidence_angle_deg,vv_db,vh_db,rtc_status,qa_status,deliberate_condition,source_status
+SAL01,SYN_S1A_20240604_ASC,2024-06-04T04:51:20Z,ascending,131,38.2,-8.4,-15.7,complete,accept,reference geometry,synthetic
+SAL02,SYN_S1A_20240604_ASC,2024-06-04T04:51:20Z,ascending,131,38.6,-9.1,-16.4,complete,accept,reference geometry,synthetic
+SAL03,SYN_S1A_20240616_ASC,2024-06-16T04:51:21Z,ascending,131,38.3,-7.7,-14.8,complete,accept,wetter synthetic condition,synthetic
+SAL04,SYN_S1A_20240616_ASC,2024-06-16T04:51:21Z,ascending,131,38.8,-8.6,-15.1,complete,accept,wetter synthetic condition,synthetic
+SAL05,SYN_S1A_20240628_DESC,2024-06-28T16:02:44Z,descending,36,33.1,-10.2,-17.0,complete,review,incompatible orbit geometry,synthetic
+SAL06,SYN_S1A_20240710_ASC,2024-07-10T04:51:23Z,ascending,131,45.9,-8.0,-14.5,complete,review,incidence-angle edge,synthetic
+SAL07,SYN_S1A_20240722_ASC,2024-07-22T04:51:22Z,ascending,131,38.5,-6.9,-13.9,failed,reject,terrain correction intentionally failed,synthetic
+SAL08,SYN_S1A_20240803_ASC,2024-08-03T04:51:24Z,ascending,131,38.4,-8.2,-15.2,complete,accept,reference geometry,synthetic

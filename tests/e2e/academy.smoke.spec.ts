@@ -205,7 +205,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes the reviewed vector, raster and UAV sequences with the planned pathway", async ({ page }) => {
+test("Module 2 exposes the reviewed vector, raster, UAV and satellite sequences with the planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -215,8 +215,8 @@ test("Module 2 exposes the reviewed vector, raster and UAV sequences with the pl
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(54);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(29);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(29);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(35);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(24);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
   await expect(overview.locator(".module-syllabus li .syllabus-number").nth(52)).toHaveText("2.53");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
@@ -242,6 +242,11 @@ test("Module 2 exposes the reviewed vector, raster and UAV sequences with the pl
   await expect(overview.getByRole("link", { name: "UAV Remote Sensing Fundamentals", exact: true })).toHaveAttribute("href", "#lesson-2-18");
   await expect(overview.getByRole("link", { name: "UAV Multispectral Processing Pipeline", exact: true })).toHaveAttribute("href", "#lesson-2-25");
   await expect(overview.getByRole("link", { name: "Evaluate a UAV Survey Before Scientific Analysis", exact: true })).toHaveAttribute("href", "#module-2-chapter-4-practicum");
+  await expect(overview.getByText("Optical Remote Sensing", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(4).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "Optical Remote Sensing", exact: true })).toHaveAttribute("href", "#lesson-2-26");
+  await expect(overview.getByRole("link", { name: "LiDAR and Point Clouds", exact: true })).toHaveAttribute("href", "#lesson-2-30");
+  await expect(overview.getByRole("link", { name: "Build a Defensible Satellite Evidence Package", exact: true })).toHaveAttribute("href", "#module-2-chapter-5-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -250,13 +255,14 @@ test("Module 2 exposes the reviewed vector, raster and UAV sequences with the pl
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("25 lessons · 4 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(29);
+  await expect(moduleNavigation.getByText("30 lessons · 5 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(35);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(1);
   await expect(page.locator("#lesson-2-18")).toHaveCount(1);
   await expect(page.locator("#lesson-2-25")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-30")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
@@ -320,6 +326,21 @@ test("Module 2 exposes the reviewed vector, raster and UAV sequences with the pl
   await uavPracticum.locator(":scope > summary").click();
   await expect(uavPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
   await expect(uavPracticum.getByText("UAV_PRODUCT_QA_REPORT.md", { exact: true }).first()).toBeVisible();
+
+  const opticalLesson = page.locator("#lesson-2-26");
+  await opticalLesson.locator(":scope > summary").click();
+  await expect(opticalLesson.getByText("Lesson 2.26 of 53", { exact: true })).toBeVisible();
+  await expect(opticalLesson.locator(".formative-check")).toHaveCount(3);
+  await expect(opticalLesson.getByRole("link", { name: "Download the optical observation inventory" })).toHaveAttribute("href", /satellite-eo\/optical_observation_inventory\.csv$/);
+
+  const lidarLesson = page.locator("#lesson-2-30");
+  await lidarLesson.locator(":scope > summary").click();
+  await expect(lidarLesson.getByRole("link", { name: "Download the synthetic LiDAR point samples" })).toHaveAttribute("href", /satellite-eo\/lidar_point_samples\.csv$/);
+
+  const satellitePracticum = page.locator("#module-2-chapter-5-practicum");
+  await satellitePracticum.locator(":scope > summary").click();
+  await expect(satellitePracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(satellitePracticum.getByText("SATELLITE_EO_EVIDENCE_REPORT.md", { exact: true }).first()).toBeVisible();
 
   const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
   await chapterOnePracticum.locator(":scope > summary").click();

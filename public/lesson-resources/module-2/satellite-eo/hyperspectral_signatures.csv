@@ -1,0 +1,21 @@
+wavelength_nm,bandwidth_nm,meadow_dry_reflectance,meadow_moist_reflectance,open_water_reflectance,bad_band,snr,deliberate_condition,source_status
+450,10,0.052,0.044,0.061,false,78,visible blue,synthetic
+500,10,0.074,0.062,0.054,false,96,visible green rise,synthetic
+550,10,0.121,0.106,0.047,false,112,green peak,synthetic
+600,10,0.098,0.081,0.038,false,105,visible decline,synthetic
+650,10,0.071,0.057,0.031,false,101,red absorption shoulder,synthetic
+680,10,0.058,0.047,0.026,false,94,chlorophyll absorption region,synthetic
+700,10,0.121,0.103,0.021,false,91,red-edge rise,synthetic
+720,10,0.238,0.211,0.018,false,88,red-edge rise,synthetic
+750,10,0.401,0.372,0.015,false,84,nir plateau onset,synthetic
+800,10,0.438,0.409,0.011,false,82,nir plateau,synthetic
+850,10,0.451,0.421,0.009,false,77,nir plateau,synthetic
+900,10,0.421,0.379,0.007,false,58,water-related decline,synthetic
+940,10,0.312,0.241,0.006,true,17,low snr near atmospheric water absorption,synthetic
+1000,10,0.391,0.337,0.005,false,52,near infrared,synthetic
+1200,10,0.342,0.276,0.004,false,46,shortwave infrared,synthetic
+1400,12,0.092,0.061,0.003,true,8,strong atmospheric water absorption,synthetic
+1650,12,0.281,0.216,0.003,false,39,shortwave infrared,synthetic
+1900,14,0.048,0.032,0.002,true,6,strong atmospheric water absorption,synthetic
+2200,14,0.173,0.126,0.002,false,31,shortwave infrared feature region,synthetic
+2400,14,0.119,0.084,0.002,true,15,low snr spectral edge,synthetic
