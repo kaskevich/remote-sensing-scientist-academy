@@ -716,7 +716,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     },
   },
   "lesson-11": {
-    estimatedTime: "100–120 minutes",
+    estimatedTime: "115–140 minutes",
     position: 11,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-11.md",
@@ -744,11 +744,12 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
       },
     ],
     submissionChecklist: [
-      "Join row meaning, key and relationship are documented",
-      "Key uniqueness, row counts and unmatched keys are audited",
-      "Mean and count matrices preserve unsampled combinations",
-      "Figures have readable labels and complete captions",
-      "Chart interpretation reports n and avoids causal claims",
+      "Join row meanings, key semantics, cardinality, coverage and expected result are documented",
+      "Key uniqueness, outer-join indicator, row counts and unmatched keys are audited",
+      "Mean and count matrices align and preserve unsampled combinations",
+      "PNG and SVG exports reopen and remain traceable to the source summary",
+      "Figures have readable labels, complete captions and a concise text alternative",
+      "A justified portfolio, review or stop decision reports n and avoids causal claims",
     ],
     rubric: [
       { dimension: "Technical correctness", expectation: "Validated join, reshape and figure code preserve expected rows and values" },

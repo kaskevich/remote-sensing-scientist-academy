@@ -218,6 +218,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson10).toContain("site-by-community count table");
     expect(lesson10).toContain("ready for descriptive handover");
     expect(lesson10).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson11 = reviewedContent["lesson-11"];
+    expect(lesson11).toContain("## Learning pathway");
+    expect(lesson11).toContain("Declare the join contract");
+    expect(lesson11).toContain("indicator=True");
+    expect(lesson11).toContain("PNG and SVG");
+    expect(lesson11).toContain("ready for portfolio handover");
+    expect(lesson11).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(

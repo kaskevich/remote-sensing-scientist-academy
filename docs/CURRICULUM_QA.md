@@ -33,7 +33,7 @@ A lesson is complete only when it supports the full progression:
 | 1.8 Open the Published Dataset with pandas | Reproducible published-file intake | Establish identity before data quality | Identity-aware DataFrame audit diagram | Guided intake + independent schema note | Checksum, parser, schema, ID and date gate | Project 1 ingestion checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
 | 1.9 Missing Values, Types and Data Quality | Question-specific pandas quality assessment | Protect population before analysis | Four-dimension audit-trail diagram | Guided decision log + independent question profiles | Assertions, coercion, co-missingness, group coverage and reversible actions | Project 1 data-quality checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
 | 1.10 Filter, Group and Summarise | Reconciled descriptive analysis | Convert quality evidence into scoped summaries | Composition-aware grouping diagram | Guided biomass + independent response analysis | Population, denominator, weighted reconciliation and composition | Project 1 grouped-analysis checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
-| 1.11 Join, Reshape and Visualise | Not reviewed | Not reviewed | Existing join/figure diagram | Not reviewed | Not reviewed | Audited scientific figure | No | NOT STARTED |
+| 1.11 Join, Reshape and Visualise | Entity-safe restructuring and accessible figures | Communicate audited summaries without structural loss | Existing join-to-figure workflow | Guided site package + independent community figure | Contract, cardinality, unmatched keys, pivot alignment and reopened exports | Project 1 communication checkpoint | Content, type, notebook and export | COMPLETE |
 | 1.12 Vegetation Data Explorer Project | Not reviewed | Not reviewed | Existing workflow diagram | Not reviewed | Not reviewed | Complete Module 1 project | No | NOT STARTED |
 
 ## Module 2 — Geospatial Data Science, implemented release
@@ -184,3 +184,13 @@ After each lesson commit, update that lesson row, update every affected promise-
 - **Changes made:** added the four-part learning pathway, analysis-specification table, independence caution, SD interpretation, count and weighted-mean assertions, site–community composition audit, evidence-led analysis decision, starter-notebook reconciliation cells, stronger assessment metadata, Project 1 framing and composition/uncertainty guidance in the visual.
 - **Validation:** 38 Module 1 content tests plus the shared Markdown-rendering test, TypeScript, focused ESLint, notebook JSON, SVG XML and GitHub Pages export passed.
 - **Matrix contribution:** strengthens filtering, aggregation, denominator governance, design reasoning, reproducibility and the tenth checkpoint of Portfolio Project 1. It supplies audited summary tables for Lesson 11 without escalating descriptive comparisons into unsupported causal or regional claims.
+
+### Lesson 1.11 — Join, Reshape and Visualise
+
+- **Purpose:** teach structural transformation and visual communication as traceable operations governed by entity meaning, cardinality and preserved denominators.
+- **Existing strengths:** validated one-to-one merge, before/after counts, unmatched-key sets, preserved unsampled pivot cells, companion count matrix, restrained chart design and strong caption expectations.
+- **Gaps found:** no explicit dependency path or consolidated join contract; the inner merge could hide unmatched entities without the separate audit; pivot alignment lacked explicit invariants; exported artifacts were not reopened or inventoried; and accessibility/readiness evidence was incomplete.
+- **Professional standard applied:** learners must declare entity relationships, inspect a full outer audit, preserve unmatched and unsampled evidence, reconcile mean/count matrices and deliver traceable accessible figure files.
+- **Changes made:** added the four-part pathway, join-contract table, outer-merge indicator audit, key/result assertions, pivot-alignment requirements, PNG/SVG reopen and provenance record, text alternative, evidence-led handover decision, starter cells, assessment metadata and Project 1 framing.
+- **Validation:** 38 Module 1 content tests plus the shared Markdown-rendering test, TypeScript and notebook JSON passed; production export is included in the lesson commit gate.
+- **Matrix contribution:** strengthens join safety, reshaping, scientific visualisation, accessibility, handover practice and the eleventh checkpoint of Portfolio Project 1.

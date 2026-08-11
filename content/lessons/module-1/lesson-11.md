@@ -3,6 +3,24 @@ title: Join, Reshape and Visualise
 lessonId: lesson-11
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 10 produced summary tables whose populations, denominators and composition were audited. These are derived evidence products with defined row meanings, not interchangeable tables that may be combined by position.
+
+### In this lesson
+
+You will declare and validate entity relationships before joining, preserve unmatched keys and unsampled combinations, and turn an audited summary into an accessible figure whose caption carries the analytical contract.
+
+### Why this comes now
+
+Communication requires structural transformation, but joins and pivots can silently change entity counts. A figure should be created only after the transformed evidence reconciles with its sources.
+
+### You will use this later
+
+Lesson 12 integrates the table, figure and audit as one portfolio handover. Module 2 uses the same cardinality, alignment and communication principles for spatial joins, raster–vector extraction and map products.
+
 ## 1. Structure evidence for comparison and communication
 
 ### Learning outcome
@@ -26,6 +44,19 @@ You will derive two site-level tables from the same published dataset: a species
 ### Learner action
 
 Add `## Lesson 11 — Join, reshape and visualise`. Write the intended row meaning of your final site report: “one row represents …”.
+
+### Declare the join contract
+
+| Contract element | Site-report decision | Failure evidence |
+|---|---|---|
+| left row meaning | one richness summary per exact site label | duplicate left key |
+| right row meaning | one AGB-coverage summary per exact site label | duplicate right key |
+| key meaning | the same documented site entity in both tables | spelling or semantic mismatch |
+| expected cardinality | one-to-one | validated merge raises an error |
+| expected coverage | all four site keys on both sides | left-only or right-only key |
+| expected result | four site rows, no multiplication | changed or duplicated row count |
+
+Similar column names are not evidence of shared entity meaning. Write the contract before calling `merge`.
 
 ## 2. Join only after confirming the key
 
@@ -91,6 +122,10 @@ print("Unmatched right keys:", sorted(right_only))
 
 Never use a join merely because the columns have similar names. A scientifically meaningful key identifies the same entity under the same definition in both tables.
 
+The worked merge uses pandas' default inner join, which would omit unmatched keys. Because you calculate both key differences first, that loss cannot remain silent. For a handover audit, also create an outer merge with `indicator=True` and inspect the `_merge` column before selecting the final join type.
+
+Assert that both source keys are unique, both unmatched-key sets are empty, the result has four rows and the result key remains unique.
+
 [[CHECK:l11-audit]]
 
 ## 4. Reshape to expose sampled and unsampled combinations
@@ -123,6 +158,8 @@ count_matrix = meadows.pivot_table(
 )
 print(count_matrix)
 ```
+
+Assert that mean and count matrices have identical index and column labels. For every populated mean cell, the companion count must be positive; for every unsampled combination, retain missingness in both views.
 
 [[CHECK:l11-reshape]]
 
@@ -160,6 +197,10 @@ A professional exploratory figure includes:
 - a caption stating source, analysis population, sample sizes, missing-value rule and interpretation limits.
 
 Your caption should note that site row counts differ and site is not independent of sampled community composition. A bar height is not uncertainty. If you later add error bars, state exactly what they represent and whether assumptions are appropriate.
+
+Save the final figure to a named `outputs` folder in both PNG and SVG form, then reopen both files. Record filename, purpose, creation date, source table and caption. PNG supports convenient preview; SVG preserves vector text and geometry. Neither export validates the underlying analysis.
+
+Provide a concise text alternative describing the comparison, strongest visible pattern and main limitation. Do not rely on colour alone to distinguish categories, and check that labels remain readable at the size used in the Academy portfolio.
 
 ## 6. Common mistakes and recovery
 
@@ -209,12 +250,21 @@ Create a second figure for either `Height_median` or `CCI_CWM` by plant-communit
 - Write an accessible caption and a 150-word interpretation.
 - Compare what the figure reveals with what the table preserves.
 
+### Professional communication decision
+
+Classify the joined figure package as:
+
+- `ready for portfolio handover` when cardinality, unmatched keys, row counts, pivot alignment, denominators, exports, caption and text alternative pass review;
+- `review` when presentation is readable but a relationship or limitation is unclear;
+- `stop` when a join multiplies or drops entities, an unsampled cell becomes zero or the figure cannot be traced to the audited summary.
+
 Answer in private notes:
 
 1. What entity does your join key identify?
 2. How would you detect row multiplication?
 3. What does an empty pivot cell mean here?
 4. Which information belongs in the caption rather than the chart marks?
+5. Why can a visually correct chart still be based on a structurally invalid join?
 
 ### Submission
 
@@ -226,5 +276,4 @@ Answer in private notes:
 
 **Artifact 11 — Audited scientific summary and figure**
 
-This checkpoint demonstrates that you can restructure evidence without losing entity meaning and communicate a real ecological comparison clearly.
-
+This eleventh checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can restructure evidence without losing entity meaning and communicate a real ecological comparison in traceable, accessible formats.
