@@ -202,6 +202,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson8).toContain("Make the structural expectations executable");
     expect(lesson8).toContain("accepted for Lesson 9 quality audit");
     expect(lesson8).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson9 = reviewedContent["lesson-09"];
+    expect(lesson9).toContain("## Learning pathway");
+    expect(lesson9).toContain("Separate four quality dimensions");
+    expect(lesson9).toContain('assert classify_biomass_pandas(np.nan) == "missing"');
+    expect(lesson9).toContain("missingness masks and count disagreements");
+    expect(lesson9).toContain("conditionally ready");
+    expect(lesson9).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
