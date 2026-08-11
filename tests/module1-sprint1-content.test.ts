@@ -178,6 +178,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson5).toContain("equivalence check");
     expect(lesson5).toContain("ready for handover");
     expect(lesson5).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson6 = reviewedContent["lesson-06"];
+    expect(lesson6).toContain("## Learning pathway");
+    expect(lesson6).toContain("Write the function contract before its body");
+    expect(lesson6).toContain("Turn expectations into executable checks");
+    expect(lesson6).toContain("regression testing");
+    expect(lesson6).toContain("not ready for pandas data");
+    expect(lesson6).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(

@@ -3,6 +3,24 @@ title: Functions, Errors and Debugging
 lessonId: lesson-06
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 4 specified and exercised one quality rule. Lesson 5 applied a stable method across a documented batch and kept population, inclusion and denominator evidence visible.
+
+### In this lesson
+
+You will give a scientific rule a reusable boundary: named inputs, documented output, explicit missingness scope and no hidden dependence on notebook state. You will turn expected behaviour into repeatable tests and diagnose failures from evidence.
+
+### Why this comes now
+
+Copied logic is difficult to update consistently. A function lets later lessons upgrade one method—such as missing-value detection—while tests show whether established behaviour has been preserved.
+
+### You will use this later
+
+Lesson 9 deliberately upgrades the Lesson 6 missingness contract for pandas. Lesson 12 assembles the tested functions into the final explorer, and Module 2 depends on small testable functions for CRS, geometry, raster and UAV quality checks.
+
 ## 1. Package one scientific rule so it can be tested and reused
 
 ### Learning outcome
@@ -40,6 +58,19 @@ print(double_observation(7))
 `def` begins a function definition. `value` is a **parameter**: a local name that receives the supplied input. `return` sends the result back to the calling code. Defining the function does not run its body; the call `double_observation(7)` does.
 
 This function is computationally valid but scientifically vague. “Double” does not say whether the value is an area, concentration or count, nor why doubling is justified. Good scientific functions need a narrow purpose, a descriptive name and documented assumptions.
+
+### Write the function contract before its body
+
+| Contract element | `classify_biomass` decision | Why a reviewer needs it |
+|---|---|---|
+| purpose | classify one `AGB` value structurally | prevents the result being mistaken for ecological validation |
+| accepted input | `None`, ordinary `int` or `float`; Boolean rejected | states the Lesson 6 representation boundary |
+| returned output | one status string | makes downstream use predictable |
+| source mutation | none | preserves the original observation for audit |
+| known limitation | NumPy/pandas missing values not yet handled | identifies the exact reason for the Lesson 9 upgrade |
+| scientific assumption | a negative AGB value is structurally invalid for this exercise | separates a stated rule from a universal claim |
+
+A docstring should summarise this contract near the code. The notebook's surrounding Markdown can preserve the fuller scientific provenance and limitation record.
 
 [[CHECK:l6-function-boundary]]
 
@@ -90,6 +121,20 @@ True invalid Boolean
 9. The five test values deliberately cover one case for every branch.
 10. `repr` makes the quotation marks around the string visible, helping you distinguish text from a number.
 
+### Turn expectations into executable checks
+
+Printed output helps a human inspect the cases. An `assert` statement makes an expectation executable:
+
+```python
+assert classify_biomass(None) == "missing"
+assert classify_biomass(True) == "invalid Boolean"
+assert classify_biomass(-1) == "invalid negative"
+assert classify_biomass("311.33") == "invalid type"
+assert classify_biomass(311.33) == "recorded"
+```
+
+A passing assertion produces no output. A failed assertion raises `AssertionError` at the unmet expectation. Keep the readable test matrix and the assertions: one communicates the cases; the other prevents a changed function from silently contradicting them.
+
 ### The function has a deliberate Lesson 6 boundary
 
 At this point in the module, `None` is the missing-value representation you have learned to handle. The function is robust for that stated boundary, but it is not yet ready for a pandas column. In Lesson 7 you will meet NumPy's `np.nan`; in Lessons 8–9 you will see how pandas represents and detects missing table values. An unchanged Lesson 6 function could treat `np.nan` as an ordinary float and incorrectly return `"recorded"`.
@@ -109,6 +154,8 @@ Use this five-step debugging method:
 3. **Read the traceback from the final line upward.** The final line names the error type and message; the preceding lines show where the call travelled.
 4. **Change one cause.** Avoid replacing the entire cell before understanding the evidence.
 5. **Rerun the known tests and then Run All.** A fix for one case must not break another or depend on stale notebook state.
+
+Rerunning every established test after a change is **regression testing**. It asks whether the correction preserved behaviour that already worked. It cannot reveal an important case that was never specified, so each new failure should become a new permanent test before the function is changed.
 
 Common error categories provide clues:
 
@@ -181,7 +228,17 @@ Write a function named `summarise_plot(plot, richness_threshold)` that accepts o
 - `richness_status` from your tested richness function;
 - `biomass_status` from `classify_biomass`.
 
-Test it with one complete record, one missing-biomass record and one deliberately malformed practice record. Do not mutate the input dictionary. Record the expected and actual outputs, and document one bug you found or one test that increased your confidence.
+Test it with one complete record, one missing-biomass record and one deliberately malformed practice record. For the malformed record, state whether a missing required key should raise `KeyError` or return a documented status; do not hide it with a broad exception. Do not mutate the input dictionary. Make a shallow copy before the call and verify afterward that the source still equals that copy. Record the expected and actual outputs, and document one bug you found or one test that increased your confidence.
+
+### Professional QA decision
+
+Classify the function set as:
+
+- `ready for the current notebook` when the contract, branch tests, assertions, non-mutation check and clean Run All pass;
+- `review` when expected and actual behaviour differ or a failure policy is ambiguous;
+- `not ready for pandas data` until Lesson 9 adds and tests pandas-aware missingness.
+
+Record both the tested software boundary and the remaining scientific-validation question. “All tests passed” is useful evidence only when readers can see what the tests covered.
 
 ### Scientific interpretation
 
@@ -193,6 +250,7 @@ Answer in your private notes:
 2. Why does `return` make a function easier to test than `print` alone?
 3. Which test protects the missing-versus-zero distinction?
 4. What can a successful test not establish scientifically?
+5. Why should a newly discovered failure become a test before you change the function?
 
 ### Submission
 
@@ -204,4 +262,4 @@ Answer in your private notes:
 
 **Artifact 06 — Tested ecological quality-control functions**
 
-This checkpoint demonstrates that you can make a scientific rule reusable, expose assumptions at the function boundary and debug from controlled evidence.
+This sixth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can make a scientific rule reusable, expose assumptions at the function boundary, protect source records and debug from controlled evidence.
