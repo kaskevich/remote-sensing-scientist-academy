@@ -40,6 +40,17 @@ Only the first card represents the published Zenodo table. The other three are i
 
 Download and open the **UAV and Satellite Analysis Pipeline** starter notebook. Add a Markdown heading `## Lesson 2.1 — What makes data geospatial?`. Under it, write your initial classification of the four assets. Do not search by file extension yet. Use only the evidence in the table.
 
+### Learning pathway
+
+This lesson begins the Academy's second portfolio project. Work through four connected decisions:
+
+1. **Identify the observation unit** — decide what one row, feature or cell represents.
+2. **Locate the spatial evidence** — distinguish labels, coordinates, geometry and grid metadata.
+3. **Test the minimum contract** — verify that representation and spatial reference evidence agree.
+4. **Set the next gate** — record what may proceed to CRS review in Lesson 2.2 and what must remain quarantined.
+
+The goal is not to make every file mappable. The goal is to prevent unsupported spatial meaning from entering the pipeline.
+
 ## 2. Location is necessary, but it is not sufficient
 
 Data become geospatial when their values can be interpreted in relation to location on Earth. That connection can be represented in several ways:
@@ -129,9 +140,19 @@ assets = [
     {"name": "unverified_plot_xy.csv", "location": "x/y columns", "model": "points intended", "crs": None},
 ]
 
+expected_status = {
+    "baltic_plant_traits.csv": "review",
+    "training_transect.geojson": "ready",
+    "uav_reflectance_demo.tif": "ready",
+    "unverified_plot_xy.csv": "review",
+}
+
 for asset in assets:
-    analysis_ready = asset["model"] in {"LineString", "grid"} and asset["crs"] is not None
-    print(asset["name"], "ready" if analysis_ready else "review")
+    has_spatial_model = asset["model"] in {"LineString", "grid"}
+    has_reference = asset["crs"] is not None
+    status = "ready" if has_spatial_model and has_reference else "review"
+    assert status == expected_status[asset["name"]]
+    print(asset["name"], status)
 ```
 
 Expected status output:
@@ -151,10 +172,13 @@ unverified_plot_xy.csv review
 2. Each dictionary records a filename and three distinct evidence fields: location mechanism, representation model and CRS.
 3. `None` preserves missing CRS metadata instead of inventing a label.
 4. The loop inspects every asset using the same rule.
-5. The first part of `analysis_ready` accepts only the explicitly modelled vector line or raster grid in this small exercise.
-6. The second part requires CRS metadata to be present.
-7. `and` means both requirements must be true.
-8. The conditional expression prints `ready` or `review` without changing the inventory.
+5. `expected_status` records the result predicted before execution, so the check is inspectable rather than remembered.
+6. `has_spatial_model` accepts only the explicitly modelled vector line or raster grid in this small exercise.
+7. `has_reference` records whether CRS evidence is present without claiming that it has already been independently verified.
+8. `and` requires both minimum conditions to be true.
+9. The conditional expression creates the status without changing the source record.
+10. `assert` stops execution if the actual status disagrees with the prediction. A silent mismatch would be a failed audit.
+11. `print()` makes the verified result visible to the learner and reviewer.
 
 The rule deliberately sends the published field table to review. It remains scientifically valuable tabular data, but it cannot yet be treated as plot geometry. The unverified x/y table also goes to review because numerical coordinates are not self-describing.
 
@@ -175,6 +199,18 @@ A useful inventory is more than a file list. For every asset, record:
 | next action | Verify, transform, join, quarantine or reject? |
 
 This separates facts from decisions. `crs = None` is an observation. `quarantine until producer confirms CRS` is a decision. Keeping both makes the pipeline auditable.
+
+### Use an explicit evidence state
+
+For each factual field, use one of three evidence states:
+
+| State | Meaning | Permitted wording |
+|---|---|---|
+| observed | read directly from the file or its metadata | “The raster reports EPSG:3301” |
+| verified | compared with an authoritative source or independent check | “The producer's survey record confirms EPSG:3301” |
+| unknown | evidence has not been supplied or cannot be reconciled | “The x/y table has no documented CRS” |
+
+Do not use `verified` as a synonym for “the software displayed a value”. The state describes the strength of the evidence, not the confidence of the analyst.
 
 ## 8. Common mistakes and recovery
 
@@ -212,6 +248,27 @@ Create a table named `spatial_inventory` in your notebook. Use one row for each 
 8. Add a next action and the person or source that could resolve it.
 
 Finish with a Markdown paragraph explaining why `baltic_plant_traits.csv` remains tabular even though it contains site labels.
+
+Then audit the structure of your inventory before continuing:
+
+```python
+required_fields = {
+    "name", "observation_unit", "model", "location_evidence",
+    "crs_evidence", "evidence_state", "limitation", "next_action",
+}
+
+assert len(spatial_inventory) == 4
+for record in spatial_inventory:
+    assert required_fields.issubset(record)
+    assert record["evidence_state"] in {"observed", "verified", "unknown"}
+    assert record["next_action"].strip()
+```
+
+These assertions establish that the inventory is structurally complete. They do not prove that any coordinate, geometry or raster value is scientifically correct.
+
+### Evidence-led lesson decision
+
+Mark this checkpoint **ready for Lesson 2.2** only when all four assets have the required fields, unknowns remain visible and no CRS has been guessed. Mark it **review required** if a classification depends on filename, visual plausibility or undocumented coordinate assumptions. This decision permits the next metadata lesson; it does not accept the assets for analysis.
 
 ## 10. Independent challenge — audit an unfamiliar asset
 
@@ -253,6 +310,8 @@ Answer in your private notes:
 
 ### Portfolio artifact
 
+**Portfolio Project 2 — Geospatial Evidence and Vector QA Package**
+
 **Artifact 2.1 — Spatial data inventory**
 
-This artifact demonstrates that you can recognise spatial evidence before selecting software. Keep it at the beginning of the UAV and Satellite Analysis Pipeline. Every later input should be added to the same inventory rather than documented in an isolated notebook.
+This artifact demonstrates that you can recognise spatial evidence before selecting software. Keep it at the beginning of the UAV and Satellite Analysis Pipeline and carry it into the Chapter 1 data-acceptance practicum. Every later input should be added to the same inventory rather than documented in an isolated notebook.

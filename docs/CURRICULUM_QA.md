@@ -1,7 +1,7 @@
 # Academy curriculum QA tracker
 
 Last updated: 11 August 2026
-Review branch: `codex/curriculum-integrity-review`
+Review branch: `codex/module2-curriculum-integrity-review`
 
 ## Quality standard
 
@@ -40,7 +40,7 @@ A lesson is complete only when it supports the full progression:
 
 | Lesson | Content | Why | Visuals | Practice | QA/QC | Portfolio | Tested | Status |
 |---|---|---|---|---|---|---|---|---|
-| 2.1 What Makes Data Geospatial? | Not reviewed | Not reviewed | Existing evidence-chain diagram | Not reviewed | Not reviewed | Spatial inventory | No | NOT STARTED |
+| 2.1 What Makes Data Geospatial? | Evidence-led spatial classification | Stop unsupported location claims before software choice | Evidence-chain diagram checked against lesson claims | Four-card inventory + unfamiliar asset audit | Predicted statuses, executable assertions, evidence states and Lesson 2.2 gate | Project 2 spatial-inventory checkpoint | Content, code, notebook, type, lint and export | COMPLETE |
 | 2.2 Coordinate Reference Systems | Not reviewed | Not reviewed | Existing CRS diagram | Not reviewed | Not reviewed | CRS decision audit | No | NOT STARTED |
 | 2.3 Scale, Resolution and Spatial Support | Not reviewed | Not reviewed | Existing support diagram | Not reviewed | Not reviewed | Support decision | No | NOT STARTED |
 | 2.4 Geospatial Formats and Metadata | Not reviewed | Not reviewed | Existing format diagram | Not reviewed | Not reviewed | Format decision matrix | No | NOT STARTED |
@@ -213,3 +213,13 @@ After each lesson commit, update that lesson row, update every affected promise-
 - **Graduate-profile boundary:** Module 1 supplies credible foundations for the GIS/Remote Sensing Engineer, Geospatial Data Analyst and Remote Sensing Researcher profiles; it does not claim spatial, satellite, UAV or modelling readiness by itself.
 - **Release validation:** 136 automated tests and 10 browser tests passed; mobile and admin pages had no horizontal overflow at 320, 375, 768 and desktop widths; production static export succeeded.
 - **Gate decision:** `COMPLETE` for Module 1. Module 2 lesson-by-lesson review remains required before the whole-Academy gate can close.
+
+### Lesson 2.1 — What Makes Data Geospatial?
+
+- **Purpose:** establish spatial evidence as a professional intake contract before learners select tools, assign a CRS or draw a map.
+- **Existing strengths:** unusually strong distinction between location labels, coordinates, geometry and referenced grids; careful separation of accuracy, precision, resolution, uncertainty and error; explicit prohibition on inventing Baltic plot locations; authentic guided and independent evidence audits; and a coherent handoff to the Chapter 1 practicum.
+- **Gaps found:** no explicit dependency path from Module 1 into the first Module 2 decision; predicted classifications were printed but not tested; the inventory did not distinguish metadata observed in a file from evidence independently verified; progression to Lesson 2.2 lacked a formal gate; and the artifact was not named explicitly as a checkpoint in Portfolio Project 2.
+- **Professional standard applied:** a learner should identify the observation unit, classify the spatial model from evidence, record reference uncertainty without guessing, make a prediction executable, distinguish observed/verified/unknown evidence and decide whether an inventory may proceed to CRS review.
+- **Changes made:** added the four-step learning pathway, predicted-status assertions, explicit evidence-state vocabulary, a structural inventory validator, an evidence-led Lesson 2.2 gate, Project 2 framing and a working inventory scaffold in the continuing starter notebook.
+- **Validation:** all 136 unit/content/integration tests passed, including compact Python-block compilation and starter-notebook assertions; notebook JSON, TypeScript, ESLint and the production static export also passed.
+- **Matrix contribution:** strengthens spatial thinking, metadata/provenance, CRS readiness, reproducibility, professional GIS intake and the first checkpoint of Portfolio Project 2. It does not claim that a reported CRS, geometry or raster is scientifically fit for analysis.
