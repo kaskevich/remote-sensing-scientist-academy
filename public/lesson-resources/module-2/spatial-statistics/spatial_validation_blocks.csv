@@ -1,0 +1,25 @@
+plot_id,spatial_block,holdout_fold,edge_status,validation_role,deliberate_condition
+P001,A,1,edge,eligible,
+P002,A,1,interior,eligible,
+P003,B,2,interior,eligible,
+P004,B,2,interior,eligible,
+P005,C,3,interior,eligible,
+P006,C,3,edge,eligible,
+P007,A,1,edge,eligible,
+P008,A,1,interior,eligible,
+P009,B,2,interior,eligible,
+P010,B,2,interior,eligible,
+P011,C,3,interior,eligible,
+P012,C,3,edge,eligible,
+P013,A,1,edge,eligible,
+P014,A,1,interior,eligible,
+P015,B,2,interior,eligible,
+P016,B,2,interior,eligible,
+P017,C,3,interior,eligible,
+P018,C,3,edge,eligible,
+P019,B,2,interior,review,roadside convenience observation
+P020,C,3,interior,review,roadside convenience observation
+P021,C,3,interior,review,roadside convenience observation
+P022,C,3,edge,review,roadside convenience observation
+P023,A,1,edge,eligible,western edge observation
+P024,D,4,island,review,isolated targeted observation

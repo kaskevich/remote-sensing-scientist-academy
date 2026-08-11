@@ -1,0 +1,25 @@
+plot_id,x_m,y_m,habitat_stratum,management_zone,sampling_route,distance_to_access_m,inclusion_probability,ndvi_mean,biomass_g_m2,elevation_m,qa_status,deliberate_condition
+P001,500000,6440000,low_marsh,west,probability,180,0.42,0.38,214,1.10,accept,
+P002,500100,6440010,low_marsh,west,probability,140,0.42,0.41,226,1.18,accept,
+P003,500210,6440005,mid_marsh,west,probability,125,0.31,0.47,258,1.31,accept,
+P004,500315,6440015,mid_marsh,central,probability,95,0.31,0.51,279,1.44,accept,
+P005,500420,6440000,high_marsh,central,probability,75,0.25,0.57,302,1.58,accept,
+P006,500525,6440020,high_marsh,east,probability,60,0.25,0.61,321,1.70,accept,
+P007,500010,6440110,low_marsh,west,probability,220,0.42,0.36,205,1.08,accept,
+P008,500115,6440120,low_marsh,west,probability,185,0.42,0.40,224,1.20,accept,
+P009,500220,6440110,mid_marsh,west,probability,150,0.31,0.46,252,1.33,accept,
+P010,500325,6440125,mid_marsh,central,probability,110,0.31,0.50,276,1.45,accept,
+P011,500430,6440115,high_marsh,central,probability,80,0.25,0.56,297,1.57,accept,
+P012,500535,6440130,high_marsh,east,probability,55,0.25,0.60,318,1.69,accept,
+P013,500020,6440220,low_marsh,west,probability,260,0.42,0.34,198,1.05,accept,
+P014,500125,6440230,low_marsh,west,probability,230,0.42,0.39,217,1.17,accept,
+P015,500235,6440220,mid_marsh,west,probability,175,0.31,0.44,247,1.30,accept,
+P016,500340,6440235,mid_marsh,central,probability,135,0.31,0.49,270,1.43,accept,
+P017,500445,6440225,high_marsh,central,probability,90,0.25,0.55,292,1.55,accept,
+P018,500550,6440240,high_marsh,east,probability,65,0.25,0.59,313,1.67,accept,
+P019,500390,6440340,mid_marsh,central,roadside,12,,0.54,286,1.49,review,convenience location; inclusion probability undocumented
+P020,500420,6440355,high_marsh,central,roadside,8,,0.58,307,1.61,review,convenience location; inclusion probability undocumented
+P021,500450,6440370,high_marsh,east,roadside,6,,0.62,329,1.73,review,convenience location; inclusion probability undocumented
+P022,500480,6440385,high_marsh,east,roadside,5,,0.64,340,1.78,review,convenience location; inclusion probability undocumented
+P023,500075,6440360,low_marsh,west,probability,310,0.42,0.35,203,1.09,accept,edge observation
+P024,501250,6440900,high_marsh,east,targeted,520,,0.67,356,2.04,review,isolated targeted plot outside core sampling frame

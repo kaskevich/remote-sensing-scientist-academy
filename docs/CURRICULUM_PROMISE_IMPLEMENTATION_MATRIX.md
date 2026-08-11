@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.30, five Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.37, seven Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -39,13 +39,13 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Coordinate systems and projections | Academy goals/module outcome | 2 | 2.2, reinforced 2.5–2.25 | Yes | Yes | Yes | CRS audit in all projects | COMPLETE |
 | Spatial relationships and predicates | Academy goals | 2 | 2.6–2.9 | Yes | Yes | Yes | Join/topology evidence | COMPLETE |
 | Geoprocessing and overlays | Academy goals | 2 | 2.6, 2.7, 2.9, 2.13 | Yes | Yes | Yes | Vector and raster derivatives | COMPLETE |
-| Spatial joins and queries | Academy goals | 2 | 2.7; database queries planned | Yes in memory | Yes | Yes | Join audit | PARTIAL |
+| Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10 and practica | Partial | Yes | Yes | QA maps | PARTIAL |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.30 | Yes | Yes | Yes | QA reports and manifests | COMPLETE |
-| Spatial databases | Module 2 outcomes | Planned | Planned 2.35–2.37 | No | No | No | No | MISSING |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.37 | Yes | Yes | Yes | QA reports, manifests and database governance record | COMPLETE |
+| Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; web/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
-| Professional GIS workflows | Academy goals | 2 | Practica 1–4 | Yes | Yes | Yes | Four handover decisions | COMPLETE |
+| Professional GIS workflows | Academy goals | 2 | Practica 1–7 | Yes | Yes | Yes | Seven evidence and handover decisions | COMPLETE |
 | Python foundations for geospatial work | Foundations/module prerequisites | 1 | 1.1–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | NumPy | Module 1 outcome | 1/2 | 1.7, reused in raster/UAV | Yes | Yes | Yes | Numerical/raster workflow | COMPLETE |
 | pandas | Module 1 outcome | 1 | 1.8–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
@@ -67,27 +67,27 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 
 | Promised topic / skill | Where promised | Module | Lesson(s) teaching it | Theory | Practice | Independent application | Portfolio evidence | Current status |
 |---|---|---|---|---|---|---|---|---|
-| Electromagnetic radiation | Academy goals/remote-sensing promise | Planned satellite stage | No implemented lesson | No | No | No | No | MISSING |
-| Spectral response | Academy goals | 2 | UAV bands in 2.18/2.20; full sensor response planned | Partial | Limited | Limited | UAV inventory | TOO SHALLOW |
-| Reflectance | Academy goals | 2 | 2.20, 2.25 | Yes for UAV | Yes | Yes | Radiometric QA/indices | PARTIAL |
-| Spectral bands | Academy goals | 2 | 2.18, 2.20, 2.25 | Yes for UAV | Yes | Yes | Band inventory | PARTIAL |
+| Electromagnetic radiation | Academy goals/remote-sensing promise | 2 | 2.26 | Yes | Yes | Yes | Optical product decision | COMPLETE |
+| Spectral response | Academy goals | 2 | 2.20, 2.26, 2.29 | Yes | Yes | Yes | Sensor inventory and spectral-feature note | COMPLETE |
+| Reflectance | Academy goals | 2 | 2.20, 2.25–2.27, 2.29 | Yes | Yes | Yes | Radiometric QA, optical decision and index evidence | COMPLETE |
+| Spectral bands | Academy goals | 2 | 2.18, 2.20, 2.25–2.29 | Yes | Yes | Yes | Band inventory and satellite evidence package | COMPLETE |
 | Spatial resolution | Academy goals | 2 | 2.3, 2.11, 2.18–2.19 | Yes | Yes | Yes | Support/mission decisions | COMPLETE |
-| Spectral resolution | Academy goals | Planned | Mentioned through sensor types only | Partial | No | No | No | TOO SHALLOW |
-| Temporal resolution | Academy goals | 2 | Temporal support in 2.3 and 2.18; satellite cadence absent | Partial | Limited | Limited | Support record | TOO SHALLOW |
-| Radiometric resolution | Academy goals | 2 | Data type/radiometry related but no explicit satellite treatment | Partial | Limited | No | No | TOO SHALLOW |
-| Sensors and platforms | Academy goals | 2 | 2.18–2.20 | Yes for UAV | Yes | Yes | Sensor/product inventory | PARTIAL |
-| Passive vs active sensing | Academy goals | 2 | UAV sensor comparison only; SAR planned | Partial | No | No | No | TOO SHALLOW |
-| Optical remote sensing | Homepage/Academy goals | Planned | Planned 2.26 | No current application | No | No | No | MISSING |
-| Satellite imagery | Hero/geospatial card | Planned | Planned 2.26–2.30 | No | No | No | No | MISSING |
-| Sentinel-2 | Hero/field lab | Planned | Only an illustrative comparison in 2.3 | Too shallow | No | No | No | MISSING |
-| Landsat | Academy goals | Planned | Planned 2.26 | No | No | No | No | MISSING |
-| Image products and processing levels | Academy goals | Planned | UAV raw/derived distinction 2.18; satellite levels absent | Partial | Partial | Partial | UAV inventory | PARTIAL |
-| Atmospheric effects | Academy goals | Planned | Not taught | No | No | No | No | MISSING |
-| Clouds and cloud masking | Field lab/Academy goals | Planned | Not taught | No | No | No | No | MISSING |
-| QA layers | Academy goals | 2 | UAV/raster QA, but satellite QA layers absent | Partial | Partial | Partial | QA reports | PARTIAL |
+| Spectral resolution | Academy goals | 2 | 2.26, 2.29 | Yes | Yes | Yes | Optical decision and spectral-feature note | COMPLETE |
+| Temporal resolution | Academy goals | 2 | 2.3, 2.18, 2.26, 2.28 | Yes | Yes | Yes | Support and observation contracts | COMPLETE AS FOUNDATION; time-series application planned |
+| Radiometric resolution | Academy goals | 2 | 2.20, 2.26 | Yes | Yes | Yes | Radiometric and product-level audits | COMPLETE |
+| Sensors and platforms | Academy goals | 2 | 2.18–2.30 | Yes | Yes | Yes | UAV and satellite sensor/product inventories | COMPLETE |
+| Passive vs active sensing | Academy goals | 2 | 2.18, 2.20, 2.26, 2.28 | Yes | Yes | Yes | Cross-sensor evidence package | COMPLETE |
+| Optical remote sensing | Homepage/Academy goals | 2 | 2.26–2.27 | Yes | Yes | Yes | Optical product and spectral-index decisions | COMPLETE |
+| Satellite imagery | Hero/geospatial card | 2 | 2.26–2.30 | Yes | Yes | Yes | Satellite EO Evidence Package | COMPLETE |
+| Sentinel-2 | Hero/field lab | 2 | 2.26–2.27 | Yes | Yes | Yes | Optical product and spectral-index decisions | COMPLETE AS FOUNDATION; time series planned |
+| Landsat | Academy goals | 2 | 2.26–2.27 | Yes | Yes | Yes | Cross-mission optical recommendation | COMPLETE AS FOUNDATION |
+| Image products and processing levels | Academy goals | 2 | 2.18, 2.22–2.26 | Yes | Yes | Yes | UAV and satellite product inventories | COMPLETE |
+| Atmospheric effects | Academy goals | 2 | 2.26–2.27, 2.29 | Yes | Yes | Yes | Optical and spectral QA decisions | COMPLETE AS FOUNDATION |
+| Clouds and cloud masking | Field lab/Academy goals | 2 | 2.26–2.27 | Yes | Yes | Yes | Local cloud/shadow gate and joint masks | COMPLETE AS FOUNDATION; time-series masking planned |
+| QA layers | Academy goals | 2 | 2.24–2.30 | Yes | Yes | Yes | UAV and satellite QA reports | COMPLETE |
 | Band combinations | Academy goals | Planned | Multispectral indices only | Partial | Limited | Limited | UAV stack | TOO SHALLOW |
 | NDVI | Hero/Academy goals | 2 | 2.25 | Yes | Yes | Yes | UAV NDVI derivative | COMPLETE |
-| Other appropriate indices | Academy goals | 2 | GNDVI in 2.25; broader selection planned | Partial | Yes | Yes | UAV index comparison | PARTIAL |
+| Other appropriate indices | Academy goals | 2 | 2.25, 2.27 | Yes | Yes | Yes | NDVI/GNDVI/SAVI/MSAVI comparison | COMPLETE |
 | Raster preprocessing | Academy goals | 2 | 2.11–2.17 | Yes | Yes | Yes | Analysis-ready stack | COMPLETE |
 | Clipping/masking | Academy goals | 2 | 2.13, 2.15, 2.25 | Yes | Yes | Yes | Valid-mask derivatives | COMPLETE |
 | Reprojection/resampling/alignment | Academy goals | 2 | 2.13–2.14, reinforced later | Yes | Yes | Yes | Alignment report | COMPLETE |
@@ -101,11 +101,11 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 |---|---|---|---|---|---|---|---|---|
 | Multidimensional raster data | Module 2 outcome | Planned | Planned Xarray/data-cube lessons | No | No | No | No | MISSING |
 | Vector–raster integration | Academy goals | 2 | 2.15, 2.25 | Yes | Yes | Yes | Extraction tables | COMPLETE |
-| Scalable workflows | Academy goals | 2 | 2.16 only | Yes for raster windows | Yes | Yes | Windowed workflow | PARTIAL |
+| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.37 | Yes for raster windows, indexed queries and storage architecture | Yes | Yes | Windowed workflow plus Spatial Database and Governance Package | PARTIAL; distributed/cloud execution planned |
 | Spatial data exploration and cleaning | Academy goals | 1/2 | 1.8–1.11, 2.5–2.10 | Yes | Yes | Yes | Data/vector reports | COMPLETE |
 | Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |
-| Spatial statistics | Module 2 outcome | Planned | Planned 2.31–2.34 | No | No | No | No | MISSING |
+| Spatial statistics | Module 2 outcome | 2 | 2.31–2.34 | Yes | Yes | Yes | Spatial Inference and Validation Package | COMPLETE |
 | Scientific visualization | Academy goals | 1/2 | 1.11–1.12, QA maps | Partial | Yes | Yes | Figures and QA maps | PARTIAL |
 | What machine learning does | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 | Features/predictors and targets | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
@@ -114,12 +114,12 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Preprocessing and feature engineering | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Random Forest | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | XGBoost | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
-| R², RMSE and MAE | Academy goals | Future modelling | RMSE only in georeferencing 2.21 | Wrong context for model evaluation | No | No | No | MISSING |
+| R², RMSE and MAE | Academy goals | 2/future modelling | 2.21, 2.33–2.34 | Yes for spatial prediction and regression baseline | Yes | Yes | Interpolation and model-comparison tables | PARTIAL; classification/model-module depth planned |
 | Confusion matrix, precision, recall and F1 | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Feature importance and interpretation | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Overfitting, hyperparameters and cross-validation | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Spatial cross-validation and autocorrelation | Academy goals | Planned/future modelling | Planned spatial-statistics titles only | No | No | No | No | MISSING |
-| Leakage, extrapolation and uncertainty | Academy goals | Future modelling | General uncertainty only | No ML treatment | No | No | No | MISSING |
+| Spatial cross-validation and autocorrelation | Academy goals | 2/future modelling | 2.31–2.34 | Yes | Yes | Yes | Weights sensitivity and separated-block validation | COMPLETE AS FOUNDATION; predictive-model application planned |
+| Leakage, extrapolation and uncertainty | Academy goals | 2/future modelling | 2.29, 2.31–2.34 | Yes for spatial evidence | Yes | Yes | Support masks, residual maps and release decisions | PARTIAL; full ML treatment planned |
 | Prediction and validation maps | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 
 ## UAV pipeline
@@ -148,9 +148,9 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Research question | Academy goals | 1/2 | 1.1, 1.10, 1.12; question-led Module 2 | Yes | Yes | Yes | Project question | COMPLETE |
 | Hypothesis | Academy goals | Academy | Mentioned but not developed/tested explicitly | Limited | No | No | No | TOO SHALLOW |
 | Data requirements | Academy goals | 1/2 | 1.12, 2.1–2.4, 2.18–2.19 | Yes | Yes | Yes | Evidence contracts | COMPLETE |
-| Sampling design | Academy goals | Planned | Spatial support taught; design lesson planned | Partial | Limited | Limited | Support decision only | TOO SHALLOW |
+| Sampling design | Academy goals | 2 | 2.32 and Chapter 6 practicum | Yes | Yes | Yes | Sampling audit and supplementary design | COMPLETE |
 | Scale | Academy goals | 2 | 2.3 and repeated | Yes | Yes | Yes | Support decision | COMPLETE |
-| Spatial autocorrelation | Academy goals | Planned | Planned 2.31 | No | No | No | No | MISSING |
+| Spatial autocorrelation | Academy goals | 2 | 2.31 and Chapter 6 practicum | Yes | Yes | Yes | Weights sensitivity and permutation report | COMPLETE |
 | Validation and uncertainty | Academy goals | 1/2 | 1.9–1.12 and Module 2 QA chain | Yes | Yes | Yes | QA/decision reports | COMPLETE |
 | Reproducibility and methodological justification | Academy goals | 1/2 | 1.1, 1.8, 1.12, all practica | Yes | Yes | Yes | Reproducible reports | COMPLETE |
 | Limitations and avoiding causal claims | Academy goals | 1/2 | 1.10–1.12 and Module 2 | Yes | Yes | Yes | Limitation statements | COMPLETE |
@@ -166,11 +166,11 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 
 ### Missing
 
-The current release does not implement satellite optical/SAR processing, Xarray/data cubes, time series, spatial statistics, databases, web delivery, automation, reproducible environments, Git/GitHub or machine learning. Stage 3 has no curriculum module. These must not be presented as currently delivered competencies.
+The current release does not implement Xarray/data cubes, time series, web delivery, automation, reproducible environments, Git/GitHub or machine learning. Spatial database foundations are implemented, but production service operations remain planned. Stage 3 has no curriculum module. These missing areas must not be presented as currently delivered competencies.
 
 ### Too shallow
 
-Hypothesis development, sampling design, spectral/radiometric/temporal resolution, active/passive sensing, cartographic design, scientific plotting depth, README construction and environment management need stronger progression or later dedicated teaching.
+Hypothesis development, temporal-resolution time-series application, cartographic design, scientific plotting depth, README construction and environment management need stronger progression or later dedicated teaching. Sampling design and sensor-resolution concepts now have complete foundations but must be reinforced in later predictive and time-series work.
 
 ### Duplicated with purpose
 

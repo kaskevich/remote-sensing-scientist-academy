@@ -1,0 +1,9 @@
+asset_id,object_name,format,declared_crs,authoritative_status,source_uri,version,update_pattern,known_condition
+A01,field_plots_2026_final.shp,Shapefile,EPSG:3301,candidate,file-server/path-a,v1,monthly,sidecar files not inventoried
+A02,field_plots_FINAL2.gpkg,GeoPackage,EPSG:3301,candidate,file-server/path-b,,ad_hoc,version and lineage missing
+A03,plot_observations.csv,CSV,not_applicable,authoritative,field-team/export-2026-07,v2,after_campaign,stable plot_id documented
+A04,management_zones.gpkg,GeoPackage,EPSG:4326,candidate,file-server/path-c,v3,quarterly,CRS differs from analysis vectors
+A05,uav_orthomosaic.tif,GeoTIFF,EPSG:3301,derived,object://training/raw/uav-2026,v1,per_campaign,checksum recorded but source image manifest missing
+A06,uav_orthomosaic_copy.tif,GeoTIFF,EPSG:3301,unknown,,v1,unknown,possible duplicate with no authoritative owner
+A07,site_summary.parquet,Parquet,unknown,derived,analyst-laptop/export,v5,manual,geospatial metadata not declared
+A08,coastal_meadow_db,PostGIS,EPSG:3301,proposed,training-db/academy,,transactional,no migration or backup policy yet

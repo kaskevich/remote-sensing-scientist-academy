@@ -1,0 +1,46 @@
+{
+  "title": "Module 2 Chapter 6 Spatial Statistics and Geostatistics training pack",
+  "version": "1.0.0",
+  "licence": "CC0-1.0",
+  "sourceStatus": "Entirely synthetic instructional data; no real field locations or observations",
+  "coordinateStatus": "Synthetic local metric grid with no real CRS assignment",
+  "ecologicalContext": "Baltic coastal meadow training story; vocabulary informed by Zenodo record 20083250 but no row is derived from it",
+  "knownDeliberateConditions": [
+    "four roadside convenience observations have undocumented inclusion probabilities",
+    "several sampling-frame cells are inaccessible for different recorded reasons",
+    "one accepted western edge observation has asymmetric neighbourhood support",
+    "one isolated targeted plot lies outside the core sampling frame"
+  ],
+  "assets": [
+    {
+      "filename": "README.md",
+      "purpose": "training-pack scope, provenance and working rules",
+      "dataType": "Markdown",
+      "sha256": "c71a13e6fd1ffaae053269847637338fa73631fadc758462ea97269166e7c648"
+    },
+    {
+      "filename": "SPATIAL_INFERENCE_QA_TEMPLATE.md",
+      "purpose": "structured decision record for sampling, weights, interpolation and regression",
+      "dataType": "Markdown",
+      "sha256": "4dade62c0091563ee68bdb8659cfe3aa8fa7de2947a2a1f9a75eabbdeb1ed36e"
+    },
+    {
+      "filename": "meadow_plot_observations.csv",
+      "purpose": "synthetic plot evidence with spatial pattern, QA status and sampling-route conditions",
+      "dataType": "CSV",
+      "sha256": "a54d594daa6d35757ab20c5ab6e98506ae3eff40dbb2bf4287bcffb361e779d4"
+    },
+    {
+      "filename": "sampling_frame.csv",
+      "purpose": "candidate spatial frame with strata, accessibility and selection evidence",
+      "dataType": "CSV",
+      "sha256": "6be1d89be804dc391ac463f80f3f9781302ccada81d9f6f903c73b27f349862f"
+    },
+    {
+      "filename": "spatial_validation_blocks.csv",
+      "purpose": "predeclared separated validation geography and edge/island status",
+      "dataType": "CSV",
+      "sha256": "8647abba751432310ffa20849f0583f16d94aff19cacf52014fe2ba34d169e6a"
+    }
+  ]
+}

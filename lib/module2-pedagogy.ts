@@ -613,6 +613,13 @@ export const publishedModule2LessonIds = [
   "lesson-2-28",
   "lesson-2-29",
   "lesson-2-30",
+  "lesson-2-31",
+  "lesson-2-32",
+  "lesson-2-33",
+  "lesson-2-34",
+  "lesson-2-35",
+  "lesson-2-36",
+  "lesson-2-37",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -662,6 +669,22 @@ export const module2ChapterPractica = [
     tools: ["Cross-sensor QA", "Evidence integration", "Scientific decision"],
     artifact: "Artifact 2.E — Satellite EO Evidence Package",
   },
+  {
+    id: "module-2-chapter-6-practicum",
+    chapter: 6,
+    title: "Design and Defend a Spatial Inference Plan",
+    description: "Audit sampling, spatial dependence, interpolation and regression as one geographically validated evidence system.",
+    tools: ["Spatial inference", "Geographic validation", "Release decision"],
+    artifact: "Artifact 2.F — Spatial Inference and Validation Package",
+  },
+  {
+    id: "module-2-chapter-7-practicum",
+    chapter: 7,
+    title: "Build a Governed Spatial Database Handover",
+    description: "Convert an imperfect spatial-data handover into a controlled relational, spatial and storage architecture with traceable release evidence.",
+    tools: ["Relational integrity", "Spatial SQL", "Data governance"],
+    artifact: "Artifact 2.G — Spatial Database and Governance Package",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -669,10 +692,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "30 lessons · 5 practica available",
+  navigationMeta: "37 lessons · 7 practica available",
   syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.30 and five chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, and Satellite Earth Observation. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.37 and seven chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, and Spatial Databases. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -2155,6 +2178,187 @@ const satelliteLessonConfigurations: Record<string, PublishedLessonConfiguration
   },
 };
 
+function spatialStatisticsRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves the sampling set, spatial domain, weights, seeds, parameters, validation geography, excluded evidence and reviewable outputs" },
+    { dimension: "Scientific communication", expectation: "Separates observed pattern, model prediction, uncertainty, sampling limitation, association and unsupported causal explanation" },
+  ];
+}
+
+const commonSpatialStatisticsChecklist = [
+  "Synthetic local coordinates are identified as instructional metric coordinates rather than a real CRS or field location",
+  "The target population, observation support, analysis rows and QA exclusions are stated before the method",
+  "Neighbour, sampling, validation and random-seed decisions are explicit and reproducible",
+  "Maps and written interpretations distinguish observation, statistical pattern, prediction, uncertainty and causal limitation",
+];
+
+const spatialStatisticsLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-31": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "Spatial-Dependence Reasoning Lab",
+    markdownFile: "content/lessons/module-2/lesson-31.md",
+    formativeChecks: [
+      { id: "m2-l31-weights", question: "Which statement about a spatial-weights matrix is correct?", options: ["It encodes a declared hypothesis about which observations are spatially related", "It is uniquely determined by the coordinate columns", "It proves the environmental mechanism connecting neighbours"], correctOption: 0, explanation: "Contiguity, distance, k-nearest and process-based weights represent different relationship hypotheses. Their scientific rationale and consequences must be reported." },
+      { id: "m2-l31-permutation", question: "What does permutation inference for global Moran's I do?", options: ["It shuffles values among fixed locations and weights to build a reference distribution", "It moves plots until the map looks random", "It proves the ecological cause of clustering"], correctOption: 0, explanation: "The observed geometry and weights remain fixed while values are rearranged. The result is conditional on exchangeability, the analysed sample and the chosen relationship model." },
+      { id: "m2-l31-cause", question: "A positive Moran's I has a small permutation probability. What is established?", options: ["Similar values are spatially arranged unusually under the stated weights and permutation model", "Elevation caused NDVI", "Every nearby plot measures the same process"], correctOption: 0, explanation: "The statistic supports a pattern statement, not a causal mechanism. Environmental gradients, sampling and alternative weights remain competing explanations to examine." },
+    ],
+    submissionChecklist: [...commonSpatialStatisticsChecklist, "At least three plausible weights definitions are compared without selecting by significance", "Islands, edges, link distances, transformation, expected I and permutations are reported"],
+    rubric: spatialStatisticsRubric("Constructs and audits weights correctly and reproduces global Moran permutation evidence", "Explains spatial autocorrelation as value structure conditional on W rather than an ecological cause"),
+    coreReferences: [
+      { title: "PySAL: Global spatial autocorrelation with Moran's I", href: "https://pysal.org/esda/stable/user-guide/global_morans_i.html" },
+      { title: "PySAL esda user guide", href: "https://pysal.org/esda/stable/user-guide/index.html" },
+    ],
+    furtherReading: [
+      { title: "libpysal spatial weights", href: "https://pysal.org/libpysal/" },
+      { title: "GeoDa workbook: spatial autocorrelation", href: "https://geodacenter.github.io/workbook/5a_global_auto/lab5a.html" },
+    ],
+  },
+  "lesson-2-32": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "Spatial Sampling-Design Studio",
+    markdownFile: "content/lessons/module-2/lesson-32.md",
+    formativeChecks: [
+      { id: "m2-l32-design", question: "Why might stratified random sampling be preferred for the meadow frame?", options: ["It can guarantee randomised evidence within predeclared rare or important habitat strata", "It makes every unweighted mean correct", "It removes all field-access restrictions"], correctOption: 0, explanation: "Stratification protects planned representation of important groups, but selection within strata, unequal sampling fractions, frame coverage and non-response still affect inference." },
+      { id: "m2-l32-access", question: "What should happen to inaccessible sampling-frame units?", options: ["Retain them with restriction reasons and state how their absence limits the target domain", "Delete them before documenting the frame", "Move them to the nearest road without a rule"], correctOption: 0, explanation: "Accessibility can be environmentally structured. Preserving excluded units allows reviewers to see where the operational frame differs from the ecological target population." },
+      { id: "m2-l32-large", question: "Can many roadside convenience plots remove spatial selection bias?", options: ["No; more observations do not repair an unknown or biased inclusion mechanism", "Yes, once the sample exceeds twenty", "Yes, if all plots have valid coordinates"], correctOption: 0, explanation: "A larger convenience sample may estimate accessible roadside conditions precisely while remaining unrepresentative of wet, distant or restricted meadow conditions." },
+    ],
+    submissionChecklist: [...commonSpatialStatisticsChecklist, "Target population, frame, design, realised sample and QA analysis set are reconciled", "Supplementary selection preserves the complete frame, fixed seed, inclusion evidence and replacement rule"],
+    rubric: spatialStatisticsRubric("Builds a reproducible probability-based supplementary design and audits frame coverage and inclusion evidence", "Connects random, systematic, stratified and clustered designs to estimands, field constraints and representativeness"),
+    coreReferences: [
+      { title: "US EPA: Selecting a sampling design", href: "https://www.epa.gov/quality/selecting-sampling-design" },
+      { title: "US EPA: Systematic planning using data quality objectives", href: "https://www.epa.gov/quality/guidance-systematic-planning-using-data-quality-objectives-process" },
+    ],
+    furtherReading: [
+      { title: "spcosa: spatial coverage sampling and random sampling", href: "https://cran.r-project.org/package=spcosa" },
+      { title: "Spatial sampling with unequal inclusion probabilities", href: "https://doi.org/10.1002/9781118445112.stat03369.pub2" },
+    ],
+  },
+  "lesson-2-33": {
+    estimatedTime: "190–240 minutes",
+    lessonType: "Geostatistical Reasoning and Validation Lab",
+    markdownFile: "content/lessons/module-2/lesson-33.md",
+    formativeChecks: [
+      { id: "m2-l33-variogram", question: "What can contribute to a variogram nugget?", options: ["Measurement error, microscale variation and unresolved spatial support", "Only an incorrect map colour", "The number of output pixels"], correctOption: 0, explanation: "Near-origin semivariance can combine several unresolved processes. Replication and support evidence are needed before assigning it entirely to measurement error." },
+      { id: "m2-l33-uncertainty", question: "What does ordinary-kriging variance represent?", options: ["Uncertainty conditional on the fitted spatial model and observation geometry", "Observed error at every unsampled pixel", "A guarantee that the variogram is correct"], correctOption: 0, explanation: "Kriging variance is model based. It can omit parameter uncertainty, trend misspecification, sampling bias and measurement-process uncertainty, so empirical spatial validation remains necessary." },
+      { id: "m2-l33-validation", question: "Why use spatial blocks instead of random neighbouring holdouts?", options: ["Blocks better represent prediction into separated unsampled geography and reduce spatial leakage", "Blocks guarantee zero error", "Random splits cannot calculate RMSE"], correctOption: 0, explanation: "Nearby training observations can make random holdouts artificially easy. Separated blocks test the geographic transfer the final surface is expected to perform." },
+    ],
+    submissionChecklist: [...commonSpatialStatisticsChecklist, "Empirical variogram bins include pair counts and sensitivity to lag choices", "IDW and ordinary kriging use identical spatial holdouts, residual maps, uncertainty and extrapolation evidence"],
+    rubric: spatialStatisticsRubric("Builds and validates deterministic and variogram-based predictions with correct units, folds and support masks", "Explains nugget, sill, range, trend, anisotropy and kriging variance as conditional model concepts"),
+    coreReferences: [
+      { title: "PyKrige OrdinaryKriging reference", href: "https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/generated/pykrige.ok.OrdinaryKriging.html" },
+      { title: "PyKrige ordinary-kriging example", href: "https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/examples/00_ordinary.html" },
+    ],
+    furtherReading: [
+      { title: "SciKit-GStat documentation", href: "https://scikit-gstat.readthedocs.io/en/latest/" },
+      { title: "scikit-learn GroupKFold", href: "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html" },
+    ],
+  },
+  "lesson-2-34": {
+    estimatedTime: "190–240 minutes",
+    lessonType: "Spatial-Model Diagnosis Studio",
+    markdownFile: "content/lessons/module-2/lesson-34.md",
+    formativeChecks: [
+      { id: "m2-l34-residual", question: "What does spatial autocorrelation in ordinary-model residuals indicate?", options: ["Unresolved spatial structure remains after the stated predictors and mean form", "The response has no relationship with any predictor", "A GWR model is automatically correct"], correctOption: 0, explanation: "Residual structure can arise from omitted variables, dependence, support mismatch, non-linearity or design. It motivates diagnosis, not one predetermined model." },
+      { id: "m2-l34-families", question: "How should a spatial-lag, spatial-error, SLX or GWR family be chosen?", options: ["From a plausible hypothesis about where and how spatial structure enters the process", "From whichever coefficient has the smallest p-value", "From the model with the most colourful map"], correctOption: 0, explanation: "The families represent response interaction, correlated disturbance, neighbouring predictors or local variation. Their meaning and interpretation differ even when fit statistics are similar." },
+      { id: "m2-l34-cause", question: "A spatial model finds an NDVI–biomass association. What causal claim is justified by this observational exercise?", options: ["No causal claim without additional design and assumptions; report the conditional association", "NDVI causes biomass", "Biomass causes the satellite measurement"], correctOption: 0, explanation: "Spatial adjustment can represent dependence but cannot create randomisation, temporal ordering or control all confounding. Causal language requires a separate defensible design." },
+    ],
+    submissionChecklist: [...commonSpatialStatisticsChecklist, "The ordinary baseline and non-spatial diagnostics precede any spatial alternative", "Model comparison uses identical separated folds and reports residual geography, stability and causal limitations"],
+    rubric: spatialStatisticsRubric("Builds a correct ordinary benchmark, residual-spatial diagnostic and geographically validated alternative comparison", "Distinguishes lag, error, surrounding-predictor and local-coefficient hypotheses and their interpretations"),
+    coreReferences: [
+      { title: "PySAL spreg documentation", href: "https://pysal.org/spreg/" },
+      { title: "PySAL spatial error model guide", href: "https://pysal.org/spreg/notebooks/16_GMM_estimation_spatial_error.html" },
+    ],
+    furtherReading: [
+      { title: "mgwr documentation", href: "https://mgwr.readthedocs.io/en/latest/" },
+      { title: "scikit-learn linear models", href: "https://scikit-learn.org/stable/modules/linear_model.html" },
+    ],
+  },
+};
+
+function spatialDatabaseRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves immutable sources, stable identifiers, explicit query populations, schema/query versions, checksums, reconciliation evidence and safe execution context" },
+    { dimension: "Scientific communication", expectation: "Explains the observation grain, spatial relationship, authority, missingness, supported use, limitations and responsible next action without overstating database integrity" },
+  ];
+}
+
+const commonSpatialDatabaseChecklist = [
+  "Every supplied table and geometry is identified as synthetic training evidence rather than a published Baltic field record",
+  "Source, staging, authoritative, access-copy and derived-product roles remain explicit",
+  "Stable keys, table grain, join cardinality, NULL policy, geometry type and SRID are declared before interpretation",
+  "Source, intermediate, matched, unmatched, review and result counts are reconciled",
+  "Queries are safe for a disposable authorised environment and contain no credentials or destructive production assumptions",
+];
+
+const spatialDatabaseLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-35": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "Relational Evidence Lab",
+    markdownFile: "content/lessons/module-2/lesson-35.md",
+    formativeChecks: [
+      { id: "m2-l35-population", question: "What does the left or starting relation contribute to a SQL analysis?", options: ["It helps declare the population available for later joins and filters", "It guarantees every row has a spatial geometry", "It chooses the scientifically correct average automatically"], correctOption: 0, explanation: "FROM and join direction establish which subjects can remain visible. The query still needs explicit filters, cardinality checks and a scientific population statement." },
+      { id: "m2-l35-join", question: "Why can filtering a right-hand table in WHERE change a LEFT JOIN result?", options: ["Unmatched right-hand values are NULL and can fail the WHERE condition", "WHERE always duplicates the left table", "LEFT JOIN ignores its ON condition"], correctOption: 0, explanation: "A filter on the right-hand fields can remove the NULL rows that represented unmatched left subjects. Decide whether the condition defines eligible matches or the final population." },
+      { id: "m2-l35-null", question: "What is the correct first treatment of an unrecorded biomass value?", options: ["Preserve it as NULL and report the non-missing denominator", "Convert it to zero before aggregation", "Delete the entire plot from every query"], correctOption: 0, explanation: "Missing is not measured zero. SQL aggregates may ignore NULL, so paired row and non-missing counts are required and any imputation needs a separate documented scientific rule." },
+    ],
+    submissionChecklist: [...commonSpatialDatabaseChecklist, "The query pack includes population, join, aggregation, unmatched-key and count-reconciliation evidence", "Every published result names its input/output grain and non-missing denominator"],
+    rubric: spatialDatabaseRubric("Writes correct, explicit and reconciled SELECT, FROM, WHERE, GROUP BY and JOIN queries", "Explains how keys, cardinality, join direction and NULL semantics determine the environmental analysis population"),
+    coreReferences: [
+      { title: "PostgreSQL SELECT", href: "https://www.postgresql.org/docs/current/sql-select.html" },
+      { title: "PostgreSQL table expressions", href: "https://www.postgresql.org/docs/current/queries-table-expressions.html" },
+    ],
+    furtherReading: [
+      { title: "PostgreSQL joins tutorial", href: "https://www.postgresql.org/docs/current/tutorial-join.html" },
+      { title: "PostgreSQL aggregate functions", href: "https://www.postgresql.org/docs/current/functions-aggregate.html" },
+    ],
+  },
+  "lesson-2-36": {
+    estimatedTime: "190–240 minutes",
+    lessonType: "Spatial SQL Reasoning Lab",
+    markdownFile: "content/lessons/module-2/lesson-36.md",
+    formativeChecks: [
+      { id: "m2-l36-srid", question: "Which statement correctly distinguishes ST_SetSRID and ST_Transform?", options: ["ST_SetSRID labels verified coordinates; ST_Transform calculates coordinates in another CRS", "Both always calculate the same reprojection", "ST_Transform only changes metadata"], correctOption: 0, explanation: "Setting an SRID changes interpretation metadata without moving coordinates. Transformation requires a known source reference and computes a new coordinate representation." },
+      { id: "m2-l36-predicate", question: "A point lies exactly on a polygon boundary. What difference should you expect?", options: ["It can intersect the polygon without being within its interior", "It must be within every touching polygon", "No topological predicate can detect it"], correctOption: 0, explanation: "ST_Intersects includes shared boundary points, while ST_Within for a point requires the polygon interior under the standard topological definition. Boundary policy remains a scientific decision." },
+      { id: "m2-l36-index", question: "What does a PostGIS spatial index principally provide for many predicates?", options: ["An efficient bounding-box candidate stage before exact geometry testing", "Automatic CRS correction", "Proof that the selected predicate is scientifically appropriate"], correctOption: 0, explanation: "A GiST spatial index reduces candidate comparisons for supported predicates. Exact evaluation, valid geometry, compatible reference systems and scientific semantics are still required." },
+    ],
+    submissionChecklist: [...commonSpatialDatabaseChecklist, "Within, intersects, distance, buffer and transformation operations state their units and boundary semantics", "GeoPandas and PostGIS results are reconciled using stable relationship pairs rather than totals alone"],
+    rubric: spatialDatabaseRubric("Builds correct geometry/geography, SRID, predicate, distance, transformation and index-aware spatial SQL", "Connects each PostGIS operation to spatial support, boundary meaning, CRS units and relational cardinality"),
+    coreReferences: [
+      { title: "PostGIS geometry workshop", href: "https://postgis.net/workshops/postgis-intro/geometries.html" },
+      { title: "PostGIS spatial indexing", href: "https://postgis.net/workshops/postgis-intro/indexing.html" },
+      { title: "PostGIS projecting data", href: "https://postgis.net/workshops/postgis-intro/projection.html" },
+    ],
+    furtherReading: [
+      { title: "PostGIS geography workshop", href: "https://postgis.net/workshops/postgis-intro/geography.html" },
+      { title: "PostGIS ST_Intersects", href: "https://postgis.net/docs/ST_Intersects.html" },
+    ],
+  },
+  "lesson-2-37": {
+    estimatedTime: "180–220 minutes",
+    lessonType: "Data-Architecture Decision Studio",
+    markdownFile: "content/lessons/module-2/lesson-37.md",
+    formativeChecks: [
+      { id: "m2-l37-authority", question: "What makes an analysis snapshot different from an authoritative source?", options: ["It is a versioned access representation whose updates flow from the declared authority", "It must always use a proprietary format", "It can be edited independently and silently promoted"], correctOption: 0, explanation: "An access copy may optimise analytical reads while remaining traceable to one governed write authority. Allowing two silent masters creates unresolved conflicts and lineage loss." },
+      { id: "m2-l37-partition", question: "When is partitioning scientifically and operationally defensible?", options: ["When a stable key, measured workload or lifecycle need justifies the physical split", "Whenever a table contains geometry", "When every plot can receive its own small partition"], correctOption: 0, explanation: "Partitioning should support pruning, retention or operations at justified scale. Premature or high-cardinality partitioning can increase complexity without improving representative queries." },
+      { id: "m2-l37-provenance", question: "Which record best identifies a released derived spatial product?", options: ["Immutable inputs and checksums, code/environment, parameters, QA, version and responsible release", "A filename ending in final", "The time it was copied into a cloud folder"], correctOption: 0, explanation: "Provenance links the derivative to identifiable evidence and decisions. A filename or location cannot by itself reconstruct inputs, methods, quality status or responsibility." },
+    ],
+    submissionChecklist: [...commonSpatialDatabaseChecklist, "GeoPackage, GeoParquet, PostGIS and object-storage decisions follow declared users, writes, queries, scale and portability", "The architecture includes authority, access, migrations, least privilege, backups, restore tests, lifecycle and exit strategy"],
+    rubric: spatialDatabaseRubric("Produces a coherent hybrid storage, index, partition, access, migration and recovery architecture", "Justifies technology choices from authority and scientific access patterns rather than format fashion or file size alone"),
+    coreReferences: [
+      { title: "GeoParquet specification", href: "https://geoparquet.org/releases/v1.1.0/" },
+      { title: "PostgreSQL table partitioning", href: "https://www.postgresql.org/docs/current/ddl-partitioning.html" },
+      { title: "PostgreSQL backup and restore", href: "https://www.postgresql.org/docs/current/backup.html" },
+    ],
+    furtherReading: [
+      { title: "OGC GeoPackage standard", href: "https://www.ogc.org/standards/geopackage/" },
+      { title: "GeoParquet project", href: "https://geoparquet.org/" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
@@ -2184,7 +2388,9 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
   publishedModule2Lessons.map((source, index) => {
     const configuration = publishedLessonConfigurations[source.id]
       ?? uavLessonConfigurations[source.id]
-      ?? satelliteLessonConfigurations[source.id];
+      ?? satelliteLessonConfigurations[source.id]
+      ?? spatialStatisticsLessonConfigurations[source.id]
+      ?? spatialDatabaseLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -2211,7 +2417,11 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
             ? "Synthetic UAV and Photogrammetry training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
             : source.chapter === 5
               ? "Synthetic Satellite Earth Observation training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
-              : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+              : source.chapter === 6
+                ? "Synthetic Spatial Statistics and Geostatistics training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+                : source.chapter === 7
+                  ? "Synthetic Spatial Databases training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+                : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
         },
@@ -2225,7 +2435,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 5,
+    totalPositions: 7,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -2282,7 +2492,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 5,
+    totalPositions: 7,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -2339,7 +2549,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 5,
+    totalPositions: 7,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2411,7 +2621,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–600 minutes",
     lessonType: "Chapter Practicum",
     position: 4,
-    totalPositions: 5,
+    totalPositions: 7,
     markdownFile: "content/lessons/module-2/practicum-04.md",
     formativeChecks: [
       {
@@ -2484,7 +2694,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 5,
-    totalPositions: 5,
+    totalPositions: 7,
     markdownFile: "content/lessons/module-2/practicum-05.md",
     formativeChecks: [
       {
@@ -2550,6 +2760,152 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       furtherReading: [
         { title: "NASA EMIT data tutorials", href: "https://earth.jpl.nasa.gov/emit/events/4/emit-data-tutorial-series/" },
         { title: "USGS Landsat Collection 2 Level-2 products", href: "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products" },
+      ],
+    },
+  },
+  "module-2-chapter-6-practicum": {
+    estimatedTime: "420–540 minutes",
+    lessonType: "Chapter Practicum",
+    position: 6,
+    totalPositions: 7,
+    markdownFile: "content/lessons/module-2/practicum-06.md",
+    formativeChecks: [
+      {
+        id: "m2-p6-target",
+        question: "What must be declared before building a spatial prediction surface?",
+        options: [
+          "The target population, observation support, prediction use and accepted analysis evidence",
+          "Only the preferred colour palette",
+          "A requirement that every grid cell receive a value",
+        ],
+        correctOption: 0,
+        explanation: "Interpolation is meaningful only for a defined variable, domain, support and use. A complete grid is not evidence that every location is supported by observations.",
+      },
+      {
+        id: "m2-p6-weights",
+        question: "Three scientifically plausible weights definitions produce different Moran results. What should be released?",
+        options: [
+          "The complete sensitivity result and an evidence-based primary definition",
+          "Only the definition with the smallest permutation probability",
+          "The average p-value without the weights",
+        ],
+        correctOption: 0,
+        explanation: "The disagreement is evidence that inference depends on the relationship model. Reporting all predeclared definitions prevents outcome-driven weights selection.",
+      },
+      {
+        id: "m2-p6-release",
+        question: "A smooth interpolation has low random-split error but poor separated-block validation. What is the correct decision?",
+        options: [
+          "Restrict or block release because intended geographic transfer is not validated",
+          "Publish because the map is smooth",
+          "Report only random-split error",
+        ],
+        correctOption: 0,
+        explanation: "Random neighbouring holdouts can leak spatial similarity. Separated blocks better represent prediction into unsampled geography, so their failure must govern the release decision.",
+      },
+    ],
+    submissionChecklist: [
+      "All nine practicum deliverables are present and open successfully",
+      "Population, frame, realised sample, QA analysis set and inclusion evidence are reconciled",
+      "Weights definitions, transformations, islands, edges, permutations and sensitivity results are traceable",
+      "IDW and kriging use the same separated validation geography and expose uncertainty and extrapolation",
+      "The regression baseline precedes a process-justified spatial alternative and retains causal limitations",
+      "The map distinguishes observations, model predictions, empirical errors, model uncertainty and unsupported areas",
+      "All professional spatial-statistics and geostatistics mistakes are considered before release",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Calculates and validates sampling, weights, autocorrelation, interpolation and residual diagnostics with compatible units and rows" },
+      { dimension: "Conceptual understanding", expectation: "Connects spatial design, dependence, continuity and regression alternatives to distinct scientific assumptions" },
+      { dimension: "Reproducibility", expectation: "Delivers immutable inputs, checksums, seeds, frame, parameters, folds, code and traceable exclusions" },
+      { dimension: "Scientific communication", expectation: "Issues a bounded release decision that separates pattern, prediction, uncertainty, extrapolation and unsupported causation" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(false, false),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Spatial Statistics and Geostatistics training pack, CC0-1.0; no real field observations or locations",
+      coreReferences: [
+        { title: "PySAL esda user guide", href: "https://pysal.org/esda/stable/user-guide/index.html" },
+        { title: "US EPA sampling-design guidance", href: "https://www.epa.gov/quality/selecting-sampling-design" },
+        { title: "PyKrige OrdinaryKriging reference", href: "https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/generated/pykrige.ok.OrdinaryKriging.html" },
+      ],
+      furtherReading: [
+        { title: "PySAL spreg documentation", href: "https://pysal.org/spreg/" },
+        { title: "scikit-learn grouped cross-validation", href: "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data" },
+      ],
+    },
+  },
+  "module-2-chapter-7-practicum": {
+    estimatedTime: "360–480 minutes",
+    lessonType: "Chapter Practicum",
+    position: 7,
+    totalPositions: 7,
+    markdownFile: "content/lessons/module-2/practicum-07.md",
+    formativeChecks: [
+      {
+        id: "m2-p7-integrity",
+        question: "A CSV imports without an error. What must happen before it becomes a curated database table?",
+        options: [
+          "Reconcile counts and validate keys, references, types, ranges, missingness and geometry",
+          "Rename the table final and grant all analysts write access",
+          "Assume the database converted every field correctly",
+        ],
+        correctOption: 0,
+        explanation: "Execution proves only that the import mechanism accepted something. Promotion needs traceable source identity, validation, rejected-row evidence and an atomic decision.",
+      },
+      {
+        id: "m2-p7-predicate",
+        question: "P012 intersects two zones and is within neither interior. What is the defensible database result?",
+        options: [
+          "Retain both candidate relationships and mark the final assignment for boundary review",
+          "Choose the first zone returned by the database",
+          "Increase a buffer until only one zone remains",
+        ],
+        correctOption: 0,
+        explanation: "Database order and outcome-tuned tolerance are not management evidence. Preserving candidates and review status keeps the spatial fact separate from the assignment policy.",
+      },
+      {
+        id: "m2-p7-architecture",
+        question: "What is the strongest basis for a hybrid spatial-data architecture?",
+        options: [
+          "One authority per data class with storage chosen for updates, queries, scale, portability and governance",
+          "Store every object in the technology with the most features",
+          "Allow every exported copy to become an independent master",
+        ],
+        correctOption: 0,
+        explanation: "Hybrid designs are effective when transactional records, immutable objects, analytical snapshots and deliveries have explicit roles and one controlled update path.",
+      },
+    ],
+    submissionChecklist: [
+      "All fifteen deliverables are present, open successfully and contain no credentials",
+      "Every source checksum, row count, table grain, key, status, geometry type and SRID is reconciled",
+      "Relational query results retain unmatched records, NULL policy and distinct observational denominators",
+      "Spatial query results expose within/intersects boundary semantics and reconcile with GeoPandas by stable ID pair",
+      "Index and partition recommendations follow representative workloads and execution evidence",
+      "The architecture gives every data class one update authority plus documented access and delivery copies",
+      "Migrations, least-privilege roles, backups, restore tests, retention, lineage and responsible next actions are defined",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Builds valid relational and spatial query packs, integrity checks, predicate audits and performance evidence" },
+      { dimension: "Conceptual understanding", expectation: "Connects table grain, SQL population, spatial semantics and storage roles to scientific use and governance" },
+      { dimension: "Reproducibility", expectation: "Delivers immutable inputs, checksums, migrations, versions, reconciled counts, lineage, access controls and recovery evidence" },
+      { dimension: "Scientific communication", expectation: "Issues an actionable database handover decision that separates structural integrity from measurement validity and unsupported ecological claims" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(false, false),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Spatial Databases training pack, CC0-1.0; no real field observations or locations",
+      coreReferences: [
+        { title: "PostgreSQL tutorial", href: "https://www.postgresql.org/docs/current/tutorial.html" },
+        { title: "PostGIS introduction", href: "https://postgis.net/workshops/postgis-intro/" },
+        { title: "GeoParquet specification", href: "https://geoparquet.org/releases/v1.1.0/" },
+      ],
+      furtherReading: [
+        { title: "OGC GeoPackage standard", href: "https://www.ogc.org/standards/geopackage/" },
+        { title: "PostgreSQL backup and restore", href: "https://www.postgresql.org/docs/current/backup.html" },
       ],
     },
   },

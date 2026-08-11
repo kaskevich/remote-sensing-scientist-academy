@@ -1,0 +1,5 @@
+site_id,site_name,region_code,management_status,source_status
+S01,West Inlet,TRAIN-W,seasonal_grazing,synthetic
+S02,Central Reach,TRAIN-C,mixed_management,synthetic
+S03,East Lagoon,TRAIN-E,late_mowing,synthetic
+S04,Outer Reference,TRAIN-R,reference_only,synthetic
