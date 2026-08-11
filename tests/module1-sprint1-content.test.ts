@@ -163,6 +163,13 @@ describe("Module 1 pedagogical review", () => {
     for (const [lessonId, ideas] of Object.entries(requiredIdeas)) {
       for (const idea of ideas) expect(reviewedContent[lessonId]).toContain(idea);
     }
+
+    const lesson4 = reviewedContent["lesson-04"];
+    expect(lesson4).toContain("## Learning pathway");
+    expect(lesson4).toContain("input contract");
+    expect(lesson4).toContain("Boundary and branch stress test");
+    expect(lesson4).toContain("ready for instructional use");
+    expect(lesson4).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(

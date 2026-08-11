@@ -337,7 +337,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     },
   },
   "lesson-04": {
-    estimatedTime: "75–90 minutes",
+    estimatedTime: "90–105 minutes",
     position: 4,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-04.md",
@@ -366,16 +366,17 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     ],
     submissionChecklist: [
       "Missingness is checked before numerical validity",
-      "Thresholds are named and identified as instructional or sourced",
+      "The input contract, threshold boundary and provenance are explicit",
       "Source values remain unchanged beside derived statuses",
+      "Missing, negative, zero, boundary and above-boundary cases are evidenced",
       "SALS4 and SALS5 rules run from a clean kernel",
-      "The interpretation separates a quality flag from proof of error",
+      "Instructional readiness and scientific deployment readiness are judged separately",
     ],
     rubric: [
-      { dimension: "Technical correctness", expectation: "Conditions, branch order and indentation produce the intended exclusive statuses" },
-      { dimension: "Conceptual understanding", expectation: "Explains comparisons, boundaries and missing-versus-zero" },
-      { dimension: "Reproducibility", expectation: "Rules, thresholds, inputs and audit messages are visible" },
-      { dimension: "Scientific communication", expectation: "Does not overstate an instructional flag as ecological validation" },
+      { dimension: "Technical correctness", expectation: "Conditions, branch order, indentation and boundary tests produce the intended exclusive statuses" },
+      { dimension: "Conceptual understanding", expectation: "Explains input scope, comparisons, boundaries, uncertainty and missing-versus-zero" },
+      { dimension: "Reproducibility", expectation: "Rule specification, inputs, cases, observed results and audit messages are visible" },
+      { dimension: "Scientific communication", expectation: "Separates computational behaviour from criterion validity and operational readiness" },
     ],
     technicalMetadata: {
       ...sharedTechnicalMetadata,

@@ -3,6 +3,24 @@ title: Conditions and Data-Quality Rules
 lessonId: lesson-04
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 2 established honest values and unresolved metadata. Lesson 3 organised those values into an auditable plot record and separated structural completeness from scientific validity.
+
+### In this lesson
+
+You will turn one documented question into an explicit decision path. You will define its input scope, boundary, missing-value treatment, derived status and review action before trusting the code.
+
+### Why this comes now
+
+A record must exist before it can be checked. Conditions are the bridge between stored evidence and a reproducible quality-control decision; they prepare you to apply one rule repeatedly in Lesson 5 and package it as a tested function in Lesson 6.
+
+### You will use this later
+
+Lesson 9 applies field-specific pandas rules to the full table. Module 2 uses the same logic for CRS compatibility, geometry validity, raster NoData, alignment and UAV product acceptance.
+
 ## 1. Turn scientific criteria into visible decisions
 
 ### Learning outcome
@@ -125,7 +143,22 @@ A professional quality rule has five visible parts:
 4. **Action:** flag, exclude, correct or retain?
 5. **Audit message:** what should another scientist be able to read afterward?
 
+Before writing a real rule, complete a specification like this:
+
+| Rule element | Instructional richness example | Scientific question it exposes |
+|---|---|---|
+| input field and representation | `Sp_richness`, integer or `None` | is the input contract supported by the source? |
+| criterion and boundary | review when value is below 6 | is 6 included, and why was 6 chosen? |
+| missing-value path | review separately | must absence be distinguished from a low count? |
+| provenance | Academy programming exercise | is the criterion sourced or merely instructional? |
+| derived action | `review`; retain source value | what happens after the flag? |
+| validation cases | missing, 5, 6 and 7 | do all branches and boundaries behave as intended? |
+
+The rule is not ready for scientific deployment when its provenance is only “programming exercise.” It is suitable for learning how to make the decision process inspectable.
+
 Check missingness before numerical range rules. A missing value cannot safely take part in ordinary arithmetic or comparisons. Keep the original measurement unchanged and store the review result separately. This preserves an audit trail.
+
+State the **input contract** too. The worked biomass rule expects only `None` or a numeric value. A Boolean or numeric-looking string is outside that contract even if Python happens to compare it. Lesson 6 will make type rejection explicit, and Lesson 9 will upgrade missingness for pandas data.
 
 > **Scientific note:** “flagged” does not mean “wrong.” A value may be unusual because the ecosystem is unusual. Quality control identifies records that need evidence-based review; it should not erase ecological variation automatically.
 
@@ -164,6 +197,14 @@ Create a dictionary for `SALS4` using the published values `Sp_richness` 7, `Moi
 5. Add a Markdown note stating that the moisture interval is a programming exercise, not a validated ecological acceptance range.
 6. Change only `AGB` to `None`, rerun, and explain which output changes and why.
 
+### Boundary and branch stress test
+
+Test the biomass path four times by changing only `AGB`: `None`, `-0.01`, `0` and `284.78`. Before each run, record the predicted branch, status and action in a Markdown table. Then compare prediction with output.
+
+Test the instructional richness rule with `5`, `6` and `7`. This is a **boundary test**: it verifies whether the code implements “below 6” exactly. It does not validate 6 as an ecological threshold. Species richness is a count, but uncertainty can still enter through survey effort, detectability, taxonomy and recording.
+
+Your evidence is complete only when every branch is exercised and the value exactly at the boundary behaves as specified.
+
 Restart the kernel and run all notebook cells in order. A clean run should preserve Lessons 1–3 and add the decision results without overwriting the original plot values.
 
 ## 7. Independent challenge — write an auditable rule
@@ -173,6 +214,16 @@ Use published plot `SALS5`: `Sp_richness` is 7, `Moisture_mean` is 25.87 and `AG
 Create one decision structure that assigns exactly one biomass status: `missing`, `invalid` or `recorded`. Create a second decision for species richness using a threshold you name clearly as instructional. Then produce a short audit message containing the plot ID, the checked field, the status and the action `review` or `retain`.
 
 Do not delete or replace the source values. Before running, predict each branch. After running, explain why a missing biomass measurement cannot support a claim about low biomass.
+
+### Professional QA decision
+
+Submit a compact rule record containing the input contract, threshold provenance, inclusive or exclusive boundary, test cases, observed results and remaining scientific limitation. Classify the rule as:
+
+- `ready for instructional use` when every documented branch and boundary behaves as specified;
+- `review` when code behaviour is unclear or a case is untested;
+- `stop for scientific deployment` while criterion provenance or input assumptions remain unsupported.
+
+The same rule can be computationally ready for teaching and scientifically unready for operational filtering. Record both judgements rather than collapsing them into one label.
 
 ### Scientific interpretation
 
@@ -186,6 +237,7 @@ Answer in your private notes:
 2. What is the difference between a data-quality flag and proof of an error?
 3. How can branch order change the assigned status?
 4. What evidence would justify a real threshold for a remote-sensing reflectance value?
+5. Why is testing the value exactly at a threshold different from just testing one value on either side?
 
 ### Submission
 
@@ -197,5 +249,4 @@ Answer in your private notes:
 
 **Artifact 04 — Transparent data-quality rules**
 
-This checkpoint demonstrates that you can translate a documented criterion into reproducible code without confusing a computational flag with a scientific conclusion. Continue in the same notebook in Lesson 5.
-
+This fourth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can translate a documented criterion into reproducible code, exercise every decision path and separate computational readiness from scientific deployment. Continue in the same notebook in Lesson 5.
