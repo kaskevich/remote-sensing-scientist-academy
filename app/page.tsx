@@ -285,6 +285,30 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/spatial-databases/manifest.json", title: "Download the storage-governance checksum manifest" },
     { href: "lesson-resources/module-2/spatial-databases/SPATIAL_DATABASE_QA_TEMPLATE.md", title: "Download the spatial database governance QA template" },
   ],
+  "lesson-2-38": [
+    { href: "lesson-resources/module-2/cloud-native-eo/README.md", title: "Read the cloud-native EO training-pack guide" },
+    { href: "lesson-resources/module-2/cloud-native-eo/manifest.json", title: "Download the cloud-native EO checksum manifest" },
+    { href: "lesson-resources/module-2/cloud-native-eo/meadow_cube_structure.json", title: "Download the labelled cube structure contract" },
+  ],
+  "lesson-2-39": [
+    { href: "lesson-resources/module-2/cloud-native-eo/observation_inventory.csv", title: "Download the synthetic observation inventory" },
+    { href: "lesson-resources/module-2/cloud-native-eo/cube_pixel_samples.csv", title: "Download the labelled cube pixel samples" },
+    { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-native EO QA template" },
+  ],
+  "lesson-2-40": [
+    { href: "lesson-resources/module-2/cloud-native-eo/chunk_scenarios.csv", title: "Download the Dask chunk-planning scenarios" },
+    { href: "lesson-resources/module-2/cloud-native-eo/meadow_cube_structure.json", title: "Download the proposed cube dimensions and chunks" },
+    { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-native EO QA template" },
+  ],
+  "lesson-2-41": [
+    { href: "lesson-resources/module-2/cloud-native-eo/cloud_format_inventory.csv", title: "Download the deliberately imperfect cloud-format inventory" },
+    { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-format QA template" },
+  ],
+  "lesson-2-42": [
+    { href: "lesson-resources/module-2/cloud-native-eo/stac_items_fixture.json", title: "Download the deterministic synthetic STAC ItemCollection" },
+    { href: "lesson-resources/module-2/cloud-native-eo/observation_inventory.csv", title: "Download the observation inventory for catalogue reconciliation" },
+    { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-native EO QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -316,7 +340,14 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 7
+  const resources = source.chapter === 8
+    ? [
+        { href: "lesson-resources/module-2/cloud-native-eo/README.md", title: "Read the Chapter 8 practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/cloud-native-eo/manifest.json", title: "Download the cloud-native EO checksum manifest" },
+        { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-native EO QA template" },
+        { href: "lesson-resources/module-2/cloud-native-eo/stac_items_fixture.json", title: "Download the deterministic STAC ItemCollection" },
+      ]
+    : source.chapter === 7
     ? [
         { href: "lesson-resources/module-2/spatial-databases/README.md", title: "Read the spatial-database practicum and training-pack guide" },
         { href: "lesson-resources/module-2/spatial-databases/manifest.json", title: "Download the spatial-database checksum manifest" },
@@ -396,6 +427,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-37") {
     return [lesson, module2PracticumAcademyLessons[6]];
+  }
+  if (lesson.id === "lesson-2-42") {
+    return [lesson, module2PracticumAcademyLessons[7]];
   }
   return [lesson];
 });

@@ -1,0 +1,49 @@
+{
+  "type": "FeatureCollection",
+  "stac_version": "1.0.0",
+  "data_status": "synthetic training evidence",
+  "features": [
+    {
+      "type": "Feature", "stac_version": "1.0.0", "id": "SYN_M2_20250512",
+      "bbox": [23.30, 58.10, 24.80, 59.20],
+      "geometry": {"type": "Polygon", "coordinates": [[[23.30,58.10],[24.80,58.10],[24.80,59.20],[23.30,59.20],[23.30,58.10]]]},
+      "properties": {"datetime": "2025-05-12T09:45:00Z", "eo:cloud_cover": 8.2, "platform": "synthetic-sentinel-2", "proj:epsg": 3301},
+      "collection": "synthetic-s2-l2a",
+      "links": [],
+      "assets": {"red": {"href": "https://example.invalid/SYN_M2_20250512_B04.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "reflectance"]}, "scl": {"href": "https://example.invalid/SYN_M2_20250512_SCL.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "quality"]}}
+    },
+    {
+      "type": "Feature", "stac_version": "1.0.0", "id": "SYN_M2_20250603",
+      "bbox": [23.30, 58.10, 24.80, 59.20],
+      "geometry": {"type": "Polygon", "coordinates": [[[23.30,58.10],[24.80,58.10],[24.80,59.20],[23.30,59.20],[23.30,58.10]]]},
+      "properties": {"datetime": "2025-06-03T09:47:00Z", "eo:cloud_cover": 42.0, "platform": "synthetic-sentinel-2", "proj:epsg": 3301},
+      "collection": "synthetic-s2-l2a", "links": [],
+      "assets": {"red": {"href": "https://example.invalid/SYN_M2_20250603_B04.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "reflectance"]}, "scl": {"href": "https://example.invalid/SYN_M2_20250603_SCL.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "quality"]}}
+    },
+    {
+      "type": "Feature", "stac_version": "1.0.0", "id": "SYN_M2_20250627",
+      "bbox": [23.30, 58.10, 24.80, 59.20],
+      "geometry": {"type": "Polygon", "coordinates": [[[23.30,58.10],[24.80,58.10],[24.80,59.20],[23.30,59.20],[23.30,58.10]]]},
+      "properties": {"datetime": "2025-06-27T09:44:00Z", "eo:cloud_cover": 13.5, "platform": "synthetic-sentinel-2", "proj:epsg": 3301},
+      "collection": "synthetic-s2-l2a", "links": [],
+      "assets": {"red": {"href": "https://example.invalid/SYN_M2_20250627_B04.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "reflectance"]}, "scl": {"href": "https://example.invalid/SYN_M2_20250627_SCL.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "quality"]}}
+    },
+    {
+      "type": "Feature", "stac_version": "1.0.0", "id": "SYN_M2_20250719",
+      "bbox": [23.30, 58.10, 24.80, 59.20],
+      "geometry": {"type": "Polygon", "coordinates": [[[23.30,58.10],[24.80,58.10],[24.80,59.20],[23.30,59.20],[23.30,58.10]]]},
+      "properties": {"datetime": "2025-07-19T09:46:00Z", "eo:cloud_cover": 5.1, "platform": "synthetic-sentinel-2", "proj:epsg": 3301},
+      "collection": "synthetic-s2-l2a", "links": [],
+      "assets": {"red": {"href": "https://example.invalid/SYN_M2_20250719_B04_shifted.tif", "type": "image/tiff; application=geotiff", "roles": ["data", "reflectance"]}}
+    },
+    {
+      "type": "Feature", "stac_version": "1.0.0", "id": "SYN_M2_20250814",
+      "bbox": [23.30, 58.10, 24.80, 59.20],
+      "geometry": {"type": "Polygon", "coordinates": [[[23.30,58.10],[24.80,58.10],[24.80,59.20],[23.30,59.20],[23.30,58.10]]]},
+      "properties": {"datetime": "2025-08-14T09:48:00Z", "eo:cloud_cover": 67.0, "platform": "synthetic-sentinel-2", "proj:epsg": 3301},
+      "collection": "synthetic-s2-l2a", "links": [],
+      "assets": {"red": {"href": "https://example.invalid/SYN_M2_20250814_B04.tif", "type": "image/tiff; application=geotiff; profile=cloud-optimized", "roles": ["data", "reflectance"]}}
+    }
+  ],
+  "links": []
+}

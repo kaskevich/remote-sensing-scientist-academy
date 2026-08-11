@@ -620,6 +620,11 @@ export const publishedModule2LessonIds = [
   "lesson-2-35",
   "lesson-2-36",
   "lesson-2-37",
+  "lesson-2-38",
+  "lesson-2-39",
+  "lesson-2-40",
+  "lesson-2-41",
+  "lesson-2-42",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -685,6 +690,14 @@ export const module2ChapterPractica = [
     tools: ["Relational integrity", "Spatial SQL", "Data governance"],
     artifact: "Artifact 2.G — Spatial Database and Governance Package",
   },
+  {
+    id: "module-2-chapter-8-practicum",
+    chapter: 8,
+    title: "Build a Reproducible Cloud-Native EO Evidence Cube",
+    description: "Connect STAC discovery, labelled cube eligibility, bounded Dask execution and validated COG/Zarr publication in one traceable scientific package.",
+    tools: ["Xarray and Dask", "COG and Zarr", "STAC provenance"],
+    artifact: "Artifact 2.H — Cloud-Native EO Discovery and Cube Package",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -692,10 +705,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "37 lessons · 7 practica available",
+  navigationMeta: "42 lessons · 8 practica available",
   syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.37 and seven chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, and Spatial Databases. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.42 and eight chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, Spatial Databases, and Multidimensional and Cloud-Native Data. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -2359,6 +2372,131 @@ const spatialDatabaseLessonConfigurations: Record<string, PublishedLessonConfigu
   },
 };
 
+function cloudNativeRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves synthetic inputs, checksums, environment, exact coordinates, stable Item–asset lineage, bounded computation, reconciled populations and versioned output evidence" },
+    { dimension: "Scientific communication", expectation: "Separates catalogue, measurement, grid, mask, computation and delivery evidence from unsupported ecological inference and states a responsible next action" },
+  ];
+}
+
+const commonCloudNativeChecklist = [
+  "Every supplied coordinate, value, Item and asset URL is identified as synthetic training evidence rather than a published Baltic observation",
+  "Dimension order, coordinates, CRS, transform, units, scale, nodata and validity meanings are recorded explicitly",
+  "Candidate, accepted, review and excluded evidence is reconciled with stable IDs and reasons",
+  "No credential, signed URL, private endpoint or machine-specific absolute path appears in the submission",
+  "Outputs preserve source lineage, environment, checksum, limitation and responsible next-action evidence",
+];
+
+const cloudNativeLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-38": {
+    estimatedTime: "150–190 minutes",
+    lessonType: "Labelled-Array Reasoning Lab",
+    markdownFile: "content/lessons/module-2/lesson-38.md",
+    formativeChecks: [
+      { id: "m2-l38-labels", question: "What does a coordinate contribute beyond a dimension name?", options: ["Labels that locate or identify positions along that dimension", "Proof that every value is scientifically valid", "Automatic reprojection into any requested CRS"], correctOption: 0, explanation: "A dimension names an axis and a coordinate labels positions on it. Accuracy, CRS provenance, units and measurement validity still require separate evidence." },
+      { id: "m2-l38-crs", question: "What does rio.write_crs() do for an in-memory array with verified coordinates?", options: ["Records CRS/grid-mapping metadata without transforming coordinate values", "Reprojects all values into the CRS", "Proves the coordinates came from a surveyed location"], correctOption: 0, explanation: "Writing CRS metadata states how existing coordinates should be interpreted. Reprojection is a separate calculation and provenance is a separate evidential claim." },
+      { id: "m2-l38-selection", question: "Two arrays have equal shapes but x coordinates differ by five metres. What should direct cell-wise analysis do?", options: ["Fail exact alignment and require a documented spatial decision", "Add values by position because shapes match", "Delete the x coordinates before adding"], correctOption: 0, explanation: "Equal shapes do not establish shared cell footprints. Exact coordinate checks expose the displacement so any resampling or exclusion remains deliberate and traceable." },
+    ],
+    submissionChecklist: [...commonCloudNativeChecklist, "Positional isel and labelled sel selections are compared and descending y order is interpreted", "The accepted, shifted and reversed-label arrays are diagnosed without silent metadata repair"],
+    rubric: cloudNativeRubric("Builds and audits DataArray/Dataset structures with correct dimensions, coordinate selection, exact alignment and Rioxarray spatial metadata", "Explains why labels support scientific meaning without guaranteeing coordinate or attribute truth"),
+    coreReferences: [
+      { title: "Xarray data structures", href: "https://docs.xarray.dev/en/stable/user-guide/data-structures.html" },
+      { title: "Xarray indexing and selecting", href: "https://docs.xarray.dev/en/stable/user-guide/indexing.html" },
+      { title: "Rioxarray CRS management", href: "https://corteva.github.io/rioxarray/stable/getting_started/crs_management.html" },
+    ],
+    furtherReading: [
+      { title: "Xarray combining data", href: "https://docs.xarray.dev/en/stable/user-guide/combining.html" },
+      { title: "CF conventions", href: "https://cfconventions.org/cf-conventions/cf-conventions.html" },
+    ],
+  },
+  "lesson-2-39": {
+    estimatedTime: "170–220 minutes",
+    lessonType: "EO Cube Construction Lab",
+    markdownFile: "content/lessons/module-2/lesson-39.md",
+    formativeChecks: [
+      { id: "m2-l39-contract", question: "When do time × band × y × x dimensions form a defensible comparison cube?", options: ["When measurement, grid, time, mask and provenance contracts are satisfied", "Whenever array shapes are equal", "Whenever Xarray concatenation completes"], correctOption: 0, explanation: "Dimensional structure enables operations, but comparability depends on shared measurement semantics, exact spatial support, valid timing, masks and traceable sources." },
+      { id: "m2-l39-mask", question: "A scene has five percent catalogue cloud but no local quality asset. What is the correct cube decision under the current contract?", options: ["Keep it in review because scene cloud cannot replace the required local mask", "Accept every pixel as clear", "Convert cloud percentage to a pixel mask"], correctOption: 0, explanation: "Scene-level cloud helps discovery but says where nothing about cloud occurs locally. A required pixel-quality rule needs local evidence or a separately validated replacement." },
+      { id: "m2-l39-composite", question: "Why must a seasonal median be accompanied by valid-observation count?", options: ["Neighbouring cells can summarize different numbers and dates of valid observations", "Median always removes the time dimension incorrectly", "Count makes reflectance equal to biomass"], correctOption: 0, explanation: "Masking produces uneven temporal support. Count reveals part of the sampling evidence behind each composite value and supports a predeclared minimum-observation rule." },
+    ],
+    submissionChecklist: [...commonCloudNativeChecklist, "Grid, processing baseline, time, scaling and local-mask eligibility are checked before stacking", "The seasonal summary, valid count and contributing source IDs are delivered together"],
+    rubric: cloudNativeRubric("Builds an aligned labelled cube, applies scaling and local masks before aggregation, and produces correct seasonal summaries and counts", "Explains a data cube as a comparability contract and a composite as a multi-date statistic with uneven support"),
+    coreReferences: [
+      { title: "Xarray indexing and selecting", href: "https://docs.xarray.dev/en/stable/user-guide/indexing.html" },
+      { title: "Xarray computation", href: "https://docs.xarray.dev/en/stable/user-guide/computation.html" },
+      { title: "Xarray weather and climate guide", href: "https://docs.xarray.dev/en/stable/user-guide/weather-climate.html" },
+    ],
+    furtherReading: [
+      { title: "Open Data Cube documentation", href: "https://opendatacube.readthedocs.io/en/latest/" },
+      { title: "OGC API Coverages", href: "https://ogcapi.ogc.org/coverages/" },
+    ],
+  },
+  "lesson-2-40": {
+    estimatedTime: "160–210 minutes",
+    lessonType: "Bounded-Computation Planning Lab",
+    markdownFile: "content/lessons/module-2/lesson-40.md",
+    formativeChecks: [
+      { id: "m2-l40-lazy", question: "Which action normally crosses from a lazy Xarray/Dask plan to in-memory values?", options: ["Calling compute() on the selected result", "Inspecting dimension names", "Reading the declared overall shape"], correctOption: 0, explanation: "Lazy metadata and graphs describe work. Compute executes the graph and materialises the requested result, so it should follow deliberate spatial, temporal and variable bounds." },
+      { id: "m2-l40-chunks", question: "What is the strongest starting principle for chunk design?", options: ["Fit memory while aligning with storage and the dominant access pattern, then benchmark", "Use the smallest possible chunk", "Store the entire cube as one chunk"], correctOption: 0, explanation: "Chunk design balances task overhead, working memory, request amplification and calculation shape. No single chunk size is optimal for every workload or system." },
+      { id: "m2-l40-memory", question: "Why is compressed object size insufficient for a memory plan?", options: ["Chunks are decoded in memory and calculations may hold masks, outputs and intermediates", "Compression always increases every value", "Dask cannot read compressed storage"], correctOption: 0, explanation: "Working memory follows decoded dtype, chunk concurrency and temporary arrays. Stored compression affects transfer and disk size but does not cap the execution footprint." },
+    ],
+    submissionChecklist: [...commonCloudNativeChecklist, "Full-array, chunk and conservative concurrent working-set estimates include formulas and units", "A bounded lazy result is compared with a trusted eager calculation before performance acceptance"],
+    rubric: cloudNativeRubric("Calculates memory and chunk evidence correctly, keeps selection lazy and computes a bounded validated result", "Explains task graphs, storage/Dask chunks, eager boundaries, rechunking costs and workload-dependent tradeoffs"),
+    coreReferences: [
+      { title: "Dask array best practices", href: "https://docs.dask.org/en/stable/array-best-practices.html" },
+      { title: "Dask array chunks", href: "https://docs.dask.org/en/stable/array-chunks.html" },
+      { title: "Xarray with Dask", href: "https://docs.xarray.dev/en/stable/user-guide/dask.html" },
+    ],
+    furtherReading: [
+      { title: "Dask diagnostics", href: "https://docs.dask.org/en/stable/diagnostics-local.html" },
+      { title: "Xarray scaling with Dask", href: "https://docs.xarray.dev/en/stable/user-guide/dask.html#optimization-tips" },
+    ],
+  },
+  "lesson-2-41": {
+    estimatedTime: "170–220 minutes",
+    lessonType: "Cloud-Format Decision Studio",
+    markdownFile: "content/lessons/module-2/lesson-41.md",
+    formativeChecks: [
+      { id: "m2-l41-selective", question: "What makes a cloud-native format useful for a bounded query?", options: ["Layout, service and client together retrieve only relevant ranges or chunks", "The filename contains cloud", "The complete file is copied to every client first"], correctOption: 0, explanation: "Selective access needs organised independent pieces, locatable metadata, a capable delivery service and a compatible client. The extension alone proves none of these." },
+      { id: "m2-l41-formats", question: "Which is the stronger starting match for a labelled time × band × y × x analysis cube?", options: ["A versioned and compatible Zarr layout designed for the access pattern", "A screenshot embedded in a PDF", "An ordinary striped TIFF renamed as COG"], correctOption: 0, explanation: "Zarr represents chunked n-dimensional arrays directly, but its version, chunks, codecs, metadata and intended readers still require explicit validation." },
+      { id: "m2-l41-validation", question: "A GeoTIFF is tiled and served over HTTPS. Can it be accepted as a COG?", options: ["Not yet; validate the complete COG organisation and actual range-serving path", "Yes; HTTPS alone proves conformance", "Yes; every tiled TIFF has suitable overviews and directory order"], correctOption: 0, explanation: "Tiling and HTTPS are partial evidence. COG acceptance also requires conformant georeferenced file structure, overview/layout checks and a serving route capable of bounded byte ranges." },
+    ],
+    submissionChecklist: [...commonCloudNativeChecklist, "Every COG claim separates internal conformance, byte-range service, client and result evidence", "Every Zarr decision records version, chunks, codecs, metadata strategy, request pattern, compatibility and immutable publication"],
+    rubric: cloudNativeRubric("Audits COG and Zarr structure, delivery and compatibility evidence and matches validated outputs to declared access patterns", "Explains tiles, overviews, ranges, chunks, codecs and versioning without treating operational units as ecological support"),
+    coreReferences: [
+      { title: "OGC Cloud Optimized GeoTIFF standard", href: "https://docs.ogc.org/is/21-026/21-026.html" },
+      { title: "Zarr v3 core specification", href: "https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html" },
+      { title: "GDAL COG driver", href: "https://gdal.org/en/stable/drivers/raster/cog.html" },
+    ],
+    furtherReading: [
+      { title: "Zarr specifications", href: "https://zarr-specs.readthedocs.io/en/latest/" },
+      { title: "OGC COG and Zarr evaluation", href: "https://docs.ogc.org/per/21-032.html" },
+    ],
+  },
+  "lesson-2-42": {
+    estimatedTime: "170–220 minutes",
+    lessonType: "Reproducible EO Discovery Lab",
+    markdownFile: "content/lessons/module-2/lesson-42.md",
+    formativeChecks: [
+      { id: "m2-l42-model", question: "What is a STAC Item?", options: ["A GeoJSON Feature describing one spatiotemporal entity and linking its assets", "A complete cloud storage service", "A guarantee that every linked pixel is valid"], correctOption: 0, explanation: "The Item is STAC's atomic spatiotemporal metadata unit. Its Assets link resources, while scientific fitness still depends on product, coverage, quality and grid review." },
+      { id: "m2-l42-assets", question: "An Item's visual asset and reflectance asset both show the scene. Which should enter quantitative analysis?", options: ["The measurement asset whose role, bands, scaling and processing are verified", "Whichever downloads first", "The visual asset because its colours look natural"], correctOption: 0, explanation: "Rendered visual assets may be stretched or encoded for display. Quantitative use requires the product asset with documented measurement semantics, scaling and quality evidence." },
+      { id: "m2-l42-reproducibility", question: "What should be preserved instead of an expiring signed asset URL?", options: ["Endpoint, Item ID, asset key, exact query, retrieval time and approved resolution process", "The secret signature in a public notebook", "Only a screenshot of the search results"], correctOption: 0, explanation: "Stable identifiers and the discovery contract support future URL resolution without leaking temporary access material. A metadata snapshot also records what the service returned." },
+    ],
+    submissionChecklist: [...commonCloudNativeChecklist, "The query records endpoint or fixture, conformance, Collection, bbox/intersects, UTC interval, filters, pagination and result count", "The Item–asset inventory separates scene discovery properties from local quality, grid and format validation"],
+    rubric: cloudNativeRubric("Builds and reconciles a bounded STAC Item–asset inventory with correct spatial, temporal, pagination and role handling", "Distinguishes Catalog, Collection, Item, Asset, static catalogue and API search and explains why discovery is not scientific acceptance"),
+    coreReferences: [
+      { title: "STAC specification overview", href: "https://stacspec.org/en/about/stac-spec/" },
+      { title: "STAC API Item Search specification", href: "https://api.stacspec.org/v1.0.0/item-search/" },
+      { title: "STAC API Core specification", href: "https://api.stacspec.org/v1.0.0/core/" },
+    ],
+    furtherReading: [
+      { title: "STAC tutorials", href: "https://stacspec.org/en/tutorials/" },
+      { title: "PySTAC Client usage", href: "https://pystac-client.readthedocs.io/en/stable/usage.html" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
@@ -2390,7 +2528,8 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       ?? uavLessonConfigurations[source.id]
       ?? satelliteLessonConfigurations[source.id]
       ?? spatialStatisticsLessonConfigurations[source.id]
-      ?? spatialDatabaseLessonConfigurations[source.id];
+      ?? spatialDatabaseLessonConfigurations[source.id]
+      ?? cloudNativeLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -2410,7 +2549,7 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
           jupyterEnvironment: "JupyterLab 4 / Notebook 7",
           testedVersions: module2TestedVersions(
             source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4 || source.chapter === 5,
-            source.chapter === 3 || source.chapter === 4 || source.chapter === 5,
+            source.chapter === 3 || source.chapter === 4 || source.chapter === 5 || source.chapter === 8,
           ),
           reviewDate: "11 August 2026",
           datasetCitation: source.chapter === 4
@@ -2421,6 +2560,8 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
                 ? "Synthetic Spatial Statistics and Geostatistics training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
                 : source.chapter === 7
                   ? "Synthetic Spatial Databases training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+                  : source.chapter === 8
+                    ? "Synthetic Multidimensional and Cloud-Native EO training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
                 : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
@@ -2435,7 +2576,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -2492,7 +2633,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -2549,7 +2690,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2621,7 +2762,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–600 minutes",
     lessonType: "Chapter Practicum",
     position: 4,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-04.md",
     formativeChecks: [
       {
@@ -2694,7 +2835,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 5,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-05.md",
     formativeChecks: [
       {
@@ -2767,7 +2908,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 6,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-06.md",
     formativeChecks: [
       {
@@ -2840,7 +2981,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "360–480 minutes",
     lessonType: "Chapter Practicum",
     position: 7,
-    totalPositions: 7,
+    totalPositions: 8,
     markdownFile: "content/lessons/module-2/practicum-07.md",
     formativeChecks: [
       {
@@ -2906,6 +3047,79 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       furtherReading: [
         { title: "OGC GeoPackage standard", href: "https://www.ogc.org/standards/geopackage/" },
         { title: "PostgreSQL backup and restore", href: "https://www.postgresql.org/docs/current/backup.html" },
+      ],
+    },
+  },
+  "module-2-chapter-8-practicum": {
+    estimatedTime: "420–540 minutes",
+    lessonType: "Chapter Practicum",
+    position: 8,
+    totalPositions: 8,
+    markdownFile: "content/lessons/module-2/practicum-08.md",
+    formativeChecks: [
+      {
+        id: "m2-p8-contract",
+        question: "What must govern whether an observation enters the EO cube?",
+        options: [
+          "A predeclared measurement, grid, time, mask and provenance contract",
+          "Whether its thumbnail looks clear",
+          "Whether concatenation completes without an exception",
+        ],
+        correctOption: 0,
+        explanation: "A cube is a comparison system. Structural success does not establish common measurements, cell footprints, temporal meaning, local validity or source lineage.",
+      },
+      {
+        id: "m2-p8-reconcile",
+        question: "The fixture contains five STAC Items but the observation plan has six records. What should the package do?",
+        options: [
+          "Preserve the discrepancy, identify the inventory-only Item and state what evidence is needed",
+          "Invent a sixth catalogue Item",
+          "Delete the sixth observation so totals match",
+        ],
+        correctOption: 0,
+        explanation: "Reconciliation makes selection boundaries visible. Fabricating or deleting evidence would hide the relationship between discovery snapshot, planned population and eligible inputs.",
+      },
+      {
+        id: "m2-p8-release",
+        question: "When is the cloud-native package ready for release?",
+        options: [
+          "When catalogue, cube, mask, compute, format, compatibility and lineage gates pass for the stated use",
+          "When one attractive composite image exists",
+          "When every source is forced into the same array",
+        ],
+        correctOption: 0,
+        explanation: "Release depends on the connected evidence chain and bounded intended use. Exclusions and unresolved limitations remain part of a professional package.",
+      },
+    ],
+    submissionChecklist: [
+      "All Chapter 8 deliverables are present, open successfully and contain no credentials or signed URLs",
+      "The deterministic STAC query, Item–asset inventory and candidate decisions reconcile by stable ID",
+      "The labelled diagnostic cube preserves coordinates, scale, mask, source lineage and valid-observation counts",
+      "Chunk, memory, bounded-compute and eager-equivalence evidence is complete and accurately qualified",
+      "COG and Zarr decisions separate layout, serving, client, compatibility and result evidence",
+      "Pipeline reconciliation retains accepted, review and excluded observations at every gate",
+      "The final release decision preserves synthetic status and separates operational success from ecological inference",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Builds and validates a correct STAC inventory, labelled diagnostic cube, mask/count output, chunk plan and cloud-format decision" },
+      { dimension: "Conceptual understanding", expectation: "Connects catalogue discovery, comparability contracts, lazy execution and selective-access storage to one scientific evidence chain" },
+      { dimension: "Reproducibility", expectation: "Delivers immutable inputs, checksums, environment, query contract, stable lineage, reconciliations, bounded tests and controlled publication" },
+      { dimension: "Scientific communication", expectation: "Issues an actionable release decision that exposes observation support, exclusions, compatibility limits and unsupported ecological claims" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Multidimensional and Cloud-Native EO training pack, CC0-1.0; no real acquisitions, asset URLs or field locations",
+      coreReferences: [
+        { title: "Xarray with Dask", href: "https://docs.xarray.dev/en/stable/user-guide/dask.html" },
+        { title: "OGC Cloud Optimized GeoTIFF standard", href: "https://docs.ogc.org/is/21-026/21-026.html" },
+        { title: "STAC specification overview", href: "https://stacspec.org/en/about/stac-spec/" },
+      ],
+      furtherReading: [
+        { title: "Zarr v3 core specification", href: "https://zarr-specs.readthedocs.io/en/latest/v3/core/v3.0.html" },
+        { title: "Dask array best practices", href: "https://docs.dask.org/en/stable/array-best-practices.html" },
       ],
     },
   },

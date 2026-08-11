@@ -1,0 +1,6 @@
+asset_id,claimed_format,layout_evidence,overviews,range_service,chunk_grid,metadata_state,version_or_profile,decision
+seasonal_ndvi_a,GeoTIFF,strips,none,full_file_only,,,GeoTIFF,local_only_not_COG
+seasonal_ndvi_b,COG,"512x512 tiles; IFD order validated","2,4,8,16",byte_ranges,,,OGC_COG_1.0,accept_for_map
+seasonal_ndvi_c,COG,strips,none,byte_ranges,,,unknown,reject_COG_claim
+meadow_cube_a,Zarr,,,,"time=12,band=1,y=512,x=512",consolidated,Zarr_v2,review_reader_compatibility
+meadow_cube_b,Zarr,,,,"time=1,band=4,y=64,x=64",fragmented_metadata,Zarr_v3,benchmark_request_pattern

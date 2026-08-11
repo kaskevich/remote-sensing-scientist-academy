@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.37, seven Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.42, eight Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -17,7 +17,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 |---|---|---|---|---|---|---|---|---|
 | Learn remote sensing | Hero | Academy | 2.3, 2.11–2.25 | Partial: raster/UAV | Yes | Yes | Raster and UAV artifacts | PARTIAL |
 | Work with real data | Hero | Academy | 1.8–1.12 use published ecological data | Yes for field table | Yes | Yes | Vegetation Data Explorer | PARTIAL |
-| Use real satellite data | Hero and README | Academy | Only planned 2.26 onward | No | No | No | No | MISSING |
+| Use real satellite data | Hero and README | Academy | 2.26–2.30 and 2.38–2.42 use synthetic EO training evidence | Theory only for real products | No real-data practice | No | No | MISSING; current lessons deliberately do not mislabel synthetic fixtures as real observations |
 | Build a portfolio | Hero/pathway | Academy | 1.1–1.12 plus Module 2 practica | Yes | Yes | Yes in reviewed Module 1 | Portfolio Project 1 consolidated; Module 2 packages await final QA | PARTIAL |
 | Complete analysis | Hero/README | Academy | 1.12 and practica 2.C/2.D | Yes | Yes | Yes | Three substantial packages | PARTIAL |
 | Sentinel-2 recovery field lab | Homepage field lab | Future satellite module | No implemented lesson | No | No | No | No | MISSING |
@@ -42,17 +42,17 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10 and practica | Partial | Yes | Yes | QA maps | PARTIAL |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.37 | Yes | Yes | Yes | QA reports, manifests and database governance record | COMPLETE |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.42 | Yes | Yes | Yes | QA reports, manifests, database governance and cloud-native EO evidence records | COMPLETE |
 | Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; web/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
-| Professional GIS workflows | Academy goals | 2 | Practica 1–7 | Yes | Yes | Yes | Seven evidence and handover decisions | COMPLETE |
+| Professional GIS workflows | Academy goals | 2 | Practica 1–8 | Yes | Yes | Yes | Eight evidence and handover decisions | COMPLETE |
 | Python foundations for geospatial work | Foundations/module prerequisites | 1 | 1.1–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | NumPy | Module 1 outcome | 1/2 | 1.7, reused in raster/UAV | Yes | Yes | Yes | Numerical/raster workflow | COMPLETE |
 | pandas | Module 1 outcome | 1 | 1.8–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | GeoPandas | Geospatial card | 2 | 2.5–2.10 | Yes | Yes | Yes | Vector handover package | COMPLETE |
 | Shapely | Academy goals | 2 | 2.6–2.9 | Yes | Yes | Yes | Geometry/topology record | COMPLETE |
 | Rasterio | Geospatial card | 2 | 2.12–2.17, 2.23–2.25 | Yes | Yes | Yes | Raster stack and UAV subset | COMPLETE |
-| Xarray | Geospatial card/module outcome | Planned | Planned 2.38–2.42 | No | No | No | No | MISSING |
+| Xarray | Geospatial card/module outcome | 2 | 2.38–2.39 and Chapter 8 practicum | Yes | Yes | Yes | Labelled array audit and EO cube contract | COMPLETE AS FOUNDATION |
 | Matplotlib and scientific plotting | Academy goals/module outcome | 1 | 1.11–1.12 | Yes for descriptive tables | Yes | Yes | Audited accessible figures with PNG/SVG handover | COMPLETE |
 | File handling and relative paths | Academy goals | 1/2 | 1.8, 2.4–2.5 | Yes | Yes | Yes | Project folders | COMPLETE |
 | Reproducible scripts | Academy goals | 1/2 | Functions/notebooks taught; scripts mainly planned | Partial | Limited | Limited | Notebook code, no package/script | TOO SHALLOW |
@@ -73,7 +73,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Spectral bands | Academy goals | 2 | 2.18, 2.20, 2.25–2.29 | Yes | Yes | Yes | Band inventory and satellite evidence package | COMPLETE |
 | Spatial resolution | Academy goals | 2 | 2.3, 2.11, 2.18–2.19 | Yes | Yes | Yes | Support/mission decisions | COMPLETE |
 | Spectral resolution | Academy goals | 2 | 2.26, 2.29 | Yes | Yes | Yes | Optical decision and spectral-feature note | COMPLETE |
-| Temporal resolution | Academy goals | 2 | 2.3, 2.18, 2.26, 2.28 | Yes | Yes | Yes | Support and observation contracts | COMPLETE AS FOUNDATION; time-series application planned |
+| Temporal resolution | Academy goals | 2 | 2.3, 2.18, 2.26, 2.28, 2.39–2.42 | Yes | Yes on synthetic seasonal evidence | Yes | Support, observation and cube contracts | COMPLETE AS FOUNDATION; multi-year real-data application planned |
 | Radiometric resolution | Academy goals | 2 | 2.20, 2.26 | Yes | Yes | Yes | Radiometric and product-level audits | COMPLETE |
 | Sensors and platforms | Academy goals | 2 | 2.18–2.30 | Yes | Yes | Yes | UAV and satellite sensor/product inventories | COMPLETE |
 | Passive vs active sensing | Academy goals | 2 | 2.18, 2.20, 2.26, 2.28 | Yes | Yes | Yes | Cross-sensor evidence package | COMPLETE |
@@ -83,7 +83,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Landsat | Academy goals | 2 | 2.26–2.27 | Yes | Yes | Yes | Cross-mission optical recommendation | COMPLETE AS FOUNDATION |
 | Image products and processing levels | Academy goals | 2 | 2.18, 2.22–2.26 | Yes | Yes | Yes | UAV and satellite product inventories | COMPLETE |
 | Atmospheric effects | Academy goals | 2 | 2.26–2.27, 2.29 | Yes | Yes | Yes | Optical and spectral QA decisions | COMPLETE AS FOUNDATION |
-| Clouds and cloud masking | Field lab/Academy goals | 2 | 2.26–2.27 | Yes | Yes | Yes | Local cloud/shadow gate and joint masks | COMPLETE AS FOUNDATION; time-series masking planned |
+| Clouds and cloud masking | Field lab/Academy goals | 2 | 2.26–2.27, 2.39, 2.42 | Yes | Yes | Yes | Local cloud/shadow gate, masked cube and catalogue eligibility record | COMPLETE AS FOUNDATION; multi-year application planned |
 | QA layers | Academy goals | 2 | 2.24–2.30 | Yes | Yes | Yes | UAV and satellite QA reports | COMPLETE |
 | Band combinations | Academy goals | Planned | Multispectral indices only | Partial | Limited | Limited | UAV stack | TOO SHALLOW |
 | NDVI | Hero/Academy goals | 2 | 2.25 | Yes | Yes | Yes | UAV NDVI derivative | COMPLETE |
@@ -92,16 +92,16 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Clipping/masking | Academy goals | 2 | 2.13, 2.15, 2.25 | Yes | Yes | Yes | Valid-mask derivatives | COMPLETE |
 | Reprojection/resampling/alignment | Academy goals | 2 | 2.13–2.14, reinforced later | Yes | Yes | Yes | Alignment report | COMPLETE |
 | Mosaicking | Academy goals | 2 | Orthomosaic formation/QA 2.22–2.24; no satellite mosaic operation | Partial | QA only | Yes, QA | UAV survey assessment | PARTIAL |
-| Time series | Homepage field lab/Academy goals | Planned | Planned data-cube lessons | No | No | No | No | MISSING |
+| Time series | Homepage field lab/Academy goals | 2 / future 3 | 2.39–2.42 provide the cube and discovery foundation | Yes for seasonal cube structure | Yes on synthetic evidence | Yes | Cloud-Native EO Discovery and Cube Package | PARTIAL; six-year real-data analysis remains planned |
 | Interpretation, validation and uncertainty | Academy goals | 1/2 | Repeated across projects/practica | Yes | Yes | Yes | Scientific briefings and QA | COMPLETE |
 
 ## Geospatial data science and modelling
 
 | Promised topic / skill | Where promised | Module | Lesson(s) teaching it | Theory | Practice | Independent application | Portfolio evidence | Current status |
 |---|---|---|---|---|---|---|---|---|
-| Multidimensional raster data | Module 2 outcome | Planned | Planned Xarray/data-cube lessons | No | No | No | No | MISSING |
+| Multidimensional raster data | Module 2 outcome | 2 | 2.38–2.42 and Chapter 8 practicum | Yes | Yes | Yes | Cloud-Native EO Discovery and Cube Package | COMPLETE AS FOUNDATION |
 | Vector–raster integration | Academy goals | 2 | 2.15, 2.25 | Yes | Yes | Yes | Extraction tables | COMPLETE |
-| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.37 | Yes for raster windows, indexed queries and storage architecture | Yes | Yes | Windowed workflow plus Spatial Database and Governance Package | PARTIAL; distributed/cloud execution planned |
+| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.41 | Yes for raster windows, indexed queries, storage architecture and bounded lazy execution | Yes | Yes | Database Governance plus Cloud-Native EO packages | COMPLETE AS FOUNDATION; production orchestration planned |
 | Spatial data exploration and cleaning | Academy goals | 1/2 | 1.8–1.11, 2.5–2.10 | Yes | Yes | Yes | Data/vector reports | COMPLETE |
 | Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |

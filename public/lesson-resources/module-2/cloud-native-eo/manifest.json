@@ -1,0 +1,17 @@
+{
+  "pack": "Module 2 Chapter 8 Multidimensional and Cloud-Native EO training pack",
+  "version": "1.0.0",
+  "created": "2026-08-11",
+  "licence": "CC0-1.0",
+  "data_status": "synthetic training evidence; no published plot locations or acquisitions",
+  "files": [
+    {"path": "CLOUD_NATIVE_EO_QA_TEMPLATE.md", "bytes": 1716, "sha256": "51a22539b205c39c91a0f34f11a24b9cbb12442752f170d426dec690a80bb967"},
+    {"path": "README.md", "bytes": 3053, "sha256": "4f6b86412909a539510008f946a9cb8115e472e29d6b97bdb309a752bd6711a3"},
+    {"path": "chunk_scenarios.csv", "bytes": 777, "sha256": "217998b89f8cb8463c376a9e77aa08c0071abe3f2d394de6c8b4d4cc2e1e6a84"},
+    {"path": "cloud_format_inventory.csv", "bytes": 580, "sha256": "32f0f08bccb5c1b43c6a759b5efcc86d70fef6efb5a89233fbacc3283e539fad"},
+    {"path": "cube_pixel_samples.csv", "bytes": 1733, "sha256": "ae61a94236f0f978ecf194329bbeb477b6796dd01953a6e7ef833f4b11c294c1"},
+    {"path": "meadow_cube_structure.json", "bytes": 1374, "sha256": "67c219c2d177af497dc27a333e1e4529cf3167aa410921c1af80b8db56e213d6"},
+    {"path": "observation_inventory.csv", "bytes": 794, "sha256": "290fe0c8efd3546f91b0a1363cd8c6e532fca89f82a0aa1e434cfe7f761768a8"},
+    {"path": "stac_items_fixture.json", "bytes": 3819, "sha256": "563eec00b47e2d758954987b6920bfb7ce86fcf9e1cccd61120a3feacb522f05"}
+  ]
+}
