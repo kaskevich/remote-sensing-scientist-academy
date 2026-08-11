@@ -170,6 +170,14 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson4).toContain("Boundary and branch stress test");
     expect(lesson4).toContain("ready for instructional use");
     expect(lesson4).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson5 = reviewedContent["lesson-05"];
+    expect(lesson5).toContain("## Learning pathway");
+    expect(lesson5).toContain("batch-processing contract");
+    expect(lesson5).toContain("Data-completeness extension");
+    expect(lesson5).toContain("equivalence check");
+    expect(lesson5).toContain("ready for handover");
+    expect(lesson5).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(

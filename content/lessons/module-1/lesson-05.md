@@ -3,6 +3,24 @@ title: Repetition, Loops and Vectorised Thinking
 lessonId: lesson-05
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 3 organised values into plot records. Lesson 4 turned one documented question into a tested decision path while preserving the original evidence.
+
+### In this lesson
+
+You will apply one method to a defined sequence of records, expose the changing loop state and account for how many records were received, used, missing and flagged.
+
+### Why this comes now
+
+A rule applied manually to six records can drift between copies. Iteration makes the method consistent, but scientific comparability, inclusion policy and the summary denominator still require deliberate choices.
+
+### You will use this later
+
+Lesson 6 packages repeated logic into functions. Lesson 7 checks a loop result against a NumPy operation, Lesson 10 replaces manual aggregation with pandas, and Module 2 repeats auditable work over geometries, raster windows and files.
+
 ## 1. Apply one transparent method to several plots
 
 ### Learning outcome
@@ -40,6 +58,8 @@ Read the loop aloud: “For each `plot_id` in `plot_ids`, print a review message
 
 The name `plot_id` is a temporary loop variable. It refers to a different list item during each iteration. The original list remains available after the loop.
 
+Output follows the list order, but that order is not automatically temporal, spatial or ecologically meaningful. Interpret sequence only when its provenance establishes what the order represents.
+
 ### Predict before running
 
 Predict how many output lines will appear and which identifier appears on the second line. Then run the cell and compare the actual order with the list order.
@@ -58,6 +78,19 @@ Predict how many output lines will appear and which identifier appears on the se
 ## 3. Keep each record together while you iterate
 
 A list of dictionaries preserves both sequence and named fields. Each iteration can therefore process one coherent plot record rather than several disconnected lists.
+
+### Specify the batch before processing it
+
+| Batch decision | Lesson example | Why it matters |
+|---|---|---|
+| analysis population | SALS1–SALS3 only | defines the scope of every output claim |
+| field and meaning | published `Sp_richness` count | prevents unlike variables from being combined |
+| inclusion rule | all three records; no missing values | defines which evidence reaches the denominator |
+| repeated operation | add one richness value to the running total | keeps the method constant across records |
+| outputs | trace, total, count and mean | makes state and denominator inspectable |
+| verification | hand result `(7 + 6 + 5) / 3` | supplies an independent known answer |
+
+This is a small **batch-processing contract**. The same decisions remain necessary when the batch contains 120 rows or thousands of raster tiles.
 
 ### Worked example
 
@@ -100,6 +133,8 @@ Mean richness: 6.0
 7. `len(plots)` returns the number of records.
 8. The mean is calculated after the loop, once the total is complete.
 
+The denominator `len(plots)` is defensible here only because all three richness values are present and included. In real data, the number of records received and the number of values used may differ. Always report the denominator that actually supports the calculation.
+
 [[CHECK:l5-accumulator]]
 
 ## 4. Separate iteration from scientific interpretation
@@ -109,6 +144,8 @@ Mean richness: 6.0
 The loop answers a computational question: how can the same addition be applied to every current record? The resulting mean answers a descriptive question for these three plots only. It does not establish a regional pattern or a causal explanation.
 
 The calculated value is easy to verify manually: `(7 + 6 + 5) / 3 = 6`. Use small known examples to test logic before scaling up. If code disagrees with the hand calculation, investigate before adding more data.
+
+A trace is temporary diagnostic output; a professional audit summary records the final counts and decisions without overwhelming the reader with every iteration. Keep detailed traces while debugging, then retain the evidence needed to reproduce the conclusion.
 
 [[CHECK:l5-interpretation]]
 
@@ -123,6 +160,8 @@ This does not make loops obsolete:
 - both require the same scientific decisions about inclusion, units, missingness and interpretation.
 
 Choose the expression that makes the method easiest to verify. Speed is not the only criterion.
+
+When a loop is later replaced with NumPy or pandas, run both versions on the same small known input and compare the results. This **equivalence check** tests whether the compressed method preserved the intended calculation; it does not prove that the scientific population or variable choice was valid.
 
 ## 6. Common mistakes and recovery
 
@@ -162,6 +201,18 @@ Use published plots `SALS4`, `SALS5` and `SALS6`, whose `Sp_richness` values are
 6. Add a condition inside the loop that prints `review` when richness is below the instructional threshold 6 and `retain` otherwise.
 7. In Markdown, explain why the loop makes the rule consistent but does not validate the threshold.
 
+### Data-completeness extension
+
+Create a separate instructional copy of the three records and replace one richness value with `None`. Do not change the published-value example. Write a second loop that:
+
+1. counts every record received;
+2. adds to the richness total and `values_used` only when richness is present;
+3. counts missing values separately;
+4. calculates a mean only when `values_used` is greater than zero;
+5. prints all three counts beside the mean.
+
+Verify by hand that the denominator is `values_used`, not the number of records received. Explain why replacing the missing value with zero would answer a different question.
+
 Run the complete notebook from the beginning. Confirm that the new loop uses data created in its own section and does not depend on a hidden cell execution order.
 
 ## 8. Independent challenge, reflection and portfolio artifact
@@ -171,8 +222,18 @@ Create records for `SALS1` through `SALS6` using their published `Sp_richness` v
 - Count how many plots fall below the instructional threshold 6.
 - Track their IDs in a list named `review_ids`.
 - Calculate the mean richness for all six plots.
-- Print a concise audit summary.
+- Print a concise audit summary containing records received, richness values used, missing values, below-threshold count, review IDs, total and mean.
 - Predict all final values before running.
+
+### Professional QA decision
+
+Classify the batch result as:
+
+- `ready for handover` when population, field, policy, denominator, trace and hand verification agree;
+- `review` when any count or result differs from the prediction;
+- `stop` when a missing-value or inclusion policy is absent, or when records are not scientifically comparable.
+
+State whether list order carries scientific meaning and whether the instructional threshold is suitable only for demonstrating code. A correct mean without this context is incomplete evidence.
 
 ### Scientific interpretation
 
@@ -184,15 +245,16 @@ Answer in your private notes:
 2. Why must an accumulator be created before the loop?
 3. When would a loop communicate a method more clearly than a vectorised expression?
 4. What missing-value decision would be required before adding biomass values?
+5. Why should a report show both records received and values used?
 
 ### Submission
 
 - **Notebook:** the continuing notebook with the worked example, trace output, guided practice and independent six-plot challenge.
 - **Screenshot:** the final audit summary and the code that produced it.
-- **Written answer:** 180–250 words explaining iteration, accumulation, verification by hand and the limits of the resulting mean.
+- **Written answer:** 180–250 words explaining iteration, accumulation, denominator choice, verification by hand and the limits of the resulting mean.
 
 ### Portfolio artifact
 
 **Artifact 05 — Repeatable plot-processing workflow**
 
-This checkpoint demonstrates that you can apply one documented method consistently across several ecological records and verify the result before scaling up.
+This fifth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can apply one documented method consistently across several ecological records, account for missing and included evidence, and verify the result before scaling up.

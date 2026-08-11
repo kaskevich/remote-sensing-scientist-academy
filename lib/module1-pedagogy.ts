@@ -390,7 +390,7 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     },
   },
   "lesson-05": {
-    estimatedTime: "75–90 minutes",
+    estimatedTime: "90–105 minutes",
     position: 5,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-05.md",
@@ -420,15 +420,17 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     submissionChecklist: [
       "Loop state is traced for known plot records",
       "Accumulators are initialised before iteration",
-      "Final summaries are calculated after the loop",
-      "The six-plot challenge is verified by hand",
-      "Interpretation states the selected population and threshold limitation",
+      "Records received, values used and missing values are counted separately",
+      "Final summaries use the documented inclusion denominator",
+      "The six-plot challenge is predicted and verified by hand",
+      "A justified ready for handover, review or stop decision is recorded",
+      "Interpretation states the selected population, order and threshold limitations",
     ],
     rubric: [
-      { dimension: "Technical correctness", expectation: "Loops, indentation, accumulation and counts produce verified results" },
-      { dimension: "Conceptual understanding", expectation: "Explains current item, repeated method and vectorised alternative" },
-      { dimension: "Reproducibility", expectation: "Inputs, trace output and hand check remain visible" },
-      { dimension: "Scientific communication", expectation: "Limits summaries to the records actually processed" },
+      { dimension: "Technical correctness", expectation: "Loops, indentation, accumulation, missingness counts and denominators produce verified results" },
+      { dimension: "Conceptual understanding", expectation: "Explains current item, repeated method, batch contract and vectorised equivalence" },
+      { dimension: "Reproducibility", expectation: "Inputs, policies, trace, audit counts and hand check remain visible" },
+      { dimension: "Scientific communication", expectation: "Limits summaries to the included records and states order and threshold constraints" },
     ],
     technicalMetadata: {
       ...sharedTechnicalMetadata,
