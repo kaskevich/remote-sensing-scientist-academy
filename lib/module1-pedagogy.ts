@@ -143,7 +143,7 @@ const sharedTechnicalMetadata = {
 
 export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
   "lesson-01": {
-    estimatedTime: "60–75 minutes",
+    estimatedTime: "75–90 minutes",
     position: 1,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-01.md",
@@ -185,15 +185,17 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
       "The starter notebook is renamed Vegetation_Data_Explorer.ipynb",
       "All required Markdown and code cells are present and executed",
       "The deliberately broken print instruction is corrected",
-      "The notebook is saved and a downloaded copy is retained",
+      "A clean restart-and-Run-All check is recorded",
+      "The notebook is saved, reopened and a downloaded copy is retained",
+      "The handover note identifies the question, run sequence, expected output and interpretation limit",
       "The written answer distinguishes code cells from Markdown cells",
       "The reflection is complete",
     ],
     rubric: [
       { dimension: "Technical correctness", expectation: "Required cells run and the simple syntax error is corrected" },
       { dimension: "Conceptual understanding", expectation: "Explains scientific programming and code versus Markdown" },
-      { dimension: "Reproducibility", expectation: "Notebook is clearly named, saved and run in order" },
-      { dimension: "Scientific communication", expectation: "Separates execution from scientific interpretation" },
+      { dimension: "Reproducibility", expectation: "Notebook is clearly named, clean-run from top to bottom, reopened and preserved" },
+      { dimension: "Scientific communication", expectation: "Handover note separates successful execution from scientific interpretation" },
     ],
     technicalMetadata: {
       ...sharedTechnicalMetadata,

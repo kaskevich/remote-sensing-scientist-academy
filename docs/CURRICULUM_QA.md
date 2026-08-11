@@ -23,7 +23,7 @@ A lesson is complete only when it supports the full progression:
 
 | Lesson | Content | Why | Visuals | Practice | QA/QC | Portfolio | Tested | Status |
 |---|---|---|---|---|---|---|---|---|
-| 1.1 Welcome to Scientific Programming | Audit in progress | Audit in progress | Existing execution diagram | Audit in progress | Audit in progress | Vegetation Data Explorer opening | No | AUDITING |
+| 1.1 Welcome to Scientific Programming | Scientific programming, notebook choice and execution | Question-to-method distinction | Execution diagram with clean-run gate | Guided notebook + independent handover | Restart, Run All, compare and reopen | Project 1 foundation | Content, type, lint, SVG, notebook, export and responsive review | COMPLETE |
 | 1.2 Variables and Scientific Data | Not reviewed | Not reviewed | Existing binding diagram | Not reviewed | Not reviewed | Scientific variables record | No | NOT STARTED |
 | 1.3 Collections for Ecological Information | Not reviewed | Not reviewed | Existing collections diagram | Not reviewed | Not reviewed | Vegetation metadata record | No | NOT STARTED |
 | 1.4 Conditions and Data-Quality Rules | Not reviewed | Not reviewed | Existing decision diagram | Not reviewed | Not reviewed | Quality-rule record | No | NOT STARTED |
@@ -81,3 +81,16 @@ A lesson is complete only when it supports the full progression:
 ## Required update rule
 
 After each lesson commit, update that lesson row, update every affected promise-matrix row and record any new dependency or gap. After a module gate, revise the website claims before proceeding if the delivered evidence cannot support the advertised outcome.
+
+## Completed lesson revision records
+
+### Lesson 1.1 — Welcome to Scientific Programming
+
+- **Purpose:** establish scientific programming as an inspectable method governed by scientific judgement, not introduce Python syntax as an end in itself.
+- **Existing strengths:** beginner-safe first instruction, prediction before execution, deliberate error, clear Markdown/code distinction and a strong ecological story.
+- **Gaps found:** no explicit connection to later lessons; limited comparison of notebook, report and script; clean execution was mentioned but not practised as a formal QA gate; handover evidence was weak.
+- **Professional standard applied:** a beginner should be able to choose why a notebook is appropriate, distinguish execution from validity, recover from one syntax error, reproduce the notebook from a clean kernel and explain the record to a colleague.
+- **Changes made:** added the four-part learning pathway, method-choice comparison, notebook-state warning, restart-and-Run-All procedure, independent handover test, Project 1 framing, updated starter-notebook prompts, assessment metadata and an improved reproducibility diagram.
+- **Integration issue fixed:** enabled GitHub-flavoured Markdown and responsive tables so professional decision and QA tables render semantically across the Academy.
+- **Validation:** 38 Module 1 content tests, TypeScript, ESLint, notebook JSON, SVG XML and GitHub Pages export passed. Lesson 1 was inspected at 320 px and desktop width without page overflow or console errors; the static export contains a semantic table after the renderer correction.
+- **Matrix contribution:** strengthens notebook workflows, reproducibility, debugging, scientific communication and Portfolio Project 1. It does not claim to close the later environment, README or Git/GitHub gaps.

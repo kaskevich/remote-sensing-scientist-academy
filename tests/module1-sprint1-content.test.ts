@@ -93,6 +93,32 @@ describe("Module 1 pedagogical review", () => {
     expect(content).toContain("code cell");
     expect(content).toContain("When code fails");
     expect(fencedPythonBlocks(content)[0]).toBe("print()");
+    for (const connection of [
+      "You already know",
+      "In this lesson",
+      "Why this comes now",
+      "You will use this later",
+    ]) {
+      expect(content).toContain(`### ${connection}`);
+    }
+    expect(content).toContain("Word or similar document");
+    expect(content).toContain("Python script");
+    expect(content).toContain("restart the kernel");
+    expect(content).toContain("Independent handover test");
+    expect(content).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+  });
+
+  it("provides Lesson 1 clean-run and handover scaffolding in the starter notebook", () => {
+    const notebook = JSON.parse(
+      readFileSync(
+        join(process.cwd(), "public/lesson-resources/module-1/Vegetation_Data_Explorer_Starter.ipynb"),
+        "utf8",
+      ),
+    ) as { cells: Array<{ id: string; source: string[] }> };
+    const handover = notebook.cells.find((cell) => cell.id === "handover-check");
+    expect(handover).toBeDefined();
+    expect(handover?.source.join("")).toContain("Restart the kernel");
+    expect(handover?.source.join("")).toContain("what that output does not prove");
   });
 
   it("keeps one main concept in each reviewed lesson", () => {

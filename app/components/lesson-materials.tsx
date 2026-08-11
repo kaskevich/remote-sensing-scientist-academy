@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
 import type { FormativeCheck } from "@/lib/module1-pedagogy";
 
@@ -144,6 +145,7 @@ export function MarkdownContent({
         </nav>
       )}
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
         components={{
           h2: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
