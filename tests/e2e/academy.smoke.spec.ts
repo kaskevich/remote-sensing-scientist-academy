@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { LEARNER_PROGRESS_STORAGE_KEY } from "../../lib/learner-progress";
+import { lessonCodeStorageKey } from "../../lib/lesson-code-workspace";
 
 const viewports = [
   { name: "small mobile", width: 320, height: 568 },
@@ -101,6 +102,46 @@ test("a direct lesson link opens the correct module and lesson", async ({ page }
   await expect(moduleNavigation).toHaveAttribute("open", "");
   await expect(lesson).toHaveAttribute("open", "");
   await expect(lesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
+});
+
+test("lesson code can be edited, run, and restored after refresh", async ({ page }) => {
+  await page.route("**/pyodide.js", async (route) => {
+    await route.fulfill({
+      contentType: "application/javascript",
+      body: `window.loadPyodide = async () => {
+        let stdout = () => {};
+        return {
+          loadPackagesFromImports: async () => {},
+          setStdout: ({ batched }) => { stdout = batched; },
+          setStderr: () => {},
+          runPythonAsync: async () => { stdout("raw RGB frame: direct image record"); },
+        };
+      };`,
+    });
+  });
+
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.goto("/#lesson-2-18");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), lessonCodeStorageKey("lesson-2-18"));
+  await page.reload();
+
+  const lesson = page.locator("#lesson-2-18");
+  const editor = lesson.getByLabel("Python code");
+  await expect(editor).toHaveValue(/"raw RGB frame": "direct image record"/);
+
+  const editedCode = 'print("Baltic meadow observation chain")';
+  await editor.fill(editedCode);
+  await expect(lesson.getByText("Draft saved in this browser", { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(editor).toHaveValue(editedCode);
+
+  await lesson.getByRole("button", { name: "Run Python" }).click();
+  await expect(lesson.locator(".lesson-code-output")).toContainText("raw RGB frame: direct image record");
+
+  const hasHorizontalOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+  );
+  expect(hasHorizontalOverflow).toBe(false);
 });
 
 test("module map, starter notebook, and formative checks support beginner navigation", async ({ page }) => {
