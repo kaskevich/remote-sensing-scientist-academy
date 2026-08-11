@@ -326,6 +326,13 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/web-gis-delivery/service_capability_inventory.csv", title: "Download the service capability inventory" },
     { href: "lesson-resources/module-2/web-gis-delivery/WEB_GIS_DELIVERY_QA_TEMPLATE.md", title: "Download the interoperability QA template" },
   ],
+  "lesson-2-46": [
+    { href: "lesson-resources/module-2/professional-gis-ecosystems/README.md", title: "Read the Professional GIS Ecosystems training-pack guide" },
+    { href: "lesson-resources/module-2/professional-gis-ecosystems/manifest.json", title: "Download the professional ecosystem checksum manifest" },
+    { href: "lesson-resources/module-2/professional-gis-ecosystems/ecosystem_component_inventory.csv", title: "Download the deliberately incomplete component inventory" },
+    { href: "lesson-resources/module-2/professional-gis-ecosystems/workflow_translation.csv", title: "Download the ArcGIS and open workflow translation" },
+    { href: "lesson-resources/module-2/professional-gis-ecosystems/PROFESSIONAL_ECOSYSTEM_QA_TEMPLATE.md", title: "Download the Professional GIS Ecosystem QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -357,7 +364,15 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 9
+  const resources = source.chapter === 10
+    ? [
+        { href: "lesson-resources/module-2/professional-gis-ecosystems/README.md", title: "Read the Chapter 10 practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/professional-gis-ecosystems/manifest.json", title: "Download the professional ecosystem checksum manifest" },
+        { href: "lesson-resources/module-2/professional-gis-ecosystems/environment_constraints.json", title: "Download the synthetic environment constraints" },
+        { href: "lesson-resources/module-2/professional-gis-ecosystems/sharing_risk_register.csv", title: "Download the sharing risk register" },
+        { href: "lesson-resources/module-2/professional-gis-ecosystems/PROFESSIONAL_ECOSYSTEM_QA_TEMPLATE.md", title: "Download the Professional GIS Ecosystem QA template" },
+      ]
+    : source.chapter === 9
     ? [
         { href: "lesson-resources/module-2/web-gis-delivery/README.md", title: "Read the Chapter 9 practicum and training-pack guide" },
         { href: "lesson-resources/module-2/web-gis-delivery/manifest.json", title: "Download the Web GIS checksum manifest" },
@@ -457,6 +472,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-45") {
     return [lesson, module2PracticumAcademyLessons[8]];
+  }
+  if (lesson.id === "lesson-2-46") {
+    return [lesson, module2PracticumAcademyLessons[9]];
   }
   return [lesson];
 });

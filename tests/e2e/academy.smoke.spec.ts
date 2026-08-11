@@ -205,7 +205,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes nine reviewed professional chapters with the planned pathway", async ({ page }) => {
+test("Module 2 exposes ten reviewed professional chapters with the planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -215,8 +215,8 @@ test("Module 2 exposes nine reviewed professional chapters with the planned path
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(54);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(54);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(9);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(56);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(8);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
   await expect(overview.locator(".module-syllabus li .syllabus-number").nth(52)).toHaveText("2.53");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
@@ -267,6 +267,10 @@ test("Module 2 exposes nine reviewed professional chapters with the planned path
   await expect(overview.getByRole("link", { name: "Web Maps and Spatial Services", exact: true })).toHaveAttribute("href", "#lesson-2-43");
   await expect(overview.getByRole("link", { name: "OGC Standards and Interoperability", exact: true })).toHaveAttribute("href", "#lesson-2-45");
   await expect(overview.getByRole("link", { name: "Deliver an Accessible Environmental Monitoring Map", exact: true })).toHaveAttribute("href", "#module-2-chapter-9-practicum");
+  await expect(overview.getByText("ArcGIS Professional Ecosystem", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(9).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "ArcGIS Professional Ecosystem", exact: true })).toHaveAttribute("href", "#lesson-2-46");
+  await expect(overview.getByRole("link", { name: "Design a Portable Coastal-Meadow GIS Architecture", exact: true })).toHaveAttribute("href", "#module-2-chapter-10-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -275,8 +279,8 @@ test("Module 2 exposes nine reviewed professional chapters with the planned path
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("45 lessons · 9 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(54);
+  await expect(moduleNavigation.getByText("46 lessons · 10 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(56);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(1);
@@ -291,6 +295,7 @@ test("Module 2 exposes nine reviewed professional chapters with the planned path
   await expect(page.locator("#lesson-2-42")).toHaveCount(1);
   await expect(page.locator("#lesson-2-43")).toHaveCount(1);
   await expect(page.locator("#lesson-2-45")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-46")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
@@ -437,6 +442,18 @@ test("Module 2 exposes nine reviewed professional chapters with the planned path
   await webPracticum.locator(":scope > summary").click();
   await expect(webPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
   await expect(webPracticum.getByText("WEB_GIS_RELEASE_DECISION.md", { exact: true }).first()).toBeVisible();
+
+  const ecosystemLesson = page.locator("#lesson-2-46");
+  await ecosystemLesson.locator(":scope > summary").click();
+  await expect(ecosystemLesson.getByText("Lesson 2.46 of 53", { exact: true })).toBeVisible();
+  await expect(ecosystemLesson.locator(".formative-check")).toHaveCount(3);
+  await expect(ecosystemLesson.getByRole("link", { name: "Download the deliberately incomplete component inventory" })).toHaveAttribute("href", /professional-gis-ecosystems\/ecosystem_component_inventory\.csv$/);
+  await expect(ecosystemLesson.getByText(/No paid ArcGIS licence is required|ArcGIS access is optional/).first()).toBeVisible();
+
+  const ecosystemPracticum = page.locator("#module-2-chapter-10-practicum");
+  await ecosystemPracticum.locator(":scope > summary").click();
+  await expect(ecosystemPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(ecosystemPracticum.getByText("PROFESSIONAL_ECOSYSTEM_DECISION.md", { exact: true }).first()).toBeVisible();
 
   const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
   await chapterOnePracticum.locator(":scope > summary").click();

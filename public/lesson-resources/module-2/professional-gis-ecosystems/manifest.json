@@ -1,0 +1,45 @@
+{
+  "title": "Professional GIS Ecosystems synthetic training pack",
+  "chapter": 10,
+  "lesson_ids": ["lesson-2-46", "module-2-chapter-10-practicum"],
+  "licence": "CC0-1.0",
+  "data_status": "synthetic organisational and technical training evidence; no real accounts, licences, endpoints or locations",
+  "created": "2026-08-11",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3309,
+      "sha256": "cdc0cf1ec4c17ec15ee30811c33dd019fe2cdc1acf987e29b60332619d2dff63"
+    },
+    {
+      "path": "PROFESSIONAL_ECOSYSTEM_QA_TEMPLATE.md",
+      "bytes": 3177,
+      "sha256": "c45e86a4b9a9624ab92ce98257774d97c96d04c85ec22f5a4d212db2f5857ecc"
+    },
+    {
+      "path": "ecosystem_component_inventory.csv",
+      "bytes": 3526,
+      "sha256": "2fac921c662eac2c4d188517a1d6b8f7f1842e5feab3858e6dd18a22b2cd678a"
+    },
+    {
+      "path": "environment_constraints.json",
+      "bytes": 2178,
+      "sha256": "67a67d755c6fddff1e53c9deccab02eb1f70a7138bd960e80e630408ac391fcb"
+    },
+    {
+      "path": "sharing_risk_register.csv",
+      "bytes": 2209,
+      "sha256": "c646db7e9bbbca8bc2d8db021a6d651c0324abf209abb5685636e8591aacbaed"
+    },
+    {
+      "path": "workflow_requirements.csv",
+      "bytes": 2431,
+      "sha256": "8e38e353d156ac6717415802c344ca52a2e0415a23ddd45398ad1598cabc037b"
+    },
+    {
+      "path": "workflow_translation.csv",
+      "bytes": 2585,
+      "sha256": "e4fa06d1fadb97debd85f935323718f18e08077a8040db3816899ff832acbdd7"
+    }
+  ]
+}

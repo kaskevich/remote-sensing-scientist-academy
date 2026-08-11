@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.45, nine Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.46, ten Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -42,12 +42,14 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10, 2.43–2.45 and practica | Yes for evidence-led map design and delivery | Yes | Yes | QA maps and Accessible Web GIS Evidence Delivery | COMPLETE AS FOUNDATION |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.45 | Yes | Yes | Yes | QA reports, manifests, database governance, cloud-native EO and Web GIS evidence records | COMPLETE |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.46 | Yes | Yes | Yes | QA reports, manifests, database governance, cloud-native EO, Web GIS and ecosystem evidence records | COMPLETE |
 | Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; production editing/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
-| Professional GIS workflows | Academy goals | 2 | Practica 1–9 | Yes | Yes | Yes | Nine evidence and handover decisions | COMPLETE |
+| Professional GIS workflows | Academy goals | 2 | Practica 1–10 | Yes | Yes | Yes | Ten evidence, handover and architecture decisions | COMPLETE |
 | Web GIS and interactive delivery | Module 2 outcome | 2 | 2.43–2.45 and Chapter 9 practicum | Yes | Yes | Yes | Accessible Web GIS Evidence Delivery | COMPLETE AS FOUNDATION |
 | OGC service/API interoperability | Module 2 outcome | 2 | 2.43, 2.45 and Chapter 9 practicum | Yes | Yes | Yes | Capability, conformance, CRS and client acceptance matrix | COMPLETE AS FOUNDATION |
+| ArcGIS professional ecosystem | Planned Module 2 Chapter 10 | 2 | 2.46 and Chapter 10 practicum | Yes | Yes without paid access | Yes | Portable Professional GIS Architecture | COMPLETE AS FOUNDATION; live organisational verification remains contextual |
+| ArcGIS/open workflow portability | Academy professional pathway | 2 | 2.46 and Chapter 10 practicum | Yes | Yes | Yes | Scientific invariant suite, role matrix and migration drill | COMPLETE AS FOUNDATION |
 | Python foundations for geospatial work | Foundations/module prerequisites | 1 | 1.1–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | NumPy | Module 1 outcome | 1/2 | 1.7, reused in raster/UAV | Yes | Yes | Yes | Numerical/raster workflow | COMPLETE |
 | pandas | Module 1 outcome | 1 | 1.8–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
