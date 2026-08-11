@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.34, six Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.37, seven Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -39,13 +39,13 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Coordinate systems and projections | Academy goals/module outcome | 2 | 2.2, reinforced 2.5–2.25 | Yes | Yes | Yes | CRS audit in all projects | COMPLETE |
 | Spatial relationships and predicates | Academy goals | 2 | 2.6–2.9 | Yes | Yes | Yes | Join/topology evidence | COMPLETE |
 | Geoprocessing and overlays | Academy goals | 2 | 2.6, 2.7, 2.9, 2.13 | Yes | Yes | Yes | Vector and raster derivatives | COMPLETE |
-| Spatial joins and queries | Academy goals | 2 | 2.7; database queries planned | Yes in memory | Yes | Yes | Join audit | PARTIAL |
+| Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10 and practica | Partial | Yes | Yes | QA maps | PARTIAL |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.34 | Yes | Yes | Yes | QA reports and manifests | COMPLETE |
-| Spatial databases | Module 2 outcomes | Planned | Planned 2.35–2.37 | No | No | No | No | MISSING |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.37 | Yes | Yes | Yes | QA reports, manifests and database governance record | COMPLETE |
+| Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; web/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
-| Professional GIS workflows | Academy goals | 2 | Practica 1–4 | Yes | Yes | Yes | Four handover decisions | COMPLETE |
+| Professional GIS workflows | Academy goals | 2 | Practica 1–7 | Yes | Yes | Yes | Seven evidence and handover decisions | COMPLETE |
 | Python foundations for geospatial work | Foundations/module prerequisites | 1 | 1.1–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | NumPy | Module 1 outcome | 1/2 | 1.7, reused in raster/UAV | Yes | Yes | Yes | Numerical/raster workflow | COMPLETE |
 | pandas | Module 1 outcome | 1 | 1.8–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
@@ -101,7 +101,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 |---|---|---|---|---|---|---|---|---|
 | Multidimensional raster data | Module 2 outcome | Planned | Planned Xarray/data-cube lessons | No | No | No | No | MISSING |
 | Vector–raster integration | Academy goals | 2 | 2.15, 2.25 | Yes | Yes | Yes | Extraction tables | COMPLETE |
-| Scalable workflows | Academy goals | 2 | 2.16 only | Yes for raster windows | Yes | Yes | Windowed workflow | PARTIAL |
+| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.37 | Yes for raster windows, indexed queries and storage architecture | Yes | Yes | Windowed workflow plus Spatial Database and Governance Package | PARTIAL; distributed/cloud execution planned |
 | Spatial data exploration and cleaning | Academy goals | 1/2 | 1.8–1.11, 2.5–2.10 | Yes | Yes | Yes | Data/vector reports | COMPLETE |
 | Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |
@@ -166,7 +166,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 
 ### Missing
 
-The current release does not implement Xarray/data cubes, time series, databases, web delivery, automation, reproducible environments, Git/GitHub or machine learning. Stage 3 has no curriculum module. These must not be presented as currently delivered competencies.
+The current release does not implement Xarray/data cubes, time series, web delivery, automation, reproducible environments, Git/GitHub or machine learning. Spatial database foundations are implemented, but production service operations remain planned. Stage 3 has no curriculum module. These missing areas must not be presented as currently delivered competencies.
 
 ### Too shallow
 

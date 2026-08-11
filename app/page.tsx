@@ -268,6 +268,23 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/spatial-statistics/spatial_validation_blocks.csv", title: "Download the separated model-validation blocks" },
     { href: "lesson-resources/module-2/spatial-statistics/SPATIAL_INFERENCE_QA_TEMPLATE.md", title: "Download the spatial inference QA template" },
   ],
+  "lesson-2-35": [
+    { href: "lesson-resources/module-2/spatial-databases/README.md", title: "Read the synthetic spatial-database training-pack guide" },
+    { href: "lesson-resources/module-2/spatial-databases/manifest.json", title: "Download the spatial-database checksum manifest" },
+    { href: "lesson-resources/module-2/spatial-databases/schema.sql", title: "Download the reviewed PostgreSQL and PostGIS teaching schema" },
+    { href: "lesson-resources/module-2/spatial-databases/plot_observations.csv", title: "Download the synthetic repeated plot observations" },
+  ],
+  "lesson-2-36": [
+    { href: "lesson-resources/module-2/spatial-databases/schema.sql", title: "Download the PostGIS teaching schema and indexes" },
+    { href: "lesson-resources/module-2/spatial-databases/field_plots.csv", title: "Download the synthetic plot WKT records" },
+    { href: "lesson-resources/module-2/spatial-databases/management_zones.csv", title: "Download the synthetic management-zone WKT records" },
+    { href: "lesson-resources/module-2/spatial-databases/SPATIAL_DATABASE_QA_TEMPLATE.md", title: "Download the spatial database QA template" },
+  ],
+  "lesson-2-37": [
+    { href: "lesson-resources/module-2/spatial-databases/database_handover_inventory.csv", title: "Download the deliberately imperfect database handover inventory" },
+    { href: "lesson-resources/module-2/spatial-databases/manifest.json", title: "Download the storage-governance checksum manifest" },
+    { href: "lesson-resources/module-2/spatial-databases/SPATIAL_DATABASE_QA_TEMPLATE.md", title: "Download the spatial database governance QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -299,7 +316,14 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 6
+  const resources = source.chapter === 7
+    ? [
+        { href: "lesson-resources/module-2/spatial-databases/README.md", title: "Read the spatial-database practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/spatial-databases/manifest.json", title: "Download the spatial-database checksum manifest" },
+        { href: "lesson-resources/module-2/spatial-databases/schema.sql", title: "Download the reviewed teaching schema" },
+        { href: "lesson-resources/module-2/spatial-databases/SPATIAL_DATABASE_QA_TEMPLATE.md", title: "Download the spatial database QA template" },
+      ]
+    : source.chapter === 6
     ? [
         { href: "lesson-resources/module-2/spatial-statistics/README.md", title: "Read the spatial-statistics practicum and training-pack guide" },
         { href: "lesson-resources/module-2/spatial-statistics/manifest.json", title: "Download the spatial-statistics checksum manifest" },
@@ -369,6 +393,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-34") {
     return [lesson, module2PracticumAcademyLessons[5]];
+  }
+  if (lesson.id === "lesson-2-37") {
+    return [lesson, module2PracticumAcademyLessons[6]];
   }
   return [lesson];
 });

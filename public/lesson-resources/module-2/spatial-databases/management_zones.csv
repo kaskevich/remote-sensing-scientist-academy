@@ -1,0 +1,4 @@
+zone_id,zone_name,management_type,geom_wkt,qa_status
+Z01,Western grazing unit,seasonal_grazing,"POLYGON ((657000 6429000, 657350 6429000, 657350 6429400, 657000 6429400, 657000 6429000))",accept
+Z02,Central mixed unit,mixed_management,"POLYGON ((657350 6429000, 657650 6429000, 657650 6429400, 657350 6429400, 657350 6429000))",accept
+Z03,Eastern mowing unit,late_mowing,"POLYGON ((657650 6429000, 658000 6429000, 658000 6429400, 657650 6429400, 657650 6429000))",accept

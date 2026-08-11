@@ -1,0 +1,65 @@
+{
+  "title": "Module 2 Chapter 7 Spatial Databases training pack",
+  "version": "1.0.0",
+  "licence": "CC0-1.0",
+  "sourceStatus": "Entirely synthetic instructional data; not observations from the published Baltic coastal plant-traits dataset",
+  "coordinateStatus": "Invented EPSG:3301 teaching geometries with no connection to real field sites",
+  "created": "2026-08-11",
+  "knownDeliberateConditions": [
+    "One missing biomass value must remain NULL rather than become zero",
+    "One extreme biomass record is retained with review status",
+    "One plot has no second-round observation so join direction changes the population",
+    "One plot is exactly on a management-zone boundary so ST_Within and ST_Intersects differ",
+    "The handover inventory contains duplicate, mixed-CRS and missing-lineage conditions"
+  ],
+  "assets": [
+    {
+      "filename": "README.md",
+      "purpose": "Training status, asset guide, deliberate conditions and safe-use boundary",
+      "dataType": "Markdown",
+      "sha256": "2bc346377488be8d93de2c1ed15e8b72bbd0e8e25f8be93e075fd605ebcbfc2c"
+    },
+    {
+      "filename": "schema.sql",
+      "purpose": "Reviewable PostgreSQL/PostGIS teaching schema with integrity constraints and indexes",
+      "dataType": "SQL",
+      "sha256": "7a7eee6dc92283ea097ec502da3caf5ac783a085ae9920c8017e443b368e3237"
+    },
+    {
+      "filename": "meadow_sites.csv",
+      "purpose": "Synthetic parent table for site metadata and relational joins",
+      "dataType": "CSV",
+      "sha256": "aa8f69a6da28b4f5daf9e6b3e77fd97d5f0abd24a91c8cea5e33bfe1e7bbfe85"
+    },
+    {
+      "filename": "field_plots.csv",
+      "purpose": "Synthetic plot table with stable keys, coordinates, WKT and QA status",
+      "dataType": "CSV",
+      "sha256": "8fc4294f012076e52f94608e4cffdf728b06c0d1360ab4cbc13f8051db5421bd"
+    },
+    {
+      "filename": "plot_observations.csv",
+      "purpose": "Synthetic repeated vegetation observations for filters, joins, NULL and aggregation practice",
+      "dataType": "CSV",
+      "sha256": "3831b2753ee056961cbe8294ec8e59b7af34d7c78d20e6e29d21851768690495"
+    },
+    {
+      "filename": "management_zones.csv",
+      "purpose": "Synthetic polygon WKT for spatial predicates and boundary-semantics practice",
+      "dataType": "CSV",
+      "sha256": "7fa1011105f37bb80fc557ad4222c8a9088869e6f1546801360b0605bf6b5a6d"
+    },
+    {
+      "filename": "database_handover_inventory.csv",
+      "purpose": "Deliberately imperfect archive inventory for storage and governance decisions",
+      "dataType": "CSV",
+      "sha256": "e579806a4384e26b52712e02efcde96b9f7561f080f6c140521db1fa04506a94"
+    },
+    {
+      "filename": "SPATIAL_DATABASE_QA_TEMPLATE.md",
+      "purpose": "Relational, spatial, performance, provenance and release evidence template",
+      "dataType": "Markdown",
+      "sha256": "cc4aa9c49bd2c0611105e82576490450d5e419d9b86b24e8ad44e6a830d43d73"
+    }
+  ]
+}
