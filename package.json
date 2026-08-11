@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit --incremental false",
     "test": "vitest run",
     "test:raster": "python3 scripts/validate_raster_training_pack.py",
+    "test:uav": "python3 scripts/validate_uav_training_pack.py",
     "test:smoke": "playwright test"
   },
   "dependencies": {

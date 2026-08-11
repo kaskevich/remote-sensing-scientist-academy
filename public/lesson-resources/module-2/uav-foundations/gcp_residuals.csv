@@ -1,0 +1,7 @@
+point_id,role,east_residual_m,north_residual_m,vertical_residual_m,region
+GCP01,control,0.012,-0.008,0.021,west
+GCP02,control,-0.016,0.011,-0.018,north
+GCP03,control,0.009,0.015,0.026,centre
+GCP04,control,-0.011,-0.014,-0.022,south
+GCP05,control,0.014,0.007,0.017,east
+GCP06,control,-0.008,0.01,-0.019,south-east

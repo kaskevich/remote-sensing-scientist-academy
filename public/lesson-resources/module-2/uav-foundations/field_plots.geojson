@@ -1,0 +1,111 @@
+{
+  "type": "FeatureCollection",
+  "academyStatus": "Synthetic, openly reusable Academy training data",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "UAVP01",
+        "support": "1.6 m synthetic square",
+        "field_date": "2026-06-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00001378,
+              58.63990089
+            ],
+            [
+              24.00004133,
+              58.63990089
+            ],
+            [
+              24.00004133,
+              58.63991526
+            ],
+            [
+              24.00001378,
+              58.63991526
+            ],
+            [
+              24.00001378,
+              58.63990089
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "UAVP02",
+        "support": "1.6 m synthetic square",
+        "field_date": "2026-06-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00005511,
+              58.63987575
+            ],
+            [
+              24.00008266,
+              58.63987575
+            ],
+            [
+              24.00008266,
+              58.63989012
+            ],
+            [
+              24.00005511,
+              58.63989012
+            ],
+            [
+              24.00005511,
+              58.63987575
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "plot_id": "UAVP03",
+        "support": "1.6 m synthetic square",
+        "field_date": "2026-06-14"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              24.00009988,
+              58.63985241
+            ],
+            [
+              24.00012743,
+              58.63985241
+            ],
+            [
+              24.00012743,
+              58.63986678
+            ],
+            [
+              24.00009988,
+              58.63986678
+            ],
+            [
+              24.00009988,
+              58.63985241
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

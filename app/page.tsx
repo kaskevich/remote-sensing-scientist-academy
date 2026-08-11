@@ -181,6 +181,47 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/raster-foundations/training_dem.tif", title: "Download the synthetic DEM" },
     { href: "lesson-resources/module-2/raster-foundations/training_dsm.tif", title: "Download the synthetic DSM" },
   ],
+  "lesson-2-18": [
+    { href: "lesson-resources/module-2/uav-foundations/README.md", title: "Read the synthetic UAV training-pack guide" },
+    { href: "lesson-resources/module-2/uav-foundations/manifest.json", title: "Download the UAV data and checksum manifest" },
+    { href: "lesson-resources/module-2/uav-foundations/mission_metadata.csv", title: "Download the synthetic mission metadata" },
+  ],
+  "lesson-2-19": [
+    { href: "lesson-resources/module-2/uav-foundations/mission_metadata.csv", title: "Download the mission-design parameters" },
+    { href: "lesson-resources/module-2/uav-foundations/image_metadata.csv", title: "Download the achieved image-metadata record" },
+    { href: "lesson-resources/module-2/uav-foundations/study_area.geojson", title: "Download the synthetic UAV study boundary" },
+  ],
+  "lesson-2-20": [
+    { href: "lesson-resources/module-2/uav-foundations/image_metadata.csv", title: "Download the radiometric image audit table" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_radiometric_gradient_demo.tif", title: "Download the variable-illumination training raster" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_rededge.tif", title: "Download the ambiguous-scale Red Edge raster" },
+  ],
+  "lesson-2-21": [
+    { href: "lesson-resources/module-2/uav-foundations/gcp_residuals.csv", title: "Download the fitted control-point residuals" },
+    { href: "lesson-resources/module-2/uav-foundations/checkpoint_residuals.csv", title: "Download the withheld check-point residuals" },
+    { href: "lesson-resources/module-2/uav-foundations/photogrammetry_report.json", title: "Download the synthetic processing report" },
+  ],
+  "lesson-2-22": [
+    { href: "lesson-resources/module-2/uav-foundations/photogrammetry_report.json", title: "Download the software-neutral reconstruction report" },
+    { href: "lesson-resources/module-2/uav-foundations/image_metadata.csv", title: "Download the source-image QA evidence" },
+  ],
+  "lesson-2-23": [
+    { href: "lesson-resources/module-2/uav-foundations/uav_rgb_preview.tif", title: "Download the seam-and-ghost orthomosaic preview" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_dsm.tif", title: "Download the synthetic clean DSM" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_dsm_spike_demo.tif", title: "Download the DSM spike-and-pit fixture" },
+  ],
+  "lesson-2-24": [
+    { href: "lesson-resources/module-2/uav-foundations/README.md", title: "Read the UAV QA fixture guide" },
+    { href: "lesson-resources/module-2/uav-foundations/manifest.json", title: "Download the complete UAV manifest" },
+    { href: "lesson-resources/module-2/uav-foundations/field_plots.geojson", title: "Download the synthetic field polygons" },
+  ],
+  "lesson-2-25": [
+    { href: "lesson-resources/module-2/uav-foundations/uav_red.tif", title: "Download the accepted Red band" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_green.tif", title: "Download the accepted Green band" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_nir.tif", title: "Download the aligned NIR band" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_nir_shifted.tif", title: "Download the shifted NIR QA fixture" },
+    { href: "lesson-resources/module-2/uav-foundations/uav_dsm.tif", title: "Download the aligned DSM" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -211,12 +252,17 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 3
+  const resources = source.chapter === 4
     ? [
+        { href: "lesson-resources/module-2/uav-foundations/README.md", title: "Read the UAV practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/uav-foundations/manifest.json", title: "Download the UAV practicum manifest" },
+      ]
+    : source.chapter === 3
+      ? [
         { href: "lesson-resources/module-2/raster-foundations/README.md", title: "Read the raster practicum and training-pack guide" },
         { href: "lesson-resources/module-2/raster-foundations/manifest.json", title: "Download the raster training-data manifest" },
       ]
-    : [{
+      : [{
         href: "lesson-resources/module-2/vector-foundations/training_data_manifest.json",
         title: "Download the vector training-data manifest",
       }];
@@ -254,6 +300,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-17") {
     return [lesson, module2PracticumAcademyLessons[2]];
+  }
+  if (lesson.id === "lesson-2-25") {
+    return [lesson, module2PracticumAcademyLessons[3]];
   }
   return [lesson];
 });

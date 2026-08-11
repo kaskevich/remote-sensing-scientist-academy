@@ -1,0 +1,2 @@
+mission_id,platform_type,sensor_type,sensor_width_mm,sensor_height_mm,image_width_px,image_height_px,focal_length_mm,nominal_height_agl_m,forward_overlap_pct,side_overlap_pct,flight_speed_m_s,shutter_type,start_utc,end_utc,field_sampling_date,illumination_note,positioning
+SYN_UAV_2026_06_18,multirotor,four-band multispectral plus RGB,13.2,8.8,5472,3648,8.8,80,80,70,5,rolling,2026-06-18T08:10:00Z,2026-06-18T08:42:00Z,2026-06-14,thin cloud arrived during flight line L03,onboard GNSS plus GCPs and withheld check points

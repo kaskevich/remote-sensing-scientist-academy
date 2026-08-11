@@ -1,0 +1,13 @@
+image_id,flight_line,capture_utc,height_agl_m,exposure_s,irradiance_relative,saturation_fraction,blur_score_px,gnss_quality,panel_capture,qa_note
+IMG_0001,L01,2026-06-18T08:12:00Z,79.55,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0002,L01,2026-06-18T08:14:00Z,79.7,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0003,L01,2026-06-18T08:16:00Z,79.85,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0004,L01,2026-06-18T08:18:00Z,80.0,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0005,L02,2026-06-18T08:20:00Z,80.15,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0006,L02,2026-06-18T08:22:00Z,80.3,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0007,L02,2026-06-18T08:24:00Z,80.45,0.0016,1.0,0.001,1.8,standard onboard GNSS,before_and_after,motion blur review
+IMG_0008,L02,2026-06-18T08:26:00Z,80.6,0.0016,1.0,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0009,L03,2026-06-18T08:28:00Z,80.75,0.0022,0.78,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0010,L03,2026-06-18T08:30:00Z,80.9,0.0022,0.81,0.064,0.35,standard onboard GNSS,before_and_after,illumination/saturation review
+IMG_0011,L03,2026-06-18T08:32:00Z,81.05,0.0022,0.84,0.001,0.35,standard onboard GNSS,before_and_after,none
+IMG_0012,L03,2026-06-18T08:34:00Z,81.2,0.0022,0.87,0.001,0.35,standard onboard GNSS,before_and_after,none

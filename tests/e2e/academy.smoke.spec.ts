@@ -91,6 +91,18 @@ test("module and lesson disclosures provide compact curriculum navigation", asyn
   expect(hasHorizontalOverflow).toBe(false);
 });
 
+test("a direct lesson link opens the correct module and lesson", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#lesson-2-18");
+
+  const moduleNavigation = page.locator("details.curriculum-module").nth(1);
+  const lesson = page.locator("#lesson-2-18");
+
+  await expect(moduleNavigation).toHaveAttribute("open", "");
+  await expect(lesson).toHaveAttribute("open", "");
+  await expect(lesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
+});
+
 test("module map, starter notebook, and formative checks support beginner navigation", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
@@ -150,7 +162,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes the reviewed vector and raster sequences with the planned pathway", async ({ page }) => {
+test("Module 2 exposes the reviewed vector, raster and UAV sequences with the planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -159,11 +171,11 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
   const overview = page.locator(".module-overview-blue");
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
-  await expect(overview.locator(".module-syllabus li")).toHaveCount(50);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(20);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(33);
+  await expect(overview.locator(".module-syllabus li")).toHaveCount(54);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(29);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(29);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
-  await expect(overview.locator(".module-syllabus li .syllabus-number").nth(48)).toHaveText("2.49");
+  await expect(overview.locator(".module-syllabus li .syllabus-number").nth(52)).toHaveText("2.53");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
   await expect(overview.getByText("GeoPandas and Spatial Tables", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();
@@ -182,6 +194,11 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
   await expect(overview.getByRole("link", { name: "What Is a Raster Really?", exact: true })).toHaveAttribute("href", "#lesson-2-11");
   await expect(overview.getByRole("link", { name: "Terrain Analysis with DEM and DSM", exact: true })).toHaveAttribute("href", "#lesson-2-17");
   await expect(overview.getByRole("link", { name: "Build an Analysis-Ready Raster Stack", exact: true })).toHaveAttribute("href", "#module-2-chapter-3-practicum");
+  await expect(overview.getByText("UAV Remote Sensing Fundamentals", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(3).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "UAV Remote Sensing Fundamentals", exact: true })).toHaveAttribute("href", "#lesson-2-18");
+  await expect(overview.getByRole("link", { name: "UAV Multispectral Processing Pipeline", exact: true })).toHaveAttribute("href", "#lesson-2-25");
+  await expect(overview.getByRole("link", { name: "Evaluate a UAV Survey Before Scientific Analysis", exact: true })).toHaveAttribute("href", "#module-2-chapter-4-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -190,17 +207,19 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("17 lessons · 3 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(20);
+  await expect(moduleNavigation.getByText("25 lessons · 4 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(29);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-18")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-25")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
   await expect(firstLesson.locator(".module-index")).toHaveText("2.1");
   await expect(firstLesson.locator(".module-lesson-label")).toHaveText("Lesson 2.1");
-  await expect(firstLesson.getByText("Lesson 2.1 of 49", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("Lesson 2.1 of 53", { exact: true })).toBeVisible();
   await expect(firstLesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
   await expect(firstLesson.getByText(/What evidence connects every observation/)).toBeVisible();
   await expect(firstLesson.getByText("spatial_data_inventory.ipynb", { exact: true }).first()).toBeVisible();
@@ -211,14 +230,14 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
 
   const vectorLesson = page.locator("#lesson-2-05");
   await vectorLesson.locator(":scope > summary").click();
-  await expect(vectorLesson.getByText("Lesson 2.5 of 49", { exact: true })).toBeVisible();
+  await expect(vectorLesson.getByText("Lesson 2.5 of 53", { exact: true })).toBeVisible();
   await expect(vectorLesson.getByRole("img", { name: /Diagram showing a GeoDataFrame/i })).toBeVisible();
   await expect(vectorLesson.locator(".formative-check")).toHaveCount(3);
   await expect(vectorLesson.getByRole("link", { name: "Download synthetic training field plots" })).toHaveAttribute("href", /training_field_plots\.geojson$/);
 
   const performanceLesson = page.locator("#lesson-2-08");
   await performanceLesson.locator(":scope > summary").click();
-  await expect(performanceLesson.getByText("Lesson 2.8 of 49", { exact: true })).toBeVisible();
+  await expect(performanceLesson.getByText("Lesson 2.8 of 53", { exact: true })).toBeVisible();
   await expect(performanceLesson.getByRole("img", { name: /two-stage spatial-index query/i })).toBeVisible();
   await expect(performanceLesson.locator(".formative-check")).toHaveCount(3);
 
@@ -233,7 +252,7 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
 
   const rasterLesson = page.locator("#lesson-2-11");
   await rasterLesson.locator(":scope > summary").click();
-  await expect(rasterLesson.getByText("Lesson 2.11 of 49", { exact: true })).toBeVisible();
+  await expect(rasterLesson.getByText("Lesson 2.11 of 53", { exact: true })).toBeVisible();
   await expect(rasterLesson.getByRole("img", { name: /numerical values, grid location and measurement meaning/i })).toBeVisible();
   await expect(rasterLesson.locator(".formative-check")).toHaveCount(3);
   await expect(rasterLesson.getByRole("link", { name: "Download the raster metadata and checksum manifest" })).toHaveAttribute("href", /raster-foundations\/manifest\.json$/);
@@ -242,6 +261,22 @@ test("Module 2 exposes the reviewed vector and raster sequences with the planned
   await rasterPracticum.locator(":scope > summary").click();
   await expect(rasterPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
   await expect(rasterPracticum.getByText("RASTER_QA_REPORT.md", { exact: true }).first()).toBeVisible();
+
+  const uavLesson = page.locator("#lesson-2-18");
+  await uavLesson.locator(":scope > summary").click();
+  await expect(uavLesson.getByText("Lesson 2.18 of 53", { exact: true })).toBeVisible();
+  await expect(uavLesson.getByRole("img", { name: /platform, sensor, navigation, storage and flight control/i })).toBeVisible();
+  await expect(uavLesson.locator(".formative-check")).toHaveCount(3);
+  await expect(uavLesson.getByRole("link", { name: "Download the UAV data and checksum manifest" })).toHaveAttribute("href", /uav-foundations\/manifest\.json$/);
+
+  const multispectralLesson = page.locator("#lesson-2-25");
+  await multispectralLesson.locator(":scope > summary").click();
+  await expect(multispectralLesson.getByRole("link", { name: "Download the shifted NIR QA fixture" })).toHaveAttribute("href", /uav_nir_shifted\.tif$/);
+
+  const uavPracticum = page.locator("#module-2-chapter-4-practicum");
+  await uavPracticum.locator(":scope > summary").click();
+  await expect(uavPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(uavPracticum.getByText("UAV_PRODUCT_QA_REPORT.md", { exact: true }).first()).toBeVisible();
 
   const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
   await chapterOnePracticum.locator(":scope > summary").click();

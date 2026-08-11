@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Point cloud, DSM, DTM and orthomosaic product meanings</title><desc id="desc">A cross-section shows reconstructed points, an upper DSM, an inferred terrain DTM and an orthomosaic mapped through a surface, highlighting different meanings.</desc>
+  <style>.sky{fill:#eef5ff}.ground{fill:#d7c7a3;stroke:#705e3e;stroke-width:2}.dsm{stroke:#1261a6;stroke-width:4;fill:none}.dtm{stroke:#536500;stroke-width:4;stroke-dasharray:9 6;fill:none}.p{fill:#1261a6}.t{font:600 16px system-ui;fill:#10233f}.s{font:13px system-ui;fill:#33445c}.box{fill:#fff;stroke:#6b7787;stroke-width:2}</style>
+  <rect class="sky" width="960" height="420"/><path class="ground" d="M0 310Q180 285 330 315T630 300T960 320V420H0Z"/>
+  <g class="p"><circle cx="100" cy="270" r="4"/><circle cx="130" cy="225" r="4"/><circle cx="160" cy="245" r="4"/><circle cx="260" cy="290" r="4"/><circle cx="410" cy="190" r="4"/><circle cx="445" cy="170" r="4"/><circle cx="480" cy="205" r="4"/><circle cx="650" cy="285" r="4"/><circle cx="760" cy="230" r="4"/><circle cx="800" cy="215" r="4"/><circle cx="840" cy="245" r="4"/></g>
+  <path class="dsm" d="M30 285Q130 210 210 285Q310 305 360 280Q440 145 520 280Q650 310 710 280Q795 190 900 285"/><path class="dtm" d="M30 310Q180 285 330 315T630 300T930 320"/>
+  <rect class="box" x="50" y="35" width="235" height="105" rx="10"/><text class="t" x="75" y="70">Point cloud</text><text class="s" x="75" y="95">discrete reconstructed XYZ</text><text class="s" x="75" y="118">density and confidence vary</text>
+  <rect class="box" x="360" y="35" width="235" height="105" rx="10"/><text class="t" x="385" y="70">DSM / DTM</text><text class="s" x="385" y="95">upper visible surface /</text><text class="s" x="385" y="118">interpreted bare terrain</text>
+  <rect class="box" x="670" y="35" width="235" height="105" rx="10"/><text class="t" x="695" y="70">Orthomosaic</text><text class="s" x="695" y="95">orthorectified image pieces</text><text class="s" x="695" y="118">selected and resampled</text>
+</svg>

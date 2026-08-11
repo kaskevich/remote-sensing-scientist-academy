@@ -1,0 +1,474 @@
+{
+  "title": "Module 2 UAV and Photogrammetry synthetic training pack",
+  "generatedWith": {
+    "python": "3.12.13",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2"
+  },
+  "coordinateNote": "Raster coordinates and survey records are synthetic. GeoJSON follows RFC 7946 longitude-latitude order.",
+  "licence": "CC0-1.0 synthetic training data; no unpublished/private UAV imagery or locations",
+  "knownDeliberateConditions": [
+    "variable illumination",
+    "weak south-east georeferencing",
+    "half-pixel NIR shift",
+    "orthomosaic seam and ghosting",
+    "DSM spike and pit",
+    "four-day temporal mismatch",
+    "inconsistent NoData values",
+    "ambiguous Red Edge reflectance scale"
+  ],
+  "assets": [
+    {
+      "filename": "mission_metadata.csv",
+      "purpose": "Mission geometry, timing, sensor and positioning evidence",
+      "dataType": "CSV table",
+      "sourceStatus": "Synthetic Academy fixture; not a real flight log",
+      "crs": null,
+      "resolution": null,
+      "shape": [
+        1,
+        18
+      ],
+      "nodata": null,
+      "semanticMeaning": "Mission geometry, timing, sensor and positioning evidence",
+      "expectedQaIssue": "Variable illumination and a four-day field/UAV temporal mismatch require review",
+      "checksum": "78cdabd4ee79e06a5c2693ab9a1d159a5da4b9a368e4d361ca9a182c82d16f2a",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "image_metadata.csv",
+      "purpose": "Image-level exposure, illumination, blur and positioning audit",
+      "dataType": "CSV table",
+      "sourceStatus": "Synthetic Academy fixture; not a real flight log",
+      "crs": null,
+      "resolution": null,
+      "shape": [
+        12,
+        11
+      ],
+      "nodata": null,
+      "semanticMeaning": "Image-level exposure, illumination, blur and positioning audit",
+      "expectedQaIssue": "IMG_0007 is blurred; line L03 changes exposure/irradiance and IMG_0010 has high saturation",
+      "checksum": "d4aa488ded87a6c8309e42241ec922f57197d801095c33b4003488ce5043b403",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "gcp_residuals.csv",
+      "purpose": "Control-point residual evidence",
+      "dataType": "CSV table",
+      "sourceStatus": "Synthetic Academy fixture; not a real flight log",
+      "crs": null,
+      "resolution": null,
+      "shape": [
+        6,
+        6
+      ],
+      "nodata": null,
+      "semanticMeaning": "Control-point residual evidence",
+      "expectedQaIssue": "Control residuals are fitting evidence, not independent accuracy",
+      "checksum": "845c5f7fdff5024b16f72422ea4ad35e590441f2ef9cdf9fc586e8c00c7bf0b8",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "checkpoint_residuals.csv",
+      "purpose": "Withheld check-point residual evidence",
+      "dataType": "CSV table",
+      "sourceStatus": "Synthetic Academy fixture; not a real flight log",
+      "crs": null,
+      "resolution": null,
+      "shape": [
+        5,
+        6
+      ],
+      "nodata": null,
+      "semanticMeaning": "Withheld check-point residual evidence",
+      "expectedQaIssue": "South-east check point exposes local warping and all points show small directional bias",
+      "checksum": "dfa29a4f0d119471a84fad1f818e13cc218cbafac3e6c47da0a8e610074076d4",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "photogrammetry_report.json",
+      "purpose": "Software-neutral synthetic reconstruction report",
+      "dataType": "JSON record",
+      "sourceStatus": "Synthetic Academy fixture; not a proprietary report",
+      "crs": null,
+      "resolution": null,
+      "shape": [
+        1,
+        10
+      ],
+      "nodata": null,
+      "semanticMeaning": "Internal photogrammetric diagnostics",
+      "expectedQaIssue": "One image is unaligned, calibration changes and a weak block edge require review; reprojection error is not absolute accuracy",
+      "checksum": "d92a77c4c6b496bcd62d7d123a68c16abad8e50d0a24a6b1f19eb5eb7032b785",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_red.tif",
+      "purpose": "Aligned calibrated Red training band",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic red reflectance proxy",
+      "units": "synthetic reflectance fraction",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Reference grid; one NoData corner; reflectance scale documented as fraction",
+      "checksum": "1fa4f01020e5ae1c28c3d51f7706d8c7c1e346bcdbcb2b9703b4c92cfe70a9ac",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_green.tif",
+      "purpose": "Aligned calibrated Green training band",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic green reflectance proxy",
+      "units": "synthetic reflectance fraction",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Aligns with Red and contains the same NoData corner",
+      "checksum": "a9e81ff7a4273016f78c03e41a5a332d784214ac72d02f5a85539cfa2596be40",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_rededge.tif",
+      "purpose": "Red Edge band with ambiguous handover scale",
+      "dataType": "uint16",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": 65535.0,
+      "semanticMeaning": "synthetic red-edge digital values",
+      "units": "ambiguous scaled digital value",
+      "reflectanceScaleStatus": "ambiguous; do not divide by 10000 without verified metadata",
+      "expectedQaIssue": "Values look like reflectance scaled by 10000, but the handover deliberately omits authoritative scale confirmation",
+      "checksum": "6cc1c63916f11798929feaea1d7313fdfbf60ab0ce2a93edcf2eeb4c30a4325b",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_nir.tif",
+      "purpose": "Aligned calibrated NIR training band",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic near-infrared reflectance proxy",
+      "units": "synthetic reflectance fraction",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Aligns with Red; verify cell-by-cell grid before index calculation",
+      "checksum": "df0ccbc44f5d58bb16d3ad5456c24f271685a2b3f8ad4ae053b4246b1302ce9f",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_nir_shifted.tif",
+      "purpose": "Half-pixel band co-registration failure",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.1,
+        0.0,
+        -0.2,
+        6500008.1
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.1,
+        6500000.1,
+        500008.1,
+        6500008.1
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic near-infrared reflectance proxy",
+      "units": "synthetic reflectance fraction",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Same CRS, resolution and shape as Red but origin is shifted by 0.1 m in x and y",
+      "checksum": "9ca929317e39c5053105594bc8847b1e1df4263eaa283d1b540bda825529a62c",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_dsm.tif",
+      "purpose": "Synthetic reconstructed upper surface",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic UAV digital surface model",
+      "units": "metres; vertical datum undocumented",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Vertical datum is deliberately undocumented; this is not a DTM or direct vegetation-height measurement",
+      "checksum": "c63ae6a340bbb917d6b36c20b2e70937d0517dcce78b57374b6b13544be52294",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_dsm_spike_demo.tif",
+      "purpose": "DSM spike-and-pit diagnosis fixture",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic UAV DSM with deliberate artefacts",
+      "units": "metres; vertical datum undocumented",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "One 18.5 m spike and one -3.0 m pit violate the local meadow surface pattern",
+      "checksum": "d0d27d6a80f347b79266ed24e8fbca8233e37fe8e2b441f259355dcbcf79b671",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_radiometric_gradient_demo.tif",
+      "purpose": "Variable-illumination diagnosis fixture",
+      "dataType": "float32",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 1,
+      "nodata": -9999.0,
+      "semanticMeaning": "synthetic Red proxy with across-flight radiometric gradient",
+      "units": "uncalibrated synthetic fraction",
+      "reflectanceScaleStatus": "not analysis-ready; variable illumination deliberately retained",
+      "expectedQaIssue": "A strong west-east gradient represents uncorrected illumination change rather than ecology",
+      "checksum": "5b218db384571f52992971ec2db38ab72f2217c2fef6494f37613736a2b166a1",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "uav_rgb_preview.tif",
+      "purpose": "Orthomosaic seam and ghosting preview",
+      "dataType": "uint8",
+      "sourceStatus": "Synthetic Academy fixture; not observed UAV data",
+      "crs": "EPSG:3301",
+      "transform": [
+        0.2,
+        0.0,
+        500000.0,
+        0.0,
+        -0.2,
+        6500008.0
+      ],
+      "resolution": [
+        0.2,
+        0.2
+      ],
+      "shape": [
+        40,
+        40
+      ],
+      "bounds": [
+        500000.0,
+        6500000.0,
+        500008.0,
+        6500008.0
+      ],
+      "bandCount": 3,
+      "nodata": 0.0,
+      "semanticMeaning": "synthetic RGB orthomosaic preview",
+      "units": "8-bit display values, not reflectance",
+      "reflectanceScaleStatus": "documented",
+      "expectedQaIssue": "Brightness seam at column 21 and locally shifted texture near the seam",
+      "checksum": "dcb3edacbca02cec6fe85238545691eff91247134aa3eb338bb3864750321a58",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "study_area.geojson",
+      "purpose": "Synthetic UAV survey boundary",
+      "dataType": "GeoJSON FeatureCollection",
+      "sourceStatus": "Synthetic Academy fixture; not a published field location",
+      "crs": "OGC:CRS84 (RFC 7946 longitude, latitude)",
+      "resolution": null,
+      "shape": [
+        1,
+        null
+      ],
+      "nodata": null,
+      "semanticMeaning": "Synthetic UAV survey boundary",
+      "expectedQaIssue": "Transform to the raster CRS before overlay or extraction",
+      "checksum": "f5430d0b212ee0085fa6d9c96022064e77cb340b006d4aab4dc9f435cca9185d",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    },
+    {
+      "filename": "field_plots.geojson",
+      "purpose": "Synthetic field-sampling polygons",
+      "dataType": "GeoJSON FeatureCollection",
+      "sourceStatus": "Synthetic Academy fixture; not a published field location",
+      "crs": "OGC:CRS84 (RFC 7946 longitude, latitude)",
+      "resolution": null,
+      "shape": [
+        3,
+        null
+      ],
+      "nodata": null,
+      "semanticMeaning": "Synthetic field-sampling polygons",
+      "expectedQaIssue": "Transform to the raster CRS before overlay or extraction",
+      "checksum": "acededa10f7d4d9c989bc0650762e2e811b2b480142d51dc5a37aa4b56340b07",
+      "licenceStatus": "CC0-1.0 synthetic training data"
+    }
+  ]
+}

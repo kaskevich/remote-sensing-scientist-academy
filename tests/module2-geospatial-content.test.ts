@@ -41,34 +41,35 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(module2Overview.chapters).toHaveLength(12);
 
     const chapterLessons = module2Overview.chapters.flatMap((chapter) => chapter.lessons);
-    expect(chapterLessons).toHaveLength(49);
+    expect(chapterLessons).toHaveLength(53);
     expect(chapterLessons.map((item) => item.number)).toEqual(
-      Array.from({ length: 49 }, (_, index) => index + 1),
+      Array.from({ length: 53 }, (_, index) => index + 1),
     );
-    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(17);
-    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(32);
-    expect(chapterLessons.slice(0, 17).every((item) => item.lessonId)).toBe(true);
-    expect(chapterLessons.slice(17).every((item) => item.lessonId === undefined)).toBe(true);
+    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(25);
+    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(28);
+    expect(chapterLessons.slice(0, 25).every((item) => item.lessonId)).toBe(true);
+    expect(chapterLessons.slice(25).every((item) => item.lessonId === undefined)).toBe(true);
     expect(module2Overview.capstone?.status).toBe("planned");
     expect(module2Overview.capstone?.lessonId).toBeUndefined();
-    expect(module2Overview.navigationMeta).toBe("17 lessons · 3 practica available");
+    expect(module2Overview.navigationMeta).toBe("25 lessons · 4 practica available");
     expect(module2Overview.chapters[0].practicum?.lessonId).toBe("module-2-chapter-1-practicum");
     expect(module2Overview.chapters[1].practicum?.lessonId).toBe("module-2-chapter-2-practicum");
     expect(module2Overview.chapters[2].practicum?.lessonId).toBe("module-2-chapter-3-practicum");
-    expect(module2Overview.chapters.slice(3).every((chapter) => chapter.practicum === undefined)).toBe(true);
+    expect(module2Overview.chapters[3].practicum?.lessonId).toBe("module-2-chapter-4-practicum");
+    expect(module2Overview.chapters.slice(4).every((chapter) => chapter.practicum === undefined)).toBe(true);
   });
 
-  it("uses unique stable IDs for the 49-lesson syllabus and capstone", () => {
+  it("uses unique stable IDs for the 53-lesson syllabus and capstone", () => {
     const ids = module2Lessons.map((item) => item.id);
-    expect(module2Lessons).toHaveLength(50);
+    expect(module2Lessons).toHaveLength(54);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids.slice(0, 49)).toEqual(
-      Array.from({ length: 49 }, (_, index) => `lesson-2-${String(index + 1).padStart(2, "0")}`),
+    expect(ids.slice(0, 53)).toEqual(
+      Array.from({ length: 53 }, (_, index) => `lesson-2-${String(index + 1).padStart(2, "0")}`),
     );
     expect(ids.at(-1)).toBe("lesson-2-capstone");
   });
 
-  it("publishes the three fully reviewed opening chapters", () => {
+  it("publishes the four fully reviewed opening chapters", () => {
     expect(publishedModule2LessonIds).toEqual([
       "lesson-2-01",
       "lesson-2-02",
@@ -87,10 +88,18 @@ describe("Module 2 Geospatial Data Science", () => {
       "lesson-2-15",
       "lesson-2-16",
       "lesson-2-17",
+      "lesson-2-18",
+      "lesson-2-19",
+      "lesson-2-20",
+      "lesson-2-21",
+      "lesson-2-22",
+      "lesson-2-23",
+      "lesson-2-24",
+      "lesson-2-25",
     ]);
     expect(publishedModule2Lessons.map((item) => item.id)).toEqual(publishedModule2LessonIds);
     expect(Object.keys(module2LessonDetails)).toEqual(publishedModule2LessonIds);
-    expect(module2Lessons.slice(17).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
+    expect(module2Lessons.slice(25).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
   });
 
   it.each(publishedModule2Lessons)("$number $title is a complete reviewed lesson", (source) => {
@@ -138,11 +147,12 @@ describe("Module 2 Geospatial Data Science", () => {
     ]));
   });
 
-  it("adds three unnumbered, reviewed chapter practica", () => {
+  it("adds four unnumbered, reviewed chapter practica", () => {
     expect(module2ChapterPractica.map((item) => item.id)).toEqual([
       "module-2-chapter-1-practicum",
       "module-2-chapter-2-practicum",
       "module-2-chapter-3-practicum",
+      "module-2-chapter-4-practicum",
     ]);
     for (const practicum of module2ChapterPractica) {
       const details = module2PracticumDetails[practicum.id];
@@ -160,6 +170,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(practicumMarkdown("module-2-chapter-2-practicum")).toContain("Professional Mistakes — Vector GIS");
     expect(practicumMarkdown("module-2-chapter-3-practicum")).toContain("Professional Mistakes — Raster Science");
     expect(practicumMarkdown("module-2-chapter-3-practicum")).toContain("RASTER_QA_REPORT.md");
+    expect(practicumMarkdown("module-2-chapter-4-practicum")).toContain("Professional Mistakes — UAV and Photogrammetry");
+    expect(practicumMarkdown("module-2-chapter-4-practicum")).toContain("UAV_PRODUCT_QA_REPORT.md");
   });
 
   it("covers the required professional reasoning in each lesson", () => {
@@ -283,6 +295,14 @@ describe("Module 2 Geospatial Data Science", () => {
       "raster-vector-support.svg",
       "windowed-raster-processing.svg",
       "dem-dsm-dtm.svg",
+      "uav-sensor-system.svg",
+      "flight-overlap-gsd.svg",
+      "radiometric-calibration.svg",
+      "gcp-rtk-ppk.svg",
+      "sfm-workflow.svg",
+      "pointcloud-dsm-dtm-orthomosaic.svg",
+      "uav-qa-chain.svg",
+      "multispectral-stack.svg",
     ]) {
       expect(allContent).toContain(`lesson-media/images/${diagram}`);
       expect(existsSync(join(process.cwd(), "public/lesson-media/images", diagram))).toBe(true);
@@ -436,17 +456,155 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(guide).toMatch(/NoData/i);
   });
 
-  it("extends the portfolio starter through the complete raster chapter", () => {
+  it("teaches the complete UAV acquisition-to-analysis evidence chain", () => {
+    const uavLessons = Array.from({ length: 8 }, (_, index) =>
+      lessonMarkdown(`lesson-2-${String(index + 18).padStart(2, "0")}`),
+    );
+    const [fundamentals, mission, radiometry, georeferencing, sfm, products, qa, multispectral] = uavLessons;
+
+    for (const sensor of ["RGB", "multispectral", "thermal", "LiDAR"]) {
+      expect(fundamentals).toMatch(new RegExp(sensor, "i"));
+    }
+    expect(fundamentals).toMatch(/orthomosaic is derived evidence/i);
+    expect(fundamentals).toMatch(/GSD does \*\*not\*\* equal/i);
+    expect(mission).toMatch(/GSD ≈ sensor pixel size × height above ground \/ focal length/i);
+    expect(mission).toMatch(/forward overlap/i);
+    expect(mission).toMatch(/side overlap/i);
+    expect(mission).toMatch(/rolling shutter/i);
+    expect(radiometry).toMatch(/digital number|DN/i);
+    expect(radiometry).toMatch(/radiance/i);
+    expect(radiometry).toMatch(/reflectance/i);
+    expect(radiometry).toMatch(/reference panel/i);
+    expect(radiometry).toMatch(/irradiance sensor/i);
+    expect(georeferencing).toMatch(/GCP/i);
+    expect(georeferencing).toMatch(/check point/i);
+    expect(georeferencing).toMatch(/RTK/i);
+    expect(georeferencing).toMatch(/PPK/i);
+    expect(georeferencing).toMatch(/planimetric RMSE/i);
+    expect(sfm).toMatch(/feature detection/i);
+    expect(sfm).toMatch(/bundle adjustment/i);
+    expect(sfm).toMatch(/reprojection error is useful but limited/i);
+    expect(products).toMatch(/sparse point cloud/i);
+    expect(products).toMatch(/dense point cloud/i);
+    expect(products).toMatch(/orthorectification/i);
+    expect(products).toMatch(/seamline/i);
+    for (const category of ["Mission QA", "Image QA", "Photogrammetry QA", "Georeferencing QA", "Orthomosaic QA", "DSM QA", "Multispectral QA", "Temporal QA"]) {
+      expect(qa).toContain(category);
+    }
+    expect(multispectral).toContain("NDVI");
+    expect(multispectral).toContain("GNDVI");
+    expect(multispectral).toMatch(/Red-edge NDVI must remain blocked/i);
+
+    for (const source of publishedModule2Lessons.filter((item) => item.chapter === 4)) {
+      expect(module2LessonDetails[source.id].technicalMetadata.testedVersions).toEqual(expect.arrayContaining([
+        { label: "pandas", value: MODULE2_SOFTWARE_VERSIONS.pandas },
+        { label: "NumPy", value: MODULE2_SOFTWARE_VERSIONS.numpy },
+        { label: "Rasterio", value: MODULE2_SOFTWARE_VERSIONS.rasterio },
+        { label: "QGIS", value: MODULE2_SOFTWARE_VERSIONS.qgis },
+      ]));
+    }
+  });
+
+  it("ships a checksummed UAV pack with every deliberate QA condition", () => {
+    const folder = join(process.cwd(), "public/lesson-resources/module-2/uav-foundations");
+    const manifest = JSON.parse(readFileSync(join(folder, "manifest.json"), "utf8")) as {
+      licence: string;
+      knownDeliberateConditions: string[];
+      assets: Array<{
+        filename: string;
+        purpose: string;
+        dataType: string;
+        sourceStatus: string;
+        crs: string | null;
+        resolution: number[] | null;
+        shape: Array<number | null>;
+        nodata: number | null;
+        semanticMeaning: string;
+        expectedQaIssue: string;
+        checksum: string;
+        licenceStatus: string;
+      }>;
+    };
+
+    expect(manifest.licence).toMatch(/^CC0/);
+    expect(manifest.assets).toHaveLength(16);
+    expect(manifest.knownDeliberateConditions).toEqual(expect.arrayContaining([
+      "variable illumination",
+      "weak south-east georeferencing",
+      "half-pixel NIR shift",
+      "orthomosaic seam and ghosting",
+      "DSM spike and pit",
+      "four-day temporal mismatch",
+      "inconsistent NoData values",
+      "ambiguous Red Edge reflectance scale",
+    ]));
+    for (const asset of manifest.assets) {
+      expect(asset.purpose).toBeTruthy();
+      expect(asset.dataType).toBeTruthy();
+      expect(asset.sourceStatus).toMatch(/synthetic/i);
+      expect(asset.shape).toHaveLength(2);
+      expect(asset.semanticMeaning).toBeTruthy();
+      expect(asset.expectedQaIssue).toBeTruthy();
+      expect(asset.licenceStatus).toMatch(/CC0/i);
+      const actual = createHash("sha256").update(readFileSync(join(folder, asset.filename))).digest("hex");
+      expect(actual, `${asset.filename} checksum`).toBe(asset.checksum);
+    }
+
+    const mission = readFileSync(join(folder, "mission_metadata.csv"), "utf8");
+    const images = readFileSync(join(folder, "image_metadata.csv"), "utf8");
+    const controls = readFileSync(join(folder, "gcp_residuals.csv"), "utf8");
+    const checks = readFileSync(join(folder, "checkpoint_residuals.csv"), "utf8");
+    expect(mission).toContain("forward_overlap_pct");
+    expect(mission).toContain("field_sampling_date");
+    expect(images).toContain("saturation_fraction");
+    expect(controls).toContain(",control,");
+    expect(checks).toContain(",check,");
+    expect(checks).toContain("south-east weak block");
+
+    for (const filename of ["study_area.geojson", "field_plots.geojson"]) {
+      const source = JSON.parse(readFileSync(join(folder, filename), "utf8")) as { type: string; features: unknown[] };
+      expect(source.type).toBe("FeatureCollection");
+      expect(source.features.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("defines the tested Chapter 4 calculations and stop conditions", () => {
+    const pixelSizeMm = 13.2 / 5472;
+    const gsdM = pixelSizeMm * 80 / 8.8;
+    const footprintWidthM = 80 * 13.2 / 8.8;
+    const footprintHeightM = 80 * 8.8 / 8.8;
+    expect(gsdM).toBeCloseTo(0.02192982456, 10);
+    expect(footprintWidthM).toBeCloseTo(120, 10);
+    expect(footprintHeightM).toBeCloseTo(80, 10);
+    expect(footprintHeightM * (1 - 0.8)).toBeCloseTo(16, 10);
+    expect(footprintWidthM * (1 - 0.7)).toBeCloseTo(36, 10);
+
+    const practicum = practicumMarkdown("module-2-chapter-4-practicum");
+    for (const deliverable of [
+      "mission_audit.csv", "georeferencing_report.csv", "raster_alignment_report.csv", "radiometric_qa.csv",
+      "uav_qa_matrix.csv", "uav_stack_manifest.csv", "extraction_table.csv", "qa_map.pdf",
+      "UAV_PRODUCT_QA_REPORT.md", "uav_practicum.ipynb",
+    ]) {
+      expect(practicum).toContain(deliverable);
+    }
+    expect(practicum).toContain("Automatic revision required");
+    expect(practicum).toContain("GSD is presented as positional accuracy");
+    expect(practicum).toContain("Professional Mistakes — UAV and Photogrammetry");
+    expect((practicum.match(/^\| [^|]+ \|/gm) ?? []).length).toBeGreaterThanOrEqual(20);
+  });
+
+  it("extends the portfolio starter through the complete UAV chapter", () => {
     const notebook = JSON.parse(readFileSync(
       join(process.cwd(), "public/lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
       "utf8",
     )) as { cells: Array<{ source: string[] }> };
     const source = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (const lesson of ["2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.17"]) {
+    for (const lesson of ["2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.17", "2.18", "2.19", "2.20", "2.21", "2.22", "2.23", "2.24", "2.25"]) {
       expect(source).toContain(`Lesson ${lesson} checkpoint`);
     }
     expect(source).toContain("Chapter 1 Practicum checkpoint");
     expect(source).toContain("Chapter 2 Practicum checkpoint");
     expect(source).toContain("Chapter 3 Practicum checkpoint");
+    expect(source).toContain("Chapter 4 Practicum checkpoint");
   });
 });

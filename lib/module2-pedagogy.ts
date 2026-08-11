@@ -210,49 +210,100 @@ slope_degrees = np.degrees(np.arctan(np.hypot(dz_dx, dz_dy)))
 aspect_degrees = (np.degrees(np.arctan2(-dz_dx, dz_dy)) + 360) % 360
 print(np.nanmin(slope_degrees), np.nanmax(slope_degrees))`, "What happens to slope if elevation is in centimetres but horizontal resolution is in metres?", "Terrain derivatives express local surface geometry. Ecological interpretation depends on whether the input is ground elevation, canopy surface or another height model.", "Calling a DSM a DTM. Vegetation and structures remain in a DSM, so its slope may describe canopy texture rather than terrain.", { title: "GDAL DEM processing", href: "https://gdal.org/en/stable/programs/gdaldem.html" }),
 
-  lesson(18, 4, "UAV Remote Sensing Fundamentals", "Design UAV acquisition around sensor, ground sampling distance, overlap, illumination and georeferencing requirements.", ["UAV", "GSD", "Acquisition design"], "Connect flight decisions to the spatial and radiometric quality of downstream products.", "Can this flight observe the target process at the required support and uncertainty?", ["RGB, multispectral, thermal and LiDAR", "Altitude, GSD and overlap", "Illumination and calibration panels", "GNSS georeferencing and field design"], "Write a flight-design rationale for Baltic meadow vegetation mapping.", "Document platform, sensor, altitude, overlap, time, illumination, control and expected GSD.", "uav_acquisition_plan.md", `flight = {
-    "target_gsd_cm": 5,
-    "forward_overlap_pct": 80,
-    "side_overlap_pct": 70,
-    "illumination": "stable diffuse or calibrated",
-    "positioning": "RTK plus independent checkpoints",
+  lesson(18, 4, "UAV Remote Sensing Fundamentals", "Treat a UAV as a complete observing system and distinguish direct sensor records from derived geospatial products.", ["UAV systems", "Sensor types", "Product provenance"], "Explain platform, payload, navigation and processing roles without treating an orthomosaic as a raw photograph.", "What did the sensor directly record, and which later models created the product?", ["Platform and payload", "RGB, multispectral, thermal and LiDAR", "Raw versus derived products", "GSD and temporal support"], "Create a UAV sensor and product inventory for the synthetic meadow handover.", "Keep direct/derived status, measurement quantity, GSD, timing and required QA explicit.", "01_mission_design.ipynb", `products = {
+    "raw RGB frame": "direct image record",
+    "image geotag": "navigation metadata",
+    "dense point cloud": "derived reconstruction",
+    "orthomosaic": "derived raster product",
+    "NDVI": "derived spectral index",
 }
-for key, value in flight.items():
-    print(key, value)`, "Which flight property mainly supports image matching, and which supports reflectance comparability?", "Acquisition is the first analytical step. A processing workflow cannot fully recover missing overlap, motion blur or undocumented illumination.", "Selecting the lowest safe altitude only for finer GSD. Coverage, flight time, motion, data volume and spatial support also change.", { title: "USGS UAS data collection", href: "https://www.usgs.gov/centers/national-uncrewed-systems-office" }),
-  lesson(19, 4, "Photogrammetry Fundamentals", "Trace overlapping photographs through camera geometry to point clouds, surfaces and orthomosaics.", ["SfM", "GCP", "Orthomosaic"], "Explain the photogrammetric chain and identify independent evidence of geometric accuracy.", "How are repeated image observations converted into a three-dimensional spatial model?", ["Feature matching and Structure from Motion", "Bundle adjustment concept", "GCP, RTK and PPK roles", "Point cloud, DSM, DTM and orthomosaic"], "Annotate a photogrammetry processing report and locate evidence for control, tie points and checkpoint error.", "Keep control points separate from independent checkpoints and report horizontal and vertical residuals.", "photogrammetry_process_audit.pdf", `stages = [
-    "image quality and metadata",
-    "feature matching",
-    "camera alignment",
-    "sparse and dense point clouds",
-    "surface model",
-    "orthorectification and mosaic",
-    "independent checkpoint QA",
-]
-print(" → ".join(stages))`, "Why can low GCP residuals coexist with poor independent checkpoint accuracy?", "Photogrammetry estimates a coherent model from overlapping views. Independent checkpoints test whether that model is positioned correctly beyond the observations used to fit it.", "Reporting only mean GCP error. Training/control residuals are not an independent validation of product accuracy.", { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" }),
-  lesson(20, 4, "UAV Product QA", "Diagnose geometric, radiometric and temporal defects before extracting ecological predictors.", ["UAV QA", "Seamlines", "Positional error"], "Apply a repeatable product QA checklist and decide whether a UAV output is fit for purpose.", "Which product defect could change the ecological conclusion?", ["Blur, shadows and seamlines", "Radiometric inconsistency and vegetation movement", "Positional and temporal mismatch", "Resolution and support mismatch"], "Inspect an orthomosaic and surface model, record defects, severity, spatial pattern and mitigation.", "Use independent checkpoints, histograms, hillshade, edge overlays and no-data inspection.", "uav_product_qa_report.pdf", `qa_findings = []
-qa_findings.append({
-    "issue": "shadow seam",
-    "location": "north-west block",
-    "risk": "biased vegetation index",
-    "decision": "mask before plot extraction",
-})
-print(qa_findings)`, "Which artefact is most likely to be hidden by an attractive colour stretch?", "QA translates visual anomalies into analytical risk and a documented decision. Fitness depends on the target variable and extraction support.", "Calling every visible seam a failure. Some seams are cosmetic; evaluate whether values, geometry or interpretation are affected.", { title: "ASPRS positional accuracy standards", href: "https://www.asprs.org/divisions-committees/standards" }),
-  lesson(21, 4, "UAV Multispectral Pipeline", "Assemble aligned reflectance, index, surface and thermal layers into plot-ready predictors.", ["Multispectral", "Vegetation indices", "Plot extraction"], "Build and validate a reproducible UAV multispectral processing chain.", "Are all bands and derived layers comparable in space, radiometry and time?", ["Reflectance stack construction", "Vegetation indices as proxies", "DSM and thermal integration", "Alignment, metadata and spatial QA"], "Build a reflectance stack, compute indices, integrate DSM and thermal layers, and extract plot summaries.", "Run band-order, calibration, alignment, mask, range and footprint checks at every stage.", "uav_multispectral_pipeline.ipynb", `import numpy as np
+for product, evidence_type in products.items():
+    print(product, evidence_type, sep=": ")`, "Which records come directly from a sensor, and which require reconstruction or spectral arithmetic?", "UAV value comes from a traceable observation chain. Fine detail does not remove the need for product semantics, positional evidence and temporal compatibility.", "Calling an orthomosaic raw imagery. It inherits camera geometry, surface, resampling, seamline and blending decisions.", { title: "USGS National Uncrewed Systems Office", href: "https://www.usgs.gov/centers/national-uncrewed-systems-office" }),
+  lesson(19, 4, "Mission Design: Altitude, GSD and Overlap", "Calculate nominal sampling geometry and evaluate how altitude, footprint, overlap, speed, shutter and terrain interact.", ["Mission geometry", "GSD", "Overlap"], "Design repeated, sharp views at a support appropriate to the environmental question.", "Does the planned geometry create enough defensible views without confusing finer pixels with better science?", ["Height and image footprint", "GSD calculation", "Forward and side overlap", "Terrain, speed and shutter"], "Compare two synthetic meadow mission designs and document all geometric assumptions.", "Verify units, footprint axes, spacing, trigger interval, terrain sensitivity and achieved-coverage evidence.", "02_mission_geometry.ipynb", `pixel_mm = 13.2 / 5472
+height_m = 80
+focal_mm = 8.8
+gsd_m = pixel_mm * height_m / focal_mm
+width_m = height_m * 13.2 / focal_mm
+length_m = height_m * 8.8 / focal_mm
+forward_spacing = length_m * (1 - 0.80)
+side_spacing = width_m * (1 - 0.70)
+print(gsd_m, width_m, length_m)
+print(forward_spacing, side_spacing)`, "If height decreases by one quarter, how do GSD and footprint change under the simplified model?", "Overlap creates opportunities for feature matching; it does not guarantee sharpness, texture, radiometric consistency or positional accuracy.", "Using planned overlap as achieved overlap. Missing frames, terrain, attitude and timing alter actual coverage.", { title: "Pix4D image acquisition plan", href: "https://support.pix4d.com/hc/en-us/articles/202557459" }),
+  lesson(20, 4, "Sensors, Illumination and Radiometric Quality", "Trace digital values through exposure, illumination and calibration evidence before calling them comparable reflectance.", ["Radiometry", "Calibration", "Band registration"], "Design a radiometric QA protocol for multispectral and thermal UAV products.", "Which part of the observed brightness belongs to the surface, illumination, exposure or sensor response?", ["Digital number, radiance and reflectance", "Panels and irradiance sensors", "Exposure, saturation and vignetting", "Illumination and co-registration"], "Audit the synthetic image sequence, gradient raster and ambiguous Red Edge scale.", "Keep scale, range, calibration, saturation, timing and registration as separate gates.", "03_radiometric_quality.ipynb", `import csv
 
-red = stack["red"].astype("float32")
-nir = stack["nir"].astype("float32")
-valid = masks["red"] & masks["nir"] & ((nir + red) != 0)
-ndvi = np.full(red.shape, np.nan, dtype="float32")
-ndvi[valid] = (nir[valid] - red[valid]) / (nir[valid] + red[valid])
-print(np.nanmin(ndvi), np.nanmax(ndvi))`, "What output pattern would suggest the red and near-infrared bands were reversed?", "A multispectral stack is a registered measurement system. Indices become interpretable only after calibration, band identity, alignment and mask integrity are established.", "Computing an index before intersecting valid masks. Denominator zeros, shadows and unmatched NoData can create apparently plausible artefacts.", { title: "MicaSense image processing", href: "https://support.micasense.com/hc/en-us/categories/115000274848-Image-Processing" }),
+with open("data/raw/image_metadata.csv", newline="") as file:
+    rows = list(csv.DictReader(file))
+for row in rows:
+    saturated = float(row["saturation_fraction"]) > 0.02
+    blurred = float(row["blur_score_px"]) > 1.0
+    changed = float(row["exposure_s"]) != 0.0016
+    status = "review" if any([saturated, blurred, changed]) else "pass"
+    print(row["image_id"], status)`, "Does a panel image prove that all flight pixels are comparable reflectance?", "Radiometric calibration supplies evidence, not immunity from saturation, changing illumination, directional response, vignetting or misregistration.", "Assuming values from a band name or familiar range. Authoritative product metadata must define scale and units.", { title: "MicaSense image processing knowledge base", href: "https://support.micasense.com/hc/en-us/categories/115000274848-Image-Processing" }),
+  lesson(21, 4, "Georeferencing: GNSS, GCP, RTK and PPK", "Separate positioning constraints from independent validation and diagnose horizontal, vertical and local error.", ["GNSS", "Control points", "Accuracy QA"], "Calculate residual statistics and map error without treating fitted control as external proof.", "Is the reconstruction internally consistent and correctly positioned where the analysis occurs?", ["Image geotags and direct georeferencing", "GCP versus check point", "RTK and PPK", "Bias, RMSE and local warping"], "Create a georeferencing report from separate synthetic control and check-point records.", "Preserve roles, sign, units, distribution, horizontal/vertical results and the south-east weak region.", "04_georeferencing_qa.ipynb", `import numpy as np
 
-  lesson(22, 5, "Optical Remote Sensing", "Connect electromagnetic interactions, sensor bands and product levels to interpretable surface reflectance.", ["Sentinel-2", "Landsat", "Reflectance"], "Select optical products and bands from spectral, spatial, radiometric and temporal requirements.", "Which measured radiance or reflectance signal can respond to the target vegetation property?", ["Electromagnetic spectrum and bands", "Four kinds of sensor resolution", "Atmosphere, clouds and shadows", "Level-1 and Level-2 products"], "Compare Sentinel-2 and Landsat products for a coastal meadow monitoring question.", "Record product level, acquisition time, band resolution, scaling, cloud method and surface conditions.", "optical_product_decision.ipynb", `sensors = {
+east = checks["east_residual_m"].to_numpy()
+north = checks["north_residual_m"].to_numpy()
+vertical = checks["vertical_residual_m"].to_numpy()
+rmse_e = np.sqrt(np.mean(east ** 2))
+rmse_n = np.sqrt(np.mean(north ** 2))
+rmse_xy = np.sqrt(rmse_e ** 2 + rmse_n ** 2)
+rmse_z = np.sqrt(np.mean(vertical ** 2))
+print(east.mean(), north.mean(), vertical.mean())
+print(rmse_xy, rmse_z)`, "Why can fitted GCP residuals be smaller than withheld check-point residuals?", "Control constrains the solution; withheld points assess external performance. RTK or PPK strengthens positioning but does not remove independent validation.", "Using every surveyed point as control. This leaves no independent evidence of final product accuracy.", { title: "ASPRS Positional Accuracy Standards", href: "https://www.asprs.org/divisions-committees/standards" }),
+  lesson(22, 4, "Structure from Motion and Photogrammetric Reconstruction", "Trace overlapping perspective images through a software-independent three-dimensional reconstruction workflow.", ["Structure from Motion", "Bundle adjustment", "Dense reconstruction"], "Explain feature matching, tie points, camera estimation and reconstruction diagnostics without confusing internal residuals with map accuracy.", "How do repeated image observations become a fitted camera-and-surface model?", ["Perspective and feature matching", "Tie points and camera parameters", "Bundle adjustment and reprojection error", "Sparse and dense point clouds"], "Audit a synthetic processing report and identify strong, warning and missing evidence.", "Connect image alignment, calibration stability and weak geometry to downstream surfaces and mosaics.", "05_photogrammetry_concepts.ipynb", `import json
+
+with open("data/raw/photogrammetry_report.json") as file:
+    report = json.load(file)
+internal = {
+    "aligned_fraction": report["imagesAligned"] / report["imagesTotal"],
+    "reprojection_px": report["reprojectionErrorPixels"],
+    "focal_change_pct": report["cameraFocalLengthChangePct"],
+}
+for metric, value in internal.items():
+    print(metric, value)
+print("external accuracy requires withheld checks")`, "Which report fields diagnose the fitted image model, and which prove external position?", "Bundle adjustment jointly refines cameras and tie points. Its reprojection residual is valuable internal evidence, not absolute geospatial validation.", "Increasing quality settings until the mosaic looks good. Missing texture, motion and weak geometry require evidence, not cosmetic iteration.", { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" }),
+  lesson(23, 4, "Point Clouds, DSM, DTM and Orthomosaics", "Interpret common UAV products from the observations and models that created them.", ["Point clouds", "Surface models", "Orthomosaics"], "Distinguish discrete clouds, upper surfaces, inferred terrain, orthorectification and mosaicking.", "What surface or image contribution does each product represent, and what remains unobserved?", ["Sparse versus dense cloud", "DSM, DTM and conditional CHM", "Orthorectification and resampling", "Seamlines, occlusion and edge effects"], "Diagnose a synthetic mosaic seam and DSM spike/pit and build a product interpretation table.", "Keep vertical reference, interpolation, source contribution and prohibited interpretations visible.", "06_uav_products.ipynb", `import rasterio
+import numpy as np
+
+with rasterio.open("data/raw/uav_dsm_spike_demo.tif") as src:
+    dsm = src.read(1, masked=True)
+median = np.ma.median(dsm)
+deviation = np.ma.abs(dsm - median)
+suspect = (~np.ma.getmaskarray(dsm)) & (deviation.data > 5)
+print(float(dsm.min()), float(dsm.max()))
+print(np.argwhere(suspect))`, "Can a smooth DSM or a fine orthomosaic prove the represented surface is correct?", "A DSM is a reconstructed upper surface and an orthomosaic is a multi-image derived raster. Product names require provenance and validation.", "Calling DSM minus an unverified terrain raster vegetation height. Both surfaces, grids, dates and vertical references must be compatible.", { title: "USGS digital elevation model terminology", href: "https://pubs.usgs.gov/publication/70223828" }),
+  lesson(24, 4, "UAV Product QA and Error Diagnosis", "Integrate mission, image, photogrammetry, georeferencing, mosaic, surface, multispectral and temporal evidence.", ["UAV QA", "Error diagnosis", "Decision matrix"], "Perform a product- and use-specific professional audit before ecological extraction.", "Which defect can change this analysis, where, and what evidence or action follows?", ["Eight-category QA chain", "Status, severity and consequence", "Spatial error map", "Accept, review or unsuitable"], "Build the complete UAV QA matrix and a map of weak or excluded support.", "Require expected/observed evidence, consequence, action and owner for every finding.", "07_uav_product_validation.ipynb", `finding = {
+    "category": "multispectral",
+    "test": "NIR grid matches Red grid",
+    "observed": "origin shifted 0.1 m",
+    "status": "fail",
+    "severity": "blocking",
+    "consequence": "index mixes footprints",
+    "action": "register and validate before calculation",
+}
+for field, value in finding.items():
+    print(field, value, sep=": ")`, "Can one product pass geometric QA and still be unsuitable for spectral or temporal analysis?", "Quality is multidimensional and conditional. A global pass hides which product, region, variable and use the evidence supports.", "Using visual appearance as the only QA. Pair QGIS diagnosis with reproducible numeric checks and provenance.", { title: "ASPRS Positional Accuracy Standards", href: "https://www.asprs.org/divisions-committees/standards" }),
+  lesson(25, 4, "UAV Multispectral Processing Pipeline", "Build an accepted multispectral subset with explicit radiometric, geometric, mask and provenance gates.", ["Multispectral stack", "Safe indices", "Raster extraction"], "Create NDVI and GNDVI only from compatible bands and document blocked derivatives honestly.", "Are band identity, scale, radiometry, grid, masks and timing compatible cell by cell?", ["Band inventory and scale", "Co-registration and masks", "Numerically safe indices", "DSM, extraction and manifest"], "Produce an analysis-ready UAV stack subset, QA mask, plot extraction and manifest.", "Block Red Edge until scale evidence exists and reopen every accepted derivative.", "08_multispectral_pipeline.ipynb", `import numpy as np
+
+def safe_ndvi(nir, red, valid, epsilon=1e-8):
+    nir = nir.astype("float32")
+    red = red.astype("float32")
+    denominator = nir + red
+    use = valid & np.isfinite(denominator) & (np.abs(denominator) > epsilon)
+    result = np.full(nir.shape, np.nan, dtype="float32")
+    result[use] = (nir[use] - red[use]) / denominator[use]
+    return result
+
+ndvi = safe_ndvi(nir, red, joint_valid_mask)
+print(np.nanmin(ndvi), np.nanmax(ndvi))`, "What should the pipeline do when Red Edge scale or NIR registration is unresolved?", "An analysis-ready stack is a set of compatible measurement layers plus proof of how compatibility was established.", "Calculating an index because the arrays share shape. Scale, transform, content registration and masks must pass first.", { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" }),
+
+  lesson(26, 5, "Optical Remote Sensing", "Connect electromagnetic interactions, sensor bands and product levels to interpretable surface reflectance.", ["Sentinel-2", "Landsat", "Reflectance"], "Select optical products and bands from spectral, spatial, radiometric and temporal requirements.", "Which measured radiance or reflectance signal can respond to the target vegetation property?", ["Electromagnetic spectrum and bands", "Four kinds of sensor resolution", "Atmosphere, clouds and shadows", "Level-1 and Level-2 products"], "Compare Sentinel-2 and Landsat products for a coastal meadow monitoring question.", "Record product level, acquisition time, band resolution, scaling, cloud method and surface conditions.", "optical_product_decision.ipynb", `sensors = {
     "Sentinel-2": {"red_m": 10, "nir_m": 10, "revisit_days": 5},
     "Landsat": {"red_m": 30, "nir_m": 30, "revisit_days": 16},
 }
 for name, properties in sensors.items():
     print(name, properties)`, "Why does a nominal revisit interval not equal the number of cloud-free observations?", "Sensor selection balances spectral response, support, acquisition opportunity and product quality. Nominal specifications do not guarantee usable observations.", "Comparing raw digital numbers across products. Confirm scaling, processing level and calibration before interpretation.", { title: "Sentinel-2 user guide", href: "https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi" }),
-  lesson(23, 5, "Vegetation and Spectral Indices", "Use vegetation indices as sensor- and context-dependent proxies rather than direct ecological measurements.", ["NDVI", "Red edge", "SAVI"], "Choose, calculate and interpret an index with its limitations and reference evidence.", "What physical contrast does this index emphasise, and which confounders remain?", ["NDVI, GNDVI, SAVI and MSAVI", "Red-edge indices", "Saturation, soil and atmosphere", "Sensor and seasonal dependence"], "Compare two indices across meadow plots and explain where they agree or diverge.", "Verify reflectance scale, band identity, masks, formula, valid range and acquisition context.", "spectral_index_comparison.ipynb", `import numpy as np
+  lesson(27, 5, "Vegetation and Spectral Indices", "Use vegetation indices as sensor- and context-dependent proxies rather than direct ecological measurements.", ["NDVI", "Red edge", "SAVI"], "Choose, calculate and interpret an index with its limitations and reference evidence.", "What physical contrast does this index emphasise, and which confounders remain?", ["NDVI, GNDVI, SAVI and MSAVI", "Red-edge indices", "Saturation, soil and atmosphere", "Sensor and seasonal dependence"], "Compare two indices across meadow plots and explain where they agree or diverge.", "Verify reflectance scale, band identity, masks, formula, valid range and acquisition context.", "spectral_index_comparison.ipynb", `import numpy as np
 
 def safe_ratio(numerator, denominator, valid):
     result = np.full(numerator.shape, np.nan, dtype="float32")
@@ -262,7 +313,7 @@ def safe_ratio(numerator, denominator, valid):
 
 ndvi = safe_ratio(nir - red, nir + red, valid_mask)
 gndvi = safe_ratio(nir - green, nir + green, valid_mask)`, "Which index may saturate in dense vegetation, and why does another index not automatically solve that limitation?", "Indices compress spectral contrast into a proxy. Their ecological relationship must be calibrated or validated for sensor, season, canopy and target variable.", "Writing 'NDVI measures biomass'. NDVI responds to red and near-infrared reflectance and may correlate with biomass under specific conditions.", { title: "USGS Landsat spectral indices", href: "https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index" }),
-  lesson(24, 5, "SAR Fundamentals", "Interpret Sentinel-1 backscatter through acquisition geometry, surface properties and preprocessing choices.", ["Sentinel-1", "VV/VH", "Backscatter"], "Explain SAR signal formation and design a defensible search-to-interpretation workflow.", "Which combination of moisture, roughness, structure and geometry could produce this backscatter pattern?", ["Active microwave sensing", "Polarisation and incidence angle", "Speckle, roughness and moisture", "Calibration and terrain correction"], "Search, filter, calibrate, terrain-correct and QA a Sentinel-1 observation conceptually or in an available platform.", "Keep orbit direction, relative orbit, polarisation, angle, preprocessing and terrain effects comparable.", "sentinel1_workflow_report.ipynb", `sar_query = {
+  lesson(28, 5, "SAR Fundamentals", "Interpret Sentinel-1 backscatter through acquisition geometry, surface properties and preprocessing choices.", ["Sentinel-1", "VV/VH", "Backscatter"], "Explain SAR signal formation and design a defensible search-to-interpretation workflow.", "Which combination of moisture, roughness, structure and geometry could produce this backscatter pattern?", ["Active microwave sensing", "Polarisation and incidence angle", "Speckle, roughness and moisture", "Calibration and terrain correction"], "Search, filter, calibrate, terrain-correct and QA a Sentinel-1 observation conceptually or in an available platform.", "Keep orbit direction, relative orbit, polarisation, angle, preprocessing and terrain effects comparable.", "sentinel1_workflow_report.ipynb", `sar_query = {
     "collection": "Sentinel-1 GRD",
     "polarisations": ["VV", "VH"],
     "orbit_direction": "consistent across dates",
@@ -270,7 +321,7 @@ gndvi = safe_ratio(nir - green, nir + green, valid_mask)`, "Which index may satu
 }
 for key, value in sar_query.items():
     print(key, value)`, "Why can a brighter pixel not be interpreted simply as more vegetation?", "SAR backscatter is a compound response to geometry and dielectric and structural properties. Interpretation must control acquisition and terrain context.", "Averaging incompatible orbit geometries. Incidence angle and viewing direction can produce changes unrelated to the ecological target.", { title: "Sentinel-1 user guide", href: "https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-1-sar" }),
-  lesson(25, 5, "Hyperspectral Remote Sensing", "Recognise when dense narrow-band measurements provide useful spectral evidence and additional preprocessing burden.", ["Hyperspectral", "Spectral curves", "SNR"], "Evaluate hyperspectral value from absorption features, signal quality and dimensionality.", "Does the target have a resolvable spectral feature at the sensor's scale and signal-to-noise ratio?", ["Narrow bands and spectral curves", "Absorption features and red edge", "Spectral libraries and SNR", "Preprocessing and feature selection"], "Inspect representative spectra, identify noisy regions and propose justified features for vegetation traits.", "Record wavelength units, band centres, bandwidths, masks, calibration and preprocessing.", "hyperspectral_feature_note.ipynb", `import numpy as np
+  lesson(29, 5, "Hyperspectral Remote Sensing", "Recognise when dense narrow-band measurements provide useful spectral evidence and additional preprocessing burden.", ["Hyperspectral", "Spectral curves", "SNR"], "Evaluate hyperspectral value from absorption features, signal quality and dimensionality.", "Does the target have a resolvable spectral feature at the sensor's scale and signal-to-noise ratio?", ["Narrow bands and spectral curves", "Absorption features and red edge", "Spectral libraries and SNR", "Preprocessing and feature selection"], "Inspect representative spectra, identify noisy regions and propose justified features for vegetation traits.", "Record wavelength units, band centres, bandwidths, masks, calibration and preprocessing.", "hyperspectral_feature_note.ipynb", `import numpy as np
 
 valid_bands = (wavelength_nm >= 450) & (wavelength_nm <= 900)
 spectra_clean = spectra[:, valid_bands]
@@ -278,13 +329,13 @@ wavelength_clean = wavelength_nm[valid_bands]
 red_edge = (wavelength_clean >= 680) & (wavelength_clean <= 750)
 print("usable bands", spectra_clean.shape[1])
 print("red-edge bands", red_edge.sum())`, "Why can hundreds of bands reduce model reliability when samples are limited?", "Hyperspectral data can resolve diagnostic spectral shape, but correlated noisy bands amplify preprocessing and validation demands.", "Selecting bands after viewing test performance. Feature design must remain inside the training workflow to avoid optimistic validation.", { title: "NASA imaging spectroscopy", href: "https://earth.jpl.nasa.gov/emit/" }),
-  lesson(26, 5, "LiDAR and Point Clouds", "Turn discrete three-dimensional returns into terrain and vegetation-structure products.", ["LiDAR", "Point clouds", "Canopy height"], "Explain point-cloud attributes and derive a simple structural surface with documented assumptions.", "Which returns represent ground, canopy and uncertainty in this landscape?", ["Coordinates, returns and intensity", "Point density and classification", "DSM, DTM and canopy height", "Rasterisation and structural metrics"], "Create or inspect a canopy-height product from classified point-cloud or supplied surface data.", "Check coordinate and vertical reference, units, density, classes, interpolation gaps and negative heights.", "lidar_structure_report.ipynb", `import numpy as np
+  lesson(30, 5, "LiDAR and Point Clouds", "Turn discrete three-dimensional returns into terrain and vegetation-structure products.", ["LiDAR", "Point clouds", "Canopy height"], "Explain point-cloud attributes and derive a simple structural surface with documented assumptions.", "Which returns represent ground, canopy and uncertainty in this landscape?", ["Coordinates, returns and intensity", "Point density and classification", "DSM, DTM and canopy height", "Rasterisation and structural metrics"], "Create or inspect a canopy-height product from classified point-cloud or supplied surface data.", "Check coordinate and vertical reference, units, density, classes, interpolation gaps and negative heights.", "lidar_structure_report.ipynb", `import numpy as np
 
 canopy_height = dsm.astype("float32") - dtm.astype("float32")
 canopy_height[(canopy_height < 0) | (canopy_height > 60)] = np.nan
 print("median height", np.nanmedian(canopy_height))
 print("valid fraction", np.isfinite(canopy_height).mean())`, "What could create negative canopy heights after subtracting the DTM from the DSM?", "Canopy height combines two estimated surfaces. Misalignment, classification errors and interpolation can propagate into structural metrics.", "Treating intensity as directly comparable across flights. Range, angle, sensor settings and calibration influence intensity.", { title: "PDAL documentation", href: "https://pdal.io/en/stable/" }),
-  lesson(27, 6, "Spatial Autocorrelation", "Recognise spatial dependence and its consequences for inference and validation.", ["Moran's I", "Weights", "Spatial dependence"], "Explain spatial autocorrelation, construct a neighbourhood concept and interpret Moran's I cautiously.", "Are nearby values more similar than expected under the chosen spatial null model?", ["Tobler's first law", "Spatial weights and neighbours", "Global Moran's I", "Consequences for inference and validation"], "Compare alternative neighbourhood definitions and calculate or interpret Moran's I for a meadow variable.", "Report weights construction, islands, permutations, spatial extent and the analysed variable.", "spatial_autocorrelation_report.ipynb", `from libpysal.weights import KNN
+  lesson(31, 6, "Spatial Autocorrelation", "Recognise spatial dependence and its consequences for inference and validation.", ["Moran's I", "Weights", "Spatial dependence"], "Explain spatial autocorrelation, construct a neighbourhood concept and interpret Moran's I cautiously.", "Are nearby values more similar than expected under the chosen spatial null model?", ["Tobler's first law", "Spatial weights and neighbours", "Global Moran's I", "Consequences for inference and validation"], "Compare alternative neighbourhood definitions and calculate or interpret Moran's I for a meadow variable.", "Report weights construction, islands, permutations, spatial extent and the analysed variable.", "spatial_autocorrelation_report.ipynb", `from libpysal.weights import KNN
 from esda.moran import Moran
 
 w = KNN.from_dataframe(plots, k=4)
@@ -292,7 +343,7 @@ w.transform = "R"
 values = plots["ndvi_mean"].to_numpy()
 moran = Moran(values, w, permutations=999)
 print(moran.I, moran.p_sim)`, "Would changing from four nearest neighbours to polygon contiguity necessarily preserve Moran's I?", "Moran's I describes pattern relative to a specified weights matrix. It is evidence of spatial structure, not its ecological cause.", "Reporting a p-value without the neighbourhood definition. The test changes when the spatial relationship changes.", { title: "PySAL exploratory spatial data analysis", href: "https://pysal.org/esda/" }),
-  lesson(28, 6, "Spatial Sampling and Bias", "Design and diagnose sampling that represents spatial heterogeneity without hidden clustering.", ["Sampling design", "Bias", "Stratification"], "Compare random, systematic and stratified spatial designs and recognise representativeness limits.", "Which parts of the landscape and environmental gradients can this sample represent?", ["Random and systematic sampling", "Stratification and clustering", "Edge effects", "Accessibility and spatial bias"], "Evaluate the existing plot distribution and propose a defensible supplementary design.", "Map inclusion probability, nearest-neighbour distance, stratum coverage and inaccessible regions.", "spatial_sampling_design.ipynb", `import pandas as pd
+  lesson(32, 6, "Spatial Sampling and Bias", "Design and diagnose sampling that represents spatial heterogeneity without hidden clustering.", ["Sampling design", "Bias", "Stratification"], "Compare random, systematic and stratified spatial designs and recognise representativeness limits.", "Which parts of the landscape and environmental gradients can this sample represent?", ["Random and systematic sampling", "Stratification and clustering", "Edge effects", "Accessibility and spatial bias"], "Evaluate the existing plot distribution and propose a defensible supplementary design.", "Map inclusion probability, nearest-neighbour distance, stratum coverage and inaccessible regions.", "spatial_sampling_design.ipynb", `import pandas as pd
 
 coverage = (
     plots.groupby("habitat", observed=True)
@@ -302,13 +353,13 @@ coverage = (
 )
 coverage["share"] = coverage["n_plots"] / coverage["n_plots"].sum()
 print(coverage)`, "Can a large sample remove bias if all plots are close to roads?", "Sample size does not repair a biased inclusion process. Spatial design determines what population and gradients the evidence can support.", "Using random points without checking feasibility. Rejected inaccessible locations can convert a nominally random design into undocumented convenience sampling.", { title: "US EPA spatial sampling guidance", href: "https://www.epa.gov/quality/guidance-systematic-planning-using-data-quality-objectives-process" }),
-  lesson(29, 6, "Interpolation and Geostatistics", "Treat interpolation as a model of spatial continuity with assumptions and prediction uncertainty.", ["IDW", "Variogram", "Kriging"], "Compare deterministic interpolation with variogram-based kriging and interpret uncertainty.", "What spatial process justifies predicting between observations?", ["IDW and trend surfaces", "Variogram, nugget, sill and range", "Ordinary kriging assumptions", "Prediction uncertainty"], "Explore an empirical variogram and compare IDW with ordinary kriging predictions at held-out locations.", "Use spatial holdouts, inspect residuals, map uncertainty and avoid extrapolation beyond support.", "geostatistical_interpolation.ipynb", `from sklearn.model_selection import GroupKFold
+  lesson(33, 6, "Interpolation and Geostatistics", "Treat interpolation as a model of spatial continuity with assumptions and prediction uncertainty.", ["IDW", "Variogram", "Kriging"], "Compare deterministic interpolation with variogram-based kriging and interpret uncertainty.", "What spatial process justifies predicting between observations?", ["IDW and trend surfaces", "Variogram, nugget, sill and range", "Ordinary kriging assumptions", "Prediction uncertainty"], "Explore an empirical variogram and compare IDW with ordinary kriging predictions at held-out locations.", "Use spatial holdouts, inspect residuals, map uncertainty and avoid extrapolation beyond support.", "geostatistical_interpolation.ipynb", `from sklearn.model_selection import GroupKFold
 
 groups = plots["spatial_block"]
 splitter = GroupKFold(n_splits=5)
 for train, test in splitter.split(plots, groups=groups):
     print("train", len(train), "test", len(test))`, "Why should nearby observations not be split randomly between training and validation?", "Interpolation performance must be tested at genuinely separated locations. A smooth map is not evidence of accurate unsampled values.", "Fitting a variogram by visual preference alone. Document estimator, model, lag choices and sensitivity, then validate predictions.", { title: "PyKrige documentation", href: "https://geostat-framework.readthedocs.io/projects/pykrige/en/stable/" }),
-  lesson(30, 6, "Spatial Regression Concepts", "Recognise when ordinary regression residuals violate independence and what spatial models attempt to address.", ["Spatial lag", "Spatial error", "GWR"], "Diagnose spatial residual structure and distinguish major spatial regression ideas.", "Does location retain explanatory structure after the measured predictors are considered?", ["Ordinary-model independence", "Spatial lag and spatial error concepts", "Geographically weighted approaches", "Interpretation and model comparison"], "Fit or inspect a baseline model, map residuals and test their spatial autocorrelation.", "Keep the outcome, predictors, weights and validation geography explicit; compare out-of-sample performance.", "spatial_regression_diagnostic.ipynb", `from sklearn.linear_model import LinearRegression
+  lesson(34, 6, "Spatial Regression Concepts", "Recognise when ordinary regression residuals violate independence and what spatial models attempt to address.", ["Spatial lag", "Spatial error", "GWR"], "Diagnose spatial residual structure and distinguish major spatial regression ideas.", "Does location retain explanatory structure after the measured predictors are considered?", ["Ordinary-model independence", "Spatial lag and spatial error concepts", "Geographically weighted approaches", "Interpretation and model comparison"], "Fit or inspect a baseline model, map residuals and test their spatial autocorrelation.", "Keep the outcome, predictors, weights and validation geography explicit; compare out-of-sample performance.", "spatial_regression_diagnostic.ipynb", `from sklearn.linear_model import LinearRegression
 
 X = plots[["ndvi_mean", "elevation_m"]]
 y = plots["biomass_g_m2"]
@@ -316,7 +367,7 @@ model = LinearRegression().fit(X, y)
 plots["residual"] = y - model.predict(X)
 print(plots["residual"].describe())`, "If residuals cluster spatially, which ordinary regression assumption is questionable?", "Spatial residual pattern signals unresolved dependence or missing spatial processes. A spatial model is not automatically a causal explanation.", "Choosing GWR because its coefficient map looks interesting. Local estimates can be unstable and require bandwidth, collinearity and multiple-testing scrutiny.", { title: "PySAL spatial regression", href: "https://pysal.org/spreg/" }),
 
-  lesson(31, 7, "SQL for Geospatial Scientists", "Query environmental tables with explicit filtering, grouping and relational joins.", ["SQL", "JOIN", "GROUP BY"], "Write readable SQL that produces an auditable environmental analysis table.", "Which rows and variables constitute the analysis population?", ["SELECT and FROM", "WHERE filters", "GROUP BY summaries", "JOIN keys and cardinality"], "Query vegetation measurements and join them to site metadata.", "Count source and result rows, test key uniqueness, preserve NULLs deliberately and qualify field names.", "environmental_queries.sql", `SELECT
+  lesson(35, 7, "SQL for Geospatial Scientists", "Query environmental tables with explicit filtering, grouping and relational joins.", ["SQL", "JOIN", "GROUP BY"], "Write readable SQL that produces an auditable environmental analysis table.", "Which rows and variables constitute the analysis population?", ["SELECT and FROM", "WHERE filters", "GROUP BY summaries", "JOIN keys and cardinality"], "Query vegetation measurements and join them to site metadata.", "Count source and result rows, test key uniqueness, preserve NULLs deliberately and qualify field names.", "environmental_queries.sql", `SELECT
   p.site_id,
   COUNT(*) AS n_plots,
   AVG(p.ndvi_mean) AS mean_ndvi
@@ -324,7 +375,7 @@ FROM plot_observations AS p
 WHERE p.qa_status = 'valid'
 GROUP BY p.site_id
 ORDER BY p.site_id;`, "Will sites with no valid plots appear in this query, and why?", "SQL makes the analysis population and aggregation explicit. Join direction and NULL handling determine which evidence remains visible.", "Using SELECT * in a published pipeline. Schema changes can silently alter outputs; name required columns and aliases.", { title: "PostgreSQL SELECT documentation", href: "https://www.postgresql.org/docs/current/sql-select.html" }),
-  lesson(32, 7, "PostGIS Fundamentals", "Move vector relationships from in-memory Python to indexed database queries.", ["PostGIS", "SRID", "Spatial SQL"], "Use geometry, geography, SRIDs and core PostGIS predicates with appropriate indexes.", "Should this relationship be evaluated on a projected plane, spheroid or stored geometry?", ["Geometry, geography and SRID", "Spatial indexes", "ST_Intersects, ST_Within and ST_Buffer", "ST_Distance and ST_Transform"], "Translate a GeoPandas plot-to-zone workflow into PostGIS SQL and compare results.", "Check SRIDs, index use, row counts, unmatched records and one-to-many cardinality.", "postgis_plot_assignment.sql", `SELECT
+  lesson(36, 7, "PostGIS Fundamentals", "Move vector relationships from in-memory Python to indexed database queries.", ["PostGIS", "SRID", "Spatial SQL"], "Use geometry, geography, SRIDs and core PostGIS predicates with appropriate indexes.", "Should this relationship be evaluated on a projected plane, spheroid or stored geometry?", ["Geometry, geography and SRID", "Spatial indexes", "ST_Intersects, ST_Within and ST_Buffer", "ST_Distance and ST_Transform"], "Translate a GeoPandas plot-to-zone workflow into PostGIS SQL and compare results.", "Check SRIDs, index use, row counts, unmatched records and one-to-many cardinality.", "postgis_plot_assignment.sql", `SELECT
   p.plot_id,
   z.zone_id
 FROM field_plots AS p
@@ -333,7 +384,7 @@ LEFT JOIN management_zones AS z
     ST_Transform(p.geom, 3301),
     ST_Transform(z.geom, 3301)
   );`, "Why might a boundary point remain unmatched by ST_Within but match ST_Intersects?", "PostGIS expresses the same spatial questions as desktop and Python tools while centralising data and scaling indexed queries.", "Wrapping every indexed geometry in ST_Transform during a large join. It can prevent index use; store or materialise an analysis CRS when justified.", { title: "PostGIS reference", href: "https://postgis.net/docs/" }),
-  lesson(33, 7, "Managing Large Spatial Data", "Choose when files, columnar objects or a spatial database best support scale and collaboration.", ["GeoParquet", "PostGIS", "Object storage"], "Design a storage architecture with indexing, provenance and lifecycle rules.", "Where should the authoritative data live, and how will each operation access it?", ["Files versus datasets and services", "Spatial and attribute indexing", "Partitioning concepts", "Naming, provenance and derived products"], "Create a decision record for moving an expanding meadow archive from many files to managed storage.", "Define source-of-truth, schema, identifiers, CRS, update frequency, backups and lineage.", "spatial_storage_architecture.md", `storage_plan = {
+  lesson(37, 7, "Managing Large Spatial Data", "Choose when files, columnar objects or a spatial database best support scale and collaboration.", ["GeoParquet", "PostGIS", "Object storage"], "Design a storage architecture with indexing, provenance and lifecycle rules.", "Where should the authoritative data live, and how will each operation access it?", ["Files versus datasets and services", "Spatial and attribute indexing", "Partitioning concepts", "Naming, provenance and derived products"], "Create a decision record for moving an expanding meadow archive from many files to managed storage.", "Define source-of-truth, schema, identifiers, CRS, update frequency, backups and lineage.", "spatial_storage_architecture.md", `storage_plan = {
     "raw_imagery": "versioned object storage",
     "analysis_vectors": "GeoParquet",
     "shared_operational_data": "PostGIS",
@@ -342,32 +393,32 @@ LEFT JOIN management_zones AS z
 for dataset, location in storage_plan.items():
     print(dataset, "→", location)`, "Which option best supports many simultaneous editors and spatial queries?", "Storage choice is part of reproducibility. It determines consistency, query cost, collaboration and the ability to trace derivatives.", "Moving data into a database without a data model. A database does not repair inconsistent IDs, CRS or provenance.", { title: "GeoParquet specification", href: "https://geoparquet.org/" }),
 
-  lesson(34, 8, "Xarray and Rioxarray", "Work with labelled multidimensional arrays that preserve coordinates, dimensions and attributes.", ["Xarray", "Rioxarray", "Labelled arrays"], "Contrast positional and labelled indexing and retain geospatial metadata through analysis.", "Which named dimensions and coordinates locate this variable in space and time?", ["DataArray and Dataset", "Dimensions, coordinates and attributes", "Labelled selection", "CRS and spatial dimensions with rioxarray"], "Open a georeferenced raster, inspect named dimensions and select an area by coordinate labels.", "Check dimension order, coordinate direction, CRS, transform, attributes and mask after each operation.", "xarray_spatial_audit.ipynb", `import rioxarray
+  lesson(38, 8, "Xarray and Rioxarray", "Work with labelled multidimensional arrays that preserve coordinates, dimensions and attributes.", ["Xarray", "Rioxarray", "Labelled arrays"], "Contrast positional and labelled indexing and retain geospatial metadata through analysis.", "Which named dimensions and coordinates locate this variable in space and time?", ["DataArray and Dataset", "Dimensions, coordinates and attributes", "Labelled selection", "CRS and spatial dimensions with rioxarray"], "Open a georeferenced raster, inspect named dimensions and select an area by coordinate labels.", "Check dimension order, coordinate direction, CRS, transform, attributes and mask after each operation.", "xarray_spatial_audit.ipynb", `import rioxarray
 
 data = rioxarray.open_rasterio("data/sentinel_stack.tif", masked=True)
 print(data.dims, data.sizes)
 print(data.rio.crs, data.rio.bounds())
 subset = data.sel(x=slice(500000, 501000), y=slice(6501000, 6500000))
 print(subset.sizes)`, "Why might the y-coordinate slice run from a larger value to a smaller value?", "Labels make array intent explicit, but coordinate order still follows the stored grid. Inspect it rather than assuming ascending axes.", "Calling .values immediately. This discards labelled context and may trigger a large eager load.", { title: "Xarray user guide", href: "https://docs.xarray.dev/en/stable/user-guide/index.html" }),
-  lesson(35, 8, "EO Data Cubes", "Extend one spatial band into band and time dimensions while preserving comparable observations.", ["Data cube", "Time series", "Masking"], "Select, mask and aggregate a time × band × y × x Earth Observation cube.", "Are values comparable across every time, band and grid cell in this cube?", ["Band × y × x", "Time × band × y × x", "Selection and aggregation", "Masks and metadata preservation"], "Build or inspect a small multi-date cube and derive a cloud-aware seasonal summary.", "Verify common grid, band definitions, time zones, scaling, masks and observation counts.", "eo_data_cube.ipynb", `clear = cube.where(cube["cloud_mask"] == 0)
+  lesson(39, 8, "EO Data Cubes", "Extend one spatial band into band and time dimensions while preserving comparable observations.", ["Data cube", "Time series", "Masking"], "Select, mask and aggregate a time × band × y × x Earth Observation cube.", "Are values comparable across every time, band and grid cell in this cube?", ["Band × y × x", "Time × band × y × x", "Selection and aggregation", "Masks and metadata preservation"], "Build or inspect a small multi-date cube and derive a cloud-aware seasonal summary.", "Verify common grid, band definitions, time zones, scaling, masks and observation counts.", "eo_data_cube.ipynb", `clear = cube.where(cube["cloud_mask"] == 0)
 season = clear.sel(time=slice("2025-05-01", "2025-08-31"))
 median = season["ndvi"].median("time", skipna=True)
 observations = season["ndvi"].count("time")
 print(median.dims, observations.min().item())`, "Can two pixels in the seasonal median be based on different numbers of dates?", "A temporal composite contains an implicit sampling pattern. Observation count and mask provenance must accompany the summary.", "Averaging before masking clouds. Contaminated values can bias the composite while remaining numerically plausible.", { title: "Xarray indexing and selecting", href: "https://docs.xarray.dev/en/stable/user-guide/indexing.html" }),
-  lesson(36, 8, "Dask and Lazy Computation", "Plan chunked computations that fit memory without turning the lesson into distributed-systems engineering.", ["Dask", "Chunks", "Lazy execution"], "Explain lazy graphs, inspect chunks and trigger computation deliberately.", "How can this calculation be divided without breaking its spatial or temporal meaning?", ["Chunks and task graphs", "Lazy versus eager execution", "compute and persistence", "Memory and chunk tradeoffs"], "Compare lazy metadata operations with one bounded compute and record the chunk plan.", "Inspect chunk sizes, estimated memory, graph scope and final array dimensions.", "lazy_cube_processing.ipynb", `import xarray as xr
+  lesson(40, 8, "Dask and Lazy Computation", "Plan chunked computations that fit memory without turning the lesson into distributed-systems engineering.", ["Dask", "Chunks", "Lazy execution"], "Explain lazy graphs, inspect chunks and trigger computation deliberately.", "How can this calculation be divided without breaking its spatial or temporal meaning?", ["Chunks and task graphs", "Lazy versus eager execution", "compute and persistence", "Memory and chunk tradeoffs"], "Compare lazy metadata operations with one bounded compute and record the chunk plan.", "Inspect chunk sizes, estimated memory, graph scope and final array dimensions.", "lazy_cube_processing.ipynb", `import xarray as xr
 
 cube = xr.open_zarr("data/meadow_cube.zarr", chunks={"time": 4, "y": 1024, "x": 1024})
 seasonal_mean = cube["ndvi"].mean("time")
 print(seasonal_mean.data)
 sample = seasonal_mean.isel(y=slice(0, 256), x=slice(0, 256)).compute()
 print(sample.shape)`, "Which line constructs work, and which line actually executes it?", "Lazy computation separates an analytical request from execution. Chunk design should follow operation shape and memory, not arbitrary defaults.", "Calling compute() on the entire cube for inspection. Select a bounded diagnostic subset first.", { title: "Dask array best practices", href: "https://docs.dask.org/en/stable/array-best-practices.html" }),
-  lesson(37, 8, "COG, Zarr and Cloud-Native Formats", "Match tiled range-readable rasters and chunked arrays to remote access patterns.", ["COG", "Zarr", "Range requests"], "Explain why internal layout—not only file extension—makes data cloud-friendly.", "Can the client retrieve only the spatial or multidimensional pieces it needs?", ["Tiling and overviews", "HTTP range requests", "Chunked multidimensional arrays", "COG versus ordinary TIFF"], "Inspect a COG and a Zarr dataset, then recommend one for a map layer and one for a time cube.", "Check tiling, overviews, compression, chunk layout, metadata consolidation and access latency.", "cloud_format_audit.ipynb", `format_fit = {
+  lesson(41, 8, "COG, Zarr and Cloud-Native Formats", "Match tiled range-readable rasters and chunked arrays to remote access patterns.", ["COG", "Zarr", "Range requests"], "Explain why internal layout—not only file extension—makes data cloud-friendly.", "Can the client retrieve only the spatial or multidimensional pieces it needs?", ["Tiling and overviews", "HTTP range requests", "Chunked multidimensional arrays", "COG versus ordinary TIFF"], "Inspect a COG and a Zarr dataset, then recommend one for a map layer and one for a time cube.", "Check tiling, overviews, compression, chunk layout, metadata consolidation and access latency.", "cloud_format_audit.ipynb", `format_fit = {
     "single analysis-ready map layer": "COG",
     "time-band spatial cube": "Zarr",
 }
 for use_case, choice in format_fit.items():
     print(use_case, choice, sep=" → ")`, "Why does uploading an untiled GeoTIFF to object storage not automatically make it a COG?", "Cloud-native layout minimises unnecessary transfer. It must still preserve scientific metadata, stable identifiers and versioned provenance.", "Choosing Zarr for every raster. A simple immutable map layer may be more interoperable and efficient as a validated COG.", { title: "Cloud Optimized GeoTIFF", href: "https://www.cogeo.org/" }),
-  lesson(38, 8, "STAC", "Discover cloud-hosted Earth Observation assets through consistent catalog metadata.", ["STAC", "Catalog", "Search"], "Search STAC by space, time, collection and cloud cover and inspect returned assets.", "Which catalog evidence proves this asset fits the study area, period and product requirement?", ["Catalog, Collection, Item and Asset", "Spatial and temporal search", "Collection and quality properties", "Connecting metadata to COG assets"], "Query a public STAC API for coastal-meadow imagery and build a reproducible item inventory.", "Record endpoint, query geometry, date range, collection, filters, item IDs, licences and asset roles.", "stac_search_inventory.ipynb", `from pystac_client import Client
+  lesson(42, 8, "STAC", "Discover cloud-hosted Earth Observation assets through consistent catalog metadata.", ["STAC", "Catalog", "Search"], "Search STAC by space, time, collection and cloud cover and inspect returned assets.", "Which catalog evidence proves this asset fits the study area, period and product requirement?", ["Catalog, Collection, Item and Asset", "Spatial and temporal search", "Collection and quality properties", "Connecting metadata to COG assets"], "Query a public STAC API for coastal-meadow imagery and build a reproducible item inventory.", "Record endpoint, query geometry, date range, collection, filters, item IDs, licences and asset roles.", "stac_search_inventory.ipynb", `from pystac_client import Client
 
 catalog = Client.open("https://earth-search.aws.element84.com/v1")
 search = catalog.search(
@@ -379,7 +430,7 @@ search = catalog.search(
 items = list(search.items())
 print("items", len(items))`, "Does scene-level cloud cover guarantee a clear study area?", "STAC makes search reproducible, but asset suitability still requires local QA, band-role inspection and licence review.", "Saving only temporary signed asset URLs. Preserve stable item IDs and catalog metadata so assets can be resolved again.", { title: "STAC specification", href: "https://stacspec.org/en" }),
 
-  lesson(39, 9, "Web Maps and Spatial Services", "Understand how browsers request tiles, features and coverages from spatial services.", ["XYZ", "WMS/WFS", "Vector tiles"], "Choose a delivery pattern from data volume, interaction and analytical need.", "Should the client receive a rendered picture, vector features or measured coverage values?", ["Client and server roles", "XYZ and vector tiles", "WMS, WFS and WMTS", "GeoJSON and APIs"], "Design a delivery architecture for an interactive environmental monitoring map.", "Record CRS, scale limits, styling responsibility, cache behaviour, payload size and data sensitivity.", "web_delivery_architecture.md", `delivery = {
+  lesson(43, 9, "Web Maps and Spatial Services", "Understand how browsers request tiles, features and coverages from spatial services.", ["XYZ", "WMS/WFS", "Vector tiles"], "Choose a delivery pattern from data volume, interaction and analytical need.", "Should the client receive a rendered picture, vector features or measured coverage values?", ["Client and server roles", "XYZ and vector tiles", "WMS, WFS and WMTS", "GeoJSON and APIs"], "Design a delivery architecture for an interactive environmental monitoring map.", "Record CRS, scale limits, styling responsibility, cache behaviour, payload size and data sensitivity.", "web_delivery_architecture.md", `delivery = {
     "context_basemap": "XYZ tiles",
     "styled monitoring layer": "WMS or vector tiles",
     "small queryable results": "GeoJSON API",
@@ -387,7 +438,7 @@ print("items", len(items))`, "Does scene-level cloud cover guarantee a clear stu
 }
 for layer, service in delivery.items():
     print(layer, service)`, "Which option sends styled pixels rather than source features?", "Web delivery separates authoritative data, service representation and browser interaction. The correct service depends on whether users view, query or analyse.", "Sending a huge GeoJSON because it is easy to inspect. Generalisation, tiling or server-side queries may provide a faster and safer product.", { title: "OGC web services", href: "https://www.ogc.org/standards/" }),
-  lesson(40, 9, "Interactive Mapping", "Communicate spatial results through a focused interactive map without teaching full frontend engineering.", ["Folium", "MapLibre", "Accessibility"], "Build a lightweight map that reveals evidence, uncertainty and provenance.", "Which interactions help the audience answer the scientific question?", ["Map purpose and audience", "Layers, popups and legends", "Performance and simplification", "Accessible alternatives and provenance"], "Create a map of monitoring results with restrained styling, meaningful popups and a static data summary.", "Test missing values, legend semantics, keyboard access, mobile layout, payload size and source attribution.", "environmental_monitoring_map.html", `import folium
+  lesson(44, 9, "Interactive Mapping", "Communicate spatial results through a focused interactive map without teaching full frontend engineering.", ["Folium", "MapLibre", "Accessibility"], "Build a lightweight map that reveals evidence, uncertainty and provenance.", "Which interactions help the audience answer the scientific question?", ["Map purpose and audience", "Layers, popups and legends", "Performance and simplification", "Accessible alternatives and provenance"], "Create a map of monitoring results with restrained styling, meaningful popups and a static data summary.", "Test missing values, legend semantics, keyboard access, mobile layout, payload size and source attribution.", "environmental_monitoring_map.html", `import folium
 
 map_view = folium.Map(location=[58.6, 24.5], zoom_start=9, tiles="CartoDB positron")
 folium.GeoJson(
@@ -395,7 +446,7 @@ folium.GeoJson(
     tooltip=folium.GeoJsonTooltip(fields=["site_id", "status"]),
 ).add_to(map_view)
 map_view.save("outputs/monitoring_map.html")`, "Which information should remain available outside the visual map?", "Interaction should clarify spatial evidence, not decorate it. A table or text summary supports accessibility and precise interpretation.", "Mapping raw sensitive locations. Generalise, aggregate or restrict delivery when ecological or personal data require protection.", { title: "Folium documentation", href: "https://python-visualization.github.io/folium/latest/" }),
-  lesson(41, 9, "OGC Standards and Interoperability", "Relate established web services, OGC APIs, COG and STAC across professional systems.", ["OGC API", "Interoperability", "Services"], "Explain which standards support maps, features, coverages and catalog discovery.", "How can different tools request the same data with shared semantics?", ["WMS, WFS and WCS", "OGC API families", "COG as data access", "STAC as catalog metadata"], "Map a cross-organisation data flow from catalog discovery to analysis and map delivery.", "Verify standard version, endpoint capabilities, CRS support, paging, licence and stable identifiers.", "interoperability_map.md", `standards = {
+  lesson(45, 9, "OGC Standards and Interoperability", "Relate established web services, OGC APIs, COG and STAC across professional systems.", ["OGC API", "Interoperability", "Services"], "Explain which standards support maps, features, coverages and catalog discovery.", "How can different tools request the same data with shared semantics?", ["WMS, WFS and WCS", "OGC API families", "COG as data access", "STAC as catalog metadata"], "Map a cross-organisation data flow from catalog discovery to analysis and map delivery.", "Verify standard version, endpoint capabilities, CRS support, paging, licence and stable identifiers.", "interoperability_map.md", `standards = {
     "rendered map": "WMS / OGC API Maps",
     "vector features": "WFS / OGC API Features",
     "raster coverage": "WCS / OGC API Coverages / COG",
@@ -403,7 +454,7 @@ map_view.save("outputs/monitoring_map.html")`, "Which information should remain 
 }
 for need, standard in standards.items():
     print(need, standard, sep=" → ")`, "Why are STAC and COG complementary rather than competing standards?", "STAC describes and locates assets; COG structures a raster for efficient reads. Interoperability emerges from clear roles and metadata.", "Assuming standard-compliant means identical behaviour. Clients must inspect advertised capabilities, versions and conformance classes.", { title: "OGC API standards", href: "https://ogcapi.ogc.org/" }),
-  lesson(42, 10, "ArcGIS Professional Ecosystem", "Position ArcGIS components within a broader interoperable geospatial architecture.", ["ArcGIS Pro", "Enterprise", "Interoperability"], "Compare proprietary and open components by workflow role without making the Academy dependent on one vendor.", "Which component owns data, processing, automation, service delivery and governance?", ["ArcGIS Pro and geodatabases", "ModelBuilder and ArcPy", "ArcGIS Online and Enterprise", "Comparison with QGIS, GeoPandas, PostGIS and MapLibre"], "Translate one Academy workflow between ArcGIS and open-source components and identify portable standards.", "Separate data formats, analytical methods, licences, service interfaces and organisation-specific governance.", "enterprise_gis_comparison.md", `roles = {
+  lesson(46, 10, "ArcGIS Professional Ecosystem", "Position ArcGIS components within a broader interoperable geospatial architecture.", ["ArcGIS Pro", "Enterprise", "Interoperability"], "Compare proprietary and open components by workflow role without making the Academy dependent on one vendor.", "Which component owns data, processing, automation, service delivery and governance?", ["ArcGIS Pro and geodatabases", "ModelBuilder and ArcPy", "ArcGIS Online and Enterprise", "Comparison with QGIS, GeoPandas, PostGIS and MapLibre"], "Translate one Academy workflow between ArcGIS and open-source components and identify portable standards.", "Separate data formats, analytical methods, licences, service interfaces and organisation-specific governance.", "enterprise_gis_comparison.md", `roles = {
     "desktop QA": ["ArcGIS Pro", "QGIS"],
     "Python processing": ["ArcPy", "GeoPandas/Rasterio"],
     "spatial database": ["Enterprise geodatabase", "PostGIS"],
@@ -412,20 +463,20 @@ for need, standard in standards.items():
 for role, options in roles.items():
     print(role, options)`, "Which parts of a workflow are easiest to preserve across ecosystems?", "Professional practice often spans ecosystems. Open formats, explicit methods and standard services reduce lock-in while respecting organisational needs.", "Comparing products only by feature count. Governance, skills, licences, scale, integration and reproducibility determine fit.", { title: "ArcGIS Pro documentation", href: "https://pro.arcgis.com/en/pro-app/latest/help/main/welcome-to-the-arcgis-pro-app-help.htm" }),
 
-  lesson(43, 11, "Image Segmentation Fundamentals", "Separate pixels into meaningful regions before classification or measurement.", ["Segmentation", "Texture", "Objects"], "Compare threshold, connected-region and object-based segmentation concepts.", "What constitutes one spatial object for this scientific question?", ["Thresholding", "Connected components", "Texture and object-based image analysis", "Segmentation versus classification"], "Segment a supplied vegetation image and evaluate boundary quality against reference objects.", "Report threshold or scale parameters, minimum object size, edge effects and over/under-segmentation.", "segmentation_experiment.ipynb", `from skimage.measure import label
+  lesson(47, 11, "Image Segmentation Fundamentals", "Separate pixels into meaningful regions before classification or measurement.", ["Segmentation", "Texture", "Objects"], "Compare threshold, connected-region and object-based segmentation concepts.", "What constitutes one spatial object for this scientific question?", ["Thresholding", "Connected components", "Texture and object-based image analysis", "Segmentation versus classification"], "Segment a supplied vegetation image and evaluate boundary quality against reference objects.", "Report threshold or scale parameters, minimum object size, edge effects and over/under-segmentation.", "segmentation_experiment.ipynb", `from skimage.measure import label
 
 vegetation = ndvi > 0.45
 regions = label(vegetation, connectivity=2)
 region_sizes = np.bincount(regions.ravel())[1:]
 print("regions", len(region_sizes))
 print("median pixels", np.median(region_sizes))`, "Will changing a threshold alter only class labels, or can it alter the number and shapes of objects?", "Segmentation defines candidate objects; classification assigns meaning. Boundary quality should be evaluated at the scale of the ecological target.", "Selecting parameters from the final evaluation scene. Reserve independent locations to test whether objects generalise.", { title: "scikit-image segmentation", href: "https://scikit-image.org/docs/stable/api/skimage.segmentation.html" }),
-  lesson(44, 11, "Deep Learning for Geospatial Images", "Understand the image-to-patch-to-probability-to-mask workflow before using model APIs.", ["CNN", "U-Net", "Semantic segmentation"], "Design a geospatial semantic-segmentation experiment with defensible labels and spatial splits.", "What labelled spatial evidence can teach the model the target class without leakage?", ["Convolutions and receptive fields", "Semantic segmentation and U-Net", "Patches, labels and augmentation", "Train, validation and test geography"], "Specify a patch dataset and trace shapes through a conceptual segmentation pipeline.", "Check label provenance, class balance, patch overlap, spatial split, resolution and probability calibration.", "geospatial_segmentation_design.ipynb", `patch_size = 256
+  lesson(48, 11, "Deep Learning for Geospatial Images", "Understand the image-to-patch-to-probability-to-mask workflow before using model APIs.", ["CNN", "U-Net", "Semantic segmentation"], "Design a geospatial semantic-segmentation experiment with defensible labels and spatial splits.", "What labelled spatial evidence can teach the model the target class without leakage?", ["Convolutions and receptive fields", "Semantic segmentation and U-Net", "Patches, labels and augmentation", "Train, validation and test geography"], "Specify a patch dataset and trace shapes through a conceptual segmentation pipeline.", "Check label provenance, class balance, patch overlap, spatial split, resolution and probability calibration.", "geospatial_segmentation_design.ipynb", `patch_size = 256
 bands = ["blue", "green", "red", "nir"]
 batch_shape = (8, len(bands), patch_size, patch_size)
 mask_shape = (8, 1, patch_size, patch_size)
 print("image batch", batch_shape)
 print("target masks", mask_shape)`, "Why can randomly splitting overlapping patches produce unrealistically high validation accuracy?", "A segmentation model learns spatial and spectral patterns encoded by labels. Validation must test new geography rather than neighbouring fragments of training scenes.", "Starting with a complex architecture before establishing a baseline and label audit. Model capacity cannot repair ambiguous classes or leakage.", { title: "PyTorch semantic segmentation", href: "https://pytorch.org/vision/stable/models.html#semantic-segmentation" }),
-  lesson(45, 11, "Geospatial Deep Learning QA", "Audit leakage, domain shift, annotation uncertainty and false confidence in mapped predictions.", ["Spatial leakage", "Domain shift", "Calibration"], "Evaluate a geospatial model beyond aggregate accuracy and communicate where it may fail.", "Does the evaluation represent the places, seasons, sensors and resolutions where the model will be used?", ["Spatial leakage and overlapping patches", "Domain shift", "Annotation uncertainty and imbalance", "Probability calibration and false confidence"], "Review a prediction map, spatial confusion patterns and uncertainty across independent regions.", "Report per-class metrics, spatial holdouts, calibration, error geography, threshold choice and unsupported domains.", "deep_learning_qa_report.pdf", `from sklearn.metrics import confusion_matrix
+  lesson(49, 11, "Geospatial Deep Learning QA", "Audit leakage, domain shift, annotation uncertainty and false confidence in mapped predictions.", ["Spatial leakage", "Domain shift", "Calibration"], "Evaluate a geospatial model beyond aggregate accuracy and communicate where it may fail.", "Does the evaluation represent the places, seasons, sensors and resolutions where the model will be used?", ["Spatial leakage and overlapping patches", "Domain shift", "Annotation uncertainty and imbalance", "Probability calibration and false confidence"], "Review a prediction map, spatial confusion patterns and uncertainty across independent regions.", "Report per-class metrics, spatial holdouts, calibration, error geography, threshold choice and unsupported domains.", "deep_learning_qa_report.pdf", `from sklearn.metrics import confusion_matrix
 
 predicted = probability >= 0.6
 matrix = confusion_matrix(reference.ravel(), predicted.ravel())
@@ -435,7 +486,7 @@ for region in np.unique(region_ids):
     use = region_ids == region
     print(region, (predicted[use] == reference[use]).mean())`, "Can a high overall accuracy coexist with failure on a rare ecologically important class?", "Model quality is geographically and class conditional. A responsible product maps limitations and decision thresholds alongside predictions.", "Treating softmax probability as calibrated certainty. Confidence requires empirical calibration and may fail under domain shift.", { title: "scikit-learn probability calibration", href: "https://scikit-learn.org/stable/modules/calibration.html" }),
 
-  lesson(46, 12, "APIs and Automated Data Acquisition", "Retrieve versioned environmental data robustly while respecting authentication, pagination and rate limits.", ["HTTP", "JSON", "Retries"], "Design a polite, recoverable and provenance-rich API acquisition step.", "Can this exact request and response inventory be reproduced later?", ["HTTP requests and JSON", "Authentication and secrets", "Pagination, retries and rate limits", "Checksums and provenance"], "Build a bounded API request workflow that records query parameters and response metadata.", "Validate status, schema, pagination completeness, content length, timestamps and stable identifiers.", "api_acquisition_log.ipynb", `import requests
+  lesson(50, 12, "APIs and Automated Data Acquisition", "Retrieve versioned environmental data robustly while respecting authentication, pagination and rate limits.", ["HTTP", "JSON", "Retries"], "Design a polite, recoverable and provenance-rich API acquisition step.", "Can this exact request and response inventory be reproduced later?", ["HTTP requests and JSON", "Authentication and secrets", "Pagination, retries and rate limits", "Checksums and provenance"], "Build a bounded API request workflow that records query parameters and response metadata.", "Validate status, schema, pagination completeness, content length, timestamps and stable identifiers.", "api_acquisition_log.ipynb", `import requests
 
 url = "https://api.gbif.org/v1/occurrence/search"
 params = {"country": "EE", "scientific_name": "Salicornia europaea", "limit": 100}
@@ -444,20 +495,20 @@ response.raise_for_status()
 payload = response.json()
 print("records", len(payload["results"]))
 print("request", response.url)`, "Which failure should be retried, and which should stop for corrected authentication or query parameters?", "Automation should make acquisition repeatable without hiding service constraints. Store query, item IDs, retrieval time and licence—not secret tokens.", "Hard-coding API keys in notebooks. Read secrets from protected environment variables and exclude them from version control.", { title: "Requests documentation", href: "https://requests.readthedocs.io/en/latest/" }),
-  lesson(47, 12, "Command-Line Geospatial Tools", "Use inspection, conversion and warping commands as composable professional operations.", ["GDAL", "ogr2ogr", "rio"], "Select a CLI tool by operation category and preserve commands in an audit log.", "What inspection or transformation must happen before a larger workflow proceeds?", ["gdalinfo and ogrinfo inspection", "gdal_translate and ogr2ogr conversion", "gdalwarp reprojection and resampling", "rio as the Rasterio command interface"], "Inspect source data, convert a vector layer and create a validated analysis raster using explicit commands.", "Capture tool version, input/output paths, CRS, creation options, command exit status and post-run inspection.", "geospatial_cli_workflow.sh", `gdalinfo data/source.tif
+  lesson(51, 12, "Command-Line Geospatial Tools", "Use inspection, conversion and warping commands as composable professional operations.", ["GDAL", "ogr2ogr", "rio"], "Select a CLI tool by operation category and preserve commands in an audit log.", "What inspection or transformation must happen before a larger workflow proceeds?", ["gdalinfo and ogrinfo inspection", "gdal_translate and ogr2ogr conversion", "gdalwarp reprojection and resampling", "rio as the Rasterio command interface"], "Inspect source data, convert a vector layer and create a validated analysis raster using explicit commands.", "Capture tool version, input/output paths, CRS, creation options, command exit status and post-run inspection.", "geospatial_cli_workflow.sh", `gdalinfo data/source.tif
 ogrinfo -so data/plots.gpkg plots
 ogr2ogr -f GPKG outputs/valid_plots.gpkg data/plots.gpkg \
   -where "qa_status = 'valid'"
 gdalwarp -t_srs EPSG:3301 -r bilinear \
   data/source.tif outputs/analysis_grid.tif
 gdalinfo outputs/analysis_grid.tif`, "Which command only inspects data, and which creates a transformed derivative?", "CLI commands expose precise, scriptable operations. They remain scientific steps that require method justification and output verification.", "Copying a command without checking shell quoting or overwrite behaviour. Test on a small derivative and inspect the result.", { title: "GDAL programs", href: "https://gdal.org/en/stable/programs/index.html" }),
-  lesson(48, 12, "Docker for Geospatial Reproducibility", "Package difficult native dependencies and project commands into a repeatable execution environment.", ["Docker", "GDAL", "Environment"], "Explain images and containers and create a minimal geospatial environment specification.", "Can another researcher rebuild the analytical environment and run the same command?", ["Image versus container", "Dependency and GDAL compatibility", "Pinned environments and data mounts", "Limits of containers"], "Create a Dockerfile and runbook for the pipeline without copying private data into the image.", "Pin base image and key dependencies, run as non-root, mount inputs read-only and record image digest.", "geospatial_pipeline_container", `FROM ghcr.io/osgeo/gdal:ubuntu-small-3.11.4
+  lesson(52, 12, "Docker for Geospatial Reproducibility", "Package difficult native dependencies and project commands into a repeatable execution environment.", ["Docker", "GDAL", "Environment"], "Explain images and containers and create a minimal geospatial environment specification.", "Can another researcher rebuild the analytical environment and run the same command?", ["Image versus container", "Dependency and GDAL compatibility", "Pinned environments and data mounts", "Limits of containers"], "Create a Dockerfile and runbook for the pipeline without copying private data into the image.", "Pin base image and key dependencies, run as non-root, mount inputs read-only and record image digest.", "geospatial_pipeline_container", `FROM ghcr.io/osgeo/gdal:ubuntu-small-3.11.4
 WORKDIR /academy
 COPY requirements.txt .
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 COPY src/ src/
 ENTRYPOINT ["python3", "src/run_pipeline.py"]`, "Which files belong in the immutable image, and which should be mounted at runtime?", "A container captures software and system dependencies. It does not capture data provenance, hardware equivalence or scientific decisions by itself.", "Using a floating latest tag in a published workflow. Record a version or digest so the environment can be reconstructed.", { title: "Docker build best practices", href: "https://docs.docker.com/build/building/best-practices/" }),
-  lesson(49, 12, "Workflow Automation and CI", "Turn the complete pipeline into validated stages that run consistently on every change.", ["GitHub Actions", "Tests", "Artifacts"], "Design continuous integration for input validation, processing tests and reviewable outputs.", "Which automated evidence should block publication when the workflow changes?", ["Input validation and contracts", "Unit and integration tests", "Deterministic outputs and artifacts", "Continuous integration with GitHub Actions"], "Add a CI workflow that installs a pinned environment, validates a small fixture, runs tests and publishes a QA artifact.", "Use tiny licensed fixtures, cache safely, fail on warnings that affect validity and retain logs and checksums.", "geospatial_pipeline_ci.yml", `name: validate-geospatial-pipeline
+  lesson(53, 12, "Workflow Automation and CI", "Turn the complete pipeline into validated stages that run consistently on every change.", ["GitHub Actions", "Tests", "Artifacts"], "Design continuous integration for input validation, processing tests and reviewable outputs.", "Which automated evidence should block publication when the workflow changes?", ["Input validation and contracts", "Unit and integration tests", "Deterministic outputs and artifacts", "Continuous integration with GitHub Actions"], "Add a CI workflow that installs a pinned environment, validates a small fixture, runs tests and publishes a QA artifact.", "Use tiny licensed fixtures, cache safely, fail on warnings that affect validity and retain logs and checksums.", "geospatial_pipeline_ci.yml", `name: validate-geospatial-pipeline
 on: [push, pull_request]
 jobs:
   test:
@@ -534,6 +585,14 @@ export const publishedModule2LessonIds = [
   "lesson-2-15",
   "lesson-2-16",
   "lesson-2-17",
+  "lesson-2-18",
+  "lesson-2-19",
+  "lesson-2-20",
+  "lesson-2-21",
+  "lesson-2-22",
+  "lesson-2-23",
+  "lesson-2-24",
+  "lesson-2-25",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -567,6 +626,14 @@ export const module2ChapterPractica = [
     tools: ["Raster harmonisation", "Alignment QA", "Professional handover"],
     artifact: "Artifact 2.C — Analysis-ready raster stack and QA report",
   },
+  {
+    id: "module-2-chapter-4-practicum",
+    chapter: 4,
+    title: "Evaluate a UAV Survey Before Scientific Analysis",
+    description: "Audit a deliberately imperfect UAV handover and decide which products and regions are defensible for ecological use.",
+    tools: ["UAV product QA", "Photogrammetry evidence", "Professional handover"],
+    artifact: "Artifact 2.D — Professional UAV Survey Assessment",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -574,10 +641,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "17 lessons · 3 practica available",
-  syllabusAriaLabel: "Complete forty-nine-lesson Module 2 map",
+  navigationMeta: "25 lessons · 4 practica available",
+  syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.17 and three chapter practica are available now, completing Spatial Foundations, Vector GIS and Raster Science. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.25 and four chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science and UAV and Photogrammetry. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -623,7 +690,7 @@ export const module2Overview: AcademyModuleOverview = {
     };
   }),
   capstone: {
-    number: 50,
+    number: 54,
     title: "UAV and Satellite Analysis Pipeline",
     status: "planned",
   },
@@ -1761,10 +1828,191 @@ const publishedLessonConfigurations: Record<string, PublishedLessonConfiguration
   },
 };
 
+function uavRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves immutable inputs, identifiers, parameters, versions, checksums and reviewable outputs" },
+    { dimension: "Scientific communication", expectation: "Connects each finding to evidence, intended use, uncertainty, consequence and next action" },
+  ];
+}
+
+const commonUavChecklist = [
+  "Synthetic training data are never presented as real UAV imagery or published field locations",
+  "Observed metadata, derived calculations, assumptions and decisions remain separate",
+  "Spatial and temporal support are explicit",
+  "Raw inputs remain immutable and every derivative is reopened and checked",
+  "Limitations and blocking evidence are visible in the portfolio artifact",
+];
+
+const uavLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-18": {
+    estimatedTime: "70–90 minutes",
+    lessonType: "Concept Lesson",
+    markdownFile: "content/lessons/module-2/lesson-18.md",
+    formativeChecks: [
+      { id: "m2-l18-system", question: "Which item is normally a derived UAV product rather than a direct sensor record?", options: ["Orthomosaic", "Individual raw camera frame", "Image capture timestamp"], correctOption: 0, explanation: "An orthomosaic is produced through camera modelling, orthorectification, surface use, resampling and mosaicking; it is not one direct exposure." },
+      { id: "m2-l18-sensors", question: "What does a thermal UAV camera most directly respond to?", options: ["Thermal infrared radiation reaching the detector", "Air temperature at the weather station", "Plant water stress as a direct measurement"], correctOption: 0, explanation: "A thermal detector records infrared signal. Apparent surface temperature and ecological stress require calibration, emissivity assumptions, environmental context and validation." },
+      { id: "m2-l18-time", question: "Why can one orthomosaic contain temporal inconsistency?", options: ["Its source images can be acquired across changing light, wind, tide or surface state", "All mosaic pixels are captured simultaneously", "A CRS transformation adds time differences"], correctOption: 0, explanation: "Mosaicking places observations from an acquisition interval into one spatial raster but cannot make their illumination or surface conditions simultaneous." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "Direct records, navigation metadata and every derived product are classified", "GSD is distinguished from accuracy and effective resolution"],
+    rubric: uavRubric("Classifies UAV system components, sensor measurements and product provenance accurately", "Explains why platform, acquisition and processing jointly determine the evidence"),
+    coreReferences: [
+      { title: "USGS National Uncrewed Systems Office", href: "https://www.usgs.gov/centers/national-uncrewed-systems-office" },
+      { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" },
+    ],
+    furtherReading: [
+      { title: "NASA Earthdata remote sensing", href: "https://www.earthdata.nasa.gov/learn/backgrounders/remote-sensing" },
+      { title: "OGC SensorThings standard", href: "https://www.ogc.org/standards/sensorthings/" },
+    ],
+  },
+  "lesson-2-19": {
+    estimatedTime: "90–110 minutes",
+    lessonType: "Concept + Calculation Lab",
+    markdownFile: "content/lessons/module-2/lesson-19.md",
+    formativeChecks: [
+      { id: "m2-l19-height", question: "With one camera and a level surface, what usually happens when height above ground increases?", options: ["GSD and footprint increase", "GSD becomes finer while footprint increases", "Absolute accuracy is guaranteed to improve"], correctOption: 0, explanation: "In the simplified pinhole relationship, GSD and linear footprint scale with camera-to-surface height; accuracy still requires separate evidence." },
+      { id: "m2-l19-overlap", question: "What does image overlap principally provide?", options: ["Repeated views that can support matching and geometric redundancy", "Guaranteed sharpness and positional accuracy", "Automatic reflectance calibration"], correctOption: 0, explanation: "Overlap supplies common scene content between images. Blur, texture, view distribution, illumination and georeferencing still control product quality." },
+      { id: "m2-l19-shutter", question: "Why can a rolling shutter distort a moving-platform image?", options: ["Different rows are recorded at slightly different times and camera poses", "It always uses a longer focal length", "It changes the output CRS during exposure"], correctOption: 0, explanation: "Sequential row readout means motion can produce row-dependent geometry; effect depends on readout, motion, exposure, stabilisation and modelling." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "GSD, footprint and spacing use consistent units and stated assumptions", "Terrain, speed, trigger, shutter and achieved overlap are evaluated"],
+    rubric: uavRubric("Calculates mission geometry and sensitivity correctly", "Explains overlap as an opportunity for reconstruction rather than a universal guarantee"),
+    coreReferences: [
+      { title: "Pix4D image acquisition plan", href: "https://support.pix4d.com/hc/en-us/articles/202557459" },
+      { title: "OpenDroneMap flying guidance", href: "https://docs.opendronemap.org/flying/" },
+    ],
+    furtherReading: [
+      { title: "USGS National Uncrewed Systems Office", href: "https://www.usgs.gov/centers/national-uncrewed-systems-office" },
+      { title: "Agisoft Metashape user manual", href: "https://www.agisoft.com/downloads/user-manuals/" },
+    ],
+  },
+  "lesson-2-20": {
+    estimatedTime: "100–120 minutes",
+    lessonType: "Scientific Measurement Lab",
+    markdownFile: "content/lessons/module-2/lesson-20.md",
+    formativeChecks: [
+      { id: "m2-l20-dn", question: "Why is a camera digital number not automatically surface reflectance?", options: ["It also depends on illumination, exposure, sensor response and processing", "Digital numbers never contain spectral information", "Reflectance is defined only by the filename"], correctOption: 0, explanation: "A stored DN is produced by the sensor and acquisition chain. Reflectance requires a documented calibration and illumination-relative product definition." },
+      { id: "m2-l20-panel", question: "What does a calibrated reference panel provide?", options: ["Known-target evidence within a protocol, not a guarantee of perfect flight-wide reflectance", "Automatic correction of saturation", "Proof that every band is geometrically aligned"], correctOption: 0, explanation: "Panel condition, exposure, timing, illumination, directional response and sensor processing must all be reviewed, and several uncertainties remain." },
+      { id: "m2-l20-registration", question: "Why is band co-registration part of multispectral QA?", options: ["Misregistration makes spectral arithmetic combine different ground footprints", "It converts radiance into reflectance", "It guarantees temporal compatibility"], correctOption: 0, explanation: "A spectral index assumes corresponding cells describe the same spatial support; shifted lenses, timing or grids can create false edge patterns." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "DN, radiance and reflectance product claims remain distinct", "Exposure, saturation, panels, irradiance, gradient and registration are audited"],
+    rubric: uavRubric("Diagnoses radiometric metadata, scale, exposure, illumination and registration correctly", "Explains calibration evidence and remaining directional, saturation and timing limits"),
+    coreReferences: [
+      { title: "MicaSense image processing knowledge base", href: "https://support.micasense.com/hc/en-us/categories/115000274848-Image-Processing" },
+      { title: "Pix4D radiometric correction", href: "https://support.pix4d.com/hc/en-us/articles/115001846106" },
+    ],
+    furtherReading: [
+      { title: "NASA Earth Observatory: measuring vegetation", href: "https://earthobservatory.nasa.gov/features/MeasuringVegetation" },
+      { title: "Rasterio masks", href: "https://rasterio.readthedocs.io/en/stable/topics/masks.html" },
+    ],
+  },
+  "lesson-2-21": {
+    estimatedTime: "100–120 minutes",
+    lessonType: "Concept + QA Lab",
+    markdownFile: "content/lessons/module-2/lesson-21.md",
+    formativeChecks: [
+      { id: "m2-l21-geotag", question: "What does an image geotag establish by itself?", options: ["A recorded position estimate whose accuracy and reference still require evidence", "The final orthomosaic accuracy", "The vertical datum of every surface product"], correctOption: 0, explanation: "Geotags depend on GNSS, timing, offsets and reference systems and can initialise or constrain cameras without independently validating final products." },
+      { id: "m2-l21-control", question: "Why keep surveyed check points out of bundle adjustment?", options: ["To provide independent evidence of external product error", "To make fitted GCP residuals smaller", "Because check points cannot have vertical coordinates"], correctOption: 0, explanation: "A point used to fit the solution no longer provides independent validation. Withheld, distributed points test performance beyond fitting evidence." },
+      { id: "m2-l21-rmse", question: "What important behaviour can one planimetric RMSE conceal?", options: ["Directional bias, outliers and local spatial warping", "The number of raster bands", "The image exposure time"], correctOption: 0, explanation: "RMSE summarises magnitude but not sign or location. Component bias, maximum residual and a spatial vector map are required for diagnosis." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "GCP and check-point roles remain separate throughout", "Component bias, RMSE, maximum and spatial residuals include horizontal and vertical evidence"],
+    rubric: uavRubric("Calculates and maps residual evidence correctly without deleting difficult points", "Distinguishes direct georeferencing, fitted constraints, relative accuracy and independent absolute assessment"),
+    coreReferences: [
+      { title: "ASPRS Positional Accuracy Standards", href: "https://www.asprs.org/divisions-committees/standards" },
+      { title: "Pix4D ground control point guidance", href: "https://support.pix4d.com/hc/en-us/articles/202557489" },
+    ],
+    furtherReading: [
+      { title: "OpenDroneMap ground control points", href: "https://docs.opendronemap.org/gcp/" },
+      { title: "EPSG Dataset", href: "https://epsg.org/home.html" },
+    ],
+  },
+  "lesson-2-22": {
+    estimatedTime: "110–130 minutes",
+    lessonType: "Concept + Workflow Lab",
+    markdownFile: "content/lessons/module-2/lesson-22.md",
+    formativeChecks: [
+      { id: "m2-l22-perspective", question: "Why is assigning a CRS not equivalent to orthorectifying a raw image?", options: ["Orthorectification models camera perspective and surface geometry before mapping pixels", "CRS labels automatically estimate camera pose", "Raw images have no perspective"], correctOption: 0, explanation: "A raw image is a perspective projection. Orthorectification uses camera and surface models; a CRS label alone cannot remove relief and viewpoint displacement." },
+      { id: "m2-l22-tiepoints", question: "What is a tie point in Structure from Motion?", options: ["Matched image observations believed to represent one scene point", "A surveyed point that must always be a GCP", "A final orthomosaic cell"], correctOption: 0, explanation: "Tie points connect images and support camera/3-D estimation. Their ground coordinates are estimated and they are not independent surveyed control." },
+      { id: "m2-l22-reprojection", question: "What does low reprojection error most directly describe?", options: ["Agreement of fitted image observations with the fitted camera-and-point model", "Independent absolute accuracy everywhere", "Radiometric reflectance quality"], correctOption: 0, explanation: "Reprojection residuals are internal image-geometry diagnostics. External check points and other QA are required for map accuracy and scientific fitness." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "Every reconstruction stage identifies input, estimate, assumption and diagnostic", "Internal reprojection evidence is never presented as external accuracy"],
+    rubric: uavRubric("Audits alignment, camera, tie-point and reconstruction evidence accurately", "Explains the complete software-independent SfM chain and its causal failure modes"),
+    coreReferences: [
+      { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" },
+      { title: "Agisoft Metashape user manual", href: "https://www.agisoft.com/downloads/user-manuals/" },
+    ],
+    furtherReading: [
+      { title: "Pix4D processing steps", href: "https://support.pix4d.com/hc/en-us/articles/202557599" },
+      { title: "COLMAP structure-from-motion documentation", href: "https://colmap.github.io/tutorial.html" },
+    ],
+  },
+  "lesson-2-23": {
+    estimatedTime: "110–130 minutes",
+    lessonType: "Scientific Product Lab",
+    markdownFile: "content/lessons/module-2/lesson-23.md",
+    formativeChecks: [
+      { id: "m2-l23-clouds", question: "What primarily distinguishes a sparse SfM cloud from a dense reconstruction?", options: ["Sparse points come from tie-point geometry; dense processing estimates many more surface points", "Sparse clouds are always LiDAR", "Dense clouds are continuous terrain truth"], correctOption: 0, explanation: "Sparse points support camera alignment and block diagnosis; dense methods estimate more surface samples, still with uneven support and uncertainty." },
+      { id: "m2-l23-dtm", question: "What evidence is required before calling a product a DTM?", options: ["A documented ground-identification, interpolation and validation process", "A smooth elevation surface", "The filename contains terrain"], correctOption: 0, explanation: "A DTM is an interpreted bare-earth approximation. Dense vegetation may hide ground, so classification and independent evidence determine credibility." },
+      { id: "m2-l23-mosaic", question: "Why can one orthomosaic contain a visible seam?", options: ["Different orthorectified source images can differ in illumination, geometry, time or sharpness", "Every source pixel is one simultaneous exposure", "The DSM is necessarily bare earth"], correctOption: 0, explanation: "Mosaicking selects and blends contributions from multiple views; source and processing differences can create radiometric or geometric boundaries." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "Point cloud, DSM, DTM, orthorectified image and orthomosaic meanings are distinct", "Seam, ghosting, DSM artefacts, occlusion, interpolation and vertical limits are mapped"],
+    rubric: uavRubric("Diagnoses the synthetic mosaic and DSM fixtures correctly", "Explains how each product is derived and refuses unsupported terrain or canopy-height claims"),
+    coreReferences: [
+      { title: "USGS digital elevation terminology", href: "https://pubs.usgs.gov/publication/70223828" },
+      { title: "OpenDroneMap outputs", href: "https://docs.opendronemap.org/outputs/" },
+    ],
+    furtherReading: [
+      { title: "GDAL DEM processing", href: "https://gdal.org/en/stable/programs/gdaldem.html" },
+      { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" },
+    ],
+  },
+  "lesson-2-24": {
+    estimatedTime: "130–150 minutes",
+    lessonType: "Professional Practicum",
+    markdownFile: "content/lessons/module-2/lesson-24.md",
+    formativeChecks: [
+      { id: "m2-l24-mission", question: "Which evidence distinguishes the achieved mission from its plan?", options: ["Captured positions/times, image quality, aligned frames and actual coverage", "The planned overlap percentage alone", "The output colour palette"], correctOption: 0, explanation: "Actual frames, timing, terrain and alignment show what was observed. A planned route cannot reveal missing or unusable coverage by itself." },
+      { id: "m2-l24-georef", question: "Most check points pass but one weak edge has a large residual. What is defensible?", options: ["Record a regional warning and evaluate intended support there", "Delete the point to improve global RMSE", "Declare the entire survey perfect"], correctOption: 0, explanation: "Local deformation can affect a bounded area. Preserve the evidence, investigate cause and make product/region-specific decisions." },
+      { id: "m2-l24-multispectral", question: "Red Edge scale is undocumented. What is its status for a quantitative index?", options: ["Blocking review until authoritative scale metadata are supplied", "Pass because values resemble reflectance times 10000", "Divide by the largest value"], correctOption: 0, explanation: "A familiar value range is not authoritative metadata. The derivative must stop rather than introduce an assumed measurement scale." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "All eight QA categories contain expected, observed, status, severity, consequence and action", "Product- and region-specific decisions include at least one accept, review and unsuitable case"],
+    rubric: uavRubric("Builds a complete reproducible QA matrix and spatial error map", "Integrates independent QA dimensions without allowing one pass to cancel another failure"),
+    coreReferences: [
+      { title: "ASPRS Positional Accuracy Standards", href: "https://www.asprs.org/divisions-committees/standards" },
+      { title: "QGIS raster properties", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_properties.html" },
+    ],
+    furtherReading: [
+      { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" },
+      { title: "Rasterio masks", href: "https://rasterio.readthedocs.io/en/stable/topics/masks.html" },
+    ],
+  },
+  "lesson-2-25": {
+    estimatedTime: "140–170 minutes",
+    lessonType: "Integrated Technical Practicum",
+    markdownFile: "content/lessons/module-2/lesson-25.md",
+    formativeChecks: [
+      { id: "m2-l25-inventory", question: "Red Edge values look like reflectance multiplied by 10000, but scale metadata are missing. What should happen?", options: ["Block quantitative use until the scale is verified", "Divide by 10000 automatically", "Clip all values to one"], correctOption: 0, explanation: "Value appearance is not product definition. Recording a blocked derivative is more reproducible than inventing a scale factor." },
+      { id: "m2-l25-alignment", question: "Two bands share CRS, resolution and shape but their origins differ by half a cell. Can they be combined directly?", options: ["No; their corresponding indices represent different ground footprints", "Yes; shape is sufficient", "Yes; NDVI corrects alignment"], correctOption: 0, explanation: "Cell-wise arithmetic requires identical transforms/origins and validated content registration, not merely matching array dimensions." },
+      { id: "m2-l25-index", question: "What should safe normalised-difference code do where the denominator is near zero?", options: ["Leave the result invalid under a declared epsilon rule", "Return positive infinity", "Replace the denominator with one silently"], correctOption: 0, explanation: "Near-zero denominators make ratios unstable. The joint mask and epsilon rule should propagate invalidity and remain documented." },
+    ],
+    submissionChecklist: [...commonUavChecklist, "Every band passes identity, scale, radiometry, grid and mask gates before arithmetic", "Accepted and blocked layers both appear in the stack manifest with reasons"],
+    rubric: uavRubric("Builds correct masks, safe indices, aligned outputs, extraction and round-trip QA", "Explains why numerical index validity does not establish ecological validity"),
+    coreReferences: [
+      { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" },
+      { title: "Rasterio masks", href: "https://rasterio.readthedocs.io/en/stable/topics/masks.html" },
+    ],
+    furtherReading: [
+      { title: "USGS Landsat NDVI", href: "https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index" },
+      { title: "NumPy floating-point error handling", href: "https://numpy.org/doc/stable/reference/generated/numpy.errstate.html" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
   rasterio: "1.4.4",
+  pandas: "2.2.3",
   geopandas: "1.1.4",
   shapely: "2.1.2",
   pyproj: "3.7.2",
@@ -1773,6 +2021,7 @@ export const MODULE2_SOFTWARE_VERSIONS = {
 
 function module2TestedVersions(includeQgis: boolean, includeRaster = false) {
   return [
+    { label: "pandas", value: MODULE2_SOFTWARE_VERSIONS.pandas },
     { label: "GeoPandas", value: MODULE2_SOFTWARE_VERSIONS.geopandas },
     { label: "Shapely", value: MODULE2_SOFTWARE_VERSIONS.shapely },
     { label: "PyProj", value: MODULE2_SOFTWARE_VERSIONS.pyproj },
@@ -1786,7 +2035,7 @@ function module2TestedVersions(includeQgis: boolean, includeRaster = false) {
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
   publishedModule2Lessons.map((source, index) => {
-    const configuration = publishedLessonConfigurations[source.id];
+    const configuration = publishedLessonConfigurations[source.id] ?? uavLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -1805,11 +2054,13 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
           pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
           jupyterEnvironment: "JupyterLab 4 / Notebook 7",
           testedVersions: module2TestedVersions(
-            source.id === "lesson-2-10" || source.chapter === 3,
-            source.chapter === 3,
+            source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4,
+            source.chapter === 3 || source.chapter === 4,
           ),
           reviewDate: "11 August 2026",
-          datasetCitation: "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+          datasetCitation: source.chapter === 4
+            ? "Synthetic UAV and Photogrammetry training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+            : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
         },
@@ -1823,7 +2074,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 3,
+    totalPositions: 4,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -1880,7 +2131,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 3,
+    totalPositions: 4,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -1937,7 +2188,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 3,
+    totalPositions: 4,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2002,6 +2253,79 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       furtherReading: [
         { title: "QGIS raster analysis", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_analysis.html" },
         { title: "USGS digital elevation terminology", href: "https://pubs.usgs.gov/publication/70223828" },
+      ],
+    },
+  },
+  "module-2-chapter-4-practicum": {
+    estimatedTime: "420–600 minutes",
+    lessonType: "Chapter Practicum",
+    position: 4,
+    totalPositions: 4,
+    markdownFile: "content/lessons/module-2/practicum-04.md",
+    formativeChecks: [
+      {
+        id: "m2-p4-gsd",
+        question: "The calculated nominal GSD is 2.19 cm. What can the final report claim from that value alone?",
+        options: [
+          "Only the approximate image sampling distance under the stated geometry and assumptions",
+          "The orthomosaic is horizontally accurate to 2.19 cm",
+          "Every 2.19 cm object can be detected",
+        ],
+        correctOption: 0,
+        explanation: "GSD is a nominal sampling description. Effective resolution, feature detection and absolute position require optical, processing and independent validation evidence.",
+      },
+      {
+        id: "m2-p4-radiometry",
+        question: "The Red Edge values resemble reflectance multiplied by 10000, but no authoritative scale is supplied. What is required?",
+        options: [
+          "Keep quantitative Red Edge derivatives blocked and request verified product metadata",
+          "Divide by 10000 because the pattern is familiar",
+          "Normalise each image independently to make it look similar",
+        ],
+        correctOption: 0,
+        explanation: "A familiar numeric range is not measurement metadata. Blocking the derivative preserves scientific integrity and makes the missing evidence actionable.",
+      },
+      {
+        id: "m2-p4-checkpoints",
+        question: "Why must the large south-east check-point residual remain in the assessment?",
+        options: [
+          "It may reveal local block deformation that directly affects analysis in that region",
+          "It should be removed because it increases RMSE",
+          "Control-point residuals already prove the edge is correct",
+        ],
+        correctOption: 0,
+        explanation: "Independent check points are intended to reveal external error. A difficult regional residual is evidence to investigate, map and connect to intended support.",
+      },
+    ],
+    submissionChecklist: [
+      "All seventeen practicum requirements and ten delivery files are complete",
+      "Mission geometry and radiometric evidence are calculated from transparent inputs",
+      "Control, internal reprojection and withheld check-point evidence remain distinct",
+      "Orthomosaic, DSM, band alignment, NoData and scale defects are all located and classified",
+      "Only accepted bands enter safe indices and spatial extraction",
+      "The report gives product- and region-specific acceptable, review or unsuitable decisions",
+      "All twenty professional mistakes are considered against the handover",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Completes mission, residual, raster, radiometric, index and extraction calculations accurately" },
+      { dimension: "Conceptual understanding", expectation: "Explains the full acquisition-to-product chain and keeps every evidence type within its limits" },
+      { dimension: "Reproducibility", expectation: "Delivers immutable inputs, checksums, versions, manifests, reopen checks and traceable decisions" },
+      { dimension: "Scientific communication", expectation: "Produces an actionable UAV report with spatial/temporal support, consequences, limitations and next actions" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic UAV and Photogrammetry training pack, CC0-1.0; no real imagery or field locations",
+      coreReferences: [
+        { title: "ASPRS Positional Accuracy Standards", href: "https://www.asprs.org/divisions-committees/standards" },
+        { title: "OpenDroneMap documentation", href: "https://docs.opendronemap.org/" },
+        { title: "Rasterio georeferencing", href: "https://rasterio.readthedocs.io/en/stable/topics/georeferencing.html" },
+      ],
+      furtherReading: [
+        { title: "Agisoft Metashape user manual", href: "https://www.agisoft.com/downloads/user-manuals/" },
+        { title: "QGIS raster properties", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_properties.html" },
       ],
     },
   },

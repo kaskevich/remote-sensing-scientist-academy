@@ -1,0 +1,26 @@
+{
+  "academyStatus": "Synthetic processing-report fixture",
+  "softwareNeutralStages": [
+    "feature detection",
+    "feature matching",
+    "tie points",
+    "camera pose",
+    "bundle adjustment",
+    "dense reconstruction",
+    "surface",
+    "orthorectification",
+    "mosaic"
+  ],
+  "imagesTotal": 12,
+  "imagesAligned": 11,
+  "medianKeypointsPerImage": 4210,
+  "medianTiePointsPerImage": 1190,
+  "reprojectionErrorPixels": 0.42,
+  "cameraFocalLengthChangePct": 2.8,
+  "weakRegion": "south-east block edge",
+  "missingEvidence": [
+    "independent accuracy standard classification",
+    "verified reflectance scale for Red Edge",
+    "vertical datum"
+  ]
+}

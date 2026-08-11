@@ -1,0 +1,6 @@
+point_id,role,east_residual_m,north_residual_m,vertical_residual_m,region
+CP01,check,0.031,-0.018,0.052,west
+CP02,check,0.028,-0.021,0.061,north
+CP03,check,0.036,-0.016,0.057,centre
+CP04,check,0.142,-0.096,0.238,south-east weak block
+CP05,check,0.034,-0.019,0.064,east
