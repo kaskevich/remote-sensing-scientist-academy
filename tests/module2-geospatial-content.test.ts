@@ -180,6 +180,12 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(lesson1).toMatch(/referenced grid/i);
     expect(lesson1).toMatch(/coordinates without a verified CRS/i);
     expect(lesson1).toMatch(/not claimed to contain published Baltic plot locations/i);
+    expect(lesson1).toContain("### Learning pathway");
+    expect(lesson1).toContain("expected_status");
+    expect(lesson1).toContain('assert status == expected_status[asset["name"]]');
+    expect(lesson1).toMatch(/observed[\s\S]*verified[\s\S]*unknown/i);
+    expect(lesson1).toMatch(/ready for Lesson 2\.2/i);
+    expect(lesson1).toContain("Portfolio Project 2 — Geospatial Evidence and Vector QA Package");
     for (const term of ["accuracy", "precision", "resolution", "uncertainty", "error"]) {
       expect(lesson1).toMatch(new RegExp(term, "i"));
     }
@@ -606,5 +612,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(source).toContain("Chapter 2 Practicum checkpoint");
     expect(source).toContain("Chapter 3 Practicum checkpoint");
     expect(source).toContain("Chapter 4 Practicum checkpoint");
+    expect(source).toContain("required_inventory_fields");
+    expect(source).toContain("inventory_is_complete");
+    expect(source).toContain("Portfolio Project 2 — Geospatial Evidence and Vector QA Package");
   });
 });
