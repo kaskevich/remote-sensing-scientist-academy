@@ -2,7 +2,7 @@
 
 ## Design decision
 
-Keep the 12-lesson Module 1 and the four implemented Module 2 chapters. They already form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science and UAV product QA.
+Keep the 12-lesson Module 1 and the six implemented Module 2 chapters. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation and spatial inference.
 
 Do not treat the remaining Module 2 titles as delivered lessons. Re-home them into later modules when they are developed so the Academy remains one pathway rather than one oversized tool catalogue.
 
@@ -11,7 +11,7 @@ Do not treat the remaining Module 2 titles as delivered lessons. Re-home them in
 | Stage | Module | Central professional problem | Main project | Current state |
 |---|---|---|---|---|
 | Foundations | 1. Thinking Like a Scientific Programmer | How can ecological measurements become a reproducible scientific argument? | Vegetation Data Explorer | Implemented; final integrity revision in progress |
-| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.30 and five chapter practica implemented; later chapters remain planned |
+| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.34 and six chapter practica implemented; later chapters remain planned |
 | Earth Observation | 3. Satellite Earth Observation and Time Series | How can optical, SAR and multidimensional satellite observations become comparable evidence through time? | Baltic Wetlands Monitoring Workflow | Planned from existing Module 2 chapters 5 and 8; not advertised as available |
 | Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned from existing Module 2 chapters 6, 7, 9, 10 and 12 |
 | Modelling | 5. Remote Sensing Modelling | How can predictive EO models be trained, spatially validated, interpreted and mapped without leakage? | Chlorophyll and Trait Prediction Pipeline | Missing; must be designed against the modelling promise matrix |
@@ -70,9 +70,9 @@ Status describes the current implemented release before the lesson-by-lesson int
 | QGIS visual QA and professional map | Required | Required | Useful | Lesson 2.10 and practica | Strengthen cartographic communication |
 | UAV mission/product/photogrammetry understanding | Required | Useful | Required for UAV research | Module 2 Chapter 4 | Add later model connection |
 | Independent georeferencing and accuracy evidence | Required | Required | Required | Lesson 2.21 and practicum | Final lesson QA only |
-| Satellite optical and SAR processing | Required | Required | Required | None implemented | Module 3 |
+| Satellite optical and SAR processing | Required | Required | Required | Module 2 Chapter 5 | Add multidimensional time-series processing in Module 3 |
 | Time series and multidimensional data | Useful | Required | Required | None implemented | Module 3 |
-| Sampling and spatial autocorrelation | Useful | Required | Required | Support concepts only | Module 4 |
+| Sampling and spatial autocorrelation | Useful | Required | Required | Module 2 Chapter 6 | Apply the design explicitly to predictive-model validation in Module 5 |
 | Spatial databases and scalable delivery | Required | Useful | Useful | None implemented | Module 4 |
 | Reproducible environments, CLI, tests and CI | Required | Useful | Required | Site engineering only, not learner evidence | Modules 4/6 |
 | Correct ML problem framing and metrics | Useful | Required | Required | None implemented | Module 5 |

@@ -1,0 +1,37 @@
+candidate_id,x_m,y_m,habitat_stratum,management_zone,accessible,existing_selected,selection_probability,restriction_reason
+C001,500000,6440000,low_marsh,west,true,true,0.42,
+C002,500100,6440000,low_marsh,west,true,true,0.42,
+C003,500200,6440000,mid_marsh,west,true,true,0.31,
+C004,500300,6440000,mid_marsh,central,true,true,0.31,
+C005,500400,6440000,high_marsh,central,true,true,0.25,
+C006,500500,6440000,high_marsh,east,true,true,0.25,
+C007,500600,6440000,high_marsh,east,false,false,0.00,tidal channel crossing
+C008,500000,6440100,low_marsh,west,true,true,0.42,
+C009,500100,6440100,low_marsh,west,true,true,0.42,
+C010,500200,6440100,mid_marsh,west,true,true,0.31,
+C011,500300,6440100,mid_marsh,central,true,true,0.31,
+C012,500400,6440100,high_marsh,central,true,true,0.25,
+C013,500500,6440100,high_marsh,east,true,true,0.25,
+C014,500600,6440100,high_marsh,east,false,false,0.00,unstable saturated ground
+C015,500000,6440200,low_marsh,west,true,true,0.42,
+C016,500100,6440200,low_marsh,west,true,true,0.42,
+C017,500200,6440200,mid_marsh,west,true,true,0.31,
+C018,500300,6440200,mid_marsh,central,true,true,0.31,
+C019,500400,6440200,high_marsh,central,true,true,0.25,
+C020,500500,6440200,high_marsh,east,true,true,0.25,
+C021,500600,6440200,high_marsh,east,false,false,0.00,protected nesting area
+C022,500000,6440300,low_marsh,west,true,false,0.42,
+C023,500100,6440300,low_marsh,west,true,false,0.42,
+C024,500200,6440300,mid_marsh,west,true,false,0.31,
+C025,500300,6440300,mid_marsh,central,true,false,0.31,
+C026,500400,6440300,high_marsh,central,true,false,0.25,
+C027,500500,6440300,high_marsh,east,true,false,0.25,
+C028,500600,6440300,high_marsh,east,false,false,0.00,protected nesting area
+C029,500000,6440400,low_marsh,west,true,false,0.42,
+C030,500100,6440400,low_marsh,west,true,false,0.42,
+C031,500200,6440400,mid_marsh,west,true,false,0.31,
+C032,500300,6440400,mid_marsh,central,true,false,0.31,
+C033,500400,6440400,high_marsh,central,true,false,0.25,
+C034,500500,6440400,high_marsh,east,true,false,0.25,
+C035,500600,6440400,high_marsh,east,false,false,0.00,tidal creek margin
+C036,500300,6440500,mid_marsh,central,false,false,0.00,landowner access unavailable

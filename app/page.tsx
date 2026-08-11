@@ -248,6 +248,26 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/satellite-eo/lidar_point_samples.csv", title: "Download the synthetic LiDAR point samples" },
     { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
   ],
+  "lesson-2-31": [
+    { href: "lesson-resources/module-2/spatial-statistics/README.md", title: "Read the synthetic spatial-statistics training-pack guide" },
+    { href: "lesson-resources/module-2/spatial-statistics/manifest.json", title: "Download the spatial-statistics checksum manifest" },
+    { href: "lesson-resources/module-2/spatial-statistics/meadow_plot_observations.csv", title: "Download the synthetic meadow plot observations" },
+  ],
+  "lesson-2-32": [
+    { href: "lesson-resources/module-2/spatial-statistics/sampling_frame.csv", title: "Download the synthetic spatial sampling frame" },
+    { href: "lesson-resources/module-2/spatial-statistics/spatial_validation_blocks.csv", title: "Download the predeclared spatial validation blocks" },
+    { href: "lesson-resources/module-2/spatial-statistics/SPATIAL_INFERENCE_QA_TEMPLATE.md", title: "Download the spatial inference QA template" },
+  ],
+  "lesson-2-33": [
+    { href: "lesson-resources/module-2/spatial-statistics/meadow_plot_observations.csv", title: "Download the interpolation plot observations" },
+    { href: "lesson-resources/module-2/spatial-statistics/spatial_validation_blocks.csv", title: "Download the separated interpolation holdout blocks" },
+    { href: "lesson-resources/module-2/spatial-statistics/SPATIAL_INFERENCE_QA_TEMPLATE.md", title: "Download the spatial inference QA template" },
+  ],
+  "lesson-2-34": [
+    { href: "lesson-resources/module-2/spatial-statistics/meadow_plot_observations.csv", title: "Download the spatial-regression plot observations" },
+    { href: "lesson-resources/module-2/spatial-statistics/spatial_validation_blocks.csv", title: "Download the separated model-validation blocks" },
+    { href: "lesson-resources/module-2/spatial-statistics/SPATIAL_INFERENCE_QA_TEMPLATE.md", title: "Download the spatial inference QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -279,7 +299,13 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 5
+  const resources = source.chapter === 6
+    ? [
+        { href: "lesson-resources/module-2/spatial-statistics/README.md", title: "Read the spatial-statistics practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/spatial-statistics/manifest.json", title: "Download the spatial-statistics checksum manifest" },
+        { href: "lesson-resources/module-2/spatial-statistics/SPATIAL_INFERENCE_QA_TEMPLATE.md", title: "Download the spatial inference QA template" },
+      ]
+    : source.chapter === 5
     ? [
         { href: "lesson-resources/module-2/satellite-eo/README.md", title: "Read the satellite EO practicum and training-pack guide" },
         { href: "lesson-resources/module-2/satellite-eo/manifest.json", title: "Download the satellite EO checksum manifest" },
@@ -340,6 +366,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-30") {
     return [lesson, module2PracticumAcademyLessons[4]];
+  }
+  if (lesson.id === "lesson-2-34") {
+    return [lesson, module2PracticumAcademyLessons[5]];
   }
   return [lesson];
 });
