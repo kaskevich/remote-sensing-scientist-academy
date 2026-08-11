@@ -309,6 +309,23 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/cloud-native-eo/observation_inventory.csv", title: "Download the observation inventory for catalogue reconciliation" },
     { href: "lesson-resources/module-2/cloud-native-eo/CLOUD_NATIVE_EO_QA_TEMPLATE.md", title: "Download the cloud-native EO QA template" },
   ],
+  "lesson-2-43": [
+    { href: "lesson-resources/module-2/web-gis-delivery/README.md", title: "Read the Web GIS delivery training-pack guide" },
+    { href: "lesson-resources/module-2/web-gis-delivery/manifest.json", title: "Download the Web GIS checksum manifest" },
+    { href: "lesson-resources/module-2/web-gis-delivery/service_capability_inventory.csv", title: "Download the deliberately mixed service capability inventory" },
+    { href: "lesson-resources/module-2/web-gis-delivery/tile_request_scenarios.csv", title: "Download the web-delivery request scenarios" },
+  ],
+  "lesson-2-44": [
+    { href: "lesson-resources/module-2/web-gis-delivery/monitoring_sites.geojson", title: "Download the generalized synthetic monitoring sites" },
+    { href: "lesson-resources/module-2/web-gis-delivery/monitoring_summary.csv", title: "Download the accessible monitoring summary table" },
+    { href: "lesson-resources/module-2/web-gis-delivery/map_content_contract.json", title: "Download the public map content contract" },
+    { href: "lesson-resources/module-2/web-gis-delivery/WEB_GIS_DELIVERY_QA_TEMPLATE.md", title: "Download the Web GIS delivery QA template" },
+  ],
+  "lesson-2-45": [
+    { href: "lesson-resources/module-2/web-gis-delivery/interoperability_fixture.json", title: "Download the deterministic interoperability fixture" },
+    { href: "lesson-resources/module-2/web-gis-delivery/service_capability_inventory.csv", title: "Download the service capability inventory" },
+    { href: "lesson-resources/module-2/web-gis-delivery/WEB_GIS_DELIVERY_QA_TEMPLATE.md", title: "Download the interoperability QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -340,7 +357,14 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 8
+  const resources = source.chapter === 9
+    ? [
+        { href: "lesson-resources/module-2/web-gis-delivery/README.md", title: "Read the Chapter 9 practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/web-gis-delivery/manifest.json", title: "Download the Web GIS checksum manifest" },
+        { href: "lesson-resources/module-2/web-gis-delivery/map_content_contract.json", title: "Download the public map content contract" },
+        { href: "lesson-resources/module-2/web-gis-delivery/WEB_GIS_DELIVERY_QA_TEMPLATE.md", title: "Download the Web GIS delivery QA template" },
+      ]
+    : source.chapter === 8
     ? [
         { href: "lesson-resources/module-2/cloud-native-eo/README.md", title: "Read the Chapter 8 practicum and training-pack guide" },
         { href: "lesson-resources/module-2/cloud-native-eo/manifest.json", title: "Download the cloud-native EO checksum manifest" },
@@ -430,6 +454,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-42") {
     return [lesson, module2PracticumAcademyLessons[7]];
+  }
+  if (lesson.id === "lesson-2-45") {
+    return [lesson, module2PracticumAcademyLessons[8]];
   }
   return [lesson];
 });

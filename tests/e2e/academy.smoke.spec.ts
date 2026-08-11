@@ -205,7 +205,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes eight reviewed professional chapters with the planned pathway", async ({ page }) => {
+test("Module 2 exposes nine reviewed professional chapters with the planned pathway", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -215,8 +215,8 @@ test("Module 2 exposes eight reviewed professional chapters with the planned pat
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(54);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(50);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(12);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(54);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(9);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
   await expect(overview.locator(".module-syllabus li .syllabus-number").nth(52)).toHaveText("2.53");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
@@ -262,6 +262,11 @@ test("Module 2 exposes eight reviewed professional chapters with the planned pat
   await expect(overview.getByRole("link", { name: "Xarray and Rioxarray", exact: true })).toHaveAttribute("href", "#lesson-2-38");
   await expect(overview.getByRole("link", { name: "STAC", exact: true })).toHaveAttribute("href", "#lesson-2-42");
   await expect(overview.getByRole("link", { name: "Build a Reproducible Cloud-Native EO Evidence Cube", exact: true })).toHaveAttribute("href", "#module-2-chapter-8-practicum");
+  await expect(overview.getByText("Web Maps and Spatial Services", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(8).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "Web Maps and Spatial Services", exact: true })).toHaveAttribute("href", "#lesson-2-43");
+  await expect(overview.getByRole("link", { name: "OGC Standards and Interoperability", exact: true })).toHaveAttribute("href", "#lesson-2-45");
+  await expect(overview.getByRole("link", { name: "Deliver an Accessible Environmental Monitoring Map", exact: true })).toHaveAttribute("href", "#module-2-chapter-9-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
@@ -270,8 +275,8 @@ test("Module 2 exposes eight reviewed professional chapters with the planned pat
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("42 lessons · 8 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(50);
+  await expect(moduleNavigation.getByText("45 lessons · 9 practica available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(54);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(1);
@@ -284,6 +289,8 @@ test("Module 2 exposes eight reviewed professional chapters with the planned pat
   await expect(page.locator("#lesson-2-37")).toHaveCount(1);
   await expect(page.locator("#lesson-2-38")).toHaveCount(1);
   await expect(page.locator("#lesson-2-42")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-43")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-45")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();
@@ -411,6 +418,25 @@ test("Module 2 exposes eight reviewed professional chapters with the planned pat
   await cloudPracticum.locator(":scope > summary").click();
   await expect(cloudPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
   await expect(cloudPracticum.getByText("CLOUD_NATIVE_EO_RELEASE_DECISION.md", { exact: true }).first()).toBeVisible();
+
+  const webServicesLesson = page.locator("#lesson-2-43");
+  await webServicesLesson.locator(":scope > summary").click();
+  await expect(webServicesLesson.getByText("Lesson 2.43 of 53", { exact: true })).toBeVisible();
+  await expect(webServicesLesson.locator(".formative-check")).toHaveCount(3);
+  await expect(webServicesLesson.getByRole("link", { name: "Download the deliberately mixed service capability inventory" })).toHaveAttribute("href", /web-gis-delivery\/service_capability_inventory\.csv$/);
+
+  const mappingLesson = page.locator("#lesson-2-44");
+  await mappingLesson.locator(":scope > summary").click();
+  await expect(mappingLesson.getByRole("link", { name: "Download the generalized synthetic monitoring sites" })).toHaveAttribute("href", /web-gis-delivery\/monitoring_sites\.geojson$/);
+
+  const interoperabilityLesson = page.locator("#lesson-2-45");
+  await interoperabilityLesson.locator(":scope > summary").click();
+  await expect(interoperabilityLesson.getByRole("link", { name: "Download the deterministic interoperability fixture" })).toHaveAttribute("href", /web-gis-delivery\/interoperability_fixture\.json$/);
+
+  const webPracticum = page.locator("#module-2-chapter-9-practicum");
+  await webPracticum.locator(":scope > summary").click();
+  await expect(webPracticum.locator(".module-lesson-label")).toHaveText("Chapter practicum");
+  await expect(webPracticum.getByText("WEB_GIS_RELEASE_DECISION.md", { exact: true }).first()).toBeVisible();
 
   const chapterOnePracticum = page.locator("#module-2-chapter-1-practicum");
   await chapterOnePracticum.locator(":scope > summary").click();

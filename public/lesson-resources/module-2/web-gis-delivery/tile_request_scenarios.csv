@@ -1,0 +1,7 @@
+scenario,user_action,delivery_candidate,expected_request_unit,primary_benefit,primary_risk,decision_evidence
+A,pan public context map,XYZ raster tiles,visible z-x-y tiles,cache reuse and simple browser display,licence or attribution omission,verify terms and attribution
+B,zoom seasonal status map,WMTS rendered tiles,declared tile matrix cells,cacheable consistent cartography,stale timestamp hidden,show data date and cache policy
+C,inspect six monitoring sites,small GeoJSON,one bounded feature response,simple queryable attributes,sensitive fields delivered to browser,apply public schema allow-list
+D,explore fifty thousand polygons,vector tiles,visible generalized tile features,client styling and bounded transfer,IDs or precision leak through tiles,privacy and generalization audit
+E,download analysis pixels,COG or WCS,bounded spatial subset or byte ranges,measured values retained,full object or wrong resampling,validate range/subset and metadata
+F,discover seasonal assets,STAC,metadata Items and Asset links,reproducible search and provenance,discovery mistaken for local validity,retain cube eligibility gate

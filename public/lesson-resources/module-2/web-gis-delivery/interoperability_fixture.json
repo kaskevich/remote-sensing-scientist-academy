@@ -1,0 +1,38 @@
+{
+  "data_status": "synthetic service evidence; endpoints must not be fetched",
+  "service_root": "https://example.invalid/academy/ogcapi",
+  "landing_links": [
+    {"rel": "self", "type": "application/json", "href": "https://example.invalid/academy/ogcapi"},
+    {"rel": "conformance", "type": "application/json", "href": "https://example.invalid/academy/ogcapi/conformance"},
+    {"rel": "data", "type": "application/json", "href": "https://example.invalid/academy/ogcapi/collections"},
+    {"rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "href": "https://example.invalid/academy/ogcapi/api"}
+  ],
+  "conformsTo": [
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson",
+    "http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/html"
+  ],
+  "collections": [
+    {
+      "id": "public_monitoring_sites",
+      "itemType": "feature",
+      "crs": ["http://www.opengis.net/def/crs/OGC/1.3/CRS84"],
+      "extent": {"spatial": {"bbox": [[23.6, 58.4, 24.7, 59.1]]}, "temporal": {"interval": [["2025-05-01T00:00:00Z", "2025-09-30T23:59:59Z"]]}},
+      "links": [
+        {"rel": "items", "type": "application/geo+json", "href": "https://example.invalid/academy/ogcapi/collections/public_monitoring_sites/items"}
+      ]
+    }
+  ],
+  "feature_page": {
+    "numberMatched": 6,
+    "numberReturned": 3,
+    "links": [
+      {"rel": "next", "type": "application/geo+json", "href": "https://example.invalid/academy/ogcapi/collections/public_monitoring_sites/items?offset=3&limit=3"}
+    ]
+  },
+  "legacy_capabilities_extracts": [
+    {"service": "WMS", "version": "1.3.0", "operations": ["GetCapabilities", "GetMap", "GetFeatureInfo"], "formats": ["image/png"], "known_risk": "axis order must be tested for requested CRS"},
+    {"service": "WFS", "version": "2.0.0", "operations": ["GetCapabilities", "DescribeFeatureType", "GetFeature"], "formats": ["application/gml+xml", "application/geo+json"], "known_risk": "result paging not declared"},
+    {"service": "WMTS", "version": "1.0.0", "operations": ["GetCapabilities", "GetTile"], "tile_matrix_sets": ["WebMercatorQuad"], "known_risk": "available zoom range ends at 14"}
+  ]
+}

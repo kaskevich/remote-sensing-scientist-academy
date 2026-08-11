@@ -2,7 +2,7 @@
 
 ## Design decision
 
-Keep the 12-lesson Module 1 and the eight implemented Module 2 chapters. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation, spatial inference, governed spatial databases and cloud-native EO data.
+Keep the 12-lesson Module 1 and the nine implemented Module 2 chapters. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation, spatial inference, governed spatial databases, cloud-native EO data and accessible web delivery.
 
 Do not treat the remaining Module 2 titles as delivered lessons. Re-home them into later modules when they are developed so the Academy remains one pathway rather than one oversized tool catalogue.
 
@@ -11,9 +11,9 @@ Do not treat the remaining Module 2 titles as delivered lessons. Re-home them in
 | Stage | Module | Central professional problem | Main project | Current state |
 |---|---|---|---|---|
 | Foundations | 1. Thinking Like a Scientific Programmer | How can ecological measurements become a reproducible scientific argument? | Vegetation Data Explorer | Implemented; final integrity revision in progress |
-| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.42 and eight chapter practica implemented; later chapters remain planned |
+| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.45 and nine chapter practica implemented; later chapters remain planned |
 | Earth Observation | 3. Satellite Earth Observation and Time Series | How can optical, SAR and multidimensional satellite observations become comparable evidence through time? | Baltic Wetlands Monitoring Workflow | Planned to extend the implemented Module 2 Chapters 5 and 8 foundation into longer real-data time-series analysis; not advertised as available |
-| Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned from existing Module 2 chapters 6, 7, 9, 10 and 12 |
+| Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned to extend existing Module 2 Chapters 6, 7 and 9 foundations with enterprise and production depth from planned Chapters 10 and 12 |
 | Modelling | 5. Remote Sensing Modelling | How can predictive EO models be trained, spatially validated, interpreted and mapped without leakage? | Chlorophyll and Trait Prediction Pipeline | Missing; must be designed against the modelling promise matrix |
 | Professional synthesis | 6. Portfolio, Research and Career Launch | How can one independently scoped EO investigation be reproduced, defended and communicated? | Environmental EO Case Study | Missing; future capstone and graduate-profile assessment |
 
@@ -45,6 +45,8 @@ Future Modules 3–6 consolidate satellite time series, spatial inference, predi
 
 Module 2 Chapter 8 contributes **Artifact 2.H — Cloud-Native EO Discovery and Cube Package** to this future case study. It proves deterministic STAC discovery, labelled-array and cube contracts, bounded Dask execution, and COG/Zarr publication decisions on synthetic training evidence. It does not yet prove a multi-year real-data monitoring result.
 
+Module 2 Chapter 9 contributes **Artifact 2.I — Accessible Web GIS Evidence Delivery**. It proves representation selection, public-schema governance, an accessible map/table pair and standards-based client acceptance on generalized synthetic evidence. It does not represent a live production monitoring service.
+
 ## Required project package
 
 Each major project must include:
@@ -75,7 +77,7 @@ Status describes the current implemented release before the lesson-by-lesson int
 | Satellite optical and SAR processing | Required | Required | Required | Module 2 Chapter 5 | Add multidimensional time-series processing in Module 3 |
 | Time series and multidimensional data | Useful | Required | Required | Module 2 Chapter 8 labelled arrays, EO cubes, lazy computation and discovery package | Extend to multi-year real EO analysis in Module 3 |
 | Sampling and spatial autocorrelation | Useful | Required | Required | Module 2 Chapter 6 | Apply the design explicitly to predictive-model validation in Module 5 |
-| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–8 relational governance, bounded computation and cloud-native format package | Web/service delivery remains for Module 4 |
+| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–9 relational governance, bounded computation, cloud-native formats and accessible interoperable delivery | Enterprise operations and automated production remain for Modules 4/6 |
 | Reproducible environments, CLI, tests and CI | Required | Useful | Required | Site engineering only, not learner evidence | Modules 4/6 |
 | Correct ML problem framing and metrics | Useful | Required | Required | None implemented | Module 5 |
 | Spatial CV, leakage and extrapolation control | Required for modelling pipelines | Required | Required | None implemented | Module 5 |

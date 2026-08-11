@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.42, eight Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.45, nine Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -41,11 +41,13 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Geoprocessing and overlays | Academy goals | 2 | 2.6, 2.7, 2.9, 2.13 | Yes | Yes | Yes | Vector and raster derivatives | COMPLETE |
 | Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
-| Cartography and professional maps | Academy goals | 2 | 2.10 and practica | Partial | Yes | Yes | QA maps | PARTIAL |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.42 | Yes | Yes | Yes | QA reports, manifests, database governance and cloud-native EO evidence records | COMPLETE |
-| Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; web/service operations planned |
+| Cartography and professional maps | Academy goals | 2 | 2.10, 2.43–2.45 and practica | Yes for evidence-led map design and delivery | Yes | Yes | QA maps and Accessible Web GIS Evidence Delivery | COMPLETE AS FOUNDATION |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.45 | Yes | Yes | Yes | QA reports, manifests, database governance, cloud-native EO and Web GIS evidence records | COMPLETE |
+| Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; production editing/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
-| Professional GIS workflows | Academy goals | 2 | Practica 1–8 | Yes | Yes | Yes | Eight evidence and handover decisions | COMPLETE |
+| Professional GIS workflows | Academy goals | 2 | Practica 1–9 | Yes | Yes | Yes | Nine evidence and handover decisions | COMPLETE |
+| Web GIS and interactive delivery | Module 2 outcome | 2 | 2.43–2.45 and Chapter 9 practicum | Yes | Yes | Yes | Accessible Web GIS Evidence Delivery | COMPLETE AS FOUNDATION |
+| OGC service/API interoperability | Module 2 outcome | 2 | 2.43, 2.45 and Chapter 9 practicum | Yes | Yes | Yes | Capability, conformance, CRS and client acceptance matrix | COMPLETE AS FOUNDATION |
 | Python foundations for geospatial work | Foundations/module prerequisites | 1 | 1.1–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
 | NumPy | Module 1 outcome | 1/2 | 1.7, reused in raster/UAV | Yes | Yes | Yes | Numerical/raster workflow | COMPLETE |
 | pandas | Module 1 outcome | 1 | 1.8–1.12 | Yes | Yes | Yes | Vegetation Data Explorer | COMPLETE |
@@ -106,7 +108,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |
 | Spatial statistics | Module 2 outcome | 2 | 2.31–2.34 | Yes | Yes | Yes | Spatial Inference and Validation Package | COMPLETE |
-| Scientific visualization | Academy goals | 1/2 | 1.11–1.12, QA maps | Partial | Yes | Yes | Figures and QA maps | PARTIAL |
+| Scientific visualization | Academy goals | 1/2 | 1.11–1.12, QA maps, 2.44 and Chapter 9 practicum | Yes for figures and accessible interactive evidence delivery | Yes | Yes | Figures, QA maps and map/table handover | COMPLETE AS FOUNDATION |
 | What machine learning does | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 | Features/predictors and targets | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Regression and classification | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
@@ -166,7 +168,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 
 ### Missing
 
-The current release does not implement Xarray/data cubes, time series, web delivery, automation, reproducible environments, Git/GitHub or machine learning. Spatial database foundations are implemented, but production service operations remain planned. Stage 3 has no curriculum module. These missing areas must not be presented as currently delivered competencies.
+The current release does not implement a real multi-year time-series investigation, production automation, learner-built reproducible environments, Git/GitHub or machine learning. Xarray/data-cube and web-delivery foundations are implemented on synthetic evidence, but live production service operations remain planned. Stage 3 has no curriculum module. These missing areas must not be presented as currently delivered competencies.
 
 ### Too shallow
 
