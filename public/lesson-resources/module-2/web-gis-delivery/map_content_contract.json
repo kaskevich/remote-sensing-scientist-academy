@@ -1,0 +1,14 @@
+{
+  "data_status": "synthetic training evidence",
+  "audience": "environmental programme managers and scientific reviewers",
+  "primary_question": "Which generalized training sites have sufficient seasonal evidence for review?",
+  "required_layers": ["context basemap", "monitoring status sites"],
+  "public_attribute_allow_list": ["site_id", "site_name", "status", "valid_observations", "median_nir", "uncertainty_note", "updated"],
+  "forbidden_content": ["precise field plots", "personal data", "access credentials", "unreviewed causal claims"],
+  "status_order": ["sufficient evidence", "conditional", "review", "not assessed"],
+  "legend_requirement": "text labels plus colour; no colour-only encoding",
+  "interaction_requirement": "select a site to read status, count, value, date and limitation",
+  "accessible_alternative": "monitoring_summary.csv rendered as a labelled HTML table with the same public records",
+  "mobile_requirement": "primary question, legend, controls and selected-site text remain usable at 320 CSS pixels",
+  "provenance_requirement": "synthetic status, data date, method summary, licence, attribution and limitations remain visible outside popups"
+}

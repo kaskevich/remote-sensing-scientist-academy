@@ -1,0 +1,7 @@
+item_id,datetime_utc,collection,processing_baseline,scene_cloud_percent,local_clear_fraction,scale_factor,offset,grid_status,local_mask_status,decision
+SYN_M2_20250512,2025-05-12T09:45:00Z,synthetic-s2-l2a,05.11,8.2,0.93,0.0001,0,common,available,accept
+SYN_M2_20250603,2025-06-03T09:47:00Z,synthetic-s2-l2a,05.11,42.0,0.81,0.0001,0,common,available,accept_with_mask
+SYN_M2_20250627,2025-06-27T09:44:00Z,synthetic-s2-l2a,05.11,13.5,0.96,0.0001,0,common,available,accept
+SYN_M2_20250719,2025-07-19T09:46:00Z,synthetic-s2-l2a,05.11,5.1,0.88,0.0001,0,shifted_half_pixel,available,review_grid
+SYN_M2_20250814,2025-08-14T09:48:00Z,synthetic-s2-l2a,05.11,67.0,,0.0001,0,common,missing,review_mask
+SYN_M2_20250905,2025-09-05T09:43:00Z,synthetic-s2-l2a,05.11,18.7,0.91,0.0001,0,common,available,accept

@@ -1,0 +1,6 @@
+scenario,dataset_shape,dtype,chunk_shape,uncompressed_chunk_mib,primary_operation,storage_alignment,diagnosis
+A,"time=180,band=4,y=12000,x=12000",float32,"time=1,band=1,y=1024,x=1024",4.00,single_date_map,aligned,reasonable_start_measure_requests
+B,"time=180,band=4,y=12000,x=12000",float32,"time=1,band=1,y=32,x=32",0.0039,seasonal_median,misaligned,too_many_tiny_tasks
+C,"time=180,band=4,y=12000,x=12000",float32,"time=180,band=4,y=12000,x=12000",395507.81,full_cube_any_operation,one_chunk,far_beyond_workstation_memory
+D,"time=180,band=4,y=12000,x=12000",float32,"time=12,band=1,y=512,x=512",12.00,seasonal_summary,aligned,candidate_benchmark
+E,"time=180,band=4,y=12000,x=12000",float32,"time=180,band=1,y=256,x=256",45.00,per_pixel_time_series,aligned,candidate_benchmark

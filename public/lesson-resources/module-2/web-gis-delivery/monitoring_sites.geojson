@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "name": "synthetic_generalized_meadow_monitoring_sites",
+  "data_status": "synthetic training evidence; invented generalized coordinates",
+  "features": [
+    {"type": "Feature", "id": "PUB_A", "geometry": {"type": "Point", "coordinates": [23.72, 58.46]}, "properties": {"site_id": "PUB_A", "site_name": "Northern inlet", "status": "sufficient evidence", "valid_observations": 5, "median_nir": 0.48, "uncertainty_note": "seasonal summary; not a change estimate", "updated": "2025-09-30"}},
+    {"type": "Feature", "id": "PUB_B", "geometry": {"type": "Point", "coordinates": [23.94, 58.57]}, "properties": {"site_id": "PUB_B", "site_name": "Sheltered bay", "status": "review", "valid_observations": 2, "median_nir": 0.39, "uncertainty_note": "below the three-observation release threshold", "updated": "2025-09-30"}},
+    {"type": "Feature", "id": "PUB_C", "geometry": {"type": "Point", "coordinates": [24.18, 58.65]}, "properties": {"site_id": "PUB_C", "site_name": "Central meadow", "status": "sufficient evidence", "valid_observations": 4, "median_nir": 0.52, "uncertainty_note": "seasonal summary; field validation pending", "updated": "2025-09-30"}},
+    {"type": "Feature", "id": "PUB_D", "geometry": {"type": "Point", "coordinates": [24.41, 58.78]}, "properties": {"site_id": "PUB_D", "site_name": "Eastern margin", "status": "not assessed", "valid_observations": 0, "median_nir": null, "uncertainty_note": "no eligible cube observations", "updated": "2025-09-30"}},
+    {"type": "Feature", "id": "PUB_E", "geometry": {"type": "Point", "coordinates": [24.56, 58.91]}, "properties": {"site_id": "PUB_E", "site_name": "Outer coast", "status": "conditional", "valid_observations": 3, "median_nir": 0.44, "uncertainty_note": "grid-correction derivative requires review", "updated": "2025-09-30"}},
+    {"type": "Feature", "id": "PUB_F", "geometry": {"type": "Point", "coordinates": [24.27, 59.03]}, "properties": {"site_id": "PUB_F", "site_name": "Estuary edge", "status": "sufficient evidence", "valid_observations": 5, "median_nir": 0.46, "uncertainty_note": "generalized public location", "updated": "2025-09-30"}}
+  ]
+}

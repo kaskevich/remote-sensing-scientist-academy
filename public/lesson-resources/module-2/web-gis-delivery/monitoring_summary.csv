@@ -1,0 +1,7 @@
+site_id,site_name,status,valid_observations,median_nir,uncertainty_note,updated,public_location_status
+PUB_A,Northern inlet,sufficient evidence,5,0.48,seasonal summary; not a change estimate,2025-09-30,generalized synthetic
+PUB_B,Sheltered bay,review,2,0.39,below the three-observation release threshold,2025-09-30,generalized synthetic
+PUB_C,Central meadow,sufficient evidence,4,0.52,seasonal summary; field validation pending,2025-09-30,generalized synthetic
+PUB_D,Eastern margin,not assessed,0,,no eligible cube observations,2025-09-30,generalized synthetic
+PUB_E,Outer coast,conditional,3,0.44,grid-correction derivative requires review,2025-09-30,generalized synthetic
+PUB_F,Estuary edge,sufficient evidence,5,0.46,generalized public location,2025-09-30,generalized synthetic

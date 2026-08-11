@@ -1,0 +1,41 @@
+{
+  "data_status": "synthetic training evidence",
+  "study_context": "Baltic coastal meadow monitoring",
+  "dimensions": {
+    "time": 6,
+    "band": 4,
+    "y": 6,
+    "x": 8
+  },
+  "dimension_order": ["time", "band", "y", "x"],
+  "coordinates": {
+    "time": ["2025-05-12", "2025-06-03", "2025-06-27", "2025-07-19", "2025-08-14", "2025-09-05"],
+    "band": ["red", "red_edge", "nir", "scl"],
+    "x": {"start": 500005, "stop": 500075, "step": 10, "units": "m"},
+    "y": {"start": 6500055, "stop": 6500005, "step": -10, "units": "m"}
+  },
+  "spatial_reference": {
+    "crs": "EPSG:3301",
+    "transform": [10, 0, 500000, 0, -10, 6500060],
+    "pixel_interpretation": "area",
+    "training_location_warning": "invented coordinates; not published field locations"
+  },
+  "variables": {
+    "reflectance": {
+      "dimensions": ["time", "band", "y", "x"],
+      "stored_dtype": "uint16",
+      "scale_factor": 0.0001,
+      "valid_range_scaled": [0.0, 1.0],
+      "nodata": 0,
+      "band_constraint": "red, red_edge and nir only"
+    },
+    "scl": {
+      "dimensions": ["time", "y", "x"],
+      "dtype": "uint8",
+      "valid_classes": [4, 5, 6],
+      "invalid_classes": [0, 1, 2, 3, 7, 8, 9, 10, 11]
+    }
+  },
+  "candidate_chunks": {"time": 2, "band": 1, "y": 3, "x": 4},
+  "required_companion_outputs": ["valid_observation_count", "mask_provenance", "cube_contract"]
+}

@@ -1,0 +1,17 @@
+{
+  "pack": "Module 2 Chapter 9 Web GIS and Delivery training pack",
+  "version": "1.0.0",
+  "created": "2026-08-11",
+  "licence": "CC0-1.0",
+  "data_status": "synthetic training evidence; invented generalized sites and non-fetchable endpoints",
+  "files": [
+    {"path": "README.md", "bytes": 2733, "sha256": "a17bc51e744189c5ebdc96bd1f9938399bb160eaa5d5aed8d21fde5657caa1ab"},
+    {"path": "WEB_GIS_DELIVERY_QA_TEMPLATE.md", "bytes": 1909, "sha256": "9b3cd543b31b3dc3d6f94e5e566bc0259ee2767674580cc50b6b15c844de3703"},
+    {"path": "interoperability_fixture.json", "bytes": 2238, "sha256": "d3949246f200aac5660f045e00b79494f480048d6e2a129175087e1272d05990"},
+    {"path": "map_content_contract.json", "bytes": 1183, "sha256": "e98d21e181be0d6bc478c8b0f1751236d8bbd19d952051aca741ba0fd08287da"},
+    {"path": "monitoring_sites.geojson", "bytes": 2161, "sha256": "e375cd5b2c48bd2ce205037e555b66defb7bf5943df96989002fa06ec05be01b"},
+    {"path": "monitoring_summary.csv", "bytes": 781, "sha256": "8f5d9240c8edaaf31307aede94febcdf13775de26de756eb97a9cb45537d5d3f"},
+    {"path": "service_capability_inventory.csv", "bytes": 1304, "sha256": "48b72bc0e9a974874ac6e40ffdf2ba952eef006675d588c5b65dbf9ad55c8e8d"},
+    {"path": "tile_request_scenarios.csv", "bytes": 1123, "sha256": "8cc0cc055ea26b1246158b4d56c5af44f2d10d84b59102a7cc9568f0be2307c7"}
+  ]
+}
