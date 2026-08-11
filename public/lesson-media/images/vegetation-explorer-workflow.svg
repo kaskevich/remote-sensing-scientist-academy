@@ -11,7 +11,8 @@
   <line x1="1110" y1="275" x2="1110" y2="390" stroke="#c8f33d" stroke-width="3" marker-end="url(#a)"/>
   <g transform="translate(855 405)"><rect width="310" height="105" rx="9" fill="#142c43" stroke="#f39a4a"/><text x="155" y="40" text-anchor="middle" class="t">INTERPRETATION</text><text x="155" y="70" text-anchor="middle" class="s">finding · uncertainty · limitation · next evidence</text></g>
   <line x1="855" y1="458" x2="665" y2="458" stroke="#c8f33d" stroke-width="3" marker-end="url(#a)"/>
-  <g transform="translate(385 405)"><rect width="270" height="105" rx="9" fill="#183d38" stroke="#c8f33d"/><text x="135" y="40" text-anchor="middle" class="t">REPRODUCIBLE EXPORT</text><text x="135" y="70" text-anchor="middle" class="s">Run All · notebook · tables · figures</text></g>
+  <g transform="translate(385 405)"><rect width="270" height="105" rx="9" fill="#183d38" stroke="#c8f33d"/><text x="135" y="40" text-anchor="middle" class="t">REPRODUCIBLE EXPORT</text><text x="135" y="70" text-anchor="middle" class="s">Run All · manifest · reopen · handover</text></g>
   <path d="M385 458 C210 458 130 390 130 285" fill="none" stroke="#4c91c8" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#a)"/><text x="165" y="410" class="s">revise question when evidence requires it</text>
-  <text x="60" y="595" class="s">The notebook is professional when a reviewer can move backward from every claim to its source and decision trail.</text>
+  <text x="60" y="582" class="s">The notebook is professional when a reviewer can move backward from every claim to its source and decision trail.</text>
+  <text x="60" y="610" class="s">Data, computation, science and communication gates must all pass.</text>
 </svg>

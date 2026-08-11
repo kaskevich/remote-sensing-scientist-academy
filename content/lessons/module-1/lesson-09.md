@@ -3,6 +3,24 @@ title: Missing Values, Types and Data Quality
 lessonId: lesson-09
 ---
 
+## Learning pathway
+
+### You already know
+
+Lesson 6 documented a deliberately narrow scalar function. Lesson 8 identified the exact published file, parser choices and expected table structure, then accepted it only for this quality audit.
+
+### In this lesson
+
+You will separate observed quality evidence from scientific rules and actions. You will upgrade the earlier function for pandas representations, profile missingness by denominator and sampling group, inspect conversion loss and preserve every source value beside derived flags.
+
+### Why this comes now
+
+Filtering or summarising before profiling can silently redefine the analysis population. Quality decisions must therefore be attached to named fields, documented evidence and a specific future question before rows are selected.
+
+### You will use this later
+
+Lesson 10 creates analysis populations from this evidence, Lesson 11 validates derived-table joins and Lesson 12 communicates unresolved limitations. Module 2 applies the same observe–rule–action separation to geometry, raster and UAV QA.
+
 ## 1. Profile the table before deciding how to clean it
 
 ### Learning outcome
@@ -26,6 +44,17 @@ The published table has no missing `Sp_richness` or `CCI_CWM` values, but 59 of 
 ### Learner action
 
 Add `## Lesson 9 — Data quality profile`. Write three separate definitions in your own words: missing value, invalid value and inconsistent representation.
+
+### Separate four quality dimensions
+
+| Dimension | Question | Example evidence | Why it stays separate |
+|---|---|---|---|
+| completeness | is a value present? | `AGB` missing count and percentage | absence is not the same as invalidity |
+| conformance | is the representation usable under the contract? | numeric, text, Boolean or missing scalar | a valid type does not validate the measurement |
+| consistency | do related fields agree structurally? | `Height_max >= Height_median` | a conflict needs review, not an invented correction |
+| uniqueness/identity | is each required entity identifiable once? | complete, non-duplicated `SampleID` | unique IDs do not validate other fields |
+
+The profile reports evidence in each dimension. An action comes later and must name the question for which it is appropriate.
 
 ## 2. Count missingness explicitly
 
@@ -90,6 +119,8 @@ print("Unparseable present values:", new_missing.sum())
 
 `errors="coerce"` changes unparseable values to `NaN`. That is useful for detection but dangerous as silent cleaning. The `new_missing` mask identifies values that conversion would erase, so they can be inspected first.
 
+Print `candidate[new_missing]` with `SampleID` before accepting any conversion. Preserve the original series and count present values before and after conversion. A zero `new_missing` count supports representation compatibility for the current file; it does not validate units or plausibility.
+
 [[CHECK:l9-types]]
 
 ## 4. Upgrade an earlier function as the data become more realistic
@@ -128,6 +159,19 @@ True invalid Boolean
 ```
 
 `pd.isna()` recognises both `None` and `np.nan` as missing scalar values. The Boolean check still comes first because Python Booleans belong to the integer type hierarchy; a quality flag must not become a biomass measurement. NumPy numeric scalar types are accepted because pandas columns can supply them. A numeric-looking string remains text until provenance and parsing rules justify conversion.
+
+Make the six expectations executable:
+
+```python
+assert classify_biomass_pandas(None) == "missing"
+assert classify_biomass_pandas(np.nan) == "missing"
+assert classify_biomass_pandas(311.33) == "recorded"
+assert classify_biomass_pandas(-1) == "invalid negative"
+assert classify_biomass_pandas("311.33") == "invalid type"
+assert classify_biomass_pandas(True) == "invalid Boolean"
+```
+
+This function contract accepts one scalar value at a time. Passing a complete Series would make `pd.isna(value)` return a Boolean Series rather than one decision, so table-wide checks should use vectorised masks directly.
 
 ### Learner action — compare specifications, not only outputs
 
@@ -170,13 +214,15 @@ Overall missingness is only the beginning. Compare available and missing biomass
 agb_coverage = (
     meadows.assign(AGB_available=meadows["AGB"].notna())
     .groupby(["site", "plantcommunity"], observed=True)["AGB_available"]
-    .agg(["sum", "count"])
+    .agg(available_n="sum", total_n="size")
 )
-agb_coverage["available_pct"] = 100 * agb_coverage["sum"] / agb_coverage["count"]
+agb_coverage["available_pct"] = 100 * agb_coverage["available_n"] / agb_coverage["total_n"]
 print(agb_coverage)
 ```
 
 This does not explain the missingness, but it reveals whether availability is evenly distributed among sampled groups. If missingness is related to sampling design, dropping incomplete rows could change which sites or communities dominate the analysis.
+
+The identical overall missing count for `AGB` and `N_AGB_Sample` does not prove that the same rows are missing. Compare their Boolean missingness masks and count disagreements. Report the observed pattern, but do not label a statistical missingness mechanism or sampling cause without appropriate design evidence.
 
 ## 7. Common mistakes and recovery
 
@@ -217,6 +263,8 @@ For `SampleID`, `Date`, `site`, `Sp_richness`, `Height_median`, `Height_max` and
 
 Use a Markdown decision log with columns `field`, `observation`, `rule`, `triggered`, `action`, `justification`.
 
+Add `denominator`, `rule provenance`, `reversibility` and `unresolved risk` columns. A count of triggered rows without its denominator is incomplete, and an action that cannot be reversed requires stronger evidence than a derived review flag.
+
 ## 9. Independent challenge, reflection and portfolio artifact
 
 Choose one future question involving `Sp_richness` and one involving `AGB`.
@@ -228,6 +276,16 @@ Choose one future question involving `Sp_richness` and one involving `AGB`.
 - Produce a `quality_flags` table containing `SampleID` and your documented Boolean checks.
 - Do not delete rows or overwrite measurements.
 
+### Professional data-readiness decision
+
+Make one decision for each future question, not one global “clean data” label:
+
+- `conditionally ready` when required fields, completeness, conformance, consistency checks, population impact and unresolved risks are documented;
+- `review` when a rule lacks provenance or group coverage may materially change interpretation;
+- `stop` when identity, representation loss or required-field evidence is unresolved.
+
+State which derived flags and source columns must travel into Lesson 10. A dataset can be conditionally ready for a richness summary while unready for a biomass question because the required evidence and analysis populations differ.
+
 ### Scientific interpretation
 
 The quality report establishes that biomass availability differs from richness availability and that specific structural checks can be reproduced. It does not identify why biomass is absent or guarantee the ecological validity of present measurements. Those questions require sampling metadata and subject-matter review.
@@ -238,6 +296,7 @@ Answer in private notes:
 2. What does coercion risk hiding?
 3. Why should a validity rule name its field?
 4. What difference is there between “not flagged” and “validated”?
+5. Why can equal missing counts in two fields hide different missing rows?
 
 ### Submission
 
@@ -249,4 +308,4 @@ Answer in private notes:
 
 **Artifact 09 — Auditable ecological data-quality report**
 
-This checkpoint demonstrates that you can diagnose a real scientific table without erasing uncertainty or disguising cleaning decisions.
+This ninth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can diagnose a real scientific table without erasing uncertainty, disguising cleaning decisions or labelling the complete dataset “clean” for every question.

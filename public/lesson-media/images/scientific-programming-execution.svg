@@ -85,5 +85,6 @@
     <text x="28" y="82" class="step">Interpret the output in ecological context</text>
     <text x="28" y="116" class="copy">Check whether the result is plausible, document uncertainty, then revise the question or instructions.</text>
     <text x="28" y="150" class="small">The computer executes code. It does not understand coastal ecology or decide whether a result is scientifically credible.</text>
+    <text x="28" y="174" class="small">REPRODUCIBILITY GATE · restart kernel → run all → compare output → save the inspectable record</text>
   </g>
 </svg>

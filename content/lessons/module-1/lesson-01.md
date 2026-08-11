@@ -3,6 +3,24 @@ title: Welcome to Scientific Programming
 lessonId: lesson-01
 ---
 
+## Learning pathway
+
+### You already know
+
+You already know how scientists ask questions, distinguish observations from interpretations and judge whether evidence is relevant. You do not need programming knowledge. Your scientific experience is the starting point.
+
+### In this lesson
+
+You will turn one ecological question into a small, inspectable notebook record. You will learn what programming and scientific programming mean, how Jupyter and Python divide their roles, how the computer executes an instruction and how to preserve the result for another person to inspect.
+
+### Why this comes now
+
+Every later table, map, raster and model depends on instructions being executed in a known order and on the scientist separating computational success from scientific validity. Learning that distinction before variables or datasets prevents code from becoming an unexplained sequence of commands.
+
+### You will use this later
+
+Lesson 2 adds scientific values to the notebook. Lesson 6 develops systematic debugging. Lesson 8 introduces the published Baltic coastal-meadow table. Every later Academy project uses the same question → instruction → output → validation → interpretation cycle.
+
 ## 1. Scientific question and computational method
 
 ### Learning outcome
@@ -43,7 +61,21 @@ A notebook contains cells:
 - A **Markdown cell** holds headings, explanations, predictions and interpretations. Running it formats the text.
 - A **code cell** holds Python instructions. Running it sends those instructions to Python and returns output or an error.
 
+### Choose the right scientific record
+
+Different formats support different parts of professional work:
+
+| Format | Best used for | Important limitation |
+|---|---|---|
+| Word or similar document | Polished narrative, review and final reporting | The calculation that produced a result is usually separate |
+| Jupyter notebook | Developing an analysis while keeping question, code, output and interpretation together | Cells can be run out of order and hidden state can make a result difficult to reproduce |
+| Python script | Repeatable processing that should run from beginning to end | Narrative and exploratory output require deliberate documentation |
+
+The notebook is the right first instrument because it keeps beginner explanation beside executable evidence. It is not automatically superior to the alternatives. A mature project often uses notebooks for investigation, scripts for stable processing and a report for communication.
+
 The **kernel** is the running Python process behind the notebook. When you run a code cell, Jupyter sends the cell to the kernel. The kernel reads instructions from top to bottom within that cell and stops if it reaches an instruction it cannot complete.
+
+The kernel also preserves the consequences of cells you already ran until it is restarted. That flexibility helps exploration, but it can hide the order needed to reproduce a result. A professional notebook must therefore pass a clean-run test: restart the kernel, run every required cell from top to bottom and confirm that the result can be regenerated.
 
 Download the starter notebook from the lesson resources below. Keep the downloaded file somewhere you can find again, then rename it exactly:
 
@@ -76,6 +108,8 @@ Now select the code cell and press **Shift + Enter**, or use the Run control.
 ![A scientific question moves through a notebook plan, a code cell, Python execution, output and scientific interpretation.](lesson-media/images/scientific-programming-execution.svg)
 
 The top row of the diagram shows computation. The lower return path matters just as much: a scientist checks whether the output is relevant and defensible.
+
+The diagram ends with a reproducibility gate. A saved notebook is evidence only when the required sequence, outputs and interpretation can be regenerated from a clean kernel.
 
 ### Code walkthrough
 
@@ -175,6 +209,17 @@ Saving updates the notebook in its current workspace. Downloading creates a sepa
 
 Complete the starter notebook's Markdown prompts: project title, researcher name, scientific question, predictions, first execution note and error correction note.
 
+Then complete its handover check:
+
+1. Restart the kernel.
+2. Use **Run All** or run every required cell from top to bottom.
+3. Confirm the deliberately broken instruction has been replaced by the corrected version.
+4. Compare the regenerated output with your predictions.
+5. Record whether the notebook passed, and identify any cell that needed correction.
+6. Save and download the clean result.
+
+This is your first QA/QC procedure. It checks execution order and preservation. It does not establish that the scientific question or future data are valid.
+
 ### Independent challenge
 
 Add one code cell with no more than three `print()` instructions. Display:
@@ -184,6 +229,12 @@ Add one code cell with no more than three `print()` instructions. Display:
 - one kind of Earth Observation evidence that might eventually help.
 
 Predict the line order before running. After running, add two Markdown sentences: one identifies the executed instructions and output; the other identifies the scientific judgement that remains yours.
+
+Finish with a professional scenario: imagine a colleague receives only this notebook. Add a Markdown note titled `### Handover note` that tells them the question, which cells to run, what successful output looks like and what the output does **not** prove. Do not explain Python generally; explain how to inspect this specific scientific record.
+
+### Independent handover test
+
+Close the notebook, reopen the downloaded copy and use only the visible instructions in the file. If you cannot reproduce the output without remembering an undocumented step, revise the notebook and repeat the test.
 
 ### Learner action
 
@@ -198,13 +249,14 @@ Write short answers in your private notes:
 3. What did the kernel do when it reached the incomplete string?
 4. Why does a successfully executed cell not prove that a scientific claim is valid?
 5. Where is your downloaded notebook stored?
+6. When would a script or a report be a better format than a notebook?
 
 ### Portfolio artifact
 
 **Artifact 01 — Scientific notebook foundation**
 
-Your `Vegetation_Data_Explorer.ipynb` now contains a project title, a scientific question, predictions, executable Python instructions, a corrected error and a reflection on scientific interpretation. Keep this notebook: Lesson 2 extends it rather than replacing it.
+Your `Vegetation_Data_Explorer.ipynb` now contains a project title, a scientific question, predictions, executable Python instructions, a corrected error, a clean-run QA record, a handover note and a reflection on scientific interpretation. It is the first checkpoint in **Portfolio Project 1 — Vegetation Data Explorer**, not a separate mini-project. Keep this notebook: Lesson 2 extends it rather than replacing it.
 
 ### Summary
 
-You can now describe scientific programming as a partnership between explicit computation and scientific judgement. You can use the two essential notebook cell types, run simple instructions in order, correct one syntax error and preserve your notebook as a file.
+You can now describe scientific programming as a partnership between explicit computation and scientific judgement. You can choose why a notebook is appropriate, use its two essential cell types, run simple instructions in order, correct one syntax error and preserve a clean, inspectable record. Lesson 2 will add scientific values and names without discarding this foundation.

@@ -125,6 +125,8 @@ test("module map, starter notebook, and formative checks support beginner naviga
   await expect(firstLesson.locator(".module-index")).toHaveText("1.1");
   await expect(firstLesson.locator(".module-lesson-label")).toHaveText("Lesson 1.1");
   await expect(firstLesson.getByText("Lesson 1.1 of 12", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByRole("table")).toHaveCount(1);
+  await expect(firstLesson.getByRole("columnheader", { name: "Format" })).toBeVisible();
   const starter = firstLesson.getByRole("link", { name: /Download the Vegetation Data Explorer starter notebook/i });
   await expect(starter).toHaveAttribute("download", "");
   await expect(starter).toHaveAttribute("href", /Vegetation_Data_Explorer_Starter\.ipynb$/);

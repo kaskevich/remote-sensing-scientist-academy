@@ -79,5 +79,6 @@
     <text x="24" y="220" class="copy">Use to preserve what each value means.</text>
   </g>
 
-  <text x="64" y="724" class="copy">The best collection is determined by the data relationship, not by which syntax is shortest.</text>
+  <text x="64" y="712" class="copy">Choose by relationship, then audit what the structure preserves and what it may discard.</text>
+  <text x="64" y="738" class="copy">A complete set of fields does not validate units, methods, plausibility or provenance.</text>
 </svg>

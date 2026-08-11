@@ -93,6 +93,32 @@ describe("Module 1 pedagogical review", () => {
     expect(content).toContain("code cell");
     expect(content).toContain("When code fails");
     expect(fencedPythonBlocks(content)[0]).toBe("print()");
+    for (const connection of [
+      "You already know",
+      "In this lesson",
+      "Why this comes now",
+      "You will use this later",
+    ]) {
+      expect(content).toContain(`### ${connection}`);
+    }
+    expect(content).toContain("Word or similar document");
+    expect(content).toContain("Python script");
+    expect(content).toContain("restart the kernel");
+    expect(content).toContain("Independent handover test");
+    expect(content).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+  });
+
+  it("provides Lesson 1 clean-run and handover scaffolding in the starter notebook", () => {
+    const notebook = JSON.parse(
+      readFileSync(
+        join(process.cwd(), "public/lesson-resources/module-1/Vegetation_Data_Explorer_Starter.ipynb"),
+        "utf8",
+      ),
+    ) as { cells: Array<{ id: string; source: string[] }> };
+    const handover = notebook.cells.find((cell) => cell.id === "handover-check");
+    expect(handover).toBeDefined();
+    expect(handover?.source.join("")).toContain("Restart the kernel");
+    expect(handover?.source.join("")).toContain("what that output does not prove");
   });
 
   it("keeps one main concept in each reviewed lesson", () => {
@@ -101,6 +127,11 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson2).toContain("type()");
     expect(lesson2).toContain('The values `"72"` and `72`');
     expect(lesson2).toContain("changing a type cannot correct an invalid measurement");
+    expect(lesson2).toContain("## Learning pathway");
+    expect(lesson2).toContain("Build a one-value data contract");
+    expect(lesson2).toContain('`reported_plot_id = "007"`');
+    expect(lesson2).toContain("Professional QA decision");
+    expect(lesson2).toContain("Portfolio Project 1 — Vegetation Data Explorer");
     expect(lesson2).not.toMatch(/\bappend\(|\{\s*"SampleID"\s*:/);
 
     const lesson3 = reviewedContent["lesson-03"];
@@ -109,6 +140,11 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson3).toContain("Tuples and sets have supporting roles");
     expect(lesson3).toContain("no management label");
     expect(lesson3).toContain("no coordinates");
+    expect(lesson3).toContain("## Learning pathway");
+    expect(lesson3).toContain("Make the relationship decision first");
+    expect(lesson3).toContain("required_fields - available_fields");
+    expect(lesson3).toContain("Professional QA decision");
+    expect(lesson3).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it("develops Chapters 2–4 as one complete scientific workflow", () => {
@@ -127,6 +163,77 @@ describe("Module 1 pedagogical review", () => {
     for (const [lessonId, ideas] of Object.entries(requiredIdeas)) {
       for (const idea of ideas) expect(reviewedContent[lessonId]).toContain(idea);
     }
+
+    const lesson4 = reviewedContent["lesson-04"];
+    expect(lesson4).toContain("## Learning pathway");
+    expect(lesson4).toContain("input contract");
+    expect(lesson4).toContain("Boundary and branch stress test");
+    expect(lesson4).toContain("ready for instructional use");
+    expect(lesson4).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson5 = reviewedContent["lesson-05"];
+    expect(lesson5).toContain("## Learning pathway");
+    expect(lesson5).toContain("batch-processing contract");
+    expect(lesson5).toContain("Data-completeness extension");
+    expect(lesson5).toContain("equivalence check");
+    expect(lesson5).toContain("ready for handover");
+    expect(lesson5).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson6 = reviewedContent["lesson-06"];
+    expect(lesson6).toContain("## Learning pathway");
+    expect(lesson6).toContain("Write the function contract before its body");
+    expect(lesson6).toContain("Turn expectations into executable checks");
+    expect(lesson6).toContain("regression testing");
+    expect(lesson6).toContain("not ready for pandas data");
+    expect(lesson6).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson7 = reviewedContent["lesson-07"];
+    expect(lesson7).toContain("## Learning pathway");
+    expect(lesson7).toContain("Record an array contract");
+    expect(lesson7).toContain("Prove equivalence with the Lesson 5 loop");
+    expect(lesson7).toContain("np.isnan");
+    expect(lesson7).toContain("spatial meaning not assigned");
+    expect(lesson7).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson8 = reviewedContent["lesson-08"];
+    expect(lesson8).toContain("## Learning pathway");
+    expect(lesson8).toContain("Define the intake contract");
+    expect(lesson8).toContain("SHA-256");
+    expect(lesson8).toContain("Make the structural expectations executable");
+    expect(lesson8).toContain("accepted for Lesson 9 quality audit");
+    expect(lesson8).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson9 = reviewedContent["lesson-09"];
+    expect(lesson9).toContain("## Learning pathway");
+    expect(lesson9).toContain("Separate four quality dimensions");
+    expect(lesson9).toContain('assert classify_biomass_pandas(np.nan) == "missing"');
+    expect(lesson9).toContain("missingness masks and count disagreements");
+    expect(lesson9).toContain("conditionally ready");
+    expect(lesson9).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson10 = reviewedContent["lesson-10"];
+    expect(lesson10).toContain("## Learning pathway");
+    expect(lesson10).toContain("Write the analysis specification");
+    expect(lesson10).toContain("Reconcile the grouped result with its population");
+    expect(lesson10).toContain("site-by-community count table");
+    expect(lesson10).toContain("ready for descriptive handover");
+    expect(lesson10).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson11 = reviewedContent["lesson-11"];
+    expect(lesson11).toContain("## Learning pathway");
+    expect(lesson11).toContain("Declare the join contract");
+    expect(lesson11).toContain("indicator=True");
+    expect(lesson11).toContain("PNG and SVG");
+    expect(lesson11).toContain("ready for portfolio handover");
+    expect(lesson11).toContain("Portfolio Project 1 — Vegetation Data Explorer");
+
+    const lesson12 = reviewedContent["lesson-12"];
+    expect(lesson12).toContain("## Learning pathway");
+    expect(lesson12).toContain("Define four completion gates");
+    expect(lesson12).toContain("evidence map");
+    expect(lesson12).toContain("output manifest");
+    expect(lesson12).toContain("ready for Module 1 portfolio");
+    expect(lesson12).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
@@ -193,6 +300,12 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson2).toContain("not evidence of how, when or under which protocol");
     expect(lesson2).not.toContain("biomass_sampled");
     expect(JSON.stringify(site)).not.toContain("biomass_sampled");
+    expect(
+      readFileSync(
+        join(process.cwd(), "public/lesson-media/images/scientific-variable-bindings.svg"),
+        "utf8",
+      ),
+    ).not.toContain("biomass_sampled");
 
     const lesson6 = reviewedContent["lesson-06"];
     expect(lesson6).toContain("if isinstance(value, bool)");

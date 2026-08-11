@@ -3,6 +3,24 @@ title: Vegetation Data Explorer Project
 lessonId: lesson-12
 ---
 
+## Learning pathway
+
+### You already know
+
+Lessons 1–11 created one continuous chain: reproducible notebook, honest values, auditable records, decision rules, batch processing, tested functions, arrays, published-file intake, data quality, descriptive summaries and accessible figures.
+
+### In this lesson
+
+You will remove duplication, connect every claim to its source and processing evidence, export an inventoried handover package and ask an independent reader to reproduce and challenge the result.
+
+### Why this comes now
+
+A portfolio artifact is credible only when the separate lesson checkpoints operate as one method. Synthesis reveals hidden state, inconsistent assumptions and unsupported claims that isolated cells may conceal.
+
+### You will use this later
+
+Module 2 reuses the handover pattern for geospatial and UAV evidence. Module 1 provides foundations for all three graduate profiles; it does not yet demonstrate spatial engineering, operational EO analysis or remote-sensing research competence by itself.
+
 ## 1. Assemble a reproducible scientific argument
 
 ### Learning outcome
@@ -26,6 +44,17 @@ You are preparing an internal research briefing for the Baltic coastal meadow gr
 ### Learner action
 
 Duplicate your notebook as a safety copy. Continue working in `Vegetation_Data_Explorer.ipynb`; do not combine results by copying screenshots from separate notebooks.
+
+### Define four completion gates
+
+| Gate | Required evidence | A failure means |
+|---|---|---|
+| data | DOI, licence, immutable filename, checksum, parser and structural audit | source identity or intake is unresolved |
+| computation | explicit population, tested functions, reconciliation checks and clean Run All | result cannot be reproduced reliably |
+| science | question, variable meaning, denominators, quality decisions and limitations | execution cannot support the claim |
+| communication | standalone tables, captions, text alternatives and output inventory | another reader cannot evaluate the evidence |
+
+The project is complete only when all four gates pass. Visual polish cannot compensate for a failed data or scientific gate.
 
 ## 2. Choose one focused investigation
 
@@ -69,6 +98,8 @@ Organise the notebook in this order:
 10. **Results** — descriptive tables, one validated join or reshape and two figures.
 11. **Scientific interpretation** — finding, uncertainty, limitations and next evidence.
 12. **Reproducibility check** — restart, Run All, output export and final checklist.
+
+Add an **evidence map** after the executive summary. For each major claim, list its source fields, analysis population, quality decision, method or function, table/figure and limitation. This gives a reviewer a direct route from wording back to evidence.
 
 Use numbered headings and short paragraphs. Keep code close to the narrative that explains its purpose and output.
 
@@ -166,6 +197,8 @@ plt.show()
 
 Use descriptive lowercase filenames, record what each file contains and confirm the exported file exists. A derived output is reproducible only when the notebook contains the instructions that created it.
 
+Create an output manifest with filename, purpose, format, byte size and SHA-256 checksum. Reopen every CSV and image after export. Checksums identify the delivered bytes; reopening verifies usability; neither proves scientific validity.
+
 ## 7. Common mistakes and recovery
 
 ### Writing the conclusion before defining the population
@@ -208,6 +241,8 @@ Use this sequence before final submission:
 10. Confirm limitations mention sampling structure, metadata and missingness where relevant.
 11. Export notebook, summary table and figures.
 12. Ask another reader to describe your question, result and limitation without assistance.
+
+Give that reader the project folder in a fresh session. Ask them to locate the source, run the notebook from the beginning, reproduce one reported number, open every exported artifact and identify one unresolved scientific risk. Record what succeeded, what failed and what you changed. This is a handover test, not proofreading alone.
 
 ## 9. Independent scientific briefing
 
@@ -253,8 +288,24 @@ Your project is portfolio ready when:
 - figures are readable and captions are complete;
 - claims remain within the evidence.
 
+### Professional portfolio decision
+
+Classify the package as:
+
+- `ready for Module 1 portfolio` when all four gates, the clean run, output manifest, reopened artifacts and independent handover pass;
+- `conditionally ready` when the computation succeeds but a clearly stated metadata or communication issue remains;
+- `not ready` when source identity, execution, analysis population, entity integrity or claim traceability fails.
+
+Map the evidence cautiously to the Academy graduate profiles:
+
+- **GIS/Remote Sensing Engineer foundation:** immutable inputs, repeatable processing, tests and auditable outputs;
+- **Geospatial Data Analyst foundation:** quality profiles, explicit populations, grouped summaries and defensible figures;
+- **Remote Sensing Researcher foundation:** question–evidence reasoning, reproducibility, uncertainty boundaries and research handover.
+
+These are foundational signals. Spatial data, imagery, coordinate systems, EO methods and validation evidence must be added by later modules before any graduate profile is credibly demonstrated.
+
 ### Portfolio artifact
 
-**Vegetation Data Explorer — reproducible Baltic coastal meadow analysis**
+**Portfolio Project 1 — Vegetation Data Explorer: reproducible Baltic coastal meadow analysis**
 
 This completed notebook demonstrates the computational mindset required of a Remote Sensing Scientist: not memorising commands, but designing a transparent path from environmental question to auditable evidence and responsible interpretation.
