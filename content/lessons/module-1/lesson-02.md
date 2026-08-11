@@ -3,6 +3,24 @@ title: Variables and Scientific Data
 lessonId: lesson-02
 ---
 
+## Learning pathway
+
+### You already know
+
+From Lesson 1, you know that a notebook connects a scientific question, executable instructions, output and interpretation. You can run cells from a clean kernel, read one error and preserve an inspectable handover record.
+
+### In this lesson
+
+You will represent the different roles inside one ecological record: identifiers, counts, decimal measurements, two-state quality flags and missing values. You will connect each Python type to a scientific meaning rather than choosing a type only because the code accepts it.
+
+### Why this comes now
+
+Before the notebook can organise many plots or open a table, it must represent one value honestly. Type, unit, missingness and measurement meaning are separate parts of that representation.
+
+### You will use this later
+
+Lesson 3 combines individual values into ecological records. Lesson 8 compares your expectations with the published table schema. Lesson 9 upgrades missing-value rules for pandas, and every later raster or model depends on preserving value meaning and units.
+
 ## 1. Values, names and scientific meaning
 
 ### Learning outcome
@@ -50,6 +68,8 @@ The practice number `12.5` has deliberately been given a neutral name. Without d
 ![Meaningful Python variable names connect to text, count, decimal, Boolean and no-value examples.](lesson-media/images/scientific-variable-bindings.svg)
 
 The diagram separates a variable name from the value it currently references. Neither part replaces scientific metadata.
+
+The Boolean in the diagram is named `biomass_value_present`. It deliberately avoids claiming that a sampling event took place, because a table value alone cannot prove when or under which protocol something was sampled.
 
 > **Scientific note** Missing means “no value is recorded here”. Zero means “a value was recorded and its magnitude is zero”. Replacing missing observations with zero changes the scientific claim and can bias later summaries.
 
@@ -120,6 +140,21 @@ Good metadata may include:
 - missing-value conventions;
 - the source and version.
 
+### Build a one-value data contract
+
+For every important value, a professional workflow should be able to answer:
+
+| Question | Example for `species_richness` | What Python can verify |
+|---|---|---|
+| What does the name mean? | number of species recorded for one quadrat | only that the name exists |
+| What is the stored type? | integer | `type(species_richness)` |
+| What is the unit or counting convention? | count under a documented field protocol | not the protocol itself |
+| How is missing represented? | not yet established for the published field | whether the current value is `None` |
+| What values are plausible? | requires ecological and protocol evidence | a rule only after the scientist defines it |
+| Where did it come from? | source table, record and version | only what the workflow records explicitly |
+
+This small contract prevents a descriptive variable name from becoming false confidence. The Academy will later express the same questions as table schemas, raster metadata and model feature definitions.
+
 > **Go deeper — names and metadata** A descriptive name helps a human read code. Formal metadata connects the value to a definition that can be checked outside the code. Professional datasets need both.
 
 ### Learner action
@@ -140,6 +175,8 @@ print(type(species_richness))
 ```
 
 This conversion is safe only after you have checked that `"7"` represents a count. `int("unknown")` fails because the text is not an integer. Converting `"9999"` to `9999` succeeds computationally, but it does not prove that 9,999 species were measured correctly.
+
+Identifiers require special care. Converting a label such as `"007"` to the integer `7` removes leading zeros and can break joins to other records. Ask whether the value is a quantity or an identifier before converting it.
 
 ### Type-error debugging exercise
 
@@ -184,6 +221,8 @@ print(elevation_value, type(elevation_value))
 
 `plot_id` is a string because it identifies a sample. `species_richness` is an integer count. `elevation_value` is a float, but its neutral name avoids inventing a unit. `biomass_value_present` states only that this table row contains a biomass value; it does not represent the biomass magnitude. `field_note = None` says that no separate note is recorded.
 
+Python may display `0.530` as `0.53` because both literals represent the same floating-point number. The source's trailing zero may still communicate reported precision or formatting. Preserve the original file and metadata rather than expecting a float's display to retain that information.
+
 The Boolean name is deliberately limited to **table-value presence**. A value being present in the table is not evidence of how, when or under which protocol the biomass was sampled. Those claims require documented sampling metadata.
 
 ### Learner action
@@ -200,7 +239,8 @@ Create variables for the published plot `SALS3` using `SampleID` `SALS3`, site `
 2. Predict the type of every value.
 3. Use `type()` to inspect each one.
 4. Add a Markdown sentence explaining why zero would make a different claim from `None`.
-5. Run Lesson 1 and Lesson 2 cells in order.
+5. Add one row to a Markdown data-contract table with name, value, Python type, scientific role, unit status, missing convention and source.
+6. Run Lesson 1 and Lesson 2 cells in order.
 
 ### Independent vegetation-plot task
 
@@ -211,6 +251,18 @@ Use a neutral name such as `cci_cwm_value` until its definition and measurement 
 - one reason the sample identifier is text;
 - one reason species richness is numeric;
 - one statement explaining why changing a type cannot correct an invalid measurement.
+
+Then test a realistic failure: create `reported_plot_id = "007"`, convert it to an integer and compare the result with the original text. Explain why the successful conversion is unsuitable for an identifier.
+
+### Professional QA decision
+
+Review every Lesson 2 variable and assign one status:
+
+- `ready` — type and scientific meaning are supported for the current task;
+- `review` — the value can be preserved, but unit, convention or provenance needs confirmation;
+- `stop` — conversion or interpretation would discard identity or invent metadata.
+
+Record the reason beside each status. Do not change an uncertain value merely to make the code easier.
 
 ### Scientific interpretation
 
@@ -229,9 +281,10 @@ Write short answers in your private notes:
 3. What does `type()` tell you, and what can it not tell you?
 4. Why does `elevation_value` communicate less than a verified field definition and unit?
 5. Why can a successful type conversion still leave an invalid measurement?
+6. Why can converting `"007"` to `7` damage a scientific record even though Python succeeds?
 
 ### Portfolio artifact
 
 **Artifact 02 — Scientific variables record**
 
-Your continuing notebook now represents ecological values explicitly, inspects their Python types and documents the limits of type information. It preserves missingness and avoids unsupported unit claims.
+Your continuing notebook now represents ecological values explicitly, inspects their Python types and documents the limits of type information. Its data-contract table and ready/review/stop decision form the second checkpoint in **Portfolio Project 1 — Vegetation Data Explorer**. It preserves missingness, identity and source precision without inventing units or protocols.

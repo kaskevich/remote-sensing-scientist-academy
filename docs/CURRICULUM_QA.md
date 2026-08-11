@@ -24,7 +24,7 @@ A lesson is complete only when it supports the full progression:
 | Lesson | Content | Why | Visuals | Practice | QA/QC | Portfolio | Tested | Status |
 |---|---|---|---|---|---|---|---|---|
 | 1.1 Welcome to Scientific Programming | Scientific programming, notebook choice and execution | Question-to-method distinction | Execution diagram with clean-run gate | Guided notebook + independent handover | Restart, Run All, compare and reopen | Project 1 foundation | Content, type, lint, SVG, notebook, export and responsive review | COMPLETE |
-| 1.2 Variables and Scientific Data | Not reviewed | Not reviewed | Existing binding diagram | Not reviewed | Not reviewed | Scientific variables record | No | NOT STARTED |
+| 1.2 Variables and Scientific Data | Value types, data contracts, identifiers and missingness | Honest representation before collection | Corrected binding diagram | Guided record + independent conversion critique | Ready/review/stop decision | Project 1 data-contract checkpoint | Content, type, lint, SVG, notebook and export | COMPLETE |
 | 1.3 Collections for Ecological Information | Not reviewed | Not reviewed | Existing collections diagram | Not reviewed | Not reviewed | Vegetation metadata record | No | NOT STARTED |
 | 1.4 Conditions and Data-Quality Rules | Not reviewed | Not reviewed | Existing decision diagram | Not reviewed | Not reviewed | Quality-rule record | No | NOT STARTED |
 | 1.5 Repetition, Loops and Vectorised Thinking | Not reviewed | Not reviewed | Existing loop/vector diagram | Not reviewed | Not reviewed | Repeated plot audit | No | NOT STARTED |
@@ -94,3 +94,13 @@ After each lesson commit, update that lesson row, update every affected promise-
 - **Integration issue fixed:** enabled GitHub-flavoured Markdown and responsive tables so professional decision and QA tables render semantically across the Academy.
 - **Validation:** 38 Module 1 content tests, TypeScript, ESLint, notebook JSON, SVG XML and GitHub Pages export passed. Lesson 1 was inspected at 320 px and desktop width without page overflow or console errors; the static export contains a semantic table after the renderer correction.
 - **Matrix contribution:** strengthens notebook workflows, reproducibility, debugging, scientific communication and Portfolio Project 1. It does not claim to close the later environment, README or Git/GitHub gaps.
+
+### Lesson 1.2 — Variables and Scientific Data
+
+- **Purpose:** teach a beginner to represent one ecological value honestly before combining values into records or tables.
+- **Existing strengths:** clear introduction to strings, numbers, Booleans and `None`; scientifically cautious wording around undocumented units; good distinction between missing and zero; and an authentic published-plot application.
+- **Gaps found:** no explicit dependency path; no compact data contract connecting Python type to meaning, units, provenance and missingness; no realistic identifier-conversion failure; no professional decision about whether an uncertain value may proceed; and the SVG retained an ambiguous Boolean name that implied sampling knowledge.
+- **Professional standard applied:** a learner should be able to inspect a Python type, distinguish computational validity from scientific validity, preserve identifier formatting and source precision, document unresolved metadata and decide whether a value is ready, requires review or must stop the workflow.
+- **Changes made:** added the four-part learning pathway, a one-value data contract, leading-zero identifier case, float-display caution, ready/review/stop QA decision, stronger guided and independent work, starter-notebook cells, Project 1 framing, assessment metadata and a scientifically accurate diagram label.
+- **Validation:** 38 Module 1 content tests plus the shared Markdown-rendering test, TypeScript, focused ESLint, notebook JSON, SVG XML and GitHub Pages export passed. The generated export contains the lesson’s semantic table; responsive table behaviour is provided by the Lesson 1 renderer correction.
+- **Matrix contribution:** strengthens Python foundations, data-quality reasoning, reproducibility, scientific communication and the second checkpoint of Portfolio Project 1. It prepares table schema auditing in Lesson 8 and pandas-aware missingness in Lesson 9 without claiming those later competencies prematurely.

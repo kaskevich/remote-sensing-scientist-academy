@@ -58,7 +58,7 @@
     </g>
     <g transform="translate(0 204)">
       <rect width="340" height="58" rx="6" fill="#10253a" stroke="#29435b" />
-      <text x="22" y="36" class="name">biomass_sampled</text>
+      <text x="22" y="36" class="name">biomass_value_present</text>
       <line x1="350" y1="29" x2="552" y2="29" stroke="#c8f33d" stroke-width="2" marker-end="url(#arrow)" />
       <rect x="570" width="330" height="58" rx="6" fill="#142c43" stroke="#29435b" />
       <text x="592" y="36" class="value">True</text>
@@ -74,5 +74,5 @@
     </g>
   </g>
 
-  <text x="64" y="668" class="copy">A clear name carries scientific meaning. A value still needs metadata, including a definition and unit where relevant.</text>
+  <text x="64" y="668" class="copy">A name and type aid computation. Meaning, unit, method, missing convention and provenance still require evidence.</text>
 </svg>

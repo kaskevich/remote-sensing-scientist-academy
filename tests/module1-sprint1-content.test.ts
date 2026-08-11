@@ -127,6 +127,11 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson2).toContain("type()");
     expect(lesson2).toContain('The values `"72"` and `72`');
     expect(lesson2).toContain("changing a type cannot correct an invalid measurement");
+    expect(lesson2).toContain("## Learning pathway");
+    expect(lesson2).toContain("Build a one-value data contract");
+    expect(lesson2).toContain('`reported_plot_id = "007"`');
+    expect(lesson2).toContain("Professional QA decision");
+    expect(lesson2).toContain("Portfolio Project 1 — Vegetation Data Explorer");
     expect(lesson2).not.toMatch(/\bappend\(|\{\s*"SampleID"\s*:/);
 
     const lesson3 = reviewedContent["lesson-03"];
@@ -219,6 +224,12 @@ describe("Module 1 pedagogical review", () => {
     expect(lesson2).toContain("not evidence of how, when or under which protocol");
     expect(lesson2).not.toContain("biomass_sampled");
     expect(JSON.stringify(site)).not.toContain("biomass_sampled");
+    expect(
+      readFileSync(
+        join(process.cwd(), "public/lesson-media/images/scientific-variable-bindings.svg"),
+        "utf8",
+      ),
+    ).not.toContain("biomass_sampled");
 
     const lesson6 = reviewedContent["lesson-06"];
     expect(lesson6).toContain("if isinstance(value, bool)");
