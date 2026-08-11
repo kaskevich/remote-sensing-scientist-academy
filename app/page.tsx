@@ -14,6 +14,7 @@ import {
   module2PracticumDetails,
   publishedModule2Lessons,
 } from "@/lib/module2-pedagogy";
+import { extractFirstPythonCode } from "@/lib/lesson-code-workspace";
 
 type CurriculumModule = {
   id: string;
@@ -55,42 +56,46 @@ const visiblePaths = content.pathsSection.items.filter((path) => path.visible);
 const visibleModules = (content.curriculum.modules as CurriculumModule[]).filter(
   (module) => module.visible,
 );
-const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => ({
-  id: module.id || `lesson-${String(index + 1).padStart(2, "0")}`,
-  numberLabel: `1.${index + 1}`,
-  week: module.week,
-  title: module.title,
-  description: module.description,
-  tools: module.tools,
-  content: reviewedLessonDetails[module.id]?.content
+const learnerLessons: AcademyLesson[] = visibleModules.map((module, index) => {
+  const lessonContent = reviewedLessonDetails[module.id]?.content
     ?? (reviewedLessonDetails[module.id]
       ? readReviewedLesson(reviewedLessonDetails[module.id].markdownFile)
-      : module.lessonContent),
-  images: module.lessonImages.map((image) => ({
-    ...image,
-    src: publicAssetPath(image.src),
-  })),
-  resources: [
-    ...module.lessonResources,
-    ...(reviewedLessonDetails[module.id]?.additionalResources ?? []),
-  ].map((resource) => ({
-      ...resource,
-      href: publicAssetPath(resource.href),
-    })),
-  pedagogy: reviewedLessonDetails[module.id] ?? null,
-  task: {
-    title: module.task.title,
-    instructions: module.task.instructions,
-    referenceImages: module.task.referenceImages.map((image) => ({
+      : module.lessonContent);
+  return {
+    id: module.id || `lesson-${String(index + 1).padStart(2, "0")}`,
+    numberLabel: `1.${index + 1}`,
+    week: module.week,
+    title: module.title,
+    description: module.description,
+    tools: module.tools,
+    content: lessonContent,
+    starterCode: extractFirstPythonCode(lessonContent) ?? undefined,
+    images: module.lessonImages.map((image) => ({
       ...image,
       src: publicAssetPath(image.src),
     })),
-    referenceMaps: module.task.referenceMaps.map((map) => ({
-      ...map,
-      src: publicAssetPath(map.src),
+    resources: [
+      ...module.lessonResources,
+      ...(reviewedLessonDetails[module.id]?.additionalResources ?? []),
+    ].map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
     })),
-  },
-}));
+    pedagogy: reviewedLessonDetails[module.id] ?? null,
+    task: {
+      title: module.task.title,
+      instructions: module.task.instructions,
+      referenceImages: module.task.referenceImages.map((image) => ({
+        ...image,
+        src: publicAssetPath(image.src),
+      })),
+      referenceMaps: module.task.referenceMaps.map((map) => ({
+        ...map,
+        src: publicAssetPath(map.src),
+      })),
+    },
+  };
+});
 
 const module2LessonResources: Record<string, Array<{ href: string; title: string }>> = {
   "lesson-2-01": [{
@@ -235,6 +240,7 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
     description: source.description,
     tools: source.tools,
     content: pedagogy.content ?? readReviewedLesson(pedagogy.markdownFile),
+    starterCode: source.code,
     images: [],
     resources: (module2LessonResources[source.id] ?? []).map((resource) => ({
       ...resource,
@@ -276,6 +282,7 @@ const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.m
     description: source.description,
     tools: [...source.tools],
     content: readReviewedLesson(pedagogy.markdownFile),
+    starterCode: extractFirstPythonCode(readReviewedLesson(pedagogy.markdownFile)) ?? undefined,
     images: [],
     resources: resources.map((resource) => ({
       ...resource,

@@ -29,6 +29,7 @@ import AcademyAccountPanel, {
 import { useAcademyAuth } from "@/app/components/academy-auth-provider";
 import LessonDiscussion from "@/app/components/lesson-discussion";
 import SyncedLessonResources from "@/app/components/synced-lesson-resources";
+import LessonCodeWorkspace from "@/app/components/lesson-code-workspace";
 import type {
   AcademyModuleOverview,
   ReviewedLessonDetails,
@@ -44,6 +45,7 @@ export type AcademyLesson = {
   description: string;
   tools: string[];
   content: string;
+  starterCode?: string;
   images: LessonImage[];
   resources: LessonResource[];
   task: {
@@ -645,6 +647,10 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                     )}
 
                     <SyncedLessonResources lessonId={lesson.id} />
+
+                    {lesson.starterCode && (
+                      <LessonCodeWorkspace lessonId={lesson.id} starterCode={lesson.starterCode} />
+                    )}
 
                     <div className="lesson-actions">
                       <label className="lesson-completion-control">

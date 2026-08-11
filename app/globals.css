@@ -1767,6 +1767,165 @@ h2 {
   background: rgba(255, 255, 255, 0.025);
 }
 
+.lesson-code-workspace {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  margin-top: 30px;
+  padding: 24px;
+  border: 1px solid rgba(200, 243, 61, 0.38);
+  background: rgba(200, 243, 61, 0.035);
+}
+
+.lesson-code-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.lesson-code-heading > div {
+  min-width: 0;
+  max-width: 650px;
+}
+
+.lesson-code-heading > div > span,
+.lesson-code-editor-label,
+.lesson-code-output > span,
+.lesson-code-runtime {
+  color: var(--lime);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.lesson-code-heading h3 {
+  margin: 7px 0 8px;
+  color: white;
+  font: 500 27px/1.15 "Iowan Old Style", Georgia, serif;
+}
+
+.lesson-code-heading p,
+.lesson-code-help {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.lesson-code-runtime {
+  max-width: 190px;
+  padding: 8px 10px;
+  border: 1px solid rgba(200, 243, 61, 0.28);
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.45;
+}
+
+.lesson-code-editor-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.lesson-code-editor-label span {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-align: right;
+  text-transform: none;
+}
+
+.lesson-code-editor {
+  width: 100%;
+  min-width: 0;
+  min-height: 190px;
+  display: block;
+  resize: vertical;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  background: #071326;
+  color: rgba(255, 255, 255, 0.92);
+  font: 14px/1.65 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  tab-size: 4;
+}
+
+.lesson-code-editor:focus {
+  border-color: var(--lime);
+  outline: 1px solid var(--lime);
+  outline-offset: 0;
+}
+
+.lesson-code-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.lesson-code-controls button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.lesson-code-controls .lesson-code-run {
+  border-color: var(--lime);
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.lesson-code-controls button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.lesson-code-output {
+  min-width: 0;
+  margin-top: 16px;
+  padding: 15px 17px;
+  border-left: 3px solid rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.lesson-code-output-success {
+  border-left-color: var(--lime);
+}
+
+.lesson-code-output-error {
+  border-left-color: var(--orange);
+}
+
+.lesson-code-output > span {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.lesson-code-output pre {
+  max-width: 100%;
+  margin: 8px 0 0;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, 0.84);
+  font: 13px/1.6 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.lesson-code-help {
+  margin-top: 14px;
+  font-size: 12px;
+}
+
 .lesson-image-gallery,
 .task-result-gallery {
   display: grid;
@@ -4300,6 +4459,29 @@ footer > p {
   .task-upload-state {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .lesson-code-workspace {
+    padding: 16px;
+  }
+
+  .lesson-code-heading,
+  .lesson-code-editor-label {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lesson-code-runtime {
+    max-width: none;
+  }
+
+  .lesson-code-editor-label span {
+    text-align: left;
+  }
+
+  .lesson-code-controls button {
+    width: 100%;
   }
 
   .task-upload-state progress {
