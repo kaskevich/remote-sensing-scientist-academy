@@ -1,0 +1,50 @@
+{
+  "title": "Synthetic professional GIS environment constraints",
+  "data_status": "invented training scenario; no real organisation, licence or service",
+  "review_date": "2026-08-11",
+  "scientific_contract": {
+    "project": "Baltic coastal-meadow evidence delivery",
+    "authoritative_vector": "reviewed management zones with stable zone_id",
+    "authoritative_raster": "accepted seasonal COG with immutable checksum",
+    "public_output": "six generalized site records and an equivalent table",
+    "required_invariants": [
+      "CRS and grid",
+      "stable identifiers",
+      "measurement scaling and nodata",
+      "eligibility and missingness",
+      "provenance and licence",
+      "acceptance thresholds"
+    ]
+  },
+  "environments": [
+    {
+      "id": "ENV-A",
+      "label": "Regional authority",
+      "available_components": ["ArcGIS Pro", "ArcGIS Online organisation", "managed database"],
+      "unknowns": ["exact version", "user types", "extensions", "service credits", "export policy"],
+      "constraints": ["named editors", "public read-only view", "annual procurement review"]
+    },
+    {
+      "id": "ENV-B",
+      "label": "University analysis team",
+      "available_components": ["QGIS 3.44 LTR", "Python environment", "PostGIS", "object storage"],
+      "unknowns": ["service uptime", "identity integration", "operational support owner"],
+      "constraints": ["open reproducible workflow", "research-data licence", "semester handover"]
+    },
+    {
+      "id": "ENV-C",
+      "label": "Offline field partner",
+      "available_components": ["approved laptop", "GeoPackage reader", "PDF reader"],
+      "unknowns": ["return connectivity", "device patch level"],
+      "constraints": ["three-day offline period", "encrypted device", "snapshot is never authoritative"]
+    }
+  ],
+  "acceptance_tolerances": {
+    "record_identity": "exact stable-ID match",
+    "category_and_missingness": "exact match",
+    "continuous_summary": "difference no greater than declared method tolerance",
+    "geometry": "topological equivalence plus documented coordinate tolerance",
+    "public_schema": "exact allow-list; no extra field"
+  },
+  "secrets": []
+}

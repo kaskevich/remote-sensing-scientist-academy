@@ -2,7 +2,7 @@
 
 ## Design decision
 
-Keep the 12-lesson Module 1 and the nine implemented Module 2 chapters. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation, spatial inference, governed spatial databases, cloud-native EO data and accessible web delivery.
+Keep the 12-lesson Module 1 and the ten implemented Module 2 chapters. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation, spatial inference, governed spatial databases, cloud-native EO data, accessible web delivery and professional GIS ecosystem translation.
 
 Do not treat the remaining Module 2 titles as delivered lessons. Re-home them into later modules when they are developed so the Academy remains one pathway rather than one oversized tool catalogue.
 
@@ -11,9 +11,9 @@ Do not treat the remaining Module 2 titles as delivered lessons. Re-home them in
 | Stage | Module | Central professional problem | Main project | Current state |
 |---|---|---|---|---|
 | Foundations | 1. Thinking Like a Scientific Programmer | How can ecological measurements become a reproducible scientific argument? | Vegetation Data Explorer | Implemented; final integrity revision in progress |
-| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.45 and nine chapter practica implemented; later chapters remain planned |
+| Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready and scientifically defensible? | Geospatial Evidence and UAV Survey Package | Lessons 2.1–2.46 and ten chapter practica implemented; later chapters remain planned |
 | Earth Observation | 3. Satellite Earth Observation and Time Series | How can optical, SAR and multidimensional satellite observations become comparable evidence through time? | Baltic Wetlands Monitoring Workflow | Planned to extend the implemented Module 2 Chapters 5 and 8 foundation into longer real-data time-series analysis; not advertised as available |
-| Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned to extend existing Module 2 Chapters 6, 7 and 9 foundations with enterprise and production depth from planned Chapters 10 and 12 |
+| Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned to extend existing Module 2 Chapters 6–10 foundations with deeper production computing from planned Chapter 12 |
 | Modelling | 5. Remote Sensing Modelling | How can predictive EO models be trained, spatially validated, interpreted and mapped without leakage? | Chlorophyll and Trait Prediction Pipeline | Missing; must be designed against the modelling promise matrix |
 | Professional synthesis | 6. Portfolio, Research and Career Launch | How can one independently scoped EO investigation be reproduced, defended and communicated? | Environmental EO Case Study | Missing; future capstone and graduate-profile assessment |
 
@@ -47,6 +47,8 @@ Module 2 Chapter 8 contributes **Artifact 2.H — Cloud-Native EO Discovery and 
 
 Module 2 Chapter 9 contributes **Artifact 2.I — Accessible Web GIS Evidence Delivery**. It proves representation selection, public-schema governance, an accessible map/table pair and standards-based client acceptance on generalized synthetic evidence. It does not represent a live production monitoring service.
 
+Module 2 Chapter 10 contributes **Artifact 2.J — Portable Professional GIS Architecture**. It proves role-based ArcGIS/open ecosystem selection, scientific invariant testing, authority and sharing controls, operating ownership and a bounded migration drill. It does not verify a live licence, organisation or production deployment.
+
 ## Required project package
 
 Each major project must include:
@@ -77,7 +79,8 @@ Status describes the current implemented release before the lesson-by-lesson int
 | Satellite optical and SAR processing | Required | Required | Required | Module 2 Chapter 5 | Add multidimensional time-series processing in Module 3 |
 | Time series and multidimensional data | Useful | Required | Required | Module 2 Chapter 8 labelled arrays, EO cubes, lazy computation and discovery package | Extend to multi-year real EO analysis in Module 3 |
 | Sampling and spatial autocorrelation | Useful | Required | Required | Module 2 Chapter 6 | Apply the design explicitly to predictive-model validation in Module 5 |
-| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–9 relational governance, bounded computation, cloud-native formats and accessible interoperable delivery | Enterprise operations and automated production remain for Modules 4/6 |
+| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–10 relational governance, bounded computation, cloud-native formats, accessible delivery and professional ecosystem translation | Automated production depth remains for Modules 4/6 |
+| ArcGIS/open ecosystem translation | Required | Useful | Useful | Lesson 2.46 and Chapter 10 practicum role matrix, equivalence gate, sharing review and migration drill | Verify organisation-specific capabilities only in authorised environments |
 | Reproducible environments, CLI, tests and CI | Required | Useful | Required | Site engineering only, not learner evidence | Modules 4/6 |
 | Correct ML problem framing and metrics | Useful | Required | Required | None implemented | Module 5 |
 | Spatial CV, leakage and extrapolation control | Required for modelling pipelines | Required | Required | None implemented | Module 5 |

@@ -628,6 +628,7 @@ export const publishedModule2LessonIds = [
   "lesson-2-43",
   "lesson-2-44",
   "lesson-2-45",
+  "lesson-2-46",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -709,6 +710,14 @@ export const module2ChapterPractica = [
     tools: ["Web delivery architecture", "Accessible interactive mapping", "OGC interoperability"],
     artifact: "Artifact 2.I — Accessible Web GIS Evidence Delivery",
   },
+  {
+    id: "module-2-chapter-10-practicum",
+    chapter: 10,
+    title: "Design a Portable Coastal-Meadow GIS Architecture",
+    description: "Allocate ArcGIS and open components by role, prove cross-ecosystem equivalence, and defend a governed architecture with an exit path.",
+    tools: ["Enterprise architecture", "Workflow translation", "Migration evidence"],
+    artifact: "Artifact 2.J — Portable Professional GIS Architecture",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -716,10 +725,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "45 lessons · 9 practica available",
+  navigationMeta: "46 lessons · 10 practica available",
   syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.45 and nine chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, Spatial Databases, Multidimensional and Cloud-Native Data, and Web GIS and Delivery. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.46 and ten chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, Spatial Databases, Multidimensional and Cloud-Native Data, Web GIS and Delivery, and Enterprise GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -2592,6 +2601,50 @@ const webDeliveryLessonConfigurations: Record<string, PublishedLessonConfigurati
   },
 };
 
+function professionalEcosystemRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves synthetic source evidence, checksums, versions, privileges, parameters, scientific invariants, exact/tolerant comparison tests, authority and migration evidence" },
+    { dimension: "Scientific communication", expectation: "Issues a bounded conditional architecture decision without product advocacy, invented capability, unsupported cost or claims that visual agreement proves scientific equivalence" },
+  ];
+}
+
+const commonProfessionalEcosystemChecklist = [
+  "Every organisation, environment, licence, service, requirement and result is identified as synthetic training evidence unless separately verified",
+  "Scientific invariants are defined before products and include IDs, CRS, grid, scaling, nodata, spatial support, eligibility, missingness, provenance and acceptance thresholds",
+  "Desktop, automation, authority, service, identity, public delivery, operations, recovery and migration roles have explicit owners",
+  "Product version, service review date, user type, extension, privilege and runtime evidence are recorded or honestly marked unverified",
+  "No licence key, credential, private endpoint, confidential architecture detail, personal information or sensitive coordinate enters the deliverable",
+  "ArcGIS and open implementations are compared by scientific contract and bounded tests rather than feature count or visual similarity",
+];
+
+const professionalEcosystemLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-46": {
+    estimatedTime: "210–270 minutes",
+    lessonType: "Professional GIS Architecture Studio",
+    markdownFile: "content/lessons/module-2/lesson-46.md",
+    formativeChecks: [
+      { id: "m2-l46-contract", question: "An ArcPy workflow and a GeoPandas/Rasterio workflow use different functions. What must remain the same?", options: ["The declared scientific inputs, method parameters, invariants and acceptance evidence", "The source-code text and file extension", "The colour of the final map only"], correctOption: 0, explanation: "Implementations may differ while the scientific contract remains stable. Equivalence is established through IDs, grids, values, missingness, provenance and predeclared comparison rules." },
+      { id: "m2-l46-roles", question: "Which statement correctly distinguishes ArcGIS Online and ArcGIS Enterprise?", options: ["Online is provider-operated cloud GIS; Enterprise is organisation-operated software whose infrastructure and recovery responsibilities must be allocated", "Online is always public and Enterprise is always private", "They are interchangeable names for ArcGIS Pro"], correctOption: 0, explanation: "Both can support governed organisational content, but their operating responsibilities differ. Security still depends on identity, sharing, services, data and configuration rather than the product label." },
+      { id: "m2-l46-decision", question: "Two maps look identical after a GeoPackage exchange. What is the next acceptance action?", options: ["Compare stable IDs, types, nulls, categories, CRS, geometry, relationships, values and provenance under a round-trip contract", "Accept because the colours match", "Assume every open format preserves all geodatabase behaviour"], correctOption: 0, explanation: "Rendering is only one representation. A receiving client can silently alter types, domains, dates, missingness, geometry or relationships while still drawing a plausible map." },
+    ],
+    submissionChecklist: [...commonProfessionalEcosystemChecklist, "ArcGIS Pro, geodatabase, ModelBuilder, ArcPy, ArcGIS Online and ArcGIS Enterprise roles are accurate and bounded", "Authority, sharing, anonymous permissions, offline conflict, monitoring, backup/restore, licence review and exit tests produce one conditional decision"],
+    rubric: professionalEcosystemRubric("Designs and verifies a coherent role-based ArcGIS, open or hybrid architecture with correct authorities, sharing controls, equivalence gates, operations and migration tests", "Explains implementation versus scientific contract, Online versus Enterprise, visual versus executable orchestration and data versus semantic/method/operational portability"),
+    coreReferences: [
+      { title: "ArcGIS Pro documentation", href: "https://pro.arcgis.com/en/pro-app/latest/help/main/welcome-to-the-arcgis-pro-app-help.htm" },
+      { title: "Introduction to ArcPy", href: "https://pro.arcgis.com/en/pro-app/latest/arcpy/get-started/what-is-arcpy-.htm" },
+      { title: "What is ModelBuilder?", href: "https://pro.arcgis.com/en/pro-app/latest/help/analysis/geoprocessing/modelbuilder/what-is-modelbuilder-.htm" },
+      { title: "Types of geodatabases", href: "https://pro.arcgis.com/en/pro-app/latest/help/data/geodatabases/overview/types-of-geodatabases.htm" },
+    ],
+    furtherReading: [
+      { title: "Introduction to ArcGIS Online", href: "https://doc.arcgis.com/en/arcgis-online/get-started/what-is-agol.htm" },
+      { title: "Introduction to ArcGIS Enterprise", href: "https://enterprise.arcgis.com/en/get-started/latest/windows/what-is-arcgis-enterprise-.htm" },
+      { title: "ArcGIS Pro OGC API service support", href: "https://pro.arcgis.com/en/pro-app/latest/help/data/services/use-ogc-api-services.htm" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
@@ -2625,7 +2678,8 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       ?? spatialStatisticsLessonConfigurations[source.id]
       ?? spatialDatabaseLessonConfigurations[source.id]
       ?? cloudNativeLessonConfigurations[source.id]
-      ?? webDeliveryLessonConfigurations[source.id];
+      ?? webDeliveryLessonConfigurations[source.id]
+      ?? professionalEcosystemLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -2644,7 +2698,7 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
           pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
           jupyterEnvironment: "JupyterLab 4 / Notebook 7",
           testedVersions: module2TestedVersions(
-            source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4 || source.chapter === 5,
+            source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4 || source.chapter === 5 || source.chapter === 10,
             source.chapter === 3 || source.chapter === 4 || source.chapter === 5 || source.chapter === 8,
           ),
           reviewDate: "11 August 2026",
@@ -2660,6 +2714,8 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
                     ? "Synthetic Multidimensional and Cloud-Native EO training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
                     : source.chapter === 9
                       ? "Synthetic Web GIS and Delivery training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+                      : source.chapter === 10
+                        ? "Synthetic Professional GIS Ecosystems training pack, CC0-1.0; no real organisations, licences, services or sensitive locations"
                 : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
@@ -2674,7 +2730,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -2731,7 +2787,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -2788,7 +2844,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2860,7 +2916,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–600 minutes",
     lessonType: "Chapter Practicum",
     position: 4,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-04.md",
     formativeChecks: [
       {
@@ -2933,7 +2989,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 5,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-05.md",
     formativeChecks: [
       {
@@ -3006,7 +3062,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 6,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-06.md",
     formativeChecks: [
       {
@@ -3079,7 +3135,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "360–480 minutes",
     lessonType: "Chapter Practicum",
     position: 7,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-07.md",
     formativeChecks: [
       {
@@ -3152,7 +3208,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 8,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-08.md",
     formativeChecks: [
       {
@@ -3225,7 +3281,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 9,
-    totalPositions: 9,
+    totalPositions: 10,
     markdownFile: "content/lessons/module-2/practicum-09.md",
     formativeChecks: [
       {
@@ -3291,6 +3347,74 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       furtherReading: [
         { title: "Folium documentation", href: "https://python-visualization.github.io/folium/latest/" },
         { title: "MapLibre GL JS documentation", href: "https://maplibre.org/maplibre-gl-js/docs/" },
+      ],
+    },
+  },
+  "module-2-chapter-10-practicum": {
+    estimatedTime: "480–600 minutes",
+    lessonType: "Chapter Practicum",
+    position: 10,
+    totalPositions: 10,
+    markdownFile: "content/lessons/module-2/practicum-10.md",
+    formativeChecks: [
+      {
+        id: "m2-p10-requirements",
+        question: "When should candidate products enter the architecture decision?",
+        options: [
+          "After users, operations, scientific invariants, governance and failure consequences are declared",
+          "Before requirements, because the existing product defines them",
+          "Only after selecting the product with the longest feature list",
+        ],
+        correctOption: 0,
+        explanation: "Requirements establish which roles are necessary and what evidence must pass. Products are evaluated against that bounded need rather than allowed to redefine it.",
+      },
+      {
+        id: "m2-p10-authority",
+        question: "A field partner edits an offline snapshot after the authoritative zones change. What is required?",
+        options: [
+          "A declared contribution and conflict-review process with one continuing authority",
+          "Use whichever copy has the later file timestamp",
+          "Make both copies authoritative",
+        ],
+        correctOption: 0,
+        explanation: "Synchronization does not decide scientific conflicts. Stable IDs, audit evidence, comparison and a named authority are needed to accept or reject each contribution.",
+      },
+      {
+        id: "m2-p10-decision",
+        question: "An ArcGIS capability cannot be run because the learner has no authorised licence. How should the decision record treat it?",
+        options: [
+          "Use authoritative documentation as context and label runtime capability unverified with an owner and test",
+          "Invent a successful result",
+          "Conclude that the capability does not exist",
+        ],
+        correctOption: 0,
+        explanation: "Absence of access is neither product failure nor execution evidence. A professional record separates documented capability from versioned, licensed and tested organisational behaviour.",
+      },
+    ],
+    submissionChecklist: [
+      ...commonProfessionalEcosystemChecklist,
+      "Two credible candidate architectures allocate desktop, automation, authority, services, identity, operations, recovery and migration",
+      "The scientific equivalence suite compares actual IDs, schema, nulls, categories, values, geometry, grid and provenance under predeclared rules",
+      "Anonymous, least-privilege, offline-conflict, failed-service, restore, upgrade and licence-unavailable cases have safe responses",
+      "The migration drill records round-trip loss, effort, scientific consequence, trigger and responsible owner",
+      "The final accept, conditional or reject decision has evidence, expiry, residual risk and measurable closure conditions",
+    ],
+    rubric: professionalEcosystemRubric("Produces a coherent governed architecture, role matrix, scientific equivalence gate, sharing tests, operations plan and tested migration path", "Distinguishes product capability, organisational verification, scientific equivalence and total operating responsibility across ArcGIS, open and hybrid patterns"),
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Professional GIS Ecosystems training pack, CC0-1.0; invented organisations, requirements and decisions with no accounts, licences, endpoints or sensitive locations",
+      coreReferences: [
+        { title: "Introduction to ArcGIS Online", href: "https://doc.arcgis.com/en/arcgis-online/get-started/what-is-agol.htm" },
+        { title: "Introduction to ArcGIS Enterprise", href: "https://enterprise.arcgis.com/en/get-started/latest/windows/what-is-arcgis-enterprise-.htm" },
+        { title: "Types of geodatabases", href: "https://pro.arcgis.com/en/pro-app/latest/help/data/geodatabases/overview/types-of-geodatabases.htm" },
+      ],
+      furtherReading: [
+        { title: "ArcGIS Online data access and editing", href: "https://doc.arcgis.com/en/arcgis-online/manage-data/data-access-and-editing.htm" },
+        { title: "ArcGIS Online sharing best practices", href: "https://doc.arcgis.com/en/arcgis-online/reference/best-practices-share.htm" },
+        { title: "OGC standards catalogue", href: "https://www.ogc.org/standards/" },
       ],
     },
   },

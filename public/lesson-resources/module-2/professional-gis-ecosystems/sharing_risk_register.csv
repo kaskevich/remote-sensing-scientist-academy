@@ -1,0 +1,11 @@
+risk_id,scenario,initial_claim,hidden_risk,required_test,decision_owner,status
+SHR-01,"public status web map","popup hides internal fields","full browser payload still contains restricted notes","inspect anonymous response schema and downloadable data",data steward,block
+SHR-02,"hosted layer shared to everyone","editing toggle appears off","source item or alternate view may remain editable or exportable","anonymous create update delete and export negative tests",platform owner,review
+SHR-03,"field team receives offline copy","sync is convenient","copy can become an undocumented competing authority","declare authority conflict rule snapshot expiry and return process",GIS lead,review
+SHR-04,"ArcPy notebook shared with partner","Python is portable","ArcPy environment tools or extensions may be unavailable","run environment probe and specify an open transfer contract",workflow owner,block
+SHR-05,"ModelBuilder diagram used as documentation","workflow is visible","defaults intermediate data and tool versions may be absent","export parameter tool version environment and output QA inventory",scientific lead,review
+SHR-06,"enterprise geodatabase view supplied to web service","database has roles","service identity may expose more rows or fields than intended","test service account query and public client separately",security reviewer,block
+SHR-07,"COG registered as imagery content","raster displays correctly","scaling nodata or dynamic processing may differ from accepted asset","compare values metadata and processing chain at fixed pixels",remote-sensing lead,block
+SHR-08,"open format selected for portability","format is documented","ArcGIS and open clients may implement different subsets","round-trip geometry attributes CRS nulls domains and dates",interoperability owner,review
+SHR-09,"organisation item marked authoritative","badge communicates trust","ownership review date lineage or dependency may still be stale","verify owner source dependencies date and deprecation process",data steward,review
+SHR-10,"licence renewal assumed","tools work today","user types extensions service capacity or terms may change","annual licence capability cost and exit review",programme owner,review
