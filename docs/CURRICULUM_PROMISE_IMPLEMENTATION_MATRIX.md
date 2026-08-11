@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.25, four Module 2 practica, and visible planned lesson titles.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.30, five Module 2 practica, and visible planned lesson titles.
 
 ## Interpretation rules
 
@@ -42,7 +42,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Spatial joins and queries | Academy goals | 2 | 2.7; database queries planned | Yes in memory | Yes | Yes | Join audit | PARTIAL |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10 and practica | Partial | Yes | Yes | QA maps | PARTIAL |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.25 | Yes | Yes | Yes | QA reports and manifests | COMPLETE |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.30 | Yes | Yes | Yes | QA reports and manifests | COMPLETE |
 | Spatial databases | Module 2 outcomes | Planned | Planned 2.35–2.37 | No | No | No | No | MISSING |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
 | Professional GIS workflows | Academy goals | 2 | Practica 1–4 | Yes | Yes | Yes | Four handover decisions | COMPLETE |
