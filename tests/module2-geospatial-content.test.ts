@@ -45,18 +45,19 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(chapterLessons.map((item) => item.number)).toEqual(
       Array.from({ length: 53 }, (_, index) => index + 1),
     );
-    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(25);
-    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(28);
-    expect(chapterLessons.slice(0, 25).every((item) => item.lessonId)).toBe(true);
-    expect(chapterLessons.slice(25).every((item) => item.lessonId === undefined)).toBe(true);
+    expect(chapterLessons.filter((item) => item.status === "available")).toHaveLength(30);
+    expect(chapterLessons.filter((item) => item.status === "planned")).toHaveLength(23);
+    expect(chapterLessons.slice(0, 30).every((item) => item.lessonId)).toBe(true);
+    expect(chapterLessons.slice(30).every((item) => item.lessonId === undefined)).toBe(true);
     expect(module2Overview.capstone?.status).toBe("planned");
     expect(module2Overview.capstone?.lessonId).toBeUndefined();
-    expect(module2Overview.navigationMeta).toBe("25 lessons · 4 practica available");
+    expect(module2Overview.navigationMeta).toBe("30 lessons · 5 practica available");
     expect(module2Overview.chapters[0].practicum?.lessonId).toBe("module-2-chapter-1-practicum");
     expect(module2Overview.chapters[1].practicum?.lessonId).toBe("module-2-chapter-2-practicum");
     expect(module2Overview.chapters[2].practicum?.lessonId).toBe("module-2-chapter-3-practicum");
     expect(module2Overview.chapters[3].practicum?.lessonId).toBe("module-2-chapter-4-practicum");
-    expect(module2Overview.chapters.slice(4).every((chapter) => chapter.practicum === undefined)).toBe(true);
+    expect(module2Overview.chapters[4].practicum?.lessonId).toBe("module-2-chapter-5-practicum");
+    expect(module2Overview.chapters.slice(5).every((chapter) => chapter.practicum === undefined)).toBe(true);
   });
 
   it("uses unique stable IDs for the 53-lesson syllabus and capstone", () => {
@@ -69,7 +70,7 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(ids.at(-1)).toBe("lesson-2-capstone");
   });
 
-  it("publishes the four fully reviewed opening chapters", () => {
+  it("publishes the five fully reviewed opening chapters", () => {
     expect(publishedModule2LessonIds).toEqual([
       "lesson-2-01",
       "lesson-2-02",
@@ -96,10 +97,15 @@ describe("Module 2 Geospatial Data Science", () => {
       "lesson-2-23",
       "lesson-2-24",
       "lesson-2-25",
+      "lesson-2-26",
+      "lesson-2-27",
+      "lesson-2-28",
+      "lesson-2-29",
+      "lesson-2-30",
     ]);
     expect(publishedModule2Lessons.map((item) => item.id)).toEqual(publishedModule2LessonIds);
     expect(Object.keys(module2LessonDetails)).toEqual(publishedModule2LessonIds);
-    expect(module2Lessons.slice(25).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
+    expect(module2Lessons.slice(30).every((item) => module2LessonDetails[item.id] === undefined)).toBe(true);
   });
 
   it.each(publishedModule2Lessons)("$number $title is a complete reviewed lesson", (source) => {
@@ -147,12 +153,13 @@ describe("Module 2 Geospatial Data Science", () => {
     ]));
   });
 
-  it("adds four unnumbered, reviewed chapter practica", () => {
+  it("adds five unnumbered, reviewed chapter practica", () => {
     expect(module2ChapterPractica.map((item) => item.id)).toEqual([
       "module-2-chapter-1-practicum",
       "module-2-chapter-2-practicum",
       "module-2-chapter-3-practicum",
       "module-2-chapter-4-practicum",
+      "module-2-chapter-5-practicum",
     ]);
     for (const practicum of module2ChapterPractica) {
       const details = module2PracticumDetails[practicum.id];
@@ -172,6 +179,8 @@ describe("Module 2 Geospatial Data Science", () => {
     expect(practicumMarkdown("module-2-chapter-3-practicum")).toContain("RASTER_QA_REPORT.md");
     expect(practicumMarkdown("module-2-chapter-4-practicum")).toContain("Professional Mistakes — UAV and Photogrammetry");
     expect(practicumMarkdown("module-2-chapter-4-practicum")).toContain("UAV_PRODUCT_QA_REPORT.md");
+    expect(practicumMarkdown("module-2-chapter-5-practicum")).toContain("Professional Mistakes — Satellite Earth Observation");
+    expect(practicumMarkdown("module-2-chapter-5-practicum")).toContain("SATELLITE_EO_EVIDENCE_REPORT.md");
   });
 
   it("covers the required professional reasoning in each lesson", () => {
@@ -593,18 +602,92 @@ describe("Module 2 Geospatial Data Science", () => {
     expect((practicum.match(/^\| [^|]+ \|/gm) ?? []).length).toBeGreaterThanOrEqual(20);
   });
 
-  it("extends the portfolio starter through the complete UAV chapter", () => {
+  it("teaches Chapter 5 as measurement physics, QA and interpretation rather than sensor marketing", () => {
+    const optical = lessonMarkdown("lesson-2-26");
+    for (const term of ["observation chain", "radiance", "top-of-atmosphere reflectance", "surface reflectance", "L2A", "L2SP", "0.0000275", "-0.2", "cloud shadow", "native support"]) {
+      expect(optical).toMatch(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
+    }
+    expect(optical).toMatch(/four kinds of resolution/i);
+    expect(optical).toMatch(/nominal revisit is therefore not usable frequency/i);
+
+    const indices = lessonMarkdown("lesson-2-27");
+    for (const term of ["NDVI", "GNDVI", "SAVI", "MSAVI", "joint mask", "epsilon", "additive offset", "saturation", "native resolution", "proxy"]) {
+      expect(indices).toMatch(new RegExp(term, "i"));
+    }
+    expect(indices).toMatch(/does not measure biomass directly/i);
+
+    const sar = lessonMarkdown("lesson-2-28");
+    for (const term of ["active microwave", "C-band", "VV", "VH", "incidence angle", "speckle", "relative orbit", "terrain correction", "linear power", "decibels"]) {
+      expect(sar).toMatch(new RegExp(term, "i"));
+    }
+    expect(sar).toMatch(/moisture, roughness, structure and angle/i);
+
+    const spectroscopy = lessonMarkdown("lesson-2-29");
+    for (const term of ["spectral response function", "bandwidth", "absorption feature", "red edge", "signal-to-noise", "bad-band", "dimensionality", "mixed pixels", "training folds"]) {
+      expect(spectroscopy).toMatch(new RegExp(term, "i"));
+    }
+    expect(spectroscopy).toMatch(/nanometres and micrometres/i);
+
+    const lidar = lessonMarkdown("lesson-2-30");
+    for (const term of ["return number", "classification", "point density", "vertical reference", "DTM", "DSM", "canopy height model", "negative canopy heights", "intensity"]) {
+      expect(lidar).toMatch(new RegExp(term, "i"));
+    }
+    expect(lidar).toMatch(/point density from spatial accuracy/i);
+  });
+
+  it("publishes a checksum-verified synthetic satellite EO training pack", () => {
+    const folder = join(process.cwd(), "public/lesson-resources/module-2/satellite-eo");
+    const manifest = JSON.parse(readFileSync(join(folder, "manifest.json"), "utf8")) as {
+      licence: string;
+      sourceStatus: string;
+      knownDeliberateConditions: string[];
+      assets: Array<{ filename: string; purpose: string; dataType: string; sha256: string }>;
+    };
+    expect(manifest.licence).toBe("CC0-1.0");
+    expect(manifest.sourceStatus).toMatch(/entirely synthetic/i);
+    expect(manifest.assets).toHaveLength(7);
+    expect(manifest.knownDeliberateConditions).toHaveLength(4);
+    for (const asset of manifest.assets) {
+      expect(asset.purpose).toBeTruthy();
+      expect(asset.dataType).toBeTruthy();
+      const actual = createHash("sha256").update(readFileSync(join(folder, asset.filename))).digest("hex");
+      expect(actual, `${asset.filename} checksum`).toBe(asset.sha256);
+    }
+    expect(readFileSync(join(folder, "optical_observation_inventory.csv"), "utf8")).toContain("top-of-atmosphere source lacks surface-reflectance conversion");
+    expect(readFileSync(join(folder, "sentinel1_backscatter_samples.csv"), "utf8")).toContain("incompatible orbit geometry");
+    expect(readFileSync(join(folder, "hyperspectral_signatures.csv"), "utf8")).toContain("strong atmospheric water absorption");
+    expect(readFileSync(join(folder, "lidar_point_samples.csv"), "utf8")).toContain("deliberate high outlier");
+  });
+
+  it("requires the complete cross-sensor Chapter 5 practicum delivery", () => {
+    const practicum = practicumMarkdown("module-2-chapter-5-practicum");
+    for (const deliverable of [
+      "satellite_observation_inventory.csv", "optical_qa_report.csv", "spectral_index_report.csv",
+      "sar_comparability_report.csv", "hyperspectral_feature_report.csv", "lidar_structure_report.csv",
+      "satellite_evidence_map.pdf", "SATELLITE_EO_EVIDENCE_REPORT.md", "satellite_eo_practicum.ipynb",
+    ]) {
+      expect(practicum).toContain(deliverable);
+    }
+    expect(practicum).toContain("Professional Mistakes — Satellite Earth Observation");
+    expect((practicum.match(/^\| [^|]+ \|/gm) ?? []).length).toBeGreaterThanOrEqual(20);
+    expect(practicum).toMatch(/convergent evidence/i);
+    expect(practicum).toMatch(/divergent evidence/i);
+    expect(practicum).toMatch(/insufficient evidence/i);
+  });
+
+  it("extends the portfolio starter through the complete Satellite Earth Observation chapter", () => {
     const notebook = JSON.parse(readFileSync(
       join(process.cwd(), "public/lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb"),
       "utf8",
     )) as { cells: Array<{ source: string[] }> };
     const source = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (const lesson of ["2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.17", "2.18", "2.19", "2.20", "2.21", "2.22", "2.23", "2.24", "2.25"]) {
+    for (const lesson of ["2.8", "2.9", "2.10", "2.11", "2.12", "2.13", "2.14", "2.15", "2.16", "2.17", "2.18", "2.19", "2.20", "2.21", "2.22", "2.23", "2.24", "2.25", "2.26", "2.27", "2.28", "2.29", "2.30"]) {
       expect(source).toContain(`Lesson ${lesson} checkpoint`);
     }
     expect(source).toContain("Chapter 1 Practicum checkpoint");
     expect(source).toContain("Chapter 2 Practicum checkpoint");
     expect(source).toContain("Chapter 3 Practicum checkpoint");
     expect(source).toContain("Chapter 4 Practicum checkpoint");
+    expect(source).toContain("Chapter 5 Practicum checkpoint");
   });
 });

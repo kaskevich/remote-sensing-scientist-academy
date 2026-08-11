@@ -1,0 +1,7 @@
+asset_id,sensor,product_level,acquired_utc,native_red_m,native_nir_m,native_rededge_m,cloud_cover_pct,quality_layer,scale_factor,additive_offset,quality_status,deliberate_condition,source_status
+SYN_S2A_20240603_CLEAR,Sentinel-2 MSI,L2A,2024-06-03T09:47:31Z,10,10,20,8,SCL,0.0001,0,accept,clear baseline,synthetic
+SYN_S2B_20240618_CLOUD,Sentinel-2 MSI,L2A,2024-06-18T09:49:12Z,10,10,20,63,SCL,0.0001,0,review,cloud and shadow over meadow,synthetic
+SYN_S2A_20240708_HAZE,Sentinel-2 MSI,L2A,2024-07-08T09:46:58Z,10,10,20,21,SCL,0.0001,0,review,thin haze near western plots,synthetic
+SYN_L9_20240611_CLEAR,Landsat 9 OLI-2,L2SP,2024-06-11T09:55:44Z,30,30,,12,QA_PIXEL,0.0000275,-0.2,accept,coarser native support,synthetic
+SYN_L8_20240627_L1,Landsat 8 OLI,L1TP,2024-06-27T09:56:07Z,30,30,,5,QA_PIXEL,,,review,top-of-atmosphere source lacks surface-reflectance conversion,synthetic
+SYN_S2B_20240802_SCALE,Sentinel-2 MSI,L2A,2024-08-02T09:48:20Z,10,10,20,4,SCL,,,review,scale metadata intentionally absent,synthetic

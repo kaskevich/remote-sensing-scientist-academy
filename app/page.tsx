@@ -227,6 +227,27 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/uav-foundations/uav_nir_shifted.tif", title: "Download the shifted NIR QA fixture" },
     { href: "lesson-resources/module-2/uav-foundations/uav_dsm.tif", title: "Download the aligned DSM" },
   ],
+  "lesson-2-26": [
+    { href: "lesson-resources/module-2/satellite-eo/README.md", title: "Read the synthetic satellite EO training-pack guide" },
+    { href: "lesson-resources/module-2/satellite-eo/manifest.json", title: "Download the satellite EO checksum manifest" },
+    { href: "lesson-resources/module-2/satellite-eo/optical_observation_inventory.csv", title: "Download the optical observation inventory" },
+  ],
+  "lesson-2-27": [
+    { href: "lesson-resources/module-2/satellite-eo/optical_reflectance_samples.csv", title: "Download the synthetic optical reflectance samples" },
+    { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
+  ],
+  "lesson-2-28": [
+    { href: "lesson-resources/module-2/satellite-eo/sentinel1_backscatter_samples.csv", title: "Download the synthetic Sentinel-1 backscatter samples" },
+    { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
+  ],
+  "lesson-2-29": [
+    { href: "lesson-resources/module-2/satellite-eo/hyperspectral_signatures.csv", title: "Download the synthetic imaging-spectroscopy signatures" },
+    { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
+  ],
+  "lesson-2-30": [
+    { href: "lesson-resources/module-2/satellite-eo/lidar_point_samples.csv", title: "Download the synthetic LiDAR point samples" },
+    { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -258,7 +279,13 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 4
+  const resources = source.chapter === 5
+    ? [
+        { href: "lesson-resources/module-2/satellite-eo/README.md", title: "Read the satellite EO practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/satellite-eo/manifest.json", title: "Download the satellite EO checksum manifest" },
+        { href: "lesson-resources/module-2/satellite-eo/SATELLITE_EO_QA_TEMPLATE.md", title: "Download the satellite EO QA template" },
+      ]
+    : source.chapter === 4
     ? [
         { href: "lesson-resources/module-2/uav-foundations/README.md", title: "Read the UAV practicum and training-pack guide" },
         { href: "lesson-resources/module-2/uav-foundations/manifest.json", title: "Download the UAV practicum manifest" },
@@ -310,6 +337,9 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-25") {
     return [lesson, module2PracticumAcademyLessons[3]];
+  }
+  if (lesson.id === "lesson-2-30") {
+    return [lesson, module2PracticumAcademyLessons[4]];
   }
   return [lesson];
 });

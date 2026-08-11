@@ -305,14 +305,21 @@ for name, properties in sensors.items():
     print(name, properties)`, "Why does a nominal revisit interval not equal the number of cloud-free observations?", "Sensor selection balances spectral response, support, acquisition opportunity and product quality. Nominal specifications do not guarantee usable observations.", "Comparing raw digital numbers across products. Confirm scaling, processing level and calibration before interpretation.", { title: "Sentinel-2 user guide", href: "https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi" }),
   lesson(27, 5, "Vegetation and Spectral Indices", "Use vegetation indices as sensor- and context-dependent proxies rather than direct ecological measurements.", ["NDVI", "Red edge", "SAVI"], "Choose, calculate and interpret an index with its limitations and reference evidence.", "What physical contrast does this index emphasise, and which confounders remain?", ["NDVI, GNDVI, SAVI and MSAVI", "Red-edge indices", "Saturation, soil and atmosphere", "Sensor and seasonal dependence"], "Compare two indices across meadow plots and explain where they agree or diverge.", "Verify reflectance scale, band identity, masks, formula, valid range and acquisition context.", "spectral_index_comparison.ipynb", `import numpy as np
 
+green = np.array([0.09, 0.12, 0.16], dtype="float32")
+red = np.array([0.07, 0.13, 0.20], dtype="float32")
+nir = np.array([0.42, 0.38, 0.31], dtype="float32")
+valid_mask = np.array([True, True, False])
+
 def safe_ratio(numerator, denominator, valid):
     result = np.full(numerator.shape, np.nan, dtype="float32")
-    use = valid & (denominator != 0)
+    use = valid & np.isfinite(denominator) & (np.abs(denominator) > 1e-6)
     result[use] = numerator[use] / denominator[use]
     return result
 
 ndvi = safe_ratio(nir - red, nir + red, valid_mask)
-gndvi = safe_ratio(nir - green, nir + green, valid_mask)`, "Which index may saturate in dense vegetation, and why does another index not automatically solve that limitation?", "Indices compress spectral contrast into a proxy. Their ecological relationship must be calibrated or validated for sensor, season, canopy and target variable.", "Writing 'NDVI measures biomass'. NDVI responds to red and near-infrared reflectance and may correlate with biomass under specific conditions.", { title: "USGS Landsat spectral indices", href: "https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index" }),
+gndvi = safe_ratio(nir - green, nir + green, valid_mask)
+print("NDVI", ndvi)
+print("GNDVI", gndvi)`, "Which index may saturate in dense vegetation, and why does another index not automatically solve that limitation?", "Indices compress spectral contrast into a proxy. Their ecological relationship must be calibrated or validated for sensor, season, canopy and target variable.", "Writing 'NDVI measures biomass'. NDVI responds to red and near-infrared reflectance and may correlate with biomass under specific conditions.", { title: "USGS Landsat spectral indices", href: "https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index" }),
   lesson(28, 5, "SAR Fundamentals", "Interpret Sentinel-1 backscatter through acquisition geometry, surface properties and preprocessing choices.", ["Sentinel-1", "VV/VH", "Backscatter"], "Explain SAR signal formation and design a defensible search-to-interpretation workflow.", "Which combination of moisture, roughness, structure and geometry could produce this backscatter pattern?", ["Active microwave sensing", "Polarisation and incidence angle", "Speckle, roughness and moisture", "Calibration and terrain correction"], "Search, filter, calibrate, terrain-correct and QA a Sentinel-1 observation conceptually or in an available platform.", "Keep orbit direction, relative orbit, polarisation, angle, preprocessing and terrain effects comparable.", "sentinel1_workflow_report.ipynb", `sar_query = {
     "collection": "Sentinel-1 GRD",
     "polarisations": ["VV", "VH"],
@@ -323,7 +330,13 @@ for key, value in sar_query.items():
     print(key, value)`, "Why can a brighter pixel not be interpreted simply as more vegetation?", "SAR backscatter is a compound response to geometry and dielectric and structural properties. Interpretation must control acquisition and terrain context.", "Averaging incompatible orbit geometries. Incidence angle and viewing direction can produce changes unrelated to the ecological target.", { title: "Sentinel-1 user guide", href: "https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-1-sar" }),
   lesson(29, 5, "Hyperspectral Remote Sensing", "Recognise when dense narrow-band measurements provide useful spectral evidence and additional preprocessing burden.", ["Hyperspectral", "Spectral curves", "SNR"], "Evaluate hyperspectral value from absorption features, signal quality and dimensionality.", "Does the target have a resolvable spectral feature at the sensor's scale and signal-to-noise ratio?", ["Narrow bands and spectral curves", "Absorption features and red edge", "Spectral libraries and SNR", "Preprocessing and feature selection"], "Inspect representative spectra, identify noisy regions and propose justified features for vegetation traits.", "Record wavelength units, band centres, bandwidths, masks, calibration and preprocessing.", "hyperspectral_feature_note.ipynb", `import numpy as np
 
-valid_bands = (wavelength_nm >= 450) & (wavelength_nm <= 900)
+wavelength_nm = np.array([450, 550, 680, 710, 750, 940])
+spectra = np.array([
+    [0.04, 0.10, 0.06, 0.25, 0.43, 0.18],
+    [0.05, 0.12, 0.09, 0.22, 0.36, 0.16],
+])
+snr = np.array([80, 110, 95, 90, 85, 12])
+valid_bands = (wavelength_nm >= 450) & (wavelength_nm <= 900) & (snr >= 30)
 spectra_clean = spectra[:, valid_bands]
 wavelength_clean = wavelength_nm[valid_bands]
 red_edge = (wavelength_clean >= 680) & (wavelength_clean <= 750)
@@ -331,6 +344,8 @@ print("usable bands", spectra_clean.shape[1])
 print("red-edge bands", red_edge.sum())`, "Why can hundreds of bands reduce model reliability when samples are limited?", "Hyperspectral data can resolve diagnostic spectral shape, but correlated noisy bands amplify preprocessing and validation demands.", "Selecting bands after viewing test performance. Feature design must remain inside the training workflow to avoid optimistic validation.", { title: "NASA imaging spectroscopy", href: "https://earth.jpl.nasa.gov/emit/" }),
   lesson(30, 5, "LiDAR and Point Clouds", "Turn discrete three-dimensional returns into terrain and vegetation-structure products.", ["LiDAR", "Point clouds", "Canopy height"], "Explain point-cloud attributes and derive a simple structural surface with documented assumptions.", "Which returns represent ground, canopy and uncertainty in this landscape?", ["Coordinates, returns and intensity", "Point density and classification", "DSM, DTM and canopy height", "Rasterisation and structural metrics"], "Create or inspect a canopy-height product from classified point-cloud or supplied surface data.", "Check coordinate and vertical reference, units, density, classes, interpolation gaps and negative heights.", "lidar_structure_report.ipynb", `import numpy as np
 
+dsm = np.array([[2.8, 2.4, 2.1], [2.2, 1.9, 2.5]])
+dtm = np.array([[1.7, 1.8, 1.9], [1.8, 2.0, 1.9]])
 canopy_height = dsm.astype("float32") - dtm.astype("float32")
 canopy_height[(canopy_height < 0) | (canopy_height > 60)] = np.nan
 print("median height", np.nanmedian(canopy_height))
@@ -593,6 +608,11 @@ export const publishedModule2LessonIds = [
   "lesson-2-23",
   "lesson-2-24",
   "lesson-2-25",
+  "lesson-2-26",
+  "lesson-2-27",
+  "lesson-2-28",
+  "lesson-2-29",
+  "lesson-2-30",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -634,6 +654,14 @@ export const module2ChapterPractica = [
     tools: ["UAV product QA", "Photogrammetry evidence", "Professional handover"],
     artifact: "Artifact 2.D — Professional UAV Survey Assessment",
   },
+  {
+    id: "module-2-chapter-5-practicum",
+    chapter: 5,
+    title: "Build a Defensible Satellite Evidence Package",
+    description: "Integrate optical, spectral-index, SAR, imaging-spectroscopy and LiDAR evidence without forcing incompatible measurements into one claim.",
+    tools: ["Cross-sensor QA", "Evidence integration", "Scientific decision"],
+    artifact: "Artifact 2.E — Satellite EO Evidence Package",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -641,10 +669,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "25 lessons · 4 practica available",
+  navigationMeta: "30 lessons · 5 practica available",
   syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.25 and four chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science and UAV and Photogrammetry. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "Lessons 2.1–2.30 and five chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, and Satellite Earth Observation. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -2008,6 +2036,125 @@ const uavLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
   },
 };
 
+function satelliteRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Records product identity, acquisition context, preprocessing, masks, parameters, versions and reviewable outputs" },
+    { dimension: "Scientific communication", expectation: "Separates observed signal, derived evidence, ecological interpretation, limitations and next action" },
+  ];
+}
+
+const commonSatelliteChecklist = [
+  "Synthetic training observations are identified as instructional rather than real satellite or field measurements",
+  "Sensor, product level, acquisition context, units, scale and masks are recorded before analysis",
+  "Code is rerunnable from immutable inputs and preserves invalid observations rather than silently filling them",
+  "Every ecological statement distinguishes the measured signal from the proposed environmental explanation",
+];
+
+const satelliteLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-26": {
+    estimatedTime: "150–180 minutes",
+    lessonType: "Concept and Product-Selection Lab",
+    markdownFile: "content/lessons/module-2/lesson-26.md",
+    formativeChecks: [
+      { id: "m2-l26-level", question: "You need comparable land-surface reflectance through time. Which evidence is essential before selecting a product?", options: ["Processing level, scale and quality-mask definition", "The brightest thumbnail", "The shortest filename"], correctOption: 0, explanation: "A surface-reflectance analysis depends on a defined processing level, numeric conversion and valid-observation mask. A display image cannot establish any of these conditions." },
+      { id: "m2-l26-resolution", question: "A Sentinel-2 red-edge band is supplied at 20 m. Does resampling it to 10 m create 10 m red-edge observations?", options: ["No; it creates a 10 m grid from measurements whose native support remains 20 m", "Yes; pixel size and information content are identical", "Yes, if bilinear interpolation is used"], correctOption: 0, explanation: "Resampling changes the grid used to represent values, not the sensor's native measurement support or its ability to resolve finer spatial detail." },
+      { id: "m2-l26-revisit", question: "Why is nominal revisit not the same as usable ecological observation frequency?", options: ["Cloud, shadow, haze, geometry and phenological timing remove or weaken acquisitions", "Satellites collect data only in winter", "Every revisit contains identical surface conditions"], correctOption: 0, explanation: "Acquisition opportunity is only the first gate. Quality masks, atmosphere, view geometry and timing relative to the ecological process determine whether an observation is usable." },
+    ],
+    submissionChecklist: [...commonSatelliteChecklist, "The product decision compares Sentinel-2 and Landsat against a stated meadow question", "Native band support, cloud/shadow policy and rejected observations are explicit"],
+    rubric: satelliteRubric("Selects and scales optical products correctly and applies a defensible quality gate", "Connects electromagnetic interaction, band response, resolution and product level to the scientific question"),
+    coreReferences: [
+      { title: "Sentinel-2 mission and MSI bands", href: "https://sentiwiki.copernicus.eu/web/s2-mission" },
+      { title: "USGS Landsat Collection 2 Level-2 products", href: "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products" },
+    ],
+    furtherReading: [
+      { title: "Sentinel-2 products", href: "https://sentiwiki.copernicus.eu/web/s2-products" },
+      { title: "USGS Landsat scale-factor guidance", href: "https://www.usgs.gov/faqs/how-do-i-use-a-scale-factor-landsat-level-2-science-products" },
+    ],
+  },
+  "lesson-2-27": {
+    estimatedTime: "160–190 minutes",
+    lessonType: "Spectral-Index Interpretation Lab",
+    markdownFile: "content/lessons/module-2/lesson-27.md",
+    formativeChecks: [
+      { id: "m2-l27-proxy", question: "A meadow plot has high NDVI. What is the strongest defensible statement from NDVI alone?", options: ["Its valid red and NIR reflectances produce a strong normalised spectral contrast", "Its biomass is known exactly", "Its species richness must be high"], correctOption: 0, explanation: "NDVI is a transformation of two reflectance measurements. Biomass or diversity interpretation requires field evidence, context and validation rather than a universal conversion." },
+      { id: "m2-l27-mask", question: "Cloudy red and clear NIR values occur at one pixel. Should the index be calculated?", options: ["No; the joint valid mask must require both contributing bands to be valid", "Yes; the NIR value is enough", "Yes; the ratio removes cloud effects"], correctOption: 0, explanation: "An index inherits the validity of every input. Combining measurements with different or invalid support creates a number without a defensible observation." },
+      { id: "m2-l27-saturation", question: "NDVI values flatten across dense canopies. What should the analyst do?", options: ["Treat saturation as a limitation and test alternative evidence against field observations", "Assume all dense plots have identical biomass", "Multiply NDVI until differences appear"], correctOption: 0, explanation: "Saturation is a response limitation, not a formatting problem. Alternative indices or sensors remain hypotheses until their relationship to the target is independently evaluated." },
+    ],
+    submissionChecklist: [...commonSatelliteChecklist, "NDVI, GNDVI, SAVI and MSAVI formulas and parameters are documented", "The comparison discusses saturation, soil, atmosphere, season, sensor and native support"],
+    rubric: satelliteRubric("Calculates masked indices safely from correctly scaled and aligned reflectance", "Interprets each index as a context-dependent spectral proxy rather than a direct ecological measurement"),
+    coreReferences: [
+      { title: "USGS Landsat NDVI", href: "https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index" },
+      { title: "Huete: Soil-Adjusted Vegetation Index", href: "https://doi.org/10.1016/0034-4257(88)90106-X" },
+    ],
+    furtherReading: [
+      { title: "Qi et al.: Modified Soil-Adjusted Vegetation Index", href: "https://doi.org/10.1016/0034-4257(94)90134-1" },
+      { title: "Sentinel-2 products specification", href: "https://sentiwiki.copernicus.eu/web/s2-products" },
+    ],
+  },
+  "lesson-2-28": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "SAR Reasoning and Comparability Lab",
+    markdownFile: "content/lessons/module-2/lesson-28.md",
+    formativeChecks: [
+      { id: "m2-l28-brightness", question: "A meadow becomes brighter in a Sentinel-1 image. What can be concluded immediately?", options: ["Backscatter increased under that acquisition and processing context", "Vegetation biomass increased", "Soil moisture is the only possible cause"], correctOption: 0, explanation: "Backscatter combines dielectric properties, roughness, structure, geometry and processing. Ecological attribution requires controlled comparisons and independent evidence." },
+      { id: "m2-l28-db", question: "Can decibel values be averaged and treated as though they were linear power?", options: ["No; convert to linear power when the operation requires linear averaging", "Yes; decibels are ordinary reflectance", "Yes, whenever values are negative"], correctOption: 0, explanation: "Decibels are logarithmic. Statistical operations must match the represented quantity, and the chosen conversion and aggregation must be documented." },
+      { id: "m2-l28-comparability", question: "Which time-series comparison is strongest?", options: ["Same mode, polarisation, relative orbit and similar incidence geometry after consistent preprocessing", "Any two cloud-free SAR scenes", "Ascending and descending scenes mixed without metadata"], correctOption: 0, explanation: "SAR is not blocked by cloud in the optical sense, but viewing geometry strongly affects the measurement. Consistent acquisition and preprocessing reduce non-ecological differences." },
+    ],
+    submissionChecklist: [...commonSatelliteChecklist, "Orbit, relative orbit, mode, polarisation, incidence angle and RTC status are compared", "Linear and decibel quantities are never mixed without an explicit conversion"],
+    rubric: satelliteRubric("Builds a comparable Sentinel-1 observation set and performs correct backscatter conversions", "Explains backscatter as a joint response to dielectric, structural, roughness and geometric controls"),
+    coreReferences: [
+      { title: "Sentinel-1 mission", href: "https://sentiwiki.copernicus.eu/web/s1-mission" },
+      { title: "Sentinel-1 processing", href: "https://sentiwiki.copernicus.eu/web/s1-processing" },
+    ],
+    furtherReading: [
+      { title: "ASF HyP3 radiometric terrain correction guide", href: "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/" },
+      { title: "NASA SAR Handbook", href: "https://earthdata.nasa.gov/learn/earth-observation-data-basics/sar" },
+    ],
+  },
+  "lesson-2-29": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "Imaging-Spectroscopy Evidence Lab",
+    markdownFile: "content/lessons/module-2/lesson-29.md",
+    formativeChecks: [
+      { id: "m2-l29-bands", question: "Why do hundreds of narrow bands not automatically improve a model?", options: ["They add correlated predictors, noise and validation burden relative to the available samples", "Every wavelength measures the same property perfectly", "Models cannot read more than ten columns"], correctOption: 0, explanation: "Dense spectra can resolve shape, but they also increase dimensionality and sensitivity to noise, preprocessing and leakage. Useful information must be demonstrated under valid evaluation." },
+      { id: "m2-l29-feature", question: "When is an apparent absorption feature defensible?", options: ["When its wavelength position, bandwidth, signal quality, preprocessing and physical interpretation are supported", "Whenever one plotted point is lower", "After removing every inconvenient band"], correctOption: 0, explanation: "A feature must exceed noise and remain meaningful under the instrument's spectral response and atmospheric correction. Visual shape alone is insufficient evidence." },
+      { id: "m2-l29-leakage", question: "You select wavelengths using the full dataset, then split into train and test. What is the risk?", options: ["Test information has influenced feature selection, creating optimistic performance", "The wavelength units will change", "The spectra will become multispectral"], correctOption: 0, explanation: "Any outcome-informed feature choice must occur inside the training resampling process. Otherwise the held-out data are no longer independent evidence." },
+    ],
+    submissionChecklist: [...commonSatelliteChecklist, "Band centres, bandwidths, wavelength units, SNR and bad-band decisions are explicit", "Feature selection is justified physically and designed to remain inside future training validation"],
+    rubric: satelliteRubric("Screens spectral bands correctly and derives a transparent, reproducible feature", "Balances absorption evidence, spectral response, SNR, mixed pixels and dimensionality"),
+    coreReferences: [
+      { title: "NASA EMIT data tutorial series", href: "https://earth.jpl.nasa.gov/emit/events/4/emit-data-tutorial-series/" },
+      { title: "NASA EMIT imaging spectroscopy", href: "https://earth.jpl.nasa.gov/emit/" },
+    ],
+    furtherReading: [
+      { title: "USGS Spectral Library", href: "https://www.usgs.gov/labs/spec-lab/capabilities/spectral-library" },
+      { title: "scikit-learn cross-validation", href: "https://scikit-learn.org/stable/modules/cross_validation.html" },
+    ],
+  },
+  "lesson-2-30": {
+    estimatedTime: "170–210 minutes",
+    lessonType: "Point-Cloud and Structural-Metric Lab",
+    markdownFile: "content/lessons/module-2/lesson-30.md",
+    formativeChecks: [
+      { id: "m2-l30-return", question: "Does a first return always represent the top of vegetation?", options: ["No; return meaning depends on the intercepted surface, geometry, pulse and classification", "Yes, without exception", "Only when intensity is zero"], correctOption: 0, explanation: "Return order records detections within a pulse, not a guaranteed ecological class. Buildings, birds, water, noise and low vegetation can complicate interpretation." },
+      { id: "m2-l30-chm", question: "What must be true before subtracting DTM from DSM?", options: ["The surfaces must share grid, units, horizontal support and compatible vertical reference", "Their filenames must both contain DEM", "The DSM must have more colours"], correctOption: 0, explanation: "A canopy-height difference is meaningful only when corresponding cells and vertical quantities are compatible. Misalignment or datum differences become false height." },
+      { id: "m2-l30-negative", question: "A canopy-height raster contains negative values. What is the professional response?", options: ["Flag and investigate alignment, classification, interpolation and water/edge effects", "Silently set every negative value to zero", "Report negative vegetation"], correctOption: 0, explanation: "Negative differences are diagnostic evidence. Masking may be appropriate after cause and rule are recorded, but silent clipping hides product limitations." },
+    ],
+    submissionChecklist: [...commonSatelliteChecklist, "Return order, classification, point density, intensity status and vertical reference are audited", "DSM, DTM and canopy-height products use a shared grid and preserve negative-height QA evidence"],
+    rubric: satelliteRubric("Audits point attributes and derives aligned, quality-controlled structural metrics", "Distinguishes direct returns, classified points, interpolated surfaces and ecological structure claims"),
+    coreReferences: [
+      { title: "ASPRS LAS specification", href: "https://www.asprs.org/wp-content/uploads/2021/04/LAS_latest.pdf" },
+      { title: "USGS 3D Elevation Program products", href: "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services" },
+    ],
+    furtherReading: [
+      { title: "PDAL documentation", href: "https://pdal.io/en/stable/" },
+      { title: "NASA GEDI mission", href: "https://gedi.umd.edu/" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
@@ -2035,7 +2182,9 @@ function module2TestedVersions(includeQgis: boolean, includeRaster = false) {
 
 export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
   publishedModule2Lessons.map((source, index) => {
-    const configuration = publishedLessonConfigurations[source.id] ?? uavLessonConfigurations[source.id];
+    const configuration = publishedLessonConfigurations[source.id]
+      ?? uavLessonConfigurations[source.id]
+      ?? satelliteLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -2054,13 +2203,15 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
           pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
           jupyterEnvironment: "JupyterLab 4 / Notebook 7",
           testedVersions: module2TestedVersions(
-            source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4,
-            source.chapter === 3 || source.chapter === 4,
+            source.id === "lesson-2-10" || source.chapter === 3 || source.chapter === 4 || source.chapter === 5,
+            source.chapter === 3 || source.chapter === 4 || source.chapter === 5,
           ),
           reviewDate: "11 August 2026",
           datasetCitation: source.chapter === 4
             ? "Synthetic UAV and Photogrammetry training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
-            : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
+            : source.chapter === 5
+              ? "Synthetic Satellite Earth Observation training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
+              : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
         },
@@ -2074,7 +2225,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 4,
+    totalPositions: 5,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -2131,7 +2282,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 4,
+    totalPositions: 5,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -2188,7 +2339,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 4,
+    totalPositions: 5,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2260,7 +2411,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–600 minutes",
     lessonType: "Chapter Practicum",
     position: 4,
-    totalPositions: 4,
+    totalPositions: 5,
     markdownFile: "content/lessons/module-2/practicum-04.md",
     formativeChecks: [
       {
@@ -2326,6 +2477,79 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
       furtherReading: [
         { title: "Agisoft Metashape user manual", href: "https://www.agisoft.com/downloads/user-manuals/" },
         { title: "QGIS raster properties", href: "https://docs.qgis.org/3.44/en/docs/user_manual/working_with_raster/raster_properties.html" },
+      ],
+    },
+  },
+  "module-2-chapter-5-practicum": {
+    estimatedTime: "420–540 minutes",
+    lessonType: "Chapter Practicum",
+    position: 5,
+    totalPositions: 5,
+    markdownFile: "content/lessons/module-2/practicum-05.md",
+    formativeChecks: [
+      {
+        id: "m2-p5-convergence",
+        question: "Optical greenness and SAR backscatter both increase. Is the ecological cause established?",
+        options: [
+          "No; record convergence in signals, then test competing explanations with field and acquisition evidence",
+          "Yes; two sensors always prove biomass",
+          "Yes, because optical and SAR measure the same quantity",
+        ],
+        correctOption: 0,
+        explanation: "Independent signals can strengthen a hypothesis, but their different physical responses and confounders remain. Convergence is evidence to interpret, not automatic causal proof.",
+      },
+      {
+        id: "m2-p5-support",
+        question: "Can a 10 m optical pixel, a 20 m red-edge pixel and a LiDAR footprint be compared as identical observations?",
+        options: [
+          "No; comparison needs an explicit common support or a model that preserves their different supports",
+          "Yes; every row in a table has equal support",
+          "Yes, after renaming all columns",
+        ],
+        correctOption: 0,
+        explanation: "Cross-sensor evidence represents different ground footprints and sampling designs. A common table does not remove spatial-support differences or create missing coverage.",
+      },
+      {
+        id: "m2-p5-release",
+        question: "One sensor fails its QA gate. What belongs in the final evidence package?",
+        options: [
+          "The blocked layer, reason, consequence and action—excluded from unsupported analysis",
+          "A silently corrected value",
+          "Only the sensors that produced attractive maps",
+        ],
+        correctOption: 0,
+        explanation: "A professional package preserves failures as decision evidence. Exclusion must be traceable so another analyst can understand, reproduce and revisit the decision.",
+      },
+    ],
+    submissionChecklist: [
+      "All nine practicum deliverables are present and open successfully",
+      "Every sensor has a documented measurement meaning, spatial support and QA gate",
+      "Scaling, masks, SAR geometry, spectral screening and vertical-reference decisions are traceable",
+      "Blocked observations remain in the manifest with reasons rather than being silently removed",
+      "Cross-sensor agreement and disagreement are both interpreted without claiming causal proof",
+      "The final report separates observation, derivative, interpretation, uncertainty and next action",
+      "All professional satellite-Earth-Observation mistakes are considered before release",
+    ],
+    rubric: [
+      { dimension: "Technical correctness", expectation: "Builds valid optical, index, SAR, spectral and structural evidence with appropriate masks and transformations" },
+      { dimension: "Conceptual understanding", expectation: "Explains sensor-specific measurement physics and preserves different spatial and temporal supports" },
+      { dimension: "Reproducibility", expectation: "Delivers immutable inputs, manifest, checksums, code, QA tables, versions and traceable decisions" },
+      { dimension: "Scientific communication", expectation: "Produces a concise evidence package that distinguishes convergence, disagreement, limitations and next work" },
+    ],
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "11 August 2026",
+      datasetCitation: "Synthetic Satellite Earth Observation training pack, CC0-1.0; no real satellite observations or field locations",
+      coreReferences: [
+        { title: "Sentinel-2 products", href: "https://sentiwiki.copernicus.eu/web/s2-products" },
+        { title: "Sentinel-1 processing", href: "https://sentiwiki.copernicus.eu/web/s1-processing" },
+        { title: "ASPRS LAS specification", href: "https://www.asprs.org/wp-content/uploads/2021/04/LAS_latest.pdf" },
+      ],
+      furtherReading: [
+        { title: "NASA EMIT data tutorials", href: "https://earth.jpl.nasa.gov/emit/events/4/emit-data-tutorial-series/" },
+        { title: "USGS Landsat Collection 2 Level-2 products", href: "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products" },
       ],
     },
   },

@@ -1,0 +1,22 @@
+{
+  "title": "Module 2 Chapter 5 Satellite Earth Observation training pack",
+  "version": "1.0.0",
+  "licence": "CC0-1.0",
+  "sourceStatus": "Entirely synthetic instructional data; no real satellite observations or field locations",
+  "ecologicalContext": "Baltic coastal meadow monitoring vocabulary, informed by but not derived from Zenodo record 20083250",
+  "knownDeliberateConditions": [
+    "cloud, shadow, haze, missing scale metadata and an unsuitable product level in the optical inventory",
+    "an incompatible orbit, incidence-angle edge and failed terrain correction in the SAR table",
+    "low-SNR atmospheric absorption and spectral-edge bands in the imaging-spectroscopy table",
+    "an unclassified high outlier and a deliberately non-authoritative local vertical reference in the point-cloud table"
+  ],
+  "assets": [
+    { "filename": "README.md", "purpose": "pack guidance and provenance", "dataType": "Markdown", "sha256": "c3d0298394f647bb3f1790291b8315b5cc798143ec8d53cdf231117c33485a61" },
+    { "filename": "optical_observation_inventory.csv", "purpose": "optical product selection", "dataType": "CSV", "sha256": "8af98d812d52c0ea3cef15f391c5fac821c03be9e3d332ce8b2c7781d932cec1" },
+    { "filename": "optical_reflectance_samples.csv", "purpose": "masked spectral-index practice", "dataType": "CSV", "sha256": "66817f7cfacc14127a728f09795bc84d520134549bbbf7a1e95799fab002537e" },
+    { "filename": "sentinel1_backscatter_samples.csv", "purpose": "SAR comparability audit", "dataType": "CSV", "sha256": "145cd4767289f16fff2a19e570d3752770e18f2eac232c8793946001ecf11208" },
+    { "filename": "hyperspectral_signatures.csv", "purpose": "spectral quality and feature practice", "dataType": "CSV", "sha256": "7867632c2684f06a144a9de678929f7dfde4524cfd7e237b3fba73ef29f8dde5" },
+    { "filename": "lidar_point_samples.csv", "purpose": "point-cloud and structural-metric practice", "dataType": "CSV", "sha256": "f14e2be473494829bbededd8dc4f1fdc8a0c6a92169c141edea99863f78c336f" },
+    { "filename": "SATELLITE_EO_QA_TEMPLATE.md", "purpose": "cross-sensor QA and evidence synthesis", "dataType": "Markdown", "sha256": "5d469dd02505de0db9b3fac42dd46a5762e8a5b5ede99b5bef8d5d95e1634dc9" }
+  ]
+}

@@ -1,0 +1,19 @@
+plot_id,point_id,x_m,y_m,z_m,classification,return_number,number_of_returns,intensity,vertical_reference,deliberate_condition,source_status
+SAL01,P001,500010.2,6440010.4,1.82,ground,2,2,41,synthetic local datum,ground return,synthetic
+SAL01,P002,500010.2,6440010.4,2.74,vegetation,1,2,86,synthetic local datum,first vegetation return,synthetic
+SAL01,P003,500011.0,6440011.1,2.41,vegetation,1,1,79,synthetic local datum,single vegetation return,synthetic
+SAL02,P004,500020.4,6440020.7,1.76,ground,3,3,38,synthetic local datum,ground return,synthetic
+SAL02,P005,500020.4,6440020.7,2.89,vegetation,1,3,93,synthetic local datum,upper vegetation return,synthetic
+SAL02,P006,500020.4,6440020.7,2.31,vegetation,2,3,74,synthetic local datum,intermediate vegetation return,synthetic
+SAL03,P007,500030.6,6440030.2,1.91,ground,2,2,43,synthetic local datum,ground return,synthetic
+SAL03,P008,500030.6,6440030.2,2.28,vegetation,1,2,68,synthetic local datum,low canopy return,synthetic
+SAL03,P009,500031.2,6440030.8,2.19,vegetation,1,1,65,synthetic local datum,single vegetation return,synthetic
+SAL04,P010,500040.3,6440040.6,1.88,ground,2,2,45,synthetic local datum,ground return,synthetic
+SAL04,P011,500040.3,6440040.6,3.02,vegetation,1,2,101,synthetic local datum,upper vegetation return,synthetic
+SAL04,P012,500041.0,6440041.2,2.66,vegetation,1,1,88,synthetic local datum,single vegetation return,synthetic
+SAL05,P013,500050.8,6440050.5,1.96,ground,1,1,47,synthetic local datum,ground-only opening,synthetic
+SAL05,P014,500051.1,6440050.9,2.37,vegetation,1,1,71,synthetic local datum,low vegetation,synthetic
+SAL06,P015,500060.4,6440060.3,1.84,ground,2,2,40,synthetic local datum,ground return,synthetic
+SAL06,P016,500060.4,6440060.3,2.55,vegetation,1,2,83,synthetic local datum,vegetation return,synthetic
+SAL06,P017,500061.0,6440060.8,12.40,unclassified,1,1,255,synthetic local datum,deliberate high outlier,synthetic
+SAL06,P018,500061.4,6440061.2,2.47,vegetation,1,1,81,synthetic local datum,single vegetation return,synthetic
