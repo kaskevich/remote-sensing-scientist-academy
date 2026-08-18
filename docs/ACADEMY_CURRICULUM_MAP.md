@@ -4,7 +4,7 @@
 
 Keep the 12-lesson Module 1 and the complete 12-chapter Module 2. They form a coherent progression from scientific programming through spatial reasoning, vector GIS, raster science, UAV product QA, satellite Earth Observation, spatial inference, governed spatial databases, cloud-native EO data, accessible delivery, professional GIS ecosystems, advanced image analysis and production geospatial computing.
 
-Module 2 now ends in one integrated UAV and Satellite Analysis Pipeline capstone. Later modules must deepen time series, predictive modelling and independent research without duplicating these foundations or advertising unsupported career outcomes.
+Module 2 now ends in one integrated UAV and Satellite Analysis Pipeline capstone. Later modules must deepen predictive modelling, time series and independent research without duplicating these foundations or advertising unsupported career outcomes.
 
 ## Proposed six-module pathway
 
@@ -12,9 +12,9 @@ Module 2 now ends in one integrated UAV and Satellite Analysis Pipeline capstone
 |---|---|---|---|---|
 | Foundations | 1. Thinking Like a Scientific Programmer | How can ecological measurements become a reproducible scientific argument? | Vegetation Data Explorer | Implemented; final integrity revision in progress |
 | Geospatial | 2. Geospatial Evidence and UAV Analysis | How can vector, raster, UAV and satellite products be made analysis-ready, scientifically defensible and reproducibly delivered? | UAV and Satellite Analysis Pipeline | Complete: Lessons 2.1–2.53, twelve chapter practica and capstone |
-| Earth Observation | 3. Satellite Earth Observation and Time Series | How can optical, SAR and multidimensional satellite observations become comparable evidence through time? | Baltic Wetlands Monitoring Workflow | Planned to extend the implemented Module 2 Chapters 5 and 8 foundation into longer real-data time-series analysis; not advertised as available |
-| Spatial analysis | 4. Spatial Inference and Geospatial Systems | How can sampling, spatial dependence, databases and delivery systems support valid, scalable decisions? | Coastal Meadow Spatial Decision System | Planned to deepen Module 2 Chapters 6–12 foundations through larger operational and institutional scenarios |
-| Modelling | 5. Remote Sensing Modelling | How can predictive EO models be trained, spatially validated, interpreted and mapped without leakage? | Chlorophyll and Trait Prediction Pipeline | Missing; must be designed against the modelling promise matrix |
+| Modelling | 3. Remote Sensing Modelling | How can EO models be framed, trained, spatially validated, diagnosed, bounded and operationalised without leakage or causal overclaiming? | Environmental Monitoring Project | Chapter 1 implemented: Lessons 3.1–3.4 establish the prediction, target, predictor and experiment contracts; Lessons 3.5–3.30 and capstone remain planned |
+| Earth Observation | 4. Cloud EO and Time Series | How can optical, SAR and multidimensional satellite observations become comparable monitoring evidence through time? | Baltic Wetlands Monitoring Workflow | Planned to extend the implemented Module 2 Chapters 5 and 8 foundation into longer real-data time-series analysis; not advertised as available |
+| Professional systems | 5. Professional Scientific Computing | How can a validated EO workflow become a maintainable, tested and governed production system? | Production-ready Coastal Meadow EO Pipeline | Planned to deepen Module 2 Chapters 7–12 and Module 3 operational modelling through larger institutional scenarios |
 | Professional synthesis | 6. Portfolio, Research and Career Launch | How can one independently scoped EO investigation be reproduced, defended and communicated? | Environmental EO Case Study | Missing; future capstone and graduate-profile assessment |
 
 This map is problem-led. Tools such as Rasterio, Xarray, PostGIS and XGBoost are implementations within a scientific problem, not module identities.
@@ -45,7 +45,7 @@ Module 2 Chapters 11–12 connect segmentation and geospatial model assurance to
 
 ### Future project — Environmental EO Case Study
 
-Future Modules 3–6 deepen satellite time series, predictive modelling and independent professional research into a second case study. It must not be presented as available until the supporting lessons exist.
+Modules 3–6 deepen predictive modelling, satellite time series, production systems and independent professional research into advanced case studies. Only the implemented Module 3 Chapter 1 may currently be presented as available.
 
 Module 2 Chapter 8 contributes **Artifact 2.H — Cloud-Native EO Discovery and Cube Package** to this future case study. It proves deterministic STAC discovery, labelled-array and cube contracts, bounded Dask execution, and COG/Zarr publication decisions on synthetic training evidence. It does not yet prove a multi-year real-data monitoring result.
 
@@ -81,13 +81,13 @@ Status describes the current implemented release before the lesson-by-lesson int
 | UAV mission/product/photogrammetry understanding | Required | Useful | Required for UAV research | Module 2 Chapter 4 | Add later model connection |
 | Independent georeferencing and accuracy evidence | Required | Required | Required | Lesson 2.21 and practicum | Final lesson QA only |
 | Satellite optical and SAR processing | Required | Required | Required | Module 2 Chapter 5 | Add multidimensional time-series processing in Module 3 |
-| Time series and multidimensional data | Useful | Required | Required | Module 2 Chapter 8 labelled arrays, EO cubes, lazy computation and discovery package | Extend to multi-year real EO analysis in Module 3 |
-| Sampling and spatial autocorrelation | Useful | Required | Required | Module 2 Chapter 6 | Apply the design explicitly to predictive-model validation in Module 5 |
-| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–10 relational governance, bounded computation, cloud-native formats, accessible delivery and professional ecosystem translation | Automated production depth remains for Modules 4/6 |
+| Time series and multidimensional data | Useful | Required | Required | Module 2 Chapter 8 labelled arrays, EO cubes, lazy computation and discovery package | Extend to multi-year real EO analysis in Module 4 |
+| Sampling and spatial autocorrelation | Useful | Required | Required | Module 2 Chapter 6; Module 3 Chapter 1 preserves groups, blocks, dates and folds in the modelling contract | Apply the design explicitly in Module 3 Chapters 3–4 |
+| Spatial databases and scalable delivery | Required | Useful | Useful | Module 2 Chapters 7–10 relational governance, bounded computation, cloud-native formats, accessible delivery and professional ecosystem translation | Automated production depth remains for Modules 3/5/6 |
 | ArcGIS/open ecosystem translation | Required | Useful | Useful | Lesson 2.46 and Chapter 10 practicum role matrix, equivalence gate, sharing review and migration drill | Verify organisation-specific capabilities only in authorised environments |
 | Reproducible environments, CLI, tests and CI | Required | Useful | Required | Module 2 Chapter 12 practicum and capstone release | Deepen with larger production operations later |
-| Correct ML problem framing and metrics | Useful | Required | Required | Module 2 Chapter 11 semantic-segmentation design and baseline | Module 5 must extend to broader regression/classification |
-| Spatial CV, leakage and extrapolation control | Required for modelling pipelines | Required | Required | Module 2 Chapters 6 and 11 plus capstone | Extend across later predictive methods |
+| Correct ML problem framing and metrics | Useful | Required | Required | Module 2 Chapter 11 semantic-segmentation design and baseline; Module 3 Chapter 1 prediction, target and experiment contracts | Module 3 Chapters 2 and 5 will implement baseline and metric evidence |
+| Spatial CV, leakage and extrapolation control | Required for modelling pipelines | Required | Required | Module 2 Chapters 6 and 11 plus capstone; Module 3 Chapter 1 blocks unavailable predictors and final-test contamination | Module 3 Chapters 3–5 will implement structured CV and applicability |
 | Prediction, validation and uncertainty maps | Useful | Required | Required | Chapter 11 error/domain maps and capstone validation package | Extend to later continuous predictive modelling |
 | Hypothesis, sampling, limitations and methods defence | Useful | Useful | Required | Question/limitations strong; hypothesis/sampling weak | Modules 3–6 |
 | Employer/supervisor-ready case study | Required | Required | Required | Module 2 capstone with explicit three-profile evidence | Later independent case study remains planned |

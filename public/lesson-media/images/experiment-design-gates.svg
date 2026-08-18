@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Pre-registered modelling experiment gates</title>
+  <desc id="desc">Source evidence is audited and divided into development and sealed final-test registries. Preprocessing, feature selection, model selection and tuning remain inside development. Only the frozen candidate crosses the final-test gate.</desc>
+  <rect width="1200" height="700" fill="#F6ECE8"/>
+  <text x="60" y="60" fill="#0B1930" font-family="Georgia,serif" font-size="34">Keep model development away from the final test</text>
+  <text x="60" y="94" fill="#506077" font-family="Arial,sans-serif" font-size="17">The experiment plan defines which evidence may influence each decision</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="60" y="152" width="220" height="112" rx="8" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="170" y="189" text-anchor="middle" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">SOURCE EVIDENCE</text>
+    <text x="170" y="220" text-anchor="middle" fill="#0B1930" font-size="17" font-weight="700">targets + predictors</text>
+    <text x="170" y="244" text-anchor="middle" fill="#506077" font-size="14">IDs · groups · dates · provenance</text>
+    <path d="M280 208 H350" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="370" y="135" width="250" height="146" rx="8" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="495" y="173" text-anchor="middle" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">AUDIT + REGISTRY</text>
+    <text x="495" y="204" text-anchor="middle" fill="#0B1930" font-size="17" font-weight="700">one modelling observation</text>
+    <text x="495" y="229" text-anchor="middle" fill="#506077" font-size="14">inclusion · exclusions · support</text>
+    <text x="495" y="253" text-anchor="middle" fill="#506077" font-size="14">saved group and fold identities</text>
+
+    <path d="M620 180 C675 180 680 236 730 236" fill="none" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M620 236 C675 236 680 472 730 472" fill="none" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="745" y="135" width="390" height="268" rx="10" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="940" y="174" text-anchor="middle" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">DEVELOPMENT EVIDENCE</text>
+    <g fill="#0B1930" font-size="16">
+      <text x="790" y="218">1  fit preprocessing inside folds</text>
+      <text x="790" y="254">2  compare baseline and candidates</text>
+      <text x="790" y="290">3  select features and hyperparameters</text>
+      <text x="790" y="326">4  inspect validation diagnostics</text>
+      <text x="790" y="362">5  freeze one complete workflow</text>
+    </g>
+    <rect x="790" y="374" width="300" height="9" rx="4" fill="#A35F47"/>
+
+    <rect x="745" y="444" width="390" height="174" rx="10" fill="#0B1930"/>
+    <text x="940" y="481" text-anchor="middle" fill="#F6ECE8" font-size="13" font-weight="700" letter-spacing="2">SEALED FINAL TEST</text>
+    <text x="940" y="520" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">opened after workflow freeze</text>
+    <text x="940" y="551" text-anchor="middle" fill="#D7DEE7" font-size="14">estimates the predeclared new-case claim</text>
+    <text x="940" y="582" text-anchor="middle" fill="#E4B7A7" font-size="14" font-weight="700">never a tuning assistant</text>
+
+    <path d="M940 403 V431" stroke="#A35F47" stroke-width="5" marker-end="url(#arrow)"/>
+    <rect x="895" y="398" width="90" height="25" rx="5" fill="#F6ECE8" stroke="#A35F47" stroke-width="2"/>
+    <text x="940" y="416" text-anchor="middle" fill="#0B1930" font-size="12" font-weight="700">FREEZE GATE</text>
+
+    <rect x="60" y="342" width="560" height="276" rx="10" fill="#FFFFFF" stroke="#D9C6BE" stroke-width="2"/>
+    <text x="90" y="382" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">PRE-REGISTER BEFORE FITTING</text>
+    <g fill="#34485F" font-size="16">
+      <text x="90" y="425">target + prediction unit + domain</text>
+      <text x="90" y="462">baseline + primary metric</text>
+      <text x="90" y="499">validation + tuning strategy</text>
+      <text x="90" y="536">feature set + exclusion policy</text>
+      <text x="90" y="573">final-test registry + stop rules</text>
+    </g>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/>
+    </marker>
+  </defs>
+</svg>

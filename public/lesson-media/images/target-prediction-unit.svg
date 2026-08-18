@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Target observation support and prediction unit</title>
+  <desc id="desc">A field plot target is shown beside alternative prediction units: raster cell, polygon and segmented object. Arrows require spatial and temporal support reconciliation before training.</desc>
+  <rect width="1200" height="700" fill="#F6ECE8"/>
+  <text x="60" y="60" fill="#0B1930" font-family="Georgia,serif" font-size="34">What exactly receives one prediction?</text>
+  <text x="60" y="94" fill="#506077" font-family="Arial,sans-serif" font-size="17">Target observation and prediction unit are related, but they are not automatically equivalent</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="60" y="142" width="330" height="430" rx="10" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="88" y="181" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">TARGET OBSERVATION</text>
+    <rect x="123" y="225" width="200" height="170" fill="#E7D9D3" stroke="#0B1930" stroke-width="2"/>
+    <circle cx="223" cy="310" r="34" fill="#A35F47" opacity="0.82"/>
+    <text x="223" y="316" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">field plot</text>
+    <text x="88" y="438" fill="#0B1930" font-size="18" font-weight="700">Observed support</text>
+    <text x="88" y="469" fill="#506077" font-size="15">footprint + protocol</text>
+    <text x="88" y="494" fill="#506077" font-size="15">visit date or window</text>
+    <text x="88" y="519" fill="#506077" font-size="15">unit + valid range</text>
+
+    <path d="M410 355 H532" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="470" y="325" text-anchor="middle" fill="#0B1930" font-size="14" font-weight="700">reconcile</text>
+    <text x="470" y="382" text-anchor="middle" fill="#506077" font-size="13">space · time · meaning</text>
+
+    <rect x="550" y="142" width="588" height="430" rx="10" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="578" y="181" fill="#A35F47" font-size="13" font-weight="700" letter-spacing="2">PREDICTION UNIT OPTIONS</text>
+
+    <g transform="translate(590 220)">
+      <rect width="145" height="120" fill="#F6ECE8" stroke="#0B1930"/>
+      <path d="M48 0 V120 M96 0 V120 M0 40 H145 M0 80 H145" stroke="#A35F47" stroke-width="1.5"/>
+      <rect x="48" y="40" width="48" height="40" fill="#A35F47" opacity="0.82"/>
+      <text x="72" y="150" text-anchor="middle" fill="#0B1930" font-size="16" font-weight="700">raster cell</text>
+      <text x="72" y="173" text-anchor="middle" fill="#506077" font-size="13">one grid footprint</text>
+    </g>
+
+    <g transform="translate(770 220)">
+      <rect width="145" height="120" fill="#F6ECE8" stroke="#0B1930"/>
+      <path d="M18 93 L32 27 L82 12 L126 43 L113 101 L55 108 Z" fill="#B97358" opacity="0.72" stroke="#0B1930" stroke-width="2"/>
+      <text x="72" y="150" text-anchor="middle" fill="#0B1930" font-size="16" font-weight="700">polygon</text>
+      <text x="72" y="173" text-anchor="middle" fill="#506077" font-size="13">one managed feature</text>
+    </g>
+
+    <g transform="translate(950 220)">
+      <rect width="145" height="120" fill="#F6ECE8" stroke="#0B1930"/>
+      <path d="M27 88 C18 45 43 20 72 35 C96 6 132 38 116 68 C135 96 91 113 68 96 C51 115 31 105 27 88 Z" fill="#A35F47" opacity="0.74" stroke="#0B1930" stroke-width="2"/>
+      <text x="72" y="150" text-anchor="middle" fill="#0B1930" font-size="16" font-weight="700">object</text>
+      <text x="72" y="173" text-anchor="middle" fill="#506077" font-size="13">one segmented entity</text>
+    </g>
+
+    <rect x="590" y="438" width="505" height="88" rx="7" fill="#0B1930"/>
+    <text x="842" y="471" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">No automatic one-to-one match</text>
+    <text x="842" y="499" text-anchor="middle" fill="#D7DEE7" font-size="14">document aggregation, mixed support and time alignment</text>
+  </g>
+  <text x="60" y="638" fill="#0B1930" font-family="Arial,sans-serif" font-size="17" font-weight="700">A successful join proves row alignment, not scientific support equivalence</text>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/>
+    </marker>
+  </defs>
+</svg>

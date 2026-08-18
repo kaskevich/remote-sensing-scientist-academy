@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Training-serving skew in an Earth Observation model</title>
+  <desc id="desc">Parallel training and operational prediction pipelines share valid EO features. A post-visit field measurement and manual retrospective scene selection are blocked because they are unavailable or computed differently at prediction time.</desc>
+  <rect width="1200" height="700" fill="#F6ECE8"/>
+  <text x="60" y="60" fill="#0B1930" font-family="Georgia,serif" font-size="34">Train with the information you can serve</text>
+  <text x="60" y="94" fill="#506077" font-family="Arial,sans-serif" font-size="17">Feature identity includes source, unit, support, time and transformation</text>
+  <g font-family="Arial,sans-serif">
+    <text x="70" y="150" fill="#A35F47" font-size="14" font-weight="700" letter-spacing="2">MODEL DEVELOPMENT</text>
+    <text x="700" y="150" fill="#A35F47" font-size="14" font-weight="700" letter-spacing="2">OPERATIONAL PREDICTION</text>
+    <line x1="600" y1="125" x2="600" y2="615" stroke="#D9C6BE" stroke-width="2" stroke-dasharray="8 8"/>
+
+    <g transform="translate(70 185)">
+      <rect width="430" height="70" rx="7" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/>
+      <text x="22" y="30" fill="#0B1930" font-size="17" font-weight="700">Sentinel-2 seasonal feature</text>
+      <text x="22" y="53" fill="#506077" font-size="14">versioned mask + declared median</text>
+      <path d="M430 35 H548" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+    </g>
+    <g transform="translate(700 185)">
+      <rect width="430" height="70" rx="7" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/>
+      <text x="22" y="30" fill="#0B1930" font-size="17" font-weight="700">Same product and transformation</text>
+      <text x="22" y="53" fill="#506077" font-size="14">schema, unit, mask and window validated</text>
+    </g>
+
+    <g transform="translate(70 285)">
+      <rect width="430" height="70" rx="7" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/>
+      <text x="22" y="30" fill="#0B1930" font-size="17" font-weight="700">Accepted terrain context</text>
+      <text x="22" y="53" fill="#506077" font-size="14">fixed version + common sampling code</text>
+      <path d="M430 35 H548" stroke="#A35F47" stroke-width="3" marker-end="url(#arrow)"/>
+    </g>
+    <g transform="translate(700 285)">
+      <rect width="430" height="70" rx="7" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/>
+      <text x="22" y="30" fill="#0B1930" font-size="17" font-weight="700">Same terrain version and code</text>
+      <text x="22" y="53" fill="#506077" font-size="14">range and missingness checked</text>
+    </g>
+
+    <g transform="translate(70 405)">
+      <rect width="430" height="74" rx="7" fill="#FFFFFF" stroke="#B94B3F" stroke-width="2"/>
+      <text x="22" y="31" fill="#0B1930" font-size="17" font-weight="700">Post-visit field height</text>
+      <text x="22" y="55" fill="#B94B3F" font-size="14">exists historically after the decision date</text>
+      <path d="M430 37 H528" stroke="#B94B3F" stroke-width="3"/>
+      <path d="M527 20 L558 54 M558 20 L527 54" stroke="#B94B3F" stroke-width="4"/>
+    </g>
+    <g transform="translate(700 405)">
+      <rect width="430" height="74" rx="7" fill="#FFF8F5" stroke="#B94B3F" stroke-width="2" stroke-dasharray="7 5"/>
+      <text x="22" y="31" fill="#B94B3F" font-size="17" font-weight="700">Unavailable before prediction</text>
+      <text x="22" y="55" fill="#506077" font-size="14">reject or change the operational claim</text>
+    </g>
+
+    <g transform="translate(70 505)">
+      <rect width="430" height="74" rx="7" fill="#FFFFFF" stroke="#B94B3F" stroke-width="2"/>
+      <text x="22" y="31" fill="#0B1930" font-size="17" font-weight="700">Manual retrospective scene choice</text>
+      <text x="22" y="55" fill="#B94B3F" font-size="14">analyst selects after viewing the full archive</text>
+      <path d="M430 37 H528" stroke="#B94B3F" stroke-width="3"/>
+      <path d="M527 20 L558 54 M558 20 L527 54" stroke="#B94B3F" stroke-width="4"/>
+    </g>
+    <g transform="translate(700 505)">
+      <rect width="430" height="74" rx="7" fill="#FFF8F5" stroke="#B94B3F" stroke-width="2" stroke-dasharray="7 5"/>
+      <text x="22" y="31" fill="#B94B3F" font-size="17" font-weight="700">Automated composite differs</text>
+      <text x="22" y="55" fill="#506077" font-size="14">same name, different feature computation</text>
+    </g>
+  </g>
+  <rect x="70" y="625" width="1060" height="44" rx="6" fill="#0B1930"/>
+  <text x="600" y="653" text-anchor="middle" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="16" font-weight="700">A strong training feature is invalid if the prediction workflow cannot reproduce its meaning</text>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/>
+    </marker>
+  </defs>
+</svg>

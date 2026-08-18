@@ -14,6 +14,11 @@ import {
   module2PracticumDetails,
   publishedModule2Lessons,
 } from "@/lib/module2-pedagogy";
+import {
+  module3LessonDetails,
+  module3Overview,
+  publishedModule3Lessons,
+} from "@/lib/module3-pedagogy";
 import { extractFirstPythonCode } from "@/lib/lesson-code-workspace";
 
 type CurriculumModule = {
@@ -537,9 +542,63 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   return [lesson];
 });
 
+const module3LessonResources: Record<string, Array<{ href: string; title: string }>> = {
+  "lesson-3-01": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Download the Environmental Monitoring Project starter notebook" },
+    { href: "lesson-resources/module-3/modelling-foundations/README.md", title: "Read the modelling-foundations training-pack guide" },
+    { href: "lesson-resources/module-3/modelling-foundations/scientific_statement_cards.csv", title: "Download the scientific claim classification cards" },
+  ],
+  "lesson-3-02": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/modelling-foundations/target_candidate_register.csv", title: "Download the target candidate register" },
+    { href: "lesson-resources/module-3/modelling-foundations/TARGET_SPECIFICATION_TEMPLATE.md", title: "Download the target specification template" },
+  ],
+  "lesson-3-03": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/modelling-foundations/predictor_candidate_register.csv", title: "Download the predictor candidate register" },
+    { href: "lesson-resources/module-3/modelling-foundations/predictor_hypotheses_template.csv", title: "Download the predictor hypotheses template" },
+  ],
+  "lesson-3-04": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/modelling-foundations/modelling_observation_fixture.csv", title: "Download the deliberately imperfect modelling-table fixture" },
+    { href: "lesson-resources/module-3/modelling-foundations/data_dictionary_template.csv", title: "Download the modelling data-dictionary template" },
+    { href: "lesson-resources/module-3/modelling-foundations/MODEL_EXPERIMENT_PLAN_TEMPLATE.md", title: "Download the model experiment plan template" },
+    { href: "lesson-resources/module-3/modelling-foundations/manifest.json", title: "Download the training-pack checksum manifest" },
+  ],
+};
+
+const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {
+  const pedagogy = module3LessonDetails[source.id];
+  const lessonContent = pedagogy.content ?? readReviewedLesson(pedagogy.markdownFile);
+  return {
+    id: source.id,
+    numberLabel: source.number,
+    scheduleLabel: `CHAPTER ${source.chapter}`,
+    week: `CHAPTER ${source.chapter}`,
+    title: source.title,
+    description: source.description,
+    tools: source.tools,
+    content: lessonContent,
+    starterCode: source.code || extractFirstPythonCode(lessonContent) || undefined,
+    images: [],
+    resources: (module3LessonResources[source.id] ?? []).map((resource) => ({
+      ...resource,
+      href: publicAssetPath(resource.href),
+    })),
+    pedagogy,
+    task: {
+      title: `Submit ${source.artifact}`,
+      instructions: `Upload ${source.artifact}, the relevant notebook checkpoint and a concise scientific justification. Make the supported prediction claim, evidence boundary and unresolved limitations explicit.`,
+      referenceImages: [],
+      referenceMaps: [],
+    },
+  };
+});
+
 const academyCurriculumModules: AcademyCurriculumModule[] = [
   { overview: module1Overview, lessons: learnerLessons },
   { overview: module2Overview, lessons: module2AcademyLessons },
+  { overview: module3Overview, lessons: module3AcademyLessons },
 ];
 
 export default function Home() {

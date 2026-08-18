@@ -1,0 +1,4 @@
+field_name,role,dtype,unit_or_codes,spatial_support,temporal_support,source,derivation,missingness_rule,validity_rule,available_at_prediction_time,notes
+observation_id,identifier,string,stable unique ID,modelling observation,target-predictor match window,observation registry,none,never missing,unique and immutable,not a predictor,replace example notes
+target,target,float,from TARGET_SPECIFICATION.md,target observation support,target observation period,target source,document exact derivation,missing targets excluded from supervised fitting,apply declared valid range,false,do not use target at prediction time
+example_predictor,predictor,float,replace,replace,replace,replace,replace,replace,replace,true,remove this example row

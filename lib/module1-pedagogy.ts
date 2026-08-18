@@ -50,7 +50,7 @@ export type ModuleChapter = {
 
 export type AcademyModuleOverview = {
   moduleNumber: number;
-  accent: "lime" | "blue";
+  accent: "lime" | "blue" | "terracotta";
   overviewLabel: string;
   navigationTitle: string;
   navigationMeta: string;

@@ -104,6 +104,17 @@ test("a direct lesson link opens the correct module and lesson", async ({ page }
   await expect(lesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
 });
 
+test("a direct Module 3 lesson link opens and scrolls to the requested lesson", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#lesson-3-01");
+
+  const lesson = page.locator("#lesson-3-01");
+  await expect(lesson).toHaveAttribute("open", "");
+  await expect(page.locator(".curriculum-module-terracotta")).toHaveAttribute("open", "");
+  await expect(lesson.getByRole("heading", { name: /Problem — decide what scientific job the model must do/i })).toBeVisible();
+  await expect.poll(async () => Math.abs((await lesson.boundingBox())?.y ?? Number.POSITIVE_INFINITY)).toBeLessThan(40);
+});
+
 test("lesson code can be edited, run, and restored after refresh", async ({ page }) => {
   await page.route("**/pyodide.js", async (route) => {
     await route.fulfill({
@@ -559,6 +570,40 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await expect(page.getByText("saardu-boundary.geojson", { exact: true })).toBeVisible();
   await expect(page.getByText("plot-summary.csv", { exact: true })).toBeVisible();
   await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
+});
+
+test("Module 3 opens with four reviewed modelling-foundation lessons and a transparent roadmap", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#curriculum");
+  await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
+  await page.reload();
+
+  const overview = page.locator(".module-overview-terracotta");
+  await expect(overview.getByRole("heading", { name: "Remote Sensing Modelling", exact: true })).toBeVisible();
+  await expect(overview.locator(".module-chapter")).toHaveCount(8);
+  await expect(overview.locator(".module-syllabus li")).toHaveCount(31);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(4);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(27);
+  await expect(overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true })).toHaveAttribute("href", "#lesson-3-01");
+  await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(1).locator("summary").click();
+  await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeVisible();
+  await expect(overview.getByText("Planned syllabus", { exact: true }).first()).toBeVisible();
+
+  await overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true }).click();
+  const lesson = page.locator("#lesson-3-01");
+  await expect(lesson).toBeVisible();
+  await expect(lesson.locator(".module-index")).toHaveText("3.1");
+  await expect(lesson.getByText("Lesson 3.1 of 30", { exact: true })).toBeVisible();
+  await expect(lesson.getByRole("img", { name: /four-column diagram separates description/i })).toBeVisible();
+  await expect(lesson.getByRole("link", { name: /Environmental Monitoring Project starter notebook/i })).toHaveAttribute("href", /Environmental_Monitoring_Project_Starter\.ipynb$/);
+  await expect(lesson.locator(".formative-check")).toHaveCount(3);
+
+  const dimensions = await page.evaluate(() => ({
+    clientWidth: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }));
+  expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
 });
 
 for (const viewport of viewports) {

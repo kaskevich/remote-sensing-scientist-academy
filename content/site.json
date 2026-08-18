@@ -123,9 +123,9 @@
         ],
         "build": "Environmental Monitoring Project",
         "outcome": "Create and communicate a complete predictive Earth Observation workflow.",
-        "ctaLabel": "Explore modelling",
+        "ctaLabel": "Explore remote sensing modelling",
         "href": "#curriculum",
-        "accent": "orange"
+        "accent": "terracotta"
       }
     ]
   },
@@ -164,8 +164,8 @@
     "titleLineOne": "Academy",
     "titleLineTwo": "Curriculum",
     "cohortLabel": "AVAILABLE NOW",
-    "cohortDate": "Module 1 + complete Module 2",
-    "cohortMeta": "65 lessons + 12 practica + Module 2 capstone available · Portfolio pathway",
+    "cohortDate": "Modules 1–2 + Module 3 Chapter 1",
+    "cohortMeta": "69 lessons + 12 practica + Module 2 capstone available · Portfolio pathway",
     "modules": [
       {
         "id": "lesson-01",
