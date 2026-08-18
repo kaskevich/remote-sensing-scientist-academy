@@ -214,10 +214,100 @@ for train_index, test_index in outer.split(X, y, groups=site):
     predictions = search.predict(X.iloc[test_index])
     save_outer_predictions(test_index, predictions, search.best_params_)`,
   },
-  { number: 13, chapter: 4, title: "Hyperparameter Optimisation", description: "Design a controlled search space inside development data.", tools: ["RandomizedSearchCV", "Search space", "Independent test"], artifact: "tuning_protocol.ipynb", code: "" },
-  { number: 14, chapter: 4, title: "Early Stopping, Regularisation and Learning Dynamics", description: "Diagnose underfit and overfit behaviour from learning evidence.", tools: ["Early stopping", "Learning curves", "Regularisation"], artifact: "learning_dynamics_report.pdf", code: "" },
-  { number: 15, chapter: 4, title: "Feature Selection, Redundancy and Stability", description: "Evaluate scientific utility and fold stability without automatic correlation pruning.", tools: ["Permutation relevance", "Redundancy", "Stability"], artifact: "feature_stability_report.csv", code: "" },
-  { number: 16, chapter: 4, title: "Imbalanced Classification and Decision Thresholds", description: "Choose thresholds from ecological error costs rather than a default of 0.5.", tools: ["Class weighting", "Precision–recall", "Thresholds"], artifact: "rare_habitat_threshold_report.md", code: "" },
+  {
+    number: 13,
+    chapter: 4,
+    title: "Hyperparameter Optimisation",
+    description: "Design a bounded, reproducible search inside nested development evidence and compare it fairly with the untuned candidate.",
+    tools: ["RandomizedSearchCV", "Grouped inner folds", "Search protocol"],
+    artifact: "Controlled Tuning Protocol",
+    code: `from sklearn.model_selection import GroupKFold, RandomizedSearchCV
+from xgboost import XGBRegressor
+
+inner = GroupKFold(n_splits=3)
+search = RandomizedSearchCV(
+    XGBRegressor(objective="reg:squarederror", random_state=42, n_jobs=1),
+    {"max_depth": [2, 3, 4], "learning_rate": [0.02, 0.05, 0.1],
+     "min_child_weight": [1, 3, 6], "subsample": [0.7, 0.9, 1.0]},
+    n_iter=12, scoring="neg_mean_absolute_error", cv=inner,
+    random_state=42, n_jobs=1, refit=True,
+)
+search.fit(X_outer_development, y_outer_development,
+           groups=block_outer_development)`,
+  },
+  {
+    number: 14,
+    chapter: 4,
+    title: "Early Stopping, Regularisation and Learning Dynamics",
+    description: "Read training and structured-development loss together, then stop boosting before additional trees cease to improve transferable performance.",
+    tools: ["XGBoost early stopping", "Learning curves", "Regularisation"],
+    artifact: "Learning Dynamics Report",
+    code: `from xgboost import XGBRegressor
+
+model = XGBRegressor(
+    n_estimators=2000,
+    learning_rate=0.03,
+    max_depth=3,
+    min_child_weight=3,
+    subsample=0.8,
+    colsample_bytree=0.8,
+    early_stopping_rounds=40,
+    eval_metric="mae",
+    random_state=42,
+    n_jobs=1,
+)
+model.fit(X_inner_train, y_inner_train,
+          eval_set=[(X_inner_train, y_inner_train),
+                    (X_stopping_group, y_stopping_group)], verbose=False)`,
+  },
+  {
+    number: 15,
+    chapter: 4,
+    title: "Feature Selection, Redundancy and Stability",
+    description: "Compare full and scientifically reduced predictor sets using fold-level relevance and stability rather than one automatic ranking.",
+    tools: ["Permutation importance", "Correlated predictors", "Fold stability"],
+    artifact: "Feature Stability Report",
+    code: `from sklearn.inspection import permutation_importance
+
+result = permutation_importance(
+    fitted_inner_model,
+    X_inner_validation,
+    y_inner_validation,
+    scoring="neg_mean_absolute_error",
+    n_repeats=30,
+    random_state=42,
+)
+fold_importance = (
+    pd.DataFrame({"feature": X_inner_validation.columns,
+                  "importance": result.importances_mean,
+                  "spread": result.importances_std})
+    .sort_values("importance", ascending=False)
+)
+fold_importance`,
+  },
+  {
+    number: 16,
+    chapter: 4,
+    title: "Imbalanced Classification and Decision Thresholds",
+    description: "Separate probability estimation from ecological action and choose a rare-habitat threshold from declared error costs.",
+    tools: ["Precision and recall", "Class weighting", "Decision thresholds"],
+    artifact: "Rare-habitat Threshold Decision",
+    code: `from sklearn.metrics import confusion_matrix
+
+rows = []
+for threshold in [0.20, 0.35, 0.50, 0.65]:
+    predicted = (rare_probability >= threshold).astype(int)
+    tn, fp, fn, tp = confusion_matrix(
+        y_inner_validation, predicted, labels=[0, 1]
+    ).ravel()
+    rows.append({
+        "threshold": threshold,
+        "precision": tp / (tp + fp) if tp + fp else 0,
+        "recall": tp / (tp + fn) if tp + fn else 0,
+        "specificity": tn / (tn + fp) if tn + fp else 0,
+    })
+pd.DataFrame(rows)`,
+  },
   { number: 17, chapter: 5, title: "Regression Evaluation", description: "Interpret R², RMSE, MAE and bias together with fold variability and diagnostics.", tools: ["R²", "RMSE", "Residuals"], artifact: "regression_evaluation_package", code: "" },
   { number: 18, chapter: 5, title: "Classification Evaluation and Probability Quality", description: "Evaluate classes, thresholds, ranking and probability calibration.", tools: ["Confusion matrix", "PR curve", "Calibration"], artifact: "classification_evaluation_package", code: "" },
   { number: 19, chapter: 5, title: "Residual Geography and Structured Failure", description: "Map where errors concentrate and expose subgroup failure hidden by averages.", tools: ["Residual maps", "Subgroups", "Failure geography"], artifact: "MODEL_DIAGNOSTIC_REPORT.md", code: "" },
@@ -253,6 +343,10 @@ export const publishedModule3LessonIds = [
   "lesson-3-10",
   "lesson-3-11",
   "lesson-3-12",
+  "lesson-3-13",
+  "lesson-3-14",
+  "lesson-3-15",
+  "lesson-3-16",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -274,10 +368,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "12 of 30 lessons available · capstone planned",
+  navigationMeta: "16 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapters 1–3 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "Chapters 1–4 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -630,6 +724,89 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
       { title: "Cawley and Talbot (2010), model selection over-fitting", href: "https://jmlr.org/papers/v11/cawley10a.html" },
       { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
       { title: "Valavi et al. (2019), spatial blocking", href: "https://doi.org/10.1111/2041-210X.13107" },
+    ],
+  },
+  "lesson-3-13": {
+    estimatedTime: "210–290 minutes",
+    lessonType: "Controlled Search Design Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-13.md",
+    formativeChecks: [
+      { id: "m3-l13-search-role", question: "Where may RandomizedSearchCV compare hyperparameters during a nested outer fold?", options: ["Only inside the current outer development partition", "On the outer assessment site", "On the sealed final test"], correctOption: 0, explanation: "Candidate configurations are development decisions. Inner structured folds select them; outer assessment evaluates the complete selection procedure." },
+      { id: "m3-l13-space", question: "What makes a search space scientifically defensible?", options: ["Each range has a behavioural rationale, feasible budget and predeclared bounds", "It contains every value the software accepts", "It is expanded until one score looks impressive"], correctOption: 0, explanation: "A bounded space encodes prior scientific and computational judgement. Post-result expansion increases selection flexibility and must be versioned as a new experiment." },
+      { id: "m3-l13-compare", question: "How should tuned and untuned candidates be compared?", options: ["On identical protected outer folds with the same metric and features", "Using each model's best inner score", "By opening the final test for both"], correctOption: 0, explanation: "Only like-for-like outer predictions isolate whether the controlled selection procedure improved transfer evidence." },
+    ],
+    submissionChecklist: [...commonChecklist, "TUNING_PROTOCOL.md declares metric, search space, candidate budget, grouped inner folds and random seed before execution", "Untuned and selected procedures use identical outer assessment rows and preserve every fold-level result", "The search log confirms no outer assessment or final-test target influenced candidate choice"],
+    rubric: rubric("Implements a reproducible bounded RandomizedSearchCV procedure inside grouped inner folds and preserves candidate, fold, runtime and failure records", "Justifies every searched parameter by expected model behaviour and judges improvement from identical outer evidence rather than the winning inner score"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — RandomizedSearchCV", href: "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html" },
+      { title: "scikit-learn 1.9 — tuning estimator hyperparameters", href: "https://scikit-learn.org/stable/modules/grid_search.html" },
+      { title: "Cawley and Talbot (2010), model-selection over-fitting", href: "https://jmlr.org/papers/v11/cawley10a.html" },
+    ],
+    furtherReading: [
+      { title: "Bergstra and Bengio (2012), random search", href: "https://www.jmlr.org/papers/v13/bergstra12a.html" },
+      { title: "scikit-learn grouped cross-validation", href: "https://scikit-learn.org/stable/modules/cross_validation.html" },
+    ],
+  },
+  "lesson-3-14": {
+    estimatedTime: "220–300 minutes",
+    lessonType: "Learning Dynamics and Early-stopping Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-14.md",
+    formativeChecks: [
+      { id: "m3-l14-curves", question: "Training MAE keeps falling while structured-development MAE rises. What is the strongest diagnosis?", options: ["Additional capacity is fitting development-specific detail rather than improving transfer", "The model is necessarily causal", "The validation group should be added to training immediately"], correctOption: 0, explanation: "A widening train–development gap is evidence of overfit under that split. It does not identify one ecological mechanism or justify contaminating assessment." },
+      { id: "m3-l14-stopping-set", question: "May the outer assessment site serve as XGBoost's early-stopping eval_set?", options: ["No; the stopping round would be selected from assessment evidence", "Yes; eval_set never changes a model", "Only when MAE improves"], correctOption: 0, explanation: "Early stopping is model selection. Its monitoring evidence must come from the current development partition." },
+      { id: "m3-l14-refit", question: "Why record best_iteration for every structured fold?", options: ["Stopping behaviour may vary by site or block and needs a transparent final refit rule", "The largest number is always the final answer", "It proves the model will generalise everywhere"], correctOption: 0, explanation: "Fold variation reveals instability. A final tree-count rule must be declared from development evidence and cannot be chosen from the outer assessment or final test." },
+    ],
+    submissionChecklist: [...commonChecklist, "The report includes deliberately underfit, overfit and controlled runs on the same structured development evidence", "Training and development metric histories, best_iteration and stopping rule are saved per fold", "The outer assessment and final test never appear in eval_set or influence the refit rule"],
+    rubric: rubric("Configures and diagnoses XGBoost learning dynamics, early stopping and regularisation with correctly separated evidence and saved histories", "Explains the learning-rate/tree-count and capacity/regularisation trade-offs without treating early stopping as a guarantee against overfitting"),
+    coreReferences: [
+      { title: "XGBoost 3.4 — scikit-learn estimator and early stopping", href: "https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html" },
+      { title: "XGBoost parameters", href: "https://xgboost.readthedocs.io/en/stable/parameter.html" },
+      { title: "scikit-learn — validation and learning curves", href: "https://scikit-learn.org/stable/modules/learning_curve.html" },
+    ],
+    furtherReading: [
+      { title: "XGBoost callbacks", href: "https://xgboost.readthedocs.io/en/stable/python/callbacks.html" },
+      { title: "Chen and Guestrin (2016), XGBoost", href: "https://doi.org/10.1145/2939672.2939785" },
+    ],
+  },
+  "lesson-3-15": {
+    estimatedTime: "210–290 minutes",
+    lessonType: "Feature Relevance and Stability Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-15.md",
+    formativeChecks: [
+      { id: "m3-l15-permutation", question: "What does held-out permutation importance measure?", options: ["How much this fitted model's selected score degrades when one feature is disrupted on that evidence", "The causal effect of the environmental variable", "A universal property of the sensor band"], correctOption: 0, explanation: "Permutation importance is model-, metric- and dataset-dependent. It describes predictive reliance, not mechanism or causality." },
+      { id: "m3-l15-correlated", question: "Two predictors carry similar information. Why can each receive low individual permutation importance?", options: ["The unpermuted partner can retain much of the same predictive information", "Both variables must be measurement errors", "Correlation guarantees neither is useful"], correctOption: 0, explanation: "Redundancy can dilute individual importance. Correlated groups require scientific interpretation and controlled full-versus-reduced comparisons." },
+      { id: "m3-l15-stability", question: "A feature ranks first in one site fold and near zero in three others. What should the report say?", options: ["Its relevance is unstable across represented transfer contexts", "It is the universally best predictor", "Delete the three inconvenient folds"], correctOption: 0, explanation: "Fold variation is evidence. Stable delivery requires reporting selection frequency, sign, magnitude and affected sites rather than one pooled rank." },
+    ],
+    submissionChecklist: [...commonChecklist, "feature_stability_report.csv preserves fold-level means, spreads, positive-fold frequency and correlation context", "Full and scientifically reduced feature sets are compared within the nested selection architecture", "No feature is removed solely because one importance or correlation threshold was crossed"],
+    rubric: rubric("Computes held-out permutation relevance, correlation structure and fold stability; compares fixed full and reduced schemas with protected evidence", "Separates predictive reliance from causal importance and justifies retention or removal through measurement meaning, redundancy, stability, cost and transferability"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — permutation feature importance", href: "https://scikit-learn.org/stable/modules/permutation_importance.html" },
+      { title: "scikit-learn — permutation importance with correlated features", href: "https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html" },
+    ],
+    furtherReading: [
+      { title: "Molnar — Interpretable Machine Learning: permutation importance", href: "https://christophm.github.io/interpretable-ml-book/feature-importance.html" },
+      { title: "scikit-learn feature selection", href: "https://scikit-learn.org/stable/modules/feature_selection.html" },
+    ],
+  },
+  "lesson-3-16": {
+    estimatedTime: "220–300 minutes",
+    lessonType: "Rare-habitat Decision Threshold Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-16.md",
+    formativeChecks: [
+      { id: "m3-l16-probability-decision", question: "What changes when a fitted classifier's decision threshold changes?", options: ["The conversion from scores or probabilities to class actions", "The original field labels", "The sensor's spectral response"], correctOption: 0, explanation: "Thresholding is a decision layer. The underlying predicted scores stay the same, while false-positive and false-negative counts change." },
+      { id: "m3-l16-accuracy", question: "Rare habitat occupies 5% of samples. Why can 95% accuracy be useless?", options: ["Predicting absence everywhere reaches 95% while finding no rare habitat", "Accuracy is never mathematically defined", "Class imbalance changes the coordinate system"], correctOption: 0, explanation: "Majority dominance hides zero sensitivity. Report the confusion matrix, precision, recall and specificity for the declared positive class." },
+      { id: "m3-l16-firewall", question: "Where should a rare-habitat threshold be selected?", options: ["Inside structured development validation using a predeclared ecological objective", "On the outer assessment site after seeing its labels", "On the final test until recall looks acceptable"], correctOption: 0, explanation: "Threshold selection is model selection. Outer and final evidence must assess the already fixed model-plus-threshold procedure." },
+    ],
+    submissionChecklist: [...commonChecklist, "The positive class, error consequences and minimum-recall or cost rule are declared before threshold inspection", "The report shows confusion counts, precision, recall/sensitivity and specificity across candidate thresholds", "Class weighting and any sampling are performed inside training partitions, with probability limitations and protected assessment kept explicit"],
+    rubric: rubric("Calculates threshold-specific confusion counts and class metrics, evaluates class weighting, and selects a reproducible threshold inside structured development evidence", "Connects false negatives and false positives to a bounded ecological decision without claiming that 0.5, accuracy or one threshold is universally correct"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — tuning the decision threshold", href: "https://scikit-learn.org/stable/modules/classification_threshold.html" },
+      { title: "scikit-learn — precision-recall", href: "https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics" },
+      { title: "scikit-learn — balanced class weights", href: "https://scikit-learn.org/stable/modules/generated/sklearn.utils.class_weight.compute_class_weight.html" },
+    ],
+    furtherReading: [
+      { title: "XGBoost parameters: scale_pos_weight", href: "https://xgboost.readthedocs.io/en/stable/parameter.html" },
+      { title: "scikit-learn threshold post-tuning example", href: "https://scikit-learn.org/stable/auto_examples/model_selection/plot_tuned_decision_threshold.html" },
     ],
   },
 };

@@ -607,6 +607,28 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/structured-validation/LEAKAGE_CHECKLIST.md", title: "Download the structured validation leakage checklist" },
     { href: "lesson-resources/module-3/structured-validation/manifest.json", title: "Download the Chapter 3 checksum manifest" },
   ],
+  "lesson-3-13": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/controlled-optimisation/README.md", title: "Read the controlled-optimisation training-pack guide" },
+    { href: "lesson-resources/module-3/controlled-optimisation/TUNING_PROTOCOL_TEMPLATE.md", title: "Download the controlled tuning protocol template" },
+    { href: "lesson-resources/module-3/controlled-optimisation/search_results_fixture.csv", title: "Download the synthetic bounded-search result fixture" },
+  ],
+  "lesson-3-14": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/controlled-optimisation/learning_dynamics_fixture.csv", title: "Download the synthetic learning-dynamics fixture" },
+    { href: "lesson-resources/module-3/controlled-optimisation/LEARNING_DYNAMICS_TEMPLATE.md", title: "Download the learning dynamics report template" },
+  ],
+  "lesson-3-15": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/controlled-optimisation/feature_stability_fixture.csv", title: "Download the synthetic feature-stability fixture" },
+    { href: "lesson-resources/module-3/controlled-optimisation/FEATURE_STABILITY_TEMPLATE.csv", title: "Download the feature stability report template" },
+  ],
+  "lesson-3-16": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Complete the Chapter 4 portfolio checkpoint" },
+    { href: "lesson-resources/module-3/controlled-optimisation/rare_habitat_probabilities.csv", title: "Download the synthetic rare-habitat probability fixture" },
+    { href: "lesson-resources/module-3/controlled-optimisation/THRESHOLD_DECISION_TEMPLATE.md", title: "Download the rare-habitat threshold decision template" },
+    { href: "lesson-resources/module-3/controlled-optimisation/manifest.json", title: "Download the Chapter 4 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {

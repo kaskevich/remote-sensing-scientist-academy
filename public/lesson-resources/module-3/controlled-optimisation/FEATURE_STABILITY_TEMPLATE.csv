@@ -1,0 +1,2 @@
+feature,fold,model_skill_vs_baseline,importance_mean,importance_std,positive_importance,correlated_family,operational_availability,acquisition_cost,decision,justification
+[feature],[fold],,,,,[family],[status],[cost],[retain/remove/compare],[measurement and fold evidence]

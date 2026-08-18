@@ -28,14 +28,14 @@ Every new technique must strengthen one link in that chain. A higher score alone
 
 ## Current release scope
 
-Chapters 1–3 are implemented in full. Lessons 3.1–3.12 are available; Lessons 3.13–3.30 and the capstone remain visibly planned. The release includes:
+Chapters 1–4 are implemented in full. Lessons 3.1–3.16 are available; Lessons 3.17–3.30 and the capstone remain visibly planned. The release includes:
 
-- twelve publishable lessons with theory, guided practice, model clinics, independent work and assessment;
+- sixteen publishable lessons with theory, guided practice, model clinics, independent work and assessment;
 - one continuous `Environmental_Monitoring_Project_Starter.ipynb`;
 - downloadable target, predictor, data-dictionary, experiment-plan, baseline-report, parameter-decision and model-metadata templates;
-- a deliberately imperfect modelling-table fixture plus checksum-verified synthetic Chapter 2 and Chapter 3 training packs;
-- twelve explanatory SVG diagrams with text alternatives in lesson content;
-- runtime validators for the Chapter 1 contracts, baseline metrics, regression stumps, boosting updates, model metadata, grouped folds, temporal folds and nested evidence roles;
+- a deliberately imperfect modelling-table fixture plus checksum-verified synthetic Chapter 2, Chapter 3 and Chapter 4 training packs;
+- sixteen explanatory SVG diagrams with text alternatives in lesson content;
+- runtime validators for the Chapter 1 contracts, baseline metrics, regression stumps, boosting updates, model metadata, grouped folds, temporal folds, nested evidence roles, optimisation protocols, learning dynamics, feature stability and decision thresholds;
 - an explicit prerequisite/novelty map that prevents repetition of Modules 1–2.
 
 ## Pedagogical pattern
@@ -68,6 +68,6 @@ Formative checks cover concept, application and claim boundary. Completion contr
 
 1. **Released:** architecture, capstone brief and Chapter 1 (3.1–3.4).
 2. **Released:** Chapter 2 (3.5–3.8), from baseline controls through the first serialized XGBoost candidate.
-3. **Released in this chapter update:** Chapter 3 (3.9–3.12), with structured spatial, grouped, temporal and nested validation.
-4. **Next:** Chapter 4 (3.13–3.16), with controlled optimisation, learning dynamics, feature stability and decision thresholds.
+3. **Released:** Chapter 3 (3.9–3.12), with structured spatial, grouped, temporal and nested validation.
+4. **Released in this chapter update:** Chapter 4 (3.13–3.16), with controlled optimisation, learning dynamics, feature stability and decision thresholds.
 5. **Final:** capstone implementation, cross-module integrity audit, browser accessibility QA and final scientific review.

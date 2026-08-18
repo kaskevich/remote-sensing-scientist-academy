@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Controlled hyperparameter search inside two evidence firewalls</title>
+  <desc id="desc">A bounded candidate space passes into grouped inner folds for selection. A solid firewall separates outer site assessment, and a second firewall keeps the final test sealed.</desc>
+  <rect width="1200" height="680" fill="#FBF7F4"/>
+  <style>.h{font:700 30px Georgia,serif;fill:#13263D}.s{font:600 18px Arial,sans-serif;fill:#13263D}.b{font:16px Arial,sans-serif;fill:#30465C}.tiny{font:14px Arial,sans-serif;fill:#30465C}.box{fill:#fff;stroke:#A35F47;stroke-width:3}.soft{fill:#F6ECE8;stroke:#B97358;stroke-width:2}.line{stroke:#A35F47;stroke-width:4;fill:none}.dash{stroke:#A35F47;stroke-width:5;stroke-dasharray:12 10}</style>
+  <text x="60" y="65" class="h">Controlled search is a procedure inside protected evidence</text>
+  <rect x="55" y="115" width="245" height="430" rx="16" class="box"/>
+  <text x="82" y="155" class="s">Frozen protocol</text>
+  <rect x="82" y="185" width="190" height="62" rx="9" class="soft"/><text x="100" y="214" class="b">Primary metric</text><text x="100" y="236" class="tiny">MAE in target units</text>
+  <rect x="82" y="265" width="190" height="78" rx="9" class="soft"/><text x="100" y="294" class="b">Bounded space</text><text x="100" y="317" class="tiny">Depth · rate · child</text><text x="100" y="336" class="tiny">evidence · subsample</text>
+  <rect x="82" y="361" width="190" height="62" rx="9" class="soft"/><text x="100" y="390" class="b">Budget and seed</text><text x="100" y="412" class="tiny">12 candidates · 42</text>
+  <rect x="82" y="441" width="190" height="76" rx="9" class="soft"/><text x="100" y="470" class="b">Evidence rule</text><text x="100" y="493" class="tiny">Select inside grouped</text><text x="100" y="512" class="tiny">development folds</text>
+  <path d="M300 330H355" class="line"/><path d="M344 318l18 12-18 12" fill="#A35F47"/>
+  <rect x="365" y="115" width="300" height="430" rx="16" class="box"/>
+  <text x="392" y="155" class="s">Inner grouped selection</text>
+  <text x="392" y="184" class="tiny">Current outer development only</text>
+  <rect x="400" y="215" width="230" height="70" rx="10" class="soft"/><text x="425" y="246" class="b">Fold A</text><text x="500" y="246" class="tiny">train blocks → validate block</text><text x="425" y="269" class="tiny">score every declared candidate</text>
+  <rect x="400" y="305" width="230" height="70" rx="10" class="soft"/><text x="425" y="336" class="b">Fold B</text><text x="500" y="336" class="tiny">train blocks → validate block</text><text x="425" y="359" class="tiny">preserve complete results</text>
+  <rect x="400" y="395" width="230" height="112" rx="10" fill="#A35F47"/><text x="425" y="429" font-family="Arial" font-size="18" font-weight="700" fill="#fff">Selection rule</text><text x="425" y="458" font-family="Arial" font-size="15" fill="#fff">Choose by declared metric</text><text x="425" y="481" font-family="Arial" font-size="15" fill="#fff">Refit on outer development</text>
+  <line x1="700" y1="102" x2="700" y2="560" class="dash"/>
+  <text x="676" y="594" class="tiny" transform="rotate(-90 676 594)">FIREWALL 1 · NO SELECTION FROM OUTER TARGETS</text>
+  <path d="M665 330H735" class="line"/><path d="M724 318l18 12-18 12" fill="#A35F47"/>
+  <rect x="745" y="180" width="205" height="300" rx="16" class="box"/>
+  <text x="774" y="221" class="s">Outer site</text><text x="774" y="245" class="s">assessment</text>
+  <text x="774" y="289" class="b">Predict once with</text><text x="774" y="313" class="b">the selected procedure</text>
+  <text x="774" y="359" class="tiny">Save row predictions</text><text x="774" y="382" class="tiny">Report every site fold</text><text x="774" y="405" class="tiny">Do not tune here</text>
+  <line x1="985" y1="102" x2="985" y2="560" class="dash"/>
+  <text x="961" y="594" class="tiny" transform="rotate(-90 961 594)">FIREWALL 2 · FINAL TEST REMAINS SEALED</text>
+  <rect x="1020" y="230" width="135" height="200" rx="16" fill="#13263D"/>
+  <text x="1047" y="275" font-family="Arial" font-size="18" font-weight="700" fill="#fff">Final test</text><text x="1041" y="319" font-family="Arial" font-size="15" fill="#fff">No tuning</text><text x="1041" y="344" font-family="Arial" font-size="15" fill="#fff">No stopping</text><text x="1041" y="369" font-family="Arial" font-size="15" fill="#fff">No features</text><text x="1041" y="394" font-family="Arial" font-size="15" fill="#fff">No thresholds</text>
+  <text x="60" y="635" class="b">The outer score evaluates the complete search rule—not the inner winning score. Each outer fold repeats the procedure from the beginning.</text>
+</svg>

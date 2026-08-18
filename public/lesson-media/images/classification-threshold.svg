@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Decision thresholds trade rare-habitat recall against false-positive review burden</title>
+  <desc id="desc">Overlapping score distributions for rare habitat and other meadow units are crossed by low, default and high thresholds. A comparison table shows that lower thresholds increase recall and review burden while higher thresholds increase missed positives.</desc>
+  <rect width="1200" height="700" fill="#FBF7F4"/>
+  <style>.h{font:700 30px Georgia,serif;fill:#13263D}.s{font:700 18px Arial,sans-serif;fill:#13263D}.b{font:16px Arial,sans-serif;fill:#30465C}.tiny{font:14px Arial,sans-serif;fill:#30465C}.axis{stroke:#637487;stroke-width:2}.rare{fill:#A35F47;fill-opacity:.65;stroke:#A35F47;stroke-width:3}.other{fill:#6B86A0;fill-opacity:.45;stroke:#415D78;stroke-width:3}.low{stroke:#B97358;stroke-width:4;stroke-dasharray:7 7}.default{stroke:#13263D;stroke-width:4}.high{stroke:#637487;stroke-width:4;stroke-dasharray:3 7}.table{fill:#fff;stroke:#D9C7BD;stroke-width:2}</style>
+  <text x="55" y="62" class="h">The model estimates a score; the threshold expresses a decision</text>
+  <rect x="55" y="105" width="730" height="420" rx="16" class="table"/>
+  <line x1="110" y1="450" x2="740" y2="450" class="axis"/><line x1="110" y1="160" x2="110" y2="450" class="axis"/>
+  <text x="355" y="495" class="b">Predicted rare-habitat probability or score</text><text x="73" y="350" class="b" transform="rotate(-90 73 350)">Relative frequency</text>
+  <path d="M115 450 C185 445 205 310 295 270 C380 232 455 360 525 450 Z" class="other"/>
+  <path d="M330 450 C410 435 470 275 555 215 C635 158 700 340 735 450 Z" class="rare"/>
+  <text x="190" y="225" class="s" fill="#415D78">Other meadow units</text><text x="555" y="165" class="s" fill="#A35F47">Rare habitat</text>
+  <line x1="350" y1="145" x2="350" y2="450" class="low"/><text x="314" y="137" class="tiny">low 0.25</text>
+  <line x1="500" y1="145" x2="500" y2="450" class="default"/><text x="460" y="137" class="tiny">default 0.50</text>
+  <line x1="640" y1="145" x2="640" y2="450" class="high"/><text x="602" y="137" class="tiny">high 0.70</text>
+  <rect x="825" y="105" width="330" height="420" rx="16" class="table"/>
+  <text x="855" y="150" class="s">Decision consequences</text>
+  <text x="855" y="200" class="b">Low threshold</text><text x="855" y="226" class="tiny">Higher recall · more units reviewed</text><text x="855" y="248" class="tiny">More false positives likely</text>
+  <line x1="855" y1="275" x2="1125" y2="275" stroke="#D9C7BD" stroke-width="2"/>
+  <text x="855" y="315" class="b">0.50 threshold</text><text x="855" y="341" class="tiny">Software default, not ecological law</text><text x="855" y="363" class="tiny">Needs the same decision justification</text>
+  <line x1="855" y1="390" x2="1125" y2="390" stroke="#D9C7BD" stroke-width="2"/>
+  <text x="855" y="430" class="b">High threshold</text><text x="855" y="456" class="tiny">Fewer units reviewed · more misses</text><text x="855" y="478" class="tiny">Precision may rise; recall falls</text>
+  <rect x="55" y="560" width="1100" height="86" rx="14" fill="#13263D"/>
+  <text x="82" y="595" font-family="Arial" font-size="17" font-weight="700" fill="#fff">Evidence rule</text><text x="82" y="623" font-family="Arial" font-size="15" fill="#fff">Choose the threshold from structured development predictions and a predeclared ecological objective. Assess the fixed rule on outer evidence once.</text>
+</svg>
