@@ -26,16 +26,16 @@ Every new technique must strengthen one link in that chain. A higher score alone
 | 6. Quantify Prediction Uncertainty | 3.22–3.25 | How uncertain is each prediction, and is observed coverage adequate? | Prediction Evidence Package |
 | 7. From Model to Operational EO Workflow | 3.26–3.30 | Can a fixed, versioned model run repeatedly without semantic drift? | Operational Monitoring Pipeline and Model Card |
 
-## First release scope
+## Current release scope
 
-This branch implements Chapter 1 in full. Lessons 3.1–3.4 are available; Lessons 3.5–3.30 and the capstone remain visibly planned. The release includes:
+Chapters 1–2 are implemented in full. Lessons 3.1–3.8 are available; Lessons 3.9–3.30 and the capstone remain visibly planned. The release includes:
 
-- four publishable lessons with theory, guided practice, model clinics, independent work and assessment;
+- eight publishable lessons with theory, guided practice, model clinics, independent work and assessment;
 - one continuous `Environmental_Monitoring_Project_Starter.ipynb`;
-- downloadable target, predictor, data-dictionary and experiment-plan templates;
-- a deliberately imperfect modelling-table fixture for diagnosis;
-- four explanatory SVG diagrams with text alternatives in lesson content;
-- runtime validators and automated content/integrity tests;
+- downloadable target, predictor, data-dictionary, experiment-plan, baseline-report, parameter-decision and model-metadata templates;
+- a deliberately imperfect modelling-table fixture plus a checksum-verified synthetic Chapter 2 comparison pack;
+- eight explanatory SVG diagrams with text alternatives in lesson content;
+- runtime validators for the Chapter 1 contracts, baseline metrics, regression stumps, boosting updates and model metadata;
 - an explicit prerequisite/novelty map that prevents repetition of Modules 1–2.
 
 ## Pedagogical pattern
@@ -66,7 +66,8 @@ Formative checks cover concept, application and claim boundary. Completion contr
 
 ## Implementation phases
 
-1. **Released in this branch:** architecture, capstone brief and Chapter 1 (3.1–3.4).
-2. **Next:** Chapter 2 (3.5–3.8) after Chapter 1 review.
-3. **Then:** one chapter per reviewed branch, with fixtures, tests and chapter review.
-4. **Final:** capstone implementation, cross-module integrity audit, browser accessibility QA and final scientific review.
+1. **Released:** architecture, capstone brief and Chapter 1 (3.1–3.4).
+2. **Released in this chapter update:** Chapter 2 (3.5–3.8), from baseline controls through the first serialized XGBoost candidate.
+3. **Next:** Chapter 3 (3.9–3.12), with structured spatial, grouped, temporal and nested validation.
+4. **Then:** one chapter per reviewed branch, with fixtures, tests and chapter review.
+5. **Final:** capstone implementation, cross-module integrity audit, browser accessibility QA and final scientific review.

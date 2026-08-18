@@ -565,6 +565,26 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/modelling-foundations/MODEL_EXPERIMENT_PLAN_TEMPLATE.md", title: "Download the model experiment plan template" },
     { href: "lesson-resources/module-3/modelling-foundations/manifest.json", title: "Download the training-pack checksum manifest" },
   ],
+  "lesson-3-05": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/README.md", title: "Read the Chapter 2 synthetic training-pack guide" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/baseline_modelling_data.csv", title: "Download the saved-split baseline modelling fixture" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/BASELINE_REPORT_TEMPLATE.md", title: "Download the baseline evidence report template" },
+  ],
+  "lesson-3-06": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/baseline_modelling_data.csv", title: "Use the same saved-split ensemble comparison fixture" },
+  ],
+  "lesson-3-07": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/parameter_decision_record.csv", title: "Download the XGBoost parameter decision record" },
+  ],
+  "lesson-3-08": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/baseline_modelling_data.csv", title: "Download the first-model training fixture" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/MODEL_METADATA_TEMPLATE.json", title: "Download the model metadata template" },
+    { href: "lesson-resources/module-3/baseline-and-xgboost/manifest.json", title: "Download the Chapter 2 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {

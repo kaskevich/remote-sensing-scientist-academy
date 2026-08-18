@@ -1,0 +1,39 @@
+{
+  "model_version": "m3-ch2-xgbreg-001",
+  "model_family": "XGBRegressor",
+  "objective": "reg:squarederror",
+  "target_specification_version": "REPLACE_ME",
+  "experiment_plan_version": "REPLACE_ME",
+  "dataset_version": "module3-chapter2-synthetic-v1",
+  "dataset_sha256": "REPLACE_FROM_MANIFEST",
+  "fold_registry_version": "chapter2-saved-split-v1",
+  "feature_order": [
+    "sentinel2_ndvi",
+    "sentinel2_ndmi",
+    "uav_height_p95",
+    "texture_contrast"
+  ],
+  "feature_schema_path": "feature_schema.csv",
+  "parameters": {
+    "n_estimators": 200,
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "min_child_weight": 3,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "gamma": 0,
+    "reg_alpha": 0,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "random_seed": 42,
+  "training_observation_count": 0,
+  "validation_observation_count": 0,
+  "validation_metrics": {},
+  "software_versions": {},
+  "training_timestamp_utc": "REPLACE_ME",
+  "final_test_opened": false,
+  "intended_use": "Chapter 2 synthetic development comparison only",
+  "unsupported_use": "Ecological inference, operational mapping, new-site transfer or any real-world decision"
+}

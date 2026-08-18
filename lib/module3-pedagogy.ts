@@ -83,10 +83,71 @@ if missing:
 if model_data["observation_id"].duplicated().any():
     raise ValueError("One observation ID must map to one modelling row")`,
   },
-  { number: 5, chapter: 2, title: "What Does a Useful Model Need to Beat?", description: "Define naive and simple baselines before judging complexity.", tools: ["Baselines", "Model skill", "Bias–variance"], artifact: "baseline_report.md", code: "" },
-  { number: 6, chapter: 2, title: "Trees, Ensembles and Boosting", description: "Reason from decision-tree partitions to bagging and sequential error correction.", tools: ["Decision trees", "Random Forest", "Gradient boosting"], artifact: "ensemble_reasoning.ipynb", code: "" },
-  { number: 7, chapter: 2, title: "XGBoost from First Principles", description: "Connect loss, additive trees, regularisation and learning rate to model behaviour.", tools: ["XGBoost", "Objectives", "Regularisation"], artifact: "xgboost_mechanism_notebook.ipynb", code: "" },
-  { number: 8, chapter: 2, title: "Train the First Defensible XGBoost Model", description: "Fit an untuned, reproducible candidate against a declared baseline and folds.", tools: ["XGBRegressor", "Metadata", "Serialization"], artifact: "first_xgboost_model", code: "" },
+  {
+    number: 5,
+    chapter: 2,
+    title: "What Does a Useful Model Need to Beat?",
+    description: "Define naive and simple baselines before judging complexity.",
+    tools: ["Baselines", "Model skill", "Bias–variance"],
+    artifact: "baseline_report.md",
+    code: `from sklearn.dummy import DummyRegressor
+from sklearn.metrics import mean_absolute_error
+
+baseline = DummyRegressor(strategy="mean")
+baseline.fit(X_train, y_train)
+baseline_predictions = baseline.predict(X_validation)
+baseline_mae = mean_absolute_error(y_validation, baseline_predictions)
+print(f"Mean baseline MAE: {baseline_mae:.2f} cm")`,
+  },
+  {
+    number: 6,
+    chapter: 2,
+    title: "Trees, Ensembles and Boosting",
+    description: "Reason from decision-tree partitions to bagging and sequential error correction.",
+    tools: ["Decision trees", "Random Forest", "Gradient boosting"],
+    artifact: "ensemble_reasoning.ipynb",
+    code: `from sklearn.tree import DecisionTreeRegressor
+
+stump = DecisionTreeRegressor(max_depth=1, random_state=42)
+stump.fit(X_train[["uav_height_p95"]], y_train)
+stump_predictions = stump.predict(X_validation[["uav_height_p95"]])
+print(f"First split threshold: {stump.tree_.threshold[0]:.2f}")`,
+  },
+  {
+    number: 7,
+    chapter: 2,
+    title: "XGBoost from First Principles",
+    description: "Connect loss, additive trees, regularisation and learning rate to model behaviour.",
+    tools: ["XGBoost", "Objectives", "Regularisation"],
+    artifact: "xgboost_mechanism_notebook.ipynb",
+    code: `import numpy as np
+
+prediction_0 = np.full(4, 24.0)
+tree_1_correction = np.array([-4.0, -2.0, 3.0, 5.0])
+learning_rate = 0.3
+prediction_1 = prediction_0 + learning_rate * tree_1_correction
+print(prediction_1)`,
+  },
+  {
+    number: 8,
+    chapter: 2,
+    title: "Train the First Defensible XGBoost Model",
+    description: "Fit an untuned, reproducible candidate against a declared baseline and folds.",
+    tools: ["XGBRegressor", "Metadata", "Serialization"],
+    artifact: "first_xgboost_model",
+    code: `from xgboost import XGBRegressor
+
+model = XGBRegressor(
+    objective="reg:squarederror",
+    n_estimators=200,
+    learning_rate=0.05,
+    max_depth=3,
+    random_state=42,
+    n_jobs=1,
+)
+model.fit(X_train[feature_order], y_train)
+predictions = model.predict(X_validation[feature_order])`,
+  },
   { number: 9, chapter: 3, title: "Validation Is Part of the Model", description: "Treat the validation design as part of the scientific claim.", tools: ["Generalisation", "Cross-validation", "Leakage"], artifact: "validation_claim.md", code: "" },
   { number: 10, chapter: 3, title: "Spatial, Grouped and Leave-Location-Out Validation", description: "Match folds to within-site, new-site and new-region prediction claims.", tools: ["GroupKFold", "Spatial blocks", "Location holdout"], artifact: "spatial_validation_comparison.ipynb", code: "" },
   { number: 11, chapter: 3, title: "Temporal and Spatiotemporal Validation", description: "Evaluate future transfer without allowing future observations into model development.", tools: ["Temporal holdout", "Rolling origin", "Drift"], artifact: "temporal_validation_report.md", code: "" },
@@ -122,6 +183,10 @@ export const publishedModule3LessonIds = [
   "lesson-3-02",
   "lesson-3-03",
   "lesson-3-04",
+  "lesson-3-05",
+  "lesson-3-06",
+  "lesson-3-07",
+  "lesson-3-08",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -143,10 +208,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "4 of 30 lessons available · capstone planned",
+  navigationMeta: "8 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapter 1 is available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "Chapters 1–2 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -335,6 +400,86 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
     furtherReading: [
       { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
       { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+    ],
+  },
+  "lesson-3-05": {
+    estimatedTime: "150–210 minutes",
+    lessonType: "Baseline and Skill Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-05.md",
+    formativeChecks: [
+      { id: "m3-l5-training-only", question: "Which observations may determine a mean baseline used to score one validation fold?", options: ["Only the corresponding training observations", "Training and validation observations together", "The final test observations only"], correctOption: 0, explanation: "Even a one-number baseline is a fitted estimator. Its constant must be learned from training evidence only or the validation score contains held-out target information." },
+      { id: "m3-l5-negative-skill", question: "A candidate has higher validation MAE than the predeclared mean baseline. What does this show?", options: ["The candidate has negative error skill for that comparison", "The candidate is useful because it is more complex", "The baseline must be removed from the report"], correctOption: 0, explanation: "For an error skill score of 1 − candidate error / baseline error, a worse candidate has a negative value. Complexity does not create usefulness." },
+      { id: "m3-l5-bias-variance", question: "Why keep a simple linear baseline alongside a constant baseline?", options: ["It tests whether a transparent relationship captures most usable signal", "It guarantees the final model is causal", "It removes the need for structured validation"], correctOption: 0, explanation: "If a simple model performs comparably, the additional variance, maintenance and interpretation burden of a complex model may not be justified." },
+    ],
+    submissionChecklist: [...commonChecklist, "baseline_report.md declares training-only mean and median comparators, one transparent feature-aware comparator, metrics, fold identity and model skill", "The sealed final test set remains unopened"],
+    rubric: rubric("Fits every baseline on training targets only and compares identical validation cases with correctly signed metrics and skill", "Explains what each comparator tests and why complexity is not evidence of scientific value"),
+    coreReferences: [
+      { title: "scikit-learn dummy estimators", href: "https://scikit-learn.org/stable/api/sklearn.dummy.html" },
+      { title: "scikit-learn regression metrics", href: "https://scikit-learn.org/stable/api/sklearn.metrics.html#regression-metrics" },
+    ],
+    furtherReading: [
+      { title: "scikit-learn linear models", href: "https://scikit-learn.org/stable/modules/linear_model.html" },
+      { title: "Hastie, Tibshirani and Friedman, Elements of Statistical Learning", href: "https://hastie.su.domains/ElemStatLearn/" },
+    ],
+  },
+  "lesson-3-06": {
+    estimatedTime: "160–220 minutes",
+    lessonType: "Tree and Ensemble Mechanism Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-06.md",
+    formativeChecks: [
+      { id: "m3-l6-leaf", question: "What does a regression-tree leaf store for prediction?", options: ["A fitted output value for observations reaching that leaf", "A causal explanation of the target", "A new field measurement"], correctOption: 0, explanation: "The path of threshold decisions assigns a case to a leaf. The leaf returns a fitted numerical value; it does not identify ecological mechanism." },
+      { id: "m3-l6-forest", question: "What primarily distinguishes a Random Forest from gradient boosting?", options: ["Forest trees are diversified and averaged; boosting trees are added sequentially to improve the current model", "Only a Random Forest uses trees", "Boosting never uses previous model error"], correctOption: 0, explanation: "Random forests reduce variance by averaging randomized trees. Gradient boosting builds an additive sequence in which each new tree is chosen relative to the current predictions and loss." },
+      { id: "m3-l6-superiority", question: "When is Gradient Boosting universally superior to Random Forest?", options: ["Never; performance and operational suitability must be evaluated for the stated problem", "Whenever the dataset contains EO predictors", "Whenever more than one tree is fitted"], correctOption: 0, explanation: "Different ensemble mechanisms have different sensitivities, tuning demands and failure modes. No model family wins independently of evidence and validation design." },
+    ],
+    submissionChecklist: [...commonChecklist, "ensemble_reasoning.ipynb identifies the first split, leaf predictions and the distinct averaging versus sequential-correction mechanisms", "All model families use the same development split and evaluation cases"],
+    rubric: rubric("Traces one observation through a tree and correctly distinguishes a single tree, bagging, Random Forest and gradient boosting", "Chooses among mechanisms from validation evidence, stability, complexity and intended use rather than reputation"),
+    coreReferences: [
+      { title: "scikit-learn decision trees", href: "https://scikit-learn.org/stable/modules/tree.html" },
+      { title: "scikit-learn ensemble methods", href: "https://scikit-learn.org/stable/modules/ensemble.html" },
+    ],
+    furtherReading: [
+      { title: "Breiman (2001), Random Forests", href: "https://doi.org/10.1023/A:1010933404324" },
+      { title: "Friedman (2001), Greedy Function Approximation", href: "https://doi.org/10.1214/aos/1013203451" },
+    ],
+  },
+  "lesson-3-07": {
+    estimatedTime: "190–260 minutes",
+    lessonType: "XGBoost Mechanism Studio",
+    markdownFile: "content/lessons/module-3/lesson-07.md",
+    formativeChecks: [
+      { id: "m3-l7-objective", question: "What does the XGBoost objective combine?", options: ["Training loss and a regularisation term", "Accuracy and causal certainty", "Only the number of trees"], correctOption: 0, explanation: "The loss represents predictive error under the chosen objective, while regularisation penalises model complexity. Their balance shapes which splits and leaf weights are worthwhile." },
+      { id: "m3-l7-learning-rate", question: "What does a smaller learning rate do to each new tree's contribution?", options: ["Shrinks it, usually requiring more boosting rounds", "Deletes all previous trees", "Guarantees generalisation"], correctOption: 0, explanation: "Shrinkage scales each additive update. It changes the learning-rate/tree-count trade-off but does not remove the need for validation or regularisation." },
+      { id: "m3-l7-missing", question: "XGBoost learns a default branch for missing feature values. What must the scientist still check?", options: ["Whether missingness has the same meaning and frequency during prediction", "Nothing; automatic handling makes missingness scientifically harmless", "Only whether the CSV opens"], correctOption: 0, explanation: "Algorithmic handling prevents a crash. It does not make missingness mechanisms, sensor failures or training-serving differences scientifically valid." },
+    ],
+    submissionChecklist: [...commonChecklist, "xgboost_mechanism_notebook.ipynb explains additive updates, objective, loss, regularisation and every selected parameter by behavioural effect", "Advanced constraints are marked optional and tied to a scientific need"],
+    rubric: rubric("Explains sequential additive trees, gradients, Hessians, split gain, shrinkage, missing-value routing and the main parameter effects without API folklore", "Connects objective and constraints to the target contract while separating predictive optimisation from causal inference"),
+    coreReferences: [
+      { title: "XGBoost: Introduction to Boosted Trees", href: "https://xgboost.readthedocs.io/en/stable/tutorials/model.html" },
+      { title: "XGBoost parameters", href: "https://xgboost.readthedocs.io/en/stable/parameter.html" },
+    ],
+    furtherReading: [
+      { title: "Chen and Guestrin (2016), XGBoost", href: "https://doi.org/10.1145/2939672.2939785" },
+      { title: "XGBoost categorical data tutorial", href: "https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html" },
+    ],
+  },
+  "lesson-3-08": {
+    estimatedTime: "210–280 minutes",
+    lessonType: "First Model Reproducibility Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-08.md",
+    formativeChecks: [
+      { id: "m3-l8-untuned", question: "Why is the first Chapter 2 XGBoost candidate intentionally untuned?", options: ["To isolate a declared starting configuration before Chapter 3 validation and Chapter 4 tuning", "Because XGBoost parameters never matter", "To allow the final test set to choose settings"], correctOption: 0, explanation: "The first model establishes a reproducible reference. Structured validation and model selection come later and must remain separate from the sealed final test." },
+      { id: "m3-l8-schema", question: "Why record feature order even when a model file is saved?", options: ["Inference must reproduce the same feature meanings, names, order and transformations", "Feature order affects only plot colours", "A JSON model stores the complete data provenance automatically"], correctOption: 0, explanation: "A model artifact is not the complete experiment record. A sidecar schema and metadata file preserve the contract between training data and future inference." },
+      { id: "m3-l8-serialization", question: "What is the strongest save/load check?", options: ["Reload the model and confirm predictions match on a fixed verification table", "Confirm that model.json exists", "Rename the file after fitting"], correctOption: 0, explanation: "File existence does not prove the artifact can be loaded or reproduces fitted behaviour. A fixed schema and prediction comparison test the handover." },
+    ],
+    submissionChecklist: [...commonChecklist, "The untuned XGBRegressor uses the frozen feature order, saved Chapter 2 split and recorded random seed", "model.json reloads successfully and reproduces validation predictions", "MODEL_METADATA.json records data, folds, parameters, objective, metrics, versions and confirms the final test stayed sealed"],
+    rubric: rubric("Fits, evaluates, serializes and reloads one declared XGBRegressor against the same baseline cases with stable feature order and metadata", "Explains why this is a development candidate rather than final evidence and identifies the stronger validation still required"),
+    coreReferences: [
+      { title: "XGBoost Python package introduction", href: "https://xgboost.readthedocs.io/en/stable/python/python_intro.html" },
+      { title: "XGBoost scikit-learn estimator interface", href: "https://xgboost.readthedocs.io/en/stable/python/sklearn_estimator.html" },
+    ],
+    furtherReading: [
+      { title: "XGBoost model IO", href: "https://xgboost.readthedocs.io/en/stable/tutorials/saving_model.html" },
+      { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
     ],
   },
 };

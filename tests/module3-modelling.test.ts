@@ -3,11 +3,19 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
+  applyBoostingStage,
+  calculateErrorSkill,
+  calculateRegressionMetrics,
+  createMeanBaseline,
+  createMedianBaseline,
   findTrainingServingSkew,
+  findBestRegressionStump,
   validateExperimentPlan,
+  validateModelRunMetadata,
   validateModellingDataset,
   validatePredictorHypotheses,
   validateTargetSpecification,
+  type ModelRunMetadata,
   type ModelExperimentPlan,
   type ModellingObservation,
   type PredictorHypothesis,
@@ -23,6 +31,7 @@ import {
 
 const repositoryRoot = process.cwd();
 const resourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/modelling-foundations");
+const chapter2ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/baseline-and-xgboost");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -96,7 +105,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes one complete opening chapter while exposing the full planned pathway", () => {
+  it("publishes two complete opening chapters while exposing the full planned pathway", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -111,8 +120,12 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-02",
       "lesson-3-03",
       "lesson-3-04",
+      "lesson-3-05",
+      "lesson-3-06",
+      "lesson-3-07",
+      "lesson-3-08",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(4);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(8);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -155,7 +168,7 @@ describe("Module 3 curriculum architecture", () => {
     }
   });
 
-  it("records current tested software versions without implying every package is used in Chapter 1", () => {
+  it("records current tested software versions without implying every package is used in every lesson", () => {
     expect(MODULE3_SOFTWARE_VERSIONS).toEqual({
       python: "3.12.13",
       jupyter: "JupyterLab 4 / Notebook 7",
@@ -184,6 +197,10 @@ describe("Module 3 teaching assets", () => {
       "target-prediction-unit.svg",
       "training-serving-skew.svg",
       "experiment-design-gates.svg",
+      "baseline-ladder.svg",
+      "tree-to-boosting.svg",
+      "xgboost-sequential-learning.svg",
+      "first-model-evidence-chain.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -202,7 +219,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 4; lesson += 1) {
+    for (let lesson = 1; lesson <= 8; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -222,6 +239,108 @@ describe("Module 3 teaching assets", () => {
       expect(existsSync(path), file.path).toBe(true);
       expect(sha256(path), file.path).toBe(file.sha256);
     }
+  });
+
+  it("verifies the Chapter 2 saved-split pack and its checksum manifest", () => {
+    const manifestPath = join(chapter2ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.files).toHaveLength(5);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const rows = readFileSync(join(chapter2ResourceRoot, "baseline_modelling_data.csv"), "utf8")
+      .trim()
+      .split("\n");
+    expect(rows).toHaveLength(45);
+    expect(rows.filter((row) => row.includes(",train,"))).toHaveLength(28);
+    expect(rows.filter((row) => row.includes(",validation,"))).toHaveLength(8);
+    expect(rows.filter((row) => row.includes(",sealed,"))).toHaveLength(8);
+  });
+
+  it("records an honest Chapter 2 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_2_REVIEW.md");
+    expect(review).toContain("4.57 / 5");
+    expect(review).toContain("not the validation or optimisation chapter");
+    expect(review).toContain("The saved Chapter 2 split is instructional");
+  });
+});
+
+describe("Module 3 baseline and ensemble behaviour", () => {
+  it("fits mean and median constants from training targets only", () => {
+    expect(createMeanBaseline([10, 20, 30], 3)).toEqual([20, 20, 20]);
+    expect(createMedianBaseline([10, 20, 200, 30], 2)).toEqual([25, 25]);
+    expect(() => createMeanBaseline([], 1)).toThrow("at least one value");
+    expect(() => createMedianBaseline([10, Number.NaN], 1)).toThrow("finite numbers");
+  });
+
+  it("calculates regression errors with an explicit prediction-minus-observation bias sign", () => {
+    const metrics = calculateRegressionMetrics([10, 20, 30], [12, 18, 33]);
+    expect(metrics.mae).toBeCloseTo(7 / 3);
+    expect(metrics.rmse).toBeCloseTo(Math.sqrt(17 / 3));
+    expect(metrics.bias).toBeCloseTo(1);
+    expect(metrics.rSquared).toBeCloseTo(0.915);
+    expect(() => calculateRegressionMetrics([1, 2], [1])).toThrow("equal length");
+  });
+
+  it("reports positive, zero and negative error skill without hiding failure", () => {
+    expect(calculateErrorSkill(6, 10)).toBeCloseTo(0.4);
+    expect(calculateErrorSkill(10, 10)).toBe(0);
+    expect(calculateErrorSkill(12, 10)).toBeCloseTo(-0.2);
+    expect(() => calculateErrorSkill(1, 0)).toThrow("positive number");
+  });
+
+  it("finds an inspectable best regression stump from threshold candidates", () => {
+    const stump = findBestRegressionStump([0.2, 0.3, 0.8, 0.9], [10, 12, 30, 32]);
+    expect(stump.threshold).toBeCloseTo(0.55);
+    expect(stump.leftValue).toBe(11);
+    expect(stump.rightValue).toBe(31);
+    expect(stump.predictions).toEqual([11, 11, 31, 31]);
+    expect(stump.squaredError).toBe(4);
+  });
+
+  it("applies a scaled additive boosting stage and validates its contract", () => {
+    expect(applyBoostingStage([24, 24, 24, 24], [-4, -2, 3, 5], 0.3)).toEqual([22.8, 23.4, 24.9, 25.5]);
+    expect(() => applyBoostingStage([1], [1, 2], 0.3)).toThrow("equal length");
+    expect(() => applyBoostingStage([1], [1], 0)).toThrow("at most one");
+  });
+});
+
+function validModelRunMetadata(overrides: Partial<ModelRunMetadata> = {}): ModelRunMetadata {
+  return {
+    modelFamily: "XGBRegressor",
+    objective: "reg:squarederror",
+    datasetVersion: "module3-chapter2-synthetic-v1",
+    foldRegistryVersion: "chapter2-saved-split-v1",
+    featureOrder: ["sentinel2_ndvi", "uav_height_p95"],
+    randomSeed: 42,
+    packageVersions: { xgboost: "3.3.0", sklearn: "1.9.0" },
+    finalTestOpened: false,
+    ...overrides,
+  };
+}
+
+describe("Module 3 first-model handover", () => {
+  it("accepts complete model metadata and blocks semantic or test-firewall failures", () => {
+    expect(validateModelRunMetadata(validModelRunMetadata())).toEqual([]);
+    const issues = validateModelRunMetadata(validModelRunMetadata({
+      featureOrder: ["sentinel2_ndvi", "sentinel2_ndvi"],
+      randomSeed: -1,
+      packageVersions: {},
+      finalTestOpened: true,
+    }));
+    expect(issues).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: "duplicate-feature-order", severity: "blocker" }),
+      expect.objectContaining({ code: "invalid-random-seed", severity: "blocker" }),
+      expect.objectContaining({ code: "missing-package-versions", severity: "blocker" }),
+      expect.objectContaining({ code: "final-test-opened-during-development", severity: "blocker" }),
+    ]));
   });
 });
 

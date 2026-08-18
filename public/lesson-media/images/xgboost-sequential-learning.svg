@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">XGBoost sequential learning under a regularised objective</title>
+  <desc id="desc">The current prediction is compared with targets through a loss. Gradients and Hessians inform candidate splits. Regularisation gates complexity. A new tree produces leaf updates scaled by the learning rate, then the updated model begins the next stage.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/></marker>
+    <style>
+      .title{font:700 28px Georgia,serif;fill:#17243E}.label{font:700 16px Arial,sans-serif;fill:#17243E}.body{font:14px Arial,sans-serif;fill:#34435E}.small{font:12px Arial,sans-serif;fill:#59667A}.box{fill:#FFFDFC;stroke:#A35F47;stroke-width:2}.soft{fill:#F6ECE8;stroke:#B97358;stroke-width:2}.gate{fill:#17243E;stroke:#17243E;stroke-width:2}.white{font:700 15px Arial,sans-serif;fill:#fff}.line{stroke:#A35F47;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#FBF8F6"/>
+  <text x="55" y="55" class="title">Each tree is fitted against the model that already exists</text>
+  <rect x="55" y="115" width="210" height="110" rx="10" class="box"/>
+  <text x="160" y="150" text-anchor="middle" class="label">CURRENT MODEL</text>
+  <text x="160" y="180" text-anchor="middle" class="body">prediction ŷ⁽ᵗ⁻¹⁾</text>
+  <text x="160" y="207" text-anchor="middle" class="small">sum of earlier trees</text>
+  <path d="M265 170 H330" class="line"/>
+  <rect x="340" y="100" width="230" height="140" rx="10" class="soft"/>
+  <text x="455" y="135" text-anchor="middle" class="label">DECLARED LOSS</text>
+  <text x="455" y="165" text-anchor="middle" class="body">compare targets y and ŷ</text>
+  <text x="455" y="194" text-anchor="middle" class="body">gradient g · direction</text>
+  <text x="455" y="219" text-anchor="middle" class="body">Hessian h · curvature</text>
+  <path d="M570 170 H635" class="line"/>
+  <rect x="645" y="100" width="230" height="140" rx="10" class="box"/>
+  <text x="760" y="135" text-anchor="middle" class="label">CANDIDATE SPLITS</text>
+  <text x="760" y="165" text-anchor="middle" class="body">aggregate G and H</text>
+  <text x="760" y="194" text-anchor="middle" class="body">calculate regularised gain</text>
+  <text x="760" y="219" text-anchor="middle" class="small">feature + threshold + children</text>
+  <path d="M875 170 H930" class="line"/>
+  <rect x="940" y="100" width="205" height="140" rx="10" class="gate"/>
+  <text x="1042" y="137" text-anchor="middle" class="white">COMPLEXITY GATE</text>
+  <text x="1042" y="170" text-anchor="middle" class="white">γ · split penalty</text>
+  <text x="1042" y="197" text-anchor="middle" class="white">λ / α · leaf penalties</text>
+  <text x="1042" y="222" text-anchor="middle" class="white">child evidence</text>
+  <path d="M1042 240 V310" class="line"/>
+  <rect x="895" y="320" width="295" height="125" rx="10" class="soft"/>
+  <text x="1042" y="357" text-anchor="middle" class="label">NEW TREE fₜ(x)</text>
+  <text x="1042" y="387" text-anchor="middle" class="body">accepted structure + leaf updates</text>
+  <text x="1042" y="417" text-anchor="middle" class="small">one addition, not a standalone model</text>
+  <path d="M895 382 H805" class="line"/>
+  <rect x="570" y="320" width="225" height="125" rx="10" class="box"/>
+  <text x="682" y="357" text-anchor="middle" class="label">SHRINKAGE η</text>
+  <text x="682" y="387" text-anchor="middle" class="body">scale the tree contribution</text>
+  <text x="682" y="417" text-anchor="middle" class="small">learning-rate/tree-count trade-off</text>
+  <path d="M570 382 H480" class="line"/>
+  <rect x="180" y="305" width="290" height="155" rx="10" class="soft"/>
+  <text x="325" y="342" text-anchor="middle" class="label">UPDATED ADDITIVE MODEL</text>
+  <text x="325" y="379" text-anchor="middle" class="body">ŷ⁽ᵗ⁾ = ŷ⁽ᵗ⁻¹⁾ + η fₜ(x)</text>
+  <text x="325" y="410" text-anchor="middle" class="small">evaluate the new loss</text>
+  <text x="325" y="435" text-anchor="middle" class="small">then begin the next boosting stage</text>
+  <path d="M180 382 C85 382 85 225 140 225" class="line"/>
+  <rect x="85" y="520" width="1030" height="105" rx="12" fill="#fff" stroke="#D6C0B8" stroke-width="2"/>
+  <text x="115" y="557" class="label">SCIENTIFIC FIREWALL</text>
+  <text x="115" y="586" class="body">The objective can optimise only the supplied target, features and rows. It cannot detect a causal overclaim, target leakage, a weak transfer split or an unsupported prediction domain.</text>
+  <text x="115" y="611" class="small">Validation design, feature availability, missingness meaning and domain evidence remain the scientist’s responsibility</text>
+</svg>
