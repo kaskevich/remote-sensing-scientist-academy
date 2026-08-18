@@ -164,8 +164,8 @@
     "titleLineOne": "Academy",
     "titleLineTwo": "Curriculum",
     "cohortLabel": "AVAILABLE NOW",
-    "cohortDate": "Module 1 + Module 2 Lessons 2.1–2.46",
-    "cohortMeta": "58 lessons + 10 practica available · 7 lessons + capstone planned · Portfolio pathway",
+    "cohortDate": "Module 1 + complete Module 2",
+    "cohortMeta": "65 lessons + 12 practica + Module 2 capstone available · Portfolio pathway",
     "modules": [
       {
         "id": "lesson-01",

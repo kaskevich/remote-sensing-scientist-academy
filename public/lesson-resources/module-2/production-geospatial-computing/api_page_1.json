@@ -1,0 +1,9 @@
+{
+  "count": 4,
+  "page": 1,
+  "next": "fixture://api_page_2.json",
+  "results": [
+    {"record_id": "OBS-001", "site_id": "SITE-A", "status": "reviewed"},
+    {"record_id": "OBS-002", "site_id": "SITE-A", "status": "reviewed"}
+  ]
+}

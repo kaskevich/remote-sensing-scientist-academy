@@ -1,0 +1,18 @@
+{
+  "licence": "CC0-1.0",
+  "sourceStatus": "Entirely synthetic offline teaching evidence",
+  "securityStatus": "No live credentials, private endpoints, protected locations or production data",
+  "knownDeliberateConditions": [
+    "two-page response requiring reconciliation",
+    "one record requiring review",
+    "forbidden public-field contract",
+    "failure scenarios are designed by the learner"
+  ],
+  "assets": [
+    {"filename": "README.md", "purpose": "Training-pack scope and safe-use guide", "sha256": "6429c792060a6d9dcc4e7cc289a592aac0da3edc27065eea2b785ae62ab583c4"},
+    {"filename": "api_page_1.json", "purpose": "First deterministic API response page", "sha256": "bd9f0d0f829973a8ea8d561d52a76121acfc5963d4d347ca1a6d137ec0889caa"},
+    {"filename": "api_page_2.json", "purpose": "Second deterministic API response page", "sha256": "787ddff6137158bad6a8df5561561ce274fc584c9ccf4af7c959b4c4f7bd5dab"},
+    {"filename": "source_contract.json", "purpose": "Required schema, population and public-field contract", "sha256": "11ce50b5f2b3b48f7e4f1bfcede501de0546e69a6b2ed530858dab9c08b36b9c"},
+    {"filename": "PRODUCTION_WORKFLOW_QA_TEMPLATE.md", "purpose": "Chapter QA and release-decision structure", "sha256": "8223b9869e2641b204a76bbae88f6ed8e2e88f851e2eabdc5519c9d93b5d7ac8"}
+  ]
+}

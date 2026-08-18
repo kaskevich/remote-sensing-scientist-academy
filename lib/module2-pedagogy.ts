@@ -629,6 +629,14 @@ export const publishedModule2LessonIds = [
   "lesson-2-44",
   "lesson-2-45",
   "lesson-2-46",
+  "lesson-2-47",
+  "lesson-2-48",
+  "lesson-2-49",
+  "lesson-2-50",
+  "lesson-2-51",
+  "lesson-2-52",
+  "lesson-2-53",
+  "lesson-2-capstone",
 ] as const;
 
 const publishedModule2LessonIdSet = new Set<string>(publishedModule2LessonIds);
@@ -718,6 +726,22 @@ export const module2ChapterPractica = [
     tools: ["Enterprise architecture", "Workflow translation", "Migration evidence"],
     artifact: "Artifact 2.J — Portable Professional GIS Architecture",
   },
+  {
+    id: "module-2-chapter-11-practicum",
+    chapter: 11,
+    title: "Audit a Meadow Segmentation Product",
+    description: "Design, test and communicate an image-segmentation workflow whose labels, spatial splits, thresholds and failure geography are fit for ecological use.",
+    tools: ["Object-based analysis", "Spatial validation", "Model QA"],
+    artifact: "Artifact 2.K — Geospatial Image Analysis Audit",
+  },
+  {
+    id: "module-2-chapter-12-practicum",
+    chapter: 12,
+    title: "Productionise the Coastal-Meadow Pipeline",
+    description: "Turn a reviewed analysis into a versioned, containerised and continuously tested workflow with recoverable acquisition and release evidence.",
+    tools: ["API acquisition", "Containers", "Continuous integration"],
+    artifact: "Artifact 2.L — Production Geospatial Workflow",
+  },
 ] as const;
 
 export const module2Overview: AcademyModuleOverview = {
@@ -725,10 +749,10 @@ export const module2Overview: AcademyModuleOverview = {
   accent: "blue",
   overviewLabel: "Module 2 overview",
   navigationTitle: "Available Module 2 lessons",
-  navigationMeta: "46 lessons · 10 practica available",
+  navigationMeta: "53 lessons · 12 practica · capstone available",
   syllabusAriaLabel: "Complete fifty-three-lesson Module 2 map",
   planningNote:
-    "Lessons 2.1–2.46 and ten chapter practica are available now, completing Spatial Foundations, Vector GIS, Raster Science, UAV and Photogrammetry, Satellite Earth Observation, Spatial Statistics and Geostatistics, Spatial Databases, Multidimensional and Cloud-Native Data, Web GIS and Delivery, and Enterprise GIS. The remaining lessons and capstone stay visible as the planned professional pathway and will be released only after full educational review.",
+    "All 53 lessons, twelve chapter practica and the final UAV and Satellite Analysis Pipeline capstone are available. The pathway progresses from spatial foundations through advanced image analysis and production geospatial computing, with one reviewable portfolio artifact at every chapter boundary.",
   title: "Geospatial Data Science",
   purpose:
     "Turn vector, raster, UAV and satellite data into reproducible spatial analyses by learning spatial reasoning before software operations.",
@@ -776,7 +800,8 @@ export const module2Overview: AcademyModuleOverview = {
   capstone: {
     number: 54,
     title: "UAV and Satellite Analysis Pipeline",
-    status: "planned",
+    status: "available",
+    lessonId: "lesson-2-capstone",
   },
 };
 
@@ -2645,6 +2670,213 @@ const professionalEcosystemLessonConfigurations: Record<string, PublishedLessonC
   },
 };
 
+function advancedImageRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Preserves source identity, label lineage, spatial partitions, parameters, seeds, software versions, acceptance thresholds and machine-readable results" },
+    { dimension: "Scientific communication", expectation: "Explains what the image product measures, where it is supported, how errors are distributed and which ecological conclusions remain unsupported" },
+  ];
+}
+
+const commonAdvancedImageChecklist = [
+  "Source images, labels and derived patches have stable identifiers, licences, checksums, CRS, resolution and acquisition context",
+  "Training, validation and test geography are spatially independent and patch overlap cannot cross a partition boundary",
+  "Class definitions, ambiguous labels, exclusions, augmentation and imbalance treatment are documented before model comparison",
+  "Performance is reported by class and region with boundary quality, calibration or threshold evidence appropriate to the task",
+  "The final claim distinguishes segmentation geometry, class assignment, model probability, uncertainty and ecological interpretation",
+];
+
+const advancedImageLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-47": {
+    estimatedTime: "180–230 minutes",
+    lessonType: "Image Segmentation Laboratory",
+    markdownFile: "content/lessons/module-2/lesson-47.md",
+    formativeChecks: [
+      { id: "m2-l47-purpose", question: "What determines whether two neighbouring vegetation pixels should form one object?", options: ["The scientific target, spatial support and declared connectivity rule", "A universally correct threshold", "Whether the regions look attractive"], correctOption: 0, explanation: "Objects are analytical constructions. Their boundaries must correspond to the ecological target and intended measurement scale, not merely a visually convenient parameter." },
+      { id: "m2-l47-components", question: "A binary mask contains two diagonal positive pixels. Can their object count change without changing either pixel value?", options: ["Yes; four- versus eight-neighbour connectivity can join or separate them", "No; object count is determined only by threshold", "No; connected components ignore neighbourhood rules"], correctOption: 0, explanation: "Connected-component labelling depends on the declared neighbourhood. Diagonal contact is disconnected under four-neighbour connectivity and connected under eight-neighbour connectivity." },
+      { id: "m2-l47-qa", question: "Which evidence best exposes over-segmentation?", options: ["One reference object is repeatedly split into several predicted regions", "Overall vegetated area is non-zero", "The image contains many pixels"], correctOption: 0, explanation: "Over-segmentation concerns object fragmentation. Object correspondence, boundary overlays and split counts reveal it more directly than pixel totals alone." },
+    ],
+    submissionChecklist: [...commonAdvancedImageChecklist, "Threshold, connectivity, minimum-area and edge rules are justified through a sensitivity table and reference-object review"],
+    rubric: advancedImageRubric("Implements and audits thresholding, connected components, minimum-area filtering and object measurements without confusing regions with classes", "Explains segmentation versus classification, connectivity, scale, texture, over-segmentation and under-segmentation in ecological terms"),
+    coreReferences: [
+      { title: "scikit-image image segmentation", href: "https://scikit-image.org/docs/stable/user_guide/tutorial_segmentation.html" },
+      { title: "scikit-image measure API", href: "https://scikit-image.org/docs/stable/api/skimage.measure.html" },
+    ],
+    furtherReading: [
+      { title: "scikit-image region properties example", href: "https://scikit-image.org/docs/stable/auto_examples/segmentation/plot_regionprops.html" },
+      { title: "Rasterio masks", href: "https://rasterio.readthedocs.io/en/stable/topics/masks.html" },
+    ],
+  },
+  "lesson-2-48": {
+    estimatedTime: "210–270 minutes",
+    lessonType: "Geospatial Deep-Learning Design Studio",
+    markdownFile: "content/lessons/module-2/lesson-48.md",
+    formativeChecks: [
+      { id: "m2-l48-patches", question: "Why is a random split of overlapping image patches usually invalid?", options: ["Near-duplicate pixels and context can appear in both training and evaluation", "Random splits always contain too few classes", "Neural networks require alphabetical scene order"], correctOption: 0, explanation: "Overlapping or neighbouring patches share signal, texture and acquisition artefacts. That leakage makes evaluation resemble memorisation of the same geography rather than transfer to new places." },
+      { id: "m2-l48-output", question: "What does a semantic-segmentation model produce before thresholding?", options: ["A per-pixel score or class-probability field", "A scientifically validated ecological conclusion", "A vector polygon with guaranteed topology"], correctOption: 0, explanation: "The model produces scores on a grid. Thresholding, masking, georeferencing, object conversion and ecological interpretation are separate governed steps." },
+      { id: "m2-l48-baseline", question: "Why compare a U-Net experiment with a simple threshold or shallow baseline?", options: ["To show whether model complexity adds transferable evidence", "To guarantee the neural network wins", "To avoid documenting labels"], correctOption: 0, explanation: "A transparent baseline reveals whether apparent performance comes from an easy spectral rule. Complexity is justified only when it improves independent, decision-relevant evidence." },
+    ],
+    submissionChecklist: [...commonAdvancedImageChecklist, "The model card traces image → patch → model → probability → mask and includes a transparent baseline plus deployment-domain limits"],
+    rubric: advancedImageRubric("Designs valid tensors, label masks, spatial partitions, augmentation and evaluation for a semantic-segmentation experiment", "Explains convolution, receptive field, U-Net, class imbalance and why a model API cannot substitute for label and validation design"),
+    coreReferences: [
+      { title: "PyTorch semantic segmentation models", href: "https://pytorch.org/vision/stable/models.html#semantic-segmentation" },
+      { title: "TorchGeo documentation", href: "https://torchgeo.readthedocs.io/en/stable/" },
+    ],
+    furtherReading: [
+      { title: "PyTorch reproducibility notes", href: "https://pytorch.org/docs/stable/notes/randomness.html" },
+      { title: "TorchMetrics segmentation metrics", href: "https://lightning.ai/docs/torchmetrics/stable/classification/jaccard_index.html" },
+    ],
+  },
+  "lesson-2-49": {
+    estimatedTime: "210–270 minutes",
+    lessonType: "Geospatial Model Assurance Review",
+    markdownFile: "content/lessons/module-2/lesson-49.md",
+    formativeChecks: [
+      { id: "m2-l49-leakage", question: "A patch model scores 0.94 IoU on random patches and 0.61 on withheld sites. Which result governs a new-site claim?", options: ["The withheld-site result", "The larger random-patch result", "Their unweighted average"], correctOption: 0, explanation: "The deployment claim concerns new geography. A spatially independent site holdout represents that transfer, while random patches may share local texture and acquisition conditions." },
+      { id: "m2-l49-calibration", question: "A pixel has predicted probability 0.9. What does that value prove by itself?", options: ["Only the model score; empirical calibration must be tested", "A 90% ecological certainty", "That the reference label is correct"], correctOption: 0, explanation: "Model probabilities can be overconfident and shift across domains. Reliability evidence compares predicted scores with observed frequencies on independent data." },
+      { id: "m2-l49-domain", question: "What is the safest response when a new image lies outside the documented sensor, season and resolution domain?", options: ["Flag it unsupported and require transfer evidence", "Publish at the original threshold", "Upsample until it resembles training data"], correctOption: 0, explanation: "Resampling does not create the missing measurement relationship. Domain shift must be detected, communicated and resolved through representative validation or restricted use." },
+    ],
+    submissionChecklist: [...commonAdvancedImageChecklist, "The assurance report maps leakage, class, boundary, calibration, domain-shift and annotation risks to release conditions and owners"],
+    rubric: advancedImageRubric("Audits spatial independence, class metrics, boundary error, calibration, annotation uncertainty, domain shift and resolution mismatch", "Explains why performance is conditional on geography, sensor, season, class definition, threshold and intended decision"),
+    coreReferences: [
+      { title: "scikit-learn probability calibration", href: "https://scikit-learn.org/stable/modules/calibration.html" },
+      { title: "scikit-learn grouped cross-validation", href: "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data" },
+    ],
+    furtherReading: [
+      { title: "TorchMetrics calibration error", href: "https://lightning.ai/docs/torchmetrics/stable/classification/calibration_error.html" },
+      { title: "Model Cards for Model Reporting", href: "https://research.google/pubs/model-cards-for-model-reporting/" },
+    ],
+  },
+};
+
+function productionRubric(technical: string, conceptual: string): ReviewedLessonDetails["rubric"] {
+  return [
+    { dimension: "Technical correctness", expectation: technical },
+    { dimension: "Conceptual understanding", expectation: conceptual },
+    { dimension: "Reproducibility", expectation: "Pins source, environment and command evidence; protects secrets; records checksums, versions, logs, deterministic fixtures and release provenance" },
+    { dimension: "Scientific communication", expectation: "States the operational promise, scientific invariants, failure consequences, recovery path, residual limitations and accountable owner" },
+  ];
+}
+
+const commonProductionChecklist = [
+  "Inputs and outputs have a declared schema, CRS/grid contract, provenance, checksums and explicit failure behaviour",
+  "Credentials are obtained from protected runtime configuration and never committed, printed, bundled or copied into images",
+  "Retries are bounded to transient failures; validation and authentication failures stop with actionable evidence",
+  "Commands, dependencies, fixtures, logs and release artifacts can be reconstructed from a clean environment",
+  "Automation blocks publication when a scientific invariant fails and preserves enough evidence for diagnosis and recovery",
+];
+
+const productionLessonConfigurations: Record<string, PublishedLessonConfiguration> = {
+  "lesson-2-50": {
+    estimatedTime: "180–240 minutes",
+    lessonType: "Environmental API Acquisition Laboratory",
+    markdownFile: "content/lessons/module-2/lesson-50.md",
+    formativeChecks: [
+      { id: "m2-l50-status", question: "Which response should normally be retried with bounded backoff?", options: ["A transient 503 service-unavailable response", "A 401 caused by invalid credentials", "A 400 caused by an invalid query"], correctOption: 0, explanation: "A 503 can be transient. Authentication and request-validation failures require corrected authority or parameters; repeating them wastes service capacity and obscures the real problem." },
+      { id: "m2-l50-pagination", question: "A first page contains 100 records and reports 347 total. When is acquisition complete?", options: ["After all advertised pages are retrieved and stable IDs reconcile to 347", "After the first successful response", "After increasing the timeout"], correctOption: 0, explanation: "Successful transport of one page is partial evidence. Completeness needs advertised paging, duplicate detection, total reconciliation and a stored query contract." },
+      { id: "m2-l50-provenance", question: "Which item must never appear in the acquisition log?", options: ["A secret access token", "The retrieval timestamp", "The final request parameters with secrets redacted"], correctOption: 0, explanation: "Tokens grant authority and may expose protected data or quota. Logs should retain reproducibility evidence while redacting secrets and sensitive signed URLs." },
+    ],
+    submissionChecklist: [...commonProductionChecklist, "The acquisition manifest reconciles pages and stable IDs and records endpoint, query, retrieval time, licence and response identity without secrets"],
+    rubric: productionRubric("Implements timeout, status handling, pagination, bounded retry, schema validation, stable-ID reconciliation and provenance capture", "Explains HTTP requests, JSON representation, authentication, rate limits and the difference between transport success and scientific readiness"),
+    coreReferences: [
+      { title: "Requests documentation", href: "https://requests.readthedocs.io/en/latest/" },
+      { title: "GBIF API reference", href: "https://techdocs.gbif.org/en/openapi/" },
+    ],
+    furtherReading: [
+      { title: "IETF HTTP Semantics", href: "https://www.rfc-editor.org/rfc/rfc9110.html" },
+      { title: "OWASP secrets management guidance", href: "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html" },
+    ],
+  },
+  "lesson-2-51": {
+    estimatedTime: "170–220 minutes",
+    lessonType: "Geospatial Command-Line Laboratory",
+    markdownFile: "content/lessons/module-2/lesson-51.md",
+    formativeChecks: [
+      { id: "m2-l51-inspect", question: "Which operation should usually happen before conversion or reprojection?", options: ["Inspect metadata, subdatasets, CRS, grid and schema", "Overwrite the source", "Memorise every option"], correctOption: 0, explanation: "Metadata inspection establishes the source contract and exposes scale, mask, CRS or schema risks before an operation creates a plausible but invalid derivative." },
+      { id: "m2-l51-resampling", question: "Which resampling method is appropriate for a categorical habitat raster?", options: ["Nearest neighbour unless a documented category rule says otherwise", "Bilinear interpolation", "Cubic smoothing"], correctOption: 0, explanation: "Continuous interpolation can invent category codes. Nearest neighbour preserves class labels, though grid change and class-area effects still require review." },
+      { id: "m2-l51-audit", question: "What makes a successful command scientifically reviewable?", options: ["Recorded version, exact parameters, exit status and reopened output checks", "A zero exit status alone", "A short filename"], correctOption: 0, explanation: "Process success does not establish the intended CRS, grid, schema, mask or value meaning. An audit record connects exact execution to validated output evidence." },
+    ],
+    submissionChecklist: [...commonProductionChecklist, "The command runbook distinguishes inspection, translation, warping and vector conversion and validates every created derivative"],
+    rubric: productionRubric("Selects and verifies gdalinfo, ogrinfo, gdal_translate, gdalwarp, ogr2ogr and rio operations with safe paths and correct resampling", "Explains a command as a reproducible method record rather than an incantation and distinguishes inspection from transformation"),
+    coreReferences: [
+      { title: "GDAL programs", href: "https://gdal.org/en/stable/programs/index.html" },
+      { title: "Rasterio command-line interface", href: "https://rasterio.readthedocs.io/en/stable/cli.html" },
+    ],
+    furtherReading: [
+      { title: "GDAL raster data model", href: "https://gdal.org/en/stable/user/raster_data_model.html" },
+      { title: "GDAL vector drivers", href: "https://gdal.org/en/stable/drivers/vector/index.html" },
+    ],
+  },
+  "lesson-2-52": {
+    estimatedTime: "190–250 minutes",
+    lessonType: "Container Reproducibility Studio",
+    markdownFile: "content/lessons/module-2/lesson-52.md",
+    formativeChecks: [
+      { id: "m2-l52-image", question: "What is the difference between an image and a container?", options: ["An image is an immutable template; a container is a running or stopped instance", "They are synonyms for a virtual machine", "A container stores all source data permanently"], correctOption: 0, explanation: "The image packages filesystem layers and configuration. A container instantiates that definition with runtime mounts, environment, user, limits and command." },
+      { id: "m2-l52-data", question: "Where should a large protected source raster normally enter the workflow?", options: ["Through an authorised read-only runtime mount or governed object service", "Copied into a public image layer", "Embedded in the Dockerfile"], correctOption: 0, explanation: "Separating code/environment from governed data avoids disclosure and image bloat while preserving explicit runtime provenance and access controls." },
+      { id: "m2-l52-limit", question: "What scientific evidence does a container digest provide?", options: ["The identity of packaged image bytes, not proof of valid data or method", "Proof that every result is scientifically correct", "Proof that CPU and floating-point behaviour are identical everywhere"], correctOption: 0, explanation: "A digest strengthens environment identity. Input provenance, method validation, hardware constraints, nondeterminism and result checks remain separate responsibilities." },
+    ],
+    submissionChecklist: [...commonProductionChecklist, "The container runs as a non-root user, uses a pinned base, excludes data/secrets, records a digest and passes the same fixture outside and inside the container"],
+    rubric: productionRubric("Builds a minimal pinned geospatial image, declares a non-root runtime, mounts data safely and verifies outputs by scientific invariant", "Explains images, containers, layers, native GDAL dependencies, data mounts and the limits of environment reproducibility"),
+    coreReferences: [
+      { title: "Docker build best practices", href: "https://docs.docker.com/build/building/best-practices/" },
+      { title: "GDAL Docker images", href: "https://gdal.org/en/stable/download.html#docker" },
+    ],
+    furtherReading: [
+      { title: "Dockerfile reference", href: "https://docs.docker.com/reference/dockerfile/" },
+      { title: "SLSA provenance", href: "https://slsa.dev/spec/v1.0/provenance" },
+    ],
+  },
+  "lesson-2-53": {
+    estimatedTime: "210–270 minutes",
+    lessonType: "Geospatial Automation and CI Laboratory",
+    markdownFile: "content/lessons/module-2/lesson-53.md",
+    formativeChecks: [
+      { id: "m2-l53-order", question: "A fixture raster has the wrong CRS. Which stage should fail first?", options: ["Input validation before expensive processing", "Map publication after processing", "Artifact upload after release"], correctOption: 0, explanation: "Failing at the earliest violated contract reduces wasted computation and prevents invalid evidence from entering later stages or misleading visual outputs." },
+      { id: "m2-l53-fixture", question: "Why use a tiny deterministic geospatial fixture in CI?", options: ["It tests contracts and core transformations quickly without exposing production data", "It proves performance at continental scale", "It replaces scientific validation"], correctOption: 0, explanation: "A small fixture provides fast repeatable evidence for logic, grid and schema invariants. Representative full-data and domain validation remain separate release gates." },
+      { id: "m2-l53-artifact", question: "What should a failed CI run preserve?", options: ["Redacted logs and diagnostics sufficient to identify the violated contract", "Secret environment variables", "A published final map"], correctOption: 0, explanation: "Failure evidence must support diagnosis without leaking credentials or promoting invalid outputs. Publication remains downstream of every required gate." },
+    ],
+    submissionChecklist: [...commonProductionChecklist, "CI validates inputs, runs unit and integration tests on licensed fixtures, records versions/checksums and publishes only reviewed QA artifacts"],
+    rubric: productionRubric("Designs staged input validation, deterministic processing tests, output invariants, safe artifacts and an enforceable GitHub Actions release gate", "Explains continuous integration as visible evidence for software and data contracts without presenting it as a substitute for scientific validation"),
+    coreReferences: [
+      { title: "GitHub Actions documentation", href: "https://docs.github.com/en/actions" },
+      { title: "pytest documentation", href: "https://docs.pytest.org/en/stable/" },
+    ],
+    furtherReading: [
+      { title: "GitHub Actions security hardening", href: "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions" },
+      { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+    ],
+  },
+  "lesson-2-capstone": {
+    estimatedTime: "24–40 hours",
+    lessonType: "Module Capstone",
+    markdownFile: "content/lessons/module-2/capstone.md",
+    formativeChecks: [
+      { id: "m2-capstone-claim", question: "What should determine the pipeline architecture first?", options: ["A bounded scientific question and evidence contract", "The longest available tool list", "The preferred map colours"], correctOption: 0, explanation: "The question determines observations, spatial support, validation and delivery. Tools implement those responsibilities and must not silently redefine the claim." },
+      { id: "m2-capstone-gate", question: "A satellite composite is misaligned by half a pixel with the declared analysis grid. What is the correct response?", options: ["Block downstream extraction until alignment is corrected and revalidated", "Continue because the image looks similar", "Round plot coordinates"], correctOption: 0, explanation: "A half-pixel shift changes which ground support is sampled and can bias plot comparisons. The grid contract must pass before extraction or modelling." },
+      { id: "m2-capstone-release", question: "When is the capstone ready for portfolio release?", options: ["When the claim, provenance, QA, spatial validation, uncertainty, reproducible execution and communication package all pass", "When the notebook runs once", "When the final map has no visible gaps"], correctOption: 0, explanation: "Professional delivery is a connected claim–evidence system. Execution and appearance are necessary observations but do not establish validity, reproducibility or appropriate interpretation." },
+    ],
+    submissionChecklist: [
+      "The project question, intended users, decision boundary, spatial/temporal support and non-claims are explicit",
+      "Field, vector, UAV and satellite sources have licences, checksums, stable IDs, CRS/grid, time, units, masks and provenance",
+      "Every transformation has a parameter source, acceptance gate, failure action and reviewable output",
+      "Validation is geographically independent and reports class/region errors, uncertainty, extrapolation and unsupported areas",
+      "The workflow runs from a clean documented environment and produces a checksummed release inventory without credentials",
+      "The final notebook, map, accessible summary, methods, QA report, limitations and career-profile evidence are coherent",
+    ],
+    rubric: productionRubric("Integrates vector, raster, UAV, satellite, database, cloud, image-analysis and production stages under validated spatial contracts", "Connects each technical choice to measurement meaning, spatial support, uncertainty, intended use and defensible environmental interpretation"),
+    coreReferences: [
+      { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+      { title: "FAIR Guiding Principles", href: "https://www.go-fair.org/fair-principles/" },
+    ],
+    furtherReading: [
+      { title: "NASA Earthdata Data Management Handbook", href: "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/data-information-policy/data-management-handbook" },
+      { title: "OGC standards catalogue", href: "https://www.ogc.org/standards/" },
+    ],
+  },
+};
+
 export const MODULE2_SOFTWARE_VERSIONS = {
   python: "3.12.13",
   numpy: "2.4.2",
@@ -2679,7 +2911,9 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       ?? spatialDatabaseLessonConfigurations[source.id]
       ?? cloudNativeLessonConfigurations[source.id]
       ?? webDeliveryLessonConfigurations[source.id]
-      ?? professionalEcosystemLessonConfigurations[source.id];
+      ?? professionalEcosystemLessonConfigurations[source.id]
+      ?? advancedImageLessonConfigurations[source.id]
+      ?? productionLessonConfigurations[source.id];
     if (!configuration) {
       throw new Error(`Missing reviewed Module 2 configuration for ${source.id}`);
     }
@@ -2714,8 +2948,12 @@ export const module2LessonDetails: Record<string, ReviewedLessonDetails> = Objec
                     ? "Synthetic Multidimensional and Cloud-Native EO training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
                     : source.chapter === 9
                       ? "Synthetic Web GIS and Delivery training pack, CC0-1.0; ecological context informed by Baltic coastal plant traits 2024, https://doi.org/10.5281/zenodo.20083250"
-                      : source.chapter === 10
-                        ? "Synthetic Professional GIS Ecosystems training pack, CC0-1.0; no real organisations, licences, services or sensitive locations"
+                    : source.chapter === 10
+                      ? "Synthetic Professional GIS Ecosystems training pack, CC0-1.0; no real organisations, licences, services or sensitive locations"
+                      : source.chapter === 11
+                        ? "Synthetic Advanced Image Analysis training pack, CC0-1.0; invented image tiles, labels and locations"
+                        : source.chapter === 12 || source.chapter === 13
+                          ? "Synthetic Production Geospatial Computing training pack, CC0-1.0; no live credentials, private endpoints or real protected data"
                 : "Baltic coastal plant traits 2024, Zenodo record 20083250, https://doi.org/10.5281/zenodo.20083250",
           coreReferences: configuration.coreReferences,
           furtherReading: configuration.furtherReading,
@@ -2730,7 +2968,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 1,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-01.md",
     formativeChecks: [
       {
@@ -2787,7 +3025,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "120–150 minutes",
     lessonType: "Chapter Practicum",
     position: 2,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-02.md",
     formativeChecks: [
       {
@@ -2844,7 +3082,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "240–300 minutes",
     lessonType: "Chapter Practicum",
     position: 3,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-03.md",
     formativeChecks: [
       {
@@ -2916,7 +3154,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–600 minutes",
     lessonType: "Chapter Practicum",
     position: 4,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-04.md",
     formativeChecks: [
       {
@@ -2989,7 +3227,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 5,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-05.md",
     formativeChecks: [
       {
@@ -3062,7 +3300,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 6,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-06.md",
     formativeChecks: [
       {
@@ -3135,7 +3373,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "360–480 minutes",
     lessonType: "Chapter Practicum",
     position: 7,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-07.md",
     formativeChecks: [
       {
@@ -3208,7 +3446,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 8,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-08.md",
     formativeChecks: [
       {
@@ -3281,7 +3519,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "420–540 minutes",
     lessonType: "Chapter Practicum",
     position: 9,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-09.md",
     formativeChecks: [
       {
@@ -3354,7 +3592,7 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
     estimatedTime: "480–600 minutes",
     lessonType: "Chapter Practicum",
     position: 10,
-    totalPositions: 10,
+    totalPositions: 12,
     markdownFile: "content/lessons/module-2/practicum-10.md",
     formativeChecks: [
       {
@@ -3415,6 +3653,65 @@ export const module2PracticumDetails: Record<string, ReviewedLessonDetails> = {
         { title: "ArcGIS Online data access and editing", href: "https://doc.arcgis.com/en/arcgis-online/manage-data/data-access-and-editing.htm" },
         { title: "ArcGIS Online sharing best practices", href: "https://doc.arcgis.com/en/arcgis-online/reference/best-practices-share.htm" },
         { title: "OGC standards catalogue", href: "https://www.ogc.org/standards/" },
+      ],
+    },
+  },
+  "module-2-chapter-11-practicum": {
+    estimatedTime: "480–600 minutes",
+    lessonType: "Chapter Practicum",
+    position: 11,
+    totalPositions: 12,
+    markdownFile: "content/lessons/module-2/practicum-11.md",
+    formativeChecks: [
+      { id: "m2-p11-contract", question: "What must be fixed before comparing segmentation methods?", options: ["Target definition, label policy, spatial partitions and acceptance metrics", "The method that produces the smoothest map", "A final threshold chosen on the test sites"], correctOption: 0, explanation: "A predeclared contract prevents the evaluation geography and acceptance rule from moving toward a preferred result. It also makes different methods comparable." },
+      { id: "m2-p11-errors", question: "A model misses small rare habitat patches but has high overall accuracy. What should the release record say?", options: ["Report class- and object-specific failure and restrict the relevant use", "Publish the overall number only", "Merge the rare class into background after evaluation"], correctOption: 0, explanation: "Overall accuracy can be dominated by common background. Decision-relevant rare habitat needs its own sensitivity, object and geographic evidence." },
+      { id: "m2-p11-release", question: "A new flight uses a different sensor and ground sampling distance. Can the old threshold be reused without review?", options: ["No; treat this as domain shift and require transfer evidence", "Yes; threshold values are universal", "Yes, after resizing the image"], correctOption: 0, explanation: "Sensor response and resolution change the distribution and spatial texture. Resizing does not prove equivalent measurement or calibration." },
+    ],
+    submissionChecklist: [...commonAdvancedImageChecklist, "The package includes a baseline, segmentation sensitivity, spatial split proof, per-class/object/region results, calibration review and bounded release decision"],
+    rubric: advancedImageRubric("Builds and audits an end-to-end image-analysis experiment with valid objects, labels, spatial partitions, metrics and domain checks", "Relates thresholds, objects, CNN predictions, calibration and failure geography to the coastal-meadow decision rather than to map appearance"),
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "18 August 2026",
+      datasetCitation: "Synthetic Advanced Image Analysis training pack, CC0-1.0; invented image tiles, labels and locations",
+      coreReferences: [
+        { title: "scikit-image segmentation", href: "https://scikit-image.org/docs/stable/user_guide/tutorial_segmentation.html" },
+        { title: "PyTorch semantic segmentation", href: "https://pytorch.org/vision/stable/models.html#semantic-segmentation" },
+      ],
+      furtherReading: [
+        { title: "scikit-learn probability calibration", href: "https://scikit-learn.org/stable/modules/calibration.html" },
+        { title: "TorchMetrics Jaccard index", href: "https://lightning.ai/docs/torchmetrics/stable/classification/jaccard_index.html" },
+      ],
+    },
+  },
+  "module-2-chapter-12-practicum": {
+    estimatedTime: "540–720 minutes",
+    lessonType: "Chapter Practicum",
+    position: 12,
+    totalPositions: 12,
+    markdownFile: "content/lessons/module-2/practicum-12.md",
+    formativeChecks: [
+      { id: "m2-p12-failure", question: "An API changes one required field name. What should the scheduled pipeline do?", options: ["Fail at schema validation, retain diagnostics and block publication", "Fill the field with zero", "Continue and let the map decide"], correctOption: 0, explanation: "A contract change can alter meaning. An explicit early failure protects downstream evidence and gives the source owner a specific recovery task." },
+      { id: "m2-p12-container", question: "The same fixture passes locally and fails in the container. What is the correct response?", options: ["Compare environment, GDAL drivers, paths and logs before release", "Publish the local result", "Disable the failing test"], correctOption: 0, explanation: "The disagreement is valuable reproducibility evidence. Release requires an understood and resolved execution contract, not selection of the preferred environment." },
+      { id: "m2-p12-release", question: "When may CI publish a release artifact?", options: ["Only after input, method, output, security and reproducibility gates pass", "Whenever the workflow file is syntactically valid", "Whenever the final map exists"], correctOption: 0, explanation: "Continuous integration is a sequence of evidence gates. Publication is downstream of every required scientific and operational condition." },
+    ],
+    submissionChecklist: [...commonProductionChecklist, "The production package includes an acquisition manifest, command runbook, pinned non-root container, deterministic fixture suite, CI workflow, recovery drill and signed-off release decision"],
+    rubric: productionRubric("Operates a recoverable API-to-release workflow with validated CLI transformations, a secure container and enforceable continuous integration", "Connects operational automation to scientific invariants, provenance, least privilege, failure visibility, recovery and controlled publication"),
+    technicalMetadata: {
+      pythonVersion: MODULE2_SOFTWARE_VERSIONS.python,
+      jupyterEnvironment: "JupyterLab 4 / Notebook 7",
+      testedVersions: module2TestedVersions(true, true),
+      reviewDate: "18 August 2026",
+      datasetCitation: "Synthetic Production Geospatial Computing training pack, CC0-1.0; no live credentials, private endpoints or protected data",
+      coreReferences: [
+        { title: "GDAL programs", href: "https://gdal.org/en/stable/programs/index.html" },
+        { title: "Docker build best practices", href: "https://docs.docker.com/build/building/best-practices/" },
+        { title: "GitHub Actions documentation", href: "https://docs.github.com/en/actions" },
+      ],
+      furtherReading: [
+        { title: "Requests documentation", href: "https://requests.readthedocs.io/en/latest/" },
+        { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
       ],
     },
   },

@@ -614,7 +614,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                   <div className="module-copy">
                     {pedagogy && (
                       <div className="lesson-context" aria-label="Lesson position and progress">
-                        <span>{lesson.kind === "practicum" ? "Chapter practicum" : `Lesson ${lesson.numberLabel ?? pedagogy.position} of ${pedagogy.totalPositions}`}</span>
+                        <span>{lesson.kind === "practicum" ? "Chapter practicum" : lesson.numberLabel === "Capstone" ? "Module capstone" : `Lesson ${lesson.numberLabel ?? pedagogy.position} of ${pedagogy.totalPositions}`}</span>
                         {pedagogy.lessonType && <span>{pedagogy.lessonType}</span>}
                         <strong>{pedagogy.estimatedTime}</strong>
                         <span>{completedLessonChecks.length} of {pedagogy.formativeChecks.length} checks completed</span>
