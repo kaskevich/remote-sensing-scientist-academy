@@ -333,6 +333,44 @@ const module2LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-2/professional-gis-ecosystems/workflow_translation.csv", title: "Download the ArcGIS and open workflow translation" },
     { href: "lesson-resources/module-2/professional-gis-ecosystems/PROFESSIONAL_ECOSYSTEM_QA_TEMPLATE.md", title: "Download the Professional GIS Ecosystem QA template" },
   ],
+  "lesson-2-47": [
+    { href: "lesson-resources/module-2/advanced-image-analysis/README.md", title: "Read the Advanced Image Analysis training-pack guide" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/manifest.json", title: "Download the checksum manifest" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/segmentation_tile.csv", title: "Download the synthetic segmentation tile" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/reference_labels.csv", title: "Download the synthetic reference labels" },
+  ],
+  "lesson-2-48": [
+    { href: "lesson-resources/module-2/advanced-image-analysis/patch_partition_inventory.csv", title: "Download the patch and partition inventory" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/GEOSPATIAL_IMAGE_ANALYSIS_QA_TEMPLATE.md", title: "Download the image-analysis QA template" },
+  ],
+  "lesson-2-49": [
+    { href: "lesson-resources/module-2/advanced-image-analysis/manifest.json", title: "Download the checksum manifest" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/patch_partition_inventory.csv", title: "Audit the deliberate spatial-overlap condition" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/GEOSPATIAL_IMAGE_ANALYSIS_QA_TEMPLATE.md", title: "Download the model-assurance template" },
+  ],
+  "lesson-2-50": [
+    { href: "lesson-resources/module-2/production-geospatial-computing/README.md", title: "Read the Production Geospatial Computing training-pack guide" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/manifest.json", title: "Download the checksum manifest" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/api_page_1.json", title: "Download deterministic API page 1" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/api_page_2.json", title: "Download deterministic API page 2" },
+  ],
+  "lesson-2-51": [
+    { href: "lesson-resources/module-2/production-geospatial-computing/source_contract.json", title: "Download the source acceptance contract" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/PRODUCTION_WORKFLOW_QA_TEMPLATE.md", title: "Download the production workflow QA template" },
+  ],
+  "lesson-2-52": [
+    { href: "lesson-resources/module-2/production-geospatial-computing/manifest.json", title: "Download the checksum manifest" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/PRODUCTION_WORKFLOW_QA_TEMPLATE.md", title: "Download the container acceptance template" },
+  ],
+  "lesson-2-53": [
+    { href: "lesson-resources/module-2/production-geospatial-computing/source_contract.json", title: "Download the deterministic fixture contract" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/PRODUCTION_WORKFLOW_QA_TEMPLATE.md", title: "Download the CI and release QA template" },
+  ],
+  "lesson-2-capstone": [
+    { href: "lesson-resources/module-2/UAV_Satellite_Analysis_Pipeline_Starter.ipynb", title: "Download the capstone starter notebook" },
+    { href: "lesson-resources/module-2/advanced-image-analysis/GEOSPATIAL_IMAGE_ANALYSIS_QA_TEMPLATE.md", title: "Download the advanced image-analysis QA template" },
+    { href: "lesson-resources/module-2/production-geospatial-computing/PRODUCTION_WORKFLOW_QA_TEMPLATE.md", title: "Download the production release QA template" },
+  ],
 };
 
 const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.map((source) => {
@@ -364,7 +402,21 @@ const module2NumberedAcademyLessons: AcademyLesson[] = publishedModule2Lessons.m
 
 const module2PracticumAcademyLessons: AcademyLesson[] = module2ChapterPractica.map((source) => {
   const pedagogy = module2PracticumDetails[source.id];
-  const resources = source.chapter === 10
+  const resources = source.chapter === 12
+    ? [
+        { href: "lesson-resources/module-2/production-geospatial-computing/README.md", title: "Read the Chapter 12 practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/production-geospatial-computing/manifest.json", title: "Download the production checksum manifest" },
+        { href: "lesson-resources/module-2/production-geospatial-computing/source_contract.json", title: "Download the production source contract" },
+        { href: "lesson-resources/module-2/production-geospatial-computing/PRODUCTION_WORKFLOW_QA_TEMPLATE.md", title: "Download the Production Workflow QA template" },
+      ]
+    : source.chapter === 11
+    ? [
+        { href: "lesson-resources/module-2/advanced-image-analysis/README.md", title: "Read the Chapter 11 practicum and training-pack guide" },
+        { href: "lesson-resources/module-2/advanced-image-analysis/manifest.json", title: "Download the image-analysis checksum manifest" },
+        { href: "lesson-resources/module-2/advanced-image-analysis/patch_partition_inventory.csv", title: "Download the spatial partition inventory" },
+        { href: "lesson-resources/module-2/advanced-image-analysis/GEOSPATIAL_IMAGE_ANALYSIS_QA_TEMPLATE.md", title: "Download the Image Analysis QA template" },
+      ]
+    : source.chapter === 10
     ? [
         { href: "lesson-resources/module-2/professional-gis-ecosystems/README.md", title: "Read the Chapter 10 practicum and training-pack guide" },
         { href: "lesson-resources/module-2/professional-gis-ecosystems/manifest.json", title: "Download the professional ecosystem checksum manifest" },
@@ -475,6 +527,12 @@ const module2AcademyLessons: AcademyLesson[] = module2NumberedAcademyLessons.fla
   }
   if (lesson.id === "lesson-2-46") {
     return [lesson, module2PracticumAcademyLessons[9]];
+  }
+  if (lesson.id === "lesson-2-49") {
+    return [lesson, module2PracticumAcademyLessons[10]];
+  }
+  if (lesson.id === "lesson-2-53") {
+    return [lesson, module2PracticumAcademyLessons[11]];
   }
   return [lesson];
 });

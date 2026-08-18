@@ -1,0 +1,9 @@
+{
+  "source_status": "entirely synthetic offline fixture",
+  "licence": "CC0-1.0",
+  "expected_record_count": 4,
+  "stable_id_field": "record_id",
+  "required_fields": ["record_id", "site_id", "status"],
+  "allowed_status": ["reviewed", "review"],
+  "forbidden_public_fields": ["precise_x", "precise_y", "access_token"]
+}

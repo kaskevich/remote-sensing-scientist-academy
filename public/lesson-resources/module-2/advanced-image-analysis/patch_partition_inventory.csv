@@ -1,0 +1,6 @@
+patch_id,site_id,partition,xmin,ymin,xmax,ymax,overlap_status,sensor,ground_sampling_distance_m
+P001,SITE_A,train,0,0,256,256,clear,SYNTH_UAV_A,0.05
+P002,SITE_A,train,192,0,448,256,clear,SYNTH_UAV_A,0.05
+P003,SITE_A,test,224,0,480,256,deliberate_overlap_with_P002,SYNTH_UAV_A,0.05
+P004,SITE_B,validation,0,0,256,256,clear,SYNTH_UAV_A,0.05
+P005,SITE_C,test,0,0,256,256,clear,SYNTH_UAV_B,0.08

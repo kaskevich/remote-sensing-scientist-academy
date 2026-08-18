@@ -205,7 +205,7 @@ test("module map, starter notebook, and formative checks support beginner naviga
   expect(controlHeights.every((height) => height >= 42)).toBe(true);
 });
 
-test("Module 2 exposes ten reviewed professional chapters with the planned pathway", async ({ page }) => {
+test("Module 2 exposes twelve reviewed professional chapters and the capstone", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -215,8 +215,8 @@ test("Module 2 exposes ten reviewed professional chapters with the planned pathw
   await expect(overview.getByRole("heading", { name: "Geospatial Data Science", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(13);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(54);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(56);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(8);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(66);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(0);
   await expect(overview.locator(".module-syllabus li .syllabus-number").first()).toHaveText("2.1");
   await expect(overview.locator(".module-syllabus li .syllabus-number").nth(52)).toHaveText("2.53");
   await expect(overview.getByRole("link", { name: "What Makes Data Geospatial?", exact: true })).toHaveAttribute("href", "#lesson-2-01");
@@ -272,15 +272,21 @@ test("Module 2 exposes ten reviewed professional chapters with the planned pathw
   await expect(overview.getByRole("link", { name: "ArcGIS Professional Ecosystem", exact: true })).toHaveAttribute("href", "#lesson-2-46");
   await expect(overview.getByRole("link", { name: "Design a Portable Coastal-Meadow GIS Architecture", exact: true })).toHaveAttribute("href", "#module-2-chapter-10-practicum");
   await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeHidden();
+  await overview.locator(".module-chapter").nth(10).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "Image Segmentation Fundamentals", exact: true })).toHaveAttribute("href", "#lesson-2-47");
+  await expect(overview.getByRole("link", { name: "Audit a Meadow Segmentation Product", exact: true })).toHaveAttribute("href", "#module-2-chapter-11-practicum");
   await overview.locator(".module-chapter").nth(11).locator("summary").click();
-  await expect(overview.getByText("Workflow Automation and CI", { exact: true })).toBeVisible();
+  await expect(overview.getByRole("link", { name: "Workflow Automation and CI", exact: true })).toHaveAttribute("href", "#lesson-2-53");
+  await expect(overview.getByRole("link", { name: "Productionise the Coastal-Meadow Pipeline", exact: true })).toHaveAttribute("href", "#module-2-chapter-12-practicum");
+  await overview.locator(".module-chapter").nth(12).locator("summary").click();
+  await expect(overview.getByRole("link", { name: "UAV and Satellite Analysis Pipeline", exact: true })).toHaveAttribute("href", "#lesson-2-capstone");
 
   const moduleNavigation = page.locator("details.curriculum-module").nth(1);
   await expect(moduleNavigation).not.toHaveAttribute("open", "");
   await moduleNavigation.locator(":scope > summary").click();
   await expect(moduleNavigation).toHaveAttribute("open", "");
-  await expect(moduleNavigation.getByText("46 lessons · 10 practica available", { exact: true })).toBeVisible();
-  await expect(moduleNavigation.locator("details.module")).toHaveCount(56);
+  await expect(moduleNavigation.getByText("53 lessons · 12 practica · capstone available", { exact: true })).toBeVisible();
+  await expect(moduleNavigation.locator("details.module")).toHaveCount(66);
   await expect(page.locator("#lesson-2-05")).toHaveCount(1);
   await expect(page.locator("#lesson-2-10")).toHaveCount(1);
   await expect(page.locator("#lesson-2-11")).toHaveCount(1);
@@ -296,6 +302,13 @@ test("Module 2 exposes ten reviewed professional chapters with the planned pathw
   await expect(page.locator("#lesson-2-43")).toHaveCount(1);
   await expect(page.locator("#lesson-2-45")).toHaveCount(1);
   await expect(page.locator("#lesson-2-46")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-47")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-49")).toHaveCount(1);
+  await expect(page.locator("#module-2-chapter-11-practicum")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-50")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-53")).toHaveCount(1);
+  await expect(page.locator("#module-2-chapter-12-practicum")).toHaveCount(1);
+  await expect(page.locator("#lesson-2-capstone")).toHaveCount(1);
 
   const firstLesson = page.locator("#lesson-2-01");
   await firstLesson.locator(":scope > summary").click();

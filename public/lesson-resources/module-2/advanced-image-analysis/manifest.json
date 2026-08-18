@@ -1,0 +1,18 @@
+{
+  "licence": "CC0-1.0",
+  "sourceStatus": "Entirely synthetic teaching evidence",
+  "coordinateStatus": "Array row and column indices only; no real-world coordinates",
+  "knownDeliberateConditions": [
+    "one NoData cell",
+    "ambiguous reference boundaries",
+    "one train/test patch overlap",
+    "a second synthetic sensor and resolution in the test partition"
+  ],
+  "assets": [
+    {"filename": "README.md", "purpose": "Training-pack scope and safe-use guide", "sha256": "a70c9f8a8ef572c445c9dfc6efe8c29e329d5b1fb66ab8386217bea62b484765"},
+    {"filename": "segmentation_tile.csv", "purpose": "Synthetic vegetation-index grid with valid-data state", "sha256": "b2b55edaf8321240577ed382b65118d9175d83252d5a864e550b2edd6f96f2d9"},
+    {"filename": "reference_labels.csv", "purpose": "Synthetic binary labels with explicit ambiguity", "sha256": "dbb5ca332a4548d07b61ebb44b8df11d1707c408f4ff9fc1017cb3553c02ed50"},
+    {"filename": "patch_partition_inventory.csv", "purpose": "Spatial split audit with deliberate leakage condition", "sha256": "7c59598d67802a6f4e1b2d0dab6fb2ca96a285361da93e16f4d496bdccd5355a"},
+    {"filename": "GEOSPATIAL_IMAGE_ANALYSIS_QA_TEMPLATE.md", "purpose": "Chapter QA and release-decision structure", "sha256": "9fc499881108a7a44f9b024784c38a0f2dca2dea9c2a3fbfbaee5296cc187957"}
+  ]
+}

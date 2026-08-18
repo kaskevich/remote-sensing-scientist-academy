@@ -1,0 +1,9 @@
+{
+  "count": 4,
+  "page": 2,
+  "next": null,
+  "results": [
+    {"record_id": "OBS-003", "site_id": "SITE-B", "status": "review"},
+    {"record_id": "OBS-004", "site_id": "SITE-C", "status": "reviewed"}
+  ]
+}

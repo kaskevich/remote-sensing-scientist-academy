@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
-Audit date: 11 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.46, ten Module 2 practica, and visible planned lesson titles.
+Audit date: 18 August 2026
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 and 2.1–2.53, twelve Module 2 practica and the Module 2 capstone.
 
 ## Interpretation rules
 
@@ -26,7 +26,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Uncertainty-aware scientific briefing | Field lab/outcomes | 1 and 2 | 1.12, 2.21, 2.24, practica | Yes | Yes | Yes | Briefing and QA reports | COMPLETE |
 | One continuous professional pathway | Pathway section | Academy | Module maps exist but Stage 3 is absent | Partial | Partial | Partial | Partial | PARTIAL |
 | Vegetation Data Explorer | Foundations card | 1 | 1.1–1.12 | Yes | Yes | Yes | Complete notebook | COMPLETE |
-| UAV and Satellite Analysis Pipeline | Geospatial card/module 2 | 2 | UAV/raster parts 2.11–2.25; satellite part planned | Partial | Partial | Partial | Raster + UAV outputs only | PARTIAL |
+| UAV and Satellite Analysis Pipeline | Geospatial card/module 2 | 2 | 2.1–2.53, twelve practica and capstone | Yes | Yes | Yes | Complete integrated capstone package | COMPLETE for the bounded Module 2 scope |
 | Environmental Monitoring Project | Modelling card | Future modelling module | No module or lesson | No | No | No | No | MISSING |
 
 ## GIS and geospatial Python
@@ -42,7 +42,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Spatial joins and queries | Academy goals | 2 | 2.7, 2.35–2.36 | Yes | Yes | Yes | Relational query pack and predicate audit | COMPLETE |
 | Sampling and zonal statistics | Academy goals | 2 | 2.15 | Yes | Yes | Yes | Extraction evidence table | COMPLETE |
 | Cartography and professional maps | Academy goals | 2 | 2.10, 2.43–2.45 and practica | Yes for evidence-led map design and delivery | Yes | Yes | QA maps and Accessible Web GIS Evidence Delivery | COMPLETE AS FOUNDATION |
-| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.46 | Yes | Yes | Yes | QA reports, manifests, database governance, cloud-native EO, Web GIS and ecosystem evidence records | COMPLETE |
+| Spatial data quality and metadata | Academy goals | 2 | 2.1–2.53 and capstone | Yes | Yes | Yes | QA reports, manifests, model assurance, production release and capstone evidence records | COMPLETE |
 | Spatial databases | Module 2 outcomes | 2 | 2.35–2.37 and Chapter 7 practicum | Yes | Yes | Yes | Spatial Database and Governance Package | COMPLETE AS FOUNDATION; production editing/service operations planned |
 | QGIS | Geospatial card | 2 | 2.10 plus QA companions | Yes | Yes | Yes | QGIS QA map/report | COMPLETE |
 | Professional GIS workflows | Academy goals | 2 | Practica 1–10 | Yes | Yes | Yes | Ten evidence, handover and architecture decisions | COMPLETE |
@@ -59,13 +59,13 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Xarray | Geospatial card/module outcome | 2 | 2.38–2.39 and Chapter 8 practicum | Yes | Yes | Yes | Labelled array audit and EO cube contract | COMPLETE AS FOUNDATION |
 | Matplotlib and scientific plotting | Academy goals/module outcome | 1 | 1.11–1.12 | Yes for descriptive tables | Yes | Yes | Audited accessible figures with PNG/SVG handover | COMPLETE |
 | File handling and relative paths | Academy goals | 1/2 | 1.8, 2.4–2.5 | Yes | Yes | Yes | Project folders | COMPLETE |
-| Reproducible scripts | Academy goals | 1/2 | Functions/notebooks taught; scripts mainly planned | Partial | Limited | Limited | Notebook code, no package/script | TOO SHALLOW |
+| Reproducible scripts | Academy goals | 1/2 | Functions/notebooks plus 2.50–2.53 | Yes | Yes | Yes | CLI workflow, pipeline entry point and CI | COMPLETE AS FOUNDATION |
 | Notebook workflows | Pathway/module outcome | 1/2 | All implemented lessons | Yes | Yes | Yes | Main notebooks | COMPLETE |
 | Functions | Module 1 outcome | 1 | 1.6, 1.9, 2.14 | Yes | Yes | Yes | Reusable QA functions | COMPLETE |
 | Workflow organisation | Academy goals | 1/2 | 1.8, 1.12, practica | Yes | Yes | Yes | Structured submissions | COMPLETE |
-| Environments and dependencies | Academy goals | Future engineering | Metadata lists versions but learner does not create environment | Partial | No | No | No | TOO SHALLOW |
+| Environments and dependencies | Academy goals | 2 | 2.52–2.53 and Chapter 12 practicum | Yes | Yes | Yes | Pinned non-root container and environment inventory | COMPLETE AS FOUNDATION |
 | Debugging | Academy goals | 1 | 1.1, 1.2, 1.6 | Yes | Yes | Yes | Debug record | COMPLETE |
-| Automation | Academy goals | Planned | Planned 2.50–2.53 | No | No | No | No | MISSING |
+| Automation | Academy goals | 2 | 2.50–2.53 and Chapter 12 practicum | Yes | Yes | Yes | Recoverable acquisition, CLI, container and CI release | COMPLETE AS FOUNDATION |
 
 ## Remote Sensing and Earth Observation
 
@@ -105,7 +105,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 |---|---|---|---|---|---|---|---|---|
 | Multidimensional raster data | Module 2 outcome | 2 | 2.38–2.42 and Chapter 8 practicum | Yes | Yes | Yes | Cloud-Native EO Discovery and Cube Package | COMPLETE AS FOUNDATION |
 | Vector–raster integration | Academy goals | 2 | 2.15, 2.25 | Yes | Yes | Yes | Extraction tables | COMPLETE |
-| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.41 | Yes for raster windows, indexed queries, storage architecture and bounded lazy execution | Yes | Yes | Database Governance plus Cloud-Native EO packages | COMPLETE AS FOUNDATION; production orchestration planned |
+| Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.42, 2.50–2.53 | Yes for bounded compute and production orchestration | Yes | Yes | Database, Cloud-Native EO and Production Workflow packages | COMPLETE AS FOUNDATION |
 | Spatial data exploration and cleaning | Academy goals | 1/2 | 1.8–1.11, 2.5–2.10 | Yes | Yes | Yes | Data/vector reports | COMPLETE |
 | Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |
@@ -114,16 +114,16 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | What machine learning does | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 | Features/predictors and targets | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Regression and classification | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Train/validation/test design | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
+| Train/validation/test design | Academy goals | 2/future modelling | 2.48–2.49 | Yes for geospatial semantic segmentation | Yes | Yes | Spatial split proof and model assurance | COMPLETE AS FOUNDATION; broader modelling remains planned |
 | Preprocessing and feature engineering | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | Random Forest | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
 | XGBoost | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 | R², RMSE and MAE | Academy goals | 2/future modelling | 2.21, 2.33–2.34 | Yes for spatial prediction and regression baseline | Yes | Yes | Interpolation and model-comparison tables | PARTIAL; classification/model-module depth planned |
-| Confusion matrix, precision, recall and F1 | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
+| Confusion matrix, precision, recall and F1 | Academy goals | 2/future modelling | 2.49 | Yes for image segmentation; F1 remains a derived extension | Yes | Yes | Regional/class/object assurance report | PARTIAL; broader model-module depth planned |
 | Feature importance and interpretation | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Overfitting, hyperparameters and cross-validation | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
+| Overfitting, hyperparameters and cross-validation | Academy goals | 2/future modelling | 2.48–2.49 | Yes for baseline, spatial splits, threshold selection and leakage | Yes | Yes | Model design and assurance package | COMPLETE AS FOUNDATION |
 | Spatial cross-validation and autocorrelation | Academy goals | 2/future modelling | 2.31–2.34 | Yes | Yes | Yes | Weights sensitivity and separated-block validation | COMPLETE AS FOUNDATION; predictive-model application planned |
-| Leakage, extrapolation and uncertainty | Academy goals | 2/future modelling | 2.29, 2.31–2.34 | Yes for spatial evidence | Yes | Yes | Support masks, residual maps and release decisions | PARTIAL; full ML treatment planned |
+| Leakage, extrapolation and uncertainty | Academy goals | 2/future modelling | 2.29, 2.31–2.34, 2.48–2.49 and capstone | Yes | Yes | Yes | Support masks, residual/error/domain maps and release decisions | COMPLETE AS FOUNDATION |
 | Prediction and validation maps | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
 
 ## UAV pipeline
@@ -159,9 +159,9 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Reproducibility and methodological justification | Academy goals | 1/2 | 1.1, 1.8, 1.12, all practica | Yes | Yes | Yes | Reproducible reports | COMPLETE |
 | Limitations and avoiding causal claims | Academy goals | 1/2 | 1.10–1.12 and Module 2 | Yes | Yes | Yes | Limitation statements | COMPLETE |
 | Methods/results communication | Academy goals | 1/2 | 1.11–1.12, practica | Yes | Yes | Yes | Briefings and handovers | COMPLETE |
-| Git and GitHub | Academy goals | Future engineering | No implemented learner lesson | No | No | No | No | MISSING |
+| Git and GitHub | Academy goals | 2/future engineering | 2.53 teaches GitHub Actions within CI but not complete Git collaboration | Partial | Yes for workflow | Limited | CI workflow | PARTIAL |
 | README | Academy goals | 1/2 | Data packs contain README; learner projects do not consistently require one | Partial | Limited | Limited | Inconsistent | TOO SHALLOW |
-| Reproducible environment | Academy goals | Future engineering | Version metadata only | Partial | No | No | No | TOO SHALLOW |
+| Reproducible environment | Academy goals | 2 | 2.52 and Chapter 12 practicum | Yes | Yes | Yes | Pinned container, digest and equivalence evidence | COMPLETE AS FOUNDATION |
 | Naming conventions and relative paths | Academy goals | 1/2 | 1.1, 1.8, Module 2 handovers | Yes | Yes | Yes | Structured packages | COMPLETE |
 | Raw versus processed data | Academy goals | 1/2 | 1.8, 1.12, 2.4 and practica | Yes | Yes | Yes | Immutable inputs/derivatives | COMPLETE |
 | Professional figures and reports | Academy goals | 1/2 | 1.11–1.12, 2.10 and practica | Yes | Yes | Yes | Figures, maps, reports | COMPLETE |
@@ -170,7 +170,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 
 ### Missing
 
-The current release does not implement a real multi-year time-series investigation, production automation, learner-built reproducible environments, Git/GitHub or machine learning. Xarray/data-cube and web-delivery foundations are implemented on synthetic evidence, but live production service operations remain planned. Stage 3 has no curriculum module. These missing areas must not be presented as currently delivered competencies.
+The current release does not implement a real multi-year time-series investigation, a complete Git collaboration course or broad predictive modelling beyond geospatial semantic segmentation. Production automation and learner-built reproducible environments are now implemented on synthetic fixtures, but live organisational operations remain contextual. Stage 3 has no complete curriculum module. These missing areas must not be presented as currently delivered competencies.
 
 ### Too shallow
 
