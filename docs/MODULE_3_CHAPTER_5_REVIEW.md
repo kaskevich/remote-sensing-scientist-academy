@@ -42,4 +42,4 @@ All numeric teaching fixtures and generalized coordinates are synthetic. They ca
 
 ## Release recommendation
 
-Publish Lessons 3.17–3.21 together. Their shared artifact—the **Model Diagnostic and Applicability Package**—depends on the complete sequence. Keep Lessons 3.22–3.30 and the capstone visibly planned until their independent reviews pass.
+Publish Lessons 3.17–3.21 together. Their shared artifact—the **Model Diagnostic and Applicability Package**—depends on the complete sequence. At the Chapter 5 release gate, Lessons 3.22–3.30 and the capstone remained planned pending independent review; Chapter 6 has since passed that review, while Chapter 7 and the capstone remain planned.

@@ -656,6 +656,28 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/evaluation-and-applicability/DOMAIN_OF_APPLICABILITY_TEMPLATE.md", title: "Download the Domain of Applicability template" },
     { href: "lesson-resources/module-3/evaluation-and-applicability/manifest.json", title: "Download the Chapter 5 checksum manifest" },
   ],
+  "lesson-3-22": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/README.md", title: "Read the prediction-uncertainty training-pack guide" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/UNCERTAINTY_INVENTORY_TEMPLATE.md", title: "Download the uncertainty inventory template" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/protected_interval_predictions.csv", title: "Download the protected synthetic interval predictions" },
+  ],
+  "lesson-3-23": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/protected_interval_predictions.csv", title: "Download the protected synthetic quantile predictions" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/QUANTILE_INTERVAL_REPORT_TEMPLATE.md", title: "Download the quantile interval report template" },
+  ],
+  "lesson-3-24": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/calibration_scores.csv", title: "Download the synthetic conformal calibration scores" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/CONFORMAL_COVERAGE_TEMPLATE.md", title: "Download the conformal coverage report template" },
+  ],
+  "lesson-3-25": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Complete the Chapter 6 portfolio checkpoint" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/prediction_evidence_grid.csv", title: "Download the synthetic prediction-evidence grid" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/PREDICTION_EVIDENCE_PACKAGE_TEMPLATE.md", title: "Download the Prediction Evidence Package template" },
+    { href: "lesson-resources/module-3/prediction-uncertainty/manifest.json", title: "Download the Chapter 6 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {

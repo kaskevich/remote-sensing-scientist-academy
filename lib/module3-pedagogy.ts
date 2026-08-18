@@ -409,10 +409,85 @@ distance = np.sqrt(
 prediction_units["nearest_training_distance"] = distance.min(axis=1)
 prediction_units["nearest_training_row"] = distance.argmin(axis=1)`,
   },
-  { number: 22, chapter: 6, title: "What Uncertainty Means in Predictive EO", description: "Separate measurement, sampling, model, residual and transfer uncertainty.", tools: ["Uncertainty sources", "Error", "Transfer"], artifact: "uncertainty_inventory.md", code: "" },
-  { number: 23, chapter: 6, title: "Prediction Intervals and Quantile Approaches", description: "Evaluate interval coverage and width alongside point predictions.", tools: ["Prediction intervals", "Quantiles", "Coverage"], artifact: "quantile_prediction_report.ipynb", code: "" },
-  { number: 24, chapter: 6, title: "Conformal Prediction and Empirical Coverage", description: "Construct calibrated intervals while examining structured-dependence limits.", tools: ["Conformal prediction", "Calibration", "Exchangeability"], artifact: "conformal_coverage_report.ipynb", code: "" },
-  { number: 25, chapter: 6, title: "Uncertainty and Applicability Maps", description: "Deliver prediction, uncertainty and applicability as three different evidence layers.", tools: ["Prediction map", "Uncertainty map", "Applicability map"], artifact: "Prediction Evidence Package", code: "" },
+  {
+    number: 22,
+    chapter: 6,
+    title: "What Uncertainty Means in Predictive EO",
+    description: "Separate measurement, sampling, model, residual and transfer uncertainty before choosing a numerical method.",
+    tools: ["Uncertainty inventory", "Evidence chain", "Claim boundaries"],
+    artifact: "Uncertainty Inventory",
+    code: `uncertainty_register = [
+    {"source": "field measurement", "type": "measurement", "represented_by_interval": False},
+    {"source": "which meadows were sampled", "type": "sampling", "represented_by_interval": False},
+    {"source": "unexplained held-out variation", "type": "residual", "represented_by_interval": True},
+    {"source": "new sensor or year", "type": "transfer", "represented_by_interval": False},
+]
+for item in uncertainty_register:
+    print(item["type"], "→", item["represented_by_interval"])`,
+  },
+  {
+    number: 23,
+    chapter: 6,
+    title: "Prediction Intervals and Quantile Approaches",
+    description: "Fit lower and upper conditional quantiles and evaluate interval coverage and width on protected transfer evidence.",
+    tools: ["Quantile regression", "Pinball loss", "Coverage and width"],
+    artifact: "Quantile Interval Report",
+    code: `from xgboost import XGBRegressor
+
+def fit_quantile(alpha):
+    model = XGBRegressor(
+        objective="reg:quantileerror", quantile_alpha=alpha,
+        tree_method="hist", n_estimators=400, learning_rate=0.04,
+        max_depth=3, random_state=42, n_jobs=1,
+    )
+    return model.fit(X_train[feature_order], y_train)
+
+lower_model = fit_quantile(0.10)
+upper_model = fit_quantile(0.90)
+lower = lower_model.predict(X_assessment[feature_order])
+upper = upper_model.predict(X_assessment[feature_order])`,
+  },
+  {
+    number: 24,
+    chapter: 6,
+    title: "Conformal Prediction and Empirical Coverage",
+    description: "Calibrate split-conformal intervals, test empirical coverage, and audit exchangeability under spatial and temporal dependence.",
+    tools: ["Split conformal", "Nonconformity scores", "Structured coverage"],
+    artifact: "Conformal Coverage Report",
+    code: `import numpy as np
+
+calibration_prediction = model.predict(X_calibration[feature_order])
+scores = np.abs(y_calibration - calibration_prediction)
+alpha = 0.10
+n = len(scores)
+rank = min(n, int(np.ceil((n + 1) * (1 - alpha))))
+q_hat = np.sort(scores)[rank - 1]
+
+test_prediction = model.predict(X_assessment[feature_order])
+lower = test_prediction - q_hat
+upper = test_prediction + q_hat
+covered = (y_assessment >= lower) & (y_assessment <= upper)`,
+  },
+  {
+    number: 25,
+    chapter: 6,
+    title: "Uncertainty and Applicability Maps",
+    description: "Release prediction, interval width and applicability as aligned but non-interchangeable evidence layers.",
+    tools: ["Prediction map", "Uncertainty map", "Applicability map"],
+    artifact: "Prediction Evidence Package",
+    code: `evidence = prediction_grid.copy()
+evidence["interval_width"] = evidence["upper"] - evidence["lower"]
+evidence["release_state"] = "supported"
+evidence.loc[evidence["interval_width"] > frozen_width_limit, "release_state"] = "review"
+evidence.loc[
+    evidence["applicability_state"] == "outside", "release_state"
+] = "withhold"
+evidence.loc[evidence["input_valid"] == False, "release_state"] = "nodata"
+
+assert evidence[["prediction", "lower", "upper"]].notna().all(axis=1).equals(
+    evidence["input_valid"]
+)`,
+  },
   { number: 26, chapter: 7, title: "Raster Inference at Scale", description: "Apply a fixed feature schema through masks and chunked prediction without changing meaning.", tools: ["Schema validation", "Chunked inference", "NoData"], artifact: "spatial_prediction_pipeline.py", code: "" },
   { number: 27, chapter: 7, title: "Google Earth Engine for Modelling Workflows", description: "Use server-side sampling, supported classifiers and exports for a justified component.", tools: ["Earth Engine", "ee.Classifier", "Export"], artifact: "earth_engine_modelling_component.ipynb", code: "" },
   { number: 28, chapter: 7, title: "Local ML versus Earth Engine ML", description: "Select an architecture by validation control, scale, access and reproducibility.", tools: ["Architecture", "XGBoost", "Earth Engine"], artifact: "model_architecture_decision.md", code: "" },
@@ -448,6 +523,10 @@ export const publishedModule3LessonIds = [
   "lesson-3-19",
   "lesson-3-20",
   "lesson-3-21",
+  "lesson-3-22",
+  "lesson-3-23",
+  "lesson-3-24",
+  "lesson-3-25",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -469,10 +548,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "21 of 30 lessons available · capstone planned",
+  navigationMeta: "25 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapters 1–5 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "Chapters 1–6 are available now. Chapter 7 and the capstone remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -1013,6 +1092,90 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
     furtherReading: [
       { title: "Meyer et al. (2018), spatio-temporal model performance", href: "https://doi.org/10.1016/j.ecolmodel.2017.12.001" },
       { title: "CAST — area of applicability", href: "https://hannameyer.github.io/CAST/" },
+    ],
+  },
+  "lesson-3-22": {
+    estimatedTime: "210–290 minutes",
+    lessonType: "Predictive Uncertainty Reasoning Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-22.md",
+    formativeChecks: [
+      { id: "m3-l22-uncertainty-error", question: "A prediction interval is wide, but the observed value falls near its centre. Which statement is correct?", options: ["The prediction was uncertain but happened to have a small realised error", "The interval proves the prediction was wrong", "Uncertainty and realised error are identical"], correctOption: 0, explanation: "Uncertainty describes a range of plausible outcomes before the value is known. Error is the realised difference after observation." },
+      { id: "m3-l22-sources", question: "Can one residual interval automatically represent measurement, sampling, model and transfer uncertainty?", options: ["No; its scope depends on the data, fitting procedure and evaluation design", "Yes; every interval includes all uncertainty", "Yes, when it is labelled 90%"], correctOption: 0, explanation: "An interval derived from held-out residuals represents variation under that evidence design. It does not automatically propagate undocumented measurement error or new-domain shift." },
+      { id: "m3-l22-transfer", question: "What is the strongest response to predictions from a sensor regime absent from calibration?", options: ["Flag a transfer limitation and require new evidence rather than inflating an arbitrary interval", "Multiply every interval by two", "Call the map 95% confident"], correctOption: 0, explanation: "Unrepresented transfer cannot be repaired by an unsupported multiplier. Applicability, drift and fresh validation must remain explicit." },
+    ],
+    submissionChecklist: [...commonChecklist, "Every uncertainty source is tied to a stage, evidence source, representation and mitigation", "Realised error, expected predictive uncertainty, applicability and ignorance remain distinct", "The inventory states which sources the planned interval will and will not represent"],
+    rubric: rubric("Builds a traceable uncertainty inventory spanning measurement, sampling, model, residual, spatial and transfer sources", "Uses bounded language, distinguishes uncertainty from error and refuses to combine unlike sources into an unsupported confidence claim"),
+    coreReferences: [
+      { title: "Gneiting and Raftery (2007), probabilistic forecasts and proper scores", href: "https://doi.org/10.1198/016214506000001437" },
+      { title: "IPCC guidance note on uncertainty", href: "https://www.ipcc.ch/site/assets/uploads/2018/05/uncertainty-guidance-note.pdf" },
+      { title: "JCGM 100 — evaluation of measurement uncertainty", href: "https://www.bipm.org/en/committees/jc/jcgm/publications" },
+    ],
+    furtherReading: [
+      { title: "O'Hagan (2012), probabilistic uncertainty specification", href: "https://doi.org/10.1016/j.ress.2011.08.017" },
+      { title: "Meyer and Pebesma (2021), area of applicability", href: "https://doi.org/10.1111/2041-210X.13650" },
+    ],
+  },
+  "lesson-3-23": {
+    estimatedTime: "240–330 minutes",
+    lessonType: "Quantile Prediction Interval Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-23.md",
+    formativeChecks: [
+      { id: "m3-l23-meaning", question: "What does a fitted 0.90 conditional quantile estimate?", options: ["A value below which about 90% of outcomes are intended to fall for represented predictor conditions", "A 90% probability that the model is correct", "The upper 90% confidence bound for the mean"], correctOption: 0, explanation: "Quantile regression estimates a conditional outcome quantile. Pairing lower and upper quantiles forms a central prediction interval, not a confidence interval for a mean parameter." },
+      { id: "m3-l23-quality", question: "Which interval result is automatically better?", options: ["Neither narrow nor wide alone; coverage, width, subgroup behaviour and decision use must be judged together", "The narrowest interval", "The interval with 100% coverage regardless of width"], correctOption: 0, explanation: "Sharp intervals are useful only when adequately calibrated. Extreme width can obtain high coverage without useful resolution." },
+      { id: "m3-l23-crossing", question: "A lower-quantile prediction exceeds the upper-quantile prediction. What should happen?", options: ["Record quantile crossing as a model failure and investigate it", "Silently swap the two values", "Drop the assessment row"], correctOption: 0, explanation: "Crossing is evidence about the fitted quantile models. A documented repair may be evaluated, but silent sorting hides failure and changes the procedure." },
+    ],
+    submissionChecklist: [...commonChecklist, "Lower and upper quantile objectives, alphas, feature schema and development-only fitting are versioned", "Coverage, mean/median width, crossing count and group-level behaviour use protected structured evidence", "The report distinguishes prediction intervals from confidence intervals and refuses narrowness-only claims"],
+    rubric: rubric("Fits reproducible lower and upper conditional-quantile models and evaluates coverage, width, crossing and protected subgroup behaviour", "Explains pinball loss and interval trade-offs in scientific language and limits conclusions to represented transfer conditions"),
+    coreReferences: [
+      { title: "XGBoost 3.3 — quantile regression example", href: "https://xgboost.readthedocs.io/en/stable/python/examples/quantile_regression.html" },
+      { title: "XGBoost 3.3 — quantile objective parameters", href: "https://xgboost.readthedocs.io/en/stable/parameter.html" },
+      { title: "Koenker and Bassett (1978), regression quantiles", href: "https://doi.org/10.2307/1913643" },
+    ],
+    furtherReading: [
+      { title: "Gneiting and Raftery (2007), proper scoring rules", href: "https://doi.org/10.1198/016214506000001437" },
+      { title: "scikit-learn — prediction intervals for gradient boosting regression", href: "https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_quantile.html" },
+    ],
+  },
+  "lesson-3-24": {
+    estimatedTime: "250–340 minutes",
+    lessonType: "Structured Split-conformal Coverage Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-24.md",
+    formativeChecks: [
+      { id: "m3-l24-calibration", question: "Which labels may calculate split-conformal nonconformity scores?", options: ["A calibration partition kept separate from model fitting and final assessment", "The final assessment labels", "Every prediction-grid cell"], correctOption: 0, explanation: "Calibration labels convert model residual behaviour into an interval rule. Reusing assessment labels destroys independent coverage evaluation." },
+      { id: "m3-l24-coverage", question: "A nominal 90% interval covers 90% of pooled rows but only 55% at one held-out site. What is the conclusion?", options: ["Pooled marginal coverage conceals poor transfer coverage and the claim must be restricted", "The method is valid everywhere because pooled coverage is 90%", "The failed site should be removed"], correctOption: 0, explanation: "Marginal coverage does not guarantee conditional or site-specific coverage. Structured failures are central evidence for an EO transfer claim." },
+      { id: "m3-l24-exchangeability", question: "Why is ordinary split conformal delicate for spatial or temporal EO data?", options: ["Dependence and distribution shift can make calibration and deployment scores non-exchangeable", "Coordinates make quantiles undefined", "Conformal prediction requires a linear model"], correctOption: 0, explanation: "The basic finite-sample coverage argument relies on exchangeability. Spatial grouping, temporal order and drift require explicit design and empirical stress tests." },
+    ],
+    submissionChecklist: [...commonChecklist, "Training, calibration and assessment roles are disjoint and preserve the declared spatial or temporal transfer unit", "The finite-sample quantile rule, alpha, score definition, counts, coverage and widths are reproducible", "Pooled results are accompanied by site/fold/applicability coverage and an explicit exchangeability limitation"],
+    rubric: rubric("Constructs a split-conformal interval without assessment leakage and evaluates empirical coverage and width across structured evidence", "States the marginal coverage target precisely, diagnoses exchangeability threats and withholds guarantees beyond the represented calibration design"),
+    coreReferences: [
+      { title: "Angelopoulos and Bates (2023), conformal prediction: a gentle introduction", href: "https://doi.org/10.1561/2200000101" },
+      { title: "Romano, Patterson and Candès (2019), conformalized quantile regression", href: "https://doi.org/10.48550/arXiv.1905.03222" },
+      { title: "Oliveira et al. (2024), split conformal prediction and non-exchangeable data", href: "https://www.jmlr.org/papers/v25/23-1553.html" },
+    ],
+    furtherReading: [
+      { title: "Vovk, Gammerman and Shafer (2005), Algorithmic Learning in a Random World", href: "https://doi.org/10.1007/b106715" },
+      { title: "Tibshirani et al. (2019), conformal prediction under covariate shift", href: "https://doi.org/10.48550/arXiv.1904.06019" },
+    ],
+  },
+  "lesson-3-25": {
+    estimatedTime: "250–350 minutes",
+    lessonType: "Prediction Evidence Mapping Signature Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-25.md",
+    formativeChecks: [
+      { id: "m3-l25-layers", question: "What does the interval-width map answer?", options: ["How wide the model's represented predictive interval is at each valid prediction unit", "Whether the unit lies inside training support", "Whether ecological change has occurred"], correctOption: 0, explanation: "Width is a model-and-calibration uncertainty diagnostic. Applicability and observed change are separate questions." },
+      { id: "m3-l25-narrow", question: "A cell is outside applicability but has a narrow interval. What is the defensible release state?", options: ["Withhold or prominently flag it because model-based narrowness does not restore support", "Release it as high confidence", "Replace the interval with NoData and call the inputs missing"], correctOption: 0, explanation: "Intervals can be overconfident under extrapolation. Applicability remains an independent gate, and NoData retains its own meaning." },
+      { id: "m3-l25-communication", question: "Which package is decision-ready?", options: ["Aligned prediction, lower, upper, width, applicability, valid-mask and release-state layers with metadata and text summary", "A prediction PNG without machine-readable evidence", "One confidence heatmap combining every limitation"], correctOption: 0, explanation: "Separate aligned layers preserve meaning, enable review and avoid an opaque composite confidence score." },
+    ],
+    submissionChecklist: [...commonChecklist, "Prediction, bounds, width, applicability, input validity and release state share one verified grid contract", "NoData, wide uncertainty and outside applicability remain separate categories with reason codes", "The map suite includes accessible legends, textual summaries, empirical coverage evidence and a bounded release policy"],
+    rubric: rubric("Builds and validates an aligned multi-layer Prediction Evidence Package with traceable release states and machine-readable metadata", "Explains the different question answered by each layer and prevents narrow extrapolated intervals or visually complete maps from overstating evidence"),
+    coreReferences: [
+      { title: "OGC — Cloud Optimized GeoTIFF standard", href: "https://docs.ogc.org/is/21-026/21-026.html" },
+      { title: "Meyer and Pebesma (2021), area of applicability", href: "https://doi.org/10.1111/2041-210X.13650" },
+      { title: "Angelopoulos and Bates (2023), conformal prediction", href: "https://doi.org/10.1561/2200000101" },
+    ],
+    furtherReading: [
+      { title: "ColorBrewer — map colour guidance", href: "https://colorbrewer2.org/" },
+      { title: "W3C — images tutorial for accessibility", href: "https://www.w3.org/WAI/tutorials/images/" },
     ],
   },
 };

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">Split conformal prediction with protected training, calibration and assessment roles</title>
+  <desc id="desc">Grouped observations flow into separate proper-training, calibration and assessment roles. Calibration absolute residuals are sorted, a finite-sample quantile becomes the interval half-width, and site-level assessment exposes pooled and structured coverage.</desc>
+  <rect width="1200" height="660" fill="#FBF8F5"/>
+  <text x="60" y="62" font-family="Georgia,serif" font-size="30" fill="#14263D">Coverage is built from protected evidence roles</text>
+  <g font-family="Arial,sans-serif">
+    <g fill="#FFFFFF" stroke="#A35F47" stroke-width="2">
+      <rect x="55" y="125" width="230" height="135" rx="9"/><rect x="350" y="125" width="230" height="135" rx="9"/><rect x="645" y="125" width="230" height="135" rx="9"/><rect x="940" y="125" width="205" height="135" rx="9"/>
+    </g>
+    <g fill="#14263D" font-size="19" font-weight="700">
+      <text x="75" y="160">1 · Proper training</text><text x="370" y="160">2 · Calibration</text><text x="665" y="160">3 · Interval rule</text><text x="960" y="160">4 · Assessment</text>
+    </g>
+    <g fill="#52606D" font-size="15">
+      <text x="75" y="192">fit preprocessing</text><text x="75" y="217">fit point model</text><text x="75" y="242">no calibration labels</text>
+      <text x="370" y="192">predict held-out labels</text><text x="370" y="217">scores = |y − ŷ|</text><text x="370" y="242">sort scores</text>
+      <text x="665" y="192">rank = ceil((n+1)(1−α))</text><text x="665" y="217">q̂ = ranked score</text><text x="665" y="242">[ŷ − q̂, ŷ + q̂]</text>
+      <text x="960" y="192">freeze procedure</text><text x="960" y="217">coverage and width</text><text x="960" y="242">no recalibration</text>
+    </g>
+    <g stroke="#A35F47" stroke-width="2" fill="none"><path d="M285 192h65"/><path d="M580 192h65"/><path d="M875 192h65"/></g>
+    <g fill="#A35F47"><path d="M350 192l-11-6v12z"/><path d="M645 192l-11-6v12z"/><path d="M940 192l-11-6v12z"/></g>
+    <text x="60" y="325" font-family="Georgia,serif" font-size="24" fill="#14263D">Stress-test the marginal result across transfer units</text>
+    <rect x="55" y="355" width="715" height="210" rx="9" fill="#FFFFFF" stroke="#D6C7BE"/>
+    <line x1="180" y1="395" x2="180" y2="535" stroke="#52606D"/><line x1="180" y1="535" x2="735" y2="535" stroke="#52606D"/>
+    <g font-size="14" fill="#52606D"><text x="90" y="425">Site A</text><text x="90" y="461">Site B</text><text x="90" y="497">Site C</text><text x="90" y="533">Pooled</text></g>
+    <g fill="#B97358"><rect x="180" y="408" width="450" height="20"/><rect x="180" y="444" width="410" height="20"/><rect x="180" y="480" width="275" height="20"/><rect x="180" y="516" width="430" height="20"/></g>
+    <line x1="630" y1="385" x2="630" y2="542" stroke="#2E6F95" stroke-width="3" stroke-dasharray="7 5"/>
+    <text x="635" y="382" font-size="13" fill="#2E6F95">90% target</text>
+    <g font-size="14" fill="#14263D"><text x="640" y="424">90% · n=20</text><text x="600" y="460">82% · n=11</text><text x="465" y="496">55% · n=11</text><text x="620" y="532">86% · n=42</text></g>
+    <rect x="815" y="355" width="330" height="210" rx="9" fill="#F6ECE8" stroke="#B97358"/>
+    <text x="840" y="392" font-size="18" font-weight="700" fill="#14263D">Exchangeability audit</text>
+    <text x="840" y="427" font-size="15" fill="#52606D">• independent unit defined?</text>
+    <text x="840" y="457" font-size="15" fill="#52606D">• sites split across roles?</text>
+    <text x="840" y="487" font-size="15" fill="#52606D">• future kept after past?</text>
+    <text x="840" y="517" font-size="15" fill="#52606D">• deployment shifted?</text>
+    <text x="840" y="547" font-size="15" font-weight="700" fill="#A35F47">Restrict claims when it fails</text>
+    <rect x="190" y="600" width="820" height="40" rx="20" fill="#14263D"/>
+    <text x="600" y="626" text-anchor="middle" font-size="17" fill="#FFFFFF">Pooled marginal coverage does not guarantee coverage at every site</text>
+  </g>
+</svg>
