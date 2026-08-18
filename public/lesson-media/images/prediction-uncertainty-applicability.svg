@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Prediction, uncertainty and applicability maps with a governed release state</title>
+  <desc id="desc">Four aligned six-column by four-row grids show point prediction, interval width, applicability and release state. An outside-applicability coastal strip is withheld despite narrow intervals, wide supported cells are marked for review, and invalid inputs remain NoData.</desc>
+  <rect width="1200" height="720" fill="#FBF8F5"/>
+  <text x="60" y="58" font-family="Georgia,serif" font-size="30" fill="#14263D">Three evidence layers answer three different questions</text>
+  <g font-family="Arial,sans-serif">
+    <g fill="#14263D" font-size="19" font-weight="700">
+      <text x="70" y="112">Prediction</text><text x="365" y="112">Interval width</text><text x="660" y="112">Applicability</text><text x="955" y="112">Release state</text>
+    </g>
+    <g transform="translate(65 140)">
+      <g stroke="#FFFFFF" stroke-width="2">
+        <g fill="#D6E8C8"><rect x="0" y="0" width="40" height="40"/><rect x="40" y="0" width="40" height="40"/><rect x="0" y="40" width="40" height="40"/></g>
+        <g fill="#9CCB83"><rect x="80" y="0" width="40" height="40"/><rect x="120" y="0" width="40" height="40"/><rect x="40" y="40" width="40" height="40"/><rect x="80" y="40" width="40" height="40"/><rect x="0" y="80" width="40" height="40"/><rect x="40" y="80" width="40" height="40"/></g>
+        <g fill="#559A63"><rect x="160" y="0" width="40" height="40"/><rect x="200" y="0" width="40" height="40"/><rect x="120" y="40" width="40" height="40"/><rect x="160" y="40" width="40" height="40"/><rect x="80" y="80" width="40" height="40"/><rect x="120" y="80" width="40" height="40"/><rect x="0" y="120" width="40" height="40"/><rect x="40" y="120" width="40" height="40"/></g>
+        <g fill="#2F6F55"><rect x="200" y="40" width="40" height="40"/><rect x="160" y="80" width="40" height="40"/><rect x="200" y="80" width="40" height="40"/><rect x="80" y="120" width="40" height="40"/><rect x="120" y="120" width="40" height="40"/><rect x="160" y="120" width="40" height="40"/></g>
+        <g fill="#6B7280"><rect x="200" y="120" width="40" height="40"/></g>
+      </g>
+      <text x="120" y="190" text-anchor="middle" font-size="14" fill="#52606D">target value</text>
+    </g>
+    <g transform="translate(360 140)" stroke="#FFFFFF" stroke-width="2">
+      <g fill="#E7EFF5"><rect x="0" y="0" width="40" height="40"/><rect x="40" y="0" width="40" height="40"/><rect x="80" y="0" width="40" height="40"/><rect x="0" y="40" width="40" height="40"/><rect x="40" y="40" width="40" height="40"/><rect x="0" y="80" width="40" height="40"/></g>
+      <g fill="#9FC3D8"><rect x="120" y="0" width="40" height="40"/><rect x="160" y="0" width="40" height="40"/><rect x="80" y="40" width="40" height="40"/><rect x="120" y="40" width="40" height="40"/><rect x="40" y="80" width="40" height="40"/><rect x="80" y="80" width="40" height="40"/><rect x="0" y="120" width="40" height="40"/><rect x="40" y="120" width="40" height="40"/></g>
+      <g fill="#4D88AE"><rect x="200" y="0" width="40" height="40"/><rect x="160" y="40" width="40" height="40"/><rect x="200" y="40" width="40" height="40"/><rect x="120" y="80" width="40" height="40"/><rect x="160" y="80" width="40" height="40"/><rect x="80" y="120" width="40" height="40"/></g>
+      <g fill="#245A7A"><rect x="200" y="80" width="40" height="40"/><rect x="120" y="120" width="40" height="40"/><rect x="160" y="120" width="40" height="40"/></g>
+      <rect x="200" y="120" width="40" height="40" fill="#6B7280"/>
+      <text x="120" y="190" text-anchor="middle" font-size="14" fill="#52606D" stroke="none">target-unit width</text>
+    </g>
+    <g transform="translate(655 140)" stroke="#FFFFFF" stroke-width="2">
+      <g fill="#78B782"><rect x="0" y="0" width="40" height="40"/><rect x="40" y="0" width="40" height="40"/><rect x="80" y="0" width="40" height="40"/><rect x="120" y="0" width="40" height="40"/><rect x="0" y="40" width="40" height="40"/><rect x="40" y="40" width="40" height="40"/><rect x="80" y="40" width="40" height="40"/><rect x="0" y="80" width="40" height="40"/><rect x="40" y="80" width="40" height="40"/><rect x="0" y="120" width="40" height="40"/></g>
+      <g fill="#E0B865"><rect x="160" y="0" width="40" height="40"/><rect x="120" y="40" width="40" height="40"/><rect x="80" y="80" width="40" height="40"/><rect x="40" y="120" width="40" height="40"/></g>
+      <g fill="#B97358"><rect x="200" y="0" width="40" height="40"/><rect x="160" y="40" width="40" height="40"/><rect x="200" y="40" width="40" height="40"/><rect x="120" y="80" width="40" height="40"/><rect x="160" y="80" width="40" height="40"/><rect x="200" y="80" width="40" height="40"/><rect x="80" y="120" width="40" height="40"/><rect x="120" y="120" width="40" height="40"/><rect x="160" y="120" width="40" height="40"/></g>
+      <rect x="200" y="120" width="40" height="40" fill="#6B7280"/>
+      <text x="120" y="190" text-anchor="middle" font-size="14" fill="#52606D" stroke="none">support state</text>
+    </g>
+    <g transform="translate(950 140)" stroke="#FFFFFF" stroke-width="2">
+      <g fill="#78B782"><rect x="0" y="0" width="40" height="40"/><rect x="40" y="0" width="40" height="40"/><rect x="80" y="0" width="40" height="40"/><rect x="120" y="0" width="40" height="40"/><rect x="0" y="40" width="40" height="40"/><rect x="40" y="40" width="40" height="40"/><rect x="80" y="40" width="40" height="40"/><rect x="0" y="80" width="40" height="40"/><rect x="40" y="80" width="40" height="40"/><rect x="0" y="120" width="40" height="40"/></g>
+      <g fill="#E0B865"><rect x="160" y="0" width="40" height="40"/><rect x="120" y="40" width="40" height="40"/><rect x="80" y="80" width="40" height="40"/><rect x="40" y="120" width="40" height="40"/><rect x="120" y="120" width="40" height="40"/></g>
+      <g fill="#A35F47"><rect x="200" y="0" width="40" height="40"/><rect x="160" y="40" width="40" height="40"/><rect x="200" y="40" width="40" height="40"/><rect x="120" y="80" width="40" height="40"/><rect x="160" y="80" width="40" height="40"/><rect x="200" y="80" width="40" height="40"/><rect x="80" y="120" width="40" height="40"/><rect x="160" y="120" width="40" height="40"/></g>
+      <rect x="200" y="120" width="40" height="40" fill="#6B7280"/>
+      <text x="120" y="190" text-anchor="middle" font-size="14" fill="#52606D" stroke="none">use policy</text>
+    </g>
+    <text x="60" y="390" font-family="Georgia,serif" font-size="24" fill="#14263D">Ordered release policy</text>
+    <g>
+      <rect x="60" y="420" width="1080" height="62" rx="8" fill="#FFFFFF" stroke="#D6C7BE"/>
+      <rect x="60" y="494" width="1080" height="62" rx="8" fill="#FFFFFF" stroke="#D6C7BE"/>
+      <rect x="60" y="568" width="1080" height="62" rx="8" fill="#FFFFFF" stroke="#D6C7BE"/>
+    </g>
+    <g font-size="16">
+      <text x="85" y="447" font-weight="700" fill="#14263D">Invalid input</text><text x="280" y="447" fill="#52606D">→ NoData</text><text x="520" y="447" fill="#52606D">Keep data failure separate from model evidence</text>
+      <text x="85" y="521" font-weight="700" fill="#14263D">Outside applicability</text><text x="280" y="521" fill="#52606D">→ Withhold</text><text x="520" y="521" fill="#52606D">A narrow model interval does not restore support</text>
+      <text x="85" y="595" font-weight="700" fill="#14263D">Supported but wide</text><text x="280" y="595" fill="#52606D">→ Review</text><text x="520" y="595" fill="#52606D">Represented conditions can still have high predictive spread</text>
+    </g>
+    <rect x="190" y="660" width="820" height="40" rx="20" fill="#14263D"/>
+    <text x="600" y="686" text-anchor="middle" font-size="17" fill="#FFFFFF">Aligned layers stay separate, traceable and machine-readable</text>
+  </g>
+</svg>

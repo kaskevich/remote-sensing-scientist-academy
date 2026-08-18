@@ -1,0 +1,55 @@
+{
+  "title": "Module 3 Chapter 6 prediction uncertainty training pack",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "data_status": "All observation, score, interval and grid records are synthetic teaching data and are not measurements or locations from the published Baltic dataset.",
+  "target_unit_status": "Synthetic neutral target_units; no undocumented scientific unit is implied.",
+  "evidence_rule": "Proper training, calibration and assessment roles stay disjoint; empirical coverage is bounded by exchangeability and represented transfer evidence; the final test remains sealed.",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "665a189dd95c6d64b894a5423a515cca2cbdea9c03202b1c540534695361bd33",
+      "purpose": "Training-pack identity, synthetic-data statement and evidence rules"
+    },
+    {
+      "path": "UNCERTAINTY_INVENTORY_TEMPLATE.md",
+      "sha256": "a10f89dee17458cee475aefc04eb2224706ee9339f1cfd4d694fb9ea2c190eaa",
+      "purpose": "Traceable uncertainty-source and claim-boundary template"
+    },
+    {
+      "path": "QUANTILE_INTERVAL_REPORT_TEMPLATE.md",
+      "sha256": "7e3a0c3efd4e8326c410ae49fe6fde76fbd02a6e9196522316be7105963725f5",
+      "purpose": "Quantile coverage, width, crossing and transfer report template"
+    },
+    {
+      "path": "CONFORMAL_COVERAGE_TEMPLATE.md",
+      "sha256": "c1efeb5d881ad572f4ebe7e098268543c179365ee83886ffa4538a25b95d9f78",
+      "purpose": "Split-conformal roles, finite-sample rule and exchangeability audit template"
+    },
+    {
+      "path": "PREDICTION_EVIDENCE_PACKAGE_TEMPLATE.md",
+      "sha256": "ec146c0df8987d0b5a3e208005c44ddb14c227d43e2c1774423438adb5914ff5",
+      "purpose": "Aligned prediction, uncertainty, applicability and release-policy inventory"
+    },
+    {
+      "path": "calibration_scores.csv",
+      "sha256": "7d08e1fc97af3d88d7d2b4347721680e5a0f364e464ac66c67551d6a7a1be24e",
+      "purpose": "Synthetic grouped nonconformity scores for the finite-sample conformal exercise"
+    },
+    {
+      "path": "protected_interval_predictions.csv",
+      "sha256": "5aa35e323149979997dfaa42bf9a6c02038decdff02fdbed497f9ad2d7456810",
+      "purpose": "Synthetic protected point, quantile and conformal interval evidence"
+    },
+    {
+      "path": "prediction_evidence_grid.csv",
+      "sha256": "21e9123692a55aeaecc42254529991088787b31826fb50f752a6da2b5dfbe718",
+      "purpose": "Synthetic aligned grid table for modelling-semantic release logic"
+    },
+    {
+      "path": "../Environmental_Monitoring_Project_Starter.ipynb",
+      "sha256": "176da8a5e00a9b4674c47aca4989bcda9bc4c75178fd57bdde46c9a9f0645038",
+      "purpose": "Continuous Module 3 portfolio notebook with Chapters 1–6 checkpoints"
+    }
+  ]
+}

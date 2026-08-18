@@ -858,3 +858,122 @@ export function classifyApplicability(
   if (result.distance > supportedMaximum) return "review";
   return "supported";
 }
+
+export type IntervalDiagnostics = {
+  count: number;
+  coveredCount: number;
+  coverage: number;
+  meanWidth: number;
+  medianWidth: number;
+  lowerMisses: number;
+  upperMisses: number;
+};
+
+function validateIntervalVectors(observed: number[], lower: number[], upper: number[]) {
+  if (observed.length === 0 || observed.length !== lower.length || observed.length !== upper.length) {
+    throw new Error("Observed values and interval bounds must have equal, non-zero length");
+  }
+  if ([...observed, ...lower, ...upper].some((value) => !Number.isFinite(value))) {
+    throw new Error("Observed values and interval bounds must be finite");
+  }
+}
+
+export function findIntervalCrossings(lower: number[], upper: number[]) {
+  if (lower.length === 0 || lower.length !== upper.length) {
+    throw new Error("Lower and upper interval bounds must have equal, non-zero length");
+  }
+  if ([...lower, ...upper].some((value) => !Number.isFinite(value))) {
+    throw new Error("Interval bounds must be finite");
+  }
+  return lower.flatMap((value, index) => value > upper[index] ? [index] : []);
+}
+
+export function calculateIntervalDiagnostics(
+  observed: number[],
+  lower: number[],
+  upper: number[],
+): IntervalDiagnostics {
+  validateIntervalVectors(observed, lower, upper);
+  const crossings = findIntervalCrossings(lower, upper);
+  if (crossings.length > 0) {
+    throw new Error(`Crossed interval bounds must be diagnosed before coverage: ${crossings.join(", ")}`);
+  }
+  const widths = upper.map((value, index) => value - lower[index]);
+  const orderedWidths = [...widths].sort((left, right) => left - right);
+  const middle = Math.floor(orderedWidths.length / 2);
+  const medianWidth = orderedWidths.length % 2 === 0
+    ? (orderedWidths[middle - 1] + orderedWidths[middle]) / 2
+    : orderedWidths[middle];
+  const covered = observed.map((value, index) => value >= lower[index] && value <= upper[index]);
+  const coveredCount = covered.filter(Boolean).length;
+  return {
+    count: observed.length,
+    coveredCount,
+    coverage: coveredCount / observed.length,
+    meanWidth: mean(widths),
+    medianWidth,
+    lowerMisses: observed.filter((value, index) => value < lower[index]).length,
+    upperMisses: observed.filter((value, index) => value > upper[index]).length,
+  };
+}
+
+export type SplitConformalQuantile = {
+  quantile: number;
+  rank: number;
+  calibrationCount: number;
+  targetCoverage: number;
+};
+
+export function calculateSplitConformalQuantile(
+  calibrationScores: number[],
+  alpha: number,
+): SplitConformalQuantile {
+  if (calibrationScores.length === 0 || calibrationScores.some((score) => !Number.isFinite(score) || score < 0)) {
+    throw new Error("Calibration scores must contain finite, non-negative values");
+  }
+  if (!Number.isFinite(alpha) || alpha <= 0 || alpha >= 1) {
+    throw new Error("Conformal alpha must be a finite value strictly between zero and one");
+  }
+  const calibrationCount = calibrationScores.length;
+  const rank = Math.min(calibrationCount, Math.ceil((calibrationCount + 1) * (1 - alpha)));
+  const ordered = [...calibrationScores].sort((left, right) => left - right);
+  return {
+    quantile: ordered[rank - 1],
+    rank,
+    calibrationCount,
+    targetCoverage: 1 - alpha,
+  };
+}
+
+export function buildSymmetricPredictionIntervals(predictions: number[], halfWidth: number) {
+  assertFiniteVector(predictions, "Point predictions");
+  if (!Number.isFinite(halfWidth) || halfWidth < 0) {
+    throw new Error("Interval half-width must be a finite, non-negative number");
+  }
+  return predictions.map((prediction) => ({
+    prediction,
+    lower: prediction - halfWidth,
+    upper: prediction + halfWidth,
+    width: halfWidth * 2,
+  }));
+}
+
+export type PredictionReleaseState = "supported" | "review" | "withhold" | "nodata";
+
+export function assignPredictionReleaseState(input: {
+  inputValid: boolean;
+  applicability: ApplicabilityState;
+  intervalWidth: number | null;
+  widthReviewThreshold: number;
+}): PredictionReleaseState {
+  if (!Number.isFinite(input.widthReviewThreshold) || input.widthReviewThreshold < 0) {
+    throw new Error("The uncertainty review threshold must be finite and non-negative");
+  }
+  if (!input.inputValid) return "nodata";
+  if (input.intervalWidth === null || !Number.isFinite(input.intervalWidth) || input.intervalWidth < 0) {
+    throw new Error("Input-valid predictions need a finite, non-negative interval width");
+  }
+  if (input.applicability === "outside") return "withhold";
+  if (input.applicability === "review" || input.intervalWidth > input.widthReviewThreshold) return "review";
+  return "supported";
+}

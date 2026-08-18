@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">Quantile prediction intervals evaluated through coverage and width</title>
+  <desc id="desc">A conditional lower and upper quantile band widens with predictor conditions around a point curve. Protected observations inside and outside the band feed a second panel comparing empirical coverage with interval width.</desc>
+  <rect width="1200" height="660" fill="#FBF8F5"/>
+  <text x="60" y="62" font-family="Georgia,serif" font-size="30" fill="#14263D">A useful interval needs coverage and sharpness</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="55" y="110" width="680" height="455" rx="10" fill="#FFFFFF" stroke="#D6C7BE"/>
+    <line x1="120" y1="505" x2="690" y2="505" stroke="#52606D" stroke-width="2"/>
+    <line x1="120" y1="505" x2="120" y2="165" stroke="#52606D" stroke-width="2"/>
+    <text x="405" y="545" text-anchor="middle" font-size="16" fill="#52606D">Predictor condition</text>
+    <text x="82" y="335" transform="rotate(-90 82 335)" text-anchor="middle" font-size="16" fill="#52606D">Target outcome</text>
+    <path d="M130 420 C270 395 360 355 470 300 S610 205 680 180 L680 355 C580 388 500 410 400 430 S230 458 130 470 Z" fill="#E8CFC5" opacity="0.85"/>
+    <path d="M130 420 C270 395 360 355 470 300 S610 205 680 180" fill="none" stroke="#A35F47" stroke-width="3"/>
+    <path d="M130 470 C230 458 310 445 400 430 S580 388 680 355" fill="none" stroke="#A35F47" stroke-width="3"/>
+    <path d="M130 447 C250 425 345 402 440 365 S600 300 680 270" fill="none" stroke="#14263D" stroke-width="3"/>
+    <g fill="#2E6F95">
+      <circle cx="170" cy="435" r="6"/><circle cx="225" cy="415" r="6"/><circle cx="290" cy="430" r="6"/><circle cx="355" cy="375" r="6"/><circle cx="415" cy="395" r="6"/><circle cx="475" cy="320" r="6"/><circle cx="535" cy="300" r="6"/><circle cx="610" cy="250" r="6"/><circle cx="650" cy="330" r="6"/>
+    </g>
+    <g fill="#A35F47" stroke="#FFFFFF" stroke-width="2"><circle cx="335" cy="455" r="7"/><circle cx="570" cy="190" r="7"/></g>
+    <text x="150" y="145" font-size="16" font-weight="700" fill="#14263D">Conditional interval</text>
+    <text x="500" y="465" font-size="14" fill="#A35F47">misses remain visible</text>
+
+    <rect x="775" y="110" width="370" height="455" rx="10" fill="#FFFFFF" stroke="#D6C7BE"/>
+    <text x="805" y="153" font-family="Georgia,serif" font-size="22" fill="#14263D">Protected evaluation</text>
+    <text x="805" y="194" font-size="16" font-weight="700" fill="#52606D">Target coverage</text><text x="1090" y="194" text-anchor="end" font-size="18" fill="#14263D">80%</text>
+    <text x="805" y="235" font-size="16" font-weight="700" fill="#52606D">Empirical coverage</text><text x="1090" y="235" text-anchor="end" font-size="18" fill="#14263D">78%</text>
+    <text x="805" y="276" font-size="16" font-weight="700" fill="#52606D">Median width</text><text x="1090" y="276" text-anchor="end" font-size="18" fill="#14263D">9.4 target units</text>
+    <text x="805" y="317" font-size="16" font-weight="700" fill="#52606D">Crossings</text><text x="1090" y="317" text-anchor="end" font-size="18" fill="#14263D">0 / 50</text>
+    <line x1="805" y1="345" x2="1115" y2="345" stroke="#D6C7BE"/>
+    <rect x="805" y="375" width="130" height="55" rx="6" fill="#E6F1F5"/><text x="870" y="399" text-anchor="middle" font-size="14" fill="#14263D">calibrated</text><text x="870" y="418" text-anchor="middle" font-size="14" fill="#14263D">but wide</text>
+    <rect x="960" y="375" width="130" height="55" rx="6" fill="#F6ECE8"/><text x="1025" y="399" text-anchor="middle" font-size="14" fill="#14263D">sharp</text><text x="1025" y="418" text-anchor="middle" font-size="14" fill="#14263D">but misses</text>
+    <text x="805" y="473" font-size="15" fill="#52606D">Report by fold and site</text>
+    <text x="805" y="500" font-size="15" fill="#52606D">Keep lower and upper misses</text>
+    <text x="805" y="527" font-size="15" fill="#52606D">Do not select on assessment</text>
+    <rect x="190" y="600" width="820" height="40" rx="20" fill="#14263D"/>
+    <text x="600" y="626" text-anchor="middle" font-size="17" fill="#FFFFFF">The narrowest interval is not automatically the best interval</text>
+  </g>
+</svg>

@@ -4,11 +4,15 @@ import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   applyBoostingStage,
+  assignPredictionReleaseState,
   buildEqualWidthReliabilityBins,
+  buildSymmetricPredictionIntervals,
   calculateBinaryClassificationMetrics,
   calculateErrorSkill,
   calculateExpandedBinaryClassificationMetrics,
+  calculateIntervalDiagnostics,
   calculateRegressionMetrics,
+  calculateSplitConformalQuantile,
   calculateStandardizedNearestAnalogue,
   classifyApplicability,
   countDiscreteSearchCombinations,
@@ -19,6 +23,7 @@ import {
   createMedianBaseline,
   diagnoseLearningDynamics,
   findFoldGroupOverlap,
+  findIntervalCrossings,
   findTrainingServingSkew,
   findBestRegressionStump,
   selectThresholdByMinimumRecall,
@@ -52,6 +57,7 @@ const chapter2ResourceRoot = join(repositoryRoot, "public/lesson-resources/modul
 const chapter3ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/structured-validation");
 const chapter4ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/controlled-optimisation");
 const chapter5ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/evaluation-and-applicability");
+const chapter6ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/prediction-uncertainty");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -125,7 +131,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes five complete opening chapters while exposing the full planned pathway", () => {
+  it("publishes six complete opening chapters while exposing the full planned pathway", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -157,8 +163,12 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-19",
       "lesson-3-20",
       "lesson-3-21",
+      "lesson-3-22",
+      "lesson-3-23",
+      "lesson-3-24",
+      "lesson-3-25",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(21);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(25);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -247,6 +257,10 @@ describe("Module 3 teaching assets", () => {
       "spatial-residuals.svg",
       "model-interpretation-boundaries.svg",
       "domain-of-applicability.svg",
+      "predictive-uncertainty-sources.svg",
+      "quantile-interval-evidence.svg",
+      "split-conformal-coverage.svg",
+      "prediction-uncertainty-applicability.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -265,7 +279,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 21; lesson += 1) {
+    for (let lesson = 1; lesson <= 25; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -406,6 +420,83 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.82 / 5");
     expect(review).toContain("not the prediction-uncertainty chapter");
     expect(review).toContain("cannot support a real vegetation-height accuracy claim");
+  });
+
+  it("verifies the Chapter 6 prediction-uncertainty pack and its checksum manifest", () => {
+    const manifestPath = join(chapter6ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      evidence_rule: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.evidence_rule).toContain("exchangeability");
+    expect(manifest.files).toHaveLength(9);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const intervalRows = readFileSync(join(chapter6ResourceRoot, "protected_interval_predictions.csv"), "utf8").trim().split("\n");
+    const calibrationRows = readFileSync(join(chapter6ResourceRoot, "calibration_scores.csv"), "utf8").trim().split("\n");
+    const gridRows = readFileSync(join(chapter6ResourceRoot, "prediction_evidence_grid.csv"), "utf8").trim().split("\n");
+    expect(intervalRows).toHaveLength(25);
+    expect(calibrationRows).toHaveLength(21);
+    expect(gridRows).toHaveLength(25);
+    expect(gridRows.at(-1)).toContain("false,,,,nodata");
+  });
+
+  it("records an honest Chapter 6 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_6_REVIEW.md");
+    expect(review).toContain("4.86 / 5");
+    expect(review).toContain("not the operational inference chapter");
+    expect(review).toContain("cannot support a real coastal-meadow uncertainty");
+  });
+});
+
+describe("Module 3 prediction uncertainty behaviour", () => {
+  it("calculates coverage, width and miss direction while refusing crossed bounds", () => {
+    expect(calculateIntervalDiagnostics(
+      [10, 20, 30, 40],
+      [8, 18, 31, 35],
+      [12, 22, 35, 38],
+    )).toEqual({
+      count: 4,
+      coveredCount: 2,
+      coverage: 0.5,
+      meanWidth: 3.75,
+      medianWidth: 4,
+      lowerMisses: 1,
+      upperMisses: 1,
+    });
+    expect(findIntervalCrossings([1, 5, 3], [2, 4, 6])).toEqual([1]);
+    expect(() => calculateIntervalDiagnostics([1], [2], [1])).toThrow("Crossed interval bounds");
+  });
+
+  it("uses the finite-sample split-conformal rank and creates symmetric intervals", () => {
+    const scores = Array.from({ length: 20 }, (_, index) => index + 1);
+    expect(calculateSplitConformalQuantile(scores, 0.1)).toEqual({
+      quantile: 19,
+      rank: 19,
+      calibrationCount: 20,
+      targetCoverage: 0.9,
+    });
+    expect(buildSymmetricPredictionIntervals([10, 20], 3)).toEqual([
+      { prediction: 10, lower: 7, upper: 13, width: 6 },
+      { prediction: 20, lower: 17, upper: 23, width: 6 },
+    ]);
+    expect(() => calculateSplitConformalQuantile([1, Number.NaN], 0.1)).toThrow("finite, non-negative");
+    expect(() => calculateSplitConformalQuantile([1, 2], 0)).toThrow("strictly between zero and one");
+  });
+
+  it("keeps input validity, applicability and interval width distinct in release policy", () => {
+    expect(assignPredictionReleaseState({ inputValid: false, applicability: "outside", intervalWidth: null, widthReviewThreshold: 10 })).toBe("nodata");
+    expect(assignPredictionReleaseState({ inputValid: true, applicability: "outside", intervalWidth: 3, widthReviewThreshold: 10 })).toBe("withhold");
+    expect(assignPredictionReleaseState({ inputValid: true, applicability: "review", intervalWidth: 3, widthReviewThreshold: 10 })).toBe("review");
+    expect(assignPredictionReleaseState({ inputValid: true, applicability: "supported", intervalWidth: 12, widthReviewThreshold: 10 })).toBe("review");
+    expect(assignPredictionReleaseState({ inputValid: true, applicability: "supported", intervalWidth: 8, widthReviewThreshold: 10 })).toBe("supported");
+    expect(() => assignPredictionReleaseState({ inputValid: true, applicability: "supported", intervalWidth: null, widthReviewThreshold: 10 })).toThrow("interval width");
   });
 });
 
