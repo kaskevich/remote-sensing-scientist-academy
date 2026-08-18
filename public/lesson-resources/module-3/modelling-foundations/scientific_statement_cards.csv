@@ -1,0 +1,13 @@
+card_id,statement,review_label,review_reason
+S01,"The sampled plots contained a median of seven recorded species.",descriptive,"Summarises observations already present in the defined sample."
+S02,"Estimate field-measured vegetation height for plots withheld from model development.",predictive,"Names an unknown target for new cases and requires independent predictive evaluation."
+S03,"Vegetation height was associated with the UAV structural metric after accounting for declared site effects.",explanatory,"Describes a modelled relationship without claiming an intervention effect."
+S04,"Increasing grazing intensity would reduce vegetation height compared with unchanged management.",causal,"Asks about the outcome under an intervention and comparison condition."
+S05,"Map the field measurements at their sampled plot locations.",descriptive,"Mapping observed values does not itself estimate targets for unseen cases."
+S06,"Classify unsurveyed 10 m cells into the three predeclared habitat-condition classes.",predictive,"Assigns a target class to prediction units without supplied labels."
+S07,"Examine whether texture contains information about the target within the represented sites.",explanatory,"Investigates a relationship; the wording does not yet make a new-case performance claim."
+S08,"The fitted model proves NDVI is the ecological mechanism controlling biomass.",causal,"Uses mechanism language that ordinary predictive modelling cannot establish."
+S09,"Predict next-year condition from features available before the annual decision date.",predictive,"Names future cases and an operational feature-availability boundary."
+S10,"Recorded target missingness differed among the sampled sites.",descriptive,"Reports a property of the observed table."
+S11,"Removing reed cover would improve the management score.",causal,"Describes an intervention effect rather than an association or prediction."
+S12,"Characterise how residual variation changes along the salinity proxy gradient.",explanatory,"Seeks structure in a relationship and model failure rather than an intervention effect."

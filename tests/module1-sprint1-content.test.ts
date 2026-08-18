@@ -58,7 +58,8 @@ describe("Module 1 pedagogical review", () => {
     expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
       "Academy Curriculum",
     );
-    expect(site.curriculum.cohortDate).toBe("Module 1 + complete Module 2");
+    expect(site.curriculum.cohortDate).toBe("Modules 1–2 + Module 3 Chapter 1");
+    expect(site.curriculum.cohortMeta).toContain("69 lessons");
     expect(activeLessons.map(({ id, title }) => ({ id, title }))).toEqual([
       { id: "lesson-01", title: "Welcome to Scientific Programming" },
       { id: "lesson-02", title: "Variables and Scientific Data" },

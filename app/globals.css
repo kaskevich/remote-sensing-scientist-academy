@@ -6,6 +6,9 @@
   --lime: #c8f33d;
   --blue: #57b7e8;
   --orange: #ff7847;
+  --terracotta: #a35f47;
+  --terracotta-secondary: #b97358;
+  --terracotta-tint: #f6ece8;
   --line: rgba(11, 25, 48, 0.18);
 }
 
@@ -826,6 +829,10 @@ h2 {
 
 .path-orange {
   --card-accent: var(--orange);
+}
+
+.path-terracotta {
+  --card-accent: var(--terracotta);
 }
 
 .path-topline,
@@ -2071,13 +2078,13 @@ h2 {
   width: 18px;
   height: 1px;
   margin: 0 10px;
-  background: rgba(87, 183, 232, 0.55);
+  background: color-mix(in srgb, var(--module-accent, var(--blue)) 55%, transparent);
   content: "";
 }
 
 .module-concept-progression span {
   margin-right: 6px;
-  color: var(--blue);
+  color: var(--module-accent, var(--blue));
   font: 700 9px/1 monospace;
 }
 
@@ -2143,6 +2150,11 @@ h2 {
   --module-accent: var(--lime);
 }
 
+.module-overview-terracotta,
+.curriculum-module-terracotta {
+  --module-accent: var(--terracotta);
+}
+
 .module-overview-blue {
   border-color: rgba(51, 154, 240, 0.42);
   background: linear-gradient(135deg, rgba(51, 154, 240, 0.09), rgba(255, 255, 255, 0.025) 42%);
@@ -2182,6 +2194,47 @@ h2 {
 .curriculum-module-blue .module-complete {
   background: rgba(87, 183, 232, 0.065);
   box-shadow: inset 4px 0 0 var(--blue);
+}
+
+.module-overview-terracotta {
+  border-color: rgba(163, 95, 71, 0.58);
+  background: linear-gradient(135deg, rgba(163, 95, 71, 0.14), rgba(255, 255, 255, 0.025) 42%);
+}
+
+.module-overview-panel.module-overview-terracotta .section-kicker,
+.module-overview-panel.module-overview-terracotta .module-outcomes summary,
+.module-overview-panel.module-overview-terracotta .module-chapter-heading span,
+.module-overview-panel.module-overview-terracotta .syllabus-number {
+  color: var(--terracotta-secondary);
+}
+
+.module-overview-panel.module-overview-terracotta .module-overview-intro dl div {
+  border-left-color: var(--terracotta);
+}
+
+.module-overview-panel.module-overview-terracotta .module-syllabus li a {
+  text-decoration-color: rgba(185, 115, 88, 0.75);
+}
+
+.curriculum-module-terracotta .module-index,
+.curriculum-module-terracotta .module-status,
+.curriculum-module-terracotta .lesson-context strong {
+  color: var(--terracotta-secondary);
+}
+
+.curriculum-module-terracotta .curriculum-module-toggle i,
+.curriculum-module-terracotta .module-toggle i {
+  border-color: var(--terracotta-secondary);
+}
+
+.curriculum-module-terracotta .module-summary:focus-visible,
+.curriculum-module-terracotta .curriculum-module-summary:focus-visible {
+  outline-color: var(--terracotta-secondary);
+}
+
+.curriculum-module-terracotta .module-complete {
+  background: rgba(163, 95, 71, 0.08);
+  box-shadow: inset 4px 0 0 var(--terracotta);
 }
 
 .module-chapter {

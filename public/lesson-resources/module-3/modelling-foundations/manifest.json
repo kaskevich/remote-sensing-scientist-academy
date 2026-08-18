@@ -1,0 +1,63 @@
+{
+  "title": "Module 3 Chapter 1 modelling-foundations training pack",
+  "version": "2026-08-18",
+  "licence": "CC0-1.0 for synthetic teaching fixtures and Academy-authored templates",
+  "data_status": "All CSV records in this pack are synthetic and are not measurements from the cited Baltic coastal-meadow dataset",
+  "scientific_context": {
+    "title": "Baltic coastal plant traits 2024",
+    "doi": "https://doi.org/10.5281/zenodo.20083250",
+    "restriction": "Do not transfer undocumented units, community-code meanings or sampling claims from assumptions into a model contract"
+  },
+  "files": [
+    {
+      "path": "../Environmental_Monitoring_Project_Starter.ipynb",
+      "purpose": "Continuous Module 3 portfolio notebook with Chapter 1 checkpoints",
+      "sha256": "4f6e541a9209c9608429e9768599db5b30754dbae34392db56f53d2e87227fdf"
+    },
+    {
+      "path": "README.md",
+      "purpose": "Training-pack use, provenance and limitation guide",
+      "sha256": "cde0f3eea577a5c73ce28ab5e2f013897eac5b0ec5393a5a051b431d8e8fca47"
+    },
+    {
+      "path": "scientific_statement_cards.csv",
+      "purpose": "Lesson 3.1 claim-classification exercise",
+      "sha256": "c8de084117e0e78d57c2ec52ae5cccd8c93416c0511bf5367de57fd7417744fd"
+    },
+    {
+      "path": "target_candidate_register.csv",
+      "purpose": "Lesson 3.2 target-definition audit",
+      "sha256": "1655e56e83cbd680726284d38fd9762f4ab5e9b00fafed107be2b6d842f27539"
+    },
+    {
+      "path": "TARGET_SPECIFICATION_TEMPLATE.md",
+      "purpose": "Lesson 3.2 target and prediction-unit contract",
+      "sha256": "d71dc8329b1cd9072ac47ef78113a8ac12deee967dca71e24a915ae6a53eaad0"
+    },
+    {
+      "path": "predictor_candidate_register.csv",
+      "purpose": "Lesson 3.3 operational feature eligibility audit",
+      "sha256": "e0d8b87c431e565e5df290fb8aa5f1e9e59ef1e5109bd74d85b6ff6d4f5ba5d4"
+    },
+    {
+      "path": "predictor_hypotheses_template.csv",
+      "purpose": "Lesson 3.3 measurement-hypothesis register",
+      "sha256": "e9b2c7d2294c9ac15b0a6486f775e88591935ff05f88114670d5a8695520b052"
+    },
+    {
+      "path": "modelling_observation_fixture.csv",
+      "purpose": "Lesson 3.4 deliberately imperfect one-row-per-observation fixture",
+      "sha256": "8fcdac97e1fd9c0b69b89bd0622f886e73dc20198ce5011c9191647291e2558d"
+    },
+    {
+      "path": "data_dictionary_template.csv",
+      "purpose": "Lesson 3.4 modelling-table schema and provenance record",
+      "sha256": "03a638fb1b015fc8d802b36130210fd9e142655eb8227381c8bc05ec9f6e9f8f"
+    },
+    {
+      "path": "MODEL_EXPERIMENT_PLAN_TEMPLATE.md",
+      "purpose": "Lesson 3.4 pre-registered baseline, metric, validation, tuning and test contract",
+      "sha256": "454fc2f36bec955517677947aeb10bea598b3f2b3bce157f2bdc317a8d9032a7"
+    }
+  ]
+}

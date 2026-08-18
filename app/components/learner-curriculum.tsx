@@ -347,6 +347,11 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
         setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
       }
       setOpenLessonId(lessonId);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          document.getElementById(lessonId)?.scrollIntoView({ block: "start", behavior: "auto" });
+        });
+      });
     }
 
     openLessonFromHash();
