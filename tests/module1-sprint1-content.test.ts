@@ -21,6 +21,7 @@ const site = JSON.parse(
     titleLineOne: string;
     titleLineTwo: string;
     cohortDate: string;
+    cohortMeta: string;
     modules: CurriculumLesson[];
   };
 };
