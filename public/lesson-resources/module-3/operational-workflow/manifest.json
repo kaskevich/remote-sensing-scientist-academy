@@ -15,6 +15,6 @@
     { "path": "MODEL_CARD_TEMPLATE.md", "sha256": "998be0e602482d3c79a018a61d07c1a9ca1b401018e07a6eaf8a8b83fd750013", "purpose": "Evidence-led intended-use, limitations and lifecycle documentation" },
     { "path": "TRAINING_DATA_SUMMARY_TEMPLATE.json", "sha256": "559f5ed30755c9e54b96779b932f2f6eccb62de16e6419002eb97b23e0ffb50d", "purpose": "Machine-readable training identity, counts, roles and representation limits" },
     { "path": "monitoring_runs_fixture.csv", "sha256": "ab3dff26c3e5ec710bc1668ec07f2b54c355b60956aab666d703c9e1cc23d263", "purpose": "Synthetic monitoring release, review and blocker cases" },
-    { "path": "../Environmental_Monitoring_Project_Starter.ipynb", "sha256": "e4df19b111def0af59e0f7fb1128e61f081fbf528dc113e75fb5fda2164e1d73", "purpose": "Continuous Module 3 portfolio notebook through all seven chapters" }
+    { "path": "../Environmental_Monitoring_Project_Starter.ipynb", "sha256": "725f3c56b30f25b35da2ef1af7042518ee4f658ea98105619af0a2bad0d149f2", "purpose": "Continuous Module 3 portfolio notebook through all seven chapters and capstone handover" }
   ]
 }

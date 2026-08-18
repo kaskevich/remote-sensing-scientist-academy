@@ -609,7 +609,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
-test("Module 3 opens with seven reviewed chapters and a transparent capstone roadmap", async ({ page }) => {
+test("Module 3 opens with seven reviewed chapters and the independent capstone", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -619,14 +619,14 @@ test("Module 3 opens with seven reviewed chapters and a transparent capstone roa
   await expect(overview.getByRole("heading", { name: "Remote Sensing Modelling", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(8);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(31);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(30);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(1);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(31);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(0);
   await expect(overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true })).toHaveAttribute("href", "#lesson-3-01");
   await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();
   await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeVisible();
   await expect(overview.getByRole("link", { name: "What Does a Useful Model Need to Beat?", exact: true })).toHaveAttribute("href", "#lesson-3-05");
-  await expect(overview.getByText("Planned syllabus", { exact: true }).first()).toBeHidden();
+  await expect(overview.getByText("Available now", { exact: true })).toHaveCount(31);
 
   await overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true }).click();
   const lesson = page.locator("#lesson-3-01");
@@ -685,6 +685,16 @@ test("Module 3 opens with seven reviewed chapters and a transparent capstone roa
   await expect(chapter6Lesson.getByRole("img", { name: /evidence-chain diagram separates field measurement/i })).toBeVisible();
   await expect(chapter6Lesson.getByRole("link", { name: /uncertainty inventory template/i })).toHaveAttribute("href", /UNCERTAINTY_INVENTORY_TEMPLATE\.md$/);
   await expect(chapter6Lesson.locator(".formative-check")).toHaveCount(3);
+
+  await overview.locator(".module-chapter").nth(7).locator("summary").click();
+  await overview.getByRole("link", { name: "Environmental Monitoring Project", exact: true }).click();
+  const capstone = page.locator("#lesson-3-capstone");
+  await expect(capstone).toBeVisible();
+  await expect(capstone.locator(".module-index")).toHaveText("Capstone");
+  await expect(capstone.getByText("Module capstone", { exact: true })).toBeVisible();
+  await expect(capstone.getByRole("img", { name: /gated workflow connects problem definition/i })).toBeVisible();
+  await expect(capstone.getByRole("link", { name: /capstone release gate/i })).toHaveAttribute("href", /CAPSTONE_RELEASE_GATE\.md$/);
+  await expect(capstone.locator(".formative-check")).toHaveCount(3);
 
   const dimensions = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,

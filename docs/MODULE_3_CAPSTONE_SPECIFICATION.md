@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** This specification fixes the destination before later lessons are written. The capstone is not marked available until all 30 lessons, data fixtures and review gates pass.
+**Available.** All 30 lessons, the independent capstone brief, downloadable review templates, resource manifest and final scientific/software/accessibility gates have passed. The capstone remains an assignment: Academy synthetic fixtures demonstrate workflow controls and do not constitute a real environmental monitoring result.
 
 ## Professional brief
 

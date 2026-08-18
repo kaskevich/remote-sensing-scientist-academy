@@ -28,7 +28,7 @@ Every new technique must strengthen one link in that chain. A higher score alone
 
 ## Current release scope
 
-All seven chapters are implemented in full. Lessons 3.1–3.30 are available; the integrated capstone remains visibly planned. The release includes:
+All seven chapters and the independent Environmental Monitoring Project capstone are implemented in full. Lessons 3.1–3.30 and the capstone are available. The release includes:
 
 - thirty publishable lessons with theory, guided practice, model clinics, independent work and assessment;
 - one continuous `Environmental_Monitoring_Project_Starter.ipynb`;
@@ -73,4 +73,4 @@ Formative checks cover concept, application and claim boundary. Completion contr
 5. **Released:** Chapter 5 (3.17–3.21), with regression and classification evidence, probability quality, structured failure, interpretation boundaries and a Domain of Applicability map.
 6. **Released:** Chapter 6 (3.22–3.25), with uncertainty-source reasoning, quantile intervals, split-conformal coverage and aligned prediction evidence maps.
 7. **Released in this chapter update:** Chapter 7 (3.26–3.30), with fail-closed raster inference, a bounded Earth Engine component, architecture selection, repeated-prediction drift gates and a versioned operational model package.
-8. **Next:** the independent capstone, cross-module integrity audit, browser accessibility QA and final scientific review.
+8. **Released:** the independent Environmental Monitoring Project capstone, cross-module integrity audit, browser accessibility QA and final scientific review.

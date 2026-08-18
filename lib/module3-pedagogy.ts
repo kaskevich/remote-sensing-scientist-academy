@@ -592,6 +592,26 @@ export const module3Lessons: Module3LessonSource[] = plannedLessons.map((item) =
   number: `3.${item.number}`,
 }));
 
+module3Lessons.push({
+  id: "lesson-3-capstone",
+  number: "Capstone",
+  chapter: 8,
+  title: "Environmental Monitoring Project",
+  description: "Design, validate and hand over an independent predictive Earth Observation workflow as a reviewable scientific evidence package.",
+  tools: ["Independent modelling", "Spatial validation", "Professional handover"],
+  artifact: "Environmental_Monitoring_Project",
+  code: `release_gates = {
+    "prediction contract": True,
+    "training-data integrity": True,
+    "protected evaluation": True,
+    "uncertainty and applicability": False,
+    "reproducible handover": True,
+}
+
+blocked = [name for name, passed in release_gates.items() if not passed]
+print("RELEASE" if not blocked else f"WITHHOLD: {', '.join(blocked)}")`,
+});
+
 export const publishedModule3LessonIds = [
   "lesson-3-01",
   "lesson-3-02",
@@ -623,6 +643,7 @@ export const publishedModule3LessonIds = [
   "lesson-3-28",
   "lesson-3-29",
   "lesson-3-30",
+  "lesson-3-capstone",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -644,10 +665,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "30 of 30 lessons available · capstone planned",
-  syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
+  navigationMeta: "30 lessons · capstone available",
+  syllabusAriaLabel: "Complete thirty-lesson Module 3 curriculum and capstone map",
   planningNote:
-    "All seven chapters are available now. The capstone remains visibly planned and will be released only after its scientific, software and accessibility reviews pass.",
+    "All thirty lessons and the independently assessed Environmental Monitoring Project capstone are available. The capstone integrates the complete predictive evidence chain into one professional handover.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -688,7 +709,8 @@ export const module3Overview: AcademyModuleOverview = {
   capstone: {
     number: 31,
     title: "Environmental Monitoring Project",
-    status: "planned",
+    status: "available",
+    lessonId: "lesson-3-capstone",
   },
 };
 
@@ -1379,6 +1401,48 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
       { title: "Datasheets for Datasets", href: "https://doi.org/10.1145/3458723" },
     ],
   },
+  "lesson-3-capstone": {
+    estimatedTime: "40–60 hours",
+    lessonType: "Independent Module Capstone",
+    markdownFile: "content/lessons/module-3/capstone.md",
+    formativeChecks: [
+      { id: "m3-capstone-transfer", question: "A project claims transfer to new meadow sites. Which evidence may support that claim?", options: ["Protected site- or spatial-block evaluation that matches the destination", "A random row split with neighbouring observations in both sets", "Training performance from the final XGBoost model"], correctOption: 0, explanation: "The evaluation geography must represent the stated destination. Random neighbouring rows and training fit cannot establish performance at new sites." },
+      { id: "m3-capstone-release", question: "The model beats its baseline, but 28% of the mapped domain is outside applicability. What is the professional response?", options: ["Withhold or flag unsupported cells and narrow the decision claim", "Publish a complete surface because the model is accurate on average", "Replace the applicability layer with a wider colour scale"], correctOption: 0, explanation: "Performance inside represented evidence does not authorize extrapolation. Applicability must constrain release and communication." },
+      { id: "m3-capstone-profile", question: "What makes the capstone credible evidence for a graduate profile?", options: ["A reviewer can trace each claimed capability to a file, test, figure or decision", "The README lists many software packages", "The final map looks polished"], correctOption: 0, explanation: "Professional evidence is inspectable. Technology lists and visual polish do not prove scientific judgement or reproducible implementation." },
+    ],
+    submissionChecklist: [
+      "The decision, target, prediction unit, domain, success criterion and non-claims are explicit and approved before modelling",
+      "The dataset, data dictionary, predictor hypotheses, exclusions, folds, roles, transformations and provenance are reviewable without hidden state",
+      "A naive baseline, a comparable ensemble and XGBoost are evaluated under the same protected structured design",
+      "Tuning remains inside development evidence and the final test is opened once for the registered assessment",
+      "Regression or classification metrics, fold variability, subgroup and spatial diagnostics, interpretation limits, uncertainty and applicability are reported",
+      "Prediction, uncertainty and applicability rasters preserve the frozen feature schema, grid, NoData and output semantics",
+      "The Earth Engine component has a necessary bounded role and does not duplicate or weaken the protected local evidence chain",
+      "The clean-run repository includes tests, manifests, model card, monitoring runbook, scientific summary, management brief and graduate-profile evidence matrix",
+    ],
+    rubric: [
+      { dimension: "Problem formulation — 10%", expectation: "Defines the target, prediction unit, domains, intended use, success criterion and unsupported claims without causal overreach" },
+      { dimension: "Training-data integrity — 10%", expectation: "Preserves observation identity, support, provenance, availability, exclusions and leakage controls in a reviewable modelling table" },
+      { dimension: "Validation design — 20%", expectation: "Matches the transfer claim with structured and, where relevant, temporal evaluation while keeping model selection separate from protected assessment" },
+      { dimension: "Modelling implementation — 15%", expectation: "Compares a meaningful baseline, a tree ensemble and XGBoost through reproducible pipelines and a frozen feature schema" },
+      { dimension: "Evaluation and diagnostics — 15%", expectation: "Reports appropriate metrics, fold variability, probability quality where relevant, subgroup failure and residual geography" },
+      { dimension: "Uncertainty and applicability — 15%", expectation: "Tests empirical interval or probability behaviour and publishes distinct prediction, uncertainty and applicability evidence" },
+      { dimension: "Reproducibility — 5%", expectation: "A clean environment can execute tests and reproduce the bounded release from versioned sources and saved folds" },
+      { dimension: "Scientific interpretation — 5%", expectation: "Separates prediction, association, uncertainty and ecological meaning while refusing unsupported causal or change claims" },
+      { dimension: "Communication — 5%", expectation: "The scientific summary, technical model card, management brief and evidence matrix are coherent, accessible and audience-appropriate" },
+    ],
+    coreReferences: [
+      { title: "scikit-learn — nested versus non-nested cross-validation", href: "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html" },
+      { title: "XGBoost 3.3 prediction guidance", href: "https://xgboost.readthedocs.io/en/stable/prediction.html" },
+      { title: "Google Earth Engine supervised classification", href: "https://developers.google.com/earth-engine/guides/classification" },
+      { title: "Valavi et al. (2019), spatially separated validation", href: "https://doi.org/10.1111/2041-210X.13107" },
+    ],
+    furtherReading: [
+      { title: "Mitchell et al. (2019), Model Cards", href: "https://doi.org/10.1145/3287560.3287596" },
+      { title: "The Turing Way — reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+      { title: "NIST AI Risk Management Framework", href: "https://www.nist.gov/itl/ai-risk-management-framework" },
+    ],
+  },
 };
 
 export const module3LessonDetails: Record<string, ReviewedLessonDetails> = Object.fromEntries(
@@ -1392,8 +1456,8 @@ export const module3LessonDetails: Record<string, ReviewedLessonDetails> = Objec
       {
         estimatedTime: configuration.estimatedTime,
         lessonType: configuration.lessonType,
-        position: Number(source.number.split(".")[1]),
-        totalPositions: 30,
+        position: source.id === "lesson-3-capstone" ? 31 : Number(source.number.split(".")[1]),
+        totalPositions: source.id === "lesson-3-capstone" ? 31 : 30,
         markdownFile: configuration.markdownFile,
         formativeChecks: configuration.formativeChecks,
         submissionChecklist: configuration.submissionChecklist,

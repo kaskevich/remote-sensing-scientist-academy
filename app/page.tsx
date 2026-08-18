@@ -703,6 +703,14 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/operational-workflow/TRAINING_DATA_SUMMARY_TEMPLATE.json", title: "Download the training-data summary template" },
     { href: "lesson-resources/module-3/operational-workflow/manifest.json", title: "Download the Chapter 7 checksum manifest" },
   ],
+  "lesson-3-capstone": [
+    { href: "lesson-resources/module-3/environmental-monitoring-project/README.md", title: "Read the Environmental Monitoring Project capstone guide" },
+    { href: "lesson-resources/module-3/environmental-monitoring-project/PROJECT_BRIEF_TEMPLATE.md", title: "Download the project brief and preregistration template" },
+    { href: "lesson-resources/module-3/environmental-monitoring-project/CAPSTONE_RELEASE_GATE.md", title: "Download the capstone release gate" },
+    { href: "lesson-resources/module-3/environmental-monitoring-project/GRADUATE_PROFILE_EVIDENCE_MATRIX.md", title: "Download the graduate-profile evidence matrix" },
+    { href: "lesson-resources/module-3/environmental-monitoring-project/submission_manifest_template.json", title: "Download the submission manifest template" },
+    { href: "lesson-resources/module-3/environmental-monitoring-project/manifest.json", title: "Download the capstone resource checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {
@@ -711,7 +719,7 @@ const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((sour
   return {
     id: source.id,
     numberLabel: source.number,
-    scheduleLabel: `CHAPTER ${source.chapter}`,
+    scheduleLabel: source.id === "lesson-3-capstone" ? "CAPSTONE" : `CHAPTER ${source.chapter}`,
     week: `CHAPTER ${source.chapter}`,
     title: source.title,
     description: source.description,
@@ -726,7 +734,9 @@ const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((sour
     pedagogy,
     task: {
       title: `Submit ${source.artifact}`,
-      instructions: `Upload ${source.artifact}, the relevant notebook checkpoint and a concise scientific justification. Make the supported prediction claim, evidence boundary and unresolved limitations explicit.`,
+      instructions: source.id === "lesson-3-capstone"
+        ? "Upload the complete clean-run repository, prediction evidence package, model card, scientific summary, management brief and graduate-profile evidence matrix. State the supported transfer claim, withheld areas, unresolved limitations and release decision explicitly."
+        : `Upload ${source.artifact}, the relevant notebook checkpoint and a concise scientific justification. Make the supported prediction claim, evidence boundary and unresolved limitations explicit.`,
       referenceImages: [],
       referenceMaps: [],
     },

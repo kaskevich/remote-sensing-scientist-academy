@@ -1,0 +1,39 @@
+{
+  "title": "Module 3 Environmental Monitoring Project capstone pack",
+  "version": "1.0.0",
+  "review_date": "2026-08-18",
+  "data_status": "Templates and synthetic-training guidance only; no real environmental observations are included",
+  "evidence_rule": "A clean run and complete files do not authorize release when target meaning, protected validation, uncertainty or applicability fails",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c4b4bb0fe8f24c3cac405e55c3631e512d2175156c3cde5a2de348f34b3cc55a",
+      "purpose": "Capstone repository, evidence-role and release guidance"
+    },
+    {
+      "path": "PROJECT_BRIEF_TEMPLATE.md",
+      "sha256": "a320226279b224daf3e51bef576c71c897c84485e2fc5b64720531841cc4d7bd",
+      "purpose": "Decision, target, predictor and protected-experiment preregistration"
+    },
+    {
+      "path": "CAPSTONE_RELEASE_GATE.md",
+      "sha256": "ec99654816a7255e83e16ff79aa26555090b0154de612179ddf16b55e882f1d8",
+      "purpose": "Four-stage scientific, modelling, spatial and operational acceptance review"
+    },
+    {
+      "path": "GRADUATE_PROFILE_EVIDENCE_MATRIX.md",
+      "sha256": "4eb0d1081b071675f856392d9b5cbbae5c6e97a576697e193870261b99bb7f0e",
+      "purpose": "Evidence mapping for three Academy graduate profiles"
+    },
+    {
+      "path": "submission_manifest_template.json",
+      "sha256": "458327dc0267acab7f16e93f50ca2d6e4e59a1fbe5fdad45f5432d965edd3490",
+      "purpose": "Machine-readable release status, software and artifact-checksum template"
+    },
+    {
+      "path": "../../../lesson-media/images/environmental-monitoring-capstone.svg",
+      "sha256": "543f8ffe6292c828db90bfb1d3dcb7bd36488df7940be445e7eee91e247c885f",
+      "purpose": "Accessible terracotta capstone evidence-gate diagram"
+    }
+  ]
+}
