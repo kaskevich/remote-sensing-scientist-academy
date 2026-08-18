@@ -4,9 +4,13 @@ import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   applyBoostingStage,
+  buildEqualWidthReliabilityBins,
   calculateBinaryClassificationMetrics,
   calculateErrorSkill,
+  calculateExpandedBinaryClassificationMetrics,
   calculateRegressionMetrics,
+  calculateStandardizedNearestAnalogue,
+  classifyApplicability,
   countDiscreteSearchCombinations,
   createBalancedGroupFolds,
   createForwardTemporalFolds,
@@ -18,6 +22,7 @@ import {
   findTrainingServingSkew,
   findBestRegressionStump,
   selectThresholdByMinimumRecall,
+  summariseResidualGroups,
   summariseFeatureStability,
   summariseFoldMetrics,
   validateExperimentPlan,
@@ -46,6 +51,7 @@ const resourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/mode
 const chapter2ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/baseline-and-xgboost");
 const chapter3ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/structured-validation");
 const chapter4ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/controlled-optimisation");
+const chapter5ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/evaluation-and-applicability");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -119,7 +125,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes four complete opening chapters while exposing the full planned pathway", () => {
+  it("publishes five complete opening chapters while exposing the full planned pathway", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -146,8 +152,13 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-14",
       "lesson-3-15",
       "lesson-3-16",
+      "lesson-3-17",
+      "lesson-3-18",
+      "lesson-3-19",
+      "lesson-3-20",
+      "lesson-3-21",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(16);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(21);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -231,6 +242,11 @@ describe("Module 3 teaching assets", () => {
       "overfit-learning-curves.svg",
       "feature-stability-across-folds.svg",
       "classification-threshold.svg",
+      "regression-diagnostic-panel.svg",
+      "classification-probability-quality.svg",
+      "spatial-residuals.svg",
+      "model-interpretation-boundaries.svg",
+      "domain-of-applicability.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -249,7 +265,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 16; lesson += 1) {
+    for (let lesson = 1; lesson <= 21; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -359,6 +375,84 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.76 / 5");
     expect(review).toContain("not the complete evaluation and interpretation chapter");
     expect(review).toContain("cannot support a real coastal-meadow transfer claim");
+  });
+
+  it("verifies the Chapter 5 evaluation-and-applicability pack and its checksum manifest", () => {
+    const manifestPath = join(chapter5ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      evidence_rule: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.evidence_rule).toContain("final test remains sealed");
+    expect(manifest.files).toHaveLength(10);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const regressionRows = readFileSync(join(chapter5ResourceRoot, "regression_outer_predictions.csv"), "utf8").trim().split("\n");
+    const classRows = readFileSync(join(chapter5ResourceRoot, "classification_outer_probabilities.csv"), "utf8").trim().split("\n");
+    expect(regressionRows).toHaveLength(25);
+    expect(classRows).toHaveLength(25);
+    expect(regressionRows.every((row, index) => index === 0 || row.endsWith(",synthetic"))).toBe(true);
+    expect(classRows.filter((row) => row.includes(",1,")).length).toBeGreaterThanOrEqual(8);
+  });
+
+  it("records an honest Chapter 5 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_5_REVIEW.md");
+    expect(review).toContain("4.82 / 5");
+    expect(review).toContain("not the prediction-uncertainty chapter");
+    expect(review).toContain("cannot support a real vegetation-height accuracy claim");
+  });
+});
+
+describe("Module 3 evaluation and applicability behaviour", () => {
+  it("calculates decision, calibration and reliability evidence without losing counts", () => {
+    const observed: Array<0 | 1> = [1, 1, 0, 0];
+    const probabilities = [0.9, 0.4, 0.6, 0.1];
+    const metrics = calculateExpandedBinaryClassificationMetrics(observed, probabilities, 0.5);
+    expect(metrics).toMatchObject({ truePositive: 1, falsePositive: 1, trueNegative: 1, falseNegative: 1 });
+    expect(metrics.f1).toBe(0.5);
+    expect(metrics.balancedAccuracy).toBe(0.5);
+    expect(metrics.brierScore).toBeCloseTo(0.185);
+    expect(metrics.prevalence).toBe(0.5);
+    expect(metrics.flaggedFraction).toBe(0.5);
+
+    const bins = buildEqualWidthReliabilityBins(observed, probabilities, 2);
+    expect(bins.map((bin) => bin.count)).toEqual([2, 2]);
+    expect(bins.map((bin) => bin.positiveCount)).toEqual([1, 1]);
+    expect(() => buildEqualWidthReliabilityBins(observed, probabilities, 1)).toThrow("between two and one hundred bins");
+  });
+
+  it("summarises structured failure without treating rows as independent sites", () => {
+    const summaries = summariseResidualGroups([
+      { group: "wet", site: "a", residual: -6 },
+      { group: "wet", site: "a", residual: -4 },
+      { group: "wet", site: "b", residual: -5 },
+      { group: "dry", site: "a", residual: 2 },
+      { group: "dry", site: "b", residual: -2 },
+    ]);
+    expect(summaries[0]).toEqual({ group: "wet", observationCount: 3, independentSiteCount: 2, mae: 5, bias: -5 });
+    expect(summaries[1]).toEqual({ group: "dry", observationCount: 2, independentSiteCount: 2, mae: 2, bias: 0 });
+    expect(() => summariseResidualGroups([])).toThrow("requires residual records");
+  });
+
+  it("calculates auditable standardized nearest analogues and applicability states", () => {
+    const training = [[0, 0], [1, 1], [2, 2]];
+    const supported = calculateStandardizedNearestAnalogue(training, [1.1, 1.1]);
+    const outside = calculateStandardizedNearestAnalogue(training, [1, 3]);
+    expect(supported.trainingIndex).toBe(1);
+    expect(supported.distance).toBeLessThan(0.2);
+    expect(supported.outsideUnivariateRange).toEqual([]);
+    expect(outside.outsideUnivariateRange).toEqual([1]);
+    expect(classifyApplicability(supported, 0.5, 1.5)).toBe("supported");
+    expect(classifyApplicability({ ...supported, distance: 0.9 }, 0.5, 1.5)).toBe("review");
+    expect(classifyApplicability(outside, 0.5, 3)).toBe("outside");
+    expect(() => calculateStandardizedNearestAnalogue([[1, 1], [1, 2]], [1, 1.5])).toThrow("constant training feature");
+    expect(() => classifyApplicability(supported, 2, 1)).toThrow("ordered");
   });
 });
 

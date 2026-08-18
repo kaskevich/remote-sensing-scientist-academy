@@ -115,6 +115,18 @@ test("a direct Module 3 Chapter 4 lesson link opens and scrolls to the requested
   await expect.poll(async () => Math.abs((await lesson.boundingBox())?.y ?? Number.POSITIVE_INFINITY)).toBeLessThan(40);
 });
 
+test("a direct Module 3 Chapter 5 lesson link opens with diagnostic resources", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#lesson-3-17");
+
+  const lesson = page.locator("#lesson-3-17");
+  await expect(lesson).toHaveAttribute("open", "");
+  await expect(page.locator(".curriculum-module-terracotta")).toHaveAttribute("open", "");
+  await expect(lesson.getByRole("heading", { name: /Problem — one regression score cannot describe/i })).toBeVisible();
+  await expect(lesson.getByRole("img", { name: /four-panel regression diagnostic/i })).toBeVisible();
+  await expect(lesson.getByRole("link", { name: /regression evaluation template/i })).toHaveAttribute("href", /REGRESSION_EVALUATION_TEMPLATE\.md$/);
+});
+
 test("lesson code can be edited, run, and restored after refresh", async ({ page }) => {
   await page.route("**/pyodide.js", async (route) => {
     await route.fulfill({
@@ -572,7 +584,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
-test("Module 3 opens with four reviewed chapters and a transparent roadmap", async ({ page }) => {
+test("Module 3 opens with five reviewed chapters and a transparent roadmap", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -582,8 +594,8 @@ test("Module 3 opens with four reviewed chapters and a transparent roadmap", asy
   await expect(overview.getByRole("heading", { name: "Remote Sensing Modelling", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(8);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(31);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(16);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(15);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(21);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(10);
   await expect(overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true })).toHaveAttribute("href", "#lesson-3-01");
   await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();
@@ -628,6 +640,16 @@ test("Module 3 opens with four reviewed chapters and a transparent roadmap", asy
   await expect(chapter4Lesson.getByRole("img", { name: /controlled search protocol moves from a bounded candidate space/i })).toBeVisible();
   await expect(chapter4Lesson.getByRole("link", { name: /controlled tuning protocol template/i })).toHaveAttribute("href", /TUNING_PROTOCOL_TEMPLATE\.md$/);
   await expect(chapter4Lesson.locator(".formative-check")).toHaveCount(3);
+
+  await overview.locator(".module-chapter").nth(4).locator("summary").click();
+  await overview.getByRole("link", { name: "Regression Evaluation", exact: true }).click();
+  const chapter5Lesson = page.locator("#lesson-3-17");
+  await expect(chapter5Lesson).toBeVisible();
+  await expect(chapter5Lesson.locator(".module-index")).toHaveText("3.17");
+  await expect(chapter5Lesson.getByText("Lesson 3.17 of 30", { exact: true })).toBeVisible();
+  await expect(chapter5Lesson.getByRole("img", { name: /four-panel regression diagnostic/i })).toBeVisible();
+  await expect(chapter5Lesson.getByRole("link", { name: /regression evaluation template/i })).toHaveAttribute("href", /REGRESSION_EVALUATION_TEMPLATE\.md$/);
+  await expect(chapter5Lesson.locator(".formative-check")).toHaveCount(3);
 
   const dimensions = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
