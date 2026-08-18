@@ -148,10 +148,72 @@ model = XGBRegressor(
 model.fit(X_train[feature_order], y_train)
 predictions = model.predict(X_validation[feature_order])`,
   },
-  { number: 9, chapter: 3, title: "Validation Is Part of the Model", description: "Treat the validation design as part of the scientific claim.", tools: ["Generalisation", "Cross-validation", "Leakage"], artifact: "validation_claim.md", code: "" },
-  { number: 10, chapter: 3, title: "Spatial, Grouped and Leave-Location-Out Validation", description: "Match folds to within-site, new-site and new-region prediction claims.", tools: ["GroupKFold", "Spatial blocks", "Location holdout"], artifact: "spatial_validation_comparison.ipynb", code: "" },
-  { number: 11, chapter: 3, title: "Temporal and Spatiotemporal Validation", description: "Evaluate future transfer without allowing future observations into model development.", tools: ["Temporal holdout", "Rolling origin", "Drift"], artifact: "temporal_validation_report.md", code: "" },
-  { number: 12, chapter: 3, title: "Nested Model Selection and Leakage Prevention", description: "Separate model selection from independent generalisation assessment.", tools: ["Nested CV", "Pipelines", "Leakage audit"], artifact: "leakage_checklist.md", code: "" },
+  {
+    number: 9,
+    chapter: 3,
+    title: "Validation Is Part of the Model",
+    description: "Treat the withheld evidence and its destination claim as part of the scientific model.",
+    tools: ["Generalisation", "Cross-validation", "Proximity leakage"],
+    artifact: "validation_claim.md",
+    code: `from sklearn.model_selection import GroupShuffleSplit
+
+splitter = GroupShuffleSplit(n_splits=1, test_size=0.25, random_state=42)
+train_index, test_index = next(splitter.split(data, groups=data["site"]))
+train_sites = set(data.loc[train_index, "site"])
+test_sites = set(data.loc[test_index, "site"])
+assert train_sites.isdisjoint(test_sites)
+print("Held-out site:", sorted(test_sites))`,
+  },
+  {
+    number: 10,
+    chapter: 3,
+    title: "Spatial, Grouped and Leave-Location-Out Validation",
+    description: "Match row, group, block, site and buffered folds to the intended spatial transfer claim.",
+    tools: ["GroupKFold", "Spatial blocks", "LeaveOneGroupOut"],
+    artifact: "spatial_validation_comparison.ipynb",
+    code: `from sklearn.model_selection import LeaveOneGroupOut
+
+splitter = LeaveOneGroupOut()
+for fold, (train_index, test_index) in enumerate(
+    splitter.split(X, y, groups=data["site"]), start=1
+):
+    train_sites = set(data.loc[train_index, "site"])
+    test_sites = set(data.loc[test_index, "site"])
+    assert train_sites.isdisjoint(test_sites)
+    print(fold, sorted(test_sites), len(test_index))`,
+  },
+  {
+    number: 11,
+    chapter: 3,
+    title: "Temporal and Spatiotemporal Validation",
+    description: "Evaluate future and future-site transfer without allowing later evidence to move backward in time.",
+    tools: ["Temporal holdout", "Rolling origin", "Drift"],
+    artifact: "temporal_validation_report.md",
+    code: `years = sorted(data["year"].unique())
+for fold, test_year in enumerate(years[1:], start=1):
+    train_years = years[:fold]
+    train_index = data.index[data["year"].isin(train_years)]
+    test_index = data.index[data["year"] == test_year]
+    assert data.loc[train_index, "year"].max() < test_year
+    print(fold, train_years, "→", test_year)`,
+  },
+  {
+    number: 12,
+    chapter: 3,
+    title: "Nested Model Selection and Leakage Prevention",
+    description: "Keep inner procedure selection inside outer generalisation assessment and audit every leakage route.",
+    tools: ["Nested CV", "Pipeline", "Leakage audit"],
+    artifact: "Structured Validation Design",
+    code: `outer = LeaveOneGroupOut()
+for train_index, test_index in outer.split(X, y, groups=site):
+    search.fit(
+        X.iloc[train_index],
+        y.iloc[train_index],
+        groups=spatial_block.iloc[train_index],
+    )
+    predictions = search.predict(X.iloc[test_index])
+    save_outer_predictions(test_index, predictions, search.best_params_)`,
+  },
   { number: 13, chapter: 4, title: "Hyperparameter Optimisation", description: "Design a controlled search space inside development data.", tools: ["RandomizedSearchCV", "Search space", "Independent test"], artifact: "tuning_protocol.ipynb", code: "" },
   { number: 14, chapter: 4, title: "Early Stopping, Regularisation and Learning Dynamics", description: "Diagnose underfit and overfit behaviour from learning evidence.", tools: ["Early stopping", "Learning curves", "Regularisation"], artifact: "learning_dynamics_report.pdf", code: "" },
   { number: 15, chapter: 4, title: "Feature Selection, Redundancy and Stability", description: "Evaluate scientific utility and fold stability without automatic correlation pruning.", tools: ["Permutation relevance", "Redundancy", "Stability"], artifact: "feature_stability_report.csv", code: "" },
@@ -187,6 +249,10 @@ export const publishedModule3LessonIds = [
   "lesson-3-06",
   "lesson-3-07",
   "lesson-3-08",
+  "lesson-3-09",
+  "lesson-3-10",
+  "lesson-3-11",
+  "lesson-3-12",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -208,10 +274,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "8 of 30 lessons available · capstone planned",
+  navigationMeta: "12 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapters 1–2 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "Chapters 1–3 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -480,6 +546,90 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
     furtherReading: [
       { title: "XGBoost model IO", href: "https://xgboost.readthedocs.io/en/stable/tutorials/saving_model.html" },
       { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+    ],
+  },
+  "lesson-3-09": {
+    estimatedTime: "170–230 minutes",
+    lessonType: "Validation Claim and Evidence Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-09.md",
+    formativeChecks: [
+      { id: "m3-l9-generalisation", question: "A random holdout contains neighbours from every site. Which claim does its error best support?", options: ["Interpolation among represented nearby conditions", "Transfer to a completely new region", "Performance in every future year"], correctOption: 0, explanation: "The withheld rows are novel identities but not novel sites or necessarily independent spatial conditions. The score must be bounded to that evidence design." },
+      { id: "m3-l9-proximity", question: "Training and assessment IDs are disjoint. Can proximity leakage still occur?", options: ["Yes; neighbours, repeated locations and derivative samples can share information", "No; unique IDs guarantee independence", "Only when the target column is duplicated exactly"], correctOption: 0, explanation: "Row identity is only one layer. Spatial, temporal, hierarchical and processing relationships must also be encoded and audited." },
+      { id: "m3-l9-test-firewall", question: "After validation performance changes the model, what remains the role of those validation rows?", options: ["Development evidence, not an untouched final test", "Independent final evidence forever", "Training data automatically"], correctOption: 0, explanation: "Evidence that influences a decision participates in development. A separate final test or external assessment is needed for an untouched end-stage claim." },
+    ],
+    submissionChecklist: [...commonChecklist, "validation_claim.md names the destination and withheld unit before scores are inspected", "split_overlap_audit.csv proves identifier and protected-group separation for the compared designs", "Random and grouped results are reported as different claims rather than averaged"],
+    rubric: rubric("Distinguishes training, validation and final-test roles; builds and audits random and site-separated evidence without proximity overclaiming", "Explains what each split estimates and bounds generalisation to the represented destination"),
+    coreReferences: [
+      { title: "scikit-learn cross-validation and grouped splitters", href: "https://scikit-learn.org/stable/modules/cross_validation.html" },
+      { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
+    ],
+    furtherReading: [
+      { title: "Valavi et al. (2019), spatial and environmental blocking", href: "https://doi.org/10.1111/2041-210X.13107" },
+      { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+    ],
+  },
+  "lesson-3-10": {
+    estimatedTime: "210–290 minutes",
+    lessonType: "Spatial Validation Design Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-10.md",
+    formativeChecks: [
+      { id: "m3-l10-match-claim", question: "The operational claim is prediction at a completely unobserved site. Which primary fold unit matches it?", options: ["Site", "Individual randomly shuffled row", "One predictor column"], correctOption: 0, explanation: "All observations and derivative information from the destination site must be held outside fitting to evaluate new-site transfer among represented sites." },
+      { id: "m3-l10-fold-distribution", question: "Why report every leave-one-site-out fold instead of only mean MAE?", options: ["To reveal site-specific transfer failure and instability", "Because a mean cannot be calculated", "To make observations independent"], correctOption: 0, explanation: "A mean can hide one site where the workflow fails. Fold values, spread, counts and aggregation rules make heterogeneity visible." },
+      { id: "m3-l10-buffer", question: "What must precede a 500 m buffered holdout?", options: ["A distance-valid coordinate method, a scientific rationale and an impact audit", "Only changing the splitter name", "Selecting the buffer that gives the lowest error"], correctOption: 0, explanation: "Buffers need defensible units and distance, reduce usable data and can themselves become tuned design choices." },
+    ],
+    submissionChecklist: [...commonChecklist, "spatial_fold_registry.csv preserves exact row, group, block and coordinate roles", "The same baseline and fixed candidate are evaluated under random, site-grouped and spatial-block designs", "Fold-level distributions, worst transfer and aggregation rules are reported"],
+    rubric: rubric("Constructs ordinary, grouped, site, leave-location-out and block comparisons with executable overlap audits and appropriately scoped buffers", "Selects a primary design from the intended transfer claim and communicates spatial heterogeneity without claiming unsupported regional transfer"),
+    coreReferences: [
+      { title: "scikit-learn GroupKFold", href: "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html" },
+      { title: "scikit-learn grouped cross-validation", href: "https://scikit-learn.org/stable/modules/cross_validation.html" },
+      { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
+    ],
+    furtherReading: [
+      { title: "Valavi et al. (2019), blockCV", href: "https://doi.org/10.1111/2041-210X.13107" },
+      { title: "scikit-learn cross_validate", href: "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html" },
+    ],
+  },
+  "lesson-3-11": {
+    estimatedTime: "190–260 minutes",
+    lessonType: "Temporal Transfer and Drift Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-11.md",
+    formativeChecks: [
+      { id: "m3-l11-direction", question: "Which fold respects a 2025 deployment?", options: ["Train through 2024 and assess 2025", "Train on 2025 and assess 2023", "Shuffle all years and call the holdout future"], correctOption: 0, explanation: "A future prediction may use only information available before its cut-off. The complete feature and preprocessing pipeline must respect the same direction." },
+      { id: "m3-l11-drift", question: "Chronological error rises in 2025. What does that prove?", options: ["Transfer weakened in the represented future assessment, but the drift mechanism still needs diagnosis", "The sensor alone caused the failure", "The model must be tuned on 2025 immediately"], correctOption: 0, explanation: "Phenology, management, sensor, processing and environmental changes can all contribute. The error establishes a result under the design, not one cause." },
+      { id: "m3-l11-firewall", question: "The team changes features after viewing 2025 performance. What role does 2025 now have?", options: ["Validation/development evidence", "Untouched final-test evidence", "No role because it is a year"], correctOption: 0, explanation: "Once the result affects a modelling decision, the period has participated in development and later independent evidence is needed." },
+    ],
+    submissionChecklist: [...commonChecklist, "temporal_fold_registry.csv proves every training period precedes assessment and records prediction cut-offs", "The report compares random and chronological evidence with the same fixed procedure", "Phenology, management, sensor and environmental drift are separated and the new-site/future-site distinction is explicit"],
+    rubric: rubric("Builds chronological and rolling-origin folds, audits feature availability, and combines spatial and temporal separation without backwards information flow", "Interprets future-transfer evidence cautiously and distinguishes measured error change from hypotheses about drift mechanisms"),
+    coreReferences: [
+      { title: "scikit-learn cross-validation of time series", href: "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-of-time-series-data" },
+      { title: "scikit-learn TimeSeriesSplit", href: "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html" },
+      { title: "Roberts et al. (2017), temporal and spatial validation", href: "https://doi.org/10.1111/ecog.02881" },
+    ],
+    furtherReading: [
+      { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+      { title: "The Turing Way: research data provenance", href: "https://book.the-turing-way.org/reproducible-research/rdm/rdm-provenance" },
+    ],
+  },
+  "lesson-3-12": {
+    estimatedTime: "220–300 minutes",
+    lessonType: "Nested Evidence and Leakage Audit Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-12.md",
+    formativeChecks: [
+      { id: "m3-l12-loops", question: "What is the inner loop allowed to do?", options: ["Select the procedure using only the current outer development partition", "Inspect the outer assessment target", "Open the final test after every candidate"], correctOption: 0, explanation: "Inner evidence selects preprocessing and model decisions. The outer fold assesses that selection process, and the final test remains separate." },
+      { id: "m3-l12-leakage", question: "An imputer is fitted on all rows before nested cross-validation. Is the result protected?", options: ["No; outer and inner assessment distributions influenced preprocessing", "Yes; imputation is not modelling", "Yes, if the target was omitted"], correctOption: 0, explanation: "A learned transformation must be fitted inside each relevant training partition. Feature-only distribution information can leak." },
+      { id: "m3-l12-final-firewall", question: "After nested CV, may final-test error choose a new cloud threshold?", options: ["No; that would convert the final test into development evidence", "Yes; nested CV protects every later decision", "Yes, if the new threshold improves MAE"], correctOption: 0, explanation: "Nested CV protects its outer assessments from inner selection. It does not authorise repeated final-test-driven changes." },
+    ],
+    submissionChecklist: [...commonChecklist, "nested_fold_registry.csv proves outer assessment rows never enter inner selection", "Every learned transformation is fold-local and the final test remains sealed", "LEAKAGE_CHECKLIST.md audits duplicates, derivatives, neighbours, time, target-derived predictors, upstream processing and model selection"],
+    rubric: rubric("Implements and verifies grouped nested evidence roles, fold-local pipelines and row-level outer predictions without contaminating assessment", "Explains selection bias, limited-group instability and the difference between nested outer evidence and the final test"),
+    coreReferences: [
+      { title: "scikit-learn nested versus non-nested cross-validation", href: "https://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html" },
+      { title: "scikit-learn common pitfalls and leakage prevention", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+      { title: "scikit-learn Pipeline", href: "https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html" },
+    ],
+    furtherReading: [
+      { title: "Cawley and Talbot (2010), model selection over-fitting", href: "https://jmlr.org/papers/v11/cawley10a.html" },
+      { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
+      { title: "Valavi et al. (2019), spatial blocking", href: "https://doi.org/10.1111/2041-210X.13107" },
     ],
   },
 };

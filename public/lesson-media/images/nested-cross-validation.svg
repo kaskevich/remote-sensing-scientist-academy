@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Nested cross-validation evidence firewall</title>
+  <desc id="desc">Three outer folds each keep an assessment partition behind a firewall. Within every outer development partition, smaller inner folds select preprocessing and hyperparameters. The selected procedure is refitted on outer development data and scored once on the untouched outer assessment partition.</desc>
+  <rect width="960" height="540" fill="#FFFDFC"/>
+  <text x="48" y="52" font-family="Georgia,serif" font-size="29" fill="#17243A">Selection happens inside assessment</text>
+  <g font-family="Arial,sans-serif">
+    <text x="50" y="98" font-size="17" font-weight="700" fill="#A35F47">OUTER LOOP · ESTIMATE GENERALISATION</text>
+    <g transform="translate(50,120)"><rect width="860" height="104" rx="14" fill="#F6ECE8" stroke="#A35F47" stroke-width="3"/><rect x="24" y="22" width="595" height="60" rx="8" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/><text x="42" y="57" font-size="16" fill="#17243A">outer development data</text><line x1="640" y1="12" x2="640" y2="92" stroke="#C94F45" stroke-width="4" stroke-dasharray="8 7"/><rect x="663" y="22" width="170" height="60" rx="8" fill="#E4EEF4" stroke="#2E6F95" stroke-width="2"/><text x="748" y="49" text-anchor="middle" font-size="15" fill="#17243A">outer assessment</text><text x="748" y="69" text-anchor="middle" font-size="13" fill="#17243A">untouched</text></g>
+    <text x="77" y="267" font-size="17" font-weight="700" fill="#A35F47">INNER LOOP · SELECT THE PROCEDURE</text>
+    <g transform="translate(77,288)"><rect width="560" height="122" rx="14" fill="#FFFFFF" stroke="#A35F47" stroke-width="2"/><rect x="22" y="24" width="150" height="34" rx="6" fill="#F0DED7"/><text x="97" y="47" text-anchor="middle" font-size="14" fill="#17243A">inner train</text><rect x="182" y="24" width="110" height="34" rx="6" fill="#E4EEF4"/><text x="237" y="47" text-anchor="middle" font-size="14" fill="#17243A">inner validate</text><rect x="22" y="68" width="270" height="34" rx="6" fill="#F0DED7"/><text x="157" y="91" text-anchor="middle" font-size="14" fill="#17243A">rotate grouped or spatial folds</text><path d="M315 61 L382 61" stroke="#2E6F95" stroke-width="3" marker-end="url(#arrow2)"/><text x="402" y="48" font-size="14" fill="#17243A">choose preprocessing</text><text x="402" y="72" font-size="14" fill="#17243A">+ hyperparameters</text><text x="402" y="96" font-size="14" fill="#17243A">from inner evidence</text></g>
+    <path d="M637 349 C730 349 730 210 702 196" fill="none" stroke="#2E6F95" stroke-width="3" marker-end="url(#arrow2)"/>
+    <rect x="50" y="451" width="860" height="52" rx="10" fill="#17243A"/><text x="480" y="483" text-anchor="middle" font-size="16" fill="#FFFFFF">Outer assessment rows never choose features, transformations, parameters, thresholds or stopping points</text>
+  </g>
+  <defs><marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2E6F95"/></marker></defs>
+</svg>
