@@ -1,0 +1,4 @@
+observation_id,outer_fold,outer_role,outer_held_out_unit,inner_fold,used_for_model_selection,site,spatial_block,year,splitter_version,notes
+M3V001,1,assessment,coast-a,,false,coast-a,block-a1,2023,structured-validation-v1,outer assessment row cannot enter inner selection
+M3V013,1,development,coast-a,1,true,coast-b,block-b1,2023,structured-validation-v1,inner assignment is local to outer fold 1
+

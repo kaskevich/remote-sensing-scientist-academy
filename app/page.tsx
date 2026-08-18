@@ -585,6 +585,28 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/baseline-and-xgboost/MODEL_METADATA_TEMPLATE.json", title: "Download the model metadata template" },
     { href: "lesson-resources/module-3/baseline-and-xgboost/manifest.json", title: "Download the Chapter 2 checksum manifest" },
   ],
+  "lesson-3-09": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/structured-validation/README.md", title: "Read the structured-validation training-pack guide" },
+    { href: "lesson-resources/module-3/structured-validation/structured_validation_data.csv", title: "Download the structured validation fixture" },
+    { href: "lesson-resources/module-3/structured-validation/VALIDATION_DESIGN_TEMPLATE.md", title: "Download the validation design template" },
+  ],
+  "lesson-3-10": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/structured-validation/structured_validation_data.csv", title: "Use the site and spatial-block validation fixture" },
+    { href: "lesson-resources/module-3/structured-validation/fold_registry_template.csv", title: "Download the auditable fold registry template" },
+  ],
+  "lesson-3-11": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/structured-validation/structured_validation_data.csv", title: "Use the three-season temporal validation fixture" },
+    { href: "lesson-resources/module-3/structured-validation/VALIDATION_DESIGN_TEMPLATE.md", title: "Extend the structured validation design" },
+  ],
+  "lesson-3-12": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Complete the Chapter 3 portfolio checkpoint" },
+    { href: "lesson-resources/module-3/structured-validation/fold_registry_template.csv", title: "Download the nested fold registry template" },
+    { href: "lesson-resources/module-3/structured-validation/LEAKAGE_CHECKLIST.md", title: "Download the structured validation leakage checklist" },
+    { href: "lesson-resources/module-3/structured-validation/manifest.json", title: "Download the Chapter 3 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {

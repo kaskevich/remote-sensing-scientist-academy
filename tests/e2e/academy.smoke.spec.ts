@@ -104,14 +104,14 @@ test("a direct lesson link opens the correct module and lesson", async ({ page }
   await expect(lesson.getByRole("heading", { name: "Learning outcome", exact: true })).toBeVisible();
 });
 
-test("a direct Module 3 Chapter 2 lesson link opens and scrolls to the requested lesson", async ({ page }) => {
+test("a direct Module 3 Chapter 3 lesson link opens and scrolls to the requested lesson", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto("/#lesson-3-05");
+  await page.goto("/#lesson-3-09");
 
-  const lesson = page.locator("#lesson-3-05");
+  const lesson = page.locator("#lesson-3-09");
   await expect(lesson).toHaveAttribute("open", "");
   await expect(page.locator(".curriculum-module-terracotta")).toHaveAttribute("open", "");
-  await expect(lesson.getByRole("heading", { name: /Problem — complexity is not a reference point/i })).toBeVisible();
+  await expect(lesson.getByRole("heading", { name: /Problem — a model score is inseparable from the evidence withheld/i })).toBeVisible();
   await expect.poll(async () => Math.abs((await lesson.boundingBox())?.y ?? Number.POSITIVE_INFINITY)).toBeLessThan(40);
 });
 
@@ -572,7 +572,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
-test("Module 3 opens with two reviewed chapters and a transparent roadmap", async ({ page }) => {
+test("Module 3 opens with three reviewed chapters and a transparent roadmap", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -582,8 +582,8 @@ test("Module 3 opens with two reviewed chapters and a transparent roadmap", asyn
   await expect(overview.getByRole("heading", { name: "Remote Sensing Modelling", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(8);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(31);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(8);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(23);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(12);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(19);
   await expect(overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true })).toHaveAttribute("href", "#lesson-3-01");
   await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();
@@ -608,6 +608,16 @@ test("Module 3 opens with two reviewed chapters and a transparent roadmap", asyn
   await expect(chapter2Lesson.getByRole("img", { name: /training observations feeding a constant baseline/i })).toBeVisible();
   await expect(chapter2Lesson.getByRole("link", { name: /baseline evidence report template/i })).toHaveAttribute("href", /BASELINE_REPORT_TEMPLATE\.md$/);
   await expect(chapter2Lesson.locator(".formative-check")).toHaveCount(3);
+
+  await overview.locator(".module-chapter").nth(2).locator("summary").click();
+  await overview.getByRole("link", { name: "Validation Is Part of the Model", exact: true }).click();
+  const chapter3Lesson = page.locator("#lesson-3-09");
+  await expect(chapter3Lesson).toBeVisible();
+  await expect(chapter3Lesson.locator(".module-index")).toHaveText("3.9");
+  await expect(chapter3Lesson.getByText("Lesson 3.9 of 30", { exact: true })).toBeVisible();
+  await expect(chapter3Lesson.getByRole("img", { name: /two maps compare intermingled random training/i })).toBeVisible();
+  await expect(chapter3Lesson.getByRole("link", { name: /validation design template/i })).toHaveAttribute("href", /VALIDATION_DESIGN_TEMPLATE\.md$/);
+  await expect(chapter3Lesson.locator(".formative-check")).toHaveCount(3);
 
   const dimensions = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,

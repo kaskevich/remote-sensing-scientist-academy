@@ -386,3 +386,142 @@ export function validateExperimentPlan(plan: ModelExperimentPlan) {
 
   return issues;
 }
+
+export type ValidationFold = {
+  fold: number;
+  trainIndices: number[];
+  testIndices: number[];
+  heldOutGroups: string[];
+};
+
+export type FoldMetricSummary = {
+  mean: number;
+  standardDeviation: number;
+  minimum: number;
+  maximum: number;
+};
+
+function requireGroups(groups: string[]) {
+  if (groups.length === 0) {
+    throw new Error("Validation requires at least one observation group");
+  }
+  if (groups.some((group) => blank(group))) {
+    throw new Error("Every validation observation needs a non-empty group");
+  }
+}
+
+export function createBalancedGroupFolds(groups: string[], nSplits: number): ValidationFold[] {
+  requireGroups(groups);
+  const uniqueGroups = [...new Set(groups)].sort();
+  if (!Number.isInteger(nSplits) || nSplits < 2 || nSplits > uniqueGroups.length) {
+    throw new Error("nSplits must be an integer between two and the number of unique groups");
+  }
+
+  const groupCounts = uniqueGroups
+    .map((group) => ({ group, count: groups.filter((value) => value === group).length }))
+    .sort((a, b) => b.count - a.count || a.group.localeCompare(b.group));
+  const assignedGroups = Array.from({ length: nSplits }, () => [] as string[]);
+  const assignedCounts = Array.from({ length: nSplits }, () => 0);
+
+  for (const entry of groupCounts) {
+    const destination = assignedCounts.indexOf(Math.min(...assignedCounts));
+    assignedGroups[destination].push(entry.group);
+    assignedCounts[destination] += entry.count;
+  }
+
+  return assignedGroups.map((heldOutGroups, fold) => {
+    const heldOut = new Set(heldOutGroups);
+    const testIndices = groups.flatMap((group, index) => heldOut.has(group) ? [index] : []);
+    const trainIndices = groups.flatMap((group, index) => heldOut.has(group) ? [] : [index]);
+    return { fold, trainIndices, testIndices, heldOutGroups: [...heldOutGroups].sort() };
+  });
+}
+
+export function createLeaveOneGroupOutFolds(groups: string[]): ValidationFold[] {
+  requireGroups(groups);
+  return [...new Set(groups)].sort().map((heldOutGroup, fold) => {
+    const testIndices = groups.flatMap((group, index) => group === heldOutGroup ? [index] : []);
+    const trainIndices = groups.flatMap((group, index) => group === heldOutGroup ? [] : [index]);
+    return { fold, trainIndices, testIndices, heldOutGroups: [heldOutGroup] };
+  });
+}
+
+export function findFoldGroupOverlap(groups: string[], fold: ValidationFold) {
+  requireGroups(groups);
+  const indices = [...fold.trainIndices, ...fold.testIndices];
+  if (indices.some((index) => !Number.isInteger(index) || index < 0 || index >= groups.length)) {
+    throw new Error("Fold indices must refer to existing observations");
+  }
+  const trainGroups = new Set(fold.trainIndices.map((index) => groups[index]));
+  return [...new Set(fold.testIndices.map((index) => groups[index]))]
+    .filter((group) => trainGroups.has(group))
+    .sort();
+}
+
+export function createForwardTemporalFolds(periods: Array<string | number>): ValidationFold[] {
+  if (periods.length === 0) {
+    throw new Error("Temporal validation requires at least one observation period");
+  }
+  const normalized = periods.map((period) => String(period).trim());
+  if (normalized.some((period) => !period)) {
+    throw new Error("Every temporal validation observation needs a period");
+  }
+  const uniquePeriods = [...new Set(normalized)].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  if (uniquePeriods.length < 2) {
+    throw new Error("Forward validation requires at least two ordered periods");
+  }
+
+  return uniquePeriods.slice(1).map((testPeriod, fold) => {
+    const earlierPeriods = new Set(uniquePeriods.slice(0, fold + 1));
+    const trainIndices = normalized.flatMap((period, index) => earlierPeriods.has(period) ? [index] : []);
+    const testIndices = normalized.flatMap((period, index) => period === testPeriod ? [index] : []);
+    return { fold, trainIndices, testIndices, heldOutGroups: [testPeriod] };
+  });
+}
+
+export function summariseFoldMetrics(values: number[]): FoldMetricSummary {
+  if (values.length === 0 || values.some((value) => !Number.isFinite(value))) {
+    throw new Error("Fold metrics must contain at least one finite value");
+  }
+  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const variance = values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / values.length;
+  return {
+    mean,
+    standardDeviation: Math.sqrt(variance),
+    minimum: Math.min(...values),
+    maximum: Math.max(...values),
+  };
+}
+
+export type NestedValidationAssignment = {
+  observationId: string;
+  outerFold: number;
+  outerRole: "development" | "assessment";
+  innerFold: number | null;
+  usedForModelSelection: boolean;
+};
+
+export function validateNestedValidationAssignments(assignments: NestedValidationAssignment[]) {
+  const issues: ModellingValidationIssue[] = [];
+  const seen = new Set<string>();
+
+  for (const assignment of assignments) {
+    const key = `${assignment.outerFold}:${assignment.observationId}`;
+    if (seen.has(key)) {
+      issues.push({ code: "duplicate-outer-assignment", message: `${assignment.observationId} appears twice in outer fold ${assignment.outerFold}`, severity: "blocker" });
+    }
+    seen.add(key);
+
+    if (assignment.outerRole === "assessment" && assignment.usedForModelSelection) {
+      issues.push({ code: "outer-assessment-used-for-selection", message: `${assignment.observationId} from outer fold ${assignment.outerFold} influenced model selection`, severity: "blocker" });
+    }
+    if (assignment.outerRole === "assessment" && assignment.innerFold !== null) {
+      issues.push({ code: "outer-assessment-assigned-inner-fold", message: `${assignment.observationId} must remain outside inner folds for outer fold ${assignment.outerFold}`, severity: "blocker" });
+    }
+    if (assignment.outerRole === "development" && assignment.innerFold === null) {
+      issues.push({ code: "development-row-missing-inner-fold", message: `${assignment.observationId} needs an inner-fold assignment inside outer fold ${assignment.outerFold}`, severity: "blocker" });
+    }
+  }
+
+  return issues;
+}

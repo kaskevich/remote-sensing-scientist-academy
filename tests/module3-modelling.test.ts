@@ -6,13 +6,19 @@ import {
   applyBoostingStage,
   calculateErrorSkill,
   calculateRegressionMetrics,
+  createBalancedGroupFolds,
+  createForwardTemporalFolds,
+  createLeaveOneGroupOutFolds,
   createMeanBaseline,
   createMedianBaseline,
+  findFoldGroupOverlap,
   findTrainingServingSkew,
   findBestRegressionStump,
+  summariseFoldMetrics,
   validateExperimentPlan,
   validateModelRunMetadata,
   validateModellingDataset,
+  validateNestedValidationAssignments,
   validatePredictorHypotheses,
   validateTargetSpecification,
   type ModelRunMetadata,
@@ -32,6 +38,7 @@ import {
 const repositoryRoot = process.cwd();
 const resourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/modelling-foundations");
 const chapter2ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/baseline-and-xgboost");
+const chapter3ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/structured-validation");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -105,7 +112,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes two complete opening chapters while exposing the full planned pathway", () => {
+  it("publishes three complete opening chapters while exposing the full planned pathway", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -124,8 +131,12 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-06",
       "lesson-3-07",
       "lesson-3-08",
+      "lesson-3-09",
+      "lesson-3-10",
+      "lesson-3-11",
+      "lesson-3-12",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(8);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(12);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -201,6 +212,10 @@ describe("Module 3 teaching assets", () => {
       "tree-to-boosting.svg",
       "xgboost-sequential-learning.svg",
       "first-model-evidence-chain.svg",
+      "random-vs-spatial-validation.svg",
+      "validation-claim-ladder.svg",
+      "temporal-validation-directions.svg",
+      "nested-cross-validation.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -219,7 +234,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 8; lesson += 1) {
+    for (let lesson = 1; lesson <= 12; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -269,6 +284,94 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.57 / 5");
     expect(review).toContain("not the validation or optimisation chapter");
     expect(review).toContain("The saved Chapter 2 split is instructional");
+  });
+
+  it("verifies the Chapter 3 structured-validation pack and its checksum manifest", () => {
+    const manifestPath = join(chapter3ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.files).toHaveLength(6);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const rows = readFileSync(join(chapter3ResourceRoot, "structured_validation_data.csv"), "utf8")
+      .trim()
+      .split("\n");
+    expect(rows).toHaveLength(49);
+    expect(rows.filter((row) => row.includes(",coast-a,"))).toHaveLength(12);
+    expect(rows.filter((row) => row.includes(",2025,"))).toHaveLength(16);
+  });
+
+  it("records an honest Chapter 3 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_3_REVIEW.md");
+    expect(review).toContain("4.72 / 5");
+    expect(review).toContain("cannot support a real coastal-meadow transfer claim");
+    expect(review).toContain("not the hyperparameter-optimisation chapter");
+  });
+});
+
+describe("Module 3 structured validation behaviour", () => {
+  it("creates deterministic balanced grouped folds with no protected-group overlap", () => {
+    const groups = ["a", "a", "a", "b", "b", "c", "c", "d"];
+    const folds = createBalancedGroupFolds(groups, 3);
+    expect(folds).toHaveLength(3);
+    expect(folds.flatMap((fold) => fold.testIndices).sort((a, b) => a - b)).toEqual(
+      Array.from({ length: groups.length }, (_, index) => index),
+    );
+    expect(folds.every((fold) => findFoldGroupOverlap(groups, fold).length === 0)).toBe(true);
+    expect(() => createBalancedGroupFolds(groups, 5)).toThrow("number of unique groups");
+  });
+
+  it("creates one complete assessment fold per location", () => {
+    const groups = ["coast-b", "coast-a", "coast-b", "coast-c"];
+    const folds = createLeaveOneGroupOutFolds(groups);
+    expect(folds.map((fold) => fold.heldOutGroups)).toEqual([["coast-a"], ["coast-b"], ["coast-c"]]);
+    expect(folds[1].testIndices).toEqual([0, 2]);
+    expect(folds.every((fold) => findFoldGroupOverlap(groups, fold).length === 0)).toBe(true);
+  });
+
+  it("creates direction-respecting expanding temporal folds", () => {
+    const periods = [2023, 2024, 2025, 2023, 2024, 2025];
+    const folds = createForwardTemporalFolds(periods);
+    expect(folds).toHaveLength(2);
+    expect(folds[0]).toMatchObject({ trainIndices: [0, 3], testIndices: [1, 4], heldOutGroups: ["2024"] });
+    expect(folds[1]).toMatchObject({ trainIndices: [0, 1, 3, 4], testIndices: [2, 5], heldOutGroups: ["2025"] });
+    expect(() => createForwardTemporalFolds([2025, 2025])).toThrow("at least two ordered periods");
+  });
+
+  it("summarises fold variation without hiding the worst transfer", () => {
+    expect(summariseFoldMetrics([2, 4, 6])).toEqual({
+      mean: 4,
+      standardDeviation: Math.sqrt(8 / 3),
+      minimum: 2,
+      maximum: 6,
+    });
+    expect(() => summariseFoldMetrics([])).toThrow("at least one finite value");
+  });
+
+  it("blocks outer assessment evidence from inner model selection", () => {
+    expect(validateNestedValidationAssignments([
+      { observationId: "a", outerFold: 1, outerRole: "development", innerFold: 1, usedForModelSelection: true },
+      { observationId: "b", outerFold: 1, outerRole: "assessment", innerFold: null, usedForModelSelection: false },
+    ])).toEqual([]);
+
+    const issues = validateNestedValidationAssignments([
+      { observationId: "a", outerFold: 1, outerRole: "development", innerFold: null, usedForModelSelection: true },
+      { observationId: "b", outerFold: 1, outerRole: "assessment", innerFold: 2, usedForModelSelection: true },
+      { observationId: "b", outerFold: 1, outerRole: "assessment", innerFold: null, usedForModelSelection: false },
+    ]);
+    expect(issues.map((issue) => issue.code)).toEqual(expect.arrayContaining([
+      "development-row-missing-inner-fold",
+      "outer-assessment-used-for-selection",
+      "outer-assessment-assigned-inner-fold",
+      "duplicate-outer-assignment",
+    ]));
   });
 });
 

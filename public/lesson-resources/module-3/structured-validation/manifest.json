@@ -1,0 +1,43 @@
+{
+  "pack": "module3-chapter3-structured-validation-v1",
+  "data_status": "Entirely synthetic teaching fixture; not measurements from the published Baltic coastal plant-traits dataset",
+  "licence": "CC0-1.0",
+  "created": "2026-08-18",
+  "validation_contract": {
+    "outer_assessment": "may estimate only the transfer claim represented by its withheld site, block or time",
+    "inner_selection": "may use only the current outer development partition",
+    "final_test": "remains outside Chapter 3 and must not influence validation design or model selection"
+  },
+  "files": [
+    {
+      "path": "../Environmental_Monitoring_Project_Starter.ipynb",
+      "purpose": "Continuous Module 3 portfolio notebook with Chapters 1–3 checkpoints",
+      "sha256": "b6d0bf05446faa8694c655b886238809018db45c690f6472bd3f92254d282cd0"
+    },
+    {
+      "path": "README.md",
+      "purpose": "Synthetic data status, chapter workflow and reproducibility contract",
+      "sha256": "cf5a256c276e427a9a3a10bb2eab48bdee95825eb0214188b6416ccb1ab9e19f"
+    },
+    {
+      "path": "structured_validation_data.csv",
+      "purpose": "Forty-eight synthetic observations with site, block, year, coordinates and saved comparison folds",
+      "sha256": "0dc99e7e5de73c4ae362affeed2ee833c75ceb389ff575e5d4637abac89dbbec"
+    },
+    {
+      "path": "VALIDATION_DESIGN_TEMPLATE.md",
+      "purpose": "Claim-first spatial, temporal and nested validation protocol",
+      "sha256": "037a62c78946deb882f39d693bd40afa0f0c741dfb9e14e47be2283798a4f02e"
+    },
+    {
+      "path": "fold_registry_template.csv",
+      "purpose": "Row-level outer and inner evidence role template",
+      "sha256": "d4135a87ef3fe1881bfbd2a0fc4705ce7d952c792f61a0baace41247de7c666a"
+    },
+    {
+      "path": "LEAKAGE_CHECKLIST.md",
+      "purpose": "Identity, spatial, temporal, preprocessing, selection and test-firewall release gate",
+      "sha256": "476dc5f01f7362f6e1a800c1088652f57ebe3957830cf4a4b67c92bb2be35aa4"
+    }
+  ]
+}
