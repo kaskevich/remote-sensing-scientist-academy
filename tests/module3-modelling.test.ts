@@ -4,21 +4,27 @@ import { dirname, join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   applyBoostingStage,
+  calculateBinaryClassificationMetrics,
   calculateErrorSkill,
   calculateRegressionMetrics,
+  countDiscreteSearchCombinations,
   createBalancedGroupFolds,
   createForwardTemporalFolds,
   createLeaveOneGroupOutFolds,
   createMeanBaseline,
   createMedianBaseline,
+  diagnoseLearningDynamics,
   findFoldGroupOverlap,
   findTrainingServingSkew,
   findBestRegressionStump,
+  selectThresholdByMinimumRecall,
+  summariseFeatureStability,
   summariseFoldMetrics,
   validateExperimentPlan,
   validateModelRunMetadata,
   validateModellingDataset,
   validateNestedValidationAssignments,
+  validateOptimisationProtocol,
   validatePredictorHypotheses,
   validateTargetSpecification,
   type ModelRunMetadata,
@@ -39,6 +45,7 @@ const repositoryRoot = process.cwd();
 const resourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/modelling-foundations");
 const chapter2ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/baseline-and-xgboost");
 const chapter3ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/structured-validation");
+const chapter4ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/controlled-optimisation");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -112,7 +119,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes three complete opening chapters while exposing the full planned pathway", () => {
+  it("publishes four complete opening chapters while exposing the full planned pathway", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -135,8 +142,12 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-10",
       "lesson-3-11",
       "lesson-3-12",
+      "lesson-3-13",
+      "lesson-3-14",
+      "lesson-3-15",
+      "lesson-3-16",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(12);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(16);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -216,6 +227,10 @@ describe("Module 3 teaching assets", () => {
       "validation-claim-ladder.svg",
       "temporal-validation-directions.svg",
       "nested-cross-validation.svg",
+      "controlled-search-evidence.svg",
+      "overfit-learning-curves.svg",
+      "feature-stability-across-folds.svg",
+      "classification-threshold.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -234,7 +249,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 12; lesson += 1) {
+    for (let lesson = 1; lesson <= 16; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -313,6 +328,113 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.72 / 5");
     expect(review).toContain("cannot support a real coastal-meadow transfer claim");
     expect(review).toContain("not the hyperparameter-optimisation chapter");
+  });
+
+  it("verifies the Chapter 4 controlled-optimisation pack and its checksum manifest", () => {
+    const manifestPath = join(chapter4ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      evidence_rule: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.evidence_rule).toContain("final test");
+    expect(manifest.files).toHaveLength(9);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const probabilityRows = readFileSync(join(chapter4ResourceRoot, "rare_habitat_probabilities.csv"), "utf8")
+      .trim()
+      .split("\n");
+    expect(probabilityRows).toHaveLength(25);
+    expect(probabilityRows.filter((row) => row.includes(",1,")).length).toBeGreaterThanOrEqual(6);
+    expect(probabilityRows.every((row, index) => index === 0 || row.endsWith(",synthetic"))).toBe(true);
+  });
+
+  it("records an honest Chapter 4 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_4_REVIEW.md");
+    expect(review).toContain("4.76 / 5");
+    expect(review).toContain("not the complete evaluation and interpretation chapter");
+    expect(review).toContain("cannot support a real coastal-meadow transfer claim");
+  });
+});
+
+describe("Module 3 controlled optimisation behaviour", () => {
+  it("counts bounded discrete spaces and validates the optimisation firewall", () => {
+    expect(countDiscreteSearchCombinations({ depth: [2, 3, 4], rate: [0.02, 0.05], subsample: [0.8, 1] })).toBe(12);
+    expect(() => countDiscreteSearchCombinations({ depth: [] })).toThrow("at least one candidate value");
+    expect(validateOptimisationProtocol({
+      primaryMetric: "MAE in centimetres",
+      searchSpaceRationale: "modest capacity and shrinkage",
+      innerValidationUnit: "spatial block",
+      outerAssessmentUnit: "site",
+      candidateBudget: 12,
+      randomSeed: 42,
+      finalTestOpened: false,
+    })).toEqual([]);
+    expect(validateOptimisationProtocol({
+      primaryMetric: "",
+      searchSpaceRationale: "",
+      innerValidationUnit: "",
+      outerAssessmentUnit: "site",
+      candidateBudget: 0,
+      randomSeed: -1,
+      finalTestOpened: true,
+    }).map((issue) => issue.code)).toEqual(expect.arrayContaining([
+      "missing-primary-metric",
+      "missing-search-space-rationale",
+      "missing-inner-validation-unit",
+      "invalid-candidate-budget",
+      "invalid-search-seed",
+      "final-test-used-during-optimisation",
+    ]));
+  });
+
+  it("distinguishes underfit, overfit and controlled learning dynamics", () => {
+    expect(diagnoseLearningDynamics(8, 9, 9.4)).toBe("underfit");
+    expect(diagnoseLearningDynamics(1.4, 5.2, 9.4)).toBe("overfit");
+    expect(diagnoseLearningDynamics(3.3, 4.4, 9.4)).toBe("controlled");
+    expect(() => diagnoseLearningDynamics(1, Number.NaN, 2)).toThrow("finite and non-negative");
+  });
+
+  it("summarises fold-level feature stability without hiding variation", () => {
+    const summary = summariseFeatureStability([
+      { feature: "uav_height_p95", fold: "a", importance: 1.4 },
+      { feature: "uav_height_p95", fold: "b", importance: 1.0 },
+      { feature: "texture", fold: "a", importance: -0.1 },
+      { feature: "texture", fold: "b", importance: 0.3 },
+    ]);
+    expect(summary[0]).toMatchObject({ feature: "uav_height_p95", foldCount: 2, positiveFoldFraction: 1, meanImportance: 1.2 });
+    expect(summary[1]).toMatchObject({ feature: "texture", positiveFoldFraction: 0.5 });
+    expect(summary[1].meanImportance).toBeCloseTo(0.1);
+    expect(() => summariseFeatureStability([
+      { feature: "ndvi", fold: "a", importance: 1 },
+      { feature: "ndvi", fold: "a", importance: 2 },
+    ])).toThrow("only once per fold");
+  });
+
+  it("calculates threshold metrics and selects by a declared recall floor", () => {
+    const observed: Array<0 | 1> = [1, 1, 0, 0, 0, 0];
+    const probabilities = [0.8, 0.4, 0.7, 0.3, 0.2, 0.1];
+    expect(calculateBinaryClassificationMetrics(observed, probabilities, 0.5)).toEqual({
+      threshold: 0.5,
+      truePositive: 1,
+      falsePositive: 1,
+      trueNegative: 3,
+      falseNegative: 1,
+      precision: 0.5,
+      recall: 0.5,
+      specificity: 0.75,
+    });
+    expect(selectThresholdByMinimumRecall(observed, probabilities, [0.2, 0.4, 0.5], 1)).toMatchObject({
+      threshold: 0.4,
+      recall: 1,
+      precision: 2 / 3,
+    });
+    expect(() => calculateBinaryClassificationMetrics([1], [1.2], 0.5)).toThrow("between zero and one");
   });
 });
 

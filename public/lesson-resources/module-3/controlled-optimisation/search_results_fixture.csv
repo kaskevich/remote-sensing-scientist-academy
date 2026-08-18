@@ -1,0 +1,13 @@
+outer_fold,candidate_id,max_depth,learning_rate,min_child_weight,subsample,inner_block,validation_mae_cm,fit_seconds,status
+coast-d,c01,2,0.02,3,0.9,block-a,4.82,0.42,complete
+coast-d,c01,2,0.02,3,0.9,block-b,5.11,0.39,complete
+coast-d,c01,2,0.02,3,0.9,block-c,4.66,0.41,complete
+coast-d,c02,3,0.05,3,0.8,block-a,4.31,0.53,complete
+coast-d,c02,3,0.05,3,0.8,block-b,4.58,0.51,complete
+coast-d,c02,3,0.05,3,0.8,block-c,4.27,0.54,complete
+coast-d,c03,4,0.10,1,1.0,block-a,4.18,0.61,complete
+coast-d,c03,4,0.10,1,1.0,block-b,5.47,0.64,complete
+coast-d,c03,4,0.10,1,1.0,block-c,4.12,0.60,complete
+coast-d,c04,3,0.02,6,0.9,block-a,4.40,0.48,complete
+coast-d,c04,3,0.02,6,0.9,block-b,4.63,0.46,complete
+coast-d,c04,3,0.02,6,0.9,block-c,4.39,0.47,complete

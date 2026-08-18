@@ -1,0 +1,18 @@
+{
+  "pack": "module-3-chapter-4-controlled-optimisation-v1",
+  "data_status": "All numeric records are deterministic synthetic teaching evidence; they are not measured coastal-meadow observations",
+  "licence": "CC0-1.0",
+  "scientific_context": "Baltic coastal meadow monitoring; context informed by https://doi.org/10.5281/zenodo.20083250 without copying measurement rows",
+  "evidence_rule": "Selection uses structured development evidence only; outer assessment and the final test cannot choose parameters, stopping, features or thresholds",
+  "files": [
+    { "path": "README.md", "sha256": "48c18590d1ea9235bab0e2f418cb5190664004f89330bc5cded27d109bb5e2ee" },
+    { "path": "TUNING_PROTOCOL_TEMPLATE.md", "sha256": "32aad9b76d4ad31e331cbb3052b4b188615c62005495f75ef32ca0211a1f7f30" },
+    { "path": "LEARNING_DYNAMICS_TEMPLATE.md", "sha256": "f7e1ca328863138464a350ab93f20ab40b44cab3f0a6580d668873d8bd7f9d9b" },
+    { "path": "FEATURE_STABILITY_TEMPLATE.csv", "sha256": "70572496df942bdb95ef2bc413ad7556b7d533bab817d3fd7c5c7f503e00d23c" },
+    { "path": "THRESHOLD_DECISION_TEMPLATE.md", "sha256": "4814a8b6075d5cd7dbc528085316e5592e185da8b4acc77887fc97c4b141118b" },
+    { "path": "search_results_fixture.csv", "sha256": "bd942e4b43d7da2ade01dc9acfa0309773afa69efe3ceb387a51e87af585d487" },
+    { "path": "learning_dynamics_fixture.csv", "sha256": "0537bda9cbecb7272768dfca582fdf1091763f5b5de92b9aafeccd70ef1d73c7" },
+    { "path": "feature_stability_fixture.csv", "sha256": "6d81d2600c798989d744084647bf9905c838ff914eb25a8299e8db5e29d98927" },
+    { "path": "rare_habitat_probabilities.csv", "sha256": "8b16ba2b0a07d2772315a09cc2a0a3b24297e2be5bd728f6bc9848825936a93a" }
+  ]
+}

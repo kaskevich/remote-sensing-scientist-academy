@@ -525,3 +525,177 @@ export function validateNestedValidationAssignments(assignments: NestedValidatio
 
   return issues;
 }
+
+export type OptimisationProtocol = {
+  primaryMetric: string;
+  searchSpaceRationale: string;
+  innerValidationUnit: string;
+  outerAssessmentUnit: string;
+  candidateBudget: number;
+  randomSeed: number;
+  finalTestOpened: boolean;
+};
+
+export function countDiscreteSearchCombinations(space: Record<string, readonly unknown[]>) {
+  const entries = Object.entries(space);
+  if (entries.length === 0 || entries.some(([, values]) => values.length === 0)) {
+    throw new Error("Every search-space parameter needs at least one candidate value");
+  }
+  return entries.reduce((count, [, values]) => count * values.length, 1);
+}
+
+export function validateOptimisationProtocol(protocol: OptimisationProtocol) {
+  const issues: ModellingValidationIssue[] = [];
+  for (const [value, label] of [
+    [protocol.primaryMetric, "primary metric"],
+    [protocol.searchSpaceRationale, "search-space rationale"],
+    [protocol.innerValidationUnit, "inner validation unit"],
+    [protocol.outerAssessmentUnit, "outer assessment unit"],
+  ]) {
+    if (blank(value)) {
+      issues.push({ code: `missing-${label.replaceAll(" ", "-")}`, message: `The optimisation protocol needs a ${label}`, severity: "blocker" });
+    }
+  }
+  if (!Number.isInteger(protocol.candidateBudget) || protocol.candidateBudget < 1) {
+    issues.push({ code: "invalid-candidate-budget", message: "Candidate budget must be a positive integer", severity: "blocker" });
+  }
+  if (!Number.isInteger(protocol.randomSeed) || protocol.randomSeed < 0) {
+    issues.push({ code: "invalid-search-seed", message: "Search seed must be a non-negative integer", severity: "blocker" });
+  }
+  if (protocol.finalTestOpened) {
+    issues.push({ code: "final-test-used-during-optimisation", message: "The final test must stay sealed throughout optimisation", severity: "blocker" });
+  }
+  return issues;
+}
+
+export type LearningDynamicsDiagnosis = "underfit" | "overfit" | "controlled";
+
+export function diagnoseLearningDynamics(
+  trainingLoss: number,
+  validationLoss: number,
+  baselineLoss: number,
+): LearningDynamicsDiagnosis {
+  if (![trainingLoss, validationLoss, baselineLoss].every(Number.isFinite) || baselineLoss <= 0 || trainingLoss < 0 || validationLoss < 0) {
+    throw new Error("Learning-dynamics losses must be finite and non-negative, with a positive baseline loss");
+  }
+  if (validationLoss >= baselineLoss * 0.95 && trainingLoss >= baselineLoss * 0.75) {
+    return "underfit";
+  }
+  if (validationLoss - trainingLoss > baselineLoss * 0.25) {
+    return "overfit";
+  }
+  return "controlled";
+}
+
+export type FeatureImportanceRecord = {
+  feature: string;
+  fold: string;
+  importance: number;
+};
+
+export type FeatureStabilitySummary = {
+  feature: string;
+  foldCount: number;
+  positiveFoldFraction: number;
+  meanImportance: number;
+  standardDeviation: number;
+};
+
+export function summariseFeatureStability(records: FeatureImportanceRecord[]): FeatureStabilitySummary[] {
+  if (records.length === 0) {
+    throw new Error("Feature stability requires at least one fold-level importance record");
+  }
+  const seen = new Set<string>();
+  const grouped = new Map<string, number[]>();
+  for (const record of records) {
+    const feature = record.feature.trim();
+    const fold = record.fold.trim();
+    if (!feature || !fold || !Number.isFinite(record.importance)) {
+      throw new Error("Every feature-stability record needs a feature, fold and finite importance");
+    }
+    const key = `${feature}:${fold}`;
+    if (seen.has(key)) {
+      throw new Error("Each feature may occur only once per fold");
+    }
+    seen.add(key);
+    grouped.set(feature, [...(grouped.get(feature) ?? []), record.importance]);
+  }
+  return [...grouped.entries()].map(([feature, values]) => {
+    const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+    const variance = values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / values.length;
+    return {
+      feature,
+      foldCount: values.length,
+      positiveFoldFraction: values.filter((value) => value > 0).length / values.length,
+      meanImportance: mean,
+      standardDeviation: Math.sqrt(variance),
+    };
+  }).sort((a, b) => b.positiveFoldFraction - a.positiveFoldFraction || b.meanImportance - a.meanImportance || a.feature.localeCompare(b.feature));
+}
+
+export type BinaryClassificationMetrics = {
+  threshold: number;
+  truePositive: number;
+  falsePositive: number;
+  trueNegative: number;
+  falseNegative: number;
+  precision: number;
+  recall: number;
+  specificity: number;
+};
+
+export function calculateBinaryClassificationMetrics(
+  observed: Array<0 | 1>,
+  probabilities: number[],
+  threshold: number,
+): BinaryClassificationMetrics {
+  if (observed.length === 0 || observed.length !== probabilities.length) {
+    throw new Error("Observed classes and probabilities must have equal, non-zero length");
+  }
+  if (!Number.isFinite(threshold) || threshold < 0 || threshold > 1 || probabilities.some((value) => !Number.isFinite(value) || value < 0 || value > 1)) {
+    throw new Error("Probabilities and threshold must be finite values between zero and one");
+  }
+  let truePositive = 0;
+  let falsePositive = 0;
+  let trueNegative = 0;
+  let falseNegative = 0;
+  observed.forEach((value, index) => {
+    const prediction = probabilities[index] >= threshold ? 1 : 0;
+    if (value === 1 && prediction === 1) truePositive += 1;
+    if (value === 0 && prediction === 1) falsePositive += 1;
+    if (value === 0 && prediction === 0) trueNegative += 1;
+    if (value === 1 && prediction === 0) falseNegative += 1;
+  });
+  const positivePredictions = truePositive + falsePositive;
+  const observedPositives = truePositive + falseNegative;
+  const observedNegatives = trueNegative + falsePositive;
+  return {
+    threshold,
+    truePositive,
+    falsePositive,
+    trueNegative,
+    falseNegative,
+    precision: positivePredictions === 0 ? 0 : truePositive / positivePredictions,
+    recall: observedPositives === 0 ? 0 : truePositive / observedPositives,
+    specificity: observedNegatives === 0 ? 0 : trueNegative / observedNegatives,
+  };
+}
+
+export function selectThresholdByMinimumRecall(
+  observed: Array<0 | 1>,
+  probabilities: number[],
+  thresholds: number[],
+  minimumRecall: number,
+) {
+  if (!Number.isFinite(minimumRecall) || minimumRecall < 0 || minimumRecall > 1 || thresholds.length === 0) {
+    throw new Error("Threshold selection needs candidate thresholds and a minimum recall between zero and one");
+  }
+  const eligible = thresholds
+    .map((threshold) => calculateBinaryClassificationMetrics(observed, probabilities, threshold))
+    .filter((metrics) => metrics.recall >= minimumRecall)
+    .sort((a, b) => b.precision - a.precision || b.specificity - a.specificity || b.threshold - a.threshold);
+  if (eligible.length === 0) {
+    throw new Error("No candidate threshold satisfies the declared minimum recall");
+  }
+  return eligible[0];
+}
