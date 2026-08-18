@@ -1,0 +1,10 @@
+parameter,mechanism,chapter_2_setting,expected_effect,interaction_to_watch,scientific_risk,evidence_needed_before_tuning
+n_estimators,number of additive boosting trees,200,fixed capacity for the starting candidate,learning_rate,more stages can follow development noise,learning curves inside development folds
+learning_rate,scales each tree contribution,0.05,conservative additive updates,n_estimators,too few trees may underfit at a small rate,development-fold learning dynamics
+max_depth,maximum depth of each tree,3,limits conditional partition complexity,min_child_weight,deep paths may describe tiny sample-specific groups,stable structured-fold performance
+min_child_weight,minimum child instance weight or Hessian sum,3,discourages very small child regions,max_depth,rare valid conditions can be smoothed away,child support and subgroup diagnostics
+subsample,row fraction per boosting stage,0.8,introduces controlled row subsampling,random_state,does not reproduce spatial validation,repeatability and structured-fold evaluation
+colsample_bytree,feature fraction per tree,0.8,introduces controlled feature subsampling,feature redundancy,measurement groups may be omitted unevenly,feature stability across folds
+gamma,minimum loss reduction for another split,0,does not add an extra split-gain threshold in the start,max_depth,small training gains may be accepted,development-fold regularisation comparison
+reg_alpha,L1 leaf-weight penalty,0,no additional L1 penalty in the start,reg_lambda,sparsity can be mislabelled feature selection,validated regularisation hypothesis
+reg_lambda,L2 leaf-weight penalty,1.0,shrinks leaf updates,max_depth,regularisation cannot repair leakage,development-fold generalisation evidence

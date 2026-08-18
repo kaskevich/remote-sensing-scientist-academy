@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Baseline ladder and evaluation firewall</title>
+  <desc id="desc">Training observations fit a constant baseline, a transparent linear baseline and a complex candidate. All three predict the same untouched validation observations. A sealed final test remains outside model development.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/></marker>
+    <style>
+      .title{font:700 28px Georgia,serif;fill:#17243E}.label{font:700 17px Arial,sans-serif;fill:#17243E}.body{font:15px Arial,sans-serif;fill:#34435E}.small{font:13px Arial,sans-serif;fill:#59667A}.box{fill:#FFFDFC;stroke:#A35F47;stroke-width:2}.soft{fill:#F6ECE8;stroke:#B97358;stroke-width:2}.navy{fill:#17243E}.white{fill:#fff;font:700 16px Arial,sans-serif}.line{stroke:#A35F47;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="680" fill="#FBF8F6"/>
+  <text x="60" y="58" class="title">A useful model must clear a declared baseline</text>
+  <rect x="60" y="100" width="230" height="112" rx="10" class="soft"/>
+  <text x="175" y="135" text-anchor="middle" class="label">TRAINING EVIDENCE</text>
+  <text x="175" y="164" text-anchor="middle" class="body">targets + ordered predictors</text>
+  <text x="175" y="190" text-anchor="middle" class="small">fit rules here only</text>
+  <path d="M290 156 H355" class="line"/>
+  <rect x="365" y="90" width="300" height="105" rx="10" class="box"/>
+  <text x="390" y="125" class="label">1 · CONSTANT BASELINE</text>
+  <text x="390" y="153" class="body">training mean or median</text>
+  <text x="390" y="178" class="small">uses no predictor information</text>
+  <rect x="365" y="220" width="300" height="105" rx="10" class="box"/>
+  <text x="390" y="255" class="label">2 · TRANSPARENT BASELINE</text>
+  <text x="390" y="283" class="body">predeclared linear relationship</text>
+  <text x="390" y="308" class="small">tests simple usable signal</text>
+  <rect x="365" y="350" width="300" height="105" rx="10" class="box"/>
+  <text x="390" y="385" class="label">3 · COMPLEX CANDIDATE</text>
+  <text x="390" y="413" class="body">tree ensemble or XGBoost</text>
+  <text x="390" y="438" class="small">must justify added flexibility</text>
+  <path d="M290 156 C330 156 330 142 355 142" class="line"/>
+  <path d="M290 156 C330 156 330 272 355 272" class="line"/>
+  <path d="M290 156 C330 156 330 402 355 402" class="line"/>
+  <rect x="720" y="90" width="410" height="365" rx="12" fill="#fff" stroke="#17243E" stroke-width="3"/>
+  <rect x="720" y="90" width="410" height="52" rx="10" class="navy"/>
+  <text x="925" y="123" text-anchor="middle" class="white">ONE UNTOUCHED VALIDATION REGISTRY</text>
+  <text x="755" y="182" class="label">Same observation IDs</text>
+  <text x="755" y="213" class="body">• same target definition and unit</text>
+  <text x="755" y="243" class="body">• same feature schema and row order</text>
+  <text x="755" y="273" class="body">• same MAE and RMSE functions</text>
+  <text x="755" y="303" class="body">• baseline skill names its comparator</text>
+  <line x1="755" y1="330" x2="1095" y2="330" stroke="#D6C0B8" stroke-width="2"/>
+  <text x="755" y="365" class="label">Decision</text>
+  <text x="755" y="395" class="body">Does added flexibility improve the</text>
+  <text x="755" y="420" class="body">same held-out cases enough to justify it?</text>
+  <path d="M665 142 H710" class="line"/>
+  <path d="M665 272 H710" class="line"/>
+  <path d="M665 402 H710" class="line"/>
+  <rect x="720" y="505" width="410" height="105" rx="10" fill="#ECEFF4" stroke="#59667A" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="925" y="540" text-anchor="middle" class="label">SEALED FINAL TEST</text>
+  <text x="925" y="568" text-anchor="middle" class="body">not opened for this comparison</text>
+  <text x="925" y="592" text-anchor="middle" class="small">no parameter, feature or baseline choice</text>
+  <text x="60" y="632" class="small">Increasing flexibility is a hypothesis to test—not progress by definition</text>
+</svg>

@@ -107,21 +107,21 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12 a
 | Vector–raster integration | Academy goals | 2 | 2.15, 2.25 | Yes | Yes | Yes | Extraction tables | COMPLETE |
 | Scalable workflows | Academy goals | 2 | 2.16, 2.35–2.42, 2.50–2.53 | Yes for bounded compute and production orchestration | Yes | Yes | Database, Cloud-Native EO and Production Workflow packages | COMPLETE AS FOUNDATION |
 | Spatial data exploration and cleaning | Academy goals | 1/2 | 1.8–1.11, 2.5–2.10 | Yes | Yes | Yes | Data/vector reports | COMPLETE |
-| Feature engineering | Academy goals | Future modelling | No implemented modelling workflow | No | No | No | No | MISSING |
+| Feature engineering | Academy goals | 3 | 3.3–3.4 | Yes for predictor hypotheses, support, operational availability and model-ready schema | Yes | Yes | Predictor Hypothesis Register and Modelling Evidence Package | COMPLETE AS FOUNDATION; selection stability remains planned |
 | Spatial aggregation | Academy goals | 1/2 | 1.10, 2.7, 2.15 | Yes | Yes | Yes | Summary/extraction tables | COMPLETE |
 | Spatial statistics | Module 2 outcome | 2 | 2.31–2.34 | Yes | Yes | Yes | Spatial Inference and Validation Package | COMPLETE |
 | Scientific visualization | Academy goals | 1/2 | 1.11–1.12, QA maps, 2.44 and Chapter 9 practicum | Yes for figures and accessible interactive evidence delivery | Yes | Yes | Figures, QA maps and map/table handover | COMPLETE AS FOUNDATION |
-| What machine learning does | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
-| Features/predictors and targets | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Regression and classification | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Train/validation/test design | Academy goals | 2/future modelling | 2.48–2.49 | Yes for geospatial semantic segmentation | Yes | Yes | Spatial split proof and model assurance | COMPLETE AS FOUNDATION; broader modelling remains planned |
-| Preprocessing and feature engineering | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Random Forest | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| XGBoost | Modelling card | Future modelling | No module | No | No | No | No | MISSING |
-| R², RMSE and MAE | Academy goals | 2/future modelling | 2.21, 2.33–2.34 | Yes for spatial prediction and regression baseline | Yes | Yes | Interpolation and model-comparison tables | PARTIAL; classification/model-module depth planned |
+| What machine learning does | Modelling card | 3 | 3.1, 3.5–3.8 | Yes for prediction, baseline controls, fitted partitions, additive optimisation and evidence limits | Yes | Yes | Baseline Report, Mechanism Audit and First Defensible XGBoost Candidate | COMPLETE AS FOUNDATION |
+| Features/predictors and targets | Academy goals | 3 | 3.2–3.4 | Yes | Yes | Yes | Target Specification, Predictor Hypotheses and Model Experiment Plan | COMPLETE |
+| Regression and classification | Academy goals | 3 | 3.1, 3.5–3.8 | Regression implemented through a full first-model workflow; classification counterpart and baseline logic introduced | Yes for regression | Yes for regression | First Defensible XGBoost Candidate | PARTIAL; imbalanced classification and full classification evaluation remain planned |
+| Train/validation/test design | Academy goals | 2/3 | 2.48–2.49, 3.4–3.8 | Yes for final-test firewall, saved Chapter 2 split and fixed-case comparison | Yes | Yes | Experiment Plan and validation prediction ledger | COMPLETE AS FOUNDATION; structured/nested validation remains planned |
+| Preprocessing and feature engineering | Academy goals | 3 | 3.3–3.4, 3.8 | Yes for schema, transformations, missingness policy and fit/predict consistency | Yes | Yes | Feature schema and model metadata | PARTIAL; learned preprocessing and feature selection remain planned |
+| Random Forest | Academy goals | 3 | 3.6 | Yes | Yes | Yes | Tree Ensemble Mechanism Audit | COMPLETE AS FOUNDATION |
+| XGBoost | Modelling card | 3 | 3.7–3.8 | Yes for objective, gradients, Hessians, regularisation, parameter effects, fit, model IO and handover | Yes | Yes | Parameter Decision Record and First Defensible XGBoost Candidate | COMPLETE AS FOUNDATION; tuning and advanced constraints remain planned |
+| R², RMSE and MAE | Academy goals | 2/3 | 2.21, 2.33–2.34, 3.5, 3.8 | MAE and RMSE implemented for baseline and candidate evidence; R² limitations introduced | Yes | Yes | Baseline and first-model reports | PARTIAL; complete regression diagnostic treatment remains planned in 3.17 |
 | Confusion matrix, precision, recall and F1 | Academy goals | 2/future modelling | 2.49 | Yes for image segmentation; F1 remains a derived extension | Yes | Yes | Regional/class/object assurance report | PARTIAL; broader model-module depth planned |
 | Feature importance and interpretation | Academy goals | Future modelling | No module | No | No | No | No | MISSING |
-| Overfitting, hyperparameters and cross-validation | Academy goals | 2/future modelling | 2.48–2.49 | Yes for baseline, spatial splits, threshold selection and leakage | Yes | Yes | Model design and assurance package | COMPLETE AS FOUNDATION |
+| Overfitting, hyperparameters and cross-validation | Academy goals | 2/3 | 2.48–2.49, 3.5–3.8 | Yes for bias–variance intuition, tree capacity, parameter effects, fixed split and leakage boundaries | Yes | Yes | Mechanism Audit and Parameter Decision Record | COMPLETE AS FOUNDATION; nested validation and tuning remain planned |
 | Spatial cross-validation and autocorrelation | Academy goals | 2/future modelling | 2.31–2.34 | Yes | Yes | Yes | Weights sensitivity and separated-block validation | COMPLETE AS FOUNDATION; predictive-model application planned |
 | Leakage, extrapolation and uncertainty | Academy goals | 2/future modelling | 2.29, 2.31–2.34, 2.48–2.49 and capstone | Yes | Yes | Yes | Support masks, residual/error/domain maps and release decisions | COMPLETE AS FOUNDATION |
 | Prediction and validation maps | Modelling card | Future modelling | No module | No | No | No | No | MISSING |

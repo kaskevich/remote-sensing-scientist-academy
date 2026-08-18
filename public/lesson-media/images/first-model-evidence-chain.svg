@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">First defensible XGBoost model evidence chain</title>
+  <desc id="desc">A frozen experiment plan leads to versioned data, a saved split and ordered feature schema. Training rows fit one untuned XGBoost candidate. It and the baseline predict identical validation IDs. Metrics, model JSON, metadata and reload verification form the handover while the final test remains sealed.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/></marker>
+    <style>
+      .title{font:700 28px Georgia,serif;fill:#17243E}.label{font:700 15px Arial,sans-serif;fill:#17243E}.body{font:13px Arial,sans-serif;fill:#34435E}.small{font:12px Arial,sans-serif;fill:#59667A}.box{fill:#FFFDFC;stroke:#A35F47;stroke-width:2}.soft{fill:#F6ECE8;stroke:#B97358;stroke-width:2}.navy{fill:#17243E;stroke:#17243E;stroke-width:2}.white{font:700 15px Arial,sans-serif;fill:#fff}.line{stroke:#A35F47;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="#FBF8F6"/>
+  <text x="55" y="52" class="title">A model becomes reviewable when every arrow is preserved</text>
+  <rect x="50" y="105" width="200" height="115" rx="10" class="soft"/>
+  <text x="150" y="140" text-anchor="middle" class="label">FROZEN PLAN</text>
+  <text x="150" y="169" text-anchor="middle" class="body">target · baseline · metric</text>
+  <text x="150" y="193" text-anchor="middle" class="body">candidate · split · test rule</text>
+  <path d="M250 162 H300" class="line"/>
+  <rect x="310" y="85" width="250" height="155" rx="10" class="box"/>
+  <text x="435" y="120" text-anchor="middle" class="label">VERSIONED EVIDENCE</text>
+  <text x="435" y="150" text-anchor="middle" class="body">dataset + checksum</text>
+  <text x="435" y="176" text-anchor="middle" class="body">saved train / validation IDs</text>
+  <text x="435" y="202" text-anchor="middle" class="body">ordered names · dtypes · units</text>
+  <text x="435" y="226" text-anchor="middle" class="small">same transformations at inference</text>
+  <path d="M560 162 H610" class="line"/>
+  <rect x="620" y="105" width="220" height="115" rx="10" class="soft"/>
+  <text x="730" y="140" text-anchor="middle" class="label">ONE UNTUNED FIT</text>
+  <text x="730" y="169" text-anchor="middle" class="body">XGBRegressor · seed 42</text>
+  <text x="730" y="193" text-anchor="middle" class="body">training rows only</text>
+  <path d="M840 162 H890" class="line"/>
+  <rect x="900" y="85" width="250" height="155" rx="10" class="box"/>
+  <text x="1025" y="120" text-anchor="middle" class="label">FIXED VALIDATION LEDGER</text>
+  <text x="1025" y="150" text-anchor="middle" class="body">same IDs for baseline + candidate</text>
+  <text x="1025" y="176" text-anchor="middle" class="body">MAE · RMSE · bias · skill</text>
+  <text x="1025" y="202" text-anchor="middle" class="body">row-level predictions + residuals</text>
+  <text x="1025" y="226" text-anchor="middle" class="small">provisional Chapter 2 claim</text>
+  <path d="M1025 240 V300" class="line"/>
+  <rect x="820" y="310" width="330" height="145" rx="10" class="soft"/>
+  <text x="985" y="345" text-anchor="middle" class="label">HANDOVER PACKAGE</text>
+  <text x="985" y="375" text-anchor="middle" class="body">model.json</text>
+  <text x="985" y="401" text-anchor="middle" class="body">MODEL_METADATA.json</text>
+  <text x="985" y="427" text-anchor="middle" class="body">feature schema + predictions + report</text>
+  <path d="M820 382 H745" class="line"/>
+  <rect x="465" y="310" width="270" height="145" rx="10" class="box"/>
+  <text x="600" y="345" text-anchor="middle" class="label">RELOAD VERIFICATION</text>
+  <text x="600" y="375" text-anchor="middle" class="body">new estimator object</text>
+  <text x="600" y="401" text-anchor="middle" class="body">validate schema and order</text>
+  <text x="600" y="427" text-anchor="middle" class="body">reproduce fixed predictions</text>
+  <path d="M465 382 H390" class="line"/>
+  <rect x="60" y="310" width="320" height="145" rx="10" class="navy"/>
+  <text x="220" y="347" text-anchor="middle" class="white">REVIEWABLE DEVELOPMENT CANDIDATE</text>
+  <text x="220" y="380" text-anchor="middle" class="white">supported: this split and data version</text>
+  <text x="220" y="407" text-anchor="middle" class="white">unsupported: new-site or future transfer</text>
+  <text x="220" y="434" text-anchor="middle" class="white">next gate: Chapter 3 validation</text>
+  <rect x="310" y="535" width="580" height="105" rx="10" fill="#ECEFF4" stroke="#59667A" stroke-width="2" stroke-dasharray="9 7"/>
+  <text x="600" y="571" text-anchor="middle" class="label">SEALED FINAL TEST</text>
+  <text x="600" y="600" text-anchor="middle" class="body">does not select features, parameters, thresholds or candidate models</text>
+  <text x="600" y="624" text-anchor="middle" class="small">opening it during development changes its scientific role</text>
+  <line x1="600" y1="455" x2="600" y2="535" stroke="#59667A" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="55" y="678" class="small">Model serialization preserves fitted behaviour; metadata preserves the experiment that gives that behaviour meaning</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">From one decision tree to Random Forest and gradient boosting</title>
+  <desc id="desc">A coastal-meadow observation follows threshold decisions to one regression leaf. Random Forest diversifies and averages trees in parallel. Gradient boosting adds ordered trees that correct the current model under a loss.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#A35F47"/></marker>
+    <style>
+      .title{font:700 28px Georgia,serif;fill:#17243E}.label{font:700 16px Arial,sans-serif;fill:#17243E}.body{font:14px Arial,sans-serif;fill:#34435E}.small{font:12px Arial,sans-serif;fill:#59667A}.node{fill:#FFFDFC;stroke:#A35F47;stroke-width:2}.leaf{fill:#F6ECE8;stroke:#B97358;stroke-width:2}.panel{fill:#fff;stroke:#D6C0B8;stroke-width:2}.line{stroke:#A35F47;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="#FBF8F6"/>
+  <text x="55" y="52" class="title">The trees look similar; the learning logic is different</text>
+  <rect x="55" y="85" width="360" height="570" rx="12" class="panel"/>
+  <text x="235" y="120" text-anchor="middle" class="label">ONE REGRESSION TREE</text>
+  <rect x="125" y="150" width="220" height="64" rx="8" class="node"/>
+  <text x="235" y="178" text-anchor="middle" class="label">UAV height p95 ≤ 34.5?</text>
+  <text x="235" y="200" text-anchor="middle" class="small">root node · fitted threshold</text>
+  <path d="M205 214 C185 250 145 258 130 285" class="line"/>
+  <path d="M265 214 C285 250 325 258 340 285" class="line"/>
+  <text x="145" y="252" class="small">yes</text><text x="315" y="252" class="small">no</text>
+  <rect x="70" y="290" width="150" height="78" rx="8" class="leaf"/>
+  <text x="145" y="321" text-anchor="middle" class="label">LEAF A</text>
+  <text x="145" y="347" text-anchor="middle" class="body">predict 21.4 cm</text>
+  <rect x="250" y="290" width="150" height="64" rx="8" class="node"/>
+  <text x="325" y="318" text-anchor="middle" class="label">NDMI ≤ 0.31?</text>
+  <text x="325" y="340" text-anchor="middle" class="small">internal node</text>
+  <path d="M300 354 C285 385 275 393 255 420" class="line"/>
+  <path d="M350 354 C365 385 375 393 390 420" class="line"/>
+  <rect x="190" y="425" width="130" height="78" rx="8" class="leaf"/>
+  <text x="255" y="456" text-anchor="middle" class="label">LEAF B</text>
+  <text x="255" y="482" text-anchor="middle" class="body">predict 31.8 cm</text>
+  <rect x="330" y="425" width="130" height="78" rx="8" class="leaf"/>
+  <text x="395" y="456" text-anchor="middle" class="label">LEAF C</text>
+  <text x="395" y="482" text-anchor="middle" class="body">predict 42.6 cm</text>
+  <text x="90" y="548" class="body">One observation follows one path</text>
+  <text x="90" y="574" class="body">and receives one leaf value</text>
+  <text x="90" y="607" class="small">A split is a predictive partition,</text>
+  <text x="90" y="627" class="small">not an ecological law</text>
+  <rect x="455" y="85" width="690" height="260" rx="12" class="panel"/>
+  <text x="800" y="120" text-anchor="middle" class="label">RANDOM FOREST · DIVERSIFY THEN AVERAGE</text>
+  <rect x="505" y="160" width="145" height="105" rx="8" class="leaf"/><rect x="725" y="160" width="145" height="105" rx="8" class="leaf"/><rect x="945" y="160" width="145" height="105" rx="8" class="leaf"/>
+  <text x="577" y="190" text-anchor="middle" class="label">TREE 1</text><text x="577" y="218" text-anchor="middle" class="body">bootstrap rows</text><text x="577" y="242" text-anchor="middle" class="small">feature subset</text>
+  <text x="797" y="190" text-anchor="middle" class="label">TREE 2</text><text x="797" y="218" text-anchor="middle" class="body">bootstrap rows</text><text x="797" y="242" text-anchor="middle" class="small">feature subset</text>
+  <text x="1017" y="190" text-anchor="middle" class="label">TREE 3…</text><text x="1017" y="218" text-anchor="middle" class="body">diversified fit</text><text x="1017" y="242" text-anchor="middle" class="small">parallel members</text>
+  <path d="M577 265 L760 305" class="line"/><path d="M797 265 L797 300" class="line"/><path d="M1017 265 L835 305" class="line"/>
+  <text x="800" y="326" text-anchor="middle" class="label">AVERAGE REGRESSION PREDICTIONS</text>
+  <rect x="455" y="375" width="690" height="280" rx="12" class="panel"/>
+  <text x="800" y="410" text-anchor="middle" class="label">GRADIENT BOOSTING · ORDERED ADDITIVE CORRECTION</text>
+  <rect x="490" y="455" width="150" height="92" rx="8" class="leaf"/><rect x="725" y="455" width="150" height="92" rx="8" class="leaf"/><rect x="960" y="455" width="150" height="92" rx="8" class="leaf"/>
+  <text x="565" y="486" text-anchor="middle" class="label">MODEL 0</text><text x="565" y="514" text-anchor="middle" class="body">initial prediction</text>
+  <text x="800" y="486" text-anchor="middle" class="label">+ η TREE 1</text><text x="800" y="514" text-anchor="middle" class="body">reduce current loss</text>
+  <text x="1035" y="486" text-anchor="middle" class="label">+ η TREE 2…</text><text x="1035" y="514" text-anchor="middle" class="body">new loss, new update</text>
+  <path d="M640 501 H715" class="line"/><path d="M875 501 H950" class="line"/>
+  <text x="800" y="585" text-anchor="middle" class="body">Order matters because each tree responds to the model built so far</text>
+  <text x="800" y="618" text-anchor="middle" class="small">Neither mechanism establishes causality or repairs a weak validation design</text>
+</svg>

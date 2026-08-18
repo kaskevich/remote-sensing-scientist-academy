@@ -1,0 +1,33 @@
+{
+  "pack": "module3-chapter2-baseline-and-xgboost-v1",
+  "data_status": "Entirely synthetic teaching fixture; not measurements from the published Baltic coastal plant-traits dataset",
+  "licence": "CC0-1.0",
+  "created": "2026-08-18",
+  "split_contract": {
+    "train": "may fit Chapter 2 comparators and the declared untuned candidate",
+    "validation": "may score frozen Chapter 2 candidates on identical observation IDs",
+    "sealed": "must not influence Chapter 2 development decisions"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e13dc213b5b526697ac19bb51cefaad7adc100607d15ac0a520ab00bdbf9eff4"
+    },
+    {
+      "path": "baseline_modelling_data.csv",
+      "sha256": "adef94c336a0a8a8d213d09f605fa8009d771f23003f63eed600a69fa8e67260"
+    },
+    {
+      "path": "BASELINE_REPORT_TEMPLATE.md",
+      "sha256": "4b72b91165cf04596048154153fe1704f5290d7e2ad9373a87055b19a8df187d"
+    },
+    {
+      "path": "parameter_decision_record.csv",
+      "sha256": "fff194562b41dad72d19e3a47550e51dc3ddb811f8d7cc572fadb2a5ccf790f1"
+    },
+    {
+      "path": "MODEL_METADATA_TEMPLATE.json",
+      "sha256": "d5966964bb3f924c82b2b95863d693e5fcc4615ce7cec5ac34f81026e00f09d4"
+    }
+  ]
+}
