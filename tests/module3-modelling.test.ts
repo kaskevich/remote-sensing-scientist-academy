@@ -22,11 +22,13 @@ import {
   createMeanBaseline,
   createMedianBaseline,
   diagnoseLearningDynamics,
+  evaluateMonitoringGate,
   findFoldGroupOverlap,
   findIntervalCrossings,
   findTrainingServingSkew,
   findBestRegressionStump,
   selectThresholdByMinimumRecall,
+  scoreModellingArchitectures,
   summariseResidualGroups,
   summariseFeatureStability,
   summariseFoldMetrics,
@@ -34,9 +36,12 @@ import {
   validateModelRunMetadata,
   validateModellingDataset,
   validateNestedValidationAssignments,
+  validateOperationalFeatureSchema,
+  validateOperationalModelCard,
   validateOptimisationProtocol,
   validatePredictorHypotheses,
   validateTargetSpecification,
+  countPredictionWindows,
   type ModelRunMetadata,
   type ModelExperimentPlan,
   type ModellingObservation,
@@ -58,6 +63,7 @@ const chapter3ResourceRoot = join(repositoryRoot, "public/lesson-resources/modul
 const chapter4ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/controlled-optimisation");
 const chapter5ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/evaluation-and-applicability");
 const chapter6ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/prediction-uncertainty");
+const chapter7ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/operational-workflow");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -131,7 +137,7 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes six complete opening chapters while exposing the full planned pathway", () => {
+  it("publishes all seven chapters while keeping the capstone transparent", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
@@ -167,8 +173,13 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-23",
       "lesson-3-24",
       "lesson-3-25",
+      "lesson-3-26",
+      "lesson-3-27",
+      "lesson-3-28",
+      "lesson-3-29",
+      "lesson-3-30",
     ]);
-    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(25);
+    expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(30);
     expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
   });
 
@@ -261,6 +272,11 @@ describe("Module 3 teaching assets", () => {
       "quantile-interval-evidence.svg",
       "split-conformal-coverage.svg",
       "prediction-uncertainty-applicability.svg",
+      "raster-inference-contract.svg",
+      "earth-engine-modelling-component.svg",
+      "local-vs-earth-engine-architecture.svg",
+      "monitoring-drift-gates.svg",
+      "operational-model-package.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -279,7 +295,7 @@ describe("Module 3 teaching assets", () => {
     expect(notebook.nbformat).toBe(4);
     expect(notebook.cells.some((cell) => cell.cell_type === "code")).toBe(true);
     const narrative = notebook.cells.flatMap((cell) => cell.source).join("");
-    for (let lesson = 1; lesson <= 25; lesson += 1) {
+    for (let lesson = 1; lesson <= 30; lesson += 1) {
       expect(narrative).toContain(`Lesson 3.${lesson} checkpoint`);
     }
     expect(narrative).toContain("synthetic");
@@ -452,6 +468,100 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.86 / 5");
     expect(review).toContain("not the operational inference chapter");
     expect(review).toContain("cannot support a real coastal-meadow uncertainty");
+  });
+
+  it("verifies the Chapter 7 operational-workflow pack and its checksum manifest", () => {
+    const manifestPath = join(chapter7ResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      evidence_rule: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("synthetic");
+    expect(manifest.evidence_rule).toContain("predicted change");
+    expect(manifest.files).toHaveLength(10);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+    const runs = readFileSync(join(chapter7ResourceRoot, "monitoring_runs_fixture.csv"), "utf8").trim().split("\n");
+    expect(runs).toHaveLength(8);
+    expect(runs.every((row, index) => index === 0 || row.endsWith(",synthetic"))).toBe(true);
+  });
+
+  it("records an honest Chapter 7 multi-lens review", () => {
+    const review = read("docs/MODULE_3_CHAPTER_7_REVIEW.md");
+    expect(review).toContain("4.89 / 5");
+    expect(review).toContain("cannot support a real coastal-meadow monitoring claim");
+    expect(review).toContain("capstone planned");
+  });
+});
+
+describe("Module 3 operational workflow behaviour", () => {
+  const feature = {
+    name: "sentinel2_ndvi",
+    unit: "unitless index",
+    transform: "verified NDVI v1",
+    support: "10 m seasonal cell",
+    version: "1.0.0",
+    dtype: "float32",
+  };
+
+  it("fails closed when operational feature meaning or order changes", () => {
+    expect(validateOperationalFeatureSchema([feature], [{ ...feature }])).toEqual([]);
+    expect(validateOperationalFeatureSchema([feature], [{ ...feature, transform: "annual median" }])).toEqual([
+      expect.objectContaining({ code: "transform-mismatch", severity: "blocker" }),
+    ]);
+    expect(validateOperationalFeatureSchema([feature], [])).toEqual([
+      expect.objectContaining({ code: "feature-count-mismatch", severity: "blocker" }),
+    ]);
+  });
+
+  it("counts complete and edge raster windows deterministically", () => {
+    expect(countPredictionWindows(1024, 768, 256, 256)).toEqual({ columns: 4, rows: 3, total: 12 });
+    expect(countPredictionWindows(1025, 769, 256, 256)).toEqual({ columns: 5, rows: 4, total: 20 });
+    expect(() => countPredictionWindows(0, 10, 5, 5)).toThrow("Raster width");
+  });
+
+  it("makes architecture scores inspectable rather than calling them approval", () => {
+    expect(scoreModellingArchitectures({
+      requiresXgboost: true,
+      customStructuredValidation: true,
+      archiveScaleProcessing: true,
+      restrictedTargetsRemainLocal: true,
+      repeatedServerSideComposites: true,
+    })).toEqual({ local: 3, "earth-engine": 2, hybrid: 5 });
+  });
+
+  it("blocks schema drift and routes other monitoring failures to review", () => {
+    const passing = {
+      schemaMatch: true,
+      sensorQaPass: true,
+      temporalSupportMatch: true,
+      outsideApplicabilityFraction: 0.08,
+      maximumOutsideFraction: 0.10,
+      coverageRecentlyVerified: true,
+    };
+    expect(evaluateMonitoringGate(passing)).toBe("release");
+    expect(evaluateMonitoringGate({ ...passing, schemaMatch: false })).toBe("blocked");
+    expect(evaluateMonitoringGate({ ...passing, outsideApplicabilityFraction: 0.11 })).toBe("review");
+    expect(evaluateMonitoringGate({ ...passing, coverageRecentlyVerified: false })).toBe("review");
+    expect(() => evaluateMonitoringGate({ ...passing, outsideApplicabilityFraction: 1.1 })).toThrow("between zero and one");
+  });
+
+  it("separates model-card structure from substantive completion", () => {
+    const headings = [
+      "model identity", "target and prediction unit", "intended use", "unsupported use",
+      "feature schema", "training domain", "validation and performance", "uncertainty",
+      "applicability", "limitations", "software and provenance", "update policy", "acceptance tests",
+    ];
+    const complete = Object.fromEntries(headings.map((heading) => [heading, `Completed ${heading}`]));
+    expect(validateOperationalModelCard(complete)).toEqual({ missing: [], empty: [], valid: true });
+    expect(validateOperationalModelCard({ ...complete, "unsupported use": "" })).toMatchObject({ empty: ["unsupported use"], valid: false });
+    const missingUpdate = { ...complete };
+    delete missingUpdate["update policy"];
+    expect(validateOperationalModelCard(missingUpdate)).toMatchObject({ missing: ["update policy"], valid: false });
   });
 });
 

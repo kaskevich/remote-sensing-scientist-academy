@@ -977,3 +977,126 @@ export function assignPredictionReleaseState(input: {
   if (input.applicability === "review" || input.intervalWidth > input.widthReviewThreshold) return "review";
   return "supported";
 }
+
+export type OperationalFeature = {
+  name: string;
+  unit: string;
+  transform: string;
+  support: string;
+  version: string;
+  dtype: string;
+};
+
+export function validateOperationalFeatureSchema(
+  expected: OperationalFeature[],
+  actual: OperationalFeature[],
+): ModellingValidationIssue[] {
+  if (expected.length === 0) {
+    return [{ code: "empty-feature-schema", message: "The frozen prediction schema must contain at least one feature", severity: "blocker" }];
+  }
+  const issues: ModellingValidationIssue[] = [];
+  if (actual.length !== expected.length) {
+    issues.push({ code: "feature-count-mismatch", message: `Expected ${expected.length} features but received ${actual.length}`, severity: "blocker" });
+  }
+  const fields: Array<keyof OperationalFeature> = ["name", "unit", "transform", "support", "version", "dtype"];
+  for (let index = 0; index < Math.min(expected.length, actual.length); index += 1) {
+    for (const field of fields) {
+      if (actual[index][field] !== expected[index][field]) {
+        issues.push({
+          code: `${field}-mismatch`,
+          message: `Feature ${index + 1} changed ${field}: expected ${expected[index][field]}, received ${actual[index][field]}`,
+          severity: "blocker",
+        });
+      }
+    }
+  }
+  return issues;
+}
+
+export function countPredictionWindows(
+  rasterWidth: number,
+  rasterHeight: number,
+  windowWidth: number,
+  windowHeight: number,
+) {
+  for (const [value, label] of [
+    [rasterWidth, "Raster width"],
+    [rasterHeight, "Raster height"],
+    [windowWidth, "Window width"],
+    [windowHeight, "Window height"],
+  ] as const) {
+    if (!Number.isInteger(value) || value <= 0) throw new Error(`${label} must be a positive integer`);
+  }
+  const columns = Math.ceil(rasterWidth / windowWidth);
+  const rows = Math.ceil(rasterHeight / windowHeight);
+  return { columns, rows, total: columns * rows };
+}
+
+export type ModellingArchitecture = "local" | "earth-engine" | "hybrid";
+
+export type ArchitectureRequirements = {
+  requiresXgboost: boolean;
+  customStructuredValidation: boolean;
+  archiveScaleProcessing: boolean;
+  restrictedTargetsRemainLocal: boolean;
+  repeatedServerSideComposites: boolean;
+};
+
+export function scoreModellingArchitectures(requirements: ArchitectureRequirements) {
+  const capabilities: Record<ModellingArchitecture, Array<keyof ArchitectureRequirements>> = {
+    local: ["requiresXgboost", "customStructuredValidation", "restrictedTargetsRemainLocal"],
+    "earth-engine": ["archiveScaleProcessing", "repeatedServerSideComposites"],
+    hybrid: ["requiresXgboost", "customStructuredValidation", "archiveScaleProcessing", "restrictedTargetsRemainLocal", "repeatedServerSideComposites"],
+  };
+  return Object.fromEntries(Object.entries(capabilities).map(([architecture, supported]) => [
+    architecture,
+    supported.filter((requirement) => requirements[requirement]).length,
+  ])) as Record<ModellingArchitecture, number>;
+}
+
+export type MonitoringGate = {
+  schemaMatch: boolean;
+  sensorQaPass: boolean;
+  temporalSupportMatch: boolean;
+  outsideApplicabilityFraction: number;
+  maximumOutsideFraction: number;
+  coverageRecentlyVerified: boolean;
+};
+
+export type MonitoringState = "release" | "review" | "blocked";
+
+export function evaluateMonitoringGate(gate: MonitoringGate): MonitoringState {
+  if (![gate.outsideApplicabilityFraction, gate.maximumOutsideFraction].every(Number.isFinite)
+    || gate.outsideApplicabilityFraction < 0 || gate.outsideApplicabilityFraction > 1
+    || gate.maximumOutsideFraction < 0 || gate.maximumOutsideFraction > 1) {
+    throw new Error("Monitoring fractions must be finite values between zero and one");
+  }
+  if (!gate.schemaMatch) return "blocked";
+  if (!gate.sensorQaPass || !gate.temporalSupportMatch
+    || gate.outsideApplicabilityFraction > gate.maximumOutsideFraction
+    || !gate.coverageRecentlyVerified) return "review";
+  return "release";
+}
+
+export const REQUIRED_OPERATIONAL_MODEL_CARD_SECTIONS = [
+  "model identity",
+  "target and prediction unit",
+  "intended use",
+  "unsupported use",
+  "feature schema",
+  "training domain",
+  "validation and performance",
+  "uncertainty",
+  "applicability",
+  "limitations",
+  "software and provenance",
+  "update policy",
+  "acceptance tests",
+] as const;
+
+export function validateOperationalModelCard(sections: Record<string, string>) {
+  const normalized = new Map(Object.entries(sections).map(([heading, body]) => [heading.trim().toLowerCase(), body.trim()]));
+  const missing = REQUIRED_OPERATIONAL_MODEL_CARD_SECTIONS.filter((heading) => !normalized.has(heading));
+  const empty = REQUIRED_OPERATIONAL_MODEL_CARD_SECTIONS.filter((heading) => normalized.has(heading) && !normalized.get(heading));
+  return { missing, empty, valid: missing.length === 0 && empty.length === 0 };
+}

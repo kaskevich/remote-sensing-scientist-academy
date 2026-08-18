@@ -488,11 +488,102 @@ assert evidence[["prediction", "lower", "upper"]].notna().all(axis=1).equals(
     evidence["input_valid"]
 )`,
   },
-  { number: 26, chapter: 7, title: "Raster Inference at Scale", description: "Apply a fixed feature schema through masks and chunked prediction without changing meaning.", tools: ["Schema validation", "Chunked inference", "NoData"], artifact: "spatial_prediction_pipeline.py", code: "" },
-  { number: 27, chapter: 7, title: "Google Earth Engine for Modelling Workflows", description: "Use server-side sampling, supported classifiers and exports for a justified component.", tools: ["Earth Engine", "ee.Classifier", "Export"], artifact: "earth_engine_modelling_component.ipynb", code: "" },
-  { number: 28, chapter: 7, title: "Local ML versus Earth Engine ML", description: "Select an architecture by validation control, scale, access and reproducibility.", tools: ["Architecture", "XGBoost", "Earth Engine"], artifact: "model_architecture_decision.md", code: "" },
-  { number: 29, chapter: 7, title: "Monitoring Through Repeated Predictions", description: "Separate predicted differences from observed ecological change and define drift gates.", tools: ["Repeated inference", "Drift", "Review triggers"], artifact: "monitoring_runbook.md", code: "" },
-  { number: 30, chapter: 7, title: "Reproducibility, Model Cards and Operational QA", description: "Package the model, evidence, limitations and update policy for reviewable operation.", tools: ["Model card", "Versioning", "Operational QA"], artifact: "MODEL_CARD.md", code: "" },
+  {
+    number: 26,
+    chapter: 7,
+    title: "Raster Inference at Scale",
+    description: "Apply a frozen feature schema through valid masks and windowed prediction without semantic or spatial drift.",
+    tools: ["Schema gates", "Windowed inference", "Prediction QA"],
+    artifact: "Spatial Prediction Pipeline",
+    code: `def validate_prediction_schema(actual, expected):
+    actual_names = [item["name"] for item in actual]
+    expected_names = [item["name"] for item in expected]
+    if actual_names != expected_names:
+        raise ValueError(f"Feature order mismatch: {actual_names}")
+    for observed, required in zip(actual, expected):
+        for field in ("unit", "transform", "support", "version"):
+            if observed[field] != required[field]:
+                raise ValueError(f"{observed['name']} changed {field}")
+    return True`,
+  },
+  {
+    number: 27,
+    chapter: 7,
+    title: "Google Earth Engine for Modelling Workflows",
+    description: "Use server-side predictor stacks, sampling, supported classifiers and exports as a bounded modelling component.",
+    tools: ["Earth Engine", "ee.Classifier", "Server-side export"],
+    artifact: "Earth Engine Modelling Component",
+    code: `gee_component = {
+    "predictor_bands": ["B2", "B3", "B4", "B8", "NDVI"],
+    "sampling_unit": "field plot with documented scale",
+    "classifier": "ee.Classifier.smileRandomForest",
+    "output_mode": "REGRESSION",
+    "validation": "saved site folds outside Earth Engine sampling",
+    "export": "versioned image plus task record",
+    "xgboost_native": False,
+}
+for key, value in gee_component.items():
+    print(f"{key}: {value}")`,
+  },
+  {
+    number: 28,
+    chapter: 7,
+    title: "Local ML versus Earth Engine ML",
+    description: "Select a modelling architecture by validation control, algorithm need, data locality, scale and operational burden.",
+    tools: ["Architecture decision", "Local XGBoost", "Earth Engine ML"],
+    artifact: "Model Architecture Decision Record",
+    code: `requirements = {
+    "requires_xgboost": True,
+    "custom_nested_spatial_cv": True,
+    "archive_scale_processing": True,
+    "offline_reproducibility": True,
+}
+local_score = sum(requirements.values())
+gee_score = int(requirements["archive_scale_processing"])
+decision = "local_or_hybrid" if local_score > gee_score else "earth_engine"
+print(decision)`,
+  },
+  {
+    number: 29,
+    chapter: 7,
+    title: "Monitoring Through Repeated Predictions",
+    description: "Run comparable predictions through time, diagnose drift and prevent map differences from becoming unsupported ecological change claims.",
+    tools: ["Repeated inference", "Drift gates", "Review triggers"],
+    artifact: "Monitoring Runbook",
+    code: `monitoring_gate = {
+    "schema_match": True,
+    "sensor_qa_pass": True,
+    "outside_applicability_fraction": 0.08,
+    "maximum_supported_fraction": 0.10,
+    "coverage_recently_verified": True,
+}
+release = (
+    monitoring_gate["schema_match"]
+    and monitoring_gate["sensor_qa_pass"]
+    and monitoring_gate["outside_applicability_fraction"] <= monitoring_gate["maximum_supported_fraction"]
+    and monitoring_gate["coverage_recently_verified"]
+)
+print("release" if release else "review")`,
+  },
+  {
+    number: 30,
+    chapter: 7,
+    title: "Reproducibility, Model Cards and Operational QA",
+    description: "Package the model, evidence, limitations, acceptance tests and update policy for reviewable operation.",
+    tools: ["Model card", "Versioned package", "Operational acceptance"],
+    artifact: "Operational Monitoring Pipeline and Model Card",
+    code: `required_sections = {
+    "model identity", "target and prediction unit", "feature schema",
+    "training and temporal domain", "validation and performance",
+    "uncertainty", "applicability", "intended use", "unsupported use",
+    "limitations", "software", "update policy", "acceptance tests",
+}
+model_card_sections = required_sections.copy()
+missing = required_sections - set(model_card_sections)
+if missing:
+    raise ValueError(f"Incomplete model card: {sorted(missing)}")
+print("model card passes the structural gate")`,
+  },
 ];
 
 export const module3Lessons: Module3LessonSource[] = plannedLessons.map((item) => ({
@@ -527,6 +618,11 @@ export const publishedModule3LessonIds = [
   "lesson-3-23",
   "lesson-3-24",
   "lesson-3-25",
+  "lesson-3-26",
+  "lesson-3-27",
+  "lesson-3-28",
+  "lesson-3-29",
+  "lesson-3-30",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -548,10 +644,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "25 of 30 lessons available · capstone planned",
+  navigationMeta: "30 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapters 1–6 are available now. Chapter 7 and the capstone remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "All seven chapters are available now. The capstone remains visibly planned and will be released only after its scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -1176,6 +1272,111 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
     furtherReading: [
       { title: "ColorBrewer — map colour guidance", href: "https://colorbrewer2.org/" },
       { title: "W3C — images tutorial for accessibility", href: "https://www.w3.org/WAI/tutorials/images/" },
+    ],
+  },
+  "lesson-3-26": {
+    estimatedTime: "250–350 minutes",
+    lessonType: "Operational Raster Inference Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-26.md",
+    formativeChecks: [
+      { id: "m3-l26-schema", question: "A prediction stack has the correct band names and order, but its NDVI uses a different seasonal composite. May inference proceed?", options: ["No; temporal transformation is part of the feature schema", "Yes; names and order are enough", "Only when the raster dimensions are unchanged"], correctOption: 0, explanation: "Geometric and naming agreement cannot preserve changed measurement meaning. The pipeline must fail before prediction." },
+      { id: "m3-l26-windows", question: "What should change when a raster is predicted in smaller windows?", options: ["Memory demand, but not valid-cell predictions or spatial placement", "Feature order", "The model's target unit"], correctOption: 0, explanation: "Windowing is an execution strategy. Acceptance fixtures should show that it leaves numerical and spatial results invariant." },
+      { id: "m3-l26-release", question: "A cell has all required predictor values but lies outside applicability. What should the output preserve?", options: ["A withheld state distinct from NoData", "NoData because every unusable value means missing input", "A supported state when the interval is narrow"], correctOption: 0, explanation: "Input validity and model support are different evidence. Outside applicability remains withhold even if a model-based interval is narrow." },
+    ],
+    submissionChecklist: [...commonChecklist, "The frozen feature schema checks order, unit, transformation, support, version and dtype before prediction", "Windowed and single-batch fixtures produce identical values and spatial placement", "Regression/class/probability outputs preserve correct dtype, NoData, applicability and run metadata"],
+    rubric: rubric("Implements a fail-closed raster inference pipeline with semantic schema, valid mask, deterministic windows and multi-layer acceptance tests", "Explains why array shape and band names cannot guarantee feature equivalence and keeps invalid input, uncertainty and unsupported domain distinct"),
+    coreReferences: [
+      { title: "Rasterio — windowed reading and writing", href: "https://rasterio.readthedocs.io/en/stable/topics/windowed-rw.html" },
+      { title: "XGBoost 3.3 Python API", href: "https://xgboost.readthedocs.io/en/stable/python/python_api.html" },
+      { title: "OGC Cloud Optimized GeoTIFF", href: "https://docs.ogc.org/is/21-026/21-026.html" },
+    ],
+    furtherReading: [
+      { title: "XGBoost prediction API", href: "https://xgboost.readthedocs.io/en/stable/prediction.html" },
+      { title: "GDAL raster data model", href: "https://gdal.org/en/stable/user/raster_data_model.html" },
+    ],
+  },
+  "lesson-3-27": {
+    estimatedTime: "250–340 minutes",
+    lessonType: "Cloud EO Modelling Component Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-27.md",
+    formativeChecks: [
+      { id: "m3-l27-native", question: "Which statement about XGBoost in Earth Engine is accurate?", options: ["It is not a native ee.Classifier; use local or hybrid execution when XGBoost is required", "Every tree ensemble in Earth Engine is XGBoost", "A model becomes XGBoost when output mode is REGRESSION"], correctOption: 0, explanation: "Earth Engine provides supported classifier families and output modes. Algorithm identities must not be blurred." },
+      { id: "m3-l27-sampling", question: "What does `scale: 10` in a sampling call establish?", options: ["A computational sampling scale, not automatic equivalence with field support", "That every field target represents exactly 100 square metres", "That sampled pixels are independent"], correctOption: 0, explanation: "Measurement support, target assignment and independence remain scientific design questions." },
+      { id: "m3-l27-export", question: "What does a completed Earth Engine export task prove?", options: ["The specified computation finished, while semantic and independent spatial QA remain necessary", "The prediction is ecologically correct", "The classifier generalises to every region"], correctOption: 0, explanation: "Task completion is operational evidence, not validation or scientific interpretation." },
+    ],
+    submissionChecklist: [...commonChecklist, "Predictor-image, sample, model and evidence contracts are complete before training", "The selected classifier's current official output-mode support is documented and XGBoost is not claimed as native", "Exports retain task, asset, script, grid and independent QA records"],
+    rubric: rubric("Designs a bounded Earth Engine predictor, sampling, supported-classifier and export component while preserving protected validation", "Uses server-side scale responsibly and separates platform capability from target validity, independent evidence and ecological interpretation"),
+    coreReferences: [
+      { title: "Google Earth Engine — supervised classification", href: "https://developers.google.com/earth-engine/guides/classification" },
+      { title: "Google Earth Engine — classifier output modes", href: "https://developers.google.com/earth-engine/apidocs/ee-classifier-setoutputmode" },
+      { title: "Google Earth Engine — Image.classify", href: "https://developers.google.com/earth-engine/apidocs/ee-image-classify" },
+    ],
+    furtherReading: [
+      { title: "Google Earth Engine — client versus server", href: "https://developers.google.com/earth-engine/guides/client_server" },
+      { title: "Google Earth Engine — exporting images", href: "https://developers.google.com/earth-engine/guides/exporting_images" },
+    ],
+  },
+  "lesson-3-28": {
+    estimatedTime: "230–320 minutes",
+    lessonType: "Modelling Architecture Decision Studio",
+    markdownFile: "content/lessons/module-3/lesson-28.md",
+    formativeChecks: [
+      { id: "m3-l28-architecture", question: "A project requires custom XGBoost and nested spatial validation on moderate local UAV data. What is the simplest plausible starting architecture?", options: ["Controlled local Python, unless another requirement justifies a cloud interface", "Native Earth Engine because every EO project must be cloud-first", "Hybrid because more components are always safer"], correctOption: 0, explanation: "Architecture follows requirements. Moderate local data and custom modelling favour local control unless archive scale or another constraint changes the decision." },
+      { id: "m3-l28-hybrid", question: "What new risk does a hybrid workflow introduce?", options: ["Schema, provenance and grid drift at component interfaces", "It removes the need for validation", "It makes restricted coordinates public automatically"], correctOption: 0, explanation: "Every transfer must preserve feature meaning, observation identity and spatial geometry through explicit contracts." },
+      { id: "m3-l28-evidence", question: "May the highest score in a platform matrix choose the architecture automatically?", options: ["No; vetoes, evidence quality, governance, skills and interface risks require review", "Yes; arithmetic removes subjective judgement", "Only when every row has equal weight"], correctOption: 0, explanation: "A matrix structures judgement. It cannot turn uncertain assumptions into a scientifically binding decision." },
+    ],
+    submissionChecklist: [...commonChecklist, "Non-negotiable scientific and governance requirements precede platform comparison", "Local, Earth Engine and hybrid candidates are compared across the complete evidence lifecycle", "The selected design includes interface tests, accountable owners, rejected alternatives and review triggers"],
+    rubric: rubric("Produces a traceable architecture decision with responsibility allocation, interfaces, risks, acceptance tests and review triggers", "Selects a proportional system from evidence needs without platform hype, false precision or unsupported service claims"),
+    coreReferences: [
+      { title: "Google Earth Engine classification guide", href: "https://developers.google.com/earth-engine/guides/classification" },
+      { title: "XGBoost 3.3 Python API", href: "https://xgboost.readthedocs.io/en/stable/python/python_api.html" },
+      { title: "The Turing Way — reproducible environments", href: "https://book.the-turing-way.org/reproducible-research/renv" },
+    ],
+    furtherReading: [
+      { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+      { title: "C4 model", href: "https://c4model.com/" },
+    ],
+  },
+  "lesson-3-29": {
+    estimatedTime: "250–350 minutes",
+    lessonType: "Repeated Prediction and Drift Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-29.md",
+    formativeChecks: [
+      { id: "m3-l29-change", question: "Two comparable prediction maps differ by 12 target units. What has been established?", options: ["The fixed model produced a difference that requires uncertainty and independent ecological review", "Ecological decline is proven", "The sensor directly measured the target change"], correctOption: 0, explanation: "A modelled difference remains conditional on input comparability, model validity and reference evidence." },
+      { id: "m3-l29-drift", question: "Can predictor distributions alone establish concept drift?", options: ["No; new paired target evidence is needed to evaluate a changed predictor–target relationship", "Yes; any covariate shift is concept drift", "Yes; a large pixel count proves it"], correctOption: 0, explanation: "Input drift can be monitored without labels. Concept drift concerns the relationship to the target and requires target evidence." },
+      { id: "m3-l29-trigger", question: "A drift alert has no owner or response procedure. What is its operational value?", options: ["Incomplete; a trigger needs accountable action and closure", "Complete because dashboards are self-interpreting", "It should retrain automatically"], correctOption: 0, explanation: "Monitoring is governed action, not indicator display. Unowned alerts become noise or silent failure." },
+    ],
+    submissionChecklist: [...commonChecklist, "Each monitoring run preserves source, temporal, feature, grid, model and reference-product identity", "Data quality, covariate shift, concept drift and ecological change remain explicitly distinct", "Every release/review/retrain/retire trigger has an owner, response and protected evidence rule"],
+    rubric: rubric("Implements reproducible run-level and spatial monitoring gates, drift indicators and failure-state tests", "Interprets repeated predictions as model-conditioned evidence and requires new observations before concept or ecological-change claims"),
+    coreReferences: [
+      { title: "Google ML — production ML systems", href: "https://developers.google.com/machine-learning/crash-course/production-ml-systems" },
+      { title: "scikit-learn common pitfalls", href: "https://scikit-learn.org/stable/common_pitfalls.html" },
+      { title: "Gama et al. (2014), concept drift", href: "https://doi.org/10.1145/2523813" },
+    ],
+    furtherReading: [
+      { title: "Rabanser et al. — Failing Loudly", href: "https://doi.org/10.48550/arXiv.1810.11953" },
+      { title: "The Turing Way — research data management", href: "https://book.the-turing-way.org/reproducible-research/rdm" },
+    ],
+  },
+  "lesson-3-30": {
+    estimatedTime: "270–370 minutes",
+    lessonType: "Operational Model Package Signature Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-30.md",
+    formativeChecks: [
+      { id: "m3-l30-card", question: "A model card contains every required heading. What has the automated gate proved?", options: ["Structural completeness only; linked evidence and scientific claims still need review", "The model is operationally approved", "Future performance is guaranteed"], correctOption: 0, explanation: "Presence tests are valuable but cannot judge evidential adequacy or approve use." },
+      { id: "m3-l30-qa", question: "Which artifact must fail when a feature transform version changes?", options: ["The prediction-schema and golden-fixture acceptance gates", "Only the visual map legend", "Nothing when feature names stay the same"], correctOption: 0, explanation: "Transform identity is part of feature meaning and must block incompatible inference." },
+      { id: "m3-l30-update", question: "Why keep some new labels protected before retraining?", options: ["The replacement procedure needs independent evidence not used to trigger or tune it", "Labels become invalid after one use", "It makes the model file smaller"], correctOption: 0, explanation: "Triggering, development and assessment roles must remain separated during model updates." },
+    ],
+    submissionChecklist: [...commonChecklist, "MODEL_CARD.md states intended and unsupported uses, training evidence, validation, uncertainty, applicability and limitations", "The immutable release inventory, environment and checksums reconstruct a bounded golden-fixture result", "Update, rollback and retirement policies separate monitoring, development, protected assessment and approval"],
+    rubric: rubric("Assembles and verifies a versioned model package with structural, numerical, spatial, scientific and operational acceptance evidence", "Communicates a bounded use honestly, refuses synthetic-evidence overclaiming and establishes accountable update and retirement governance"),
+    coreReferences: [
+      { title: "Mitchell et al. (2019), Model Cards", href: "https://doi.org/10.1145/3287560.3287596" },
+      { title: "XGBoost model IO", href: "https://xgboost.readthedocs.io/en/stable/tutorials/saving_model.html" },
+      { title: "The Turing Way — reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+    ],
+    furtherReading: [
+      { title: "NIST AI Risk Management Framework", href: "https://www.nist.gov/itl/ai-risk-management-framework" },
+      { title: "Datasheets for Datasets", href: "https://doi.org/10.1145/3458723" },
     ],
   },
 };

@@ -139,6 +139,19 @@ test("a direct Module 3 Chapter 6 lesson link opens with uncertainty resources",
   await expect(lesson.getByRole("link", { name: /uncertainty inventory template/i })).toHaveAttribute("href", /UNCERTAINTY_INVENTORY_TEMPLATE\.md$/);
 });
 
+test("a direct Module 3 Chapter 7 lesson link opens with operational resources", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/#lesson-3-26");
+
+  const lesson = page.locator("#lesson-3-26");
+  await expect(lesson).toBeVisible();
+  await expect(lesson.locator(".module-index")).toHaveText("3.26");
+  await expect(lesson.getByText("Lesson 3.26 of 30", { exact: true })).toBeVisible();
+  await expect(lesson.getByRole("img", { name: /workflow diagram shows one frozen feature schema/i })).toBeVisible();
+  await expect(lesson.getByRole("link", { name: /operational prediction-schema template/i })).toHaveAttribute("href", /PREDICTION_SCHEMA_TEMPLATE\.json$/);
+  await expect(lesson.locator(".formative-check")).toHaveCount(3);
+});
+
 test("lesson code can be edited, run, and restored after refresh", async ({ page }) => {
   await page.route("**/pyodide.js", async (route) => {
     await route.fulfill({
@@ -596,7 +609,7 @@ test("task text, imagery, and GeoJSON persist and render", async ({ page }) => {
   await expect(page.getByRole("img", { name: "Uploaded map: saardu-boundary.geojson" })).toBeVisible();
 });
 
-test("Module 3 opens with six reviewed chapters and a transparent roadmap", async ({ page }) => {
+test("Module 3 opens with seven reviewed chapters and a transparent capstone roadmap", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#curriculum");
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
@@ -606,8 +619,8 @@ test("Module 3 opens with six reviewed chapters and a transparent roadmap", asyn
   await expect(overview.getByRole("heading", { name: "Remote Sensing Modelling", exact: true })).toBeVisible();
   await expect(overview.locator(".module-chapter")).toHaveCount(8);
   await expect(overview.locator(".module-syllabus li")).toHaveCount(31);
-  await expect(overview.locator(".syllabus-available")).toHaveCount(25);
-  await expect(overview.locator(".syllabus-planned")).toHaveCount(6);
+  await expect(overview.locator(".syllabus-available")).toHaveCount(30);
+  await expect(overview.locator(".syllabus-planned")).toHaveCount(1);
   await expect(overview.getByRole("link", { name: "Prediction, Inference and Explanation", exact: true })).toHaveAttribute("href", "#lesson-3-01");
   await expect(overview.getByText("What Does a Useful Model Need to Beat?", { exact: true })).toBeHidden();
   await overview.locator(".module-chapter").nth(1).locator("summary").click();

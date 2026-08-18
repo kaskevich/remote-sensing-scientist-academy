@@ -1,0 +1,26 @@
+{
+  "summary_version": "0.1.0",
+  "status": "synthetic_template",
+  "dataset_identities": [],
+  "licences": [],
+  "target_contract": "link_or_id",
+  "counts": {
+    "rows_received": null,
+    "rows_excluded": null,
+    "rows_modelled": null,
+    "sites": null,
+    "dates": null,
+    "spatial_blocks": null
+  },
+  "evidence_roles": {
+    "development": null,
+    "calibration": null,
+    "protected_assessment": null
+  },
+  "spatial_temporal_coverage": "replace",
+  "sampling_limitations": [],
+  "missingness_and_exclusions": [],
+  "feature_schema_id": "replace",
+  "source_checksums": {},
+  "responsible_author": "replace"
+}

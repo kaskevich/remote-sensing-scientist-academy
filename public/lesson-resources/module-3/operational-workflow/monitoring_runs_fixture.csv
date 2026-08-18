@@ -1,0 +1,8 @@
+run_id,reference_run,schema_match,sensor_qa_pass,temporal_support_match,outside_applicability_fraction,maximum_outside_fraction,coverage_recently_verified,expected_state,data_status
+run-2026,baseline,true,true,true,0.04,0.10,true,release,synthetic
+run-2027,run-2026,true,true,true,0.08,0.10,true,release,synthetic
+run-2028,run-2027,false,true,true,0.07,0.10,true,blocked,synthetic
+run-2029,run-2027,true,false,true,0.09,0.10,true,review,synthetic
+run-2030,run-2027,true,true,true,0.14,0.10,true,review,synthetic
+run-2031,run-2027,true,true,false,0.06,0.10,true,review,synthetic
+run-2032,run-2027,true,true,true,0.09,0.10,false,review,synthetic

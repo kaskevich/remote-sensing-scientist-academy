@@ -1,0 +1,28 @@
+{
+  "run_id": "prediction-YYYYMMDD-001",
+  "status": "not_run",
+  "model_package_version": "0.1.0-rc1",
+  "model_sha256": "replace_after_packaging",
+  "feature_schema_id": "environmental-monitoring-features-0.1.0",
+  "code_commit": "replace_with_git_commit",
+  "input_assets": [],
+  "destination_grid": {
+    "crs": "replace",
+    "transform": [],
+    "width": null,
+    "height": null
+  },
+  "window_shape": [512, 512],
+  "output_dtype": "float32",
+  "nodata": "replace",
+  "acceptance": {
+    "schema": false,
+    "grid": false,
+    "golden_fixture": false,
+    "window_invariance": false,
+    "spatial_spot_checks": false,
+    "output_manifest": false
+  },
+  "release_state": "blocked",
+  "reviewer": "replace"
+}
