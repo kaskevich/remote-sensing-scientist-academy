@@ -1,0 +1,19 @@
+{
+  "pack": "module-3-chapter-5-evaluation-and-applicability-v1",
+  "data_status": "All records, coordinates, context labels and predictions are deterministic synthetic teaching evidence; they are not measured coastal-meadow observations",
+  "licence": "CC0-1.0",
+  "scientific_context": "Baltic coastal meadow monitoring; context informed by https://doi.org/10.5281/zenodo.20083250 without copying measurement rows",
+  "evidence_rule": "The fixed predictions are protected diagnostic evidence; they cannot select and re-assess a revised model, calibrator, explanation schema or applicability threshold, and the final test remains sealed",
+  "files": [
+    { "path": "README.md", "sha256": "f27d87f7c745865d3d1f7c80fe5f959b0e957d4414c3079919e8dbf83b4b64cf" },
+    { "path": "REGRESSION_EVALUATION_TEMPLATE.md", "sha256": "a3700e0cd5a8979344d99ff9a2feead6843524de98017824631a589618b7e8d6" },
+    { "path": "CLASSIFICATION_EVALUATION_TEMPLATE.md", "sha256": "e753c2615ff69a49518a7a9d7a0e9dad31ef0477b5aad0998c9bf066d203995d" },
+    { "path": "MODEL_DIAGNOSTIC_TEMPLATE.md", "sha256": "be6fcb5c56f807fae14928714b3fe3f02e172236b0a30fd952478a2ce1e39375" },
+    { "path": "INTERPRETATION_CLAIMS_TEMPLATE.md", "sha256": "3e4a6ff8b287152741fa8e6093fbca9387769ba395d7b6d580d1e574d6a14c64" },
+    { "path": "DOMAIN_OF_APPLICABILITY_TEMPLATE.md", "sha256": "99e9cae9ce73e5481a828cdcf9badf9e516c54cce641879e4d3058842c222354" },
+    { "path": "regression_outer_predictions.csv", "sha256": "d1678f6056ef33422d3b711f56f434064c925d60454297beed036191872b0bb3" },
+    { "path": "classification_outer_probabilities.csv", "sha256": "a4df7b2bcb1f3e770634628797e79a78f0ef94e94e09f64c19032c0a2f7929f1" },
+    { "path": "diagnostic_context.csv", "sha256": "0d01b69bb47ff29d258fc36ad011b033f19b6d246c2ca7fc228cda891633a1e1" },
+    { "path": "applicability_training_and_grid.csv", "sha256": "cfe4ddff612c356e935dc8e17e2f202e6551a4374d480d3607603df4377ccd71" }
+  ]
+}

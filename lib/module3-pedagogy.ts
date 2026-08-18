@@ -308,11 +308,107 @@ for threshold in [0.20, 0.35, 0.50, 0.65]:
     })
 pd.DataFrame(rows)`,
   },
-  { number: 17, chapter: 5, title: "Regression Evaluation", description: "Interpret R², RMSE, MAE and bias together with fold variability and diagnostics.", tools: ["R²", "RMSE", "Residuals"], artifact: "regression_evaluation_package", code: "" },
-  { number: 18, chapter: 5, title: "Classification Evaluation and Probability Quality", description: "Evaluate classes, thresholds, ranking and probability calibration.", tools: ["Confusion matrix", "PR curve", "Calibration"], artifact: "classification_evaluation_package", code: "" },
-  { number: 19, chapter: 5, title: "Residual Geography and Structured Failure", description: "Map where errors concentrate and expose subgroup failure hidden by averages.", tools: ["Residual maps", "Subgroups", "Failure geography"], artifact: "MODEL_DIAGNOSTIC_REPORT.md", code: "" },
-  { number: 20, chapter: 5, title: "Model Interpretation Without Causal Overclaiming", description: "Compare gain, permutation and SHAP while preserving predictive claim boundaries.", tools: ["Permutation importance", "SHAP", "Partial dependence"], artifact: "interpretation_stability_report.md", code: "" },
-  { number: 21, chapter: 5, title: "Domain of Applicability and Extrapolation", description: "Identify and map predictions unsupported by the training domain.", tools: ["Environmental distance", "Analogues", "Applicability map"], artifact: "applicability.tif", code: "" },
+  {
+    number: 17,
+    chapter: 5,
+    title: "Regression Evaluation",
+    description: "Interpret R², RMSE, MAE and bias together with fold variability and residual diagnostics.",
+    tools: ["R²", "RMSE", "Residual diagnostics"],
+    artifact: "Regression Evaluation Package",
+    code: `from sklearn.metrics import mean_absolute_error, r2_score, root_mean_squared_error
+
+evaluation = outer_predictions.copy()
+evaluation["residual"] = evaluation["prediction"] - evaluation["observed"]
+summary = {
+    "mae_cm": mean_absolute_error(evaluation["observed"], evaluation["prediction"]),
+    "rmse_cm": root_mean_squared_error(evaluation["observed"], evaluation["prediction"]),
+    "bias_cm": evaluation["residual"].mean(),
+    "r_squared": r2_score(evaluation["observed"], evaluation["prediction"]),
+}
+summary`,
+  },
+  {
+    number: 18,
+    chapter: 5,
+    title: "Classification Evaluation and Probability Quality",
+    description: "Separate fixed class decisions, score ranking and probability calibration under class imbalance.",
+    tools: ["Confusion matrix", "ROC and PR curves", "Calibration"],
+    artifact: "Classification Evaluation and Probability-quality Package",
+    code: `from sklearn.metrics import brier_score_loss, confusion_matrix, roc_auc_score
+
+y_true = outer_scores["rare_habitat"].to_numpy()
+probability = outer_scores["rare_probability"].to_numpy()
+predicted = (probability >= frozen_threshold).astype(int)
+tn, fp, fn, tp = confusion_matrix(y_true, predicted, labels=[0, 1]).ravel()
+evidence = {
+    "counts": {"tn": tn, "fp": fp, "fn": fn, "tp": tp},
+    "roc_auc": roc_auc_score(y_true, probability),
+    "brier": brier_score_loss(y_true, probability),
+}
+evidence`,
+  },
+  {
+    number: 19,
+    chapter: 5,
+    title: "Residual Geography and Structured Failure",
+    description: "Map where errors concentrate and expose site, subgroup and acquisition failure hidden by averages.",
+    tools: ["Residual maps", "Subgroup evidence", "Failure hypotheses"],
+    artifact: "Model Diagnostic Report",
+    code: `diagnostic = outer_predictions.merge(
+    context_registry, on="observation_id", how="left", validate="one_to_one"
+)
+diagnostic["residual"] = diagnostic["prediction"] - diagnostic["observed"]
+diagnostic["absolute_error"] = diagnostic["residual"].abs()
+by_habitat = diagnostic.groupby("habitat_stratum").agg(
+    n=("observation_id", "size"),
+    sites=("site", "nunique"),
+    mae_cm=("absolute_error", "mean"),
+    bias_cm=("residual", "mean"),
+)
+by_habitat`,
+  },
+  {
+    number: 20,
+    chapter: 5,
+    title: "Model Interpretation Without Causal Overclaiming",
+    description: "Compare gain, permutation, dependence and SHAP explanations while preserving predictive claim boundaries.",
+    tools: ["Permutation importance", "SHAP", "Partial dependence and ICE"],
+    artifact: "Interpretation Stability Report",
+    code: `import pandas as pd
+from sklearn.inspection import permutation_importance
+
+gain = pd.Series(fitted_model.feature_importances_, index=feature_order)
+permuted = permutation_importance(
+    fitted_model, X_outer_assessment[feature_order], y_outer_assessment,
+    scoring="neg_mean_absolute_error", n_repeats=30, random_state=42,
+)
+comparison = pd.DataFrame({
+    "gain": gain,
+    "permutation_mae_increase": permuted.importances_mean,
+    "permutation_spread": permuted.importances_std,
+})
+comparison.sort_values("permutation_mae_increase", ascending=False)`,
+  },
+  {
+    number: 21,
+    chapter: 5,
+    title: "Domain of Applicability and Extrapolation",
+    description: "Identify, flag and map predictions unsupported by represented multivariate training evidence.",
+    tools: ["Predictor-space distance", "Nearest analogues", "Applicability map"],
+    artifact: "Model Diagnostic and Applicability Package",
+    code: `import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+features = ["sentinel2_ndvi", "uav_height_p95", "moisture_index"]
+scaler = StandardScaler().fit(X_development[features])
+training_z = scaler.transform(X_development[features])
+prediction_z = scaler.transform(prediction_units[features])
+distance = np.sqrt(
+    ((prediction_z[:, None, :] - training_z[None, :, :]) ** 2).sum(axis=2)
+)
+prediction_units["nearest_training_distance"] = distance.min(axis=1)
+prediction_units["nearest_training_row"] = distance.argmin(axis=1)`,
+  },
   { number: 22, chapter: 6, title: "What Uncertainty Means in Predictive EO", description: "Separate measurement, sampling, model, residual and transfer uncertainty.", tools: ["Uncertainty sources", "Error", "Transfer"], artifact: "uncertainty_inventory.md", code: "" },
   { number: 23, chapter: 6, title: "Prediction Intervals and Quantile Approaches", description: "Evaluate interval coverage and width alongside point predictions.", tools: ["Prediction intervals", "Quantiles", "Coverage"], artifact: "quantile_prediction_report.ipynb", code: "" },
   { number: 24, chapter: 6, title: "Conformal Prediction and Empirical Coverage", description: "Construct calibrated intervals while examining structured-dependence limits.", tools: ["Conformal prediction", "Calibration", "Exchangeability"], artifact: "conformal_coverage_report.ipynb", code: "" },
@@ -347,6 +443,11 @@ export const publishedModule3LessonIds = [
   "lesson-3-14",
   "lesson-3-15",
   "lesson-3-16",
+  "lesson-3-17",
+  "lesson-3-18",
+  "lesson-3-19",
+  "lesson-3-20",
+  "lesson-3-21",
 ] as const;
 
 const publishedLessonIdSet = new Set<string>(publishedModule3LessonIds);
@@ -368,10 +469,10 @@ export const module3Overview: AcademyModuleOverview = {
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
   navigationTitle: "Remote Sensing Modelling lessons",
-  navigationMeta: "16 of 30 lessons available · capstone planned",
+  navigationMeta: "21 of 30 lessons available · capstone planned",
   syllabusAriaLabel: "Thirty-lesson Module 3 curriculum map",
   planningNote:
-    "Chapters 1–4 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
+    "Chapters 1–5 are available now. Later chapters remain visibly planned and will be released only after their scientific, software and accessibility reviews pass.",
   title: "Remote Sensing Modelling",
   purpose:
     "Turn remote-sensing observations into defensible predictions by making the scientific claim, training evidence, validation design, uncertainty and operational domain explicit.",
@@ -807,6 +908,111 @@ const lessonConfigurations: Record<string, LessonConfiguration> = {
     furtherReading: [
       { title: "XGBoost parameters: scale_pos_weight", href: "https://xgboost.readthedocs.io/en/stable/parameter.html" },
       { title: "scikit-learn threshold post-tuning example", href: "https://scikit-learn.org/stable/auto_examples/model_selection/plot_tuned_decision_threshold.html" },
+    ],
+  },
+  "lesson-3-17": {
+    estimatedTime: "220–300 minutes",
+    lessonType: "Regression Evidence and Diagnostic Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-17.md",
+    formativeChecks: [
+      { id: "m3-l17-metrics", question: "Which statement correctly distinguishes MAE and RMSE?", options: ["Both use the target unit, but RMSE gives large residuals greater influence", "MAE is unitless while RMSE has the target unit", "RMSE always gives the scientifically correct model choice"], correctOption: 0, explanation: "MAE weights absolute deviations linearly; RMSE squares them before averaging and returns to the target unit. The appropriate emphasis depends on the decision." },
+      { id: "m3-l17-r2", question: "A held-out site has negative R². What does that mean?", options: ["The fixed predictions have greater squared error than predicting that site's assessment mean", "The software failed to calculate a legal value", "The model has negative causal influence"], correctOption: 0, explanation: "R² can be negative on assessment evidence. It is a relative squared-error comparison, not a causal quantity or a percentage of each observation explained." },
+      { id: "m3-l17-folds", question: "Why report fold metrics before a pooled result?", options: ["A pooled average can hide a failed transfer site and weighting by row count", "Every fold is an independent estimate of global truth", "Pooling is mathematically prohibited"], correctOption: 0, explanation: "Fold results retain the spatial or temporal transfer contexts defined by validation. Pooling can still be useful when its weighting and limits are explicit." },
+    ],
+    submissionChecklist: [...commonChecklist, "Model and baseline metrics use identical protected rows and declare the residual sign", "MAE, RMSE, bias and R² are reported with units, counts, fold spread and diagnostic plots", "No valid extreme or weak fold is removed because it reduces reported performance"],
+    rubric: rubric("Calculates and compares regression metrics correctly, preserves fold evidence, and produces observed–predicted, residual and distribution diagnostics", "Explains the unit, sensitivity and blind spot of each metric and limits the claim when errors vary by magnitude or transfer context"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — regression metrics", href: "https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics" },
+      { title: "scikit-learn — R² score", href: "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html" },
+      { title: "scikit-learn — root mean squared error", href: "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.root_mean_squared_error.html" },
+    ],
+    furtherReading: [
+      { title: "Gneiting (2011), Making and Evaluating Point Forecasts", href: "https://doi.org/10.1198/jasa.2011.r10138" },
+      { title: "Roberts et al. (2017), structured validation", href: "https://doi.org/10.1111/ecog.02881" },
+    ],
+  },
+  "lesson-3-18": {
+    estimatedTime: "230–310 minutes",
+    lessonType: "Classification and Probability-quality Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-18.md",
+    formativeChecks: [
+      { id: "m3-l18-decision-ranking", question: "Which evidence evaluates the one frozen operational threshold?", options: ["Confusion counts and their derived decision metrics", "ROC-AUC alone", "A reliability diagram alone"], correctOption: 0, explanation: "ROC and PR curves describe ranking across thresholds, while reliability describes probability meaning. The frozen action is evaluated by its confusion evidence and workload." },
+      { id: "m3-l18-roc-pr", question: "Why pair ROC with precision–recall evidence for a rare class?", options: ["A small false-positive rate can still create many false positives, while precision shows positive retrieval at the evaluated prevalence", "ROC-AUC is undefined whenever classes are imbalanced", "Precision–recall curves are independent of prevalence"], correctOption: 0, explanation: "ROC remains a valid ranking view, but the operational region and false-positive counts can be obscured. Precision is prevalence-dependent and must be reported with that context." },
+      { id: "m3-l18-calibration", question: "May outer assessment labels fit a calibrator and also assess its Brier score?", options: ["No; calibration is learned model development and needs fresh protected assessment", "Yes; calibration never changes predictions", "Yes, whenever reliability improves"], correctOption: 0, explanation: "A post-hoc calibrator learns from labels. Fitting and judging it on the same outer evidence contaminates probability-quality assessment." },
+    ],
+    submissionChecklist: [...commonChecklist, "The positive class, frozen threshold, prevalence and confusion counts are explicit", "ROC, PR and reliability evidence are distinguished and fold metrics mark non-estimable cases", "No calibrator or threshold is fitted on the outer evidence being reported"],
+    rubric: rubric("Calculates threshold metrics, ranking summaries and Brier/reliability evidence with correct class orientation, denominators and counts", "Distinguishes classification, ranking and calibration and connects the operating point to a bounded rare-habitat screening action"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — classification metrics", href: "https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics" },
+      { title: "scikit-learn 1.9 — probability calibration", href: "https://scikit-learn.org/stable/modules/calibration.html" },
+      { title: "scikit-learn — precision–recall", href: "https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics" },
+    ],
+    furtherReading: [
+      { title: "Saito and Rehmsmeier (2015), precision–recall and ROC", href: "https://doi.org/10.1371/journal.pone.0118432" },
+      { title: "Gneiting and Raftery (2007), proper scoring rules", href: "https://doi.org/10.1198/016214506000001437" },
+    ],
+  },
+  "lesson-3-19": {
+    estimatedTime: "230–310 minutes",
+    lessonType: "Structured Failure and Residual Geography Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-19.md",
+    formativeChecks: [
+      { id: "m3-l19-pattern-cause", question: "A coastal band has negative residuals. What is supported?", options: ["The fixed model has a geographically structured underprediction pattern that needs competing hypotheses", "Salinity caused the prediction error", "Adding coordinates will necessarily solve transfer"], correctOption: 0, explanation: "Residual geography establishes a pattern under the design. Mechanism requires additional measurements and a suitable inferential design." },
+      { id: "m3-l19-subgroups", question: "What must accompany a subgroup MAE?", options: ["Observation count, independent-site count, target/class support and fold context", "Only the subgroup name", "A smooth residual surface"], correctOption: 0, explanation: "Rows from one site and unusual target ranges do not establish general subgroup performance. Representation and estimability must remain visible." },
+      { id: "m3-l19-revision", question: "A new feature is suggested by outer residuals. What is the defensible next step?", options: ["Preregister a revised procedure and evaluate it on fresh protected evidence", "Add it and quote the same outer results", "Delete the failed subgroup"], correctOption: 0, explanation: "Outer diagnostics can generate a development hypothesis. They cannot remain neutral assessment after selecting a revision." },
+    ],
+    submissionChecklist: [...commonChecklist, "Prediction-to-context joins are one-to-one and preserve every protected row", "Residual maps and subgroup tables report direction, magnitude, counts, folds and support without unsupported interpolation", "Every serious pattern is labelled predeclared or exploratory and linked to competing explanations and new evidence"],
+    rubric: rubric("Maps residuals and class errors and summarises structured failure by site, habitat, management, gradients and acquisition context with valid joins", "Separates documented error patterns from causal mechanisms and translates findings into proportionate support, review or withholding decisions"),
+    coreReferences: [
+      { title: "Roberts et al. (2017), structured cross-validation", href: "https://doi.org/10.1111/ecog.02881" },
+      { title: "scikit-learn — model evaluation", href: "https://scikit-learn.org/stable/modules/model_evaluation.html" },
+      { title: "GeoPandas — merging data", href: "https://geopandas.org/en/stable/docs/user_guide/mergingdata.html" },
+    ],
+    furtherReading: [
+      { title: "Valavi et al. (2019), blockCV", href: "https://doi.org/10.1111/2041-210X.13107" },
+      { title: "Ploton et al. (2020), spatial validation", href: "https://doi.org/10.1038/s41586-020-2466-6" },
+    ],
+  },
+  "lesson-3-20": {
+    estimatedTime: "240–320 minutes",
+    lessonType: "Predictive Interpretation and Claim-boundary Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-20.md",
+    formativeChecks: [
+      { id: "m3-l20-methods", question: "What does held-out permutation importance estimate?", options: ["How much this fitted model's chosen score degrades when one feature is disrupted on that evidence", "The feature's causal ecological effect", "The sensor's universal physical importance"], correctOption: 0, explanation: "The result depends on model, metric, evidence and feature dependence. It measures predictive reliance, not mechanism." },
+      { id: "m3-l20-shap", question: "What does a local SHAP explanation describe?", options: ["An allocation of this model output relative to a reference under the explainer assumptions", "The intervention effect of changing a feature", "The probability that the prediction is correct"], correctOption: 0, explanation: "SHAP explains the fitted output under a background/dependence formulation. Applicability and causal evidence are separate." },
+      { id: "m3-l20-claim", question: "Which statement stays inside the predictive claim boundary?", options: ["The fitted model repeatedly relied on canopy-height information across represented folds", "Increasing canopy height will cause the target to rise", "SHAP proves the ecological mechanism"], correctOption: 0, explanation: "Stable predictive reliance can be reported with its model, evidence and range. Interventions and mechanisms require a separate causal design." },
+    ],
+    submissionChecklist: [...commonChecklist, "Gain, permutation, PDP/ICE and SHAP are compared by question, evidence and limitation", "Correlation, fold stability, supported ranges, SHAP background and output scale are explicit", "All conclusions use predictive wording and local explanations carry applicability status"],
+    rubric: rubric("Produces reproducible global and local explanation evidence with documented metric, fold, feature dependence, background and support", "Compares method agreement and disagreement while refusing causal or mechanistic claims not supported by the predictive design"),
+    coreReferences: [
+      { title: "scikit-learn 1.9 — permutation importance", href: "https://scikit-learn.org/stable/modules/permutation_importance.html" },
+      { title: "scikit-learn 1.9 — partial dependence and ICE", href: "https://scikit-learn.org/stable/modules/partial_dependence.html" },
+      { title: "SHAP — TreeExplainer", href: "https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html" },
+    ],
+    furtherReading: [
+      { title: "Molnar — Interpretable Machine Learning", href: "https://christophm.github.io/interpretable-ml-book/" },
+      { title: "Apley and Zhu (2020), accumulated local effects", href: "https://doi.org/10.1111/rssb.12377" },
+    ],
+  },
+  "lesson-3-21": {
+    estimatedTime: "250–340 minutes",
+    lessonType: "Domain of Applicability Signature Laboratory",
+    markdownFile: "content/lessons/module-3/lesson-21.md",
+    formativeChecks: [
+      { id: "m3-l21-interpolation", question: "Every predictor is within its separate training range. Is multivariate support guaranteed?", options: ["No; their combination may still lack a close training analogue", "Yes; univariate ranges prove interpolation", "Yes, if the pixel is geographically near a plot"], correctOption: 0, explanation: "Separate ranges cannot describe the joint predictor manifold. Geographic and environmental similarity are also different." },
+      { id: "m3-l21-threshold", question: "Where should applicability thresholds be derived?", options: ["From structured development evidence consistent with the validation design", "From repeated inspection of final-test errors", "From a universal Euclidean-distance value"], correctOption: 0, explanation: "Scaling, dimension and validation design define distance behaviour. The support rule must be frozen before protected assessment." },
+      { id: "m3-l21-map", question: "How should outside-applicability predictions be released?", options: ["Flagged or masked with reason codes and a machine-readable support layer", "Coloured exactly like supported predictions", "Replaced silently by the nearest training value"], correctOption: 0, explanation: "A visually complete map must not imply equal evidence. Preserve prediction, support state, NoData and reasons distinctly." },
+    ],
+    submissionChecklist: [...commonChecklist, "Feature order, units, scaler, distance, validation design and thresholds are frozen and versioned", "Univariate flags, multivariate distance, nearest analogue and upstream QA remain distinct and traceable", "The aligned applicability raster exposes supported, review, outside and NoData states and defines a release policy"],
+    rubric: rubric("Calculates auditable predictor-space support, validates nearest analogues and writes an aligned categorical applicability product with reason codes", "Distinguishes geographic and environmental extrapolation, refuses universal thresholds and treats applicability as support rather than probability or uncertainty"),
+    coreReferences: [
+      { title: "Meyer and Pebesma (2021), area of applicability", href: "https://doi.org/10.1111/2041-210X.13650" },
+      { title: "scikit-learn 1.9 — StandardScaler", href: "https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html" },
+      { title: "scikit-learn 1.9 — nearest neighbours", href: "https://scikit-learn.org/stable/modules/neighbors.html" },
+    ],
+    furtherReading: [
+      { title: "Meyer et al. (2018), spatio-temporal model performance", href: "https://doi.org/10.1016/j.ecolmodel.2017.12.001" },
+      { title: "CAST — area of applicability", href: "https://hannameyer.github.io/CAST/" },
     ],
   },
 };

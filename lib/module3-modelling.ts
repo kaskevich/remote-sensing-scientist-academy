@@ -699,3 +699,162 @@ export function selectThresholdByMinimumRecall(
   }
   return eligible[0];
 }
+
+export type ExpandedBinaryClassificationMetrics = BinaryClassificationMetrics & {
+  f1: number;
+  balancedAccuracy: number;
+  brierScore: number;
+  prevalence: number;
+  flaggedFraction: number;
+};
+
+export function calculateExpandedBinaryClassificationMetrics(
+  observed: Array<0 | 1>,
+  probabilities: number[],
+  threshold: number,
+): ExpandedBinaryClassificationMetrics {
+  const counts = calculateBinaryClassificationMetrics(observed, probabilities, threshold);
+  const precisionRecallTotal = counts.precision + counts.recall;
+  return {
+    ...counts,
+    f1: precisionRecallTotal === 0 ? 0 : (2 * counts.precision * counts.recall) / precisionRecallTotal,
+    balancedAccuracy: (counts.recall + counts.specificity) / 2,
+    brierScore: probabilities.reduce((total, probability, index) => total + (probability - observed[index]) ** 2, 0) / observed.length,
+    prevalence: observed.filter((value) => value === 1).length / observed.length,
+    flaggedFraction: (counts.truePositive + counts.falsePositive) / observed.length,
+  };
+}
+
+export type ReliabilityBin = {
+  lowerBound: number;
+  upperBound: number;
+  count: number;
+  positiveCount: number;
+  meanProbability: number | null;
+  observedFrequency: number | null;
+};
+
+export function buildEqualWidthReliabilityBins(
+  observed: Array<0 | 1>,
+  probabilities: number[],
+  binCount: number,
+): ReliabilityBin[] {
+  calculateBinaryClassificationMetrics(observed, probabilities, 0.5);
+  if (!Number.isInteger(binCount) || binCount < 2 || binCount > 100) {
+    throw new Error("Reliability diagrams require between two and one hundred bins");
+  }
+  return Array.from({ length: binCount }, (_, index) => {
+    const lowerBound = index / binCount;
+    const upperBound = (index + 1) / binCount;
+    const members = probabilities.flatMap((probability, row) => {
+      const belongs = index === binCount - 1
+        ? probability >= lowerBound && probability <= upperBound
+        : probability >= lowerBound && probability < upperBound;
+      return belongs ? [{ probability, observed: observed[row] }] : [];
+    });
+    const positiveCount = members.filter((member) => member.observed === 1).length;
+    return {
+      lowerBound,
+      upperBound,
+      count: members.length,
+      positiveCount,
+      meanProbability: members.length === 0 ? null : mean(members.map((member) => member.probability)),
+      observedFrequency: members.length === 0 ? null : positiveCount / members.length,
+    };
+  });
+}
+
+export type ResidualGroupRecord = {
+  group: string;
+  site: string;
+  residual: number;
+};
+
+export type ResidualGroupSummary = {
+  group: string;
+  observationCount: number;
+  independentSiteCount: number;
+  mae: number;
+  bias: number;
+};
+
+export function summariseResidualGroups(records: ResidualGroupRecord[]): ResidualGroupSummary[] {
+  if (records.length === 0) {
+    throw new Error("Structured-failure diagnosis requires residual records");
+  }
+  const grouped = new Map<string, ResidualGroupRecord[]>();
+  for (const record of records) {
+    const group = record.group.trim();
+    const site = record.site.trim();
+    if (!group || !site || !Number.isFinite(record.residual)) {
+      throw new Error("Every residual record needs a group, site and finite residual");
+    }
+    grouped.set(group, [...(grouped.get(group) ?? []), { ...record, group, site }]);
+  }
+  return [...grouped.entries()].map(([group, values]) => ({
+    group,
+    observationCount: values.length,
+    independentSiteCount: new Set(values.map((value) => value.site)).size,
+    mae: mean(values.map((value) => Math.abs(value.residual))),
+    bias: mean(values.map((value) => value.residual)),
+  })).sort((left, right) => right.mae - left.mae || left.group.localeCompare(right.group));
+}
+
+export type NearestAnalogueResult = {
+  distance: number;
+  trainingIndex: number;
+  outsideUnivariateRange: number[];
+};
+
+export function calculateStandardizedNearestAnalogue(
+  training: number[][],
+  prediction: number[],
+): NearestAnalogueResult {
+  if (training.length < 2 || prediction.length === 0) {
+    throw new Error("Applicability analysis requires at least two training rows and one prediction feature");
+  }
+  const width = prediction.length;
+  if (training.some((row) => row.length !== width) || [...training.flat(), ...prediction].some((value) => !Number.isFinite(value))) {
+    throw new Error("Training and prediction vectors must have matching dimensions and finite values");
+  }
+  const columns = Array.from({ length: width }, (_, column) => training.map((row) => row[column]));
+  const means = columns.map((column) => mean(column));
+  const scales = columns.map((column, index) => {
+    const variance = mean(column.map((value) => (value - means[index]) ** 2));
+    const scale = Math.sqrt(variance);
+    if (scale === 0) {
+      throw new Error("Applicability distance cannot standardize a constant training feature");
+    }
+    return scale;
+  });
+  const standardizedPrediction = prediction.map((value, column) => (value - means[column]) / scales[column]);
+  const distances = training.map((row) => Math.sqrt(row.reduce((total, value, column) => {
+    const difference = (value - means[column]) / scales[column] - standardizedPrediction[column];
+    return total + difference ** 2;
+  }, 0)));
+  const distance = Math.min(...distances);
+  return {
+    distance,
+    trainingIndex: distances.indexOf(distance),
+    outsideUnivariateRange: columns.flatMap((column, index) => {
+      const value = prediction[index];
+      return value < Math.min(...column) || value > Math.max(...column) ? [index] : [];
+    }),
+  };
+}
+
+export type ApplicabilityState = "supported" | "review" | "outside";
+
+export function classifyApplicability(
+  result: NearestAnalogueResult,
+  supportedMaximum: number,
+  reviewMaximum: number,
+): ApplicabilityState {
+  if (![result.distance, supportedMaximum, reviewMaximum].every(Number.isFinite)
+    || supportedMaximum < 0 || reviewMaximum <= supportedMaximum) {
+    throw new Error("Applicability thresholds must be finite, non-negative and ordered");
+  }
+  if (result.outsideUnivariateRange.length > 0 || result.distance > reviewMaximum) return "outside";
+  if (result.distance > supportedMaximum) return "review";
+  return "supported";
+}

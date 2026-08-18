@@ -629,6 +629,33 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/controlled-optimisation/THRESHOLD_DECISION_TEMPLATE.md", title: "Download the rare-habitat threshold decision template" },
     { href: "lesson-resources/module-3/controlled-optimisation/manifest.json", title: "Download the Chapter 4 checksum manifest" },
   ],
+  "lesson-3-17": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/README.md", title: "Read the evaluation and applicability training-pack guide" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/regression_outer_predictions.csv", title: "Download the protected synthetic regression predictions" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/REGRESSION_EVALUATION_TEMPLATE.md", title: "Download the regression evaluation template" },
+  ],
+  "lesson-3-18": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/classification_outer_probabilities.csv", title: "Download the protected synthetic class probabilities" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/CLASSIFICATION_EVALUATION_TEMPLATE.md", title: "Download the classification and calibration template" },
+  ],
+  "lesson-3-19": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/diagnostic_context.csv", title: "Download the synthetic structured-failure context" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/MODEL_DIAGNOSTIC_TEMPLATE.md", title: "Download the Model Diagnostic Report template" },
+  ],
+  "lesson-3-20": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/INTERPRETATION_CLAIMS_TEMPLATE.md", title: "Download the interpretation claims and stability template" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/regression_outer_predictions.csv", title: "Reuse the protected diagnostic predictions" },
+  ],
+  "lesson-3-21": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Complete the Chapter 5 portfolio checkpoint" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/applicability_training_and_grid.csv", title: "Download the synthetic applicability vectors" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/DOMAIN_OF_APPLICABILITY_TEMPLATE.md", title: "Download the Domain of Applicability template" },
+    { href: "lesson-resources/module-3/evaluation-and-applicability/manifest.json", title: "Download the Chapter 5 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {
