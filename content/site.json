@@ -24,6 +24,11 @@
         "label": "Field Lab",
         "href": "#field-lab",
         "visible": true
+      },
+      {
+        "label": "About",
+        "href": "about/",
+        "visible": true
       }
     ],
     "applyLabel": "Apply for cohort",
