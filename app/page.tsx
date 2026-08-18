@@ -678,6 +678,31 @@ const module3LessonResources: Record<string, Array<{ href: string; title: string
     { href: "lesson-resources/module-3/prediction-uncertainty/PREDICTION_EVIDENCE_PACKAGE_TEMPLATE.md", title: "Download the Prediction Evidence Package template" },
     { href: "lesson-resources/module-3/prediction-uncertainty/manifest.json", title: "Download the Chapter 6 checksum manifest" },
   ],
+  "lesson-3-26": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/operational-workflow/PREDICTION_SCHEMA_TEMPLATE.json", title: "Download the operational prediction-schema template" },
+    { href: "lesson-resources/module-3/operational-workflow/INFERENCE_RUN_TEMPLATE.json", title: "Download the raster inference run template" },
+  ],
+  "lesson-3-27": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/operational-workflow/EARTH_ENGINE_COMPONENT_TEMPLATE.md", title: "Download the Earth Engine component template" },
+    { href: "lesson-resources/module-3/operational-workflow/README.md", title: "Read the operational-workflow training-pack guide" },
+  ],
+  "lesson-3-28": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/operational-workflow/ARCHITECTURE_DECISION_TEMPLATE.md", title: "Download the modelling architecture decision template" },
+  ],
+  "lesson-3-29": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Continue the Environmental Monitoring Project notebook" },
+    { href: "lesson-resources/module-3/operational-workflow/MONITORING_RUNBOOK_TEMPLATE.md", title: "Download the repeated-prediction monitoring runbook" },
+    { href: "lesson-resources/module-3/operational-workflow/monitoring_runs_fixture.csv", title: "Download the synthetic monitoring-runs fixture" },
+  ],
+  "lesson-3-30": [
+    { href: "lesson-resources/module-3/Environmental_Monitoring_Project_Starter.ipynb", title: "Download the complete Module 3 portfolio notebook" },
+    { href: "lesson-resources/module-3/operational-workflow/MODEL_CARD_TEMPLATE.md", title: "Download the operational model-card template" },
+    { href: "lesson-resources/module-3/operational-workflow/TRAINING_DATA_SUMMARY_TEMPLATE.json", title: "Download the training-data summary template" },
+    { href: "lesson-resources/module-3/operational-workflow/manifest.json", title: "Download the Chapter 7 checksum manifest" },
+  ],
 };
 
 const module3AcademyLessons: AcademyLesson[] = publishedModule3Lessons.map((source) => {

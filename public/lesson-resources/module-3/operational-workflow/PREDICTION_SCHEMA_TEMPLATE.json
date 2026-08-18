@@ -1,0 +1,22 @@
+{
+  "schema_id": "environmental-monitoring-features-0.1.0",
+  "status": "synthetic_template",
+  "target": "documented_target_name",
+  "prediction_unit": "documented spatial and temporal support",
+  "features": [
+    {
+      "position": 0,
+      "name": "sentinel2_ndvi",
+      "source": "replace with verified collection and asset identity",
+      "unit": "unitless index",
+      "transform": "(nir - red) / (nir + red), verified scaling",
+      "support": "10 m cell; replace with approved contract",
+      "temporal_support": "replace with approved composite rule",
+      "dtype": "float32",
+      "version": "0.1.0",
+      "valid_minimum": -1,
+      "valid_maximum": 1,
+      "missing_rule": "invalid if any required input or upstream QA fails"
+    }
+  ]
+}

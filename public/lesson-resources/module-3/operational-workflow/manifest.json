@@ -1,0 +1,20 @@
+{
+  "title": "Module 3 Chapter 7 operational workflow training pack",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "data_status": "All schemas, identifiers, thresholds and monitoring records are synthetic teaching evidence and are not measurements or locations from the published Baltic dataset.",
+  "target_unit_status": "Synthetic neutral target_units; no undocumented scientific unit is implied.",
+  "evidence_rule": "Feature meaning and spatial grids must fail closed; protected validation and monitoring labels remain independent; predicted change is not automatically observed ecological change; structural packaging is not scientific approval.",
+  "files": [
+    { "path": "README.md", "sha256": "06aba19c66665f4c5fb43c6d287509c4e46597142a0b43a1e79f0316317859d8", "purpose": "Pack identity, synthetic-data statement and scientific limitations" },
+    { "path": "PREDICTION_SCHEMA_TEMPLATE.json", "sha256": "99bb2dc7259b036b5a9cac97f43daccad4c256f6a5ea24957a3d80ea697e16f2", "purpose": "Ordered inference-time feature meaning and missingness contract" },
+    { "path": "INFERENCE_RUN_TEMPLATE.json", "sha256": "148de7ed8a97c3846214caeb76bfea39523b54a62580aecbc6bde5f0ff73c32b", "purpose": "Versioned raster inference and acceptance-test record" },
+    { "path": "EARTH_ENGINE_COMPONENT_TEMPLATE.md", "sha256": "62fc49d3240239d4140a562e715830528c3238a5d83cf5a976041910ff75d9ad", "purpose": "Bounded Earth Engine image, sample, model, evidence and export contracts" },
+    { "path": "ARCHITECTURE_DECISION_TEMPLATE.md", "sha256": "709a249ff15ca25deb7035126bde1d7ce2533657807d6078484728ae13d38783", "purpose": "Local, Earth Engine and hybrid architecture decision record" },
+    { "path": "MONITORING_RUNBOOK_TEMPLATE.md", "sha256": "e0f2f04a645da37d75e5cd3b080113a583a99134ca2f3bb18b720573ee15eff7", "purpose": "Repeated-prediction comparability, drift and response governance" },
+    { "path": "MODEL_CARD_TEMPLATE.md", "sha256": "998be0e602482d3c79a018a61d07c1a9ca1b401018e07a6eaf8a8b83fd750013", "purpose": "Evidence-led intended-use, limitations and lifecycle documentation" },
+    { "path": "TRAINING_DATA_SUMMARY_TEMPLATE.json", "sha256": "559f5ed30755c9e54b96779b932f2f6eccb62de16e6419002eb97b23e0ffb50d", "purpose": "Machine-readable training identity, counts, roles and representation limits" },
+    { "path": "monitoring_runs_fixture.csv", "sha256": "ab3dff26c3e5ec710bc1668ec07f2b54c355b60956aab666d703c9e1cc23d263", "purpose": "Synthetic monitoring release, review and blocker cases" },
+    { "path": "../Environmental_Monitoring_Project_Starter.ipynb", "sha256": "e4df19b111def0af59e0f7fb1128e61f081fbf528dc113e75fb5fda2164e1d73", "purpose": "Continuous Module 3 portfolio notebook through all seven chapters" }
+  ]
+}

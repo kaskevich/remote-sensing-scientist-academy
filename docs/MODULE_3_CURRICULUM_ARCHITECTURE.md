@@ -6,7 +6,7 @@
 - **Professional question:** How can Earth Observation measurements support predictions that remain scientifically defensible across new observations, locations or times?
 - **Capstone:** Environmental Monitoring Project
 - **Length:** 30 lessons in seven chapters, followed by one integrated capstone
-**Visual accent:** terracotta (`#A35F47`) with secondary (`#B97358`) and tint (`#F6ECE8`)
+- **Visual accent:** terracotta (`#A35F47`) with secondary (`#B97358`) and tint (`#F6ECE8`)
 
 The module is not a catalogue of algorithms. It follows one evidence chain:
 
@@ -28,14 +28,14 @@ Every new technique must strengthen one link in that chain. A higher score alone
 
 ## Current release scope
 
-Chapters 1–6 are implemented in full. Lessons 3.1–3.25 are available; Lessons 3.26–3.30 and the capstone remain visibly planned. The release includes:
+All seven chapters are implemented in full. Lessons 3.1–3.30 are available; the integrated capstone remains visibly planned. The release includes:
 
-- twenty-five publishable lessons with theory, guided practice, model clinics, independent work and assessment;
+- thirty publishable lessons with theory, guided practice, model clinics, independent work and assessment;
 - one continuous `Environmental_Monitoring_Project_Starter.ipynb`;
 - downloadable target, predictor, data-dictionary, experiment-plan, baseline-report, parameter-decision and model-metadata templates;
-- a deliberately imperfect modelling-table fixture plus checksum-verified synthetic Chapter 2–6 training packs;
-- twenty-five explanatory SVG diagrams with text alternatives in lesson content;
-- runtime validators for the Chapter 1 contracts, baseline metrics, regression stumps, boosting updates, model metadata, grouped folds, temporal folds, nested evidence roles, optimisation protocols, learning dynamics, feature stability, decision thresholds, interval diagnostics, finite-sample conformal quantiles and evidence-layer release states;
+- a deliberately imperfect modelling-table fixture plus checksum-verified synthetic Chapter 2–7 training packs;
+- thirty explanatory SVG diagrams with text alternatives in lesson content;
+- runtime validators for the Chapter 1 contracts, baseline metrics, regression stumps, boosting updates, model metadata, grouped folds, temporal folds, nested evidence roles, optimisation protocols, learning dynamics, feature stability, decision thresholds, interval diagnostics, finite-sample conformal quantiles, evidence-layer release states, operational feature schemas, inference windows, architecture requirements, monitoring gates and model-card structure;
 - an explicit prerequisite/novelty map that prevents repetition of Modules 1–2.
 
 ## Pedagogical pattern
@@ -71,5 +71,6 @@ Formative checks cover concept, application and claim boundary. Completion contr
 3. **Released:** Chapter 3 (3.9–3.12), with structured spatial, grouped, temporal and nested validation.
 4. **Released:** Chapter 4 (3.13–3.16), with controlled optimisation, learning dynamics, feature stability and decision thresholds.
 5. **Released:** Chapter 5 (3.17–3.21), with regression and classification evidence, probability quality, structured failure, interpretation boundaries and a Domain of Applicability map.
-6. **Released in this chapter update:** Chapter 6 (3.22–3.25), with uncertainty-source reasoning, quantile intervals, split-conformal coverage and aligned prediction evidence maps.
-7. **Next:** Chapter 7 operational workflow, followed by the capstone, cross-module integrity audit, browser accessibility QA and final scientific review.
+6. **Released:** Chapter 6 (3.22–3.25), with uncertainty-source reasoning, quantile intervals, split-conformal coverage and aligned prediction evidence maps.
+7. **Released in this chapter update:** Chapter 7 (3.26–3.30), with fail-closed raster inference, a bounded Earth Engine component, architecture selection, repeated-prediction drift gates and a versioned operational model package.
+8. **Next:** the independent capstone, cross-module integrity audit, browser accessibility QA and final scientific review.
