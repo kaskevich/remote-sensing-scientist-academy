@@ -7,6 +7,7 @@ import {
   assignPredictionReleaseState,
   buildEqualWidthReliabilityBins,
   buildSymmetricPredictionIntervals,
+  CAPSTONE_RELEASE_GATES,
   calculateBinaryClassificationMetrics,
   calculateErrorSkill,
   calculateExpandedBinaryClassificationMetrics,
@@ -23,6 +24,7 @@ import {
   createMedianBaseline,
   diagnoseLearningDynamics,
   evaluateMonitoringGate,
+  evaluateCapstoneRelease,
   findFoldGroupOverlap,
   findIntervalCrossings,
   findTrainingServingSkew,
@@ -64,6 +66,7 @@ const chapter4ResourceRoot = join(repositoryRoot, "public/lesson-resources/modul
 const chapter5ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/evaluation-and-applicability");
 const chapter6ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/prediction-uncertainty");
 const chapter7ResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/operational-workflow");
+const capstoneResourceRoot = join(repositoryRoot, "public/lesson-resources/module-3/environmental-monitoring-project");
 
 function read(path: string) {
   return readFileSync(join(repositoryRoot, path), "utf8");
@@ -137,16 +140,17 @@ function validExperimentPlan(overrides: Partial<ModelExperimentPlan> = {}): Mode
 }
 
 describe("Module 3 curriculum architecture", () => {
-  it("publishes all seven chapters while keeping the capstone transparent", () => {
+  it("publishes all seven chapters and the independent capstone", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
     expect(module3Overview.accent).toBe("terracotta");
     expect(module3Overview.chapters).toHaveLength(7);
-    expect(module3Lessons).toHaveLength(30);
-    expect(new Set(module3Lessons.map((lesson) => lesson.id)).size).toBe(30);
-    expect(module3Lessons.map((lesson) => lesson.number)).toEqual(
+    expect(module3Lessons).toHaveLength(31);
+    expect(new Set(module3Lessons.map((lesson) => lesson.id)).size).toBe(31);
+    expect(module3Lessons.filter((lesson) => lesson.id !== "lesson-3-capstone").map((lesson) => lesson.number)).toEqual(
       Array.from({ length: 30 }, (_, index) => `3.${index + 1}`),
     );
+    expect(module3Lessons.at(-1)).toMatchObject({ id: "lesson-3-capstone", number: "Capstone" });
     expect(publishedModule3Lessons.map((lesson) => lesson.id)).toEqual([
       "lesson-3-01",
       "lesson-3-02",
@@ -178,9 +182,11 @@ describe("Module 3 curriculum architecture", () => {
       "lesson-3-28",
       "lesson-3-29",
       "lesson-3-30",
+      "lesson-3-capstone",
     ]);
     expect(module3Overview.chapters.flatMap((chapter) => chapter.lessons).filter((lesson) => lesson.status === "available")).toHaveLength(30);
-    expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "planned" });
+    expect(module3Overview.capstone).toMatchObject({ title: "Environmental Monitoring Project", status: "available", lessonId: "lesson-3-capstone" });
+    expect(module3Overview.navigationMeta).toBe("30 lessons · capstone available");
   });
 
   it("keeps every released lesson substantive, cumulative and reviewable", () => {
@@ -216,7 +222,7 @@ describe("Module 3 curriculum architecture", () => {
         expect(markdown.toLowerCase(), `${lesson.id}: ${signal}`).toContain(signal.toLowerCase());
       }
       expect(details.formativeChecks, lesson.id).toHaveLength(3);
-      expect(details.rubric, lesson.id).toHaveLength(4);
+      expect(details.rubric, lesson.id).toHaveLength(lesson.id === "lesson-3-capstone" ? 9 : 4);
       expect(details.technicalMetadata.coreReferences.length, lesson.id).toBeGreaterThanOrEqual(2);
       expect(details.technicalMetadata.datasetCitation, lesson.id).toContain("synthetic records are not measurements");
     }
@@ -277,6 +283,7 @@ describe("Module 3 teaching assets", () => {
       "local-vs-earth-engine-architecture.svg",
       "monitoring-drift-gates.svg",
       "operational-model-package.svg",
+      "environmental-monitoring-capstone.svg",
     ]) {
       const path = join(repositoryRoot, "public/lesson-media/images", filename);
       const svg = readFileSync(path, "utf8");
@@ -495,6 +502,76 @@ describe("Module 3 teaching assets", () => {
     expect(review).toContain("4.89 / 5");
     expect(review).toContain("cannot support a real coastal-meadow monitoring claim");
     expect(review).toContain("capstone planned");
+  });
+
+  it("verifies the independent capstone pack and final multi-lens review", () => {
+    const manifestPath = join(capstoneResourceRoot, "manifest.json");
+    const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as {
+      data_status: string;
+      evidence_rule: string;
+      files: Array<{ path: string; sha256: string }>;
+    };
+    expect(manifest.data_status).toContain("no real environmental observations");
+    expect(manifest.evidence_rule).toContain("do not authorize release");
+    expect(manifest.files).toHaveLength(6);
+    for (const file of manifest.files) {
+      const path = resolve(dirname(manifestPath), file.path);
+      expect(existsSync(path), file.path).toBe(true);
+      expect(sha256(path), file.path).toBe(file.sha256);
+    }
+
+    const capstone = read("content/lessons/module-3/capstone.md");
+    expect(capstone).toContain("GIS / Remote Sensing Engineer");
+    expect(capstone).toContain("Geospatial Data Analyst");
+    expect(capstone).toContain("Remote Sensing Researcher");
+    expect(capstone).toMatch(/prediction\.tif[\s\S]*uncertainty\.tif[\s\S]*applicability\.tif/);
+    expect(capstone).toContain("training demonstration only");
+
+    const review = read("docs/MODULE_3_FINAL_REVIEW.md");
+    expect(review).toContain("4.75 / 5");
+    expect(review).toContain("Publish as the completed Remote Sensing Modelling module");
+    expect(review).toContain("synthetic teaching evidence");
+  });
+});
+
+describe("Module 3 capstone release behaviour", () => {
+  const completeRecords = CAPSTONE_RELEASE_GATES.map((gate) => ({
+    gate,
+    state: "pass" as const,
+    evidencePath: `evidence/${gate}.md`,
+    rationale: `Reviewed evidence passes the ${gate} contract`,
+  }));
+
+  it("releases only when every evidence gate passes with traceable support", () => {
+    expect(evaluateCapstoneRelease(completeRecords)).toEqual({
+      decision: "release",
+      issues: [],
+      blockingGates: [],
+      reviewGates: [],
+    });
+  });
+
+  it("withholds for a failed scientific gate even when every other gate passes", () => {
+    const result = evaluateCapstoneRelease(completeRecords.map((record) =>
+      record.gate === "applicability-boundary" ? { ...record, state: "block" as const } : record,
+    ));
+    expect(result.decision).toBe("withhold");
+    expect(result.blockingGates).toEqual(["applicability-boundary"]);
+  });
+
+  it("withholds when a gate, evidence path or not-applicable rationale is incomplete", () => {
+    const incomplete = completeRecords
+      .filter((record) => record.gate !== "protected-model-selection")
+      .map((record) => record.gate === "uncertainty-evidence"
+        ? { ...record, state: "not-applicable" as const, evidencePath: "", rationale: "not needed" }
+        : record);
+    const result = evaluateCapstoneRelease(incomplete);
+    expect(result.decision).toBe("withhold");
+    expect(result.issues).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: "missing-gate-protected-model-selection", severity: "blocker" }),
+      expect.objectContaining({ code: "missing-evidence-uncertainty-evidence", severity: "blocker" }),
+      expect.objectContaining({ code: "unjustified-na-uncertainty-evidence", severity: "blocker" }),
+    ]));
   });
 });
 

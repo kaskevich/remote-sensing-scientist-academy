@@ -1,7 +1,7 @@
 # Curriculum Promise → Implementation Matrix
 
 Audit date: 18 August 2026
-Scope: published homepage, README, module maps, implemented lessons 1.1–1.12, 2.1–2.53 and 3.1–3.30, twelve Module 2 practica and the Module 2 capstone.
+Scope: published homepage, README, module maps, implemented lessons 1.1–1.12, 2.1–2.53 and 3.1–3.30, twelve Module 2 practica and the Module 2 and Module 3 capstones.
 
 ## Interpretation rules
 
@@ -24,10 +24,10 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12, 
 | Surface-reflectance preparation | Field-lab step | Future satellite module | No implemented lesson | No | No | No | No | MISSING |
 | Six-year change analysis | Field-lab step | Future satellite module | No implemented lesson | No | No | No | No | MISSING |
 | Uncertainty-aware scientific briefing | Field lab/outcomes | 1 and 2 | 1.12, 2.21, 2.24, practica | Yes | Yes | Yes | Briefing and QA reports | COMPLETE |
-| One continuous professional pathway | Pathway section | Academy | Modules 1–2 and all seven Module 3 chapters are implemented; later stages remain planned | Yes through Module 3 | Yes | Yes | Three cumulative module projects, with Module 3 capstone still planned | PARTIAL across the six-module vision |
+| One continuous professional pathway | Pathway section | Academy | Modules 1–2 and all seven Module 3 chapters plus capstone are implemented; later stages remain planned | Yes through Module 3 | Yes | Yes | Three cumulative module projects with independent Module 2 and Module 3 capstones | PARTIAL across the six-module vision |
 | Vegetation Data Explorer | Foundations card | 1 | 1.1–1.12 | Yes | Yes | Yes | Complete notebook | COMPLETE |
 | UAV and Satellite Analysis Pipeline | Geospatial card/module 2 | 2 | 2.1–2.53, twelve practica and capstone | Yes | Yes | Yes | Complete integrated capstone package | COMPLETE for the bounded Module 2 scope |
-| Environmental Monitoring Project | Modelling card | 3 | 3.1–3.30 | Yes through operational package | Yes on synthetic teaching evidence | Yes | Cumulative model package; independent capstone planned | PARTIAL pending independent capstone |
+| Environmental Monitoring Project | Modelling card | 3 | 3.1–3.30 plus capstone | Yes through independent project handover | Yes on synthetic teaching evidence and learner-approved data | Yes | Complete capstone brief, release gate, three-profile evidence matrix and learner submission workflow | COMPLETE for the bounded Module 3 scope |
 
 ## GIS and geospatial Python
 
@@ -123,7 +123,7 @@ Scope: published homepage, README, module maps, implemented lessons 1.1–1.12, 
 | Feature importance and interpretation | Academy goals | 3 | 3.15, 3.20 | Held-out permutation, gain, PDP/ICE, SHAP, correlation, fold stability and predictive-not-causal interpretation | Yes | Yes | Feature Stability and Interpretation Stability Reports | COMPLETE |
 | Overfitting, hyperparameters and cross-validation | Academy goals | 2/3 | 2.48–2.49, 3.5–3.16 | Yes for bias–variance intuition, tree capacity, bounded random search, early stopping, grouped/spatial/temporal CV, nested selection and leakage boundaries | Yes | Yes | Mechanism Audit, Structured Validation Design and Controlled Model Selection Record | COMPLETE AS FOUNDATION |
 | Spatial cross-validation and autocorrelation | Academy goals | 2/3 | 2.31–2.34, 3.9–3.12 | Yes for claim-matched grouping, blocks, sites, buffers, temporal direction and nested spatial assessment | Yes | Yes | Spatial/temporal fold registries and validation comparison | COMPLETE |
-| Leakage, extrapolation and uncertainty | Academy goals | 2/3 | 2.29, 2.31–2.34, 2.48–2.49, 3.3–3.4, 3.9–3.12, 3.19–3.30 and capstone | Target, proximity, duplicate, derivative, temporal, preprocessing, selection and final-test leakage; applicability; uncertainty; inference schemas; drift and monitoring gates | Yes | Yes | Leakage checklist, nested registry, diagnostics, Prediction Evidence Package, Monitoring Runbook and Model Card | COMPLETE AS MODELLING FOUNDATION; independent capstone remains planned |
+| Leakage, extrapolation and uncertainty | Academy goals | 2/3 | 2.29, 2.31–2.34, 2.48–2.49, 3.3–3.4, 3.9–3.30 and capstone | Target, proximity, duplicate, derivative, temporal, preprocessing, selection and final-test leakage; applicability; uncertainty; inference schemas; drift and monitoring gates | Yes | Yes | Leakage checklist, nested registry, diagnostics, Prediction Evidence Package, capstone release gate, Monitoring Runbook and Model Card | COMPLETE THROUGH INDEPENDENT MODULE 3 CAPSTONE |
 | Prediction and validation maps | Modelling card | 3 | 3.9–3.11, 3.19, 3.21 | Split-role, fold, transfer, residual, class-error and Domain of Applicability maps with support and release rules | Yes | Yes | Structured Validation Design and Model Diagnostic and Applicability Package | COMPLETE AS DIAGNOSTIC FOUNDATION |
 
 ## UAV pipeline

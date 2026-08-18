@@ -1,0 +1,50 @@
+{
+  "project": "Environmental_Monitoring_Project",
+  "version": "REPLACE_WITH_SEMANTIC_VERSION",
+  "status": "training-demonstration-only | bounded-release | withheld",
+  "data_status": "REPLACE_WITH_REAL_PUBLIC_RESTRICTED_OR_SYNTHETIC",
+  "prediction_claim": "REPLACE_WITH_BOUNDED_CLAIM",
+  "validation_destination": "REPLACE_WITH_NEW_PLOT_SITE_TIME_OR_REGION_CLAIM",
+  "protected_test_opened_once": false,
+  "release_decision": "REPLACE_WITH_RELEASE_REVIEW_OR_WITHHOLD",
+  "withheld_conditions": [
+    "REPLACE_WITH_UNSUPPORTED_DOMAIN_OR_USE"
+  ],
+  "software": {
+    "python": "REPLACE",
+    "scikit_learn": "REPLACE",
+    "xgboost": "REPLACE"
+  },
+  "artifacts": [
+    {
+      "path": "docs/TARGET_SPECIFICATION.md",
+      "sha256": "REPLACE",
+      "evidence_role": "target contract"
+    },
+    {
+      "path": "outputs/predictions/prediction.tif",
+      "sha256": "REPLACE",
+      "evidence_role": "model prediction"
+    },
+    {
+      "path": "outputs/uncertainty/uncertainty.tif",
+      "sha256": "REPLACE",
+      "evidence_role": "prediction uncertainty"
+    },
+    {
+      "path": "outputs/applicability/applicability.tif",
+      "sha256": "REPLACE",
+      "evidence_role": "domain of applicability"
+    },
+    {
+      "path": "reports/SCIENTIFIC_SUMMARY.md",
+      "sha256": "REPLACE",
+      "evidence_role": "scientific communication"
+    },
+    {
+      "path": "reports/MANAGEMENT_BRIEF.md",
+      "sha256": "REPLACE",
+      "evidence_role": "decision communication"
+    }
+  ]
+}

@@ -1100,3 +1100,72 @@ export function validateOperationalModelCard(sections: Record<string, string>) {
   const empty = REQUIRED_OPERATIONAL_MODEL_CARD_SECTIONS.filter((heading) => normalized.has(heading) && !normalized.get(heading));
   return { missing, empty, valid: missing.length === 0 && empty.length === 0 };
 }
+
+export const CAPSTONE_RELEASE_GATES = [
+  "prediction-contract",
+  "training-data-integrity",
+  "baseline-comparison",
+  "protected-model-selection",
+  "structured-validation",
+  "evaluation-and-diagnostics",
+  "interpretation-boundaries",
+  "uncertainty-evidence",
+  "applicability-boundary",
+  "spatial-output-qa",
+  "reproducible-handover",
+  "communication-and-governance",
+] as const;
+
+export type CapstoneReleaseGate = typeof CAPSTONE_RELEASE_GATES[number];
+export type CapstoneGateState = "pass" | "review" | "block" | "not-applicable";
+export type CapstoneReleaseDecision = "release" | "conditional-review" | "withhold";
+
+export type CapstoneReleaseRecord = {
+  gate: CapstoneReleaseGate;
+  state: CapstoneGateState;
+  evidencePath: string;
+  rationale: string;
+};
+
+export function evaluateCapstoneRelease(records: CapstoneReleaseRecord[]) {
+  const issues: ModellingValidationIssue[] = [];
+  const byGate = new Map<CapstoneReleaseGate, CapstoneReleaseRecord>();
+
+  for (const record of records) {
+    if (byGate.has(record.gate)) {
+      issues.push({ code: `duplicate-${record.gate}`, message: `Capstone gate ${record.gate} is recorded more than once`, severity: "blocker" });
+      continue;
+    }
+    byGate.set(record.gate, record);
+    if (record.evidencePath.trim() === "") {
+      issues.push({ code: `missing-evidence-${record.gate}`, message: `Capstone gate ${record.gate} needs a reviewable evidence path`, severity: "blocker" });
+    }
+    if (record.rationale.trim() === "") {
+      issues.push({ code: `missing-rationale-${record.gate}`, message: `Capstone gate ${record.gate} needs a scientific rationale`, severity: "blocker" });
+    }
+    if (record.state === "not-applicable" && !/not applicable|does not apply|classification|regression/i.test(record.rationale)) {
+      issues.push({ code: `unjustified-na-${record.gate}`, message: `Not-applicable state for ${record.gate} must explain why the requirement does not apply`, severity: "blocker" });
+    }
+  }
+
+  for (const gate of CAPSTONE_RELEASE_GATES) {
+    if (!byGate.has(gate)) {
+      issues.push({ code: `missing-gate-${gate}`, message: `Capstone release record is missing ${gate}`, severity: "blocker" });
+    }
+  }
+
+  const states = [...byGate.values()].map((record) => record.state);
+  const hasBlocker = issues.some((issue) => issue.severity === "blocker") || states.includes("block");
+  const decision: CapstoneReleaseDecision = hasBlocker
+    ? "withhold"
+    : states.includes("review")
+      ? "conditional-review"
+      : "release";
+
+  return {
+    decision,
+    issues,
+    blockingGates: [...byGate.values()].filter((record) => record.state === "block").map((record) => record.gate),
+    reviewGates: [...byGate.values()].filter((record) => record.state === "review").map((record) => record.gate),
+  };
+}

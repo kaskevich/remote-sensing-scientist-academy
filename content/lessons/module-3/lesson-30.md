@@ -38,7 +38,7 @@ The Environmental Monitoring Project now includes the complete reasoning chain: 
 
 Lesson 3.30 does not invent a better accuracy result. It packages the evidence already earned and makes gaps visible. If the synthetic training pack cannot support a real Baltic coastal-meadow accuracy or uncertainty claim, the model card must say so. A polished document cannot upgrade synthetic evidence into ecological validation.
 
-The output is a capstone-ready operational package. The independent Environmental Monitoring Project capstone remains a separate planned assessment in which learners apply the system to an approved real or fully documented dataset.
+The output is a capstone-ready operational package. The independent Environmental Monitoring Project capstone is now available as a separate assessment in which learners apply the system to an approved real or fully documented dataset.
 
 ## 3. Concept — a model card is a navigation layer over evidence
 

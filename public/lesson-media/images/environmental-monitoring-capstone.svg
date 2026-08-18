@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Environmental Monitoring Project evidence and release gates</title>
+  <desc id="desc">A left-to-right, four-stage scientific workflow links the decision and prediction contract to protected model development, independent spatial evidence, and operational handover. Each stage has a terracotta gate; any failed gate returns the project for documented revision rather than publication.</desc>
+  <rect width="1200" height="760" fill="#FBF8F5"/>
+  <text x="60" y="62" font-family="Georgia,serif" font-size="31" fill="#14263D">A prediction is released only with its evidence and boundaries</text>
+  <g font-family="Arial,sans-serif">
+    <g fill="#FFFFFF" stroke="#A35F47" stroke-width="4">
+      <rect x="55" y="120" width="245" height="310" rx="16"/>
+      <rect x="340" y="120" width="245" height="310" rx="16"/>
+      <rect x="625" y="120" width="245" height="310" rx="16"/>
+      <rect x="910" y="120" width="235" height="310" rx="16"/>
+    </g>
+    <g fill="#F4E4DD">
+      <rect x="75" y="145" width="205" height="54" rx="8"/>
+      <rect x="360" y="145" width="205" height="54" rx="8"/>
+      <rect x="645" y="145" width="205" height="54" rx="8"/>
+      <rect x="930" y="145" width="195" height="54" rx="8"/>
+    </g>
+    <g fill="#14263D" text-anchor="middle">
+      <text x="178" y="179" font-size="18" font-weight="700">1 · Scientific contract</text>
+      <text x="463" y="179" font-size="18" font-weight="700">2 · Protected development</text>
+      <text x="748" y="179" font-size="18" font-weight="700">3 · Independent evidence</text>
+      <text x="1028" y="179" font-size="18" font-weight="700">4 · Governed handover</text>
+    </g>
+    <g fill="#14263D" font-size="16">
+      <text x="85" y="235">decision and user</text><text x="85" y="268">target and prediction unit</text><text x="85" y="301">predictor hypotheses</text><text x="85" y="334">domain and non-claims</text><text x="85" y="367">registered experiment</text>
+      <text x="370" y="235">model-ready observations</text><text x="370" y="268">saved roles and folds</text><text x="370" y="301">baseline + ensemble</text><text x="370" y="334">XGBoost candidate</text><text x="370" y="367">inner-loop selection</text>
+      <text x="655" y="235">structured outer transfer</text><text x="655" y="268">final protected assessment</text><text x="655" y="301">residual geography</text><text x="655" y="334">uncertainty coverage</text><text x="655" y="367">applicability boundary</text>
+      <text x="940" y="235">prediction + uncertainty</text><text x="940" y="268">applicability + QA</text><text x="940" y="301">model card + runbook</text><text x="940" y="334">scientific + management</text><text x="940" y="367">profile evidence matrix</text>
+    </g>
+    <g fill="#14263D">
+      <rect x="78" y="388" width="198" height="28" rx="14"/><rect x="363" y="388" width="198" height="28" rx="14"/><rect x="648" y="388" width="198" height="28" rx="14"/><rect x="933" y="388" width="188" height="28" rx="14"/>
+    </g>
+    <g fill="#FFFFFF" font-size="13" text-anchor="middle" font-weight="700">
+      <text x="177" y="407">GATE A · APPROVE MEANING</text><text x="462" y="407">GATE B · SEAL TEST</text><text x="747" y="407">GATE C · TEST CLAIM</text><text x="1027" y="407">GATE D · RELEASE</text>
+    </g>
+    <g stroke="#A35F47" stroke-width="4" fill="none">
+      <path d="M300 275h32"/><path d="M585 275h32"/><path d="M870 275h32"/>
+    </g>
+    <g fill="#A35F47">
+      <path d="M332 275l-14-8v16z"/><path d="M617 275l-14-8v16z"/><path d="M902 275l-14-8v16z"/>
+    </g>
+    <rect x="230" y="520" width="740" height="105" rx="14" fill="#FFFFFF" stroke="#A35F47" stroke-width="3"/>
+    <text x="600" y="555" text-anchor="middle" font-size="20" font-weight="700" fill="#A35F47">Any failed gate → WITHHOLD → document the reason → return to the responsible phase</text>
+    <text x="600" y="588" text-anchor="middle" font-size="16" fill="#14263D">Do not repair a failed target, validation or applicability claim with a better-looking map</text>
+    <path d="M1028 430v142H980" stroke="#A35F47" stroke-width="4" fill="none"/>
+    <path d="M230 572H178V430" stroke="#A35F47" stroke-width="4" fill="none"/>
+    <g fill="#A35F47"><path d="M980 572l14-8v16z"/><path d="M178 430l-8 14h16z"/></g>
+    <text x="600" y="690" text-anchor="middle" font-size="17" fill="#14263D">A clean run proves reproducibility of the procedure; protected evidence establishes the bounded predictive claim</text>
+  </g>
+</svg>
