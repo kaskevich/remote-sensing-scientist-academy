@@ -1744,6 +1744,80 @@ h2 {
   background: #071326;
 }
 
+.lesson-visual-frame {
+  width: 100%;
+  max-width: 100%;
+  margin: 28px 0 34px;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #f8f2ef;
+}
+
+.lesson-visual-scroll {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: rgba(11, 25, 48, 0.48) rgba(11, 25, 48, 0.08);
+}
+
+.lesson-visual-frame img {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+
+.lesson-visual-frame figcaption {
+  display: none;
+  margin: 9px 4px 0;
+  color: #506077;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.lesson-math {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lesson-math math {
+  color: inherit;
+  font-family: "STIX Two Math", "Cambria Math", "Times New Roman", serif;
+}
+
+.lesson-math-inline {
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+  margin: 0 0.12em;
+  vertical-align: -0.08em;
+  white-space: nowrap;
+}
+
+.lesson-math-inline math {
+  font-size: 1.05em;
+}
+
+.lesson-math-display {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 22px 0 26px;
+  padding: 15px 18px;
+  overflow-x: auto;
+  border-left: 3px solid var(--orange);
+  background: rgba(255, 255, 255, 0.045);
+  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.06);
+}
+
+.lesson-math-display math {
+  width: max-content;
+  min-width: 100%;
+  font-size: 1.18rem;
+}
+
 .lesson-rich-text table {
   display: block;
   width: 100%;
@@ -3740,6 +3814,28 @@ footer > p {
 
   .lesson-rich-text h3 {
     font-size: 21px;
+  }
+
+  .lesson-visual-frame {
+    padding: 8px;
+  }
+
+  .lesson-visual-frame img {
+    width: 720px;
+    min-width: 720px;
+  }
+
+  .lesson-visual-frame figcaption {
+    display: block;
+  }
+
+  .lesson-math-display {
+    padding: 13px 14px;
+  }
+
+  .lesson-math-display math {
+    min-width: max-content;
+    font-size: 1.06rem;
   }
 
   .lesson-table-of-contents,
