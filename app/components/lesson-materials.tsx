@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
+import { extractLessonMath, LessonMath, renderInlineLessonMath } from "@/app/components/lesson-math";
 import type { FormativeCheck } from "@/lib/module1-pedagogy";
 
 export type LessonImage = {
@@ -125,6 +126,8 @@ export function MarkdownContent({
     return null;
   }
 
+  const { markdown, expressions } = extractLessonMath(children);
+
   const tableOfContents = showTableOfContents
     ? [...children.matchAll(/^##\s+(.+)$/gm)].map((match) => ({
         label: match[1].replace(/[*_`]/g, "").replace(/^\d+\.\s*/, ""),
@@ -149,14 +152,19 @@ export function MarkdownContent({
         components={{
           h2: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
-            return <h2 id={`${lessonId}-${headingSlug(text)}`}>{headingChildren}</h2>;
+            return <h2 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h2")}</h2>;
           },
           h3: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
-            return <h3 id={`${lessonId}-${headingSlug(text)}`}>{headingChildren}</h3>;
+            return <h3 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h3")}</h3>;
           },
           p: ({ children: paragraphChildren }) => {
             const text = nodeText(paragraphChildren).trim();
+            const mathMarker = text.match(/^%%lesson-math-block-(\d+)%%$/);
+            if (mathMarker) {
+              const expression = expressions[Number(mathMarker[1])];
+              return expression ? <LessonMath {...expression} /> : null;
+            }
             const marker = text.match(/^\[\[CHECK:([a-z0-9-]+)\]\]$/);
             if (marker) {
               const check = formativeChecks.find((candidate) => candidate.id === marker[1]);
@@ -169,8 +177,19 @@ export function MarkdownContent({
                 />
               ) : null;
             }
-            return <p>{paragraphChildren}</p>;
+            const onlyChild = Array.isArray(paragraphChildren) ? paragraphChildren.length === 1 ? paragraphChildren[0] : null : paragraphChildren;
+            if (onlyChild && typeof onlyChild === "object" && "type" in onlyChild && onlyChild.type === "img") {
+              return (
+                <figure className="lesson-visual-frame">
+                  <span className="lesson-visual-scroll">{onlyChild}</span>
+                  <figcaption>On smaller screens, swipe horizontally to inspect the complete diagram</figcaption>
+                </figure>
+              );
+            }
+            return <p>{renderInlineLessonMath(paragraphChildren, expressions, "paragraph")}</p>;
           },
+          li: ({ children: listChildren }) => <li>{renderInlineLessonMath(listChildren, expressions, "list")}</li>,
+          td: ({ children: cellChildren }) => <td>{renderInlineLessonMath(cellChildren, expressions, "cell")}</td>,
           blockquote: ({ children: quoteChildren }) => {
             const text = nodeText(quoteChildren).trim().toLowerCase();
             const layer = text.startsWith("core lesson")
@@ -180,11 +199,11 @@ export function MarkdownContent({
                 : text.startsWith("go deeper")
                   ? "deeper"
                   : "standard";
-            return <blockquote className={`lesson-callout lesson-callout-${layer}`}>{quoteChildren}</blockquote>;
+            return <blockquote className={`lesson-callout lesson-callout-${layer}`}>{renderInlineLessonMath(quoteChildren, expressions, "quote")}</blockquote>;
           },
         }}
       >
-        {children}
+        {markdown}
       </ReactMarkdown>
     </div>
   );
