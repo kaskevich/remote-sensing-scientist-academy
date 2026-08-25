@@ -216,6 +216,9 @@ test("module map, starter notebook, and formative checks support beginner naviga
   await expect(firstLesson.getByText("Lesson 1.1 of 12", { exact: true })).toBeVisible();
   await expect(firstLesson.getByRole("table")).toHaveCount(1);
   await expect(firstLesson.getByRole("columnheader", { name: "Format" })).toBeVisible();
+  await expect(firstLesson.getByRole("img", { name: /real coastal meadow beside Pärnu Bay/i })).toBeVisible();
+  await expect(firstLesson.getByRole("img", { name: /cycle separates scientist-controlled questions/i })).toBeVisible();
+  await expect(firstLesson.getByRole("img", { name: /saved notebook file opens in the Jupyter interface/i })).toBeVisible();
   const starter = firstLesson.getByRole("link", { name: /Download the Vegetation Data Explorer starter notebook/i });
   await expect(starter).toHaveAttribute("download", "");
   await expect(starter).toHaveAttribute("href", /Vegetation_Data_Explorer_Starter\.ipynb$/);
@@ -224,24 +227,24 @@ test("module map, starter notebook, and formative checks support beginner naviga
   const completion = firstLesson.getByRole("checkbox");
   await expect(completion).not.toBeChecked();
 
-  const incorrectOption = firstCheck.getByLabel("A code cell");
+  const incorrectOption = firstCheck.getByLabel("The word print");
   const checkAnswer = firstCheck.getByRole("button", { name: "Check answer" });
   await incorrectOption.check();
   await expect(incorrectOption).toBeChecked();
   await expect(checkAnswer).toBeEnabled();
   await checkAnswer.click();
   await expect(firstCheck.getByText("Not quite", { exact: true })).toBeVisible();
-  await expect(firstCheck.getByText(/Markdown cells hold narrative/)).toBeVisible();
+  await expect(firstCheck.getByText(/contains no value to display/)).toBeVisible();
   await expect(completion).not.toBeChecked();
 
   await firstCheck.getByRole("button", { name: "Try again" }).click();
-  const correctOption = firstCheck.getByLabel("A Markdown cell");
+  const correctOption = firstCheck.getByLabel("An empty-looking line");
   await correctOption.check();
   await expect(correctOption).toBeChecked();
   await expect(checkAnswer).toBeEnabled();
   await checkAnswer.click();
   await expect(firstCheck.getByText("Correct", { exact: true })).toBeVisible();
-  await expect(firstLesson.getByText("1 of 3 checks completed", { exact: true })).toBeVisible();
+  await expect(firstLesson.getByText("1 of 5 checks completed", { exact: true })).toBeVisible();
   await expect(completion).not.toBeChecked();
 
   const controlHeights = await firstLesson.locator(":scope > summary, .formative-check button, .lesson-resource-list a").evaluateAll((elements) =>

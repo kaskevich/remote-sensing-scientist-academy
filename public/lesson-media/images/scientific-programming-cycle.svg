@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Scientific programming cycle from question to interpretation</title>
+  <desc id="desc">A scientist defines a scientific question and computational plan. A notebook records code, Python executes it and produces output. The scientist validates and interprets the output, then revises the question or plan. Labels distinguish scientist-controlled reasoning from computer-executed operations.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9eb1c2" />
+    </marker>
+    <marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c8f33d" />
+    </marker>
+    <style>
+      .heading { fill: #f7f3e9; font: 600 35px Inter, Arial, sans-serif; }
+      .eyebrow { fill: #c8f33d; font: 700 15px Inter, Arial, sans-serif; letter-spacing: 2px; }
+      .lane { fill: #91a5b8; font: 700 13px Inter, Arial, sans-serif; letter-spacing: 1.5px; }
+      .step { fill: #f7f3e9; font: 600 20px Inter, Arial, sans-serif; }
+      .copy { fill: #b9c6d2; font: 400 15px Inter, Arial, sans-serif; }
+      .number { fill: #071426; font: 700 14px Inter, Arial, sans-serif; }
+      .footer { fill: #cbd5df; font: 400 15px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="780" fill="#071426" />
+  <text x="64" y="58" class="eyebrow">SCIENTIFIC PROGRAMMING CYCLE</text>
+  <text x="64" y="106" class="heading">A computer executes instructions; a scientist makes the decisions</text>
+
+  <rect x="52" y="145" width="1096" height="250" rx="10" fill="#0d2134" stroke="#36516a" />
+  <text x="76" y="177" class="lane">SCIENTIST-CONTROLLED REASONING</text>
+
+  <g transform="translate(76 205)">
+    <rect width="230" height="154" rx="8" fill="#12304a" stroke="#c8f33d" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#c8f33d" />
+    <text x="28" y="33" text-anchor="middle" class="number">1</text>
+    <text x="22" y="72" class="step">Scientific question</text>
+    <text x="22" y="105" class="copy">What do we want to know</text>
+    <text x="22" y="128" class="copy">about meadow vegetation?</text>
+  </g>
+  <line x1="316" y1="282" x2="348" y2="282" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <g transform="translate(360 205)">
+    <rect width="230" height="154" rx="8" fill="#12304a" stroke="#c8f33d" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#c8f33d" />
+    <text x="28" y="33" text-anchor="middle" class="number">2</text>
+    <text x="22" y="72" class="step">Computational plan</text>
+    <text x="22" y="105" class="copy">Define evidence, operations</text>
+    <text x="22" y="128" class="copy">and checks before coding.</text>
+  </g>
+
+  <g transform="translate(644 205)">
+    <rect width="230" height="154" rx="8" fill="#12304a" stroke="#c8f33d" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#c8f33d" />
+    <text x="28" y="33" text-anchor="middle" class="number">6</text>
+    <text x="22" y="72" class="step">Validation</text>
+    <text x="22" y="105" class="copy">Check execution, data and</text>
+    <text x="22" y="128" class="copy">methodological assumptions.</text>
+  </g>
+  <line x1="884" y1="282" x2="916" y2="282" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <g transform="translate(928 205)">
+    <rect width="196" height="154" rx="8" fill="#12304a" stroke="#c8f33d" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#c8f33d" />
+    <text x="28" y="33" text-anchor="middle" class="number">7</text>
+    <text x="22" y="72" class="step">Interpretation</text>
+    <text x="22" y="105" class="copy">Explain meaning, limits</text>
+    <text x="22" y="128" class="copy">and the next question.</text>
+  </g>
+
+  <rect x="52" y="425" width="1096" height="222" rx="10" fill="#0b1b2b" stroke="#4d718f" />
+  <text x="76" y="457" class="lane">COMPUTER-EXECUTED OPERATIONS</text>
+
+  <g transform="translate(76 485)">
+    <rect width="280" height="126" rx="8" fill="#173853" stroke="#5ba8ff" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#5ba8ff" />
+    <text x="28" y="33" text-anchor="middle" class="number">3</text>
+    <text x="22" y="70" class="step">Notebook and code</text>
+    <text x="22" y="101" class="copy">Express the planned operations.</text>
+  </g>
+  <line x1="366" y1="548" x2="404" y2="548" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <g transform="translate(416 485)">
+    <rect width="280" height="126" rx="8" fill="#173853" stroke="#5ba8ff" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#5ba8ff" />
+    <text x="28" y="33" text-anchor="middle" class="number">4</text>
+    <text x="22" y="70" class="step">Python execution</text>
+    <text x="22" y="101" class="copy">Follow the instructions exactly.</text>
+  </g>
+  <line x1="706" y1="548" x2="744" y2="548" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <g transform="translate(756 485)">
+    <rect width="368" height="126" rx="8" fill="#173853" stroke="#5ba8ff" stroke-width="2" />
+    <circle cx="28" cy="28" r="16" fill="#5ba8ff" />
+    <text x="28" y="33" text-anchor="middle" class="number">5</text>
+    <text x="22" y="70" class="step">Output</text>
+    <text x="22" y="101" class="copy">Return text, a value, a figure or an error.</text>
+  </g>
+
+  <path d="M475 359 C475 407 40 407 40 548 L70 548" fill="none" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <path d="M940 475 C940 412 810 412 760 412 C705 412 705 372 705 359" fill="none" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <path d="M1026 195 L1026 140 L40 140 L40 282 L70 282" fill="none" stroke="#c8f33d" stroke-width="3" marker-end="url(#loop-arrow)" />
+  <text x="610" y="134" text-anchor="middle" class="eyebrow">REFINE THE QUESTION OR PLAN</text>
+
+  <rect x="52" y="678" width="1096" height="58" rx="8" fill="#c8f33d" />
+  <text x="600" y="713" text-anchor="middle" fill="#071426" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Execution can be correct while the data, method or scientific interpretation is still wrong</text>
+  <text x="64" y="761" class="footer">Record every stage so another person can inspect how the result was produced and what it does not establish.</text>
+</svg>

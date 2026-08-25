@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Relationship among the saved notebook file, Jupyter interface and Python kernel</title>
+  <desc id="desc">The saved Vegetation Data Explorer notebook file stores Markdown, code and saved output. Jupyter opens and displays the file. Running a code cell sends instructions to a Python kernel, which holds temporary running state and returns output. Saving updates the file. Restarting clears kernel state but does not delete notebook code.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9eb1c2" />
+    </marker>
+    <style>
+      .heading { fill: #f7f3e9; font: 600 35px Inter, Arial, sans-serif; }
+      .eyebrow { fill: #c8f33d; font: 700 15px Inter, Arial, sans-serif; letter-spacing: 2px; }
+      .label { fill: #91a5b8; font: 700 13px Inter, Arial, sans-serif; letter-spacing: 1.4px; }
+      .title { fill: #f7f3e9; font: 600 22px Inter, Arial, sans-serif; }
+      .copy { fill: #bdc9d5; font: 400 16px Inter, Arial, sans-serif; }
+      .action { fill: #071426; font: 700 13px Inter, Arial, sans-serif; letter-spacing: 1px; }
+      .code { fill: #d9e4ed; font: 500 15px ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .small { fill: #9eb1c2; font: 400 14px Inter, Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="780" fill="#071426" />
+  <text x="64" y="58" class="eyebrow">NOTEBOOK · JUPYTER · KERNEL</text>
+  <text x="64" y="106" class="heading">Three connected things, with three different jobs</text>
+
+  <g transform="translate(64 164)">
+    <rect width="300" height="470" rx="10" fill="#10283e" stroke="#c8f33d" stroke-width="2" />
+    <text x="24" y="38" class="label">SAVED NOTEBOOK FILE</text>
+    <text x="24" y="76" class="title">Vegetation_Data_</text>
+    <text x="24" y="105" class="title">Explorer.ipynb</text>
+    <rect x="24" y="137" width="252" height="74" rx="6" fill="#0a1a29" stroke="#37516a" />
+    <text x="42" y="168" class="code">Markdown: question</text>
+    <text x="42" y="193" class="code">and interpretation</text>
+    <rect x="24" y="225" width="252" height="74" rx="6" fill="#0a1a29" stroke="#37516a" />
+    <text x="42" y="256" class="code">Code: print()</text>
+    <text x="42" y="281" class="code">saved cell order</text>
+    <rect x="24" y="313" width="252" height="74" rx="6" fill="#0a1a29" stroke="#37516a" />
+    <text x="42" y="344" class="code">Saved output</text>
+    <text x="42" y="369" class="code">and metadata</text>
+    <text x="24" y="423" class="copy">Persists after closing</text>
+    <text x="24" y="447" class="copy">when you save or download.</text>
+  </g>
+
+  <g transform="translate(450 164)">
+    <rect width="300" height="470" rx="10" fill="#112a40" stroke="#5ba8ff" stroke-width="2" />
+    <text x="24" y="38" class="label">JUPYTER INTERFACE</text>
+    <text x="24" y="76" class="title">The workspace you see</text>
+    <rect x="24" y="118" width="252" height="74" rx="6" fill="#173853" stroke="#5ba8ff" />
+    <text x="42" y="149" class="code">Markdown cell</text>
+    <text x="42" y="174" class="small">formatted explanation</text>
+    <rect x="24" y="209" width="252" height="100" rx="6" fill="#173853" stroke="#5ba8ff" />
+    <text x="42" y="240" class="code">Code cell</text>
+    <text x="42" y="270" class="code">print("Meadow")</text>
+    <text x="42" y="294" class="small">Shift + Enter sends it to Python</text>
+    <rect x="24" y="326" width="252" height="62" rx="6" fill="#0a1a29" stroke="#37516a" />
+    <text x="42" y="364" class="code">Meadow</text>
+    <text x="24" y="423" class="copy">Displays cells and output;</text>
+    <text x="24" y="447" class="copy">coordinates open, run and save.</text>
+  </g>
+
+  <g transform="translate(836 164)">
+    <rect width="300" height="470" rx="10" fill="#173853" stroke="#ff9348" stroke-width="2" />
+    <text x="24" y="38" class="label">PYTHON KERNEL</text>
+    <text x="24" y="76" class="title">Temporary running state</text>
+    <circle cx="150" cy="195" r="82" fill="#0a1a29" stroke="#ff9348" stroke-width="2" />
+    <text x="150" y="178" text-anchor="middle" class="code">executes code</text>
+    <text x="150" y="207" text-anchor="middle" class="code">holds results</text>
+    <text x="150" y="236" text-anchor="middle" class="code">returns output</text>
+    <rect x="24" y="310" width="252" height="84" rx="6" fill="#2b2a2c" stroke="#ff9348" />
+    <text x="150" y="343" text-anchor="middle" fill="#ffbd8e" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">RESTART</text>
+    <text x="150" y="370" text-anchor="middle" class="copy">clears running state</text>
+    <text x="24" y="423" class="copy">Does not understand ecology</text>
+    <text x="24" y="447" class="copy">or judge whether output is valid.</text>
+  </g>
+
+  <line x1="374" y1="296" x2="440" y2="296" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <rect x="382" y="267" width="52" height="23" rx="11" fill="#c8f33d" />
+  <text x="408" y="283" text-anchor="middle" class="action">OPEN</text>
+
+  <line x1="760" y1="253" x2="826" y2="253" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <rect x="771" y="224" width="44" height="23" rx="11" fill="#5ba8ff" />
+  <text x="793" y="240" text-anchor="middle" class="action">RUN</text>
+  <line x1="826" y1="342" x2="760" y2="342" stroke="#9eb1c2" stroke-width="2" marker-end="url(#arrow)" />
+  <rect x="763" y="350" width="60" height="23" rx="11" fill="#5ba8ff" />
+  <text x="793" y="366" text-anchor="middle" class="action">OUTPUT</text>
+
+  <path d="M600 644 C600 692 214 692 214 644" fill="none" stroke="#c8f33d" stroke-width="3" marker-end="url(#arrow)" />
+  <rect x="376" y="671" width="72" height="25" rx="12" fill="#c8f33d" />
+  <text x="412" y="688" text-anchor="middle" class="action">SAVE</text>
+
+  <rect x="64" y="718" width="1072" height="40" rx="7" fill="#0d2134" stroke="#c8f33d" />
+  <text x="600" y="744" text-anchor="middle" fill="#f7f3e9" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Restarting the kernel clears temporary state; it does not delete the code saved in the notebook file</text>
+</svg>

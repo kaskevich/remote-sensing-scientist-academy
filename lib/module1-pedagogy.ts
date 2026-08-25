@@ -6,19 +6,33 @@ export type FormativeCheck = {
   explanation: string;
 };
 
+export type LessonReference = {
+  title: string;
+  href: string;
+  detail?: string;
+};
+
 export type LessonTechnicalMetadata = {
   pythonVersion: string;
   jupyterEnvironment: string;
   reviewDate: string;
   testedVersions?: Array<{ label: string; value: string }>;
   datasetCitation?: string;
-  coreReferences: Array<{ title: string; href: string }>;
-  furtherReading: Array<{ title: string; href: string }>;
+  coreReferences: LessonReference[];
+  furtherReading: LessonReference[];
+  officialReferences?: LessonReference[];
 };
 
 export type ReviewedLessonDetails = {
   estimatedTime: string;
   lessonType?: string;
+  slug?: string;
+  difficulty?: string;
+  portfolioArtifact?: string;
+  prerequisites?: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  futureRoute?: string;
   position: number;
   totalPositions: number;
   markdownFile: string;
@@ -143,42 +157,76 @@ const sharedTechnicalMetadata = {
 
 export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
   "lesson-01": {
-    estimatedTime: "75–90 minutes",
+    estimatedTime: "60–75 minutes",
+    lessonType: "Core",
+    slug: "scientific-programming",
+    difficulty: "Beginner",
+    portfolioArtifact: "Scientific Notebook Foundation",
+    prerequisites: [],
+    seoTitle: "Scientific Programming: Your First Reproducible Notebook",
+    seoDescription:
+      "Learn what scientific programming means, how Python and Jupyter work together, and how to create, test and preserve your first reproducible scientific notebook.",
+    futureRoute: "/module-1/scientific-programming/",
     position: 1,
     totalPositions: 12,
     markdownFile: "content/lessons/module-1/lesson-01.md",
     formativeChecks: [
       {
-        id: "l1-cells",
-        question: "You want to explain why a research question matters. Which notebook cell should you use?",
-        options: ["A Markdown cell", "A code cell", "Either cell produces the same result"],
+        id: "l1-predict-empty-print",
+        question: "Before you run print(), what output should you predict?",
+        options: ["An empty-looking line", "The word print", "A SyntaxError"],
         correctOption: 0,
         explanation:
-          "Markdown cells hold narrative, headings and interpretation. Code cells contain instructions that the Python kernel executes.",
+          "The call is complete, but it contains no value to display. Python executes it successfully and print produces only a new line.",
       },
       {
-        id: "l1-invalid-instruction",
-        question: "What happens when Python reaches an invalid instruction in a code cell?",
+        id: "l1-predict-execution-order",
+        question: "A code cell contains three print instructions on three lines. In which order will a fresh kernel execute them?",
         options: [
-          "Python guesses the intended instruction",
-          "Python reports an error and stops that cell",
-          "Jupyter silently deletes the instruction",
-        ],
-        correctOption: 1,
-        explanation:
-          "Python reports an error at the point where it cannot continue. Earlier completed instructions may already have produced output, but later instructions in that cell do not run.",
-      },
-      {
-        id: "l1-interpretation",
-        question: "A cell runs and prints a number. What has been established?",
-        options: [
-          "Only that Python executed the instruction and produced that output",
-          "That the number is scientifically valid",
-          "That the ecological hypothesis is correct",
+          "From the first line to the third line",
+          "From the third line to the first line",
+          "In an order chosen by Jupyter",
         ],
         correctOption: 0,
         explanation:
-          "Successful execution is computational evidence, not scientific validation. The scientist must still check data, assumptions and interpretation.",
+          "Within one code cell, Python executes complete instructions from top to bottom. Predicting that order before running makes the result testable.",
+      },
+      {
+        id: "l1-diagnose-validity",
+        question: "Python displays “Mean vegetation height = 42.7 cm”. Which conclusion is justified by that output alone?",
+        options: [
+          "Python successfully displayed the supplied or computed value",
+          "Field sampling was scientifically valid",
+          "The value represents the entire coastal meadow",
+          "Vegetation is definitely 42.7 cm high",
+        ],
+        correctOption: 0,
+        explanation:
+          "Execution confirms that Python produced the output. It does not validate the measurements, units, sampling design, calculation, representativeness or ecological interpretation.",
+      },
+      {
+        id: "l1-diagnose-syntax",
+        question: "Why does print(\"Baltic coastal meadow) produce a SyntaxError?",
+        options: [
+          "The opening quotation mark has no matching closing quotation mark",
+          "Python cannot print ecological text",
+          "The code must be written in a Markdown cell",
+        ],
+        correctOption: 0,
+        explanation:
+          "Python cannot determine where the text ends because its opening quotation mark is unmatched. Add the missing straight quotation mark and rerun the cell.",
+      },
+      {
+        id: "l1-recall",
+        question: "What is the strongest reason to restart the kernel and run all required cells from top to bottom?",
+        options: [
+          "To test whether the saved notebook regenerates its result without hidden state or undocumented order",
+          "To prove that the field sampling design is valid",
+          "To delete the notebook code and begin again",
+        ],
+        correctOption: 0,
+        explanation:
+          "A clean run tests execution order and preservation from fresh computational state. It does not establish data quality or scientific validity.",
       },
     ],
     submissionChecklist: [
@@ -199,13 +247,47 @@ export const reviewedLessonDetails: Record<string, ReviewedLessonDetails> = {
     ],
     technicalMetadata: {
       ...sharedTechnicalMetadata,
+      reviewDate: "25 August 2026",
       coreReferences: [
-        { title: "Project Jupyter documentation", href: "https://docs.jupyter.org/en/latest/start/index.html" },
-        { title: "Python built-in functions: print", href: "https://docs.python.org/3/library/functions.html#print" },
+        {
+          title: "Wilson et al. (2017), Good enough practices in scientific computing",
+          href: "https://doi.org/10.1371/journal.pcbi.1005510",
+          detail: "Core reading · Practical habits for making computational research more reliable, understandable and reusable.",
+        },
       ],
       furtherReading: [
-        { title: "Try Jupyter in a browser", href: "https://jupyter.org/try" },
-        { title: "The Turing Way: reproducible research", href: "https://book.the-turing-way.org/reproducible-research/reproducible-research" },
+        {
+          title: "Sandve et al. (2013), Ten Simple Rules for Reproducible Computational Research",
+          href: "https://doi.org/10.1371/journal.pcbi.1003285",
+          detail: "Scientific foundation · Explains why the complete computational path from data to result should be preserved.",
+        },
+        {
+          title: "Rule et al. (2019), Ten Simple Rules for Writing and Sharing Computational Analyses in Jupyter Notebooks",
+          href: "https://doi.org/10.1371/journal.pcbi.1007007",
+          detail: "Go deeper · Shows how a notebook becomes a clear scientific record another person can inspect and rerun.",
+        },
+      ],
+      officialReferences: [
+        {
+          title: "Project Jupyter documentation",
+          href: "https://docs.jupyter.org/",
+          detail: "Official documentation · Authoritative overview of Jupyter and its notebook-and-kernel architecture.",
+        },
+        {
+          title: "Jupyter Notebook documentation",
+          href: "https://jupyter-notebook.readthedocs.io/",
+          detail: "Official documentation · Operational reference for notebook execution, saving and kernel behaviour.",
+        },
+        {
+          title: "Python documentation",
+          href: "https://docs.python.org/3/",
+          detail: "Official documentation · Authoritative reference for the Python language used throughout the Academy.",
+        },
+        {
+          title: "Python built-in print()",
+          href: "https://docs.python.org/3/library/functions.html#print",
+          detail: "Official documentation · Definition of the first Python function used in this lesson.",
+        },
       ],
     },
     additionalResources: [

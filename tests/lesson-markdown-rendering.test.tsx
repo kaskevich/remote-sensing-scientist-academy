@@ -24,9 +24,19 @@ describe("lesson Markdown rendering", () => {
       <MarkdownContent>{`![A scientific workflow diagram](lesson-media/images/workflow.svg)`}</MarkdownContent>,
     );
 
-    expect(markup).toContain('<figure class="lesson-visual-frame">');
+    expect(markup).toContain('<figure class="lesson-visual-frame lesson-diagram-frame">');
     expect(markup).toContain('class="lesson-visual-scroll"');
     expect(markup).toContain("swipe horizontally");
+  });
+
+  it("keeps scientific photographs fluid and uses their authored caption", () => {
+    const markup = renderToStaticMarkup(
+      <MarkdownContent>{`![A real coastal meadow](lesson-media/images/meadow.jpg "Real coastal-meadow context")`}</MarkdownContent>,
+    );
+
+    expect(markup).toContain('class="lesson-visual-frame lesson-photo-frame"');
+    expect(markup).toContain("Real coastal-meadow context");
+    expect(markup).not.toContain("swipe horizontally");
   });
 
   it("renders inline and display formulas as accessible MathML", () => {
