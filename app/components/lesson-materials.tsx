@@ -179,10 +179,14 @@ export function MarkdownContent({
             }
             const onlyChild = Array.isArray(paragraphChildren) ? paragraphChildren.length === 1 ? paragraphChildren[0] : null : paragraphChildren;
             if (onlyChild && typeof onlyChild === "object" && "type" in onlyChild && onlyChild.type === "img") {
+              const imageProps = (onlyChild as { props?: { src?: string; title?: string } }).props;
+              const isDiagram = imageProps?.src?.toLowerCase().endsWith(".svg") ?? false;
+              const caption = imageProps?.title
+                ?? (isDiagram ? "On smaller screens, swipe horizontally to inspect the complete diagram" : "Scientific context image");
               return (
-                <figure className="lesson-visual-frame">
+                <figure className={`lesson-visual-frame${isDiagram ? " lesson-diagram-frame" : " lesson-photo-frame"}`}>
                   <span className="lesson-visual-scroll">{onlyChild}</span>
-                  <figcaption>On smaller screens, swipe horizontally to inspect the complete diagram</figcaption>
+                  <figcaption>{caption}</figcaption>
                 </figure>
               );
             }

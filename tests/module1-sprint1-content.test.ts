@@ -110,6 +110,52 @@ describe("Module 1 pedagogical review", () => {
     expect(content).toContain("Portfolio Project 1 — Vegetation Data Explorer");
   });
 
+  it("implements the final Lesson 1 learning standard without changing its stable ID", () => {
+    const content = reviewedContent["lesson-01"];
+    const details = reviewedLessonDetails["lesson-01"];
+
+    expect(content).toContain("lessonId: lesson-01");
+    expect(content).toContain("slug: scientific-programming");
+    expect(content).toContain("lessonType: core");
+    expect(content).toContain("difficulty: beginner");
+    expect(content).toContain("estimatedMinutes: 60-75");
+    expect(content).toContain("portfolioArtifact: scientific-notebook-foundation");
+    expect(content).toContain("How does a scientific question become something a computer can actually execute?");
+    expect(content).toContain("scientific-programming-cycle.svg");
+    expect(content).toContain("notebook-kernel-file-model.svg");
+    expect(content).toContain("parnu-coastal-meadow.jpg");
+    expect(content).toContain("Scientific context, not lesson data");
+    expect(content).toContain("Close the notes — 3-minute recall");
+    expect(content).toContain("Mean vegetation height = 42.7 cm");
+    expect(content).toContain("Scientific Notebook Foundation");
+
+    expect(details.lessonType).toBe("Core");
+    expect(details.difficulty).toBe("Beginner");
+    expect(details.estimatedTime).toBe("60–75 minutes");
+    expect(details.slug).toBe("scientific-programming");
+    expect(details.portfolioArtifact).toBe("Scientific Notebook Foundation");
+    expect(details.futureRoute).toBe("/module-1/scientific-programming/");
+    expect(details.formativeChecks.map((check) => check.id)).toEqual([
+      "l1-predict-empty-print",
+      "l1-predict-execution-order",
+      "l1-diagnose-validity",
+      "l1-diagnose-syntax",
+      "l1-recall",
+    ]);
+    expect(details.technicalMetadata.coreReferences[0].href).toBe("https://doi.org/10.1371/journal.pcbi.1005510");
+    expect(details.technicalMetadata.furtherReading).toHaveLength(2);
+    expect(details.technicalMetadata.officialReferences).toHaveLength(4);
+
+    for (const asset of [
+      "public/lesson-media/images/scientific-programming-cycle.svg",
+      "public/lesson-media/images/notebook-kernel-file-model.svg",
+      "public/lesson-media/images/parnu-coastal-meadow.jpg",
+      "public/lesson-media/images/parnu-coastal-meadow.LICENSE.md",
+    ]) {
+      expect(existsSync(join(process.cwd(), asset))).toBe(true);
+    }
+  });
+
   it("provides Lesson 1 clean-run and handover scaffolding in the starter notebook", () => {
     const notebook = JSON.parse(
       readFileSync(
@@ -239,10 +285,10 @@ describe("Module 1 pedagogical review", () => {
   });
 
   it.each(Object.entries(reviewedLessonDetails))(
-    "%s includes three retryable, explanatory formative checks",
+    "%s includes at least three retryable, explanatory formative checks",
     (_lessonId, details) => {
-      expect(details.formativeChecks).toHaveLength(3);
-      expect(new Set(details.formativeChecks.map((check) => check.id)).size).toBe(3);
+      expect(details.formativeChecks.length).toBeGreaterThanOrEqual(3);
+      expect(new Set(details.formativeChecks.map((check) => check.id)).size).toBe(details.formativeChecks.length);
       for (const check of details.formativeChecks) {
         expect(check.options.length).toBeGreaterThanOrEqual(3);
         expect(check.correctOption).toBeGreaterThanOrEqual(0);
@@ -357,12 +403,13 @@ describe("Module 1 pedagogical review", () => {
     }
   });
 
-  it("retains one explanatory SVG for every lesson", () => {
+  it("retains at least one explanatory SVG for every lesson", () => {
     const referencedImages = Object.values(reviewedContent).flatMap((content) =>
-      [...content.matchAll(/!\[[^\]]*\]\(([^)]+\.svg)\)/g)].map((match) => match[1]),
+      [...content.matchAll(/!\[[^\]]*\]\(([^)\s]+\.svg)(?:\s+"[^"]*")?\)/g)].map((match) => match[1]),
     );
     expect(referencedImages).toEqual([
-      "lesson-media/images/scientific-programming-execution.svg",
+      "lesson-media/images/scientific-programming-cycle.svg",
+      "lesson-media/images/notebook-kernel-file-model.svg",
       "lesson-media/images/scientific-variable-bindings.svg",
       "lesson-media/images/ecological-collections.svg",
       "lesson-media/images/condition-quality-path.svg",

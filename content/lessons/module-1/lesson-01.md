@@ -1,6 +1,17 @@
 ---
 title: Welcome to Scientific Programming
 lessonId: lesson-01
+slug: scientific-programming
+module: 1
+chapter: 1
+lessonType: core
+difficulty: beginner
+estimatedMinutes: 60-75
+portfolioArtifact: scientific-notebook-foundation
+prerequisites: none
+retrievalFrom: []
+seoTitle: "Scientific Programming: Your First Reproducible Notebook"
+seoDescription: Learn what scientific programming means, how Python and Jupyter work together, and how to create, test and preserve your first reproducible scientific notebook.
 ---
 
 ## Learning pathway
@@ -11,7 +22,7 @@ You already know how scientists ask questions, distinguish observations from int
 
 ### In this lesson
 
-You will turn one ecological question into a small, inspectable notebook record. You will learn what programming and scientific programming mean, how Jupyter and Python divide their roles, how the computer executes an instruction and how to preserve the result for another person to inspect.
+You will turn one ecological question into a small, inspectable notebook record. You will learn what programming and scientific programming mean, how Jupyter, a notebook file, Python and the kernel divide their roles, how the computer executes an instruction and how to preserve the result for another person to inspect.
 
 ### Why this comes now
 
@@ -25,26 +36,42 @@ Lesson 2 adds scientific values to the notebook. Lesson 6 develops systematic de
 
 ### Learning outcome
 
-By the end of this lesson, you can explain scientific programming in one sentence, distinguish Markdown and code cells, run notebook cells in order, use `print()`, recognise and correct one syntax error, save the notebook, and explain why successful execution does not prove scientific validity.
+By the end of this lesson, you can explain scientific programming; distinguish a scientific question from a computational instruction; explain the roles of Jupyter, a notebook file, Python and the kernel; distinguish Markdown and code cells; run simple instructions in order; predict output before execution; recognise and repair a simple `SyntaxError`; restart and clean-run a notebook; preserve it for inspection; and explain why successful execution does not prove scientific validity.
 
 **Prerequisites:** None. You do not need to know Python, files, folders, terminals or notebooks.
 
 ### Why this matters
 
+> **Core lesson** How does a scientific question become something a computer can actually execute?
+
 You have joined a research group studying Baltic coastal meadows. Across the module, your working question is:
 
 > How can field measurements help us describe and compare vegetation patterns across Baltic coastal meadow plots?
+
+![A real coastal meadow beside Pärnu Bay, Estonia, with water, low vegetation, shrubs and managed grassland visible from an observation tower.](lesson-media/images/parnu-coastal-meadow.jpg "Pärnu coastal meadow, Estonia — what observations and metadata would be needed to turn this landscape into scientific data?")
+
+*Scientific context, not lesson data.* Photograph by Marko Vainu, 7 August 2013, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:P%C3%A4rnu_rannaniidu_LKA.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The photograph is not part of the published Baltic coastal plant-traits dataset and no values are inferred from it here.
+
+Before thinking about code, inspect the landscape. What would need to be defined before a computer could compare its vegetation: the observation unit, field protocol, dates, locations, measurements, quality checks, or something else? The computer cannot choose these scientific meanings for you.
 
 A scientific question is not yet a computational method. To analyse it, a scientist must turn decisions into instructions: which data to inspect, which values to compare, what to calculate and how to check the result.
 
 **Programming** means writing instructions a computer can execute. **Scientific programming** means using explicit, repeatable computer instructions to investigate scientific evidence while keeping scientific judgement with the researcher.
 
-The relationship is simple:
+The relationship is a cycle:
 
-1. The scientist defines the question.
-2. The notebook records explanation and instructions.
-3. Python executes the instructions.
-4. The scientist checks and interprets the result.
+1. The **scientist asks a question**.
+2. An **analysis plan defines operations and checks**.
+3. **Notebook code expresses exact instructions**.
+4. **Python executes** those instructions.
+5. The notebook records **output**, including errors.
+6. The scientist **validates** execution, data and method.
+7. The scientist **interprets** what the output means and does not mean.
+8. The evidence may lead back to a revised question or plan.
+
+![A cycle separates scientist-controlled questions, plans, validation and interpretation from computer-executed notebook code, Python execution and output.](lesson-media/images/scientific-programming-cycle.svg "Scientific programming cycle — reasoning controls the computation and returns to the question")
+
+The arrows are not a guarantee of correctness. They make the reasoning inspectable. Code can execute exactly as written even when the wrong evidence was selected or the scientific question was translated badly.
 
 > **Core lesson** Write your own one-sentence definition of scientific programming in your private notes. Include both *repeatable instructions* and *scientific judgement*.
 
@@ -60,6 +87,17 @@ A notebook contains cells:
 
 - A **Markdown cell** holds headings, explanations, predictions and interpretations. Running it formats the text.
 - A **code cell** holds Python instructions. Running it sends those instructions to Python and returns output or an error.
+
+### Four names that beginners often mix up
+
+- **Notebook file:** the saved `.ipynb` record containing cells, saved output and metadata.
+- **Jupyter:** the interface that opens the file, displays cells and sends code to be run.
+- **Python:** the programming language used to express the instructions.
+- **Kernel:** the running Python process that executes code and temporarily remembers the current computational state.
+
+![The saved notebook file opens in the Jupyter interface, which sends code cells to a temporary Python kernel and receives output; save and restart affect different parts of the system.](lesson-media/images/notebook-kernel-file-model.svg "Notebook, Jupyter and kernel mental model — restarting clears temporary state but does not delete saved code")
+
+When you choose **Save**, Jupyter updates the notebook file. When you choose **Restart Kernel**, Jupyter clears the kernel's temporary running state. Your saved code remains in the notebook. When you choose **Run All**, Jupyter sends code cells to a fresh kernel in notebook order. These actions are related, but they are not interchangeable.
 
 ### Choose the right scientific record
 
@@ -89,8 +127,6 @@ Open it in JupyterLab, Jupyter Notebook, or your institution's current Jupyter e
 
 Open the starter notebook. Find its title cell, one prediction field and one prepared code cell. Change the learner-name placeholder to your name or researcher identifier, then save.
 
-[[CHECK:l1-cells]]
-
 ## 3. Run the first instruction
 
 The first prepared code cell contains:
@@ -101,15 +137,11 @@ print()
 
 Before running it, predict what will appear: the word `print`, an error, or an empty-looking line. Record the prediction in the Markdown field directly above the code.
 
+[[CHECK:l1-predict-empty-print]]
+
 Now select the code cell and press **Shift + Enter**, or use the Run control.
 
 `print` is a built-in Python function that sends information to the output area. The parentheses mean “run this function now”. Nothing appears inside the parentheses, so `print()` produces only a new line. The output looks empty, but Python still completed a valid instruction.
-
-![A scientific question moves through a notebook plan, a code cell, Python execution, output and scientific interpretation.](lesson-media/images/scientific-programming-execution.svg)
-
-The top row of the diagram shows computation. The lower return path matters just as much: a scientist checks whether the output is relevant and defensible.
-
-The diagram ends with a reproducibility gate. A saved notebook is evidence only when the required sequence, outputs and interpretation can be regenerated from a clean kernel.
 
 ### Code walkthrough
 
@@ -137,6 +169,8 @@ print("Question: How does vegetation vary among field plots?")
 
 In the prediction field, write the three lines in the order you expect them to appear. Then run the cell.
 
+[[CHECK:l1-predict-execution-order]]
+
 Expected output:
 
 ```text
@@ -153,11 +187,30 @@ Python displayed a research question, but it did not judge whether the question 
 
 > **Scientific note** A precise output can still result from weak data, an unsuitable method or an unsupported assumption. Computational correctness and scientific validity must be checked separately.
 
+### Diagnose — it worked, but is it scientifically valid?
+
+Imagine that Python displays:
+
+```text
+Mean vegetation height = 42.7 cm
+```
+
+Which conclusion is justified?
+
+- Vegetation is definitely 42.7 cm high.
+- Python successfully displayed the supplied or computed value.
+- Field sampling was scientifically valid.
+- The measurement represents the entire coastal meadow.
+
+[[CHECK:l1-diagnose-validity]]
+
+Only the second statement follows from the output. To support the others, you would need evidence about the input values, units, sampling design, calculation, quality control, spatial and temporal scope, and uncertainty. Successful execution is one check in an evidence chain, not the scientific conclusion.
+
+In two sentences, explain the difference between **computational success** and **scientific validity** in your notebook.
+
 ### Learner action
 
 Change only the final printed question so it matches the scientific question you wrote in Block 1. Predict the output order again, run the cell and confirm the lines remain in the expected sequence.
-
-[[CHECK:l1-interpretation]]
 
 ## 5. Cause and fix one error
 
@@ -168,6 +221,8 @@ print("Baltic coastal meadow)
 ```
 
 Run it. Python should report a `SyntaxError` because the opening quotation mark has no matching closing quotation mark. The error is information, not a judgement about your ability.
+
+[[CHECK:l1-diagnose-syntax]]
 
 ### When code fails
 
@@ -192,8 +247,6 @@ If `print("Baltic coastal meadow")` appears as formatted text instead of produci
 ### Learner action
 
 Add a Markdown note below the corrected cell. State what Python reported, which single character was missing and how you knew the fix worked.
-
-[[CHECK:l1-invalid-instruction]]
 
 ## 6. Save and submit the notebook
 
@@ -242,6 +295,22 @@ Use the submission checklist shown below the lesson. Upload the renamed notebook
 
 ## 7. Reflection and summary
 
+### Close the notes — 3-minute recall
+
+Close or cover the lesson text. Without running code, answer from memory:
+
+1. What is scientific programming?
+2. When would you use a Markdown cell rather than a code cell?
+3. What does the kernel do?
+4. Why restart the kernel and run the notebook from top to bottom?
+5. Why does successful code execution not prove a scientific conclusion?
+
+Then reopen the lesson, check your answers and correct only what you could not explain accurately.
+
+[[CHECK:l1-recall]]
+
+### Reflection
+
 Write short answers in your private notes:
 
 1. What is scientific programming, in one sentence?
@@ -253,9 +322,9 @@ Write short answers in your private notes:
 
 ### Portfolio artifact
 
-**Artifact 01 — Scientific notebook foundation**
+**Artifact 01 — Scientific Notebook Foundation**
 
-Your `Vegetation_Data_Explorer.ipynb` now contains a project title, a scientific question, predictions, executable Python instructions, a corrected error, a clean-run QA record, a handover note and a reflection on scientific interpretation. It is the first checkpoint in **Portfolio Project 1 — Vegetation Data Explorer**, not a separate mini-project. Keep this notebook: Lesson 2 extends it rather than replacing it.
+Your `Vegetation_Data_Explorer.ipynb` now contains a project title, a researcher identifier, a scientific question, predictions, executable Python instructions, a corrected `SyntaxError`, an interpretation, a clean-run QA record, a handover note and a reflection on scientific interpretation. It is the first checkpoint in **Portfolio Project 1 — Vegetation Data Explorer**, not a separate mini-project. Keep this notebook: Lesson 2 extends it rather than replacing it.
 
 ### Summary
 

@@ -268,6 +268,16 @@ function LessonSubmissionGuide({ lessonId, pedagogy }: { lessonId: string; pedag
 
 function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails }) {
   const metadata = pedagogy.technicalMetadata;
+  const referenceList = (references: typeof metadata.coreReferences) => (
+    <ul>
+      {references.map((reference) => (
+        <li key={reference.href}>
+          <a href={reference.href} target="_blank" rel="noreferrer">{reference.title}</a>
+          {reference.detail && <p>{reference.detail}</p>}
+        </li>
+      ))}
+    </ul>
+  );
   return (
     <details className="lesson-technical-details">
       <summary>Technical and source information</summary>
@@ -278,17 +288,25 @@ function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails 
         <div><dt>Tested Python</dt><dd>{metadata.pythonVersion}</dd></div>
         <div><dt>Tested Jupyter environment</dt><dd>{metadata.jupyterEnvironment}</dd></div>
         <div><dt>Last technical review</dt><dd>{metadata.reviewDate}</dd></div>
+        {pedagogy.portfolioArtifact && <div><dt>Portfolio artifact</dt><dd>{pedagogy.portfolioArtifact}</dd></div>}
+        {pedagogy.prerequisites && <div><dt>Prerequisites</dt><dd>{pedagogy.prerequisites.length > 0 ? pedagogy.prerequisites.join(", ") : "None"}</dd></div>}
         {metadata.datasetCitation && <div><dt>Dataset citation</dt><dd>{metadata.datasetCitation}</dd></div>}
       </dl>
       <div className="lesson-reference-columns">
         <div>
-          <h4>Core references</h4>
-          <ul>{metadata.coreReferences.map((reference) => <li key={reference.href}><a href={reference.href} target="_blank" rel="noreferrer">{reference.title}</a></li>)}</ul>
+          <h4>Core reading</h4>
+          {referenceList(metadata.coreReferences)}
         </div>
         <div>
-          <h4>Optional further reading</h4>
-          <ul>{metadata.furtherReading.map((reference) => <li key={reference.href}><a href={reference.href} target="_blank" rel="noreferrer">{reference.title}</a></li>)}</ul>
+          <h4>Go deeper</h4>
+          {referenceList(metadata.furtherReading)}
         </div>
+        {metadata.officialReferences && metadata.officialReferences.length > 0 && (
+          <div>
+            <h4>Official reference</h4>
+            {referenceList(metadata.officialReferences)}
+          </div>
+        )}
       </div>
     </details>
   );
@@ -621,6 +639,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       <div className="lesson-context" aria-label="Lesson position and progress">
                         <span>{lesson.kind === "practicum" ? "Chapter practicum" : lesson.numberLabel === "Capstone" ? "Module capstone" : `Lesson ${lesson.numberLabel ?? pedagogy.position} of ${pedagogy.totalPositions}`}</span>
                         {pedagogy.lessonType && <span>{pedagogy.lessonType}</span>}
+                        {pedagogy.difficulty && <span>{pedagogy.difficulty}</span>}
                         <strong>{pedagogy.estimatedTime}</strong>
                         <span>{completedLessonChecks.length} of {pedagogy.formativeChecks.length} checks completed</span>
                       </div>
