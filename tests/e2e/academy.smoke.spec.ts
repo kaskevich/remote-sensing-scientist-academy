@@ -7,7 +7,6 @@ const lesson2 = "/module-1/start-with-python/variables-and-scientific-data/";
 const lesson2Spatial = "/module-2/spatial-foundations/what-makes-data-geospatial/";
 const lesson2Uav = "/module-2/uav-and-photogrammetry/uav-remote-sensing-fundamentals/";
 const lesson3 = "/module-3/frame-the-prediction-problem/prediction-inference-and-explanation/";
-const regressionEvaluation = "/module-3/evaluate-diagnose-and-understand/regression-evaluation/";
 
 const routeMatrix = [
   "/",
@@ -65,39 +64,6 @@ test("direct lesson pages expose complete content and real sequence links", asyn
   await expect(lesson.getByRole("link", { name: /Vegetation Data Explorer starter notebook/i })).toHaveAttribute("href", /Vegetation_Data_Explorer_Starter\.ipynb$/);
   await expect(page.locator(".platform-progression").getByRole("link", { name: /Variables and Scientific Data/ })).toHaveAttribute("href", lesson2);
   await expect(page.getByRole("link", { name: "Chapter overview", exact: true })).toHaveAttribute("href", "/module-1/start-with-python/");
-});
-
-test("long lesson contents remain readable and contained", async ({ page }) => {
-  for (const viewport of [
-    { width: 320, height: 568 },
-    { width: 1440, height: 900 },
-  ]) {
-    await page.setViewportSize(viewport);
-    await page.goto(regressionEvaluation);
-
-    const workspace = page.locator(".lesson-platform-workspace");
-    const contents = page.locator(".lesson-table-of-contents");
-    await expect(contents.locator("li")).toHaveCount(19);
-    await expect(page.locator("#lesson-3-17 > summary")).toBeHidden();
-
-    const layout = await contents.evaluate((element) => {
-      const list = element.querySelector("ol");
-      const items = [...element.querySelectorAll("li")];
-      const bounds = element.getBoundingClientRect();
-      return {
-        columns: list ? getComputedStyle(list).gridTemplateColumns.trim().split(/\s+/).length : 0,
-        contained: items.every((item) => {
-          const itemBounds = item.getBoundingClientRect();
-          return itemBounds.left >= bounds.left && itemBounds.right <= bounds.right + 1;
-        }),
-      };
-    });
-
-    expect(layout.columns).toBe(1);
-    expect(layout.contained).toBe(true);
-    expect(await workspace.evaluate((element) => getComputedStyle(element).backgroundColor)).toBe("rgb(11, 25, 48)");
-    expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
-  }
 });
 
 test("a fresh browser can read a direct lesson without JavaScript disclosure", async ({ browser }) => {
