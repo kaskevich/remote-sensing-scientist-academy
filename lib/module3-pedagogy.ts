@@ -664,7 +664,7 @@ export const module3Overview: AcademyModuleOverview = {
   moduleNumber: 3,
   accent: "terracotta",
   overviewLabel: "Module 3 overview",
-  navigationTitle: "Remote Sensing Modelling lessons",
+  navigationTitle: "Available Module 3 lessons",
   navigationMeta: "30 lessons · capstone available",
   syllabusAriaLabel: "Complete thirty-lesson Module 3 curriculum and capstone map",
   planningNote:

@@ -143,6 +143,7 @@ describe("Module 3 curriculum architecture", () => {
   it("publishes all seven chapters and the independent capstone", () => {
     expect(module3Overview.moduleNumber).toBe(3);
     expect(module3Overview.title).toBe("Remote Sensing Modelling");
+    expect(module3Overview.navigationTitle).toBe("Available Module 3 lessons");
     expect(module3Overview.accent).toBe("terracotta");
     expect(module3Overview.chapters).toHaveLength(7);
     expect(module3Lessons).toHaveLength(31);
