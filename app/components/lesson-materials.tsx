@@ -127,6 +127,7 @@ export function MarkdownContent({
   }
 
   const { markdown, expressions } = extractLessonMath(children);
+  const isModuleThreeLesson = lessonId.startsWith("lesson-3-");
 
   const tableOfContents = showTableOfContents
     ? [...children.matchAll(/^##\s+(.+)$/gm)].map((match) => ({
@@ -136,7 +137,7 @@ export function MarkdownContent({
     : [];
 
   return (
-    <div className="lesson-rich-text">
+    <div className={`lesson-rich-text${isModuleThreeLesson ? " lesson-rich-text-module-3" : ""}`}>
       {tableOfContents.length > 0 && (
         <nav className="lesson-table-of-contents" aria-label="Lesson contents">
           <span>In this lesson</span>

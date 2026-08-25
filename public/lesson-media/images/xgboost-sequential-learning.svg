@@ -48,8 +48,9 @@
   <text x="325" y="410" text-anchor="middle" class="small">evaluate the new loss</text>
   <text x="325" y="435" text-anchor="middle" class="small">then begin the next boosting stage</text>
   <path d="M180 382 C85 382 85 225 140 225" class="line"/>
-  <rect x="85" y="520" width="1030" height="105" rx="12" fill="#fff" stroke="#D6C0B8" stroke-width="2"/>
-  <text x="115" y="557" class="label">SCIENTIFIC FIREWALL</text>
-  <text x="115" y="586" class="body">The objective can optimise only the supplied target, features and rows. It cannot detect a causal overclaim, target leakage, a weak transfer split or an unsupported prediction domain.</text>
-  <text x="115" y="611" class="small">Validation design, feature availability, missingness meaning and domain evidence remain the scientist’s responsibility</text>
+  <rect x="85" y="505" width="1030" height="145" rx="12" fill="#fff" stroke="#D6C0B8" stroke-width="2"/>
+  <text x="115" y="540" class="label">SCIENTIFIC FIREWALL</text>
+  <text x="115" y="570" class="body">The objective optimises only the supplied target, features and rows; it cannot detect causal overclaim or target leakage.</text>
+  <text x="115" y="597" class="body">Weak transfer design, unsupported prediction domains and changing feature meaning require independent scientific checks.</text>
+  <text x="115" y="624" class="small">Validation design, feature availability, missingness and applicability evidence remain the scientist’s responsibility.</text>
 </svg>

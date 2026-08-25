@@ -127,6 +127,37 @@ test("a direct Module 3 Chapter 5 lesson link opens with diagnostic resources", 
   await expect(lesson.getByRole("link", { name: /regression evaluation template/i })).toHaveAttribute("href", /REGRESSION_EVALUATION_TEMPLATE\.md$/);
 });
 
+test("Module 3 lesson contents and diagrams keep a readable responsive layout", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/#lesson-3-17");
+
+  const lesson = page.locator("#lesson-3-17");
+  const contentsItems = lesson.locator(".lesson-table-of-contents li");
+  const contents = lesson.locator(".lesson-table-of-contents");
+  const diagram = lesson.locator(".lesson-diagram-frame");
+
+  await expect(contentsItems).toHaveCount(19);
+  const desktopLayout = await contents.evaluate((node) => {
+    const items = [...node.querySelectorAll("li")];
+    const first = items[0]?.getBoundingClientRect();
+    const second = items[1]?.getBoundingClientRect();
+    return {
+      aligned: Boolean(first && second && Math.abs(first.left - second.left) < 1),
+      contained: node.scrollWidth <= node.clientWidth,
+    };
+  });
+  expect(desktopLayout).toEqual({ aligned: true, contained: true });
+  await expect(diagram).toBeVisible();
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  const mobileOverflow = await page.evaluate(() => ({
+    document: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    contents: [...document.querySelectorAll("#lesson-3-17 .lesson-table-of-contents")]
+      .some((node) => node.scrollWidth > node.clientWidth),
+  }));
+  expect(mobileOverflow).toEqual({ document: false, contents: false });
+});
+
 test("a direct Module 3 Chapter 6 lesson link opens with uncertainty resources", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/#lesson-3-22");

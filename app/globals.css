@@ -1670,6 +1670,14 @@ h2 {
   line-height: 1.72;
 }
 
+.lesson-rich-text-module-3 {
+  max-width: 1100px;
+}
+
+.lesson-rich-text-module-3 > :not(.lesson-visual-frame) {
+  max-width: 860px;
+}
+
 .lesson-rich-text h1,
 .lesson-rich-text h2,
 .lesson-rich-text h3,
@@ -2579,6 +2587,36 @@ h2 {
   color: rgba(255, 255, 255, 0.73);
   font-size: 13px;
   line-height: 1.45;
+}
+
+.lesson-rich-text-module-3 .lesson-table-of-contents ol {
+  max-width: 780px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 9px;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: module-three-section;
+}
+
+.lesson-rich-text-module-3 .lesson-table-of-contents li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: 10px;
+  counter-increment: module-three-section;
+}
+
+.lesson-rich-text-module-3 .lesson-table-of-contents li::before {
+  content: counter(module-three-section) ".";
+  color: rgba(255, 255, 255, 0.48);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.lesson-rich-text-module-3 .lesson-table-of-contents a {
+  min-width: 0;
+  display: block;
+  overflow-wrap: anywhere;
 }
 
 .lesson-rich-text h2,
