@@ -1,57 +1,79 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  Breadcrumbs,
-  JsonLd,
-  PlatformFooter,
-  PlatformHeader,
-} from "@/app/components/platform-navigation";
-import { academyAssetHref, academyHref, academyUrl } from "@/lib/site-paths";
-
-const description = "The story behind Remote Sensing Scientist Academy — a self-directed learning project by environmental scientist and PhD researcher Volha Kaskevich for practical scientific programming, geospatial data science, remote sensing and modelling.";
+import content from "@/content/site.json";
 
 export const metadata: Metadata = {
   title: "About | Remote Sensing Scientist Academy",
-  description,
-  alternates: { canonical: academyUrl("/about/") },
-  openGraph: {
-    title: "About | Remote Sensing Scientist Academy",
-    description,
-    url: academyUrl("/about/"),
-    type: "profile",
-  },
+  description:
+    "The story behind Remote Sensing Scientist Academy — a self-directed learning project by environmental scientist and PhD researcher Volha Kaskevich for developing practical skills in scientific programming, geospatial data science, remote sensing and machine learning.",
 };
 
+const visibleNavigation = content.navigation.items.filter((item) => item.visible);
+
+function aboutNavigationHref(href: string) {
+  return href === "about/" ? "./" : `../${href}`;
+}
+
 export default function AboutPage() {
-  const imageSrc = academyAssetHref("/images/volha-kaskevich.jpg");
+  const imageSrc = `${process.env.PAGES_BASE_PATH ?? ""}/images/volha-kaskevich.jpg`;
 
   return (
     <>
-      <JsonLd value={{
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Volha Kaskevich",
-        url: academyUrl("/about/"),
-        image: academyUrl("/images/volha-kaskevich.jpg"),
-        jobTitle: "Junior Research Fellow and PhD researcher",
-        affiliation: {
-          "@type": "CollegeOrUniversity",
-          name: "Estonian University of Life Sciences",
-          url: "https://www.emu.ee/",
-        },
-        sameAs: [
-          "https://www.etis.ee/CV/Volha_Kaskevich/eng/",
-          "https://www.emu.ee/en/contacts/volha-kaskevich",
-          "https://ee.linkedin.com/in/volha-kaskevich-b13439b3",
-        ],
-      }} />
-      <PlatformHeader current="about" />
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
+
+      <header className="site-header">
+        <a className="brand" href="../" aria-label={`${content.metadata.title} home`}>
+          <span className="brand-mark" aria-hidden="true">
+            <span>{content.brand.mark}</span>
+          </span>
+          <span className="brand-name">
+            {content.brand.lineOne}
+            <strong>{content.brand.lineTwo}</strong>
+          </span>
+        </a>
+
+        <nav className="main-nav" aria-label="Main navigation">
+          {visibleNavigation.map((item) => (
+            <a
+              href={aboutNavigationHref(item.href)}
+              aria-current={item.label === "About" ? "page" : undefined}
+              key={`${item.label}-${item.href}`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <details className="mobile-menu">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation">
+            {visibleNavigation.map((item) => (
+              <a
+                href={aboutNavigationHref(item.href)}
+                aria-current={item.label === "About" ? "page" : undefined}
+                key={`${item.label}-${item.href}`}
+              >
+                {item.label}
+              </a>
+            ))}
+            {content.navigation.showApplyButton && (
+              <a className="mobile-apply" href="../#apply">
+                {content.navigation.applyLabel} ↗
+              </a>
+            )}
+          </nav>
+        </details>
+
+        {content.navigation.showApplyButton && (
+          <a className="header-cta" href="../#apply">
+            {content.navigation.applyLabel} <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </header>
 
       <main className="about-main" id="main-content">
-        <Breadcrumbs items={[
-          { label: "Academy", href: academyHref("/") },
-          { label: "About" },
-        ]} />
         <header className="about-heading">
           <h1>About</h1>
         </header>
@@ -99,8 +121,7 @@ export default function AboutPage() {
             </p>
 
             <p>
-              The Academy is therefore both a personal learning project and an open educational resource. Its{" "}
-              <a href={academyHref("/curriculum/")}>structured learning path</a> moves through scientific programming, data analysis, geospatial data science, remote sensing and machine learning, with an emphasis on practical work, scientific reasoning and reproducibility.
+              The Academy is therefore both a personal learning project and an open educational resource. It follows a path through scientific programming, data analysis, geospatial data science, remote sensing and machine learning, with an emphasis on practical work, scientific reasoning and reproducibility.
             </p>
 
             <p>
@@ -129,13 +150,40 @@ export default function AboutPage() {
 
             <div className="about-closing">
               <strong>Remote Sensing Scientist Academy</strong>
-              <span>From beginner to Earth Observation professional</span>
+              <span>From beginner to Earth Observation professional.</span>
             </div>
           </article>
         </div>
       </main>
 
-      <PlatformFooter />
+      <footer>
+        <a className="brand footer-brand" href="../">
+          <span className="brand-mark" aria-hidden="true">
+            <span>{content.brand.mark}</span>
+          </span>
+          <span className="brand-name">
+            {content.brand.lineOne}
+            <strong>{content.brand.lineTwo}</strong>
+          </span>
+        </a>
+        <p>{content.footer.description}</p>
+        <div className="footer-links">
+          {visibleNavigation.map((item) => (
+            <a
+              href={aboutNavigationHref(item.href)}
+              aria-current={item.label === "About" ? "page" : undefined}
+              key={`${item.label}-${item.href}`}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a href={content.footer.contactHref}>{content.footer.contactLabel}</a>
+        </div>
+        <div className="footer-bottom">
+          <span>{content.footer.copyright}</span>
+          <span>{content.footer.manifesto}</span>
+        </div>
+      </footer>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import content from "@/content/site.json";
 import AdminPortal from "@/app/components/admin-portal";
-import { academyLessonRoutes } from "@/lib/academy-routes";
 
 export const metadata: Metadata = {
   title: "Academy administration | Remote Sensing Scientist Academy",
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
-  const lessons = academyLessonRoutes.map((lesson) => ({
-    id: lesson.lessonId,
-    title: `${lesson.lessonNumber} · ${lesson.title}`,
+  const lessons = content.curriculum.modules.map((lesson) => ({
+    id: lesson.id,
+    title: lesson.title,
   }));
 
   return <AdminPortal lessons={lessons} />;
