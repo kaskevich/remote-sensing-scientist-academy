@@ -64,6 +64,13 @@ export type AcademyCurriculumModule = {
 
 type LearnerCurriculumProps = {
   modules: AcademyCurriculumModule[];
+  routeByLessonId?: Record<string, string>;
+  activeLessonId?: string;
+  showModuleOverviews?: boolean;
+  showDashboard?: boolean;
+  showLessonPanels?: boolean;
+  showOnlyActiveLesson?: boolean;
+  showInternalSequenceNavigation?: boolean;
 };
 
 function activityTimestamp() {
@@ -74,10 +81,12 @@ function ModuleOverview({
   overview,
   completedLessonIds,
   onOpenLesson,
+  lessonHref,
 }: {
   overview: AcademyModuleOverview;
   completedLessonIds: string[];
   onOpenLesson: (lessonId: string) => void;
+  lessonHref: (lessonId: string) => string;
 }) {
   return (
     <section className={`module-overview-panel module-overview-${overview.accent}`} aria-labelledby={`module-${overview.moduleNumber}-overview-title`}>
@@ -117,6 +126,7 @@ function ModuleOverview({
             moduleNumber={overview.moduleNumber}
             completedLessonIds={completedLessonIds}
             onOpenLesson={onOpenLesson}
+            lessonHref={lessonHref}
           />
         ))}
         {overview.capstone && (
@@ -131,7 +141,7 @@ function ModuleOverview({
                 <span className="syllabus-number">CP</span>
                 <div>
                   {overview.capstone.lessonId ? (
-                    <a href={`#${overview.capstone.lessonId}`} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
+                    <a href={lessonHref(overview.capstone.lessonId)} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
                       {overview.capstone.title}
                     </a>
                   ) : (
@@ -154,11 +164,13 @@ function ChapterOverview({
   moduleNumber,
   completedLessonIds,
   onOpenLesson,
+  lessonHref,
 }: {
   chapter: AcademyModuleOverview["chapters"][number];
   moduleNumber: number;
   completedLessonIds: string[];
   onOpenLesson: (lessonId: string) => void;
+  lessonHref: (lessonId: string) => string;
 }) {
   const availableIds = [
     ...chapter.lessons.flatMap((lesson) => lesson.lessonId ? [lesson.lessonId] : []),
@@ -194,7 +206,7 @@ function ChapterOverview({
                     <div>
                       {lesson.lessonId ? (
                         <a
-                          href={`#${lesson.lessonId}`}
+                          href={lessonHref(lesson.lessonId)}
                           onClick={() => onOpenLesson(lesson.lessonId as string)}
                         >
                           {lesson.title}
@@ -213,7 +225,7 @@ function ChapterOverview({
           <span className="syllabus-number">PRACTICUM</span>
           <div>
             {chapter.practicum.lessonId ? (
-              <a href={`#${chapter.practicum.lessonId}`} onClick={() => onOpenLesson(chapter.practicum?.lessonId as string)}>
+              <a href={lessonHref(chapter.practicum.lessonId)} onClick={() => onOpenLesson(chapter.practicum?.lessonId as string)}>
                 {chapter.practicum.title}
               </a>
             ) : (
@@ -312,7 +324,16 @@ function LessonTechnicalDetails({ pedagogy }: { pedagogy: ReviewedLessonDetails 
   );
 }
 
-export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
+export default function LearnerCurriculum({
+  modules,
+  routeByLessonId = {},
+  activeLessonId,
+  showModuleOverviews = true,
+  showDashboard = true,
+  showLessonPanels = true,
+  showOnlyActiveLesson = false,
+  showInternalSequenceNavigation = true,
+}: LearnerCurriculumProps) {
   const lessons = useMemo(() => modules.flatMap((module) => module.lessons), [modules]);
   const auth = useAcademyAuth();
   const lessonIds = useMemo(() => lessons.map((lesson) => lesson.id), [lessons]);
@@ -321,8 +342,17 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [loadStatus, setLoadStatus] = useState<StorageLoadStatus>("empty");
   const [saveFailed, setSaveFailed] = useState(false);
-  const [openModuleNumbers, setOpenModuleNumbers] = useState<number[]>(() => modules[0] ? [modules[0].overview.moduleNumber] : []);
-  const [openLessonId, setOpenLessonId] = useState<string | null>(() => lessons[0]?.id ?? null);
+  const activeModuleNumber = modules.find((module) =>
+    module.lessons.some((lesson) => lesson.id === activeLessonId),
+  )?.overview.moduleNumber;
+  const [openModuleNumbers, setOpenModuleNumbers] = useState<number[]>(() =>
+    activeModuleNumber !== undefined
+      ? [activeModuleNumber]
+      : modules[0]
+        ? [modules[0].overview.moduleNumber]
+        : [],
+  );
+  const [openLessonId, setOpenLessonId] = useState<string | null>(() => activeLessonId ?? lessons[0]?.id ?? null);
   const [completedChecks, setCompletedChecks] = useState<Record<string, string[]>>({});
   const authenticatedStorageReady = Boolean(!auth.loading && auth.client && auth.user);
   const storageRevision = authenticatedStorageReady ? auth.dataRevision : 0;
@@ -393,6 +423,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
 
   const summary = calculateProgress(lessonIds, progress);
   const currentLesson = lessons.find((lesson) => lesson.id === summary.currentLessonId) ?? null;
+  const lessonHref = (lessonId: string) => routeByLessonId[lessonId] ?? `#${lessonId}`;
 
   function moduleNumberForLesson(lessonId: string) {
     return modules.find((module) => module.lessons.some((lesson) => lesson.id === lessonId))?.overview.moduleNumber;
@@ -476,7 +507,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
 
   return (
     <>
-      {modules.map((module) => (
+      {showModuleOverviews && modules.map((module) => (
         <ModuleOverview
           key={module.overview.moduleNumber}
           overview={module.overview}
@@ -485,10 +516,11 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
             openModuleForLesson(lessonId);
             setOpenLessonId(lessonId);
           }}
+          lessonHref={lessonHref}
         />
       ))}
 
-      <section className="learner-dashboard" aria-labelledby="learner-dashboard-title">
+      {showDashboard && <section className="learner-dashboard" aria-labelledby="learner-dashboard-title">
         <AcademyAccountPanel />
         <div className="learner-dashboard-heading">
           <div>
@@ -498,7 +530,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
           {currentLesson && (
             <a
               className="button button-primary learner-continue"
-              href={`#${currentLesson.id}`}
+              href={lessonHref(currentLesson.id)}
               onClick={() => {
                 openModuleForLesson(currentLesson.id);
                 setOpenLessonId(currentLesson.id);
@@ -544,9 +576,12 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
             Reset progress
           </button>
         </div>
-      </section>
+      </section>}
 
-      {modules.map(({ overview, lessons: moduleLessons }) => {
+      {showLessonPanels && modules.map(({ overview, lessons: moduleLessons }) => {
+        if (showOnlyActiveLesson && !moduleLessons.some((lesson) => lesson.id === activeLessonId)) {
+          return null;
+        }
         const isModuleOpen = openModuleNumbers.includes(overview.moduleNumber);
         return (
       <details
@@ -580,6 +615,9 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
 
         <div className="module-list">
           {moduleLessons.map((lesson, index) => {
+            if (showOnlyActiveLesson && lesson.id !== activeLessonId) {
+              return null;
+            }
             const isCompleted = progress.completedLessonIds.includes(lesson.id);
             const isCurrent = summary.currentLessonId === lesson.id;
             const isOpen = openLessonId === lesson.id;
@@ -694,10 +732,10 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       )}
                     </div>
 
-                    <nav className="lesson-sequence-navigation" aria-label="Previous and next lessons">
+                    {showInternalSequenceNavigation && <nav className="lesson-sequence-navigation" aria-label="Previous and next lessons">
                       {previousLesson ? (
                         <a
-                          href={`#${previousLesson.id}`}
+                          href={lessonHref(previousLesson.id)}
                           onClick={() => {
                             setOpenLessonId(previousLesson.id);
                             setCurrentLesson(previousLesson.id);
@@ -709,7 +747,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       ) : <span className="lesson-sequence-empty">Start of Module {overview.moduleNumber}</span>}
                       {nextLesson ? (
                         <a
-                          href={`#${nextLesson.id}`}
+                          href={lessonHref(nextLesson.id)}
                           onClick={() => {
                             setOpenLessonId(nextLesson.id);
                             setCurrentLesson(nextLesson.id);
@@ -724,7 +762,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                           <strong>{overview.finalProject} portfolio complete</strong>
                         </span>
                       )}
-                    </nav>
+                    </nav>}
 
                     {pedagogy && <LessonSubmissionGuide lessonId={lesson.id} pedagogy={pedagogy} />}
 

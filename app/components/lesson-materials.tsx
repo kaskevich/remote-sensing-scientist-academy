@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
 import { extractLessonMath, LessonMath, renderInlineLessonMath } from "@/app/components/lesson-math";
 import type { FormativeCheck } from "@/lib/module1-pedagogy";
+import { academyHref } from "@/lib/site-paths";
 
 export type LessonImage = {
   src: string;
@@ -150,6 +151,10 @@ export function MarkdownContent({
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
+          h1: ({ children: headingChildren }) => {
+            const text = nodeText(headingChildren);
+            return <h2 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h2")}</h2>;
+          },
           h2: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
             return <h2 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h2")}</h2>;
@@ -157,6 +162,14 @@ export function MarkdownContent({
           h3: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
             return <h3 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h3")}</h3>;
+          },
+          img: ({ src, alt, title }) => {
+            const resolvedSrc = typeof src !== "string" || /^(https?:|data:|blob:|\/)/.test(src)
+              ? src
+              : academyHref(`/${src}`);
+            // Markdown lesson media can be local or externally hosted, so a raw image element is intentional.
+            // eslint-disable-next-line @next/next/no-img-element
+            return <img src={resolvedSrc} alt={alt ?? ""} title={title} loading="lazy" />;
           },
           p: ({ children: paragraphChildren }) => {
             const text = nodeText(paragraphChildren).trim();
@@ -178,8 +191,9 @@ export function MarkdownContent({
               ) : null;
             }
             const onlyChild = Array.isArray(paragraphChildren) ? paragraphChildren.length === 1 ? paragraphChildren[0] : null : paragraphChildren;
-            if (onlyChild && typeof onlyChild === "object" && "type" in onlyChild && onlyChild.type === "img") {
-              const imageProps = (onlyChild as { props?: { src?: string; title?: string } }).props;
+            if (onlyChild && typeof onlyChild === "object" && "props" in onlyChild) {
+              const imageProps = (onlyChild as { props?: { src?: string; title?: string; alt?: string } }).props;
+              if (typeof imageProps?.src !== "string") return <p>{renderInlineLessonMath(paragraphChildren, expressions, "paragraph")}</p>;
               const isDiagram = imageProps?.src?.toLowerCase().endsWith(".svg") ?? false;
               const caption = imageProps?.title
                 ?? (isDiagram ? "On smaller screens, swipe horizontally to inspect the complete diagram" : "Scientific context image");

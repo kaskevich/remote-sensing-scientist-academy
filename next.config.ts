@@ -8,7 +8,14 @@ const nextConfig: NextConfig = pagesBasePath
       basePath: pagesBasePath,
       assetPrefix: pagesBasePath,
       trailingSlash: true,
+      env: {
+        NEXT_PUBLIC_BASE_PATH: pagesBasePath,
+      },
     }
-  : {};
+  : {
+      env: {
+        NEXT_PUBLIC_BASE_PATH: "",
+      },
+    };
 
 export default nextConfig;
