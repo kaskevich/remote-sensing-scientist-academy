@@ -4851,3 +4851,346 @@ footer > p {
     padding-inline: 16px;
   }
 }
+
+/* Search-index pages reuse the Academy visual system without altering the learner workspace. */
+.seo-index-page,
+.seo-lesson-page {
+  min-height: 70vh;
+  padding: clamp(34px, 5vw, 72px) max(5vw, calc((100vw - 1240px) / 2));
+}
+
+.seo-index-page {
+  background: var(--paper);
+}
+
+.seo-lesson-page {
+  background: var(--ink);
+  color: white;
+}
+
+.seo-breadcrumbs {
+  max-width: 1180px;
+  margin: 0 auto 42px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.seo-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  margin-left: 8px;
+  opacity: 0.45;
+}
+
+.seo-breadcrumbs a {
+  border-bottom: 1px solid currentColor;
+}
+
+.seo-lesson-page .seo-breadcrumbs {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.seo-page-heading,
+.seo-lesson-article,
+.seo-module-outcomes,
+.seo-lesson-index,
+.seo-module-catalog {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.seo-page-heading {
+  padding-bottom: 45px;
+}
+
+.seo-page-heading h1,
+.seo-lesson-heading h1 {
+  max-width: 930px;
+  margin: 12px 0 18px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.seo-page-heading > p:last-child,
+.seo-lesson-heading > p {
+  max-width: 760px;
+  margin: 0;
+  color: #657286;
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.6;
+}
+
+.seo-module-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  max-width: 900px;
+  margin: 34px 0 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.seo-module-facts > div {
+  padding: 20px;
+  background: var(--paper);
+}
+
+.seo-module-facts dt,
+.seo-module-card dt {
+  margin-bottom: 7px;
+  color: #657286;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.seo-module-facts dd,
+.seo-module-card dd {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.seo-module-outcomes,
+.seo-lesson-index,
+.seo-module-card {
+  border-top: 1px solid var(--line);
+  padding-block: 38px;
+}
+
+.seo-module-outcomes h2,
+.seo-lesson-index h2,
+.seo-module-card h2 {
+  margin: 0 0 22px;
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 500;
+}
+
+.seo-module-outcomes ul {
+  columns: 2;
+  max-width: 980px;
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+.seo-lesson-index > ol,
+.seo-module-card > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.seo-lesson-index li,
+.seo-module-card > ol li {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.seo-lesson-index li > span,
+.seo-module-card > ol li > span {
+  color: #657286;
+  font: 750 11px/1.5 monospace;
+}
+
+.seo-lesson-index li a,
+.seo-module-card > ol li a {
+  font-weight: 780;
+  line-height: 1.4;
+}
+
+.seo-lesson-index li a:hover,
+.seo-module-card > ol li a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.seo-lesson-index li small {
+  display: block;
+  margin-top: 5px;
+  color: #657286;
+  font-size: 11px;
+}
+
+.seo-module-catalog {
+  display: grid;
+  gap: 48px;
+}
+
+.seo-module-card {
+  border-top-width: 4px;
+}
+
+.seo-module-lime {
+  border-top-color: var(--lime);
+}
+
+.seo-module-blue {
+  border-top-color: var(--blue);
+}
+
+.seo-module-terracotta {
+  border-top-color: var(--terracotta);
+}
+
+.seo-module-card header > span {
+  font: 850 10px/1 monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.seo-module-card header > p {
+  max-width: 760px;
+  color: #657286;
+  line-height: 1.65;
+}
+
+.seo-module-card dl {
+  display: flex;
+  gap: 48px;
+  margin: 24px 0 30px;
+}
+
+.seo-lesson-article {
+  max-width: 1100px;
+}
+
+.seo-lesson-heading {
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.seo-lesson-heading .section-kicker,
+.seo-lesson-heading h1 {
+  color: white;
+}
+
+.seo-lesson-heading > p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.seo-lesson-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seo-lesson-meta li {
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.seo-workspace-link {
+  display: inline-block;
+  margin-top: 26px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--lime);
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.seo-lesson-page .lesson-managed-content {
+  margin-top: 0;
+  padding-top: 42px;
+}
+
+.seo-lesson-sequence {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 54px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.seo-lesson-sequence > a,
+.seo-lesson-sequence > span {
+  min-height: 84px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.seo-lesson-sequence > a:last-child,
+.seo-lesson-sequence > span:last-child {
+  text-align: right;
+}
+
+.seo-lesson-sequence a span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--lime);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.seo-lesson-sequence a strong {
+  color: white;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .seo-index-page,
+  .seo-lesson-page {
+    padding-inline: 20px;
+  }
+
+  .seo-page-heading h1,
+  .seo-lesson-heading h1 {
+    font-size: clamp(38px, 12vw, 58px);
+  }
+
+  .seo-module-facts,
+  .seo-lesson-sequence {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-module-outcomes ul {
+    columns: 1;
+  }
+
+  .seo-module-card dl {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .seo-lesson-index li,
+  .seo-module-card > ol li {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .seo-lesson-sequence > a:last-child,
+  .seo-lesson-sequence > span:last-child {
+    text-align: left;
+  }
+}

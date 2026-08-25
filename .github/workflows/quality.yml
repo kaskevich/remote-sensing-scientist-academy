@@ -58,3 +58,7 @@ jobs:
         env:
           PAGES_BASE_PATH: /remote-sensing-scientist-academy
           NEXT_PUBLIC_SITE_URL: https://kaskevich.github.io/remote-sensing-scientist-academy
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
+
+      - name: Validate static SEO output
+        run: npm run seo:validate

@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import content from "@/content/site.json";
+import { academyAssetUrl, academyUrl } from "@/lib/site-paths";
 
 export const metadata: Metadata = {
   title: "About | Remote Sensing Scientist Academy",
   description:
-    "The story behind Remote Sensing Scientist Academy — a self-directed learning project by environmental scientist and PhD researcher Volha Kaskevich for developing practical skills in scientific programming, geospatial data science, remote sensing and machine learning.",
+    "Meet Volha Kaskevich and learn how environmental research, GIS, UAV and satellite remote sensing shaped the Academy's professional learning pathway.",
+  alternates: { canonical: academyUrl("/about/") },
+  openGraph: {
+    title: "About | Remote Sensing Scientist Academy",
+    description:
+      "Meet Volha Kaskevich and learn how environmental research, GIS, UAV and satellite remote sensing shaped the Academy's professional learning pathway.",
+    type: "profile",
+    url: academyUrl("/about/"),
+    images: [{ url: academyAssetUrl("/images/volha-kaskevich.jpg"), width: 1200, height: 1800, alt: "Volha Kaskevich in a botanical setting" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About | Remote Sensing Scientist Academy",
+    description: "Meet Volha Kaskevich and the environmental research context behind the Remote Sensing Scientist Academy.",
+  },
 };
 
 const visibleNavigation = content.navigation.items.filter((item) => item.visible);

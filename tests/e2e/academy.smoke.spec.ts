@@ -756,3 +756,27 @@ for (const viewport of viewports) {
     }
   });
 }
+
+test("canonical lesson pages expose metadata, lesson text and responsive navigation", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/module-3/regression-evaluation/");
+
+  await expect(page).toHaveTitle(/Regression Evaluation.*Remote Sensing Scientist Academy/);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://kaskevich.github.io/remote-sensing-scientist-academy/module-3/regression-evaluation/",
+  );
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /regression/i);
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.getByRole("heading", { name: "Regression Evaluation", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Learning Outcome/i })).toBeVisible();
+  await expect(page.getByRole("img", { name: /four-panel regression diagnostic/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Open this lesson in the Academy workspace/i })).toHaveAttribute("href", "/#lesson-3-17");
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(2);
+
+  const dimensions = await page.evaluate(() => ({
+    clientWidth: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }));
+  expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+});

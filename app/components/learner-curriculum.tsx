@@ -365,17 +365,41 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
         setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
       }
       setOpenLessonId(lessonId);
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          document.getElementById(lessonId)?.scrollIntoView({ block: "start", behavior: "auto" });
-        });
-      });
     }
 
     openLessonFromHash();
     window.addEventListener("hashchange", openLessonFromHash);
     return () => window.removeEventListener("hashchange", openLessonFromHash);
   }, [lessonIds, modules]);
+
+  useEffect(() => {
+    if (!openLessonId || decodeURIComponent(window.location.hash.slice(1)) !== openLessonId) {
+      return;
+    }
+
+    let active = true;
+    const scrollToLesson = () => {
+      if (!active) return;
+      const target = document.getElementById(openLessonId);
+      if (!target) return;
+      window.scrollTo({
+        top: window.scrollY + target.getBoundingClientRect().top - 22,
+        behavior: "auto",
+      });
+    };
+
+    const frame = window.requestAnimationFrame(() => {
+      scrollToLesson();
+    });
+    const settle = window.setTimeout(scrollToLesson, 250);
+    void document.fonts?.ready.then(scrollToLesson);
+
+    return () => {
+      active = false;
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(settle);
+    };
+  }, [openLessonId]);
 
   useEffect(() => {
     if (!hasLoaded || !storageRef.current) {
