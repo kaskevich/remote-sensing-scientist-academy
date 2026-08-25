@@ -2556,8 +2556,9 @@ h2 {
 }
 
 .lesson-table-of-contents {
+  max-width: 760px;
   margin-bottom: 32px;
-  padding: 18px;
+  padding: 20px 22px;
   border: 1px solid rgba(255, 255, 255, 0.17);
   background: rgba(255, 255, 255, 0.025);
 }
@@ -2568,17 +2569,39 @@ h2 {
 
 .lesson-table-of-contents ol {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px 24px;
-  margin: 14px 0 0;
-  padding-left: 19px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: lesson-toc;
+}
+
+.lesson-table-of-contents li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  counter-increment: lesson-toc;
+}
+
+.lesson-table-of-contents li::before {
+  content: counter(lesson-toc, decimal-leading-zero);
+  padding-top: 0.08em;
+  color: rgba(255, 255, 255, 0.42);
+  font: 700 11px/1.55 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 .lesson-table-of-contents a {
+  min-width: 0;
+  display: inline;
   border: 0;
   color: rgba(255, 255, 255, 0.73);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .lesson-rich-text h2,
@@ -5315,14 +5338,37 @@ footer > p {
 
 .lesson-platform-workspace {
   min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(11, 25, 48, 0.18);
+  background: var(--ink);
+  color: white;
 }
 
 .lesson-platform-workspace .curriculum-module {
   margin-top: 0;
+  border: 0;
 }
 
 .lesson-platform-workspace .curriculum-module-summary {
+  display: none;
   scroll-margin-top: 20px;
+}
+
+.lesson-platform-workspace .module-list,
+.lesson-platform-workspace .module {
+  border: 0;
+}
+
+.lesson-platform-workspace .module-summary {
+  display: none;
+}
+
+.lesson-platform-workspace .module-body {
+  padding: clamp(30px, 4vw, 48px);
+}
+
+.lesson-platform-workspace .lesson-rich-text {
+  max-width: 900px;
 }
 
 .standalone-lesson-links {
@@ -5439,6 +5485,22 @@ footer > p {
   .platform-progression {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .lesson-platform-workspace .module-body {
+    padding: 24px 18px 32px;
+  }
+
+  .lesson-platform-workspace .lesson-actions,
+  .lesson-platform-workspace .lesson-notes,
+  .lesson-platform-workspace .lesson-managed-content,
+  .lesson-platform-workspace .lesson-context,
+  .lesson-platform-workspace .lesson-layer-key,
+  .lesson-platform-workspace .lesson-sequence-navigation,
+  .lesson-platform-workspace .lesson-submission-guide,
+  .lesson-platform-workspace .lesson-technical-details,
+  .lesson-platform-workspace .program-task {
+    margin-left: 0;
   }
 }
 
