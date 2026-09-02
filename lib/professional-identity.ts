@@ -9,8 +9,8 @@ export const volhaKaskevich = {
   linkedin: "https://ee.linkedin.com/in/volha-kaskevich-b13439b3",
 } as const;
 
-export const academyEntityId = academyUrl("/#academy");
-export const creatorEntityId = academyUrl("/#volha-kaskevich");
+export const academyEntityId = `${academyUrl("/")}#academy`;
+export const creatorEntityId = `${academyUrl("/")}#volha-kaskevich`;
 
 export function creatorReference() {
   return {
