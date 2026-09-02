@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Remote Sensing Scientist Academy",
-    "description": "Practical online remote sensing training with real satellite data, clear workflows, and portfolio projects."
+    "description": "GIS and remote sensing education created by Volha Kaskevich, with Earth Observation workflows, real data and portfolio projects."
   },
   "brand": {
     "mark": "RS",
@@ -40,7 +40,7 @@
     "eyebrow": "Admissions open · Autumn cohort",
     "title": "Learn remote sensing",
     "accentTitle": "Work with real data",
-    "intro": "A practical online academy for people who want to understand satellite data and use it with confidence. You will learn by doing, from the basics to a complete analysis.",
+    "intro": "Created by Volha Kaskevich, this practical online Academy teaches GIS, remote sensing and Earth Observation through real environmental data—from scientific Python and geospatial analysis to Google Earth Engine and machine learning.",
     "primaryButtonLabel": "View the pathway",
     "primaryButtonHref": "#paths",
     "secondaryButtonLabel": "See a field lab",
@@ -421,7 +421,7 @@
     "deadlineMeta": "APPLICATIONS CLOSE 21 AUGUST"
   },
   "footer": {
-    "description": "Practical remote sensing training with real data and clear results.",
+    "description": "Created by Volha Kaskevich: practical GIS, remote sensing and Earth Observation training with real data and clear results.",
     "contactLabel": "Contact",
     "contactHref": "mailto:kaskevich@gmail.com",
     "copyright": "© 2026 Remote Sensing Scientist Academy",

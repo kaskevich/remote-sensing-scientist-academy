@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { JsonLd, SeoBreadcrumbs, SeoFooter, SeoHeader } from "@/app/components/seo-navigation";
 import { academyName, getSeoModule, seoModules } from "@/lib/seo-curriculum";
 import { academyAssetUrl, academyHref, academyUrl } from "@/lib/site-paths";
+import { academyEntityId, creatorReference } from "@/lib/professional-identity";
 
 export function generateStaticParams() {
   return seoModules.map((module) => ({ moduleSlug: module.slug }));
@@ -49,7 +50,8 @@ export default async function ModulePage({
           name: academyModule.title,
           description: academyModule.description,
           url: academyModule.canonicalUrl,
-          provider: { "@type": "EducationalOrganization", name: academyName, url: academyUrl("/") },
+          provider: { "@type": "EducationalOrganization", "@id": academyEntityId, name: academyName, url: academyUrl("/") },
+          creator: creatorReference(),
           hasPart: academyModule.lessons.map((lesson) => ({
             "@type": "LearningResource",
             name: lesson.title,

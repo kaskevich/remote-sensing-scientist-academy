@@ -4,6 +4,7 @@ import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
 import { seoLessons, seoModules } from "@/lib/seo-curriculum";
 import { academyProductionBasePath } from "@/lib/site-paths";
+import { creatorEntity, volhaKaskevich } from "@/lib/professional-identity";
 
 function unique(values: string[]) {
   return new Set(values).size === values.length;
@@ -65,5 +66,18 @@ describe("Academy SEO architecture", () => {
     });
     expect(existsSync("app/robots.ts")).toBe(true);
     expect(existsSync("app/sitemap.ts")).toBe(true);
+  });
+
+  it("uses one verified creator identity across Academy schema", () => {
+    const creator = creatorEntity();
+    expect(creator.name).toBe("Volha Kaskevich");
+    expect(creator.sameAs).toEqual([
+      "https://github.com/kaskevich",
+      "https://orcid.org/0000-0003-2801-4490",
+      "https://www.etis.ee/CV/Volha_Kaskevich/eng/",
+      "https://www.emu.ee/en/contacts/volha-kaskevich",
+      "https://ee.linkedin.com/in/volha-kaskevich-b13439b3",
+    ]);
+    expect(creator.sameAs).toContain(volhaKaskevich.github);
   });
 });

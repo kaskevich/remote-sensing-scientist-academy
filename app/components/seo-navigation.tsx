@@ -91,6 +91,7 @@ export function SeoFooter() {
         <a href={academyHref("/module-2/")}>Module 2</a>
         <a href={academyHref("/module-3/")}>Module 3</a>
         <a href={academyHref("/about/")}>About</a>
+        <a href="https://github.com/kaskevich" rel="me">Volha Kaskevich on GitHub</a>
         <a href={content.footer.contactHref}>{content.footer.contactLabel}</a>
       </div>
       <div className="footer-bottom"><span>{content.footer.copyright}</span><span>{content.footer.manifesto}</span></div>

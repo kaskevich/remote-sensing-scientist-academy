@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import content from "@/content/site.json";
 import { academyAssetUrl, academyUrl } from "@/lib/site-paths";
+import { volhaKaskevich } from "@/lib/professional-identity";
 
 export const metadata: Metadata = {
   title: "About | Remote Sensing Scientist Academy",
@@ -159,6 +160,10 @@ export default function AboutPage() {
               , or connect with me professionally on{" "}
               <a href="https://ee.linkedin.com/in/volha-kaskevich-b13439b3" target="_blank" rel="noopener noreferrer">
                 LinkedIn
+              </a>
+              , or view the Academy source and my geospatial work on{" "}
+              <a href={volhaKaskevich.github} target="_blank" rel="me noopener noreferrer">
+                GitHub
               </a>
               .
             </p>

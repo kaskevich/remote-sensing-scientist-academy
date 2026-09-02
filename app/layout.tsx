@@ -3,6 +3,7 @@ import content from "@/content/site.json";
 import AcademyAuthProvider from "@/app/components/academy-auth-provider";
 import { JsonLd } from "@/app/components/seo-navigation";
 import { academyAssetUrl, academyUrl } from "@/lib/site-paths";
+import { academyEntityId, creatorEntity, creatorReference } from "@/lib/professional-identity";
 import "./globals.css";
 
 const siteUrl = new URL(
@@ -14,12 +15,14 @@ const siteUrl = new URL(
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Remote Sensing Scientist Academy | GIS, Earth Observation & UAV",
+  title: "GIS & Remote Sensing Academy — Volha Kaskevich",
   description:
     "Hands-on training in remote sensing, GIS, Earth observation, UAV imagery, spatial analysis, scientific Python and machine learning with portfolio projects.",
   alternates: { canonical: academyUrl("/") },
   applicationName: content.metadata.title,
   category: "education",
+  authors: [{ name: "Volha Kaskevich", url: academyUrl("/about/") }],
+  creator: "Volha Kaskevich",
   keywords: [
     "remote sensing",
     "GIS",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
   openGraph: {
-    title: "Remote Sensing Scientist Academy | GIS, Earth Observation & UAV",
+    title: "GIS & Remote Sensing Academy — Volha Kaskevich",
     description:
       "Hands-on training in remote sensing, GIS, Earth observation, UAV imagery, spatial analysis, scientific Python and machine learning with portfolio projects.",
     type: "website",
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Remote Sensing Scientist Academy | GIS, Earth Observation & UAV",
+    title: "GIS & Remote Sensing Academy — Volha Kaskevich",
     description:
       "Hands-on training in remote sensing, GIS, Earth observation, UAV imagery, spatial analysis, scientific Python and machine learning with portfolio projects.",
     images: [academyAssetUrl("/og.png")],
@@ -71,10 +74,12 @@ export default function RootLayout({
           {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
+            "@id": academyEntityId,
             name: content.metadata.title,
             url: academyUrl("/"),
             description:
               "A professional learning platform for scientific programming, geospatial data science and remote sensing modelling.",
+            founder: creatorReference(),
           },
           {
             "@context": "https://schema.org",
@@ -84,7 +89,10 @@ export default function RootLayout({
             description:
               "Hands-on education in remote sensing, GIS, Earth observation, UAV imagery, spatial analysis and reproducible scientific workflows.",
             inLanguage: "en",
+            creator: creatorReference(),
+            publisher: { "@id": academyEntityId },
           },
+          { "@context": "https://schema.org", ...creatorEntity() },
         ]} />
         <AcademyAuthProvider>{children}</AcademyAuthProvider>
       </body>

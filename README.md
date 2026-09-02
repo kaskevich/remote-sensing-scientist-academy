@@ -1,12 +1,31 @@
-# Remote Sensing Scientist Academy
+# GIS & Remote Sensing Academy — Volha Kaskevich
 
-A practical online academy for learning remote sensing with real satellite
-data. The site includes programs, a field lab, a full curriculum, outcomes,
-and applications.
+The Remote Sensing Scientist Academy is an open educational project created by
+[Volha Kaskevich](https://github.com/kaskevich), a Junior Research Fellow and
+PhD researcher at the Estonian University of Life Sciences. It teaches GIS,
+remote sensing, Earth Observation and geospatial data science through practical
+environmental applications and reproducible portfolio projects.
+
+The curriculum progresses from scientific Python to vector, raster, UAV and
+satellite analysis, then to Google Earth Engine and defensible machine-learning
+workflows. It uses tools and concepts including Python, Jupyter, QGIS,
+GeoPandas, Rasterio, Xarray and XGBoost.
 
 ## Live site
 
 [Open Remote Sensing Scientist Academy](https://kaskevich.github.io/remote-sensing-scientist-academy/)
+
+## Creator
+
+Volha Kaskevich works with GIS, UAV and satellite remote sensing, spatial
+analysis, environmental monitoring and machine learning, with research focused
+on coastal wetlands and blue-green infrastructure.
+
+- [GitHub profile](https://github.com/kaskevich)
+- [ORCID](https://orcid.org/0000-0003-2801-4490)
+- [Estonian Research Information System (ETIS)](https://www.etis.ee/CV/Volha_Kaskevich/eng/)
+- [Estonian University of Life Sciences](https://www.emu.ee/en/contacts/volha-kaskevich)
+- [LinkedIn](https://ee.linkedin.com/in/volha-kaskevich-b13439b3)
 
 ## What is included
 

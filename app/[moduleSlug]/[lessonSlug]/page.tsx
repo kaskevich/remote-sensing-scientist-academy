@@ -10,6 +10,7 @@ import {
   seoLessons,
 } from "@/lib/seo-curriculum";
 import { academyAssetUrl, academyHref, academyUrl } from "@/lib/site-paths";
+import { academyEntityId, creatorReference } from "@/lib/professional-identity";
 
 export function generateStaticParams() {
   return seoLessons.map((lesson) => ({
@@ -65,7 +66,8 @@ export default async function LessonPage({
           educationalUse: "instruction",
           teaches: lesson.description,
           isPartOf: { "@type": "Course", name: lesson.moduleTitle, url: academyUrl(lesson.modulePath) },
-          provider: { "@type": "EducationalOrganization", name: academyName, url: academyHome },
+          provider: { "@type": "EducationalOrganization", "@id": academyEntityId, name: academyName, url: academyHome },
+          creator: creatorReference(),
         },
         {
           "@context": "https://schema.org",
