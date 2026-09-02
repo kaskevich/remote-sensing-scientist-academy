@@ -88,7 +88,7 @@
         "build": "Vegetation Data Explorer",
         "outcome": "Analyse and explain ecological datasets in Python.",
         "ctaLabel": "Explore foundations",
-        "href": "#curriculum",
+        "href": "/module-1/",
         "accent": "lime"
       },
       {
@@ -106,7 +106,7 @@
         "build": "UAV and Satellite Analysis Pipeline",
         "outcome": "Process, combine and interpret geospatial data correctly.",
         "ctaLabel": "Explore geospatial analysis",
-        "href": "#curriculum",
+        "href": "/module-2/",
         "accent": "blue"
       },
       {
@@ -124,7 +124,7 @@
         "build": "Environmental Monitoring Project",
         "outcome": "Create and communicate a complete predictive Earth Observation workflow.",
         "ctaLabel": "Explore remote sensing modelling",
-        "href": "#curriculum",
+        "href": "/module-3/",
         "accent": "terracotta"
       }
     ]

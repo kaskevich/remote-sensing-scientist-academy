@@ -20,6 +20,7 @@ import {
   publishedModule3Lessons,
 } from "@/lib/module3-pedagogy";
 import { extractFirstPythonCode } from "@/lib/lesson-code-workspace";
+import { academyHref } from "@/lib/site-paths";
 
 type CurriculumModule = {
   id: string;
@@ -898,41 +899,48 @@ export default function Home() {
 
             <div className="path-grid" aria-label="Academy curriculum stages">
               {visiblePaths.map((path) => (
-                <article className={`path-card path-${path.accent}`} key={path.number}>
-                  <div className="path-topline">
-                    <span>{path.label}</span>
-                    <span>{path.number}</span>
-                  </div>
-                  <h3>{path.title}</h3>
-                  <p className="path-description">{path.description}</p>
+                <a
+                  className="path-card-link"
+                  href={academyHref(path.href)}
+                  aria-label={`${path.ctaLabel}: ${path.title}`}
+                  key={path.number}
+                >
+                  <article className={`path-card path-${path.accent}`}>
+                    <div className="path-topline">
+                      <span>{path.label}</span>
+                      <span>{path.number}</span>
+                    </div>
+                    <h3>{path.title}</h3>
+                    <p className="path-description">{path.description}</p>
 
-                  <div className="path-details">
-                    <section className="path-detail path-learn" aria-labelledby={`learn-${path.number}`}>
-                      <h4 id={`learn-${path.number}`}>Learn</h4>
-                      <ul>
-                        {path.skills.map((skill) => (
-                          <li key={skill}>{skill}</li>
-                        ))}
-                      </ul>
-                    </section>
+                    <div className="path-details">
+                      <section className="path-detail path-learn" aria-labelledby={`learn-${path.number}`}>
+                        <h4 id={`learn-${path.number}`}>Learn</h4>
+                        <ul>
+                          {path.skills.map((skill) => (
+                            <li key={skill}>{skill}</li>
+                          ))}
+                        </ul>
+                      </section>
 
-                    <section className="path-detail" aria-labelledby={`build-${path.number}`}>
-                      <h4 id={`build-${path.number}`}>Build</h4>
-                      <p>{path.build}</p>
-                    </section>
+                      <section className="path-detail" aria-labelledby={`build-${path.number}`}>
+                        <h4 id={`build-${path.number}`}>Build</h4>
+                        <p>{path.build}</p>
+                      </section>
 
-                    <section className="path-detail" aria-labelledby={`outcome-${path.number}`}>
-                      <h4 id={`outcome-${path.number}`}>Outcome</h4>
-                      <p>{path.outcome}</p>
-                    </section>
-                  </div>
+                      <section className="path-detail" aria-labelledby={`outcome-${path.number}`}>
+                        <h4 id={`outcome-${path.number}`}>Outcome</h4>
+                        <p>{path.outcome}</p>
+                      </section>
+                    </div>
 
-                  <div className="path-footer">
-                    <a href={path.href} aria-label={`${path.ctaLabel}: ${path.title}`}>
-                      {path.ctaLabel} <span aria-hidden="true">→</span>
-                    </a>
-                  </div>
-                </article>
+                    <div className="path-footer">
+                      <span className="path-footer-link">
+                        {path.ctaLabel} <span aria-hidden="true">→</span>
+                      </span>
+                    </div>
+                  </article>
+                </a>
               ))}
             </div>
           </section>

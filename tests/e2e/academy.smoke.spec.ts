@@ -9,6 +9,71 @@ const viewports = [
   { name: "desktop", width: 1440, height: 900 },
 ];
 
+async function expectLessonAtTop(page: import("@playwright/test").Page, lessonId: string) {
+  const lesson = page.locator(`#${lessonId}`);
+  await expect(lesson).toHaveAttribute("open", "");
+  await expect.poll(async () => Math.abs((await lesson.boundingBox())?.y ?? Number.POSITIVE_INFINITY)).toBeLessThan(40);
+}
+
+async function scrollToLessonEnd(page: import("@playwright/test").Page, lessonId: string) {
+  await page.locator(`#${lessonId}`).evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    window.scrollTo(0, window.scrollY + bounds.bottom - window.innerHeight);
+  });
+}
+
+test("each homepage pathway card opens its matching module route", async ({ page }) => {
+  const cards = [
+    { label: /Explore foundations/i, route: "/module-1/" },
+    { label: /Explore geospatial analysis/i, route: "/module-2/" },
+    { label: /Explore remote sensing modelling/i, route: "/module-3/" },
+  ];
+
+  for (const card of cards) {
+    await page.goto("/#paths");
+    const link = page.getByRole("link", { name: card.label });
+    await expect(link).toHaveAttribute("href", card.route);
+    await link.click();
+    await expect(page).toHaveURL(new RegExp(`${card.route.replaceAll("/", "\\/")}?$`));
+  }
+});
+
+for (const viewport of [
+  { name: "desktop", width: 1440, height: 900 },
+  { name: "mobile", width: 375, height: 812 },
+]) {
+  test(`${viewport.name}: newly selected lessons always open at their beginning`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/#lesson-01");
+    await expectLessonAtTop(page, "lesson-01");
+
+    await scrollToLessonEnd(page, "lesson-01");
+    await page.locator("#lesson-02 > summary").click();
+    await expect(page).toHaveURL(/#lesson-02$/);
+    await expectLessonAtTop(page, "lesson-02");
+
+    await scrollToLessonEnd(page, "lesson-02");
+    await page.locator(".module-overview-panel").nth(1).getByRole("link").first().click();
+    await expect(page).toHaveURL(/#lesson-2-01$/);
+    await expectLessonAtTop(page, "lesson-2-01");
+
+    await scrollToLessonEnd(page, "lesson-2-01");
+    await page.locator(".module-overview-panel").nth(2).getByRole("link").first().click();
+    await expect(page).toHaveURL(/#lesson-3-01$/);
+    await expectLessonAtTop(page, "lesson-3-01");
+
+    await scrollToLessonEnd(page, "lesson-3-01");
+    await page.locator("#lesson-3-01 .lesson-sequence-navigation").getByText("Next lesson", { exact: true }).click();
+    await expect(page).toHaveURL(/#lesson-3-02$/);
+    await expectLessonAtTop(page, "lesson-3-02");
+
+    await scrollToLessonEnd(page, "lesson-3-02");
+    await page.locator("#lesson-3-02 .lesson-sequence-navigation").getByText("Previous lesson", { exact: true }).click();
+    await expect(page).toHaveURL(/#lesson-3-01$/);
+    await expectLessonAtTop(page, "lesson-3-01");
+  });
+}
+
 test("lesson completion and notes persist after refresh", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");

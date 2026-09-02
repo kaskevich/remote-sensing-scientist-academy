@@ -760,6 +760,19 @@ h2 {
   border: 1px solid var(--line);
 }
 
+.path-card-link {
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.path-card-link:focus-visible {
+  position: relative;
+  z-index: 3;
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
 .path-progression {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -802,6 +815,10 @@ h2 {
   position: relative;
   overflow: hidden;
   transition: transform 200ms ease, z-index 0s;
+}
+
+.path-card-link .path-card {
+  height: 100%;
 }
 
 .path-card:hover {
@@ -924,7 +941,7 @@ h2 {
   border-top: 1px solid var(--line);
 }
 
-.path-footer a {
+.path-footer-link {
   width: 100%;
   min-height: 44px;
   display: flex;
@@ -936,19 +953,19 @@ h2 {
   transition: color 180ms ease;
 }
 
-.path-footer a:hover,
-.path-footer a:focus-visible {
+.path-card-link:hover .path-footer-link,
+.path-card-link:focus-visible .path-footer-link {
   color: #43566d;
 }
 
-.path-footer a span {
+.path-footer-link span {
   color: var(--card-accent);
   font-size: 16px;
   transition: transform 180ms ease;
 }
 
-.path-footer a:hover span,
-.path-footer a:focus-visible span {
+.path-card-link:hover .path-footer-link span,
+.path-card-link:focus-visible .path-footer-link span {
   transform: translateX(4px);
 }
 

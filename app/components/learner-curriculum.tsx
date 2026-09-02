@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   calculateChapterProgress,
   calculateProgress,
@@ -131,7 +131,13 @@ function ModuleOverview({
                 <span className="syllabus-number">CP</span>
                 <div>
                   {overview.capstone.lessonId ? (
-                    <a href={`#${overview.capstone.lessonId}`} onClick={() => onOpenLesson(overview.capstone?.lessonId as string)}>
+                    <a
+                      href={`#${overview.capstone.lessonId}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        onOpenLesson(overview.capstone?.lessonId as string);
+                      }}
+                    >
                       {overview.capstone.title}
                     </a>
                   ) : (
@@ -195,7 +201,10 @@ function ChapterOverview({
                       {lesson.lessonId ? (
                         <a
                           href={`#${lesson.lessonId}`}
-                          onClick={() => onOpenLesson(lesson.lessonId as string)}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            onOpenLesson(lesson.lessonId as string);
+                          }}
                         >
                           {lesson.title}
                         </a>
@@ -213,7 +222,13 @@ function ChapterOverview({
           <span className="syllabus-number">PRACTICUM</span>
           <div>
             {chapter.practicum.lessonId ? (
-              <a href={`#${chapter.practicum.lessonId}`} onClick={() => onOpenLesson(chapter.practicum?.lessonId as string)}>
+              <a
+                href={`#${chapter.practicum.lessonId}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onOpenLesson(chapter.practicum?.lessonId as string);
+                }}
+              >
                 {chapter.practicum.title}
               </a>
             ) : (
@@ -323,9 +338,42 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
   const [saveFailed, setSaveFailed] = useState(false);
   const [openModuleNumbers, setOpenModuleNumbers] = useState<number[]>(() => modules[0] ? [modules[0].overview.moduleNumber] : []);
   const [openLessonId, setOpenLessonId] = useState<string | null>(() => lessons[0]?.id ?? null);
+  const [lessonScrollRequest, setLessonScrollRequest] = useState({ lessonId: "", sequence: 0 });
   const [completedChecks, setCompletedChecks] = useState<Record<string, string[]>>({});
   const authenticatedStorageReady = Boolean(!auth.loading && auth.client && auth.user);
   const storageRevision = authenticatedStorageReady ? auth.dataRevision : 0;
+  const lessonModuleNumbers = useMemo(() => new Map(
+    modules.flatMap((module) => module.lessons.map((lesson) => [lesson.id, module.overview.moduleNumber] as const)),
+  ), [modules]);
+
+  const navigateToLesson = useCallback((
+    lessonId: string,
+    options: { setAsCurrent?: boolean; updateHistory?: boolean } = {},
+  ) => {
+    if (!lessonModuleNumbers.has(lessonId)) return;
+
+    const moduleNumber = lessonModuleNumbers.get(lessonId);
+    if (moduleNumber !== undefined) {
+      setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
+    }
+    setOpenLessonId(lessonId);
+    setLessonScrollRequest((previous) => ({ lessonId, sequence: previous.sequence + 1 }));
+
+    if (options.updateHistory !== false) {
+      const nextHash = `#${encodeURIComponent(lessonId)}`;
+      if (window.location.hash !== nextHash) {
+        window.history.pushState({ lessonId }, "", nextHash);
+      }
+    }
+
+    if (options.setAsCurrent) {
+      setProgress((previous) => ({
+        ...previous,
+        currentLessonId: lessonId,
+        lastActivityTimestamp: activityTimestamp(),
+      }));
+    }
+  }, [lessonModuleNumbers]);
 
   // Browser-local state must hydrate after mount so server rendering stays deterministic.
   /* eslint-disable react-hooks/set-state-in-effect */
@@ -356,36 +404,53 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
     function openLessonFromHash() {
       const lessonId = decodeURIComponent(window.location.hash.slice(1));
       if (!lessonIds.includes(lessonId)) return;
-
-      const moduleNumber = modules.find((module) =>
-        module.lessons.some((lesson) => lesson.id === lessonId),
-      )?.overview.moduleNumber;
-
-      if (moduleNumber !== undefined) {
-        setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
-      }
-      setOpenLessonId(lessonId);
+      navigateToLesson(lessonId, { updateHistory: false });
     }
 
     openLessonFromHash();
     window.addEventListener("hashchange", openLessonFromHash);
-    return () => window.removeEventListener("hashchange", openLessonFromHash);
-  }, [lessonIds, modules]);
+    window.addEventListener("popstate", openLessonFromHash);
+    return () => {
+      window.removeEventListener("hashchange", openLessonFromHash);
+      window.removeEventListener("popstate", openLessonFromHash);
+    };
+  }, [lessonIds, navigateToLesson]);
 
   useEffect(() => {
-    if (!openLessonId || decodeURIComponent(window.location.hash.slice(1)) !== openLessonId) {
-      return;
+    function handleInternalLessonLink(event: MouseEvent) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+      const target = event.target instanceof Element ? event.target : null;
+      const link = target?.closest<HTMLAnchorElement>('a[href^="#lesson-"]');
+      if (!link) return;
+      const lessonId = decodeURIComponent(link.hash.slice(1));
+      if (!lessonIds.includes(lessonId)) return;
+      event.preventDefault();
+      navigateToLesson(lessonId);
     }
+
+    document.addEventListener("click", handleInternalLessonLink);
+    return () => document.removeEventListener("click", handleInternalLessonLink);
+  }, [lessonIds, navigateToLesson]);
+
+  useEffect(() => {
+    const lessonId = lessonScrollRequest.lessonId;
+    if (!lessonId) return;
 
     let active = true;
     const scrollToLesson = () => {
       if (!active) return;
-      const target = document.getElementById(openLessonId);
+      const target = document.getElementById(lessonId);
       if (!target) return;
+      const scrollingElement = (document.scrollingElement ?? document.documentElement) as HTMLElement;
+      const previousScrollBehavior = scrollingElement.style.scrollBehavior;
+      scrollingElement.style.scrollBehavior = "auto";
       window.scrollTo({
         top: window.scrollY + target.getBoundingClientRect().top - 22,
         behavior: "auto",
       });
+      scrollingElement.style.scrollBehavior = previousScrollBehavior;
     };
 
     const frame = window.requestAnimationFrame(() => {
@@ -399,7 +464,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
       window.cancelAnimationFrame(frame);
       window.clearTimeout(settle);
     };
-  }, [openLessonId]);
+  }, [lessonScrollRequest]);
 
   useEffect(() => {
     if (!hasLoaded || !storageRef.current) {
@@ -418,24 +483,8 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
   const summary = calculateProgress(lessonIds, progress);
   const currentLesson = lessons.find((lesson) => lesson.id === summary.currentLessonId) ?? null;
 
-  function moduleNumberForLesson(lessonId: string) {
-    return modules.find((module) => module.lessons.some((lesson) => lesson.id === lessonId))?.overview.moduleNumber;
-  }
-
-  function openModuleForLesson(lessonId: string) {
-    const moduleNumber = moduleNumberForLesson(lessonId);
-    if (moduleNumber === undefined) return;
-    setOpenModuleNumbers((previous) => Array.from(new Set([...previous, moduleNumber])));
-  }
-
   function setCurrentLesson(lessonId: string) {
-    openModuleForLesson(lessonId);
-    setOpenLessonId(lessonId);
-    setProgress((previous) => ({
-      ...previous,
-      currentLessonId: lessonId,
-      lastActivityTimestamp: activityTimestamp(),
-    }));
+    navigateToLesson(lessonId, { setAsCurrent: true });
   }
 
   function setLessonCompletion(lessonId: string, isCompleted: boolean) {
@@ -505,10 +554,7 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
           key={module.overview.moduleNumber}
           overview={module.overview}
           completedLessonIds={progress.completedLessonIds}
-          onOpenLesson={(lessonId) => {
-            openModuleForLesson(lessonId);
-            setOpenLessonId(lessonId);
-          }}
+          onOpenLesson={navigateToLesson}
         />
       ))}
 
@@ -523,9 +569,9 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
             <a
               className="button button-primary learner-continue"
               href={`#${currentLesson.id}`}
-              onClick={() => {
-                openModuleForLesson(currentLesson.id);
-                setOpenLessonId(currentLesson.id);
+              onClick={(event) => {
+                event.preventDefault();
+                navigateToLesson(currentLesson.id);
               }}
             >
               Continue learning <span aria-hidden="true">↓</span>
@@ -624,7 +670,11 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                   className="module-summary"
                   onClick={(event) => {
                     event.preventDefault();
-                    setOpenLessonId((previous) => previous === lesson.id ? null : lesson.id);
+                    if (isOpen) {
+                      setOpenLessonId(null);
+                    } else {
+                      navigateToLesson(lesson.id);
+                    }
                   }}
                 >
                   <span className="module-index">{lesson.numberLabel ?? String(index + 1).padStart(2, "0")}</span>
@@ -722,9 +772,9 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       {previousLesson ? (
                         <a
                           href={`#${previousLesson.id}`}
-                          onClick={() => {
-                            setOpenLessonId(previousLesson.id);
-                            setCurrentLesson(previousLesson.id);
+                          onClick={(event) => {
+                            event.preventDefault();
+                            navigateToLesson(previousLesson.id, { setAsCurrent: true });
                           }}
                         >
                           <span>Previous lesson</span>
@@ -734,9 +784,9 @@ export default function LearnerCurriculum({ modules }: LearnerCurriculumProps) {
                       {nextLesson ? (
                         <a
                           href={`#${nextLesson.id}`}
-                          onClick={() => {
-                            setOpenLessonId(nextLesson.id);
-                            setCurrentLesson(nextLesson.id);
+                          onClick={(event) => {
+                            event.preventDefault();
+                            navigateToLesson(nextLesson.id, { setAsCurrent: true });
                           }}
                         >
                           <span>Next lesson</span>
