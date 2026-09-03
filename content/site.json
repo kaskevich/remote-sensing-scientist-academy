@@ -131,13 +131,13 @@
   },
   "fieldLab": {
     "visible": true,
-    "mapAriaLabel": "Stylized wildfire recovery analysis map",
-    "coordinates": "39.74°N / 105.18°W",
+    "mapAriaLabel": "Conceptual wildfire recovery analysis map for northern Evia, Greece",
+    "coordinates": "38.85°N / 23.35°E",
     "legendBefore": "PRE-FIRE",
-    "legendAfter": "RECOVERY",
-    "kicker": "Field lab 06 · Change detection",
+    "legendAfter": "POST-FIRE",
+    "kicker": "Field lab 06 · Northern Evia, Greece",
     "title": "Track recovery after a fire",
-    "lead": "In this field lab, you will use Sentinel-2 images to track recovery over several years. You will find where vegetation is returning and where it is not.",
+    "lead": "Investigate the August 2021 northern Evia wildfire with an authoritative Copernicus perimeter, harmonized Sentinel-2 imagery, continuous dNBR and matched-season recovery trajectories. Measure spectral recovery without confusing it with ecological recovery.",
     "steps": [
       {
         "number": "01",
@@ -155,8 +155,8 @@
         "description": "Check uncertainty and present a short, clear scientific briefing."
       }
     ],
-    "buttonLabel": "View the full curriculum",
-    "buttonHref": "#curriculum"
+    "buttonLabel": "Open the scientific project",
+    "buttonHref": "/projects/track-recovery-after-fire/"
   },
   "curriculum": {
     "visible": true,
@@ -415,7 +415,7 @@
     "title": "Ready to start?",
     "description": "Send a short note about what you want to learn and why you want to join.",
     "buttonLabel": "Send your application",
-    "buttonHref": "mailto:kaskevich@gmail.com",
+    "buttonHref": "mailto:volha.kaskevich@emu.ee",
     "openInNewTab": false,
     "cohortMeta": "AUTUMN COHORT · 24 PLACES",
     "deadlineMeta": "APPLICATIONS CLOSE 21 AUGUST"
@@ -423,7 +423,7 @@
   "footer": {
     "description": "Created by Volha Kaskevich: practical GIS, remote sensing and Earth Observation training with real data and clear results.",
     "contactLabel": "Contact",
-    "contactHref": "mailto:kaskevich@gmail.com",
+    "contactHref": "mailto:volha.kaskevich@emu.ee",
     "copyright": "© 2026 Remote Sensing Scientist Academy",
     "manifesto": "LEARN — ANALYZE — EXPLAIN"
   }

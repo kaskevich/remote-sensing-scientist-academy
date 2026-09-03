@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/.pnpm-store/
 /.pnp
 .pnp.*
 .yarn/*
@@ -33,6 +34,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Separate local checkout of the public GitHub profile repository
+/kaskevich/
 
 # typescript
 next-env.d.ts

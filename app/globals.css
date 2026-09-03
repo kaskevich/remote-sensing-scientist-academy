@@ -4032,6 +4032,646 @@ footer > p {
   }
 }
 
+/* Field Lab 06: a scientific project page using the existing Academy system. */
+.fire-project {
+  --fire-accent: #c87a5c;
+  --fire-deep: #311e1a;
+  min-height: 70vh;
+  padding: clamp(34px, 5vw, 72px) max(5vw, calc((100vw - 1240px) / 2));
+  background: var(--ink);
+  color: white;
+}
+
+.fire-project .seo-breadcrumbs {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.fire-project-hero,
+.fire-project-section,
+.fire-project-warning {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.fire-project-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: end;
+  padding: 22px 0 72px;
+}
+
+.fire-project .section-kicker {
+  color: var(--fire-accent);
+}
+
+.fire-project-hero h1,
+.fire-project-section h2,
+.fire-project-warning h2 {
+  font-family: "Iowan Old Style", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.fire-project-hero h1 {
+  max-width: 760px;
+  margin: 14px 0 22px;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 0.94;
+}
+
+.fire-project-lead,
+.fire-section-intro {
+  max-width: 780px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.65;
+}
+
+.fire-project-actions,
+.fire-resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.fire-project .button-primary {
+  background: var(--fire-accent);
+  color: #190f0c;
+}
+
+.fire-project .text-link,
+.fire-project a {
+  text-decoration-color: var(--fire-accent);
+}
+
+.fire-project-question {
+  padding: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid var(--fire-accent);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.fire-project-question span,
+.fire-equation-grid article > span {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--fire-accent);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.fire-project-question strong {
+  font: 500 clamp(20px, 2.1vw, 29px)/1.35 "Iowan Old Style", Georgia, serif;
+}
+
+.fire-project-warning {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 26px;
+  align-items: center;
+  padding: 34px;
+  border: 1px solid rgba(200, 122, 92, 0.62);
+  background: linear-gradient(110deg, rgba(200, 122, 92, 0.16), rgba(255, 255, 255, 0.025));
+}
+
+.fire-project-warning > div:first-child {
+  color: var(--fire-accent);
+  font: 500 88px/0.8 "Iowan Old Style", Georgia, serif;
+  text-align: center;
+}
+
+.fire-project-warning h2,
+.fire-project-section h2 {
+  margin: 0 0 16px;
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.02;
+}
+
+.fire-project-warning p,
+.fire-project-section p,
+.fire-project-section li {
+  color: rgba(255, 255, 255, 0.71);
+  line-height: 1.68;
+}
+
+.fire-project-section {
+  padding: clamp(56px, 8vw, 96px) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.fire-stage-grid,
+.fire-output-sequence,
+.fire-uncertainty-grid,
+.fire-download-grid {
+  display: grid;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fire-stage-grid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.fire-stage-grid li {
+  min-height: 190px;
+  padding: 18px;
+  background: var(--ink);
+}
+
+.fire-stage-grid li > span,
+.fire-output-sequence li > span,
+.fire-checklist li > span {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--fire-accent);
+  font: 800 11px/1 monospace;
+}
+
+.fire-stage-grid strong,
+.fire-output-sequence strong,
+.fire-uncertainty-grid strong {
+  display: block;
+  color: white;
+}
+
+.fire-stage-grid p,
+.fire-output-sequence p,
+.fire-uncertainty-grid p {
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+
+.fire-evidence-grid,
+.fire-science-grid,
+.fire-recovery-section,
+.fire-build-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(34px, 6vw, 76px);
+  align-items: start;
+}
+
+.fire-map-frame {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.fire-map-frame .geojson-map {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: #e7e0d2;
+}
+
+.fire-map-frame .geojson-map path {
+  fill: rgba(176, 65, 45, 0.38);
+  stroke: #752b23;
+  stroke-width: 1.4;
+}
+
+.fire-map-frame figcaption,
+.fire-output-note {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.fire-resource-links a,
+.fire-references a {
+  color: white;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.fire-contract-grid,
+.fire-two-column,
+.fire-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 32px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.fire-contract-grid > *,
+.fire-two-column > *,
+.fire-portfolio-grid > * {
+  margin: 0;
+  padding: 30px;
+  background: var(--ink);
+}
+
+.fire-contract-grid dl > div {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.fire-contract-grid dt {
+  color: var(--fire-accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fire-contract-grid dd {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.55;
+}
+
+.fire-nonclaims {
+  border-left: 4px solid var(--fire-accent);
+  background: rgba(200, 122, 92, 0.08);
+}
+
+.fire-timeline {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  margin: 32px 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.14);
+  list-style: none;
+}
+
+.fire-timeline li {
+  position: relative;
+  min-height: 145px;
+  padding: 19px;
+  background: var(--ink);
+}
+
+.fire-timeline li::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--fire-accent);
+  opacity: 0.45;
+}
+
+.fire-timeline strong,
+.fire-timeline span,
+.fire-timeline small {
+  display: block;
+}
+
+.fire-timeline strong {
+  color: white;
+  font-size: 26px;
+}
+
+.fire-timeline span {
+  margin-top: 10px;
+  color: var(--fire-accent);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.fire-timeline small {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.4;
+}
+
+.fire-activity {
+  margin-top: 30px;
+  padding: 0 22px;
+  border: 1px solid rgba(200, 122, 92, 0.46);
+  background: rgba(200, 122, 92, 0.07);
+}
+
+.fire-activity summary {
+  padding: 18px 0;
+  cursor: pointer;
+  color: white;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.fire-activity summary span {
+  margin-right: 12px;
+  color: var(--fire-accent);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fire-activity p {
+  padding-bottom: 18px;
+}
+
+.fire-band-visual {
+  min-height: 360px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  align-content: center;
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  background: linear-gradient(160deg, rgba(47, 103, 83, 0.16), rgba(200, 122, 92, 0.12));
+}
+
+.fire-band-visual > span {
+  color: rgba(255, 255, 255, 0.55);
+  font: 800 10px/1 monospace;
+  text-align: center;
+}
+
+.fire-spectrum {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.fire-spectrum i {
+  display: block;
+  height: 18px;
+  background: linear-gradient(90deg, #2e7560 0 72%, #cf9b73 72% 100%);
+}
+
+.fire-spectrum.disturbed i {
+  background: linear-gradient(90deg, #77625c 0 42%, #ba724f 42% 100%);
+}
+
+.fire-spectrum b {
+  min-width: 130px;
+  font-size: 12px;
+}
+
+.fire-band-visual small {
+  grid-column: 1 / -1;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.fire-two-column article h3,
+.fire-equation-grid h3 {
+  margin: 0 0 12px;
+  color: white;
+  font: 500 27px/1.2 "Iowan Old Style", Georgia, serif;
+}
+
+.fire-equation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 32px 0 24px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.fire-equation-grid article {
+  padding: 26px;
+  background: var(--ink);
+}
+
+.fire-equation-grid code,
+.fire-recovery-equation {
+  color: #ffd4bf;
+  font-size: clamp(15px, 1.5vw, 19px);
+}
+
+.fire-recovery-equation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+  margin: 28px 0;
+  padding: 22px;
+  border-left: 4px solid var(--fire-accent);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: monospace;
+}
+
+.fire-recovery-scale {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-self: center;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.fire-recovery-scale i {
+  height: 34px;
+  background: #762a83;
+}
+
+.fire-recovery-scale i:nth-child(2) { background: #af8dc3; }
+.fire-recovery-scale i:nth-child(3) { background: #7fbf7b; }
+.fire-recovery-scale i:nth-child(4) { background: #1b7837; }
+
+.fire-recovery-scale span {
+  padding-top: 14px;
+  color: white;
+  font-weight: 800;
+  text-align: center;
+}
+
+.fire-recovery-scale small {
+  color: rgba(255, 255, 255, 0.52);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.fire-strata-visual {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.fire-strata-visual > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fire-strata-visual i {
+  height: 10px;
+  background: #d1e5f0;
+}
+
+.fire-strata-visual .strata-medium { background: #f4a582; }
+.fire-strata-visual .strata-high { background: #b2182b; }
+
+.fire-strata-visual b {
+  grid-column: 1 / -1;
+  padding: 14px;
+  color: rgba(255, 255, 255, 0.62);
+  font: 700 11px/1.5 monospace;
+  text-align: center;
+}
+
+.fire-output-sequence {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.fire-output-sequence li {
+  min-height: 170px;
+  padding: 20px;
+  background: var(--ink);
+}
+
+.fire-uncertainty-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fire-uncertainty-grid article {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.fire-build-section pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #15191c;
+  color: #ffd4bf;
+  line-height: 1.8;
+}
+
+.fire-checklist {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 32px 0 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.14);
+  list-style: none;
+}
+
+.fire-checklist li {
+  min-height: 125px;
+  padding: 20px;
+  background: var(--ink);
+}
+
+.fire-checklist li > span {
+  margin-bottom: 12px;
+}
+
+.fire-portfolio-grid ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.fire-portfolio-grid aside {
+  border-top: 5px solid var(--fire-accent);
+  background: rgba(200, 122, 92, 0.08);
+}
+
+.fire-portfolio-grid aside strong {
+  color: white;
+  font: 500 34px/1 "Iowan Old Style", Georgia, serif;
+}
+
+.fire-download-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fire-download-grid a {
+  display: grid;
+  gap: 7px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
+.fire-download-grid a:hover {
+  border-color: var(--fire-accent);
+  background: rgba(200, 122, 92, 0.08);
+}
+
+.fire-download-grid span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+.fire-references ul {
+  max-width: 900px;
+  padding-left: 20px;
+}
+
+@media (max-width: 980px) {
+  .fire-stage-grid,
+  .fire-timeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .fire-output-sequence,
+  .fire-uncertainty-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .fire-project {
+    padding-inline: 20px;
+  }
+
+  .fire-project-hero,
+  .fire-evidence-grid,
+  .fire-science-grid,
+  .fire-recovery-section,
+  .fire-build-section,
+  .fire-contract-grid,
+  .fire-two-column,
+  .fire-portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fire-project-warning {
+    grid-template-columns: 1fr;
+  }
+
+  .fire-project-warning > div:first-child {
+    text-align: left;
+  }
+
+  .fire-stage-grid,
+  .fire-timeline,
+  .fire-equation-grid,
+  .fire-output-sequence,
+  .fire-uncertainty-grid,
+  .fire-checklist,
+  .fire-download-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fire-timeline li,
+  .fire-stage-grid li,
+  .fire-output-sequence li,
+  .fire-checklist li {
+    min-height: auto;
+  }
+}
+
 @media (max-width: 380px) {
   .about-heading h1 {
     font-size: 52px;

@@ -4,6 +4,7 @@ import { academyHref } from "@/lib/site-paths";
 const seoNavigation = [
   { label: "Pathway", href: `${academyHref("/")}#paths`, key: "pathway" },
   { label: "Curriculum", href: academyHref("/curriculum/"), key: "curriculum" },
+  { label: "Field Lab 06", href: academyHref("/projects/track-recovery-after-fire/"), key: "field-lab-06" },
   { label: "About", href: academyHref("/about/"), key: "about" },
 ];
 
@@ -90,6 +91,7 @@ export function SeoFooter() {
         <a href={academyHref("/module-1/")}>Module 1</a>
         <a href={academyHref("/module-2/")}>Module 2</a>
         <a href={academyHref("/module-3/")}>Module 3</a>
+        <a href={academyHref("/projects/track-recovery-after-fire/")}>Field Lab 06</a>
         <a href={academyHref("/about/")}>About</a>
         <a href="https://github.com/kaskevich" rel="me">Volha Kaskevich on GitHub</a>
         <a href={content.footer.contactHref}>{content.footer.contactLabel}</a>

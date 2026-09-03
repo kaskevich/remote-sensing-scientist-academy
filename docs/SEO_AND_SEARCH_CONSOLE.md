@@ -15,6 +15,7 @@ The public `/admin/` route already carries `noindex, nofollow`. It remains exclu
 - `/module-1/`, `/module-2/` and `/module-3/` describe the three sequential courses.
 - `/{module-slug}/{lesson-slug}/` is the canonical static reading page for each lesson, practicum and capstone.
 - `/about/` retains its existing page and now has a canonical URL and social metadata.
+- `/projects/track-recovery-after-fire/` is the canonical northern Evia scientific field lab and publishes its research design, official EMS perimeter and reproducible resources.
 - `/admin/` is not indexable.
 
 Stable lesson IDs still power progress, notes, code drafts, uploads and synchronized data. Human-readable SEO slugs are a separate discovery layer, so metadata improvements do not invalidate learner data.

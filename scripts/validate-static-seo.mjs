@@ -32,7 +32,7 @@ if (!existsSync(robotsPath)) errors.push("out/robots.txt is missing");
 
 const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, "utf8") : "";
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-if (urls.length !== 115) errors.push(`sitemap contains ${urls.length} URLs instead of 115`);
+if (urls.length !== 116) errors.push(`sitemap contains ${urls.length} URLs instead of 116`);
 if (new Set(urls).size !== urls.length) errors.push("sitemap contains duplicate URLs");
 const titles = [];
 const canonicals = [];

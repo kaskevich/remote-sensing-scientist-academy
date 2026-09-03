@@ -15,6 +15,8 @@ GeoPandas, Rasterio, Xarray and XGBoost.
 
 [Open Remote Sensing Scientist Academy](https://kaskevich.github.io/remote-sensing-scientist-academy/)
 
+[Open Field Lab 06: Northern Evia Fire Recovery](https://kaskevich.github.io/remote-sensing-scientist-academy/projects/track-recovery-after-fire/)
+
 ## Creator
 
 Volha Kaskevich works with GIS, UAV and satellite remote sensing, spatial
@@ -31,6 +33,7 @@ on coastal wetlands and blue-green infrastructure.
 
 - Responsive website for desktop and mobile
 - Programs, curriculum, field lab, outcomes, and application sections
+- A complete northern Evia wildfire recovery mini-project with the official Copernicus EMSR527 perimeter, reproducible Earth Engine code and portfolio templates
 - Content editing with Pages CMS
 - Automatic publishing with GitHub Pages
 

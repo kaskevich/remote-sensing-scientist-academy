@@ -984,7 +984,7 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
-              <a className="button button-dark" href={content.fieldLab.buttonHref}>
+              <a className="button button-dark" href={academyHref(content.fieldLab.buttonHref)}>
                 {content.fieldLab.buttonLabel} <span aria-hidden="true">→</span>
               </a>
             </div>

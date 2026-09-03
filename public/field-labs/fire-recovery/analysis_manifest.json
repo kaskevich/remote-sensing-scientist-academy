@@ -1,0 +1,36 @@
+{
+  "project": "Northern Evia Fire Recovery — Sentinel-2 Change Detection",
+  "event": "August 2021 northern Evia wildfire, Greece",
+  "author": "[learner name]",
+  "created_at": "[ISO 8601 timestamp]",
+  "perimeter": {
+    "activation": "EMSR527",
+    "aoi": "AOI01",
+    "product": "DEL_MONIT03",
+    "delivery": "2021-08-11T15:09:37Z",
+    "source_url": "https://mapping.emergency.copernicus.eu/activations/EMSR527/",
+    "filter": "notation == Burnt area",
+    "earth_engine_asset_id": "[uploaded asset ID]"
+  },
+  "imagery": {
+    "collection": "COPERNICUS/S2_SR_HARMONIZED",
+    "seasonal_window": "September 1–October 15",
+    "baseline_years": [2019, 2020],
+    "post_fire_year": 2021,
+    "recovery_years": [2022, 2023, 2024, 2025],
+    "excluded_years": [2026]
+  },
+  "analysis": {
+    "scale_m": 20,
+    "indices": ["NBR", "dNBR", "NDVI", "relative NBR spectral recovery"],
+    "minimum_absolute_recovery_denominator": 0.05,
+    "disturbance_strata": "AOI-derived dNBR 33rd and 67th percentiles",
+    "summary_statistics": ["median", "25th percentile", "75th percentile"]
+  },
+  "software": {
+    "platform": "Google Earth Engine",
+    "script_version": "[Git commit or release]"
+  },
+  "outputs": [],
+  "limitations_reviewed": false
+}

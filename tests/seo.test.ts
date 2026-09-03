@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import robots from "@/app/robots";
 import sitemap from "@/app/sitemap";
@@ -48,12 +48,30 @@ describe("Academy SEO architecture", () => {
 
   it("generates a complete sitemap with no duplicate URLs", () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(115);
+    expect(entries).toHaveLength(116);
     expect(unique(entries.map((entry) => entry.url))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/curriculum/"))).toBe(true);
+    expect(entries.some((entry) => entry.url.endsWith("/projects/track-recovery-after-fire/"))).toBe(true);
     for (const lesson of seoLessons) {
       expect(entries.some((entry) => entry.url === lesson.canonicalUrl), lesson.id).toBe(true);
     }
+  });
+
+  it("bundles a reproducible, non-fabricated northern Evia field lab", () => {
+    const code = readFileSync("public/field-labs/fire-recovery/fire_recovery.js", "utf8");
+    const perimeter = JSON.parse(readFileSync(
+      "public/field-labs/fire-recovery/EMSR527_AOI01_DEL_MONIT03_observedEventA_r1_v1.json",
+      "utf8",
+    )) as { features: Array<{ properties: { notation?: string; area?: number } }> };
+    const burnedArea = perimeter.features.find((feature) => feature.properties.notation === "Burnt area");
+
+    expect(code).toContain("COPERNICUS/S2_SR_HARMONIZED");
+    expect(code).toContain("recoveryYears: [2022, 2023, 2024, 2025]");
+    expect(code).toContain("trajectoryYears: [2019, 2020, 2021, 2022, 2023, 2024, 2025]");
+    expect(code).toContain("minimumNbrChange: 0.05");
+    expect(code).toContain("scl.neq(3)");
+    expect(code).not.toContain("recoveryYears: [2022, 2023, 2024, 2025, 2026]");
+    expect(burnedArea?.properties.area).toBeCloseTo(50909.887828, 5);
   });
 
   it("allows public crawling, excludes admin and references the sitemap", () => {
