@@ -17,6 +17,8 @@ GeoPandas, Rasterio, Xarray and XGBoost.
 
 [Open Field Lab 06: Northern Evia Fire Recovery](https://kaskevich.github.io/remote-sensing-scientist-academy/projects/track-recovery-after-fire/)
 
+[Open the Boreal Baltic Coastal Meadow Species Atlas](https://kaskevich.github.io/remote-sensing-scientist-academy/species/)
+
 ## Creator
 
 Volha Kaskevich works with GIS, UAV and satellite remote sensing, spatial
@@ -34,6 +36,7 @@ on coastal wetlands and blue-green infrastructure.
 - Responsive website for desktop and mobile
 - Programs, curriculum, field lab, outcomes, and application sections
 - A complete northern Evia wildfire recovery mini-project with the official Copernicus EMSR527 perimeter, reproducible Earth Engine code and portfolio templates
+- A searchable, data-driven Coastal Meadow Species Atlas with 38 source-traceable FinBIF records, individual species routes, habitat-reference pages and image-level licensing
 - Content editing with Pages CMS
 - Automatic publishing with GitHub Pages
 

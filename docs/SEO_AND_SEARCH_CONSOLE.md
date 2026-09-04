@@ -16,6 +16,9 @@ The public `/admin/` route already carries `noindex, nofollow`. It remains exclu
 - `/{module-slug}/{lesson-slug}/` is the canonical static reading page for each lesson, practicum and capstone.
 - `/about/` retains its existing page and now has a canonical URL and social metadata.
 - `/projects/track-recovery-after-fire/` is the canonical northern Evia scientific field lab and publishes its research design, official EMS perimeter and reproducible resources.
+- `/species/` is the canonical Boreal Baltic Coastal Meadow Species Atlas index.
+- `/species/{species-slug}/` provides one statically generated, source-traceable page for each of the 38 supplied FinBIF taxon records.
+- `/species/habitats/{habitat-slug}/` provides four study-community reference pages (OP, LS, US and TG) without inferring unsupported species assignments.
 - `/admin/` is not indexable.
 
 Stable lesson IDs still power progress, notes, code drafts, uploads and synchronized data. Human-readable SEO slugs are a separate discovery layer, so metadata improvements do not invalidate learner data.
@@ -28,8 +31,11 @@ Stable lesson IDs still power progress, notes, code drafts, uploads and synchron
 - Module pages publish `Course` and `BreadcrumbList` JSON-LD.
 - Lesson pages publish `LearningResource` and `BreadcrumbList` JSON-LD.
 - The curriculum publishes `CollectionPage` JSON-LD.
+- The Atlas index and habitat pages publish `CollectionPage` and `BreadcrumbList` JSON-LD; species pages publish `LearningResource` and `BreadcrumbList` JSON-LD with canonical URLs and source citations.
 
 The schema makes no claim of accreditation, certification, guaranteed employment or unsupported institutional status.
+
+The Atlas intentionally separates source taxonomy, pending study observations and remote-sensing interpretation. Photograph schema and social metadata are emitted only for images whose individual owner, licence and source mapping was verifiable from the supplied PDFs.
 
 ## Google ownership verification
 

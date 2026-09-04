@@ -5,6 +5,7 @@ import sitemap from "@/app/sitemap";
 import { seoLessons, seoModules } from "@/lib/seo-curriculum";
 import { academyProductionBasePath } from "@/lib/site-paths";
 import { creatorEntity, volhaKaskevich } from "@/lib/professional-identity";
+import { habitatCodes, speciesRecords } from "@/lib/species-atlas";
 
 function unique(values: string[]) {
   return new Set(values).size === values.length;
@@ -48,10 +49,14 @@ describe("Academy SEO architecture", () => {
 
   it("generates a complete sitemap with no duplicate URLs", () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(116);
+    expect(entries).toHaveLength(159);
     expect(unique(entries.map((entry) => entry.url))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/curriculum/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/projects/track-recovery-after-fire/"))).toBe(true);
+    expect(entries.some((entry) => entry.url.endsWith("/species/"))).toBe(true);
+    expect(entries.filter((entry) => entry.url.includes("/species/")).length).toBe(43);
+    expect(speciesRecords).toHaveLength(38);
+    expect(habitatCodes).toHaveLength(4);
     for (const lesson of seoLessons) {
       expect(entries.some((entry) => entry.url === lesson.canonicalUrl), lesson.id).toBe(true);
     }

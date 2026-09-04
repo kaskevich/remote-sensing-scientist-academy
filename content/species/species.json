@@ -1,0 +1,3800 @@
+[
+  {
+    "speciesId": "achillea-millefolium",
+    "slug": "achillea-millefolium",
+    "scientificName": "Achillea millefolium",
+    "commonName": null,
+    "family": "Asteraceae",
+    "genus": "Achillea",
+    "taxonId": "MX.39812",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39812/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Achillea_millefolium.pdf",
+    "sourceDocumentSha256": "6ca450184bbae218211c12a11019e09b1227de5d5f968c5e663c7a3f744e1796",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Asterales",
+        "taxonId": "MX.53721"
+      },
+      {
+        "name": "Asteraceae",
+        "taxonId": "MX.39723"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/achillea-millefolium/finbif-page-02.webp",
+        "alt": "Achillea millefolium photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39812/identification",
+        "sourceDocument": "Achillea_millefolium.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Achillea millefolium photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39812/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "agrostis-stolonifera",
+    "slug": "agrostis-stolonifera",
+    "scientificName": "Agrostis stolonifera",
+    "commonName": null,
+    "family": null,
+    "genus": "Agrostis",
+    "taxonId": "MX.40601",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40601/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Agrostis_Stolonifera.pdf",
+    "sourceDocumentSha256": "3dd85d19b418bb2f7e7ee4273aed1e31ab4861959cb301e8b41287e67d749f9a",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Agrostis",
+        "taxonId": "MX.40587"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/agrostis-stolonifera/finbif-page-02.webp",
+        "alt": "Agrostis stolonifera photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40601/identification",
+        "sourceDocument": "Agrostis_Stolonifera.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Agrostis stolonifera photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40601/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "argentina-anserina",
+    "slug": "argentina-anserina",
+    "scientificName": "Argentina anserina",
+    "commonName": null,
+    "family": null,
+    "genus": "Argentina",
+    "taxonId": "MX.38844",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38844/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Argentina_anserina.pdf",
+    "sourceDocumentSha256": "d437b3ca9cd28b109d4d9ee3e437ce21f7251076a87b00c40eeea8cbce751e6c",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Rosales",
+        "taxonId": "MX.70070"
+      },
+      {
+        "name": "Argentina",
+        "taxonId": "MX.4972057"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/argentina-anserina/finbif-page-02.webp",
+        "alt": "Argentina anserina photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38844/identification",
+        "sourceDocument": "Argentina_anserina.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Argentina anserina photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38844/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "arrhenatherum-elatius",
+    "slug": "arrhenatherum-elatius",
+    "scientificName": "Arrhenatherum elatius",
+    "commonName": null,
+    "family": null,
+    "genus": "Arrhenatherum",
+    "taxonId": "MX.40557",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40557/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Arrhenatherum_elatius.pdf",
+    "sourceDocumentSha256": "6c0c9892a565a675ed19b9d11aa53363b2c31c8b64b937ddca624338a0103992",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Arrhenatherum",
+        "taxonId": "MX.40556"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/arrhenatherum-elatius/finbif-page-02.webp",
+        "alt": "Arrhenatherum elatius photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40557/identification",
+        "sourceDocument": "Arrhenatherum_elatius.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Arrhenatherum elatius photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40557/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "briza-media",
+    "slug": "briza-media",
+    "scientificName": "Briza media",
+    "commonName": null,
+    "family": null,
+    "genus": "Briza",
+    "taxonId": "MX.40501",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40501/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Briza_media.pdf",
+    "sourceDocumentSha256": "74ddb7f7a4db8b00b6b11f69030642851721152c2775747293c3fdfda9b691b9",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Briza",
+        "taxonId": "MX.40500"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/briza-media/finbif-page-02.webp",
+        "alt": "Briza media photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40501/identification",
+        "sourceDocument": "Briza_media.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Briza media photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40501/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "carex-distans",
+    "slug": "carex-distans",
+    "scientificName": "Carex distans",
+    "commonName": null,
+    "family": null,
+    "genus": "Carex",
+    "taxonId": "MX.40355",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40355/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Carex_distans.pdf",
+    "sourceDocumentSha256": "d38b475590c35e4d302f75ab83f32dc0db856d5692a97d4ce5e17f2871b9d9b6",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Carex",
+        "taxonId": "MX.40288"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/carex-distans/finbif-page-02.webp",
+        "alt": "Carex distans photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40355/identification",
+        "sourceDocument": "Carex_distans.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Carex distans photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40355/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "carex-flava",
+    "slug": "carex-flava",
+    "scientificName": "Carex flava",
+    "commonName": null,
+    "family": null,
+    "genus": "Carex",
+    "taxonId": "MX.40360",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40360/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Carex_flava.pdf",
+    "sourceDocumentSha256": "05829e6bc214b1aeea96dac7fec39f90030dcc1767bfd04472d0f40b8c33a638",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Carex",
+        "taxonId": "MX.40288"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/carex-flava/finbif-page-02.webp",
+        "alt": "Carex flava photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40360/identification",
+        "sourceDocument": "Carex_flava.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Carex flava photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40360/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "carex-nigra",
+    "slug": "carex-nigra",
+    "scientificName": "Carex nigra",
+    "commonName": null,
+    "family": null,
+    "genus": "Carex",
+    "taxonId": "MX.40417",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40417/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Carex_nigra.pdf",
+    "sourceDocumentSha256": "fc2e197e6c8c47fd5619e07da86f99799c5eadb93c9e43279c1d133e899f4ac6",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Carex",
+        "taxonId": "MX.40288"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/carex-nigra/finbif-page-02.webp",
+        "alt": "Carex nigra photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40417/identification",
+        "sourceDocument": "Carex_nigra.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Carex nigra photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40417/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "carex-panicea",
+    "slug": "carex-panicea",
+    "scientificName": "Carex panicea",
+    "commonName": null,
+    "family": null,
+    "genus": "Carex",
+    "taxonId": "MX.40352",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40352/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Carex_panicea.pdf",
+    "sourceDocumentSha256": "93b843db5bb01682736a20e13b79d7e6e96dee091ea080c7f8a56ee543314a34",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Carex",
+        "taxonId": "MX.40288"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/carex-panicea/finbif-page-02.webp",
+        "alt": "Carex panicea photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40352/identification",
+        "sourceDocument": "Carex_panicea.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Carex panicea photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40352/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "centaurea-jacea",
+    "slug": "centaurea-jacea",
+    "scientificName": "Centaurea jacea",
+    "commonName": null,
+    "family": "Asteraceae",
+    "genus": "Centaurea",
+    "taxonId": "MX.39904",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39904/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Centaurea_jacea.pdf",
+    "sourceDocumentSha256": "3c0255f9718a8665d09c1a4c46d43f8030ae630325e112481233e1f238f0a303",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Asterales",
+        "taxonId": "MX.53721"
+      },
+      {
+        "name": "Asteraceae",
+        "taxonId": "MX.39723"
+      },
+      {
+        "name": "Centaurea",
+        "taxonId": "MX.39898"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/centaurea-jacea/finbif-page-02.webp",
+        "alt": "Centaurea jacea photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39904/identification",
+        "sourceDocument": "Centaurea_jacea.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Centaurea jacea photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39904/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "deschampsia-cespitosa",
+    "slug": "deschampsia-cespitosa",
+    "scientificName": "Deschampsia cespitosa",
+    "commonName": null,
+    "family": null,
+    "genus": "Deschampsia",
+    "taxonId": "MX.40564",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40564/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Deschampsia_cespitosa.pdf",
+    "sourceDocumentSha256": "383da423304e4ec05469dbdc24d9a73b3fa9eb8f64cd81e2bc6a2673cfac7e51",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Deschampsia",
+        "taxonId": "MX.40562"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/deschampsia-cespitosa/finbif-page-02.webp",
+        "alt": "Deschampsia cespitosa photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40564/identification",
+        "sourceDocument": "Deschampsia_cespitosa.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Deschampsia cespitosa photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40564/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "eleocharis-palustris",
+    "slug": "eleocharis-palustris",
+    "scientificName": "Eleocharis palustris",
+    "commonName": null,
+    "family": null,
+    "genus": "Eleocharis",
+    "taxonId": "MX.40269",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40269/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Eleocharis_palustris.pdf",
+    "sourceDocumentSha256": "40e20baba7dea2d6b9861489051406a76a1612c51b70f78008318efd579be31e",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Eleocharis",
+        "taxonId": "MX.40265"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/eleocharis-palustris/finbif-page-02.webp",
+        "alt": "Eleocharis palustris photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40269/identification",
+        "sourceDocument": "Eleocharis_palustris.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Eleocharis palustris photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40269/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "elytrigia-repens",
+    "slug": "elytrigia-repens",
+    "scientificName": "Elytrigia repens",
+    "commonName": null,
+    "family": null,
+    "genus": "Elytrigia",
+    "taxonId": "MX.40537",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40537/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Elytrigia_repens.pdf",
+    "sourceDocumentSha256": "e8183422666cc1620412cb37fc52906573b619eac391e2ead71de1552dc614db",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Elytrigia",
+        "taxonId": "MX.42803"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/elytrigia-repens/finbif-page-02.webp",
+        "alt": "Elytrigia repens photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40537/identification",
+        "sourceDocument": "Elytrigia_repens.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Elytrigia repens photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40537/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "festuca-rubra",
+    "slug": "festuca-rubra",
+    "scientificName": "Festuca rubra",
+    "commonName": null,
+    "family": null,
+    "genus": "Festuca",
+    "taxonId": "MX.40438",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40438/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Festuca_rubra.pdf",
+    "sourceDocumentSha256": "ab22686444ae1e7c3e0d396d7e5797163762938352b6cca017a844b0e4ff0894",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Festuca",
+        "taxonId": "MX.40432"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/festuca-rubra/finbif-page-02.webp",
+        "alt": "Festuca rubra photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40438/identification",
+        "sourceDocument": "Festuca_rubra.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Festuca rubra photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40438/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "filipendula-vulgaris",
+    "slug": "filipendula-vulgaris",
+    "scientificName": "Filipendula vulgaris",
+    "commonName": null,
+    "family": null,
+    "genus": "Filipendula",
+    "taxonId": "MX.38794",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38794/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Filipendula_vulgaris.pdf",
+    "sourceDocumentSha256": "4de8173e59fdf6d91aad5d25f0540c6b0fc0b6468612a2263a1cb90bd4998383",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Rosales",
+        "taxonId": "MX.70070"
+      },
+      {
+        "name": "Filipendula",
+        "taxonId": "MX.38793"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/filipendula-vulgaris/finbif-page-02.webp",
+        "alt": "Filipendula vulgaris photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38794/identification",
+        "sourceDocument": "Filipendula_vulgaris.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Filipendula vulgaris photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38794/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "galium-boreale",
+    "slug": "galium-boreale",
+    "scientificName": "Galium boreale",
+    "commonName": null,
+    "family": "Rubiaceae",
+    "genus": "Galium",
+    "taxonId": "MX.39284",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39284/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Galium_boreale.pdf",
+    "sourceDocumentSha256": "541f2236cf41c42e4ab449d682a00d671590fb1cd9d691de5040ce2ccfd33119",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Gentianales",
+        "taxonId": "MX.70056"
+      },
+      {
+        "name": "Rubiaceae",
+        "taxonId": "MX.39276"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/galium-boreale/finbif-page-02.webp",
+        "alt": "Galium boreale photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39284/identification",
+        "sourceDocument": "Galium_boreale.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Galium boreale photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39284/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "galium-palustre",
+    "slug": "galium-palustre",
+    "scientificName": "Galium palustre",
+    "commonName": null,
+    "family": "Rubiaceae",
+    "genus": "Galium",
+    "taxonId": "MX.39288",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39288/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Galium_palustre.pdf",
+    "sourceDocumentSha256": "99a05479c6d50604536fa84a4ff6bb9215556600e64511c50f19f77b8eb81683",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Gentianales",
+        "taxonId": "MX.70056"
+      },
+      {
+        "name": "Rubiaceae",
+        "taxonId": "MX.39276"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/galium-palustre/finbif-page-02.webp",
+        "alt": "Galium palustre photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39288/identification",
+        "sourceDocument": "Galium_palustre.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Galium palustre photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39288/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "galium-verum",
+    "slug": "galium-verum",
+    "scientificName": "Galium verum",
+    "commonName": null,
+    "family": "Rubiaceae",
+    "genus": "Galium",
+    "taxonId": "MX.39292",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39292/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Galium_verum.pdf",
+    "sourceDocumentSha256": "1a6c3dbf5236bcf4d8d2363870c2c4bdb1af8c52f459b86b9515aae6594c655c",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Gentianales",
+        "taxonId": "MX.70056"
+      },
+      {
+        "name": "Rubiaceae",
+        "taxonId": "MX.39276"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/galium-verum/finbif-page-02.webp",
+        "alt": "Galium verum photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39292/identification",
+        "sourceDocument": "Galium_verum.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Galium verum photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39292/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "juncus-gerardi",
+    "slug": "juncus-gerardi",
+    "scientificName": "Juncus gerardi",
+    "commonName": null,
+    "family": null,
+    "genus": "Juncus",
+    "taxonId": "MX.40207",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40207/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Juncus_gerardi .pdf",
+    "sourceDocumentSha256": "3ae72d4771261d3625b8a99f8a28cf89692af7cc196f699820a0b7a80f0ff78c",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Juncus",
+        "taxonId": "MX.40195"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/juncus-gerardi/finbif-page-02.webp",
+        "alt": "Juncus gerardi photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40207/identification",
+        "sourceDocument": "Juncus_gerardi .pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Juncus gerardi photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40207/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "lathyrus-pratensis",
+    "slug": "lathyrus-pratensis",
+    "scientificName": "Lathyrus pratensis",
+    "commonName": null,
+    "family": null,
+    "genus": "Lathyrus",
+    "taxonId": "MX.39002",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39002/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Lathyrus_pratensis.pdf",
+    "sourceDocumentSha256": "8e010e0e570cc962de9cd4305d1dadc3f34e1ffc7bdd6dd6ce978f196a2bb15c",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Fabales",
+        "taxonId": "MX.53670"
+      },
+      {
+        "name": "Lathyrus",
+        "taxonId": "MX.38992"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/lathyrus-pratensis/finbif-page-02.webp",
+        "alt": "Lathyrus pratensis photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39002/identification",
+        "sourceDocument": "Lathyrus_pratensis.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Lathyrus pratensis photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39002/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "linum-catharticum",
+    "slug": "linum-catharticum",
+    "scientificName": "Linum catharticum",
+    "commonName": null,
+    "family": "Linaceae",
+    "genus": "Linum",
+    "taxonId": "MX.39126",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39126/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Linum_catharticum.pdf",
+    "sourceDocumentSha256": "35f542cf9dfe83f110930ae0703bf67ac35d4ae621e5077db4b3f0ba8c4a7975",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Malpighiales",
+        "taxonId": "MX.70062"
+      },
+      {
+        "name": "Linaceae",
+        "taxonId": "MX.39124"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/linum-catharticum/finbif-page-02.webp",
+        "alt": "Linum catharticum photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39126/identification",
+        "sourceDocument": "Linum_catharticum.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Linum catharticum photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39126/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "lolium-arundinaceum",
+    "slug": "lolium-arundinaceum",
+    "scientificName": "Lolium arundinaceum",
+    "commonName": null,
+    "family": null,
+    "genus": "Lolium",
+    "taxonId": "MX.40436",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40436/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Lolium_arundinaceum.pdf",
+    "sourceDocumentSha256": "8744fe76d64698e16210f5bc9dd33d750dfa9e440922e403ecc104fb5d188131",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Lolium",
+        "taxonId": "MX.40448"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40436/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage.",
+      "No image published: page-2 image-to-owner/licence mapping was not uniquely verifiable."
+    ]
+  },
+  {
+    "speciesId": "lotus-corniculatus",
+    "slug": "lotus-corniculatus",
+    "scientificName": "Lotus corniculatus",
+    "commonName": null,
+    "family": null,
+    "genus": "Lotus",
+    "taxonId": "MX.39057",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39057/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Lotus_corniculatus.pdf",
+    "sourceDocumentSha256": "936b0d05e0497659f7960fb0e5a12ac1c12edef3004301e8f82ab79c16898e74",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Fabales",
+        "taxonId": "MX.53670"
+      },
+      {
+        "name": "Lotus",
+        "taxonId": "MX.39055"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/lotus-corniculatus/finbif-page-02.webp",
+        "alt": "Lotus corniculatus photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39057/identification",
+        "sourceDocument": "Lotus_corniculatus.pdf, page 2",
+        "copyrightOwner": "Tuomo Härkönen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Lotus corniculatus photograph by Tuomo Härkönen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39057/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "lysimachia-maritima",
+    "slug": "lysimachia-maritima",
+    "scientificName": "Lysimachia maritima",
+    "commonName": null,
+    "family": "Primulaceae",
+    "genus": "Lysimachia",
+    "taxonId": "MX.38678",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38678/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Lysimachia_maritima.pdf",
+    "sourceDocumentSha256": "0f60be0f9a149d7aaaa67f6517895906a103cad7997fe1abd67340249e8e65f6",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Ericales",
+        "taxonId": "MX.70053"
+      },
+      {
+        "name": "Primulaceae",
+        "taxonId": "MX.38652"
+      },
+      {
+        "name": "Lysimachia",
+        "taxonId": "MX.38669"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/lysimachia-maritima/finbif-page-02.webp",
+        "alt": "Lysimachia maritima photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38678/identification",
+        "sourceDocument": "Lysimachia_maritima.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Lysimachia maritima photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38678/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "molinia-caerulea",
+    "slug": "molinia-caerulea",
+    "scientificName": "Molinia caerulea",
+    "commonName": null,
+    "family": null,
+    "genus": "Molinia",
+    "taxonId": "MX.40643",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40643/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Molinia_caerulea.pdf",
+    "sourceDocumentSha256": "c7d99db78ac48b2544bf7f131de39035c7da78968ca1f7a1109df78f3ba6b1e1",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Molinia",
+        "taxonId": "MX.40642"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/molinia-caerulea/finbif-page-02.webp",
+        "alt": "Molinia caerulea photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40643/identification",
+        "sourceDocument": "Molinia_caerulea.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Molinia caerulea photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40643/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "pentanema-salicinum",
+    "slug": "pentanema-salicinum",
+    "scientificName": "Pentanema salicinum",
+    "commonName": null,
+    "family": "Asteraceae",
+    "genus": "Pentanema",
+    "taxonId": "MX.39772",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39772/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Pentanema_salicinum.pdf",
+    "sourceDocumentSha256": "b3527ba7fbc926a5ca1153f11ed19ebc6d6bbd543ce559c3bb036833898f63d0",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Asterales",
+        "taxonId": "MX.53721"
+      },
+      {
+        "name": "Asteraceae",
+        "taxonId": "MX.39723"
+      },
+      {
+        "name": "Pentanema",
+        "taxonId": "MX.5006345"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/pentanema-salicinum/finbif-page-02.webp",
+        "alt": "Pentanema salicinum photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39772/identification",
+        "sourceDocument": "Pentanema_salicinum.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Pentanema salicinum photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39772/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "phragmites-australis",
+    "slug": "phragmites-australis",
+    "scientificName": "Phragmites australis",
+    "commonName": null,
+    "family": null,
+    "genus": "Phragmites",
+    "taxonId": "MX.40639",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40639/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Phragmites_australis.pdf",
+    "sourceDocumentSha256": "f690747b1412d10c7eeb67ac3275fc5d81dd603744cf14be1f1cdfe5e70b27e2",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Phragmites",
+        "taxonId": "MX.40638"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/phragmites-australis/finbif-page-02.webp",
+        "alt": "Phragmites australis photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40639/identification",
+        "sourceDocument": "Phragmites_australis.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Phragmites australis photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40639/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "plantago-maritima",
+    "slug": "plantago-maritima",
+    "scientificName": "Plantago maritima",
+    "commonName": null,
+    "family": "Plantaginaceae",
+    "genus": "Plantago",
+    "taxonId": "MX.39677",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39677/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Plantago_maritima.pdf",
+    "sourceDocumentSha256": "9aecc717f3831f261a8d00c4c0b80294cb1605b78dcd0259aeb19b2c6da90cd6",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Lamiales",
+        "taxonId": "MX.70059"
+      },
+      {
+        "name": "Plantaginaceae",
+        "taxonId": "MX.39671"
+      },
+      {
+        "name": "Plantago",
+        "taxonId": "MX.39672"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/plantago-maritima/finbif-page-02.webp",
+        "alt": "Plantago maritima photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39677/identification",
+        "sourceDocument": "Plantago_maritima.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Plantago maritima photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39677/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "poa-pratensis",
+    "slug": "poa-pratensis",
+    "scientificName": "Poa pratensis",
+    "commonName": null,
+    "family": null,
+    "genus": "Poa",
+    "taxonId": "MX.40461",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40461/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Poa_pratensis.pdf",
+    "sourceDocumentSha256": "340ea0e93d4c97517adc2b01418ee9341aa489a1135ae64e825be611c0866a65",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Poa",
+        "taxonId": "MX.40456"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/poa-pratensis/finbif-page-02.webp",
+        "alt": "Poa pratensis photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40461/identification",
+        "sourceDocument": "Poa_pratensis.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Poa pratensis photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40461/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "potentilla-erecta",
+    "slug": "potentilla-erecta",
+    "scientificName": "Potentilla erecta",
+    "commonName": null,
+    "family": null,
+    "genus": "Potentilla",
+    "taxonId": "MX.38863",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38863/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Potentilla_erecta.pdf",
+    "sourceDocumentSha256": "e2b3175eeed4451d283c6d5169f87e8543ee9b110018bd3506160345eef3308d",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Rosales",
+        "taxonId": "MX.70070"
+      },
+      {
+        "name": "Potentilla",
+        "taxonId": "MX.38841"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/potentilla-erecta/finbif-page-02.webp",
+        "alt": "Potentilla erecta photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38863/identification",
+        "sourceDocument": "Potentilla_erecta.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Potentilla erecta photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38863/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "salicornia-perennans",
+    "slug": "salicornia-perennans",
+    "scientificName": "Salicornia perennans",
+    "commonName": null,
+    "family": "Amaranthaceae",
+    "genus": "Salicornia",
+    "taxonId": "MX.4977505",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.4977505/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Salicornia perennans.pdf",
+    "sourceDocumentSha256": "7b488c00cce7afc75f8de1b6890d21d941ad6e4569b626c8bc66a2c17b0e4063",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Caryophyllales",
+        "taxonId": "MX.70046"
+      },
+      {
+        "name": "Amaranthaceae",
+        "taxonId": "MX.5081107"
+      },
+      {
+        "name": "Salicornia",
+        "taxonId": "MX.38204"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/salicornia-perennans/finbif-page-02.webp",
+        "alt": "Salicornia perennans photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.4977505/identification",
+        "sourceDocument": "Salicornia perennans.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Salicornia perennans photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.4977505/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "scorzoneroides-autumnalis",
+    "slug": "scorzoneroides-autumnalis",
+    "scientificName": "Scorzoneroides autumnalis",
+    "commonName": null,
+    "family": "Asteraceae",
+    "genus": "Scorzoneroides",
+    "taxonId": "MX.39917",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39917/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Scorzoneroides_autumnalis.pdf",
+    "sourceDocumentSha256": "3d358dc32109b0ca3428292f49e8e2bd688d6f48b0dada865ab520b80749d900",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Asterales",
+        "taxonId": "MX.53721"
+      },
+      {
+        "name": "Asteraceae",
+        "taxonId": "MX.39723"
+      },
+      {
+        "name": "Scorzoneroides",
+        "taxonId": "MX.4972136"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/scorzoneroides-autumnalis/finbif-page-02.webp",
+        "alt": "Scorzoneroides autumnalis photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39917/identification",
+        "sourceDocument": "Scorzoneroides_autumnalis.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Scorzoneroides autumnalis photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39917/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "sesleria-uliginosa",
+    "slug": "sesleria-uliginosa",
+    "scientificName": "Sesleria uliginosa",
+    "commonName": null,
+    "family": null,
+    "genus": "Sesleria",
+    "taxonId": "MX.40503",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40503/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Sesleria_uliginosa.pdf",
+    "sourceDocumentSha256": "05045cbb5de47e996f5d7305631f6c85ac6e3b1c02ed533d8e9e6cd685bc1e99",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Poales",
+        "taxonId": "MX.53720"
+      },
+      {
+        "name": "Sesleria",
+        "taxonId": "MX.40502"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/sesleria-uliginosa/finbif-page-02.webp",
+        "alt": "Sesleria uliginosa photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40503/identification",
+        "sourceDocument": "Sesleria_uliginosa.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Sesleria uliginosa photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40503/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  },
+  {
+    "speciesId": "suaeda-maritima",
+    "slug": "suaeda-maritima",
+    "scientificName": "Suaeda maritima",
+    "commonName": null,
+    "family": "Amaranthaceae",
+    "genus": "Suaeda",
+    "taxonId": "MX.38207",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38207/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Suaeda_maritima.pdf",
+    "sourceDocumentSha256": "14192ffbc2d17f9d0bf430b4ff976758456c8b3ed51c569487adab2a3b05f2bd",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Caryophyllales",
+        "taxonId": "MX.70046"
+      },
+      {
+        "name": "Amaranthaceae",
+        "taxonId": "MX.5081107"
+      },
+      {
+        "name": "Suaeda",
+        "taxonId": "MX.38206"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/suaeda-maritima/finbif-page-02.webp",
+        "alt": "Suaeda maritima photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38207/identification",
+        "sourceDocument": "Suaeda_maritima.pdf, page 2",
+        "copyrightOwner": "Henry Väre",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Suaeda maritima photograph by Henry Väre, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38207/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "succisa-pratensis",
+    "slug": "succisa-pratensis",
+    "scientificName": "Succisa pratensis",
+    "commonName": null,
+    "family": "Caprifoliaceae",
+    "genus": "Succisa",
+    "taxonId": "MX.39366",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39366/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Succisa_pratensis.pdf",
+    "sourceDocumentSha256": "a7a2e14dab08163ae85371da9569641d3ded67e153fb23c1507404bdcd5a63c4",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Dipsacales",
+        "taxonId": "MX.70052"
+      },
+      {
+        "name": "Caprifoliaceae",
+        "taxonId": "MX.39334"
+      },
+      {
+        "name": "Succisa",
+        "taxonId": "MX.39365"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/succisa-pratensis/finbif-page-02.webp",
+        "alt": "Succisa pratensis photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.39366/identification",
+        "sourceDocument": "Succisa_pratensis.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Succisa pratensis photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39366/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "trifolium-repens",
+    "slug": "trifolium-repens",
+    "scientificName": "Trifolium repens",
+    "commonName": null,
+    "family": null,
+    "genus": "Trifolium",
+    "taxonId": "MX.39038",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.39038/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Trifolium_repens.pdf",
+    "sourceDocumentSha256": "d7ae520060cdf35878cc36ca2ed81ad7fd34d45dd87f6c7c9f1743321bad9a9e",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Fabales",
+        "taxonId": "MX.53670"
+      },
+      {
+        "name": "Trifolium",
+        "taxonId": "MX.39036"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.39038/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage.",
+      "No image published: page-2 image-to-owner/licence mapping was not uniquely verifiable."
+    ]
+  },
+  {
+    "speciesId": "triglochin-maritima",
+    "slug": "triglochin-maritima",
+    "scientificName": "Triglochin maritima",
+    "commonName": null,
+    "family": "Juncaginaceae",
+    "genus": "Triglochin",
+    "taxonId": "MX.40125",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.40125/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Triglochin_maritima.pdf",
+    "sourceDocumentSha256": "f96a9b1f7d77792ae2a8e5aabe2e9c1000747d19c09d98ae6be5970da3564854",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Alismatales",
+        "taxonId": "MX.53663"
+      },
+      {
+        "name": "Juncaginaceae",
+        "taxonId": "MX.40123"
+      },
+      {
+        "name": "Triglochin",
+        "taxonId": "MX.40124"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/triglochin-maritima/finbif-page-02.webp",
+        "alt": "Triglochin maritima photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.40125/identification",
+        "sourceDocument": "Triglochin_maritima.pdf, page 2",
+        "copyrightOwner": "Jouko Rikkinen",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "attributionText": "Triglochin maritima photograph by Jouko Rikkinen, CC BY-NC 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": false
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.40125/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported."
+    ]
+  },
+  {
+    "speciesId": "vicia-cracca",
+    "slug": "vicia-cracca",
+    "scientificName": "Vicia cracca",
+    "commonName": null,
+    "family": null,
+    "genus": "Vicia",
+    "taxonId": "MX.38972",
+    "sourceUrl": "https://laji.fi/en/taxon/MX.38972/identification",
+    "sourceName": "Finnish Biodiversity Information Facility (FinBIF / laji.fi)",
+    "sourceAccessDate": "2024-08-16",
+    "sourceDocument": "Vicia_cracca.pdf",
+    "sourceDocumentSha256": "54d9de3cf1ea2e339a3d3ac0b2618599defb939e45b74942b0533816cc648508",
+    "taxonomy": [
+      {
+        "name": "Plants – Plantae",
+        "taxonId": "MX.37601"
+      },
+      {
+        "name": "Vascular plants – Tracheophyta",
+        "taxonId": "MX.53078"
+      },
+      {
+        "name": "Magnoliopsida",
+        "taxonId": "MX.4976189"
+      },
+      {
+        "name": "Fabales",
+        "taxonId": "MX.53670"
+      },
+      {
+        "name": "Vicia",
+        "taxonId": "MX.38971"
+      }
+    ],
+    "identification": null,
+    "ecology": null,
+    "occurrence": null,
+    "habitats": {
+      "OP": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "LS": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "US": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      },
+      "TG": {
+        "observed": null,
+        "plotCount": null,
+        "occurrencePct": null,
+        "coverSummary": null
+      }
+    },
+    "studyEvidence": {
+      "status": "pending_verified_field_data_import",
+      "sites": [],
+      "occupiedPlotCount": null,
+      "totalPlotCount": null,
+      "habitatOccurrence": {},
+      "traits": {}
+    },
+    "images": [
+      {
+        "file": "/species/vicia-cracca/finbif-page-02.webp",
+        "alt": "Vicia cracca photographed for the Finnish Biodiversity Information Facility",
+        "sourceUrl": "https://laji.fi/en/taxon/MX.38972/identification",
+        "sourceDocument": "Vicia_cracca.pdf, page 2",
+        "copyrightOwner": "Johanna Kolehmainen",
+        "license": "CC BY-NC-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "attributionText": "Vicia cracca photograph by Johanna Kolehmainen, CC BY-NC-SA 4.0, via FinBIF",
+        "nonCommercial": true,
+        "shareAlike": true
+      }
+    ],
+    "remoteSensingContext": "No species-specific trait or spectral evidence was supplied. At community scale, changes in plant cover, leaf area and canopy structure can alter the vegetation fraction and structure contributing to UAV or satellite observations; this does not establish species identification from imagery.",
+    "references": [
+      {
+        "title": "FinBIF taxon page",
+        "url": "https://laji.fi/en/taxon/MX.38972/identification"
+      }
+    ],
+    "warnings": [
+      "No OP/LS/US/TG association supplied; study distribution remains pending.",
+      "No source-supported ecology or identification prose was present in the saved PDF.",
+      "No common name or growth form was imported.",
+      "Family was not extractable from the printed FinBIF lineage."
+    ]
+  }
+]

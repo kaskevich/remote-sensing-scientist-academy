@@ -80,7 +80,7 @@ test("lesson completion and notes persist after refresh", async ({ page }) => {
   await page.evaluate((storageKey) => window.localStorage.removeItem(storageKey), LEARNER_PROGRESS_STORAGE_KEY);
   await page.reload();
 
-  await expect(page).toHaveTitle(/Remote Sensing Scientist Academy/);
+  await expect(page).toHaveTitle(/GIS & Remote Sensing Academy/);
   await expect(page.locator(".academy-account-panel")).toBeVisible();
 
   const firstLesson = page.locator("#lesson-01");
@@ -179,6 +179,42 @@ test("a direct Module 3 Chapter 4 lesson link opens and scrolls to the requested
   await expect(lesson.getByRole("heading", { name: /Problem — optimisation can improve a procedure/i })).toBeVisible();
   await expect.poll(async () => Math.abs((await lesson.boundingBox())?.y ?? Number.POSITIVE_INFINITY)).toBeLessThan(40);
 });
+
+test("the species atlas searches source records and preserves filter state in the URL", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/species/");
+
+  await expect(page.getByRole("heading", { name: "Boreal Baltic Coastal Meadow Species Atlas" })).toBeVisible();
+  await expect(page.locator(".species-card")).toHaveCount(38);
+
+  await page.getByRole("searchbox", { name: "Search the Atlas" }).fill("Juncus");
+  await expect(page.locator(".species-card")).toHaveCount(1);
+  await expect(page.getByRole("heading", { name: "Juncus gerardi" })).toBeVisible();
+  await expect(page).toHaveURL(/q=Juncus/);
+
+  await page.reload();
+  await expect(page.getByRole("searchbox", { name: "Search the Atlas" })).toHaveValue("Juncus");
+  await page.getByRole("button", { name: "Clear filters" }).click();
+  await expect(page.locator(".species-card")).toHaveCount(38);
+
+  await page.getByRole("button", { name: /LS Lower Shore/ }).click();
+  await expect(page.getByText("No verified records match this filter.")).toBeVisible();
+  await expect(page).toHaveURL(/habitat=LS/);
+});
+
+for (const viewport of [
+  { name: "320 px Atlas", width: 320, height: 700 },
+  { name: "375 px Atlas", width: 375, height: 812 },
+]) {
+  test(`${viewport.name} keeps controls, cards and the scrollable transect inside the page`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/species/");
+    await expect(page.getByRole("searchbox", { name: "Search the Atlas" })).toBeVisible();
+    await expect(page.locator(".species-card").first()).toBeVisible();
+    await expect(page.locator(".coastal-transect-frame").first()).toHaveCSS("overflow-x", "auto");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  });
+}
 
 test("a direct Module 3 Chapter 5 lesson link opens with diagnostic resources", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });

@@ -26,6 +26,11 @@
         "visible": true
       },
       {
+        "label": "Species Atlas",
+        "href": "/species/",
+        "visible": true
+      },
+      {
         "label": "About",
         "href": "about/",
         "visible": true

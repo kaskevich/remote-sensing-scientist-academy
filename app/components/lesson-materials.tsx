@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
 import { extractLessonMath, LessonMath, renderInlineLessonMath } from "@/app/components/lesson-math";
 import type { FormativeCheck } from "@/lib/module1-pedagogy";
+import { academyHref } from "@/lib/site-paths";
 
 export type LessonImage = {
   src: string;
@@ -151,6 +152,9 @@ export function MarkdownContent({
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
+          a: ({ href, children: linkChildren }) => (
+            <a href={href?.startsWith("/") ? academyHref(href) : href}>{linkChildren}</a>
+          ),
           h2: ({ children: headingChildren }) => {
             const text = nodeText(headingChildren);
             return <h2 id={`${lessonId}-${headingSlug(text)}`}>{renderInlineLessonMath(headingChildren, expressions, "h2")}</h2>;

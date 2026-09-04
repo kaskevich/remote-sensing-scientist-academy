@@ -293,6 +293,8 @@ print("Number of outer fields:", len(plot_record))
 
 An empty `missing_fields` set is the expected structural result. It does not prove that a value is correct, that the record is complete for every scientific purpose or that the instructional species came from the published dataset.
 
+> **Atlas provenance note:** The instructional spelling `Juncus gerardii` above is retained because it is part of this exercise, not silently treated as source data. The source-verified Atlas records are [*Juncus gerardi*](/species/juncus-gerardi/), [*Festuca rubra*](/species/festuca-rubra/) and [*Plantago maritima*](/species/plantago-maritima/). Those links establish taxon-record provenance; they do not establish that the species occurred in this practice plot.
+
 ### Professional QA decision
 
 Classify the record as:

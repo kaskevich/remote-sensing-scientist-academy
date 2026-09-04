@@ -233,6 +233,10 @@ You may propose that stronger contrast is consistent with greener or more struct
 
 Rows rejected by cloud or shadow are not inconvenient missing numbers to fill. They are locations where the satellite did not provide the required surface observation. Their absence affects temporal and spatial representativeness and must be reported.
 
+### Connect pixels to botanical evidence
+
+Use the [Coastal Meadow Species Atlas](/species/) to inspect the botanical records behind the Academy's meadow context. Keep the evidence levels separate: a source-verified species record is not a spectral signature, and an index response does not uniquely identify a species. The Atlas becomes analytically useful only when verified species-by-plot observations can be joined to compatible UAV or satellite support.
+
 ## 13. Reflection, submission and portfolio artifact
 
 ### Reflection

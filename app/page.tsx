@@ -772,7 +772,7 @@ export default function Home() {
 
         <nav className="main-nav" aria-label="Main navigation">
           {visibleNavigation.map((item) => (
-            <a href={item.href} key={`${item.label}-${item.href}`}>
+            <a href={item.href.startsWith("#") ? item.href : academyHref(item.href)} key={`${item.label}-${item.href}`}>
               {item.label}
             </a>
           ))}
@@ -782,7 +782,7 @@ export default function Home() {
           <summary>Menu</summary>
           <nav aria-label="Mobile navigation">
             {visibleNavigation.map((item) => (
-              <a href={item.href} key={`${item.label}-${item.href}`}>
+              <a href={item.href.startsWith("#") ? item.href : academyHref(item.href)} key={`${item.label}-${item.href}`}>
                 {item.label}
               </a>
             ))}
@@ -1067,7 +1067,7 @@ export default function Home() {
           <p>{content.footer.description}</p>
           <div className="footer-links">
             {visibleNavigation.map((item) => (
-              <a href={item.href} key={`${item.label}-${item.href}`}>
+              <a href={item.href.startsWith("#") ? item.href : academyHref(item.href)} key={`${item.label}-${item.href}`}>
                 {item.label}
               </a>
             ))}
