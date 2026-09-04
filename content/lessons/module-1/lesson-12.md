@@ -309,3 +309,6 @@ These are foundational signals. Spatial data, imagery, coordinate systems, EO me
 **Portfolio Project 1 — Vegetation Data Explorer: reproducible Baltic coastal meadow analysis**
 
 This completed notebook demonstrates the computational mindset required of a Remote Sensing Scientist: not memorising commands, but designing a transparent path from environmental question to auditable evidence and responsible interpretation.
+### Optional species and community investigation
+
+Use the [Species Atlas](/species/) to compare OP, LS, US and TG occurrence, then return to the plot table to distinguish richness, composition and cover. Treat the 120 quadrats as this study's reference observations, not as a regional distribution survey.

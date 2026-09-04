@@ -263,3 +263,6 @@ Answer in your private notes:
 **Artifact 06 — Tested ecological quality-control functions**
 
 This sixth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can make a scientific rule reusable, expose assumptions at the function boundary, protect source records and debug from controlled evidence.
+### Where this goes next
+
+A validation function can check cover range, preserve missing traits and flag insufficient trait replication before a species median enters a community-weighted mean. Keep the rule, evidence and action separate. [Follow the complete field-to-EO lineage](/species/from-field-to-earth-observation/).

@@ -293,3 +293,6 @@ Answer in private notes:
 **Artifact 07 — Verified numerical-array analysis**
 
 This seventh checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can move from small Python collections to structured scientific arrays while preserving provenance, denominators, positional alignment and interpretation limits.
+### From the Field — arrays need meaning
+
+An array axis must identify its entity: individual leaves, species summaries or plots are not interchangeable rows. Record axis, unit and support before computing with CCI, leaf area or cover. [Trace leaf measurements into plot CWM](/species/from-field-to-earth-observation/).

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { CoastalHabitatTransect } from "@/app/components/coastal-habitat-transect";
 import { academyAssetHref, academyHref } from "@/lib/site-paths";
-import { type SpeciesRecord, verifiedHabitats } from "@/lib/species-atlas";
+import { habitatDefinitions, strongestHabitats, type SpeciesRecord, verifiedHabitats } from "@/lib/species-atlas";
 
 export function SpeciesCard({ species }: { species: SpeciesRecord }) {
   const image = species.images[0];
   const habitats = verifiedHabitats(species);
+  const strongest = strongestHabitats(species);
   return (
     <article className="species-card">
       <a className="species-card-image" href={academyHref(`/species/${species.slug}/`)} tabIndex={-1} aria-hidden="true">
@@ -16,10 +17,12 @@ export function SpeciesCard({ species }: { species: SpeciesRecord }) {
       <div className="species-card-copy">
         <p className="species-card-source">FINBIF · {species.taxonId}</p>
         <h2><a href={academyHref(`/species/${species.slug}/`)}><i>{species.scientificName}</i></a></h2>
-        <p>{species.family ?? "Family not extractable from supplied PDF"}</p>
-        <CoastalHabitatTransect highlighted={habitats} compact />
+        <p>{species.family ?? "Family unavailable from verified sources"}</p>
+        <CoastalHabitatTransect highlighted={habitats} evidence={species.habitats} compact />
         <p className="species-study-status">
-          {habitats.length ? `${habitats.join(" · ")} verified in study data` : "Study distribution pending verified field-data import"}
+          {species.studyEvidence.studyNames.length
+            ? <>{species.studyEvidence.occupiedPlotCount} / {species.studyEvidence.totalPlotCount} sampled plots · highest occurrence in {strongest.map((code) => `${code} ${habitatDefinitions[code].name}`).join(" and ")}</>
+            : "No safely reconciled occurrence record in the 2024 field tables"}
         </p>
         <a className="species-card-link" href={academyHref(`/species/${species.slug}/`)}>View species →</a>
       </div>

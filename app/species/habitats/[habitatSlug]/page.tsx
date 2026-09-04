@@ -19,9 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ habitatSl
   const url = academyUrl(`/species/habitats/${habitat.slug}/`);
   return {
     title: `${habitat.name} (${habitat.code}) — Coastal Meadow Species Atlas`,
-    description: `Review the ${habitat.code} ${habitat.name} position in the Academy coastal-meadow transect and browse species with verified study associations when available.`,
+    description: `Review the ${habitat.code} ${habitat.name} study-community position and taxa recorded there in the Academy's 2024 field plots.`,
     alternates: { canonical: url },
-    openGraph: { title: `${habitat.name} — Coastal Meadow Species Atlas`, description: `${habitat.position}. Verified species associations are shown only when field data support them.`, url, type: "website" },
+    openGraph: { title: `${habitat.name} — Coastal Meadow Species Atlas`, description: `${habitat.position}. Taxon occurrence is limited to the sampled 2024 plots and does not establish global habitat affinity.`, url, type: "website" },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function HabitatPage({ params }: { params: Promise<{ habita
   return (
     <>
       <JsonLd value={[
-        { "@context": "https://schema.org", "@type": "CollectionPage", name: `${habitat.name} — Coastal Meadow Species Atlas`, url, description: `Academy reference page for the ${habitat.code} study-community band, with only source-verified species associations.` },
+        { "@context": "https://schema.org", "@type": "CollectionPage", name: `${habitat.name} — Coastal Meadow Species Atlas`, url, description: `Taxa recorded in the ${habitat.code} study-community band during the Academy's 2024 field campaign.` },
         { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
           { "@type": "ListItem", position: 1, name: "Academy", item: academyUrl("/") },
           { "@type": "ListItem", position: 2, name: "Species Atlas", item: academyUrl("/species/") },
@@ -55,10 +55,11 @@ export default async function HabitatPage({ params }: { params: Promise<{ habita
 
         <section className="habitat-species-section" aria-labelledby="habitat-species-title">
           <p className="section-kicker">OUR STUDY</p>
-          <h2 id="habitat-species-title">{records.length} species with a verified {habitat.code} association</h2>
+          <h2 id="habitat-species-title">Species recorded in our 2024 coastal-meadow sampling</h2>
+          <p>{records.length} published Atlas species occurred in {habitat.code}. Records are ranked by occurrence frequency across the {records[0]?.habitats[habitat.code].totalPlots ?? 30} sampled plots; this is not a complete floristic inventory of the habitat beyond this study.</p>
           {records.length
             ? <div className="species-card-grid">{records.map((species) => <SpeciesCard species={species} key={species.slug} />)}</div>
-            : <div className="atlas-empty"><strong>Study distribution pending verified field-data import.</strong><p>The 38 FinBIF PDFs establish species identity but do not contain species-by-plot community observations. No species has been assigned to {habitat.code} from intuition.</p></div>}
+            : <div className="atlas-empty"><strong>No reconciled Atlas species was recorded in this sample.</strong><p>No species has been assigned to {habitat.code} from intuition.</p></div>}
         </section>
 
         <section className="habitat-learning-links" aria-labelledby="habitat-learning-title">

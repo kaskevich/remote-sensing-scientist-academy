@@ -21,6 +21,12 @@ Data-quality work is meaningful only when the input can be identified and reopen
 
 Lesson 9 profiles value quality, Lesson 10 defines analysis populations, Lesson 11 joins derived summaries and Lesson 12 assembles the handover. Module 2 applies the same immutable-input and intake-audit pattern to vectors, rasters and UAV products.
 
+## Why were these data collected?
+
+This is not a generic CSV. It comes from a July 2024 field campaign in Boreal Baltic coastal wetlands and meadows in western Estonia. The campaign used 120 one-square-metre quadrats at Saardu, Keemu, Koera and Kudani to characterize coastal vegetation and provide ecological reference observations for UAV analysis.
+
+Read each row through the entity hierarchy **site → vegetation community → 1 m² plot → species and measurements**. `SampleID` identifies the plot and must remain stable so a table row can later be linked to reviewed plot geometry, extracted raster predictors and one modelling row. [Explore the species behind this dataset in the Species Atlas](/species/) or open the [Study Data Guide](/data/baltic-coastal-meadow-2024/).
+
 ## 1. Open data as a documented scientific table
 
 ### Learning outcome

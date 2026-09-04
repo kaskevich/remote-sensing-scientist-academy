@@ -306,3 +306,6 @@ Answer in your private notes:
 **Artifact 2.15 — Spatially justified raster extraction table**
 
 Add the method record, extraction table and QA map to the **Raster QA and Harmonisation Pipeline**. The table becomes the controlled bridge between spatial observations and later ecological modelling.
+### From the Field — extraction creates a model row
+
+Use plot geometry and a documented support rule to extract UAV values for each `SampleID`. Do not turn many pixels inside one plot into independent field observations: the quadrat remains the observational unit. [See how plot responses meet UAV predictors](/species/from-field-to-earth-observation/).

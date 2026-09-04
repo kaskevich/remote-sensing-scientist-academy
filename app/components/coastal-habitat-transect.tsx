@@ -1,18 +1,20 @@
 import { useId } from "react";
-import { habitatCodes, habitatDefinitions, type HabitatCode } from "@/lib/species-atlas";
+import { habitatCodes, habitatDefinitions, type HabitatCode, type HabitatEvidence } from "@/lib/species-atlas";
 
 export function CoastalHabitatTransect({
   highlighted = [],
   compact = false,
+  evidence,
 }: {
   highlighted?: HabitatCode[];
   compact?: boolean;
+  evidence?: Partial<Record<HabitatCode, HabitatEvidence>>;
 }) {
   const active = new Set(highlighted);
   const patternId = `transect-hatch-${useId().replaceAll(":", "")}`;
   const label = highlighted.length
-    ? `Coastal meadow gradient; highlighted habitats: ${highlighted.map((code) => `${code}, ${habitatDefinitions[code].name}`).join("; ")}`
-    : "Coastal meadow gradient with no verified species habitat association yet";
+    ? `Coastal meadow gradient; recorded habitats: ${highlighted.map((code) => `${code}, ${habitatDefinitions[code].name}, ${evidence?.[code]?.occupiedPlots ?? 0} of ${evidence?.[code]?.totalPlots ?? 30} plots`).join("; ")}`
+    : "Coastal meadow gradient with no occurrence in the sampled plots";
 
   return (
     <div className={`coastal-transect-frame${compact ? " is-compact" : ""}`}>
@@ -40,12 +42,15 @@ export function CoastalHabitatTransect({
       {habitatCodes.map((code, index) => {
         const x = 170 + index * 205;
         const isActive = active.has(code);
+        const value = evidence?.[code];
+        const frequencyClass = value ? ` frequency-${Math.min(4, Math.ceil(value.occurrenceFrequency * 4))}` : "";
         return (
-          <g key={code} className={isActive ? "transect-band is-active" : "transect-band"}>
+          <g key={code} className={`transect-band${isActive ? " is-active" : ""}${frequencyClass}`}>
             <rect x={x} y="168" width="185" height={compact ? 58 : 72} rx="3" />
             {isActive && <rect className="transect-hatch" x={x + 3} y="171" width="179" height={compact ? 52 : 66} rx="2" fill={`url(#${patternId})`} />}
-            <text x={x + 14} y={compact ? 192 : 195} className="transect-code">{code}{isActive ? " ✓" : ""}</text>
+            <text x={x + 14} y={compact ? 192 : 195} className="transect-code">{code}{value ? ` ${Math.round(value.occurrenceFrequency * 100)}%` : ""}</text>
             {!compact && <text x={x + 14} y="220" className="transect-name">{habitatDefinitions[code].name}</text>}
+            <title>{value ? `${code}: ${value.occupiedPlots} / ${value.totalPlots} plots · ${Math.round(value.occurrenceFrequency * 100)}% occurrence` : `${code}: no study evidence available`}</title>
           </g>
         );
       })}

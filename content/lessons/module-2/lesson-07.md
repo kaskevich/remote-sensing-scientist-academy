@@ -312,3 +312,6 @@ Answer in your private notes:
 **Artifact 2.7 — Audited spatial-assignment and overlay workflow**
 
 This artifact demonstrates that you can combine spatial evidence without hiding unmatched or one-to-many outcomes. Add the cardinality audit, predicate rationale and unresolved-case policy to the vector-integration stage of the UAV and Satellite Analysis Pipeline.
+### From the Field — SampleID is the bridge
+
+A species table is not spatial merely because it contains site and community labels. Reviewed plot geometry supplies the spatial link, and `SampleID` connects that geometry to the field record. Audit unmatched and duplicated identifiers before extracting imagery. [Review the study hierarchy](/data/baltic-coastal-meadow-2024/).

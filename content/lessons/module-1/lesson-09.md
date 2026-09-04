@@ -309,3 +309,6 @@ Answer in private notes:
 **Artifact 09 — Auditable ecological data-quality report**
 
 This ninth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can diagnose a real scientific table without erasing uncertainty, disguising cleaning decisions or labelling the complete dataset “clean” for every question.
+### From the Field — missing traits are not zero
+
+The CCI and leaf-area tables are a real missing-data case: only species summaries with at least five measurements are used, and their represented share of species-only cover must be audited. An absent trait value means unavailable evidence, not a measured zero. [Review the documented aggregation and limitations](/data/baltic-coastal-meadow-2024/).

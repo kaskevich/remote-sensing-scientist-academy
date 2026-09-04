@@ -1,0 +1,2576 @@
+[
+  {
+    "issue": "nonnumeric cover",
+    "sourceSheet": "Community_level_data",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG9",
+    "severity": "error",
+    "action": "' '",
+    "resolved": false
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "SALS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_stolonifera",
+    "sampleId": "SALS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Triglochin_maritima",
+    "sampleId": "SALS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "SALS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Glaux_maritima",
+    "sampleId": "SALS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "SALS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "SALS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "SALS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "SALS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Poa_pratensis",
+    "sampleId": "SALS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Glaux_maritima",
+    "sampleId": "SALS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "SALS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Triglochin_maritima",
+    "sampleId": "SALS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Glaux_maritima",
+    "sampleId": "SALS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "SALS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Glaux_maritima",
+    "sampleId": "SALS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "SALS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_maritima",
+    "sampleId": "SALS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Triglochin_maritima",
+    "sampleId": "SALS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Triglochin_maritima",
+    "sampleId": "SALS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SALS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "SATG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "SATG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "SATG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Stelaria_graminea",
+    "sampleId": "SATG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_anserina",
+    "sampleId": "SATG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "SATG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "SATG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phragmites_australis",
+    "sampleId": "SATG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Stelaria_graminea",
+    "sampleId": "SATG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "SATG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "SATG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phragmites_australis",
+    "sampleId": "SATG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phleum_pratense",
+    "sampleId": "SATG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "SATG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "SATG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Juncus_gerardii",
+    "sampleId": "SATG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "SATG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phragmites_australis",
+    "sampleId": "SATG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_capilaris",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phragmites_australis",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Fragaria_viridis",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "SATG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "SATG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "SATG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Stelaria_graminea",
+    "sampleId": "SATG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Stelaria_graminea",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phleum_pratense",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Fragaria_viridis",
+    "sampleId": "SATG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "SATG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Poa_pratensis",
+    "sampleId": "SATG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_arundinacea",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Phleum_pratense",
+    "sampleId": "SATG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "SATG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KEUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KEUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_stolonifera",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Stelaria_graminea",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KEUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Centaurea_jacea",
+    "sampleId": "KEUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KEUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_panaceae",
+    "sampleId": "KEUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KEUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Pilosella_officinarum",
+    "sampleId": "KEUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KEUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KEUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_stolonifera",
+    "sampleId": "KEUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KEUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KEUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KEUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KEUS9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_pratense",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Triglochin_maritima",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KEUS10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_repens",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Suaeda_maritima",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KETG1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_pratense",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_panaceae",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Geranium_pratense",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KETG2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_repens",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_pratense",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Centaurea_jacea",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Deschampsia_cespitosa",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Poa_pratensis",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KETG6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_repens",
+    "sampleId": "KETG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KETG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_arundinacea",
+    "sampleId": "KETG7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_stolonifera",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_arundinacea",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Vicia_cracca",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_repens",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_panaceae",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Agrostis_stolonifera",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Centaurea_jacea",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG9",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Anthyllis_vulneraria",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_pratense",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_arundinacea",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Festuca_rubra",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Plantago_lanceolata",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KETG10",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_panaceae",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KOUS1",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KOUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS2",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Arrhenaterum_elatius",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KOUS3",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS4",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Molinia_caerulea",
+    "sampleId": "KOUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KOUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "KOUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS5",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Briza_media",
+    "sampleId": "KOUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KOUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_verum",
+    "sampleId": "KOUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS6",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Potentilla_erectus",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_pratense",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lotus_corniculatus",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_nigra",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_panaceae",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Trifolium_montanum",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Lathyrus_pratensis",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Filipendula_vulgaris",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Deschampsia_cespitosa",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Leontodon_autumnalis",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Achillea_millefolium",
+    "sampleId": "KOUS7",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Elytrigia_repens",
+    "sampleId": "KOUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Galium_borealium",
+    "sampleId": "KOUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Succisa_pratensis",
+    "sampleId": "KOUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  },
+  {
+    "issue": "presence recorded without numeric cover",
+    "sourceSheet": "Community_level_data ↔ inwork_Sp_presence",
+    "species": "Carex_flacca",
+    "sampleId": "KOUS8",
+    "severity": "info",
+    "action": "Occurrence uses the presence sheet; quantitative cover is unavailable for this plot.",
+    "resolved": true
+  }
+]

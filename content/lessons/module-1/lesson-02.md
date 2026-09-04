@@ -288,3 +288,7 @@ Write short answers in your private notes:
 **Artifact 02 — Scientific variables record**
 
 Your continuing notebook now represents ecological values explicitly, inspects their Python types and documents the limits of type information. Its data-contract table and ready/review/stop decision form the second checkpoint in **Portfolio Project 1 — Vegetation Data Explorer**. It preserves missingness, identity and source precision without inventing units or protocols.
+
+### Species Atlas connection
+
+In the study evidence, species and site are identifiers, OP/LS/US/TG are categorical community labels, and cover is numeric. A numeric type does not establish a unit or protocol. [Inspect those roles in the Study Data Guide](/data/baltic-coastal-meadow-2024/).

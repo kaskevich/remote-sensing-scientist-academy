@@ -1,0 +1,1388 @@
+[
+  {
+    "studyName": "Achillea_millefolium",
+    "normalizedStudyName": "Achillea millefolium",
+    "finbifAcceptedName": "Achillea millefolium",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39812",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "siankärsämö",
+      "sv": "röllika"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Agrostis_capilaris",
+    "normalizedStudyName": "Agrostis capilaris",
+    "finbifAcceptedName": "Agrostis capillaris",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40593",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "nurmirölli",
+      "sv": "rödven"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "One-letter spelling correction."
+  },
+  {
+    "studyName": "Agrostis_stolonifera",
+    "normalizedStudyName": "Agrostis stolonifera",
+    "finbifAcceptedName": "Agrostis stolonifera",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40601",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "rönsyrölli",
+      "sv": "krypven"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Alchemilla_vulgaris",
+    "normalizedStudyName": "Alchemilla vulgaris",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "manual-review",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Angelica_palustris",
+    "normalizedStudyName": "Angelica palustris",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "manual-review",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Anthoxanthum_odoratum",
+    "normalizedStudyName": "Anthoxanthum odoratum",
+    "finbifAcceptedName": "Anthoxanthum odoratum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40582",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "eteläntuoksusimake",
+      "sv": "sydvårbrodd"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Anthyllis_vulneraria",
+    "normalizedStudyName": "Anthyllis vulneraria",
+    "finbifAcceptedName": "Anthyllis vulneraria",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39064",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "masmalo",
+      "sv": "getväppling"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Arabis_sp",
+    "normalizedStudyName": "Arabis sp",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "unresolved",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Arrhenaterum_elatius",
+    "normalizedStudyName": "Arrhenaterum elatius",
+    "finbifAcceptedName": "Arrhenatherum elatius",
+    "finbifScientificNameAuthorship": "(L.) P. Beauv. ex J. Presl & C. Presl",
+    "taxonId": "MX.40557",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittyheinäkaura",
+      "sv": "knylhavre"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Missing h in the study label."
+  },
+  {
+    "studyName": "Briza_media",
+    "normalizedStudyName": "Briza media",
+    "finbifAcceptedName": "Briza media",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40501",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittyräpelö",
+      "sv": "darrgräs"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Campanula_glomerata",
+    "normalizedStudyName": "Campanula glomerata",
+    "finbifAcceptedName": "Campanula glomerata",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39705",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "peurankello",
+      "sv": "toppklocka"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Carex_distans",
+    "normalizedStudyName": "Carex distans",
+    "finbifAcceptedName": "Carex distans",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40355",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "välisara",
+      "sv": "glesstarr"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Carex_disticha",
+    "normalizedStudyName": "Carex disticha",
+    "finbifAcceptedName": "Carex disticha",
+    "finbifScientificNameAuthorship": "Huds.",
+    "taxonId": "MX.40298",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "kahtaissara",
+      "sv": "plattstarr"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Carex_divisa",
+    "normalizedStudyName": "Carex divisa",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "manual-review",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Carex_flacca",
+    "normalizedStudyName": "Carex flacca",
+    "finbifAcceptedName": "Carex flacca",
+    "finbifScientificNameAuthorship": "Schreb.",
+    "taxonId": "MX.40351",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "vahasara",
+      "sv": "slankstarr"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Carex_nigra",
+    "normalizedStudyName": "Carex nigra",
+    "finbifAcceptedName": "Carex nigra",
+    "finbifScientificNameAuthorship": "(L.) Reichard",
+    "taxonId": "MX.40417",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "jokapaikansara",
+      "sv": "hundstarr"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Carex_panaceae",
+    "normalizedStudyName": "Carex panaceae",
+    "finbifAcceptedName": "Carex panicea",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40352",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "hirssisara",
+      "sv": "hirsstarr"
+    },
+    "matchStatus": "manual-review",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Probable spelling variant supported by the supplied seed taxon, but the label is ambiguous and remains flagged."
+  },
+  {
+    "studyName": "Centaurea_jacea",
+    "normalizedStudyName": "Centaurea jacea",
+    "finbifAcceptedName": "Centaurea jacea",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39904",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ahdekaunokki",
+      "sv": "rödklint"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Cerastium_fontanum",
+    "normalizedStudyName": "Cerastium fontanum",
+    "finbifAcceptedName": "Cerastium fontanum",
+    "finbifScientificNameAuthorship": "Baumg.",
+    "taxonId": "MX.38073",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "nurmihärkki",
+      "sv": "hönsarv"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Cirsium_acaule",
+    "normalizedStudyName": "Cirsium acaule",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "manual-review",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Deschampsia_cespitosa",
+    "normalizedStudyName": "Deschampsia cespitosa",
+    "finbifAcceptedName": "Deschampsia cespitosa",
+    "finbifScientificNameAuthorship": "(L.) P. Beauv.",
+    "taxonId": "MX.40564",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "nurmilauha",
+      "sv": "tuvtåtel"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Eleocharis_palustris",
+    "normalizedStudyName": "Eleocharis palustris",
+    "finbifAcceptedName": "Eleocharis palustris",
+    "finbifScientificNameAuthorship": "(L.) Roem. & Schult.",
+    "taxonId": "MX.40269",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "rantaluikka",
+      "sv": "knappsäv"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Elytrigia_repens",
+    "normalizedStudyName": "Elytrigia repens",
+    "finbifAcceptedName": "Elytrigia repens",
+    "finbifScientificNameAuthorship": "(L.) Desv. ex Nevski",
+    "taxonId": "MX.40537",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittyjuola",
+      "sv": "kvickrot"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Equisetum_palustre",
+    "normalizedStudyName": "Equisetum palustre",
+    "finbifAcceptedName": "Equisetum palustre",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.37718",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "suokorte",
+      "sv": "kärrfräken"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Festuca_arundinacea",
+    "normalizedStudyName": "Festuca arundinacea",
+    "finbifAcceptedName": "Lolium arundinaceum",
+    "finbifScientificNameAuthorship": "(Schreb.) Darbysh.",
+    "taxonId": "MX.40436",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Festuca arundinacea"
+    ],
+    "commonNames": {
+      "fi": "ruokoraiheinä",
+      "sv": "rörsvingel"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Festuca_rubra",
+    "normalizedStudyName": "Festuca rubra",
+    "finbifAcceptedName": "Festuca rubra",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40438",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "punanata",
+      "sv": "rödsvingel"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Filipendula_ulmaria",
+    "normalizedStudyName": "Filipendula ulmaria",
+    "finbifAcceptedName": "Filipendula ulmaria",
+    "finbifScientificNameAuthorship": "(L.) Maxim.",
+    "taxonId": "MX.38795",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "mesiangervo",
+      "sv": "älggräs"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Filipendula_vulgaris",
+    "normalizedStudyName": "Filipendula vulgaris",
+    "finbifAcceptedName": "Filipendula vulgaris",
+    "finbifScientificNameAuthorship": "Moench",
+    "taxonId": "MX.38794",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "sikoangervo",
+      "sv": "brudbröd"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Fragaria_viridis",
+    "normalizedStudyName": "Fragaria viridis",
+    "finbifAcceptedName": "Fragaria viridis",
+    "finbifScientificNameAuthorship": "Weston",
+    "taxonId": "MX.38871",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "karvamansikka",
+      "sv": "backsmultron"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Galium_borealium",
+    "normalizedStudyName": "Galium borealium",
+    "finbifAcceptedName": "Galium boreale",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39284",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ahomatara",
+      "sv": "vitmåra"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Study epithet normalized to the verified FinBIF name."
+  },
+  {
+    "studyName": "Galium_uliginosum",
+    "normalizedStudyName": "Galium uliginosum",
+    "finbifAcceptedName": "Galium uliginosum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39287",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "luhtamatara",
+      "sv": "sumpmåra"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Galium_verum",
+    "normalizedStudyName": "Galium verum",
+    "finbifAcceptedName": "Galium verum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39292",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "keltamatara",
+      "sv": "gulmåra"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Geranium_pratense",
+    "normalizedStudyName": "Geranium pratense",
+    "finbifAcceptedName": "Geranium pratense",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39137",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "kyläkurjenpolvi",
+      "sv": "ängsnäva"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Geum_rivale",
+    "normalizedStudyName": "Geum rivale",
+    "finbifAcceptedName": "Geum rivale",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38834",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ojakellukka",
+      "sv": "humleblomster"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Geum_urbanum",
+    "normalizedStudyName": "Geum urbanum",
+    "finbifAcceptedName": "Geum urbanum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38836",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "kyläkellukka",
+      "sv": "nejlikrot"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Glaux_maritima",
+    "normalizedStudyName": "Glaux maritima",
+    "finbifAcceptedName": "Lysimachia maritima",
+    "finbifScientificNameAuthorship": "(L.) Galasso, Banfi & Soldano",
+    "taxonId": "MX.38678",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Glaux maritima"
+    ],
+    "commonNames": {
+      "fi": "merirannikki",
+      "sv": "strandkrypa"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Inula_salicina",
+    "normalizedStudyName": "Inula salicina",
+    "finbifAcceptedName": "Pentanema salicinum",
+    "finbifScientificNameAuthorship": "(L.) D. Gut. Larr., Santos-Vicente, Anderb., E. Rico & M. M. Mart. Ort.",
+    "taxonId": "MX.39772",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Inula salicina"
+    ],
+    "commonNames": {
+      "fi": "rantahirvenjuuri",
+      "sv": "krissla"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Juncus_gerardii",
+    "normalizedStudyName": "Juncus gerardii",
+    "finbifAcceptedName": "Juncus gerardi",
+    "finbifScientificNameAuthorship": "Loisel.",
+    "taxonId": "MX.40207",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "suolavihvilä",
+      "sv": "salttåg"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Study epithet has an extra i."
+  },
+  {
+    "studyName": "Lathyrus_pratensis",
+    "normalizedStudyName": "Lathyrus pratensis",
+    "finbifAcceptedName": "Lathyrus pratensis",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39002",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittynätkelmä",
+      "sv": "gulvial"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Leontodon_autumnalis",
+    "normalizedStudyName": "Leontodon autumnalis",
+    "finbifAcceptedName": "Scorzoneroides autumnalis",
+    "finbifScientificNameAuthorship": "(L.) Moench",
+    "taxonId": "MX.39917",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Leontodon autumnalis"
+    ],
+    "commonNames": {
+      "fi": "syysmaitiainen",
+      "sv": "höstfibbla"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Linum_catharticum",
+    "normalizedStudyName": "Linum catharticum",
+    "finbifAcceptedName": "Linum catharticum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39126",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ahopellava",
+      "sv": "vildlin"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Lotus_corniculatus",
+    "normalizedStudyName": "Lotus corniculatus",
+    "finbifAcceptedName": "Lotus corniculatus",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39057",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "keltamaite",
+      "sv": "käringtand"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Luzula_campestris",
+    "normalizedStudyName": "Luzula campestris",
+    "finbifAcceptedName": "Luzula campestris",
+    "finbifScientificNameAuthorship": "(L.) DC.",
+    "taxonId": "MX.40228",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ketopiippo",
+      "sv": "knippfryle"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Molinia_caerulea",
+    "normalizedStudyName": "Molinia caerulea",
+    "finbifAcceptedName": "Molinia caerulea",
+    "finbifScientificNameAuthorship": "(L.) Moench",
+    "taxonId": "MX.40643",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "siniheinä",
+      "sv": "blåtåtel"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Ononis_arvensis",
+    "normalizedStudyName": "Ononis arvensis",
+    "finbifAcceptedName": "Ononis spinosa subsp. arvensis",
+    "finbifScientificNameAuthorship": "(L.) Greuter & Burdet",
+    "taxonId": "MX.39014",
+    "taxonRank": "subspecies",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Ononis arvensis"
+    ],
+    "commonNames": {
+      "fi": "kenttäorakko",
+      "sv": "stallört"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Peucedanum_palustre",
+    "normalizedStudyName": "Peucedanum palustre",
+    "finbifAcceptedName": "Peucedanum palustre",
+    "finbifScientificNameAuthorship": "(L.) Moench",
+    "taxonId": "MX.39242",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "luhtasuoputki",
+      "sv": "kärrsilja"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Phleum_pratense",
+    "normalizedStudyName": "Phleum pratense",
+    "finbifAcceptedName": "Phleum pratense",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40617",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "nurmitähkiö",
+      "sv": "vanlig timotej"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Phragmites_australis",
+    "normalizedStudyName": "Phragmites australis",
+    "finbifAcceptedName": "Phragmites australis",
+    "finbifScientificNameAuthorship": "(Cav.) Trin. ex Steud.",
+    "taxonId": "MX.40639",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "järviruoko",
+      "sv": "vass"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Pilosella_officinarum",
+    "normalizedStudyName": "Pilosella officinarum",
+    "finbifAcceptedName": "Pilosella officinarum",
+    "finbifScientificNameAuthorship": "F. W. Schultz & Sch. Bip.",
+    "taxonId": "MX.39959",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "huopavoikeltano",
+      "sv": "gråfibbla"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Pimpinella_major",
+    "normalizedStudyName": "Pimpinella major",
+    "finbifAcceptedName": "Pimpinella major",
+    "finbifScientificNameAuthorship": "(L.) Huds.",
+    "taxonId": "MX.39198",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "isopukinjuuri",
+      "sv": "stor bockrot"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Pimpinella_saxifraga",
+    "normalizedStudyName": "Pimpinella saxifraga",
+    "finbifAcceptedName": "Pimpinella saxifraga",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39199",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "ahopukinjuuri",
+      "sv": "bockrot"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Plantago_lanceolata",
+    "normalizedStudyName": "Plantago lanceolata",
+    "finbifAcceptedName": "Plantago lanceolata",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39679",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "heinäratamo",
+      "sv": "svartkämpar"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Plantago_major",
+    "normalizedStudyName": "Plantago major",
+    "finbifAcceptedName": "Plantago major",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39673",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "piharatamo",
+      "sv": "groblad"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Plantago_maritima",
+    "normalizedStudyName": "Plantago maritima",
+    "finbifAcceptedName": "Plantago maritima",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39677",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "meriratamo",
+      "sv": "gulkämpar"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Poa_annua",
+    "normalizedStudyName": "Poa annua",
+    "finbifAcceptedName": "Poa annua",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40457",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "kylänurmikka",
+      "sv": "vitgröe"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Poa_pratensis",
+    "normalizedStudyName": "Poa pratensis",
+    "finbifAcceptedName": "Poa pratensis",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40461",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittynurmikka",
+      "sv": "ängsgröe"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Potentilla_anserina",
+    "normalizedStudyName": "Potentilla anserina",
+    "finbifAcceptedName": "Argentina anserina",
+    "finbifScientificNameAuthorship": "(L.) Rydb.",
+    "taxonId": "MX.38844",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Potentilla anserina"
+    ],
+    "commonNames": {
+      "fi": "ketohanhikki",
+      "sv": "gåsört"
+    },
+    "matchStatus": "synonym-match",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Potentilla_erectus",
+    "normalizedStudyName": "Potentilla erectus",
+    "finbifAcceptedName": "Potentilla erecta",
+    "finbifScientificNameAuthorship": "(L.) Raeusch.",
+    "taxonId": "MX.38863",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "rätvänä",
+      "sv": "blodrot"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Study epithet corrected to the verified feminine form."
+  },
+  {
+    "studyName": "Potentilla_reptans",
+    "normalizedStudyName": "Potentilla reptans",
+    "finbifAcceptedName": "Potentilla reptans",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38865",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "suikerohanhikki",
+      "sv": "revfingerört"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Prunella_vulgaris",
+    "normalizedStudyName": "Prunella vulgaris",
+    "finbifAcceptedName": "Prunella vulgaris",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39500",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittyhumala",
+      "sv": "brunört"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Ranunculus_acris",
+    "normalizedStudyName": "Ranunculus acris",
+    "finbifAcceptedName": "Ranunculus acris",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.37897",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittyleinikki",
+      "sv": "smörblomma"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Ranunculus_bulbosus",
+    "normalizedStudyName": "Ranunculus bulbosus",
+    "finbifAcceptedName": "Ranunculus bulbosus",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.37902",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "mäkileinikki",
+      "sv": "knölsmörblomma"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Rhinanthus_minor",
+    "normalizedStudyName": "Rhinanthus minor",
+    "finbifAcceptedName": "Rhinanthus minor",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39663",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "pikkulaukku",
+      "sv": "ängsskallra"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Rumex_acetosa",
+    "normalizedStudyName": "Rumex acetosa",
+    "finbifAcceptedName": "Rumex acetosa",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38279",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "niittysuolaheinä",
+      "sv": "ängssyra"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Salicornia_europaea",
+    "normalizedStudyName": "Salicornia europaea",
+    "finbifAcceptedName": "Salicornia perennans",
+    "finbifScientificNameAuthorship": "Willd.",
+    "taxonId": "MX.4977505",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Salicornia europaea"
+    ],
+    "commonNames": {
+      "fi": "suolayrtti",
+      "sv": "glasört"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Scorzonera_humilis",
+    "normalizedStudyName": "Scorzonera humilis",
+    "finbifAcceptedName": "Scorzonera humilis",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39926",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "harjusikojuuri",
+      "sv": "svinrot"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Sesleria_caerulea",
+    "normalizedStudyName": "Sesleria caerulea",
+    "finbifAcceptedName": "Sesleria uliginosa",
+    "finbifScientificNameAuthorship": "Opiz",
+    "taxonId": "MX.40503",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted name with matched synonym",
+    "synonyms": [
+      "Sesleria caerulea"
+    ],
+    "commonNames": {
+      "fi": "sinilupikka",
+      "sv": "älväxing"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Stelaria_graminea",
+    "normalizedStudyName": "Stelaria graminea",
+    "finbifAcceptedName": "Stellaria graminea",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38055",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "heinätähtimö",
+      "sv": "grässtjärnblomma"
+    },
+    "matchStatus": "spelling-normalization",
+    "matchMethod": "reviewed-target-with-finbif-exact-search",
+    "matchNotes": "Missing l in the study genus."
+  },
+  {
+    "studyName": "Suaeda_maritima",
+    "normalizedStudyName": "Suaeda maritima",
+    "finbifAcceptedName": "Suaeda maritima",
+    "finbifScientificNameAuthorship": "(L.) Dumort.",
+    "taxonId": "MX.38207",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "pikkukilokki",
+      "sv": "saltört"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Succisa_pratensis",
+    "normalizedStudyName": "Succisa pratensis",
+    "finbifAcceptedName": "Succisa pratensis",
+    "finbifScientificNameAuthorship": "Moench",
+    "taxonId": "MX.39366",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "purtojuuri",
+      "sv": "ängsvädd"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Thymus_pratensis",
+    "normalizedStudyName": "Thymus pratensis",
+    "finbifAcceptedName": null,
+    "finbifScientificNameAuthorship": null,
+    "taxonId": null,
+    "taxonRank": null,
+    "taxonomicStatus": null,
+    "synonyms": [],
+    "matchStatus": "manual-review",
+    "matchMethod": "no-exact-finbif-match",
+    "matchNotes": "No exact FinBIF name or synonym match was accepted; fuzzy results were rejected."
+  },
+  {
+    "studyName": "Trifolium_fragiferum",
+    "normalizedStudyName": "Trifolium fragiferum",
+    "finbifAcceptedName": "Trifolium fragiferum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39042",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "rakkoapila",
+      "sv": "smultronklöver"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Trifolium_medium",
+    "normalizedStudyName": "Trifolium medium",
+    "finbifAcceptedName": "Trifolium medium",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39054",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "metsäapila",
+      "sv": "skogsklöver"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Trifolium_montanum",
+    "normalizedStudyName": "Trifolium montanum",
+    "finbifAcceptedName": "Trifolium montanum",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39037",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "mäkiapila",
+      "sv": "backklöver"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Trifolium_pratense",
+    "normalizedStudyName": "Trifolium pratense",
+    "finbifAcceptedName": "Trifolium pratense",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39052",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "puna-apila",
+      "sv": "rödklöver"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Trifolium_repens",
+    "normalizedStudyName": "Trifolium repens",
+    "finbifAcceptedName": "Trifolium repens",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39038",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "valkoapila",
+      "sv": "vitklöver"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Triglochin_maritima",
+    "normalizedStudyName": "Triglochin maritima",
+    "finbifAcceptedName": "Triglochin maritima",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40125",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "merisuolake",
+      "sv": "havssälting"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Triglochin_palustris",
+    "normalizedStudyName": "Triglochin palustris",
+    "finbifAcceptedName": "Triglochin palustris",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.40126",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "hentosuolake",
+      "sv": "kärrsälting"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Veronica_officinalis",
+    "normalizedStudyName": "Veronica officinalis",
+    "finbifAcceptedName": "Veronica officinalis",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.39608",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "rohtotädyke",
+      "sv": "ärenpris"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Vicia_cracca",
+    "normalizedStudyName": "Vicia cracca",
+    "finbifAcceptedName": "Vicia cracca",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38972",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "hiirenvirna",
+      "sv": "kråkvicker"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Viola_hirta",
+    "normalizedStudyName": "Viola hirta",
+    "finbifAcceptedName": "Viola hirta",
+    "finbifScientificNameAuthorship": "L.",
+    "taxonId": "MX.38312",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "karvaorvokki",
+      "sv": "buskviol"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  },
+  {
+    "studyName": "Viola_riviniana",
+    "normalizedStudyName": "Viola riviniana",
+    "finbifAcceptedName": "Viola riviniana",
+    "finbifScientificNameAuthorship": "Rchb.",
+    "taxonId": "MX.38321",
+    "taxonRank": "species",
+    "taxonomicStatus": "accepted",
+    "synonyms": [],
+    "commonNames": {
+      "fi": "metsäorvokki",
+      "sv": "skogsviol"
+    },
+    "matchStatus": "exact",
+    "matchMethod": "finbif-exact-search",
+    "matchNotes": null
+  }
+]

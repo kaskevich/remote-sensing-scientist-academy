@@ -9,7 +9,7 @@ const atlasUrl = academyUrl("/species/");
 
 export const metadata: Metadata = {
   title: "Boreal Baltic Coastal Meadow Species Atlas | Remote Sensing Scientist Academy",
-  description: "Browse 38 source-traceable coastal meadow plant records from FinBIF and connect botanical identity with field evidence, habitat gradients and remote-sensing concepts.",
+  description: "Browse 78 source-traceable taxa recorded in a 2024 western Estonia coastal-meadow study, with FinBIF identity kept separate from plot evidence.",
   alternates: { canonical: atlasUrl },
   openGraph: {
     title: "Boreal Baltic Coastal Meadow Species Atlas",
@@ -58,8 +58,15 @@ export default function SpeciesAtlasPage() {
             <p className="section-kicker">Botanical identity · field evidence · Earth Observation</p>
             <h1>Boreal Baltic Coastal Meadow Species Atlas</h1>
           </div>
-          <p>Explore the plant species behind the field measurements, vegetation communities and remote-sensing patterns used throughout the Academy. The Atlas connects botanical identity with the ecological gradient of Boreal Baltic coastal meadows and, where available, with observations from our own field dataset.</p>
+          <p>Explore verified FinBIF identities alongside plot occurrence, cover, sites and pool-wise trait measurements from 120 plots sampled in western Estonia in 2024. Botanical reference data and study evidence remain explicitly separate.</p>
         </header>
+
+        <aside className="atlas-scope-note"><strong>Study occurrence is not global ecology.</strong><p>A taxon appears here because it was recorded in our Boreal Baltic coastal-meadow study. OP/LS/US/TG frequencies describe only these 120 plots; they do not make a taxon a coastal specialist, salt-marsh species or member of one universal habitat. General ecological statements are published only when an independent authoritative source supports them.</p></aside>
+
+        <nav className="atlas-feature-links" aria-label="Species Atlas learning guides">
+          <a href={academyHref("/species/from-field-to-earth-observation/")}><span>Interactive explainer</span><strong>From Plant Species to Earth Observation</strong><small>Follow observations through traits, plots, UAV predictors, models and maps →</small></a>
+          <a href={academyHref("/data/baltic-coastal-meadow-2024/")}><span>Study provenance</span><strong>Baltic Coastal Meadow 2024 Data Guide</strong><small>Understand the campaign, variables, aggregation and limitations →</small></a>
+        </nav>
 
         <SpeciesAtlasBrowser records={speciesRecords} />
 
@@ -69,8 +76,8 @@ export default function SpeciesAtlasPage() {
             <h2 id="atlas-evidence-title">Three labels, three different claims</h2>
           </div>
           <div className="atlas-evidence-grid">
-            <article><span>SOURCE ECOLOGY</span><p>Taxonomy or ecology reproduced only when a traceable botanical source provides it.</p></article>
-            <article><span>OUR STUDY</span><p>Species-by-plot distributions calculated only after a verified field-data import with an explicit denominator.</p></article>
+            <article><span>GENERAL ECOLOGY</span><p>Ecology reproduced only when an independent, traceable botanical source provides it.</p></article>
+            <article><span>OUR 2024 OBSERVATIONS</span><p>Occurrence comes from the presence table with 30 plots per habitat. Cover summaries use positive numeric cover records and exclude absence plots.</p></article>
             <article><span>REMOTE-SENSING INTERPRETATION</span><p>Careful links from plant cover or structure to pixel-scale evidence—not claims of unique species detection.</p></article>
           </div>
         </section>
@@ -89,7 +96,7 @@ export default function SpeciesAtlasPage() {
 
         <aside className="atlas-license-note">
           <strong>Image-use notice</strong>
-          <p>Published photographs retain individual owner, licence and source details. The current images use Creative Commons NonCommercial licences; review or replace them before any monetized Academy use. Records and image assets are deliberately separate so photographs can be changed without breaking species URLs.</p>
+          <p>Published photographs retain individual owner, licence and source details. NonCommercial and ShareAlike restrictions are labelled per image; review or replace restricted assets before monetized use. Records and image assets remain separate so photographs can change without breaking species URLs.</p>
         </aside>
       </main>
       <SeoFooter />

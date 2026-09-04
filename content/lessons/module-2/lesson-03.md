@@ -267,3 +267,7 @@ Answer in your private notes:
 This artifact demonstrates that you can define the observation footprint before extracting pixels or fitting a model. It becomes the scientific design record used later for raster–vector integration, UAV analysis and satellite validation.
 
 Keep the reviewed checkpoint in the continuing notebook and export it as `spatial_support_decision.ipynb` for submission.
+
+### Species-to-pixel bridge
+
+The Academy field response belongs to a 1 m² quadrat; UAV and satellite values belong to sensor-dependent pixel footprints or plot aggregations. Fine resolution does not remove support mismatch. [Use the leaf-to-landscape scale explainer](/species/from-field-to-earth-observation/).

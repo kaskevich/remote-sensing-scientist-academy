@@ -256,3 +256,6 @@ Answer in private notes:
 **Artifact 10 — Reproducible grouped vegetation summary**
 
 This tenth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can move from a research question to an explicit analytical population, reconcile grouped results with source records and communicate an appropriately qualified comparison.
+### Species Atlas activity
+
+Summarise occurrence as occupied plots divided by sampled plots, then summarise positive cover only among plots with numeric cover. Report the denominator: prevalence and abundance answer different questions. [Compare observed habitat frequencies in the Species Atlas](/species/).

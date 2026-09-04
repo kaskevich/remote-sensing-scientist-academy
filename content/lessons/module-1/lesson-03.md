@@ -327,3 +327,6 @@ Write short answers in your private notes:
 **Artifact 03 — Vegetation plot record**
 
 Your `Vegetation_Data_Explorer.ipynb` now contains an editable species list, a named plot dictionary, precise access and update operations, a structural audit and a documented distinction between published and instructional values. This is the third checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** and establishes the record design that later lessons will validate and analyse.
+### Ecological records
+
+A plot record belongs to an entity hierarchy: site → vegetation community → 1 m² plot → species observations and measurements. Preserve `SampleID`, taxon label, cover and missingness as separate fields; a collection groups evidence but does not prove that its fields share a scale or unit. [See the real campaign hierarchy](/data/baltic-coastal-meadow-2024/).

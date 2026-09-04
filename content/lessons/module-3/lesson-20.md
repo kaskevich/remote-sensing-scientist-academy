@@ -302,3 +302,6 @@ The artifact compares explanation lenses rather than selecting the most persuasi
 ## 20. Tested software versions
 
 Teaching examples were reviewed for Python 3.12.13, JupyterLab 4 / Notebook 7, NumPy 2.4.2, pandas 2.2.3, scikit-learn 1.9.0 and XGBoost 3.3.0. SHAP is introduced through its current TreeExplainer documentation; learners must record the installed SHAP version and explainer settings because outputs can depend on version and configuration. All data are synthetic.
+### Interpretation boundary
+
+“High predicted CCI means <i>Juncus gerardi</i> is present” is unsupported unless a separate species-classification model has been trained and validated for that claim. A trait surface is a model output for the specified response, not a botanical inventory. [Follow Juncus through the pipeline](/species/from-field-to-earth-observation/).

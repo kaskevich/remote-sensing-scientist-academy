@@ -385,3 +385,6 @@ Together, Lessons 3.1–3.4 form the complete Chapter 1 foundation: problem stat
 ### Tested software versions
 
 Python 3.12.13, NumPy 2.4.2, pandas 2.2.3, scikit-learn 1.9.0 and XGBoost 3.3.0. Record the exact Parquet engine and version used in your environment because pandas delegates Parquet writing to an installed engine.
+### From the Field — modelling-table lineage
+
+Before fitting XGBoost, require one auditable chain: `SampleID` → plot response → reviewed geometry → raster extraction → predictor row. Fit trait aggregation and preprocessing inside the permitted training evidence; otherwise site or target information can leak across the split. [Review the data lineage](/species/from-field-to-earth-observation/).

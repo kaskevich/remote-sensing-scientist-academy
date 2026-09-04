@@ -320,3 +320,6 @@ Answer in your private notes:
 **Artifact 2.14 — Raster alignment validator**
 
 Add the reusable function, failure tests and target-grid specification to the **Raster QA and Harmonisation Pipeline**. This validator must run before stacking, raster arithmetic, DSM differencing or extraction.
+### Field response meets aligned predictors
+
+Bands, vegetation indices and structural rasters must share a declared target grid before plot summaries become comparable predictors. Alignment is necessary but does not make a pixel and a 1 m² quadrat biologically equivalent. [Follow the complete evidence lineage](/species/from-field-to-earth-observation/).

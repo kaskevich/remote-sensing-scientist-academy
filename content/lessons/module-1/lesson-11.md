@@ -277,3 +277,6 @@ Answer in private notes:
 **Artifact 11 — Audited scientific summary and figure**
 
 This eleventh checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can restructure evidence without losing entity meaning and communicate a real ecological comparison in traceable, accessible formats.
+### Where this goes next
+
+Joining plots, species and trait medians requires explicit keys and cardinality checks: `SampleID` identifies the plot, while the reconciled taxon key links an original study label to an accepted FinBIF taxon. Reshaping does not repair an uncertain taxonomic match. [Inspect the study-to-taxon evidence on a species page](/species/juncus-gerardi/).

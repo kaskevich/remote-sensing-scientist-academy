@@ -250,3 +250,6 @@ Answer in your private notes:
 **Artifact 04 — Transparent data-quality rules**
 
 This fourth checkpoint in **Portfolio Project 1 — Vegetation Data Explorer** demonstrates that you can translate a documented criterion into reproducible code, exercise every decision path and separate computational readiness from scientific deployment. Continue in the same notebook in Lesson 5.
+### From the Field — validation boundaries
+
+Invalid cover, missing trait data and fewer than five trait measurements are different conditions and require different actions. Missing trait is not zero, and the ≥5 rule is a documented minimum for the pooled species method rather than a universal ecological threshold. [See the CWM decision chain](/species/from-field-to-earth-observation/).

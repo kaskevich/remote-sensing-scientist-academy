@@ -185,7 +185,8 @@ test("the species atlas searches source records and preserves filter state in th
   await page.goto("/species/");
 
   await expect(page.getByRole("heading", { name: "Boreal Baltic Coastal Meadow Species Atlas" })).toBeVisible();
-  await expect(page.locator(".species-card")).toHaveCount(38);
+  await expect(page.getByText("Study occurrence is not global ecology.", { exact: true })).toBeVisible();
+  await expect(page.locator(".species-card")).toHaveCount(78);
 
   await page.getByRole("searchbox", { name: "Search the Atlas" }).fill("Juncus");
   await expect(page.locator(".species-card")).toHaveCount(1);
@@ -195,11 +196,53 @@ test("the species atlas searches source records and preserves filter state in th
   await page.reload();
   await expect(page.getByRole("searchbox", { name: "Search the Atlas" })).toHaveValue("Juncus");
   await page.getByRole("button", { name: "Clear filters" }).click();
-  await expect(page.locator(".species-card")).toHaveCount(38);
+  await expect(page.locator(".species-card")).toHaveCount(78);
 
   await page.getByRole("button", { name: /LS Lower Shore/ }).click();
-  await expect(page.getByText("No verified records match this filter.")).toBeVisible();
+  await expect(page.locator(".species-card")).not.toHaveCount(0);
+  await expect(page.getByText(/sampled plots · highest occurrence/).first()).toBeVisible();
   await expect(page).toHaveURL(/habitat=LS/);
+});
+
+test("an enriched species page separates field evidence, traits, taxonomy and image licences", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/species/juncus-gerardi/");
+  await expect(page.getByRole("heading", { name: /Juncus gerardi/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "General ecology" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Occurrence in our 2024 coastal-meadow study" })).toBeVisible();
+  await expect(page.getByText("Recorded as Juncus gerardii")).toBeVisible();
+  await expect(page.getByText("30 / 30 · 100%")).toBeVisible();
+  await expect(page.getByText(/Cover among 30 plots: median 52.5%/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Pool-wise CCI and leaf area" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Current verified classification" })).toBeVisible();
+  await expect(page.locator(".species-image-grid figure")).toHaveCount(4);
+});
+
+test("the Field-to-EO explainer and Study Data Guide expose the verified evidence chain", async ({ page }) => {
+  await page.goto("/species/from-field-to-earth-observation/");
+  await expect(page.getByRole("heading", { name: "From Plant Species to Earth Observation" })).toBeVisible();
+  await expect(page.locator(".pipeline-steps button")).toHaveCount(9);
+  await page.getByRole("button", { name: "Nearer 1.0" }).click();
+  await expect(page.getByText("CWM = 1.15", { exact: true })).toBeVisible();
+  await expect(page.getByText("87.20%", { exact: false }).first()).toBeVisible();
+
+  await page.goto("/data/baltic-coastal-meadow-2024/");
+  await expect(page.getByRole("heading", { name: "Baltic Coastal Meadow 2024" })).toBeVisible();
+  await expect(page.getByText("Kudani", { exact: true }).last()).toBeVisible();
+  await expect(page.getByText("OP · 20 plots", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Raster–Vector Integration/ })).toHaveAttribute("href", "/module-2/raster-vector-integration/");
+});
+
+test("reconciled historical names resolve to distinct accepted species pages", async ({ page }) => {
+  for (const [route, acceptedName] of [
+    ["/species/lysimachia-maritima/", "Lysimachia maritima"],
+    ["/species/lolium-arundinaceum/", "Lolium arundinaceum"],
+    ["/species/ononis-spinosa-subsp-arvensis/", "Ononis spinosa subsp. arvensis"],
+  ] as const) {
+    await page.goto(route);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(acceptedName);
+    await expect(page.getByText(/Recorded as/).first()).toBeVisible();
+  }
 });
 
 for (const viewport of [

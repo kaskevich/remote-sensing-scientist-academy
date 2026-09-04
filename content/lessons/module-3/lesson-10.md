@@ -300,3 +300,6 @@ This artifact shows that you can encode a spatial prediction destination as fold
 ### Tested software versions
 
 Python 3.12.13; JupyterLab 4 / Notebook 7; NumPy 2.4.2; pandas 2.2.3; scikit-learn 1.9.0; XGBoost 3.3.0. The fixture coordinates are synthetic teaching values and do not authorise real-world distance claims.
+### Site-aware ecological validation
+
+The 120 quadrats are clustered among four sites and four sampled community labels. A random row split can place nearby or related plots in training and assessment. Grouped or spatial validation must match the intended transfer claim. [See the actual site-community combinations](/data/baltic-coastal-meadow-2024/).

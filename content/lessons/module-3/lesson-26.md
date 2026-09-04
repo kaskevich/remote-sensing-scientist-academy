@@ -310,3 +310,6 @@ This component converts the fixed Prediction Evidence Package into a repeatable,
 ## 21. Tested software versions
 
 The modelling contracts and tests target Python 3.12.13, NumPy 2.4.2, pandas 2.2.3, scikit-learn 1.9.0 and XGBoost 3.3.0. Raster implementation must retain the tested Rasterio/GDAL environment recorded by Module 2. The synthetic Chapter 7 pack supplies control metadata, not real prediction rasters.
+### Functional-landscape bridge
+
+Aligned UAV predictors → fitted model → trait prediction surface can support later analysis of trait heterogeneity or functional diversity. Richness, CWM and functional diversity answer different questions; AGB is biomass/productivity and is not one of the traits in the project’s composite functional-diversity metric. [Review the observed–derived–modelled lineage](/species/from-field-to-earth-observation/).

@@ -49,13 +49,13 @@ describe("Academy SEO architecture", () => {
 
   it("generates a complete sitemap with no duplicate URLs", () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(159);
+    expect(entries).toHaveLength(5 + seoModules.length + seoLessons.length + habitatCodes.length + 2 + speciesRecords.length);
     expect(unique(entries.map((entry) => entry.url))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/curriculum/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/projects/track-recovery-after-fire/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/species/"))).toBe(true);
-    expect(entries.filter((entry) => entry.url.includes("/species/")).length).toBe(43);
-    expect(speciesRecords).toHaveLength(38);
+    expect(entries.filter((entry) => entry.url.includes("/species/")).length).toBe(2 + habitatCodes.length + speciesRecords.length);
+    expect(speciesRecords).toHaveLength(78);
     expect(habitatCodes).toHaveLength(4);
     for (const lesson of seoLessons) {
       expect(entries.some((entry) => entry.url === lesson.canonicalUrl), lesson.id).toBe(true);

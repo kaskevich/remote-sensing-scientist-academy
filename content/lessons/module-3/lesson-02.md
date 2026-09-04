@@ -336,3 +336,7 @@ Store the contract beside the Lesson 3.1 Prediction Problem Statement. If the ta
 ### Tested software versions
 
 Python 3.12.13, NumPy 2.4.2, pandas 2.2.3, scikit-learn 1.9.0 and XGBoost 3.3.0. The example uses core Python; the environment record is shared with the continuing Module 3 project.
+
+### Species-to-response bridge
+
+One row should represent the declared plot-level observation. CCI CWM, leaf-area CWM, height or AGB can be ecological responses; UAV bands, indices and DSM-derived structure can be predictors. Species and trait evidence constructs and interprets the response—it is not the raster predictor itself. [Inspect the Field-to-EO pipeline](/species/from-field-to-earth-observation/).
