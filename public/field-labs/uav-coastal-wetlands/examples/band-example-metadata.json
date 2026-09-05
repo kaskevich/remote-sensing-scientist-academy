@@ -1,0 +1,33 @@
+{
+  "site": "Saardu",
+  "source_files": {
+    "RGB": "Saardu_orthomosaic_clipped.tif",
+    "Green": "Saardu_Green_fin.tif",
+    "Red": "Saardu_Red_clipped.tif",
+    "RedEdge": "Saardu_RedEdge_fin.tif",
+    "NIR": "Saardu_NIR_fin.tif"
+  },
+  "output_size": [1200, 1200],
+  "reflectance_source_geometry": {
+    "rows": 4189,
+    "columns": 4187,
+    "resolution_metres": [0.11208, 0.11208],
+    "crs": "+proj=utm +zone=34 +datum=WGS84 +units=m +no_defs"
+  },
+  "rgb_source_geometry": {
+    "rows": 5630,
+    "columns": 5627,
+    "layers": 4,
+    "resolution_metres": [0.08339, 0.08339],
+    "crs": "+proj=utm +zone=34 +datum=WGS84 +units=m +no_defs"
+  },
+  "reflectance_display": "Each band is independently linearly stretched from its sampled 2nd to 98th percentile and rendered in grayscale. This is a display transformation only; source reflectance values are not embedded in the PNG.",
+  "resampling": "All public examples are resampled to one 1200 × 1200 display grid covering the common Saardu reflectance extent. Bilinear resampling is used for RGB and reflectance; nearest-neighbour resampling is used for the RGB alpha mask.",
+  "display_limits": {
+    "Green": [0.0436992, 0.08280465],
+    "Red": [0.03250522, 0.07390959],
+    "RedEdge": [0.22454488, 0.43957998],
+    "NIR": [0.32019863, 0.6836308]
+  },
+  "public_use_basis": "User-supplied 2024 project material explicitly requested for public Academy teaching"
+}

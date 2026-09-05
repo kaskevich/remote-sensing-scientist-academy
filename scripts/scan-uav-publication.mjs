@@ -12,6 +12,8 @@ const files = [
   "public/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",
   "public/field-labs/uav-coastal-wetlands/complete-mission-checklist.md",
   "public/field-labs/uav-coastal-wetlands/examples/provenance.json",
+  "public/field-labs/uav-coastal-wetlands/examples/band-example-metadata.json",
+  "scripts/prepare-uav-band-examples.R",
   "docs/field-labs/uav-field-lab-07-publication-audit.md",
 ];
 

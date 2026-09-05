@@ -20,9 +20,10 @@ const releaseFiles = [
   "public/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",
   "public/field-labs/uav-coastal-wetlands/complete-mission-checklist.md",
   "public/field-labs/uav-coastal-wetlands/examples/provenance.json",
+  "public/field-labs/uav-coastal-wetlands/examples/band-example-metadata.json",
 ];
 
-const projectExampleFiles = ["saardu-ndvi.png", "saardu-gndvi.png", "saardu-rndvi.png", "saardu-msavi.png", "saardu-dsm.png", "saardu-thermal.png"];
+const projectExampleFiles = ["saardu-rgb.png", "saardu-green.png", "saardu-red.png", "saardu-rededge.png", "saardu-nir.png", "saardu-ndvi.png", "saardu-gndvi.png", "saardu-rndvi.png", "saardu-msavi.png", "saardu-dsm.png", "saardu-thermal.png"];
 
 describe("Field Lab 07 release", () => {
   it("publishes the full route and download set", () => {
@@ -100,5 +101,10 @@ describe("Field Lab 07 release", () => {
     const provenance = JSON.parse(readFileSync("public/field-labs/uav-coastal-wetlands/examples/provenance.json", "utf8"));
     expect(provenance.site).toBe("Saardu");
     expect(provenance.examples).toHaveLength(6);
+    const bandMetadata = JSON.parse(readFileSync("public/field-labs/uav-coastal-wetlands/examples/band-example-metadata.json", "utf8"));
+    expect(bandMetadata.site).toBe("Saardu");
+    expect(bandMetadata.output_size).toEqual([1200, 1200]);
+    expect(Object.keys(bandMetadata.display_limits)).toEqual(["Green", "Red", "RedEdge", "NIR"]);
+    expect(Object.values(bandMetadata.display_limits).every((limits) => Array.isArray(limits) && Number(limits[0]) < Number(limits[1]))).toBe(true);
   });
 });

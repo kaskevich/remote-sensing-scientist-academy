@@ -263,14 +263,29 @@ test("Field Lab 07 publishes the science route, interactive sensor explorer and 
   await expect(firstTutorialStep.getByRole("button")).toHaveAttribute("aria-expanded", "false");
   await expect(page.locator("#tutorial-step-03 > button")).toHaveAttribute("aria-expanded", "true");
   await expect(page.getByRole("heading", { name: "Same site, different measurement product" })).toBeVisible();
-  for (const product of ["NDVI", "GNDVI", "RNDVI / NDVIRe", "MSAVI", "DSM", "Thermal"]) {
+  const projectProducts = {
+    RGB: "saardu-rgb.png",
+    Green: "saardu-green.png",
+    Red: "saardu-red.png",
+    "Red Edge": "saardu-rededge.png",
+    NIR: "saardu-nir.png",
+    NDVI: "saardu-ndvi.png",
+    GNDVI: "saardu-gndvi.png",
+    "RNDVI / NDVIRe": "saardu-rndvi.png",
+    MSAVI: "saardu-msavi.png",
+    DSM: "saardu-dsm.png",
+    Thermal: "saardu-thermal.png",
+  };
+  for (const [product, file] of Object.entries(projectProducts)) {
     await page.locator(".uav-example-selector").getByRole("button", { name: product, exact: true }).click();
+    await expect(page.locator(".uav-example-stage img")).toHaveAttribute("src", new RegExp(`${file}$`));
     await expect(page.locator(".uav-example-stage img")).toHaveJSProperty("naturalWidth", 1200);
   }
+  await expect(page.getByText(/each band's own 2nd–98th percentile limits/i)).toBeVisible();
   await page.getByRole("button", { name: /Mission and source manifest/ }).click();
   await expect(page.getByText("raw-file inventory", { exact: true })).toBeVisible();
   await page.locator("#reference-sensors > summary").click();
-  await page.getByRole("button", { name: "Red Edge", exact: true }).click();
+  await page.getByLabel("Choose a Sequoia band").getByRole("button", { name: "Red Edge", exact: true }).click();
   await expect(page.getByText("735 nm centre · 10 nm bandwidth", { exact: true })).toBeVisible();
   await page.getByLabel("Choose one of the eight verified project formulas").selectOption("CIre");
   await expect(page.locator(".uav-index-card").getByText("(NIR / Red Edge) − 1", { exact: true })).toBeVisible();

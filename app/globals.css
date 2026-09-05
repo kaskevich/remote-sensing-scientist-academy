@@ -7435,7 +7435,8 @@ footer > p {
 .uav-example-stage > article { display: grid; align-content: start; gap: 1px; min-width: 0; background: #4a5752; }
 .uav-example-stage > article p { margin: 0; padding: 13px 15px; background: #16283d; font-size: .82rem; line-height: 1.5; overflow-wrap: anywhere; }.uav-example-stage > article b { display: block; margin-bottom: 4px; color: var(--lime); font-size: .64rem; letter-spacing: .08em; }.uav-example-stage code { white-space: normal; }
 .uav-same-site-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 8px; }
-.uav-same-site-strip button { position: relative; min-width: 0; padding: 0; border: 1px solid #65736c; background: #16283d; color: white; cursor: pointer; }.uav-same-site-strip img { display: block; width: 100%; height: 130px; object-fit: cover; }.uav-same-site-strip span { display: block; padding: 9px; font-weight: 850; }
+.uav-same-site-title { margin: 24px 0 10px; color: white; font-size: 1rem; }
+.uav-same-site-strip button { position: relative; min-width: 0; padding: 0; border: 1px solid #65736c; background: #16283d; color: white; cursor: pointer; }.uav-same-site-strip button[aria-pressed="true"] { border-color: var(--lime); box-shadow: 0 0 0 1px var(--lime); }.uav-same-site-strip img { display: block; width: 100%; height: 130px; object-fit: cover; }.uav-same-site-strip span { display: block; padding: 9px; font-weight: 850; }
 .uav-project-examples > aside { margin-top: 18px; padding: 17px; border-left: 5px solid var(--lime); background: #16283d; }.uav-project-examples > aside p { margin-bottom: 0; color: #c7d1cc; line-height: 1.55; }
 
 .uav-portfolio-challenge > div { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
