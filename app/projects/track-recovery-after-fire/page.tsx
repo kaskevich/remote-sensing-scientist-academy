@@ -3,6 +3,7 @@ import { RemoteGeoJsonMap } from "@/app/components/geojson-map";
 import { JsonLd, SeoBreadcrumbs, SeoFooter, SeoHeader } from "@/app/components/seo-navigation";
 import { creatorReference } from "@/lib/professional-identity";
 import { academyAssetUrl, academyHref, academyUrl } from "@/lib/site-paths";
+import { uavFieldLabPath } from "@/lib/uav-field-lab";
 
 const projectPath = "/projects/track-recovery-after-fire/";
 const projectUrl = academyUrl(projectPath);
@@ -92,14 +93,16 @@ export default function FireRecoveryProjectPage() {
           "@type": "BreadcrumbList",
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Academy", item: academyUrl("/") },
-            { "@type": "ListItem", position: 2, name: "Track Recovery After a Fire", item: projectUrl },
+            { "@type": "ListItem", position: 2, name: "Field Labs", item: academyUrl("/field-labs/") },
+            { "@type": "ListItem", position: 3, name: "Track Recovery After a Fire", item: projectUrl },
           ],
         },
       ]} />
-      <SeoHeader />
+      <SeoHeader current="field-labs" />
       <main className="fire-project" id="main-content">
         <SeoBreadcrumbs items={[
           { label: "Academy", href: academyHref("/") },
+          { label: "Field Labs", href: academyHref("/field-labs/") },
           { label: "Field Lab 06" },
         ]} />
 
@@ -376,6 +379,11 @@ Export.image.toDrive(...)`}</code></pre>
             <li><a href={nbrUrl} target="_blank" rel="noopener noreferrer">USGS Normalized Burn Ratio</a> — physical index rationale and standard NIR–SWIR formulation.</li>
           </ul>
         </section>
+
+        <nav className="field-lab-sequence" aria-label="Field lab sequence">
+          <span>Field Lab 06 of 07</span>
+          <a href={academyHref(uavFieldLabPath)}>Next: UAV Remote Sensing — From Flight to Ecological Map →</a>
+        </nav>
       </main>
       <SeoFooter />
     </>

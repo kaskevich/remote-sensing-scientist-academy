@@ -21,8 +21,8 @@
         "visible": true
       },
       {
-        "label": "Field Lab",
-        "href": "#field-lab",
+        "label": "Field Labs",
+        "href": "/field-labs/",
         "visible": true
       },
       {
@@ -49,7 +49,7 @@
     "primaryButtonLabel": "View the pathway",
     "primaryButtonHref": "#paths",
     "secondaryButtonLabel": "See a field lab",
-    "secondaryButtonHref": "#field-lab",
+    "secondaryButtonHref": "/field-labs/",
     "notes": [
       "Study online",
       "Use real satellite data",

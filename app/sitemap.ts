@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { seoLessons, seoModules } from "@/lib/seo-curriculum";
 import { academyUrl } from "@/lib/site-paths";
 import { habitatCodes, habitatDefinitions, speciesRecords } from "@/lib/species-atlas";
+import { droneLabPath, uavFieldLabPath } from "@/lib/uav-field-lab";
 
 export const dynamic = "force-static";
 
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date("2026-08-25T00:00:00.000Z");
   const projectLastModified = new Date("2026-09-03T00:00:00.000Z");
   const atlasLastModified = new Date("2026-09-04T00:00:00.000Z");
+  const uavLastModified = new Date("2026-09-05T00:00:00.000Z");
   return [
     { url: academyUrl("/"), lastModified, changeFrequency: "weekly", priority: 1 },
     { url: academyUrl("/curriculum/"), lastModified, changeFrequency: "weekly", priority: 0.9 },
@@ -19,6 +21,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    { url: academyUrl("/field-labs/"), lastModified: uavLastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: academyUrl(uavFieldLabPath), lastModified: uavLastModified, changeFrequency: "monthly", priority: 0.95 },
+    { url: academyUrl(droneLabPath), lastModified: uavLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl("/species/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl("/species/from-field-to-earth-observation/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl("/data/baltic-coastal-meadow-2024/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.85 },

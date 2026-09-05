@@ -233,6 +233,36 @@ test("the Field-to-EO explainer and Study Data Guide expose the verified evidenc
   await expect(page.getByRole("link", { name: /Raster–Vector Integration/ })).toHaveAttribute("href", "/module-2/raster-vector-integration/");
 });
 
+test("Field Lab 07 publishes the science route, interactive sensor explorer and gated Drone Lab", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/field-labs/");
+  await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
+  await expect(page.locator(".field-lab-card")).toHaveCount(2);
+
+  await page.goto("/field-labs/uav-coastal-wetlands/");
+  await expect(page.getByRole("heading", { name: "From Flight to Ecological Map", level: 1 })).toBeVisible();
+  await expect(page.getByText("30 Jun–2 Jul 2024", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Red Edge", exact: true }).click();
+  await expect(page.getByText("735 nm centre · 10 nm bandwidth", { exact: true })).toBeVisible();
+  await page.getByLabel("Choose one of the eight verified project formulas").selectOption("CIre");
+  await expect(page.locator(".uav-index-card").getByText("(NIR / Red Edge) − 1", { exact: true })).toBeVisible();
+
+  await page.goto("/field-labs/uav-coastal-wetlands/drone-lab/");
+  await expect(page.getByRole("heading", { name: "Drone Lab", level: 1 })).toBeVisible();
+  await expect(page.locator(".practical-visual")).toHaveCount(20);
+  await expect(page.locator(".sop-steps > li")).toHaveCount(21);
+  await page.getByRole("button", { name: /Understand why/ }).click();
+  await expect(page.locator(".sop-steps").first()).toHaveClass(/mode-why/);
+  await expect(page.getByText("Why", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Download Markdown checklist" })).toHaveAttribute(
+    "href",
+    "/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",
+  );
+
+  await page.setViewportSize({ width: 375, height: 812 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+});
+
 test("reconciled historical names resolve to distinct accepted species pages", async ({ page }) => {
   for (const [route, acceptedName] of [
     ["/species/lysimachia-maritima/", "Lysimachia maritima"],

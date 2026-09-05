@@ -19,6 +19,7 @@
     "test:raster": "python3 scripts/validate_raster_training_pack.py",
     "test:uav": "python3 scripts/validate_uav_training_pack.py",
     "test:smoke": "playwright test",
+    "security:uav": "node scripts/scan-uav-publication.mjs",
     "species:update": "python3 scripts/species/update_species_atlas.py"
   },
   "dependencies": {

@@ -7061,3 +7061,158 @@ footer > p {
   background: color-mix(in srgb, var(--orange) 7%, white);
 }
 .atlas-scope-note p { margin: .4rem 0 0; color: var(--ink-soft); }
+
+/* Field Labs 07 · UAV science and practical workflow */
+.field-labs-page,
+.uav-lab-page,
+.drone-lab-page {
+  min-height: 100vh;
+  padding: 0 5vw 88px;
+}
+
+.field-labs-page > *,
+.uav-lab-page > *,
+.drone-lab-page > * {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.field-labs-hero,
+.uav-lab-hero,
+.drone-lab-hero {
+  padding: clamp(56px, 8vw, 108px) 0 48px;
+}
+
+.field-labs-hero { max-width: 920px; margin-left: max(0px, calc((100% - 1240px) / 2)); }
+.field-labs-hero h1,
+.uav-lab-hero h1,
+.drone-lab-hero h1 {
+  margin: 8px 0 18px;
+  max-width: 950px;
+  font-size: clamp(3.2rem, 7.3vw, 7rem);
+  line-height: .9;
+  letter-spacing: -.07em;
+}
+.field-labs-hero > p:last-child,
+.uav-lab-hero > div > p,
+.drone-lab-hero > div > p { max-width: 760px; color: var(--ink-soft); font-size: 1.15rem; line-height: 1.7; }
+
+.field-lab-list { display: grid; gap: 20px; padding: 0; list-style: none; }
+.field-lab-card > a { display: grid; grid-template-columns: 170px 1fr; gap: 36px; padding: clamp(28px, 4vw, 52px); border: 1px solid var(--line); border-radius: 24px; background: white; transition: transform 160ms ease, box-shadow 160ms ease; }
+.field-lab-card > a:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(11,25,48,.09); }
+.field-lab-card.uav > a { background: linear-gradient(135deg, #ecf7ef, white 56%); border-color: rgba(22,101,52,.25); }
+.field-lab-card.fire > a { background: linear-gradient(135deg, #f8eee8, white 56%); }
+.field-lab-number { display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--line); }
+.field-lab-number small { font-size: .72rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
+.field-lab-number strong { font-size: 5rem; line-height: 1; letter-spacing: -.08em; }
+.field-lab-card h2 { margin: 6px 0 12px; font-size: clamp(2rem, 4vw, 3.7rem); letter-spacing: -.045em; }
+.field-lab-card p { max-width: 780px; line-height: 1.65; }
+.field-lab-card ul { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
+.field-lab-card ul li { padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.7); font-size: .78rem; font-weight: 750; }
+
+.uav-lab-hero,
+.drone-lab-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.uav-hero-actions { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 28px; }
+.uav-flight-visual { position: relative; min-height: 410px; overflow: hidden; border: 1px solid rgba(17,94,64,.3); border-radius: 28px; background: linear-gradient(#a9dceb 0 39%, #72ad91 40% 62%, #b7c67e 63%); box-shadow: inset 0 0 80px rgba(255,255,255,.25); }
+.uav-flight-visual::before { content: ""; position: absolute; inset: 63% 0 0; background: repeating-linear-gradient(100deg, transparent 0 52px, rgba(255,255,255,.35) 54px 57px); }
+.uav-wing { position: absolute; z-index: 2; top: 24%; left: 50%; width: 170px; height: 42px; display: grid; place-items: center; transform: translateX(-50%) rotate(-7deg); clip-path: polygon(0 42%,42% 15%,48% 0,52% 0,58% 15%,100% 42%,80% 67%,55% 52%,52% 100%,48% 100%,45% 52%,20% 67%); background: var(--ink); color: white; font-size: .72rem; font-weight: 850; letter-spacing: .12em; }
+.uav-flight-visual i { position: absolute; top: 39%; width: 36%; height: 36%; border: 2px solid rgba(255,255,255,.65); transform: skewY(-10deg); background: rgba(200,243,61,.12); }
+.uav-flight-visual i:nth-of-type(1) { left: 3%; }.uav-flight-visual i:nth-of-type(2) { left: 22%; }.uav-flight-visual i:nth-of-type(3) { left: 41%; }.uav-flight-visual i:nth-of-type(4) { left: 60%; }
+.uav-flight-visual b { position: absolute; right: 9%; bottom: 11%; padding: 8px; border: 2px solid white; color: white; font-size: .72rem; }
+.uav-flight-visual > span { position: absolute; left: 8%; bottom: 6%; color: white; font-size: .72rem; font-weight: 800; text-transform: uppercase; }
+
+.uav-fact-strip { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 70px; border-block: 1px solid var(--line); }
+.uav-fact-strip div { padding: 24px; border-right: 1px solid var(--line); }
+.uav-fact-strip div:last-child { border-right: 0; }
+.uav-fact-strip strong,.uav-fact-strip span { display: block; }
+.uav-fact-strip strong { font-size: 1.1rem; }.uav-fact-strip span { margin-top: 5px; color: var(--ink-soft); font-size: .8rem; }
+.uav-lab-section,
+.drone-lab-section { overflow: hidden; margin-block: 28px; padding: clamp(30px, 5vw, 62px); border: 1px solid var(--line); border-radius: 24px; background: rgba(255,255,255,.75); }
+.uav-lab-section h2,
+.drone-lab-section h2 { margin: 7px 0 18px; max-width: 950px; font-size: clamp(2rem, 4.5vw, 4rem); line-height: 1; letter-spacing: -.05em; }
+.uav-lab-section h3 { margin-top: 28px; font-size: 1.4rem; }
+.uav-lab-section p,
+.drone-lab-section p { max-width: 940px; line-height: 1.7; }
+.uav-lab-section > *,
+.drone-lab-section > *,
+.uav-explorer-grid > *,
+.uav-platform-section > *,
+.uav-platform-compare > *,
+.uav-radiometry-grid > *,
+.uav-thermal-section > * { min-width: 0; }
+
+.uav-flow { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 9px; padding: 0; list-style: none; }
+.uav-flow li { min-height: 108px; padding: 16px; border-radius: 12px; background: var(--ink); color: white; }
+.uav-flow span,.uav-flow strong { display: block; }.uav-flow span { margin-bottom: 18px; color: var(--lime); font-size: .68rem; font-weight: 850; }
+.uav-flow.compact { grid-template-columns: repeat(7,minmax(0,1fr)); }.uav-flow.compact li { min-height: 94px; background: #e4eee9; color: var(--ink); }.uav-flow.compact span { color: #286a50; }
+.uav-core-message { margin: 28px 0; padding: 24px; border-left: 5px solid var(--lime); background: #eff7d7; }.uav-core-message strong { font-size: 1.2rem; }.uav-core-message p { margin-bottom: 0; }
+.uav-platform-section,.uav-radiometry-grid,.geometry-radiometry,.uav-thermal-section { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.uav-platform-compare,.uav-sensor-triptych,.uav-warning-grid,.drone-misconception-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.uav-platform-compare article,.uav-sensor-triptych article,.geometry-radiometry article { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; }
+.uav-platform-compare span,.uav-sensor-triptych span,.geometry-radiometry span { color: #31765d; font-size: .7rem; font-weight: 900; letter-spacing: .13em; }
+.uav-platform-compare ul,.geometry-radiometry ul { padding-left: 18px; line-height: 1.7; }
+
+.uav-explorer { margin-top: 26px; padding: 26px; border-radius: 19px; background: #0d2038; color: white; }
+.uav-spectrum { display: flex; overflow: hidden; height: 70px; margin: 18px 0 26px; border-radius: 12px; background: linear-gradient(90deg,#4769ff,#44b37f,#d5dc4d,#f44336,#902c7f); }
+.uav-spectrum span { display: grid; place-items: center; flex: 1; font-size: .7rem; font-weight: 850; text-shadow: 0 1px 4px #000; }.uav-spectrum .edge { background: #9a2c54; }.uav-spectrum .near { background: #512772; }.uav-spectrum .thermal { background: #1a1b31; }
+.uav-explorer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.uav-picker { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.uav-picker button { padding: 13px; border: 1px solid rgba(255,255,255,.3); border-radius: 8px; background: transparent; color: white; cursor: pointer; }.uav-picker button[aria-pressed="true"] { border-color: var(--lime); background: rgba(200,243,61,.13); }
+.uav-band-card,.uav-index-card { padding: 20px; border-radius: 12px; background: rgba(255,255,255,.08); }.uav-band-card strong,.uav-band-card span { display: block; }.uav-band-card span { margin: 6px 0; color: var(--lime); }.uav-band-card p,.uav-index-card p { margin-bottom: 0; }
+.uav-select-label { display: grid; gap: 7px; margin: 22px 0 8px; font-weight: 800; }.uav-select-label select { width: 100%; padding: 12px; border-radius: 8px; }
+.uav-explorer select { min-width: 0; max-width: 100%; }
+.uav-index-card code { display: block; margin: 12px 0; color: var(--lime); white-space: normal; }
+.uav-sensor-triptych { grid-template-columns: repeat(3,1fr); margin-top: 20px; }.uav-sensor-triptych .thermal { background: #30253e; color: white; }
+.uav-misconceptions,.uav-warning-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }.uav-misconceptions strong,.uav-warning-grid strong { padding: 10px 13px; border: 1px solid var(--orange); border-radius: 999px; font-size: .72rem; }
+
+.sun-sensor-diagram,.leaf-energy-diagram,.overlap-diagram,.ppk-diagram,.palette-measurement,.retrieval-diagram,.processing-toggle-diagram,.final-products-diagram { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 230px; padding: 28px; overflow: hidden; border-radius: 18px; background: #e5f0eb; text-align: center; }
+.sun-sensor-diagram span,.ppk-diagram span { padding: 16px; border-radius: 50%; background: white; font-weight: 800; }.sun-sensor-diagram .sun { background: #ffd94a; }.sun-sensor-diagram .sensor { border-radius: 9px; background: var(--ink); color: white; }
+.reflectance-equation { margin: 22px 0; padding: 18px; border: 1px solid #7daa94; border-radius: 9px; font-family: ui-monospace,monospace; font-weight: 800; }
+.leaf-energy-diagram { min-height: 150px; margin: 28px 0; background: linear-gradient(110deg,#dff2f7,#e9f4d8); }.leaf-energy-diagram b { padding: 22px 36px; border-radius: 50% 8px 50% 8px; background: #459a5f; color: white; }.leaf-energy-diagram i { font-style: normal; font-size: .75rem; font-weight: 850; }
+.spectral-curve { margin: 30px 0 0; color: #397652; }.spectral-curve svg { width: 100%; min-width: 600px; }.spectral-curve text { font: 20px Inter,Arial,sans-serif; fill: var(--ink); }.spectral-curve figcaption { color: var(--ink-soft); font-size: .8rem; }.spectral-curve { overflow-x: auto; }
+.uav-flight-table,.uav-output-table { overflow-x: auto; margin-block: 24px; }.uav-flight-table table,.uav-output-table table { width: 100%; min-width: 830px; border-collapse: collapse; }.uav-flight-table th,.uav-flight-table td,.uav-output-table th,.uav-output-table td { padding: 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }.uav-flight-table thead,.uav-output-table thead { background: var(--ink); color: white; }
+.overlap-diagram > div { width: 27%; height: 130px; padding: 12px; border: 2px solid rgba(11,25,48,.35); background: rgba(87,183,232,.18); }.overlap-diagram > div + div { margin-left: -7%; }.overlap-diagram > span { position: absolute; bottom: 18px; font-size: .75rem; font-weight: 800; }
+.ppk-diagram { flex-wrap: wrap; }.ppk-diagram b { width: 100%; color: #286a50; }.ppk-before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-block: 20px; }.ppk-before-after article { padding: 22px; border: 1px solid var(--line); border-radius: 14px; }.ppk-before-after span,.ppk-before-after strong { display: block; }.ppk-before-after strong { margin-top: 6px; font-size: 2.2rem; }
+.uav-time-check { padding: 20px; border: 1px solid var(--orange); border-radius: 14px; background: #fff5ed; }.uav-time-check p { margin-bottom: 0; }
+.uav-index-grid,.uav-stop-grid,.uav-portfolio-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 24px; }.uav-index-grid article,.uav-stop-grid article,.uav-portfolio-grid article { padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: white; }.uav-index-grid span,.uav-stop-grid span { display: block; color: #2a7257; font-size: .7rem; font-weight: 900; }.uav-index-grid code { display: block; margin: 10px 0; white-space: normal; }
+.palette-measurement { flex-wrap: wrap; background: var(--ink); color: white; }.palette-measurement div { display: grid; place-items: center; width: 43%; min-height: 130px; border-radius: 10px; }.palette-measurement .grey { background: repeating-radial-gradient(circle,#ddd 0 3px,#555 4px 8px); text-shadow: 0 1px 4px #000; }.palette-measurement .false-colour { background: repeating-radial-gradient(circle,#ffea00 0 3px,#d60055 4px 8px,#221351 9px 12px); }.palette-measurement strong { width: 100%; }
+.field-uav-model { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 12px; align-items: center; }.field-uav-model article { min-height: 150px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: white; }.field-uav-model span { color: #286a50; font-size: .7rem; font-weight: 900; }.scale-support-diagram { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 24px; }.scale-support-diagram span { flex: 1; min-width: 120px; padding: 14px; border-radius: 8px; background: #e3ede8; text-align: center; font-size: .78rem; font-weight: 800; }.scale-support-diagram span::after { content: " →"; }.scale-support-diagram span:last-child::after { content: ""; }
+.uav-stop-grid { grid-template-columns: repeat(3,1fr); }.uav-stop-grid article { border-top: 4px solid var(--orange); }.uav-qa-sequence { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }.uav-qa-sequence li { padding: 9px 12px; border-radius: 999px; background: var(--ink); color: white; font-size: .75rem; font-weight: 800; }
+.uav-portfolio-grid article { border-top: 5px solid var(--lime); }.uav-references ul,.drone-references ul { padding-left: 20px; line-height: 1.8; }
+.field-lab-sequence { display: flex; justify-content: space-between; gap: 22px; align-items: center; max-width: 1240px; margin: 28px auto 0; padding: 24px; border-block: 1px solid var(--line); }.field-lab-sequence span { font-weight: 850; }.field-lab-sequence a { color: #286a50; font-weight: 850; }
+
+.drone-lab-hero { border-bottom: 1px solid var(--line); }.drone-lab-status { padding: 26px; border: 1px solid #7daa94; border-radius: 18px; background: #e5f0eb; }.drone-lab-status strong,.drone-lab-status span { display: block; }.drone-lab-status strong { font-size: 2.2rem; }.drone-lab-status span { margin-top: 7px; color: var(--ink-soft); }
+.drone-version-note,.drone-security-note { border-left: 5px solid var(--orange); background: #fff5ed; }
+.retrieval-diagram { justify-content: space-around; }.retrieval-diagram > div { padding: 20px; border-radius: 12px; background: white; }.retrieval-diagram strong,.retrieval-diagram span { display: block; }.retrieval-diagram b { color: #286a50; }
+.folder-tree { padding: 24px; overflow-x: auto; border-radius: 14px; background: var(--ink); color: #e9f7ef; line-height: 1.7; }
+.practical-visual-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }.practical-visual { min-height: 145px; display: grid; align-content: space-between; padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: #edf4f0; }.practical-visual span { color: #286a50; font-size: .68rem; font-weight: 900; }.practical-visual strong { font-size: 1.05rem; }
+.sop-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 26px; }.sop-mode button { display: grid; gap: 5px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--ink); text-align: left; cursor: pointer; }.sop-mode button[aria-pressed="true"] { border-color: #286a50; box-shadow: inset 0 0 0 2px #286a50; }.sop-mode span { color: var(--ink-soft); font-size: .78rem; }
+.sop-steps { display: grid; gap: 18px; padding: 0; list-style: none; }.sop-steps > li { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: white; scroll-margin-top: 20px; }.sop-step-heading { display: flex; gap: 16px; align-items: baseline; }.sop-step-heading span { color: #2a7257; font: 900 1.1rem ui-monospace,monospace; }.sop-step-heading h2 { margin: 0; font-size: clamp(1.4rem,3vw,2.2rem); }.sop-fields { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 18px; }.sop-fields section { padding: 15px; border-radius: 10px; background: #edf4f0; }.sop-fields strong { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; }.sop-fields p { margin: 7px 0 0; font-size: .9rem; }.sop-fields .sop-stop { border: 1px solid #d65c35; background: #fff1ea; }
+.drone-checklist { margin-top: 30px; padding: 28px; border: 3px solid var(--ink); background: white; }.drone-checklist-actions { display: flex; flex-wrap: wrap; gap: 10px; }.drone-checklist-actions button,.drone-checklist-actions a { padding: 11px 14px; border: 1px solid var(--ink); border-radius: 7px; background: var(--ink); color: white; cursor: pointer; }.drone-checklist ul { columns: 2; padding-left: 0; list-style: none; }.drone-checklist li { display: flex; gap: 9px; margin: 12px 0; break-inside: avoid; }.drone-checklist li span { font-size: 1.3rem; }
+.processing-toggle-diagram { justify-content: space-around; }.processing-toggle-diagram div { display: grid; gap: 7px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: white; }.processing-toggle-diagram .on { border-color: #2a7257; box-shadow: inset 0 0 0 2px #2a7257; }.processing-toggle-diagram .off { opacity: .55; }
+.final-products-diagram { display: grid; grid-template-columns: repeat(4,1fr); }.final-products-diagram span { display: grid; place-items: center; min-height: 100px; padding: 14px; border-radius: 9px; background: var(--ink); color: white; font-weight: 800; }
+.drone-misconception-grid { grid-template-columns: repeat(3,1fr); }.drone-misconception-grid article { padding: 18px; border: 1px solid var(--line); border-radius: 12px; }.drone-misconception-grid strong { color: #a44327; }
+
+@media (max-width: 980px) {
+  .uav-lab-hero,.drone-lab-hero,.uav-platform-section,.uav-radiometry-grid,.uav-thermal-section { grid-template-columns: 1fr; }
+  .uav-flow { grid-template-columns: repeat(3,1fr); }.uav-flow.compact { grid-template-columns: repeat(4,1fr); }
+  .uav-fact-strip,.practical-visual-grid { grid-template-columns: repeat(2,1fr); }
+  .uav-sensor-triptych,.uav-stop-grid,.drone-misconception-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 680px) {
+  .field-labs-page,.uav-lab-page,.drone-lab-page { padding-inline: 18px; }
+  .field-lab-card > a,.field-uav-model { grid-template-columns: 1fr; }
+  .field-lab-number { border-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 18px; }.field-lab-number strong { font-size: 3.6rem; }
+  .uav-flow,.uav-flow.compact,.uav-explorer-grid,.uav-platform-compare,.uav-sensor-triptych,.uav-index-grid,.uav-stop-grid,.uav-portfolio-grid,.geometry-radiometry,.ppk-before-after,.sop-mode,.sop-fields,.final-products-diagram,.drone-misconception-grid { grid-template-columns: 1fr; }
+  .uav-fact-strip,.practical-visual-grid { grid-template-columns: 1fr; }.uav-fact-strip div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .uav-flight-visual { min-height: 310px; }.sun-sensor-diagram,.ppk-diagram,.retrieval-diagram,.processing-toggle-diagram { flex-direction: column; }.field-uav-model > strong { transform: rotate(90deg); }
+  .drone-checklist ul { columns: 1; }.field-lab-sequence { align-items: flex-start; flex-direction: column; }
+}
+
+@media print {
+  .site-header,.seo-breadcrumbs,footer,.sop-mode,.drone-checklist-actions { display: none !important; }
+  .drone-lab-page { padding: 0; }.drone-lab-page > :not(.sop-section) { display: none !important; }
+  .sop-section { border: 0; padding: 0; }.sop-steps { display: none; }.drone-checklist { display: block; border: 2px solid #000; margin: 0; }
+  .drone-checklist ul { columns: 2; }
+}
