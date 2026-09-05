@@ -5,9 +5,13 @@ const files = [
   "app/field-labs/uav-coastal-wetlands/page.tsx",
   "app/field-labs/uav-coastal-wetlands/drone-lab/page.tsx",
   "app/components/uav-field-lab-explorer.tsx",
+  "app/components/uav-field-lab-tutorial.tsx",
+  "app/components/uav-field-lab-interactions.tsx",
   "app/components/uav-drone-lab.tsx",
   "lib/uav-field-lab.ts",
   "public/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",
+  "public/field-labs/uav-coastal-wetlands/complete-mission-checklist.md",
+  "public/field-labs/uav-coastal-wetlands/examples/provenance.json",
   "docs/field-labs/uav-field-lab-07-publication-audit.md",
 ];
 

@@ -8,6 +8,7 @@ import {
   sequoiaBands,
   uavFieldLabPath,
   uavOutputs,
+  uavTutorialSteps,
   vegetationIndices,
 } from "@/lib/uav-field-lab";
 
@@ -15,14 +16,20 @@ const releaseFiles = [
   "app/field-labs/page.tsx",
   "app/field-labs/uav-coastal-wetlands/page.tsx",
   "app/field-labs/uav-coastal-wetlands/drone-lab/page.tsx",
+  "app/components/uav-field-lab-interactions.tsx",
   "public/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",
+  "public/field-labs/uav-coastal-wetlands/complete-mission-checklist.md",
+  "public/field-labs/uav-coastal-wetlands/examples/provenance.json",
 ];
+
+const projectExampleFiles = ["saardu-ndvi.png", "saardu-gndvi.png", "saardu-rndvi.png", "saardu-msavi.png", "saardu-dsm.png", "saardu-thermal.png"];
 
 describe("Field Lab 07 release", () => {
   it("publishes the full route and download set", () => {
     expect(uavFieldLabPath).toBe("/field-labs/uav-coastal-wetlands/");
     expect(droneLabPath).toBe("/field-labs/uav-coastal-wetlands/drone-lab/");
     for (const file of releaseFiles) expect(existsSync(file), file).toBe(true);
+    for (const file of projectExampleFiles) expect(existsSync(`public/field-labs/uav-coastal-wetlands/examples/${file}`), file).toBe(true);
   });
 
   it("retains the verified acquisition and sensor details", () => {
@@ -52,10 +59,46 @@ describe("Field Lab 07 release", () => {
     expect(uavOutputs).toHaveLength(9);
   });
 
+  it("provides a chronological mission-to-handoff tutorial with all instructional fields", () => {
+    expect(uavTutorialSteps).toHaveLength(22);
+    expect(uavTutorialSteps.map((step) => step.number)).toEqual(
+      Array.from({ length: 22 }, (_, index) => String(index + 1).padStart(2, "0")),
+    );
+    expect(uavTutorialSteps[0].title).toMatch(/Plan the mission/i);
+    expect(uavTutorialSteps.at(-1)?.title).toMatch(/analysis-ready mission package/i);
+    expect(uavTutorialSteps.every((step) =>
+      step.what
+      && step.action.length
+      && step.where
+      && step.why
+      && step.input.length
+      && step.output.length
+      && step.check.length
+      && step.failure
+      && step.next
+    )).toBe(true);
+    expect(new Set(uavTutorialSteps.map((step) => step.phase))).toEqual(
+      new Set(["PLAN", "ACQUIRE", "POSITION", "RECONSTRUCT", "PRODUCTS", "HANDOFF"]),
+    );
+  });
+
   it("does not expose credentials, local paths or private URLs", () => {
     const publicText = releaseFiles.map((file) => readFileSync(file, "utf8")).join("\n");
     expect(publicText).not.toMatch(/(?:\/Users\/|C:\\Users\\)/i);
     expect(publicText).not.toMatch(/\b(?:user(?:name)?|password)\s*:\s*\S+/i);
     expect(publicText).not.toMatch(/https?:\/\/(?:localhost|127\.0\.0\.1|[^\s/]*\.local)(?:[/:]|\b)/i);
+  });
+
+  it("publishes the explained pre-flight, expandable interactions and real-project provenance", () => {
+    const interactions = readFileSync("app/components/uav-field-lab-interactions.tsx", "utf8");
+    expect(interactions).toContain("Phase 0 · before the flight");
+    expect(interactions).toContain("At home · before leaving");
+    expect(interactions).toContain("On site · before launch");
+    expect(interactions).toContain("2024 UAV field note");
+    expect(interactions.match(/aria-expanded=/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(interactions).toContain("Same site, different measurement product");
+    const provenance = JSON.parse(readFileSync("public/field-labs/uav-coastal-wetlands/examples/provenance.json", "utf8"));
+    expect(provenance.site).toBe("Saardu");
+    expect(provenance.examples).toHaveLength(6);
   });
 });

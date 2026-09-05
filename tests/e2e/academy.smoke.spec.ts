@@ -240,20 +240,56 @@ test("Field Lab 07 publishes the science route, interactive sensor explorer and 
   await expect(page.locator(".field-lab-card")).toHaveCount(2);
 
   await page.goto("/field-labs/uav-coastal-wetlands/");
-  await expect(page.getByRole("heading", { name: "From Flight to Ecological Map", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Plan, fly and process an eBee mission", level: 1 })).toBeVisible();
   await expect(page.getByText("30 Jun–2 Jul 2024", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Preparation makes the mission traceable" })).toBeVisible();
+  await expect(page.getByText("At home · before leaving", { exact: true })).toBeVisible();
+  await expect(page.getByText("On site · before launch", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "2024 UAV field note" })).toBeVisible();
+  await expect(page.locator(".uav-workflow-overview .uav-expandable-cards > li")).toHaveCount(15);
+  const conceptButtons = page.locator(".uav-workflow-overview .uav-expandable-cards").getByRole("button");
+  await expect(conceptButtons.first()).toHaveAttribute("aria-expanded", "true");
+  await conceptButtons.nth(2).click();
+  await expect(conceptButtons.first()).toHaveAttribute("aria-expanded", "false");
+  await expect(conceptButtons.nth(2)).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator(".uav-operational-step")).toHaveCount(22);
+  await expect(page.locator("#uav-tutorial-step option")).toHaveCount(22);
+  const firstTutorialStep = page.locator("#tutorial-step-01");
+  await expect(firstTutorialStep.getByRole("button")).toHaveAttribute("aria-expanded", "true");
+  for (const label of ["WHAT", "ACTION", "WHERE", "WHY", "INPUT", "OUTPUT", "CHECK", "IF THIS FAILS", "NEXT"]) {
+    await expect(firstTutorialStep.getByText(label, { exact: true }).first()).toBeVisible();
+  }
+  await page.locator("#tutorial-step-03 > button").click();
+  await expect(firstTutorialStep.getByRole("button")).toHaveAttribute("aria-expanded", "false");
+  await expect(page.locator("#tutorial-step-03 > button")).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByRole("heading", { name: "Same site, different measurement product" })).toBeVisible();
+  for (const product of ["NDVI", "GNDVI", "RNDVI / NDVIRe", "MSAVI", "DSM", "Thermal"]) {
+    await page.locator(".uav-example-selector").getByRole("button", { name: product, exact: true }).click();
+    await expect(page.locator(".uav-example-stage img")).toHaveJSProperty("naturalWidth", 1200);
+  }
+  await page.getByRole("button", { name: /Mission and source manifest/ }).click();
+  await expect(page.getByText("raw-file inventory", { exact: true })).toBeVisible();
+  await page.locator("#reference-sensors > summary").click();
   await page.getByRole("button", { name: "Red Edge", exact: true }).click();
   await expect(page.getByText("735 nm centre · 10 nm bandwidth", { exact: true })).toBeVisible();
   await page.getByLabel("Choose one of the eight verified project formulas").selectOption("CIre");
   await expect(page.locator(".uav-index-card").getByText("(NIR / Red Edge) − 1", { exact: true })).toBeVisible();
 
   await page.goto("/field-labs/uav-coastal-wetlands/drone-lab/");
-  await expect(page.getByRole("heading", { name: "Drone Lab", level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Prepare the eBee, then process the mission/i, level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Prepare, document, then fly" })).toBeVisible();
+  await expect(page.locator(".drone-preflight-quick li")).toHaveCount(17);
   await expect(page.locator(".practical-visual")).toHaveCount(20);
   await expect(page.locator(".sop-steps > li")).toHaveCount(21);
+  await expect(page.locator("#drone-sop-step option")).toHaveCount(21);
+  const firstDroneStep = page.locator("#step-00");
+  await expect(firstDroneStep.getByRole("button")).toHaveAttribute("aria-expanded", "true");
+  for (const label of ["WHAT", "ACTION", "WHERE", "WHY", "INPUT", "OUTPUT", "CHECK", "IF THIS FAILS", "NEXT"]) {
+    await expect(firstDroneStep.getByText(label, { exact: true }).last()).toBeVisible();
+  }
   await page.getByRole("button", { name: /Understand why/ }).click();
   await expect(page.locator(".sop-steps").first()).toHaveClass(/mode-why/);
-  await expect(page.getByText("Why", { exact: true }).first()).toBeVisible();
+  await expect(firstDroneStep.getByText("WHY", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Download Markdown checklist" })).toHaveAttribute(
     "href",
     "/field-labs/uav-coastal-wetlands/ebee-postflight-checklist.md",

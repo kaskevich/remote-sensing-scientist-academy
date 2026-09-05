@@ -1,0 +1,45 @@
+{
+  "project": "2024 Boreal Baltic coastal-wetland UAV campaign, western Estonia",
+  "site": "Saardu",
+  "sourceFolder": "2024 fieldwork / Vegetation_Indices_Plots",
+  "publicUseBasis": "User-supplied project material explicitly requested for public Academy teaching",
+  "transformation": "Identical crop removes precise coordinate axes and legend; map pixels are otherwise unaltered, then downsampled for web delivery",
+  "examples": [
+    {
+      "sourceFile": "Saardu_NDVI_Plot.png",
+      "publicFile": "saardu-ndvi.png",
+      "product": "NDVI",
+      "status": "derived"
+    },
+    {
+      "sourceFile": "Saardu_GNDVI_Plot.png",
+      "publicFile": "saardu-gndvi.png",
+      "product": "GNDVI",
+      "status": "derived"
+    },
+    {
+      "sourceFile": "Saardu_RNDVI_Plot.png",
+      "publicFile": "saardu-rndvi.png",
+      "product": "RNDVI / NDVIRe",
+      "status": "derived"
+    },
+    {
+      "sourceFile": "Saardu_MSAVI_Plot.png",
+      "publicFile": "saardu-msavi.png",
+      "product": "MSAVI",
+      "status": "derived"
+    },
+    {
+      "sourceFile": "Saardu_DSM_Plot.png",
+      "publicFile": "saardu-dsm.png",
+      "product": "DSM",
+      "status": "processed"
+    },
+    {
+      "sourceFile": "Saardu_Thermal_Plot.png",
+      "publicFile": "saardu-thermal.png",
+      "product": "Thermal",
+      "status": "processed"
+    }
+  ]
+}

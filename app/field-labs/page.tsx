@@ -26,10 +26,10 @@ const labs = [
   {
     number: "07",
     eyebrow: "UAV remote sensing",
-    title: "From Flight to Ecological Map",
-    description: "Process a real 2024 eBee coastal-wetland mission from raw imagery and positioning data to RGB, multispectral, thermal, DSM and reflectance products.",
+    title: "Plan, fly and process an eBee mission",
+    description: "Follow a chronological 22-step tutorial from ecological mission planning and field preparation through eMotion, PPK/GCP, Pix4D products, final QA and an analysis-ready handoff.",
     href: uavFieldLabPath,
-    tags: ["eBee X", "Sequoia + Duet T", "PPK / GCP", "Pix4D"],
+    tags: ["eBee X", "Sequoia + Duet T", "PPK / GCP", "Pix4D", "Mission → handoff"],
     className: "uav",
   },
 ] as const;
