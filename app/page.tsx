@@ -820,7 +820,7 @@ export default function Home() {
               <a className="button button-primary" href={content.hero.primaryButtonHref}>
                 {content.hero.primaryButtonLabel} <span aria-hidden="true">→</span>
               </a>
-              <a className="text-link" href={content.hero.secondaryButtonHref}>
+              <a className="text-link" href={academyHref(content.hero.secondaryButtonHref)}>
                 {content.hero.secondaryButtonLabel} <span aria-hidden="true">↘</span>
               </a>
             </div>

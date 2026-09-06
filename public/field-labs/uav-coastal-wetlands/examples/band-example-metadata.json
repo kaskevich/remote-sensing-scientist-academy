@@ -29,5 +29,5 @@
     "RedEdge": [0.22454488, 0.43957998],
     "NIR": [0.32019863, 0.6836308]
   },
-  "public_use_basis": "User-supplied 2024 project material explicitly requested for public Academy teaching"
+  "project_provenance": "Processed rasters from the 2024 Saardu UAV campaign"
 }

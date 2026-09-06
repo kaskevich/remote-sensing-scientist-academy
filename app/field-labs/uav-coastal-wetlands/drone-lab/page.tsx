@@ -24,7 +24,7 @@ const practicalVisuals = [
   { id: "emotion", title: "eMotion Postflight", nodes: ["flight log", "image times", "GNSS / PPK"], note: "Associates mission evidence and corrected geotags." },
   { id: "time", title: "Time and RINEX", nodes: ["UTC flight", "+3 h summer", "local request"], note: "Request full mission coverage plus margin." },
   { id: "ppk", title: "PPK concept", nodes: ["rover", "base", "corrected geotags"], note: "Overlap in observation time is mandatory." },
-  { id: "accuracy", title: "Before / after", nodes: ["≈0.806 m", "PPK", "≈0.049 m"], note: "2024 manual example, not a guarantee." },
+  { id: "accuracy", title: "Before / after", nodes: ["≈0.806 m", "PPK", "≈0.049 m"], note: "Documented 2024 project example, not a guarantee." },
   { id: "matching", title: "Image–log matching", nodes: ["capture time", "flight event", "image coordinate"], note: "Different from image feature matching." },
   { id: "trimble", title: "Trimble to Pix4D", nodes: ["approved job", "GCP CSV", "GCP/MTP"], note: "Verify schema, units and EPSG:3301." },
   { id: "manager", title: "GCP/MTP Manager", nodes: ["import", "plot", "inspect"], note: "Imported does not mean correctly identified." },
@@ -78,7 +78,7 @@ export default function DroneLabPage() {
           <div className="drone-lab-status" aria-label="Drone Lab workflow status sequence"><span>PREPARE</span><span>FLY</span><span>RETRIEVE</span><span>CORRECT</span><span>RECONSTRUCT</span><strong>HAND OFF</strong></div>
         </header>
 
-        <aside className="drone-version-note"><strong>2024 project workflow</strong><p>The source manual used eMotion 3.23.12494 and PIX4Dmapper 4.3.27. Interface labels can differ in newer versions. Read current help before acting; never substitute similar-looking buttons.</p></aside>
+        <aside className="drone-version-note"><strong>2024 project workflow</strong><p>This workflow used eMotion 3.23.12494 and PIX4Dmapper 4.3.27. Interface labels can differ in newer versions. Read current help before acting; never substitute similar-looking buttons.</p></aside>
 
         <DronePreflightQuickSop />
 
@@ -104,7 +104,7 @@ export default function DroneLabPage() {
 
           <details className="uav-reference-chapter">
             <summary><span>B</span><div><strong>Twenty annotated procedure diagrams</strong><small>Open the visual index instead of scrolling past a card wall</small></div></summary>
-            <div className="uav-reference-content"><p>These safe code-native diagrams replace credential-bearing, private-path and version-specific manual screenshots.</p><div className="practical-visual-grid">{practicalVisuals.map((visual, index) => <article className={`practical-visual visual-${visual.id}`} key={visual.id}><span>{String(index + 1).padStart(2, "0")}</span><h3>{visual.title}</h3><div>{visual.nodes.map((node, nodeIndex) => <strong key={node}>{node}{nodeIndex < visual.nodes.length - 1 && <i aria-hidden="true">→</i>}</strong>)}</div><p>{visual.note}</p></article>)}</div></div>
+            <div className="uav-reference-content"><p>Use this diagram index to revisit a handoff without repeating the full SOP. Each card summarizes the input, operation, check and resulting product.</p><div className="practical-visual-grid">{practicalVisuals.map((visual, index) => <article className={`practical-visual visual-${visual.id}`} key={visual.id}><span>{String(index + 1).padStart(2, "0")}</span><h3>{visual.title}</h3><div>{visual.nodes.map((node, nodeIndex) => <strong key={node}>{node}{nodeIndex < visual.nodes.length - 1 && <i aria-hidden="true">→</i>}</strong>)}</div><p>{visual.note}</p></article>)}</div></div>
           </details>
 
           <details className="uav-reference-chapter">
@@ -114,7 +114,6 @@ export default function DroneLabPage() {
         </section>
 
         <section className="drone-lab-section"><p className="section-kicker">Misconception firewall</p><h2>Similar words do not make equivalent evidence</h2><div className="drone-misconception-grid">{misconceptions.map((item) => <strong key={item}>{item}</strong>)}</div></section>
-        <section className="drone-lab-section drone-security-note"><p className="section-kicker">Publication security</p><h2>No operational credentials or internal paths</h2><p>The private manual informed the sequence, PPK example and checkpoints. No usernames, passwords, authenticated URLs, machine paths or unverified local job names are reproduced. Deployment runs a dedicated scan.</p></section>
         <section className="drone-lab-section drone-references"><p className="section-kicker">Current help at the workstation</p><h2>Authoritative operational references</h2><ul><li><a href={uavSources.pix4dProcess} target="_blank" rel="noopener noreferrer">PIX4Dmapper processing sequence and Quality Report ↗</a></li><li><a href={uavSources.pix4dThermal} target="_blank" rel="noopener noreferrer">PIX4D thermal-image guidance ↗</a></li><li><a href={uavSources.trimbleExport} target="_blank" rel="noopener noreferrer">Trimble Access export guidance ↗</a></li><li><a href={uavSources.epsg3301} target="_blank" rel="noopener noreferrer">EPSG:3301 registry record ↗</a></li></ul></section>
 
         <nav className="field-lab-sequence" aria-label="Field Lab 07 navigation"><a href={academyHref(uavFieldLabPath)}><span>Return to the complete mission</span><strong>Field Lab 07 · Plan, fly and process</strong></a><a href={academyHref("/species/from-field-to-earth-observation/")}><span>Continue the evidence chain</span><strong>Species → field plot → EO model</strong></a></nav>

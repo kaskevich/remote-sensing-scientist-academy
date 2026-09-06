@@ -93,7 +93,7 @@ export function UavFieldLabTutorial() {
                 <footer>
                   <div><strong>NEXT</strong><p>{step.next}</p></div>
                   {step.reference && <a href={`#${step.reference}`}>Open the supporting science ↓</a>}
-                  {step.number === "05" && <a href={academyHref(droneLabPath)}>Open the detailed post-flight Drone Lab →</a>}
+                  {step.number === "05" && <a href={academyHref(droneLabPath)}>Continue with the workstation procedure →</a>}
                   {index < uavTutorialSteps.length - 1 && <a href={stepHref(uavTutorialSteps[index + 1].number)} onClick={(event) => { event.preventDefault(); chooseStep(uavTutorialSteps[index + 1].number); }}>Continue to Step {uavTutorialSteps[index + 1].number} →</a>}
                 </footer>
               </div>}

@@ -90,6 +90,18 @@ describe("Field Lab 07 release", () => {
     expect(publicText).not.toMatch(/https?:\/\/(?:localhost|127\.0\.0\.1|[^\s/]*\.local)(?:[/:]|\b)/i);
   });
 
+  it("keeps release-process language out of learner-facing Lab 07 content", () => {
+    const learnerFiles = [
+      "app/field-labs/uav-coastal-wetlands/page.tsx",
+      "app/field-labs/uav-coastal-wetlands/drone-lab/page.tsx",
+      "app/components/uav-field-lab-interactions.tsx",
+      "lib/uav-field-lab.ts",
+    ];
+    const learnerText = learnerFiles.map((file) => readFileSync(file, "utf8")).join("\n");
+    expect(learnerText).not.toMatch(/Publication security|No operational credentials|credential-bearing|private-path|private manual|Internal 2024 example job names|publication-safe teaching export/i);
+    expect(readFileSync("app/page.tsx", "utf8")).toContain("academyHref(content.hero.secondaryButtonHref)");
+  });
+
   it("publishes the explained pre-flight, expandable interactions and real-project provenance", () => {
     const interactions = readFileSync("app/components/uav-field-lab-interactions.tsx", "utf8");
     expect(interactions).toContain("Phase 0 · before the flight");

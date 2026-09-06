@@ -88,7 +88,7 @@ export default function UavCoastalWetlandsPage() {
             <p>Follow one chronological workflow from the ecological question to an analysis-ready raster stack. Every stage names its inputs, output, software location, quality check, failure response and next action.</p>
             <div className="uav-hero-actions">
               <a className="button button-primary" href="#tutorial-step-01">Begin at Step 01 ↓</a>
-              <a className="text-link" href={academyHref(droneLabPath)}>Open the detailed post-flight Drone Lab →</a>
+              <a className="button uav-drone-cta" href={academyHref(droneLabPath)}>Open the detailed Drone Lab →</a>
             </div>
           </div>
           <div className="uav-flight-visual" role="img" aria-label="Fixed-wing eBee mapping a coastal meadow with overlapping image footprints and field plots">
@@ -157,7 +157,7 @@ export default function UavCoastalWetlandsPage() {
             <summary><span>03</span><div><strong>Positioning and control</strong><small>Time · RINEX · PPK · GCP · CRS</small></div></summary>
             <div className="uav-reference-content">
               <div className="ppk-diagram" role="img" aria-label="UAV GNSS and base-station observations with overlapping time feed a PPK solution"><span>UAV GNSS<br /><small>rover observations</small></span><strong>+</strong><span>Reference station<br /><small>RINEX observations</small></span><strong>+</strong><span>Overlapping time<br /><small>mission + margin</small></span><b>→ PPK solution → corrected camera geotags</b></div>
-              <p><strong>PPK</strong> combines rover and reference GNSS observations after flight. <strong>RINEX</strong> transfers receiver-independent observation/navigation data. The 2024 manual example improved reported geotag uncertainty from approximately 0.806 m to 0.049 m; that is not a universal guarantee of map accuracy.</p>
+              <p><strong>PPK</strong> combines rover and reference GNSS observations after flight. <strong>RINEX</strong> transfers receiver-independent observation/navigation data. In the documented 2024 project example, reported geotag uncertainty improved from approximately 0.806 m to 0.049 m; that is not a universal guarantee of map accuracy.</p>
               <div className="uav-time-check"><strong>TIME CHECK</strong><p>For the July 2024 mission, Estonia local time was UTC+3. Verify the source time basis and request reference data for the complete flight plus margin.</p></div>
               <div className="geometry-radiometry"><article><span>GEOMETRY</span><h3>Where is this pixel?</h3><ul><li>geotagging and PPK</li><li>GCPs</li><li>EPSG:3301</li><li>bundle adjustment</li><li>DSM and orthorectification</li></ul></article><article><span>RADIOMETRY</span><h3>What does its value represent?</h3><ul><li>sensor response</li><li>illumination and calibration</li><li>reflectance</li><li>thermal signal</li></ul></article></div>
             </div>

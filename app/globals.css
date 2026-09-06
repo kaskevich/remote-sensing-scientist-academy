@@ -7113,6 +7113,8 @@ footer > p {
 .uav-lab-hero,
 .drone-lab-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
 .uav-hero-actions { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 28px; }
+.uav-drone-cta { border: 1px solid var(--ink); background: var(--ink); color: white; }
+.uav-drone-cta:hover,.uav-drone-cta:focus-visible { background: #286a50; }
 .uav-flight-visual { position: relative; min-height: 410px; overflow: hidden; border: 1px solid rgba(17,94,64,.3); border-radius: 28px; background: linear-gradient(#a9dceb 0 39%, #72ad91 40% 62%, #b7c67e 63%); box-shadow: inset 0 0 80px rgba(255,255,255,.25); }
 .uav-flight-visual::before { content: ""; position: absolute; inset: 63% 0 0; background: repeating-linear-gradient(100deg, transparent 0 52px, rgba(255,255,255,.35) 54px 57px); }
 .uav-wing { position: absolute; z-index: 2; top: 24%; left: 50%; width: 170px; height: 42px; display: grid; place-items: center; transform: translateX(-50%) rotate(-7deg); clip-path: polygon(0 42%,42% 15%,48% 0,52% 0,58% 15%,100% 42%,80% 67%,55% 52%,52% 100%,48% 100%,45% 52%,20% 67%); background: var(--ink); color: white; font-size: .72rem; font-weight: 850; letter-spacing: .12em; }
@@ -7182,7 +7184,7 @@ footer > p {
 .field-lab-sequence { display: flex; justify-content: space-between; gap: 22px; align-items: center; max-width: 1240px; margin: 28px auto 0; padding: 24px; border-block: 1px solid var(--line); }.field-lab-sequence span { font-weight: 850; }.field-lab-sequence a { color: #286a50; font-weight: 850; }
 
 .drone-lab-hero { border-bottom: 1px solid var(--line); }.drone-lab-status { padding: 26px; border: 1px solid #7daa94; border-radius: 18px; background: #e5f0eb; }.drone-lab-status strong,.drone-lab-status span { display: block; }.drone-lab-status strong { font-size: 2.2rem; }.drone-lab-status span { margin-top: 7px; color: var(--ink-soft); }
-.drone-version-note,.drone-security-note { border-left: 5px solid var(--orange); background: #fff5ed; }
+.drone-version-note { border-left: 5px solid var(--orange); background: #fff5ed; }
 .retrieval-diagram { justify-content: space-around; }.retrieval-diagram > div { padding: 20px; border-radius: 12px; background: white; }.retrieval-diagram strong,.retrieval-diagram span { display: block; }.retrieval-diagram b { color: #286a50; }
 .folder-tree { padding: 24px; overflow-x: auto; border-radius: 14px; background: var(--ink); color: #e9f7ef; line-height: 1.7; }
 .practical-visual-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }.practical-visual { min-height: 145px; display: grid; align-content: space-between; padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: #edf4f0; }.practical-visual span { color: #286a50; font-size: .68rem; font-weight: 900; }.practical-visual strong { font-size: 1.05rem; }

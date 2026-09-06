@@ -102,7 +102,7 @@ metadata <- list(
   reflectance_display = "Each band is independently linearly stretched from its sampled 2nd to 98th percentile and rendered in grayscale. This is a display transformation only; source reflectance values are not embedded in the PNG.",
   resampling = "All public examples are resampled to one 1200 × 1200 display grid covering the common Saardu reflectance extent. Bilinear resampling is used for RGB and reflectance; nearest-neighbour resampling is used for the RGB alpha mask.",
   display_limits = display_limits,
-  public_use_basis = "User-supplied 2024 project material explicitly requested for public Academy teaching"
+  project_provenance = "Processed rasters from the 2024 Saardu UAV campaign"
 )
 
 json <- jsonlite::toJSON(metadata, pretty = TRUE, auto_unbox = TRUE, digits = 8)

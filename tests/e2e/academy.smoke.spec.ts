@@ -38,6 +38,15 @@ test("each homepage pathway card opens its matching module route", async ({ page
   }
 });
 
+test("homepage field-lab link opens the Field Labs collection", async ({ page }) => {
+  await page.goto("/");
+  const link = page.getByRole("link", { name: /See a field lab/i });
+  await expect(link).toHaveAttribute("href", "/field-labs/");
+  await link.click();
+  await expect(page).toHaveURL(/\/field-labs\/?$/);
+  await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
+});
+
 for (const viewport of [
   { name: "desktop", width: 1440, height: 900 },
   { name: "mobile", width: 375, height: 812 },
@@ -263,6 +272,7 @@ test("Field Lab 07 publishes the science route, interactive sensor explorer and 
   await expect(firstTutorialStep.getByRole("button")).toHaveAttribute("aria-expanded", "false");
   await expect(page.locator("#tutorial-step-03 > button")).toHaveAttribute("aria-expanded", "true");
   await expect(page.getByRole("heading", { name: "Same site, different measurement product" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open the detailed Drone Lab →" })).toHaveClass(/uav-drone-cta/);
   const projectProducts = {
     RGB: "saardu-rgb.png",
     Green: "saardu-green.png",
