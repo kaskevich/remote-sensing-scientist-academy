@@ -227,6 +227,12 @@ test("an enriched species page separates field evidence, traits, taxonomy and im
   await expect(page.getByText(/Cover among 30 plots: median 52.5%/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Pool-wise CCI and leaf area" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Current verified classification" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "How this taxon enters the analysis" })).toBeVisible();
+  await expect(page.locator(".species-eo-evidence")).toContainText("52 of 120 plots");
+  await expect(page.locator(".species-eo-evidence")).toContainText("CCI n = 124 · leaf area n = 58");
+  await expect(page.getByText("Source boundary", { exact: true })).toHaveCount(0);
+  await expect(page.getByText("Trace every published element", { exact: true })).toHaveCount(0);
+  await expect(page.getByText(/SHA-256|Records_West_Estonia_2024_dec16_shared.xlsx/)).toHaveCount(0);
   await expect(page.locator(".species-image-grid figure")).toHaveCount(4);
 
   for (const width of [375, 320]) {
@@ -235,6 +241,18 @@ test("an enriched species page separates field evidence, traits, taxonomy and im
     await expect(page.locator(".species-evidence-split article").nth(1)).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
   }
+});
+
+test("species pages replace generic copy with taxon-specific study contribution", async ({ page }) => {
+  await page.goto("/species/briza-media/");
+  await expect(page.locator(".species-eo-evidence")).toContainText("25 of 120 plots");
+  await expect(page.locator(".species-eo-evidence")).toContainText("2 occupied plots have a positive numeric cover value");
+  await expect(page.locator(".species-eo-evidence")).toContainText("No eligible CCI or leaf-area summary");
+  await expect(page.getByText(/No species-specific trait or spectral evidence was supplied/)).toHaveCount(0);
+
+  await page.goto("/species/carex-flava/");
+  await expect(page.locator(".species-eo-evidence")).toContainText("Not linked to a 2024 plot record");
+  await expect(page.locator(".species-eo-evidence")).toContainText("not used as field evidence in the study summaries");
 });
 
 test("the Field-to-EO explainer and Study Data Guide expose the verified evidence chain", async ({ page }) => {

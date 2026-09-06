@@ -116,6 +116,13 @@ describe("Coastal Meadow Species Atlas", () => {
     const pageSource = readFileSync("app/species/[slug]/page.tsx", "utf8");
     expect(pageSource.indexOf("INDEPENDENT BOTANICAL EVIDENCE")).toBeLessThan(pageSource.indexOf("OUR FIELD EVIDENCE"));
     expect(pageSource).not.toContain("FinBIF description payloads are retained in the maintenance cache");
+    expect(pageSource).not.toContain("Source boundary");
+    expect(pageSource).not.toContain("Why this record matters for Earth Observation");
+    expect(pageSource).not.toContain("Trace every published element");
+    expect(pageSource).not.toContain("Seed provenance");
+    expect(pageSource).not.toContain("Source access date");
+    expect(pageSource).toContain("How this taxon enters the analysis");
+    expect(pageSource).toContain("/data/baltic-coastal-meadow-2024/");
   });
 
   it("does not promote study frequency or unresolved labels into ecological claims", () => {

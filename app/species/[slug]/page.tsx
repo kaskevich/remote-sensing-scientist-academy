@@ -47,6 +47,11 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
     ? speciesRecords.filter((candidate) => candidate.family === species.family && candidate.slug !== species.slug && candidate.genus !== species.genus)
     : [];
   const related = [...sameGenus, ...sameFamily].slice(0, 4);
+  const coverObservationCount = Object.values(species.habitats).reduce((total, habitat) => total + habitat.coverAmongOccupiedPlots.n, 0);
+  const cci = species.studyEvidence.traits.CCI;
+  const leafArea = species.studyEvidence.traits.LA;
+  const hasStudyRecord = species.studyEvidence.studyNames.length > 0;
+  const traitCount = Number(Boolean(cci)) + Number(Boolean(leafArea));
 
   return (
     <>
@@ -103,7 +108,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
           <p className="section-kicker">Coastal-meadow position</p>
           <h2 id="coastal-position-title">Our 2024 field observations</h2>
           <CoastalHabitatTransect highlighted={habitats} evidence={species.habitats} />
-          <p className="transect-disclaimer">Occurrence uses the 30 sampled plots in each community. Community boundaries are not rigid; these are study observations, not a complete Estonian distribution.</p>
+          <p className="transect-disclaimer">Occurrence uses the 30 sampled plots in each community. Community boundaries are not rigid; these are study observations, not a complete Estonian distribution. <a href={academyHref("/data/baltic-coastal-meadow-2024/")}>Study data and methods →</a></p>
           <div className="species-evidence-split">
             <article className="species-general-ecology"><span>INDEPENDENT BOTANICAL EVIDENCE</span><h3>General ecology</h3><p>{species.generalEcology.summary}</p>{species.generalEcology.sources.length > 0 && <p className="species-ecology-sources"><strong>Sources:</strong> {species.generalEcology.sources.map((source, index) => <span key={source.url}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer">{source.name} ↗</a></span>)}</p>}</article>
             <article><span>OUR FIELD EVIDENCE</span><h3>Occurrence in our 2024 coastal-meadow study</h3><p>{species.studyEvidence.studyNames.length ? `Recorded in ${species.studyEvidence.occupiedPlotCount} of ${species.studyEvidence.totalPlotCount} sampled plots.` : "No study label was safely reconciled to this accepted taxon."}</p><ul>{Object.values(habitatDefinitions).map((habitat) => { const value = species.habitats[habitat.code]; const cover = value.coverAmongOccupiedPlots; return <li className="habitat-evidence-row" key={habitat.code}><a href={academyHref(`/species/habitats/${habitat.slug}/`)}>{habitat.code} · {habitat.name}</a><strong>{value.occupiedPlots} / {value.totalPlots} · {Math.round(value.occurrenceFrequency * 100)}%</strong>{cover.n > 0 && <small>Cover among {cover.n} plots: median {cover.median}% · IQR {cover.q1}–{cover.q3}%</small>}</li>; })}</ul></article>
@@ -111,7 +116,7 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
           <div className="species-site-grid" aria-label="Site occurrence in the 2024 study">{Object.entries(species.studyEvidence.siteEvidence).map(([site, value]) => <div key={site}><strong>{site}</strong><span>{value.occupiedPlots} / {value.totalPlots} plots</span></div>)}</div>
         </section>
 
-        <section className="species-detail-section species-taxonomy-grid" aria-labelledby="taxonomy-title">
+        <section className="species-detail-section species-taxonomy-grid species-taxonomy-only" aria-labelledby="taxonomy-title">
           <div>
             <p className="section-kicker">FINBIF TAXONOMY</p>
             <h2 id="taxonomy-title">Current verified classification</h2>
@@ -119,11 +124,6 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
               {species.taxonomy.map((entry) => <li key={`${entry.taxonId}-${entry.rank}`}><span>{entry.rank ?? entry.taxonId}</span><strong>{entry.name}{entry.authorship ? ` ${entry.authorship}` : ""}</strong></li>)}
             </ol>
           </div>
-          <aside>
-            <p className="section-kicker">IDENTIFICATION</p>
-            <h2>Source boundary</h2>
-            <p>{species.identification ?? "No English identification prose was returned for automatic publication. Consult the linked FinBIF record and appropriate regional keys; do not identify a plant from photographs alone."}</p>
-          </aside>
         </section>
 
         <section className="species-detail-section species-observation-panel" aria-labelledby="observations-title">
@@ -133,32 +133,22 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
 
         <section className="species-detail-section species-images" aria-labelledby="images-title">
           <p className="section-kicker">Licensed FinBIF photographs</p><h2 id="images-title">Image evidence</h2>
+          <p className="species-image-guidance">Use the photographs as visual reference alongside a regional identification key; photographs alone are not sufficient for a field identification.</p>
           <div className="species-image-grid">{species.images.map((item, index) => <figure key={item.imageId ?? item.file}><Image src={academyAssetHref(item.file)} alt={item.alt} width={1200} height={900} loading={index ? "lazy" : "eager"} unoptimized /><figcaption>{item.attributionText}. <a href={item.licenseUrl} target="_blank" rel="license noopener noreferrer">{item.license} ↗</a> · <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">source ↗</a></figcaption></figure>)}</div>
         </section>
 
         <section className="species-detail-section species-eo-panel" aria-labelledby="eo-title">
           <div>
-            <p className="section-kicker">REMOTE-SENSING INTERPRETATION</p>
-            <h2 id="eo-title">Why this record matters for Earth Observation</h2>
-            <p>{species.remoteSensingContext}</p>
+            <p className="section-kicker">FIELD DATA → EARTH OBSERVATION</p>
+            <h2 id="eo-title">How this taxon enters the analysis</h2>
+            <p>These steps show what this record contributes to the 2024 study. They do not turn the taxon name into a remotely sensed measurement.</p>
           </div>
-          <div className="eo-chain" aria-label="Conceptual evidence chain from plant evidence to remotely sensed observation">
-            <span>species traits or abundance</span><b>→</b><span>community cover and structure</span><b>→</b><span>mixed spectral or structural response</span><b>→</b><span>UAV or satellite observation</span>
-          </div>
-          <p className="eo-nonclaim">This page does not claim that Sentinel-2 or a UAV can uniquely identify <i>{species.scientificName}</i>.</p>
-        </section>
-
-        <section className="species-detail-section species-sources" aria-labelledby="sources-title">
-          <p className="section-kicker">Sources and image credits</p>
-          <h2 id="sources-title">Trace every published element</h2>
-          <dl>
-            <div><dt>FinBIF taxonomy</dt><dd><a href={species.sourceUrl} target="_blank" rel="noopener noreferrer">{species.sourceName} · {species.taxonId} · refreshed 2026-09-04 ↗</a></dd></div>
-            <div><dt>Source access date</dt><dd>{species.sourceAccessDate ?? "Not available"}</dd></div>
-            <div><dt>Seed provenance</dt><dd>{species.sourceDocument}{species.sourceDocumentSha256 ? ` · SHA-256 ${species.sourceDocumentSha256}` : ""}</dd></div>
-            <div><dt>2024 field data</dt><dd>Records_West_Estonia_2024_dec16_shared.xlsx · occurrence from inwork_Sp_presence · cover from Community_level_data</dd></div>
-            <div><dt>Trait method</dt><dd>HowTo_species_to_community_level_traits_13Dez.docx · pooled species medians · minimum n = 5 · cover-weighted community interpretation</dd></div>
-            <div><dt>Photographs</dt><dd>{species.images.length} individually licensed FinBIF image{species.images.length === 1 ? "" : "s"}; creator, licence and source are shown with each image.</dd></div>
-          </dl>
+          <ol className="species-eo-evidence">
+            <li><span>1 · FIELD EVIDENCE</span><strong>{hasStudyRecord ? `${species.studyEvidence.occupiedPlotCount} of ${species.studyEvidence.totalPlotCount} plots` : "Not linked to a 2024 plot record"}</strong><p>{hasStudyRecord ? (coverObservationCount > 0 ? `${coverObservationCount} occupied plot${coverObservationCount === 1 ? " has" : "s have"} a positive numeric cover value available for occupied-plot cover summaries.` : "Occurrence is verified, but no positive numeric cover value is available for an occupied-plot cover summary.") : "This accepted taxon remains a botanical reference in the Atlas but is not used as field evidence in the study summaries."}</p></li>
+            <li><span>2 · TRAIT ELIGIBILITY</span><strong>{traitCount > 0 ? [cci && `CCI n = ${cci.n}`, leafArea && `leaf area n = ${leafArea.n}`].filter(Boolean).join(" · ") : "No eligible CCI or leaf-area summary"}</strong><p>{traitCount === 2 ? "Both traits passed the documented minimum of five measurements. Their species medians can be weighted by relative cover when constructing plot-level community-weighted means." : traitCount === 1 ? `Only ${cci ? "CCI" : "leaf area"} passed the documented minimum of five measurements. Its species median can contribute to the corresponding plot-level community-weighted mean where cover is available.` : `Neither trait met the documented minimum of five measurements for this taxon, so it contributes no species median to the CCI or leaf-area community-weighted means.`}</p></li>
+            <li><span>3 · MODEL LINK</span><strong>Plot response, not species detection</strong><p>Plot-level ecological responses are paired with UAV predictors. A fitted model can estimate variation in those responses across the landscape; this record does not train a classifier for <i>{species.scientificName}</i>.</p></li>
+          </ol>
+          <p className="eo-nonclaim"><strong>Interpretation boundary:</strong> UAV or satellite imagery does not uniquely identify <i>{species.scientificName}</i> in this study. <a href={academyHref("/species/from-field-to-earth-observation/")}>Follow the complete field-to-EO workflow →</a></p>
         </section>
 
         <section className="species-detail-section species-related" aria-labelledby="related-title">
