@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { filterSpecies } from "@/app/components/species-atlas-browser";
 import { habitatCodes, speciesRecords } from "@/lib/species-atlas";
+import generalEcology from "@/content/species/general-ecology.json";
 import reconciliation from "@/content/species/taxon-reconciliation.json";
 
 describe("Coastal Meadow Species Atlas", () => {
@@ -77,5 +80,52 @@ describe("Coastal Meadow Species Atlas", () => {
     expect(withCci.every((species) => species.studyEvidence.traits.CCI!.n >= 5)).toBe(true);
     expect(withLa.every((species) => species.studyEvidence.traits.LA!.n >= 5)).toBe(true);
     expect(speciesRecords.find((species) => species.scientificName === "Juncus gerardi")!.studyEvidence.traits.CCI!.n).toBe(124);
+  });
+
+  it("publishes concise, sourced general ecology for every Atlas taxon", () => {
+    expect(Object.keys(generalEcology.records)).toHaveLength(78);
+    expect(new Set(Object.keys(generalEcology.records))).toEqual(new Set(speciesRecords.map((species) => species.taxonId)));
+    for (const species of speciesRecords) {
+      const ecology = species.generalEcology;
+      expect(["complete", "partial", "under_review"]).toContain(ecology.status);
+      expect(ecology.summary).not.toContain("description payloads are retained in the maintenance cache");
+      if (ecology.status === "under_review") {
+        expect(ecology.summary).toBe("General ecology summary is still under source review.");
+        continue;
+      }
+      expect(ecology.summary.length).toBeGreaterThanOrEqual(100);
+      expect((ecology.summary.match(/[.!?](?:\s|$)/g) ?? []).length).toBeGreaterThanOrEqual(2);
+      expect((ecology.summary.match(/[.!?](?:\s|$)/g) ?? []).length).toBeLessThanOrEqual(5);
+      expect(ecology.sources.length).toBeGreaterThanOrEqual(1);
+      for (const source of ecology.sources) {
+        expect(source.name).not.toBe("");
+        expect(source.url).toMatch(/^https:\/\//);
+        expect(source.retrievedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(source.geographicScope).not.toBe("");
+        expect(source.contentFieldsSupported.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("keeps independent ecology separate from unchanged 2024 field evidence", () => {
+    const studyBytes = readFileSync("data/species/study-species-summary.json");
+    expect(createHash("sha256").update(studyBytes).digest("hex")).toBe("d9481f956ad4f29bcb218fec0140a916eba43107fdb8402db49d4c6ba8320362");
+    for (const species of speciesRecords) {
+      expect(species.generalEcology.summary).not.toMatch(/\b(?:OP|LS|US|TG)\b|2024 field|sampled plots|occurrence frequency/i);
+    }
+    const pageSource = readFileSync("app/species/[slug]/page.tsx", "utf8");
+    expect(pageSource.indexOf("INDEPENDENT BOTANICAL EVIDENCE")).toBeLessThan(pageSource.indexOf("OUR FIELD EVIDENCE"));
+    expect(pageSource).not.toContain("FinBIF description payloads are retained in the maintenance cache");
+  });
+
+  it("does not promote study frequency or unresolved labels into ecological claims", () => {
+    const summaries = speciesRecords.map((species) => species.generalEcology.summary).join("\n");
+    expect(summaries).not.toMatch(/\bcoastal specialist\b|\bLower Shore species\b|\bUpper Shore species\b/i);
+    expect(summaries).not.toMatch(/In Estonia/i);
+    const salicornia = speciesRecords.find((species) => species.scientificName === "Salicornia perennans")!;
+    expect(salicornia.studyEvidence.studyNames).toEqual(["Salicornia_europaea"]);
+    expect(reconciliation.find((record) => record.studyName === "Salicornia_europaea")).toMatchObject({ matchStatus: "exact", finbifAcceptedName: "Salicornia perennans" });
+    const unresolvedStudyNames = new Set(reconciliation.filter((record) => !record.taxonId).map((record) => record.studyName));
+    expect(speciesRecords.some((species) => species.studyEvidence.studyNames.some((name) => unresolvedStudyNames.has(name)))).toBe(false);
   });
 });

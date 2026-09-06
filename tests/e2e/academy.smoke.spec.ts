@@ -218,6 +218,9 @@ test("an enriched species page separates field evidence, traits, taxonomy and im
   await page.goto("/species/juncus-gerardi/");
   await expect(page.getByRole("heading", { name: /Juncus gerardi/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: "General ecology" })).toBeVisible();
+  await expect(page.locator(".species-general-ecology")).toContainText("coastal meadows and salt marshes");
+  await expect(page.locator(".species-ecology-sources").getByRole("link", { name: /FinBIF/ })).toBeVisible();
+  await expect(page.getByText(/description payloads are retained in the maintenance cache/i)).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Occurrence in our 2024 coastal-meadow study" })).toBeVisible();
   await expect(page.getByText("Recorded as Juncus gerardii")).toBeVisible();
   await expect(page.getByText("30 / 30 · 100%")).toBeVisible();
@@ -225,6 +228,13 @@ test("an enriched species page separates field evidence, traits, taxonomy and im
   await expect(page.getByRole("heading", { name: "Pool-wise CCI and leaf area" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Current verified classification" })).toBeVisible();
   await expect(page.locator(".species-image-grid figure")).toHaveCount(4);
+
+  for (const width of [375, 320]) {
+    await page.setViewportSize({ width, height: 812 });
+    await expect(page.locator(".species-general-ecology")).toBeVisible();
+    await expect(page.locator(".species-evidence-split article").nth(1)).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  }
 });
 
 test("the Field-to-EO explainer and Study Data Guide expose the verified evidence chain", async ({ page }) => {

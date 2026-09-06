@@ -1,5 +1,6 @@
 import rawSpecies from "@/content/species/species.json";
 import rawReconciliation from "@/content/species/taxon-reconciliation.json";
+import rawGeneralEcology from "@/content/species/general-ecology.json";
 import rawStudy from "@/data/species/study-species-summary.json";
 import rawFinbif from "@/data/species/finbif-cache.json";
 
@@ -44,6 +45,20 @@ export type TraitSummary = {
   sourceMinHeader: string;
 };
 
+export type EcologySource = {
+  name: string;
+  url: string;
+  retrievedAt: string;
+  geographicScope: string;
+  contentFieldsSupported: string[];
+};
+
+export type GeneralEcology = {
+  status: "complete" | "partial" | "under_review";
+  summary: string;
+  sources: EcologySource[];
+};
+
 export type SpeciesRecord = {
   speciesId: string;
   slug: string;
@@ -64,6 +79,7 @@ export type SpeciesRecord = {
   taxonomy: Array<{ rank?: string; name: string; taxonId: string; authorship?: string | null }>;
   identification: string | null;
   ecology: string | null;
+  generalEcology: GeneralEcology;
   occurrence: string | null;
   habitats: Record<HabitatCode, HabitatEvidence>;
   studyEvidence: {
@@ -128,6 +144,7 @@ type FinbifRecord = {
 const reconciliation = rawReconciliation as Reconciliation[];
 const study = (rawStudy as { species: Record<string, StudySummary> }).species;
 const finbif = rawFinbif as Record<string, FinbifRecord>;
+const generalEcology = (rawGeneralEcology as { records: Record<string, GeneralEcology> }).records;
 const acceptedStatuses = new Set(["exact", "accepted-name-match", "synonym-match", "spelling-normalization"]);
 
 type AtlasBase = {
@@ -196,6 +213,11 @@ const emptyHabitat = (): HabitatEvidence => ({
 
 export const speciesRecords: SpeciesRecord[] = [...seedBases, ...fieldBases].map((base) => {
   const current = finbif[base.taxonId];
+  const ecologyEvidence = generalEcology[base.taxonId] ?? {
+    status: "under_review" as const,
+    summary: "General ecology summary is still under source review.",
+    sources: [],
+  };
   const links = reconciliation.filter((item) => item.taxonId === base.taxonId && acceptedStatuses.has(item.matchStatus));
   const evidence = links.map((item) => study[item.studyName]).filter(Boolean);
   const primary = evidence[0];
@@ -231,6 +253,8 @@ export const speciesRecords: SpeciesRecord[] = [...seedBases, ...fieldBases].map
     taxonRank: current?.taxonRank ?? null,
     taxonomicStatus: "accepted",
     taxonomy: current?.classification ?? base.taxonomy,
+    ecology: ecologyEvidence.status === "under_review" ? null : ecologyEvidence.summary,
+    generalEcology: ecologyEvidence,
     habitats,
     studyEvidence: {
       status: primary?.coverAvailable ? "verified_2024_field_data" : "not_recorded_in_cover_table",

@@ -20,6 +20,7 @@
     "test:uav": "python3 scripts/validate_uav_training_pack.py",
     "test:smoke": "playwright test",
     "security:uav": "node scripts/scan-uav-publication.mjs",
+    "species:ecology:validate": "node scripts/validate-species-ecology.mjs",
     "species:update": "python3 scripts/species/update_species_atlas.py"
   },
   "dependencies": {

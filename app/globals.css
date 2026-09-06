@@ -6642,6 +6642,7 @@ footer > p {
 }
 
 .species-evidence-split article {
+  align-self: start;
   padding: 28px;
   border: 1px solid #c6ccc4;
   background: #fbf9f3;
@@ -6659,6 +6660,24 @@ footer > p {
 .species-related p {
   color: #5b685f;
   line-height: 1.68;
+}
+
+.species-evidence-split .species-ecology-sources {
+  margin: 22px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #d3d7d1;
+  color: #657168;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.species-ecology-sources strong {
+  color: var(--botanical-ink);
+}
+
+.species-ecology-sources a {
+  color: var(--coast-blue-deep);
+  text-underline-offset: 3px;
 }
 
 .species-evidence-split ul {

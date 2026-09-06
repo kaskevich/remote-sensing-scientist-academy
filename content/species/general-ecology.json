@@ -1,0 +1,398 @@
+{
+  "schemaVersion": "1.0.0",
+  "records": {
+    "MX.39812": {
+      "status": "complete",
+      "summary": "Achillea millefolium is a perennial herb of meadows, fields, pastures, verges, yards and other dryish or disturbed ground. Its broad habitat range makes it a grassland and open-ground generalist rather than a plant restricted to coastal settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39812/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40593": {
+      "status": "complete",
+      "summary": "Agrostis capillaris is a tuft-forming perennial grass of meadows, lawns, dry grasslands, wooded pastures, roadsides and ruderal ground. It can grow on relatively nutrient-poor sites and is not specifically coastal.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40593/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.40601": {
+      "status": "complete",
+      "summary": "Agrostis stolonifera is a perennial grass that may form mats on sea, lake and river shores, in ditches, spring-fed wet ground and salt-marsh habitats. It is associated with wet and riparian ground but is not confined to the coast.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40601/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40582": {
+      "status": "complete",
+      "summary": "Anthoxanthum odoratum is a tufted perennial grass of mesic meadows, wooded pastures, rocky ground, yards and verges. It is broadly associated with open grassland and managed margins rather than a single wetland or coastal habitat.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40582/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39064": {
+      "status": "complete",
+      "summary": "Anthyllis vulneraria is a biennial or short-lived perennial herb of dry grasslands, open esker woods, roadsides, railways and harbour ground. The source describes a plant of dry, open habitats, not a wetland specialist.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39064/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.38844": {
+      "status": "complete",
+      "summary": "Argentina anserina is a rhizomatous perennial herb recorded from grasslands, yards, fields, parks, waste ground and seashores. Its habitat range includes both inland disturbed places and coastal ground, so coastal occurrence does not define its whole ecology.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38844/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40557": {
+      "status": "complete",
+      "summary": "Arrhenatherum elatius is a loosely tufted perennial grass of meadows, rocky hills, park and garden lawns, roadsides, coastal groves and stony shores. Its source-supported range includes both inland and shore habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40557/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40501": {
+      "status": "complete",
+      "summary": "Briza media is a perennial grass of open dry and wooded meadows, rich fens and secondary meadow or verge habitats. FinBIF describes it as light-demanding and calciphilous, with occurrences spanning moist and drier grasslands.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40501/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and Europe where stated", "contentFieldsSupported": ["life form", "habitat", "light", "substrate", "distribution"] }]
+    },
+    "MX.39705": {
+      "status": "complete",
+      "summary": "Campanula glomerata is a perennial herb of sunny to partly shaded meadow slopes, verges, glades and herb-rich woodland. FinBIF associates it with dry to mesic, calcareous and relatively nutrient-poor substrates.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39705/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and broader native range where stated", "contentFieldsSupported": ["life form", "habitat", "light", "moisture", "substrate"] }]
+    },
+    "MX.40355": {
+      "status": "complete",
+      "summary": "Carex distans is a densely tufted perennial sedge. FinBIF describes its Finnish habitat as the upper parts of seashore meadows; that independent source evidence supports a coastal association, not an inference from the Academy plots.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40355/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40298": {
+      "status": "complete",
+      "summary": "Carex disticha is a rhizomatous perennial sedge of moist meadows, rich thin-peat wetlands, rich fens, spring-fed swamp woodland, ditches and shores. It is wetland-associated across both inland and shore environments.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40298/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.40351": {
+      "status": "complete",
+      "summary": "Carex flacca is a creeping perennial sedge of calcareous meadows, wooded meadows and rich fens. It is calciphilous and may also occur as an introduction around harbours and storage areas.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40351/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.40360": {
+      "status": "complete",
+      "summary": "Carex flava is a tufted perennial sedge of rich fens, wet woodland, moist meadows, shores, springs and ditches. FinBIF characterizes it as calciphilous, placing it among base-rich wetland plants across inland and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40360/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.40417": {
+      "status": "complete",
+      "summary": "Carex nigra is a narrow-leaved perennial sedge occupying many moist habitats, including lake, river and sea shores, ditches, meadows, roadsides, thin-peat mires and wet rock hollows. It is wetland-associated but ecologically broad within that moisture range.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40417/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.40352": {
+      "status": "complete",
+      "summary": "Carex panicea is a narrow-leaved perennial sedge of rich fen-like mires, shores, pastures and mesic to moist meadows. Its source-supported ecology is moisture-associated and includes both inland and shore habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40352/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39904": {
+      "status": "complete",
+      "summary": "Centaurea jacea is a robust-rooted perennial herb of dryish meadows, dry riverbank grasslands, glades and verges. It is principally an open-grassland plant in the source account, without a specific coastal association.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39904/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.38073": {
+      "status": "complete",
+      "summary": "Cerastium fontanum is usually a perennial herb, though annual or biennial forms occur. FinBIF records it from many open and semi-open habitats, including meadows, lawns, verges, roadsides and shores, indicating a broad ecological range.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38073/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "light"] }]
+    },
+    "MX.40564": {
+      "status": "complete",
+      "summary": "Deschampsia cespitosa is a densely tufted perennial grass of mesic and moist meadows, abandoned fields, shores, wet woodland, spring-fed ground and settled areas. It grows on varied substrates and FinBIF notes strong competitiveness on organic soils and pastures.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40564/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.40269": {
+      "status": "complete",
+      "summary": "Eleocharis palustris is a low perennial wetland plant, especially of shallow water on open lake shores, but also of wet meadows, ditches, pools and mires. FinBIF associates it with relatively firm clay-sand or mineral shore substrates.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40269/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.40537": {
+      "status": "complete",
+      "summary": "Elytrigia repens is a rhizomatous perennial grass that can form extensive stands in fields, gardens, yards, verges, waste ground and on seashores. Its combination of agricultural, ruderal and coastal habitats identifies it as a broad habitat generalist.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40537/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.37718": {
+      "status": "complete",
+      "summary": "Equisetum palustre is a perennial horsetail of wet meadows and fields, rich fens, riparian ground, shores, springs and ditches. It is wetland-associated but not specifically coastal.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.37718/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.40438": {
+      "status": "complete",
+      "summary": "Festuca rubra is a loosely tufted perennial grass of meadows, sown grasslands, shores, verges and waste ground. FinBIF describes a native range across the temperate Northern Hemisphere and established introductions in the Southern Hemisphere.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40438/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.38795": {
+      "status": "complete",
+      "summary": "Filipendula ulmaria is an upright rhizomatous perennial herb of moist meadows, ditches, shore meadows and thickets, wet woodland, rich fens and springs. It is a moisture- and wetland-associated plant across inland and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38795/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.38794": {
+      "status": "complete",
+      "summary": "Filipendula vulgaris is a rhizomatous perennial herb of dryish banks, dry and sloping meadows and rocky outcrops. FinBIF characterizes it as calciphilous, linking it to dry, base-rich grassland rather than wetland habitat.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38794/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.38871": {
+      "status": "complete",
+      "summary": "Fragaria viridis is a stoloniferous perennial herb of dry meadows, banks and dry slopes, with a preference for calcareous substrates. FinBIF places its wider range from central and eastern Europe to Central Asia, reaching southern Fennoscandia and the Caucasus.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38871/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and Eurasian distribution where stated", "contentFieldsSupported": ["life form", "habitat", "substrate", "distribution"] }]
+    },
+    "MX.39284": {
+      "status": "complete",
+      "summary": "Galium boreale is a rhizomatous perennial herb of meadows, dry grasslands, forest margins, dry herb-rich woodland, riverbanks and verges. Its source-supported habitat range crosses grassland, woodland edge and riparian environments.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39284/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39288": {
+      "status": "complete",
+      "summary": "Galium palustre is a perennial herb of sea and lake shores, meadows, mires, ditches and flood-prone margins. It is wetland-associated across both freshwater and coastal settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39288/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39287": {
+      "status": "complete",
+      "summary": "Galium uliginosum is a perennial herb found in dry to mesic meadows as well as stream margins, ditches, shores, herb-rich woodland and swamp woodland. This broad source account spans both grassland and moisture-associated habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39287/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39292": {
+      "status": "complete",
+      "summary": "Galium verum is a perennial herb of dry meadows, exposed rocky ground, heaths, juniper scrub and roadsides. FinBIF describes it as Eurasian, so an occurrence beside the sea represents only one part of its wider ecology.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39292/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and Eurasian distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.39137": {
+      "status": "complete",
+      "summary": "Geranium pratense is a robust rhizomatous perennial herb of village margins, yards, gardens, parks, roadsides, forest edges and harbour areas. The Finnish source also notes ornamental use and frequent naturalization, so its ecology includes human-influenced habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39137/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat", "establishment context"] }]
+    },
+    "MX.38834": {
+      "status": "complete",
+      "summary": "Geum rivale is a rhizomatous perennial herb of meadows, verges, ditches, moist herb-rich woodland and spring-fed mires. It is moisture-associated but occupies a range of open and wooded inland habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38834/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad moist-habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.38836": {
+      "status": "complete",
+      "summary": "Geum urbanum is a rhizomatous perennial herb of herb-rich woodland, forest margins, parks, gardens and verges. Its ecology centres on wooded or semi-shaded and managed habitats rather than coastal wetlands.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38836/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "light"] }]
+    },
+    "MX.40207": {
+      "status": "complete",
+      "summary": "Juncus gerardi is a low perennial rush associated with coastal meadows and salt marshes. FinBIF also records roadside and railway habitats in northern Finland, showing that its occurrence is not universally confined to coastal plots.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40207/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "salinity context"] }]
+    },
+    "MX.39002": {
+      "status": "complete",
+      "summary": "Lathyrus pratensis is a perennial herb of meadows, verges, hayfields, forest margins, shores and grassy woodland. It is a broad grassland and woodland-edge plant whose source account includes, but is not limited to, shore habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39002/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39126": {
+      "status": "complete",
+      "summary": "Linum catharticum is an annual or biennial herb of calcareous moist meadows, wooded and seashore meadows, dry pasture, rocky ground, gravel pits and limestone quarries. Its calciphilous ecology spans both moist and dry open habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39126/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.40436": {
+      "status": "complete",
+      "summary": "Lolium arundinaceum is a perennial grass that the Finnish source records from seashores and as a cultivated turf or forage grass. It is native from western Europe and North Africa to Central Asia and established more widely in temperate and cool regions, so it is not globally restricted to coasts.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40436/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.39057": {
+      "status": "complete",
+      "summary": "Lotus corniculatus is a perennial herb of seashores, esker woods, roadsides, gravel pits and dry grasslands. This varied open-habitat range includes both coastal and inland sites.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39057/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40228": {
+      "status": "complete",
+      "summary": "Luzula campestris is a loosely tufted perennial wood-rush that often forms carpet-like patches. FinBIF places it in dryish and dry meadows, supporting an open-grassland ecology rather than a wetland association.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40228/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.38678": {
+      "status": "complete",
+      "summary": "Lysimachia maritima is a rhizomatous perennial herb of coastal salt marshes and other shore habitats, and it also occurs on inland saline soils. It is salt-associated but not exclusively coastal, with a wider Eurasian and North American distribution.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38678/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "salinity", "distribution"] }]
+    },
+    "MX.40643": {
+      "status": "complete",
+      "summary": "Molinia caerulea is a densely tufted perennial grass of mesotrophic to eutrophic fens, sandy or stony shores, mire margins, wet meadows and ditches. FinBIF associates it with thin peat or mineral soil, describing a wetland plant across inland and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40643/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.39014": {
+      "status": "complete",
+      "summary": "Ononis spinosa subsp. arvensis is a perennial herb whose Finnish account emphasizes stony seashore meadows and waste ground. The same authoritative description notes dry and moist meadows, pastures, field edges and roadsides elsewhere in its European to western Asian range, so it is not universally coastal.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39014/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and broader European range where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.39772": {
+      "status": "complete",
+      "summary": "Pentanema salicinum is a perennial herb of seashores and a wide range of inland habitats, including glades, dry grasslands, meadows, roadsides, forest margins, rich woodland and rich fens. FinBIF also characterizes it as calciphilous.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39772/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.39242": {
+      "status": "complete",
+      "summary": "Peucedanum palustre is a biennial herb of shores, shore meadows, ditches, mires and other wet ground. It is a moisture- and wetland-associated plant rather than a species restricted to marine habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39242/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.40617": {
+      "status": "complete",
+      "summary": "Phleum pratense is a loosely tufted perennial grass of hayfields, meadows, waste ground, yards and verges. It is native from western Europe to eastern Asia and established in many other temperate regions, reflecting a broad grassland and managed-land ecology.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40617/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.40639": {
+      "status": "complete",
+      "summary": "Phragmites australis is a large perennial grass of lake and sea shores, shallow water, ditches, flood meadows and mire margins. Its source-supported habitats include freshwater, wetland and coastal environments, so it is not restricted to brackish coastal systems.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40639/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39959": {
+      "status": "complete",
+      "summary": "Pilosella officinarum is a hairy, stoloniferous perennial herb of dry rocky or sandy grassland, gravel slopes, dry banks, verges and gravel pits. It is associated with open, dry ground rather than wetland habitat.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39959/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39198": {
+      "status": "complete",
+      "summary": "Pimpinella major is a perennial herb associated with moist herb-rich woods and traditional land-use habitats such as wooded pastures, clearings and mesic meadows. FinBIF places its wider distribution across much of Europe and the Caucasus.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39198/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and broader European range where stated", "contentFieldsSupported": ["life form", "habitat", "moisture", "distribution"] }]
+    },
+    "MX.39199": {
+      "status": "complete",
+      "summary": "Pimpinella saxifraga is a perennial herb of dry to mesic meadows, banks, yards, pastures, woodland clearings and rocky grasslands. Its source account supports a broad dryish open-habitat ecology.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39199/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39679": {
+      "status": "complete",
+      "summary": "Plantago lanceolata is a perennial herb of dry meadows, glades, verges, lawns, railway margins and ruderal ground. Its source-supported ecology is broadly associated with open ground and grassland.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39679/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39673": {
+      "status": "complete",
+      "summary": "Plantago major is a perennial herb of yards, roadsides and shores, especially open ground exposed to trampling or other disturbance. This broad disturbance-tolerant ecology is not tied to coastal wetlands.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39673/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat", "disturbance"] }]
+    },
+    "MX.39677": {
+      "status": "complete",
+      "summary": "Plantago maritima is a perennial herb of wet saline coastal banks and salt-influenced ground. FinBIF reports a wide distribution across Eurasia and parts of the Americas and North Africa; its coastal affinity is independently sourced rather than inferred from the study communities.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39677/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "moisture", "salinity", "distribution"] }]
+    },
+    "MX.40457": {
+      "status": "complete",
+      "summary": "Poa annua is usually an annual grass of meadows, lawns, yards, gardens, roadsides, waste ground and shores. It succeeds on many substrates and is a broad open-ground and disturbance-associated generalist.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40457/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.40461": {
+      "status": "complete",
+      "summary": "Poa pratensis is a loosely tufted perennial grass of forest edges, meadows, lawns, sown grasslands, yards, gardens, verges and waste ground. It is native across cool and temperate parts of the Northern Hemisphere and established more widely, making it a broad grassland species.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40461/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.38863": {
+      "status": "complete",
+      "summary": "Potentilla erecta is a perennial herb of meadows, verges, glades and mesic woodland, as well as swamp woodland and rich fens. Its source-supported range crosses grassland, forest and wetland habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38863/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.38865": {
+      "status": "complete",
+      "summary": "Potentilla reptans is a thick-rhizomed perennial herb of meadows, verges and shores, with occasional records from ports and loading areas. Its ecology includes inland grassland and disturbed habitats as well as shore sites.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38865/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39500": {
+      "status": "complete",
+      "summary": "Prunella vulgaris is a perennial herb of meadows, verges, pastures, lawns, shores and herb-rich woodland. This range spans managed grassland, woodland and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39500/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.37897": {
+      "status": "complete",
+      "summary": "Ranunculus acris is a perennial herb of meadows, verges, roadsides, yards and mesic or herb-rich woodland. Its source-supported ecology is broadly associated with mesic grassland and woodland edges.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.37897/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.37902": {
+      "status": "complete",
+      "summary": "Ranunculus bulbosus is a perennial herb of glades, meadows, dry rocky grasslands, verges and yards, with occasional harbour occurrences. FinBIF characterizes it as calciphilous and primarily associated with dry, open ground.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.37902/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.39663": {
+      "status": "complete",
+      "summary": "Rhinanthus minor is an annual hemiparasitic herb of road and field verges, dry meadows, sloping grasslands and pastures. It is associated with open grassland and obtains part of its resources through host plants.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39663/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "growth strategy", "habitat"] }]
+    },
+    "MX.38279": {
+      "status": "complete",
+      "summary": "Rumex acetosa is a perennial herb of meadows, verges, yards, springs and herb-rich woodland. Its source-supported habitats span both common grassland and moist woodland settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38279/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.4977505": {
+      "status": "complete",
+      "summary": "Salicornia perennans is an annual succulent herb of sparsely vegetated sandy or silty depressions in low seashore meadows. FinBIF describes it as an obligate saltland plant of neutral chloride soils and places northern Baltic material in a taxonomically difficult diploid complex; the 2024 study name Salicornia europaea is therefore retained alongside the accepted FinBIF match.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.4977505/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and northern European taxonomic context", "contentFieldsSupported": ["life form", "habitat", "salinity", "taxonomic scope"] }]
+    },
+    "MX.39926": {
+      "status": "complete",
+      "summary": "Scorzonera humilis is a perennial herb of esker woods, forest clearings and edges, wooded pastures, dry slopes, sunny riverine woodland and roadsides. FinBIF places its range from northern France and Scandinavia east to Russia and the Caucasus.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39926/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and European distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.39917": {
+      "status": "complete",
+      "summary": "Scorzoneroides autumnalis is a perennial herb of yards, lawns, roadsides, pastures, meadows, rocky ground, seashores and alpine tundra. Its very broad open-habitat range makes shore occurrence only one part of its ecology.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39917/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.40503": {
+      "status": "complete",
+      "summary": "Sesleria uliginosa is a loosely tufted perennial grass of eutrophic fens, fen meadows and mesic to moist nutrient-rich meadows. FinBIF characterizes it as calcicolous, supporting an affinity for base-rich grassland and fen habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40503/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] }]
+    },
+    "MX.38055": {
+      "status": "complete",
+      "summary": "Stellaria graminea is a perennial herb of meadows, verges, forest margins, cultivated ground, roadsides and shores. The varied source-supported habitat list spans grassland, edge and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38055/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.38207": {
+      "status": "complete",
+      "summary": "Suaeda maritima is an annual herb of open saline ground on seashores, including sparsely vegetated and often muddy shore-meadow depressions. FinBIF also reports inland populations on saline steppe ground farther east, so its saltland affinity is broader than one coastal community type.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38207/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and broader Eurasian range where stated", "contentFieldsSupported": ["life form", "habitat", "salinity", "distribution"] }]
+    },
+    "MX.39366": {
+      "status": "complete",
+      "summary": "Succisa pratensis is a short-rhizomed perennial herb of mesic meadows, river, lake and sea shores, forest margins and clearings, wooded pastures and field or road edges. Its source account spans grassland, woodland edge and shore habitats, especially on clay-rich ground.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39366/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "habitat", "substrate"] }]
+    },
+    "MX.39042": {
+      "status": "complete",
+      "summary": "Trifolium fragiferum is a perennial herb of coastal meadows and harbour ground, and FinBIF notes a requirement for mineral-rich substrate. Its wider range includes North Africa, much of Europe, the Baltic region and southern Fennoscandia; the coastal association is independently sourced.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39042/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and wider European distribution where stated", "contentFieldsSupported": ["life form", "habitat", "substrate", "distribution"] }]
+    },
+    "MX.39054": {
+      "status": "complete",
+      "summary": "Trifolium medium is a rhizomatous perennial herb that can form extensive patches in meadows, verges, esker woods, herb-rich woodland and forest margins. Its ecology is broadly associated with grassland and woodland edges.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39054/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat"] }]
+    },
+    "MX.39037": {
+      "status": "complete",
+      "summary": "Trifolium montanum is a perennial herb of dry meadows, calcareous grasslands, rocky ground and, occasionally, railways, roadsides and harbours. FinBIF places its range across central and eastern Europe, reaching the Baltic region and southern Fennoscandia.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39037/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and wider European distribution where stated", "contentFieldsSupported": ["life form", "habitat", "substrate", "distribution"] }]
+    },
+    "MX.39052": {
+      "status": "complete",
+      "summary": "Trifolium pratense is a perennial herb of meadows, dry grasslands, verges, roadsides and forest margins, and it is also cultivated as forage. It is native from western Europe and North Africa to central and southern Asia and established widely elsewhere.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39052/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.39038": {
+      "status": "complete",
+      "summary": "Trifolium repens is a perennial herb of meadows, verges, yards, fields, paths and roadsides, and it is widely used in forage and lawns. Its native range extends from western Europe and parts of Africa to central and southern Asia, with established populations in many other regions.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39038/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland and global distribution where stated", "contentFieldsSupported": ["life form", "habitat", "distribution"] }]
+    },
+    "MX.40125": {
+      "status": "complete",
+      "summary": "Triglochin maritima is a perennial wetland herb of coastal meadows, gaps among shore stones and shallow water. FinBIF also records it from rich fens inland in northern Finland, so its ecology is not exclusively coastal.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40125/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.40126": {
+      "status": "complete",
+      "summary": "Triglochin palustris is a perennial wetland herb of pond, lake and sea shores, springs, rich fens, open mires, wet meadows and ditches. Its moisture association spans freshwater, mire and coastal habitats.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.40126/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland wetland evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.39608": {
+      "status": "complete",
+      "summary": "Veronica officinalis is a perennial herb of wooded rocks, dry herb-rich heath woodland, clear-cuts, wooded pastures and dryish meadows. It is principally associated with dry open woodland and grassland, not coastal wetland habitat.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.39608/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "moisture"] }]
+    },
+    "MX.38972": {
+      "status": "complete",
+      "summary": "Vicia cracca is a perennial scrambling herb that climbs through surrounding vegetation in meadows, roadsides, verges, shores, forest margins and grassy woodland. Its habitat range is broad and includes both inland and shore settings.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38972/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; coastal and inland habitat evidence", "contentFieldsSupported": ["life form", "growth form", "habitat"] }]
+    },
+    "MX.38312": {
+      "status": "complete",
+      "summary": "Viola hirta is a perennial herb of dry woodland and scrub margins, semi-dry grassland and intermittently moist calcareous meadows. It is calciphilous and native from Europe east to Siberia and Xinjiang, placing it in a temperate dry-grassland and edge context rather than a coastal one.",
+      "sources": [
+        { "name": "FloraWeb (German Federal Agency for Nature Conservation)", "url": "https://www.floraweb.de/php/artenhome.php?suchnr=6378", "retrievedAt": "2026-09-06", "geographicScope": "Germany; habitat and life-form evidence", "contentFieldsSupported": ["life form", "habitat", "moisture", "substrate"] },
+        { "name": "Plants of the World Online (Kew)", "url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:868309-1", "retrievedAt": "2026-09-06", "geographicScope": "Global taxonomic and distribution context", "contentFieldsSupported": ["accepted name", "life form", "distribution"] }
+      ]
+    },
+    "MX.38321": {
+      "status": "complete",
+      "summary": "Viola riviniana is a low perennial herb of herb-rich heath woodland, herb-rich forest, meadows and forest margins. Its ecology spans both woodland and grassland edges.",
+      "sources": [{ "name": "FinBIF / Laji.fi", "url": "https://laji.fi/en/taxon/MX.38321/identification", "retrievedAt": "2026-09-04", "geographicScope": "Finland; broad habitat evidence", "contentFieldsSupported": ["life form", "habitat", "light"] }]
+    }
+  }
+}
