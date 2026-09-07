@@ -132,9 +132,9 @@ export default async function SpeciesPage({ params }: { params: Promise<{ slug: 
         </section>
 
         <section className="species-detail-section species-images" aria-labelledby="images-title">
-          <p className="section-kicker">Licensed FinBIF photographs</p><h2 id="images-title">Image evidence</h2>
-          <p className="species-image-guidance">Use the photographs as visual reference alongside a regional identification key; photographs alone are not sufficient for a field identification.</p>
-          <div className="species-image-grid">{species.images.map((item, index) => <figure key={item.imageId ?? item.file}><Image src={academyAssetHref(item.file)} alt={item.alt} width={1200} height={900} loading={index ? "lazy" : "eager"} unoptimized /><figcaption>{item.attributionText}. <a href={item.licenseUrl} target="_blank" rel="license noopener noreferrer">{item.license} ↗</a> · <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">source ↗</a></figcaption></figure>)}</div>
+          <p className="section-kicker">Licensed FinBIF photographs</p><h2 id="images-title">Additional photographs</h2>
+          <p className="species-image-guidance">These views complement the primary photograph above without repeating it. Use them alongside a regional identification key; photographs alone are not sufficient for a field identification.</p>
+          <div className="species-image-grid">{species.images.slice(1).map((item) => <figure key={item.imageId ?? item.file}><Image src={academyAssetHref(item.file)} alt={item.alt} width={1200} height={900} loading="lazy" unoptimized /><figcaption>{item.attributionText}. <a href={item.licenseUrl} target="_blank" rel="license noopener noreferrer">{item.license} ↗</a> · <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">source ↗</a></figcaption></figure>)}</div>
         </section>
 
         <section className="species-detail-section species-eo-panel" aria-labelledby="eo-title">

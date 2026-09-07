@@ -43,3 +43,11 @@ The previous *Phragmites australis* primary showed dead/rhizome material. It was
 | *Poa pratensis* | MM.122051 | flowering living stand |
 
 Selections are encoded in `scripts/species/update_species_atlas.py` so a future refresh revalidates their rights and preserves the reviewed primary order when the media remain eligible.
+
+## Duplicate-presentation audit — 2026-09-07
+
+All 273 local Atlas WebP files were checked by SHA-256 and perceptual-hash screening. A labelled contact-sheet review then confirmed 35 pairs in which a legacy PDF-extracted image and a current FinBIF media file showed the same underlying photograph. No current FinBIF media pair within a taxon and no cross-taxon pair was identified as a duplicate.
+
+The Atlas now treats the current FinBIF media inventory as authoritative whenever it is available. Each of the 78 taxa renders three distinct, fully attributed FinBIF media records: one primary photograph and two additional photographs. The primary photograph is no longer repeated in the additional-photographs gallery. Legacy PDF-extracted files remain only as a non-rendered fallback and do not appear on current Atlas pages.
+
+The 35 affected taxa were: *Achillea millefolium*, *Agrostis stolonifera*, *Argentina anserina*, *Arrhenatherum elatius*, *Briza media*, *Carex distans*, *Carex flava*, *Carex nigra*, *Carex panicea*, *Centaurea jacea*, *Deschampsia cespitosa*, *Eleocharis palustris*, *Elytrigia repens*, *Festuca rubra*, *Filipendula vulgaris*, *Galium boreale*, *Galium palustre*, *Galium verum*, *Juncus gerardi*, *Lathyrus pratensis*, *Linum catharticum*, *Lotus corniculatus*, *Lysimachia maritima*, *Molinia caerulea*, *Pentanema salicinum*, *Phragmites australis*, *Plantago maritima*, *Poa pratensis*, *Potentilla erecta*, *Salicornia perennans*, *Scorzoneroides autumnalis*, *Sesleria uliginosa*, *Suaeda maritima*, *Triglochin maritima* and *Vicia cracca*.

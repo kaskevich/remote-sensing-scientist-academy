@@ -239,8 +239,12 @@ export const speciesRecords: SpeciesRecord[] = [...seedBases, ...fieldBases].map
     imageId: image.imageId,
     retrievedAt: image.retrievedAt,
   }));
-  const orderedImages = current?.primaryImageId ? [...onlineImages, ...base.images] : [...base.images, ...onlineImages];
-  const images = orderedImages.filter((image, index, records) => records.findIndex((candidate) => candidate.file === image.file) === index).slice(0, 4);
+  // Current FinBIF media supersede legacy PDF-extracted images. Many legacy files
+  // are alternate encodings of the same photograph and must not reappear beside
+  // their current, fully attributed media record.
+  const images = (onlineImages.length > 0 ? onlineImages : base.images)
+    .filter((image, index, records) => records.findIndex((candidate) => candidate.file === image.file) === index)
+    .slice(0, 4);
   const commonNames = current?.commonNames ?? {};
   return {
     ...base,

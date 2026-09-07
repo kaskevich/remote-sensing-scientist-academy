@@ -30,8 +30,10 @@ describe("Coastal Meadow Species Atlas", () => {
 
   it("publishes only photographs with complete adjacent attribution", () => {
     const photographs = speciesRecords.flatMap((species) => species.images);
-    expect(photographs.length).toBeGreaterThanOrEqual(speciesRecords.length * 3);
-    expect(speciesRecords.every((species) => species.images.length >= 3 && species.images.length <= 4)).toBe(true);
+    expect(photographs).toHaveLength(speciesRecords.length * 3);
+    expect(speciesRecords.every((species) => species.images.length === 3)).toBe(true);
+    expect(speciesRecords.every((species) => species.images.every((image) => image.imageId && !image.file.includes("finbif-page-")))).toBe(true);
+    expect(speciesRecords.every((species) => new Set(species.images.map((image) => image.imageId)).size === species.images.length)).toBe(true);
     for (const image of photographs) {
       expect(image.copyrightOwner).not.toBe("");
       expect(image.license).toMatch(/^CC (?:BY|BY-SA|BY-NC|BY-NC-SA|0) 4\.0$|^CC0 1\.0$/);

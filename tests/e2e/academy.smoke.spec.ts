@@ -233,7 +233,11 @@ test("an enriched species page separates field evidence, traits, taxonomy and im
   await expect(page.getByText("Source boundary", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Trace every published element", { exact: true })).toHaveCount(0);
   await expect(page.getByText(/SHA-256|Records_West_Estonia_2024_dec16_shared.xlsx/)).toHaveCount(0);
-  await expect(page.locator(".species-image-grid figure")).toHaveCount(4);
+  await expect(page.getByRole("heading", { name: "Additional photographs" })).toBeVisible();
+  await expect(page.locator(".species-image-grid figure")).toHaveCount(2);
+  const heroImage = await page.locator(".species-detail-hero figure > img").getAttribute("src");
+  const galleryImages = await page.locator(".species-image-grid img").evaluateAll((images) => images.map((image) => image.getAttribute("src")));
+  expect(galleryImages).not.toContain(heroImage);
 
   for (const width of [375, 320]) {
     await page.setViewportSize({ width, height: 812 });
@@ -253,6 +257,16 @@ test("species pages replace generic copy with taxon-specific study contribution"
   await page.goto("/species/carex-flava/");
   await expect(page.locator(".species-eo-evidence")).toContainText("Not linked to a 2024 plot record");
   await expect(page.locator(".species-eo-evidence")).toContainText("not used as field evidence in the study summaries");
+});
+
+test("species galleries do not repeat their primary photograph or legacy PDF extraction", async ({ page }) => {
+  await page.goto("/species/festuca-rubra/");
+  const hero = await page.locator(".species-detail-hero figure > img").getAttribute("src");
+  const gallery = await page.locator(".species-image-grid img").evaluateAll((images) => images.map((image) => image.getAttribute("src")));
+  expect(gallery).toHaveLength(2);
+  expect(new Set([hero, ...gallery]).size).toBe(3);
+  expect([hero, ...gallery].every((src) => src?.includes("/finbif-mm-") && !src.includes("finbif-page-"))).toBe(true);
+  await expect(page.locator(".species-image-grid figcaption")).toHaveCount(2);
 });
 
 test("the Field-to-EO explainer and Study Data Guide expose the verified evidence chain", async ({ page }) => {
