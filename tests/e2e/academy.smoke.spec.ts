@@ -47,6 +47,63 @@ test("homepage field-lab link opens the Field Labs collection", async ({ page })
   await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
 });
 
+test("homepage Remote Sensing navigator opens all six topics with accessible state and deep links", async ({ page }) => {
+  await page.goto("/#sar");
+
+  const navigator = page.locator(".remote-sensing-navigator");
+  const topics = [
+    { name: "OPTICAL", id: "optical" },
+    { name: "SAR", id: "sar" },
+    { name: "LIDAR", id: "lidar" },
+    { name: "THERMAL", id: "thermal" },
+    { name: "HYPERSPECTRAL", id: "hyperspectral" },
+    { name: "SPATIAL ANALYSIS", id: "spatial-analysis" },
+  ];
+
+  const topicControls = navigator.locator(".signal-strip-interactive");
+  await expect(topicControls.getByRole("button")).toHaveCount(6);
+  await expect(topicControls.getByRole("button", { name: "SAR", exact: true })).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator("#sar")).toBeVisible();
+  await expect.poll(async () => (await page.locator("#sar").boundingBox())?.y ?? 9999).toBeLessThan(200);
+
+  for (const topic of topics) {
+    const button = topicControls.getByRole("button", { name: topic.name, exact: true });
+    await expect(button).toHaveAttribute("aria-controls", topic.id);
+    await button.click();
+    await expect(button).toHaveAttribute("aria-expanded", "true");
+    await expect(page.locator(`#${topic.id}`)).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(`#${topic.id}$`));
+    await expect(navigator.locator(".remote-sensing-topic-panel:visible")).toHaveCount(1);
+  }
+
+  await navigator.getByText("Compare the technologies", { exact: false }).click();
+  await expect(navigator.getByRole("table")).toBeVisible();
+
+  await navigator.getByRole("radio", { name: "Optical", exact: true }).check();
+  await navigator.getByRole("button", { name: "Check my reasoning" }).click();
+  await expect(navigator.getByRole("status")).toContainText("Best starting point: Optical");
+});
+
+for (const viewport of [
+  { name: "320 px", width: 320, height: 700 },
+  { name: "375 px", width: 375, height: 812 },
+]) {
+  test(`Remote Sensing navigator fits ${viewport.name} without hiding topics`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto("/#optical");
+    const navigator = page.locator(".remote-sensing-navigator");
+    const topicControls = navigator.locator(".signal-strip-interactive");
+    await expect(topicControls.getByRole("button")).toHaveCount(6);
+    for (const label of ["OPTICAL", "SAR", "LIDAR", "THERMAL", "HYPERSPECTRAL", "SPATIAL ANALYSIS"]) {
+      await expect(topicControls.getByRole("button", { name: label, exact: true })).toBeVisible();
+    }
+    const hasHorizontalOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    );
+    expect(hasHorizontalOverflow).toBe(false);
+  });
+}
+
 for (const viewport of [
   { name: "desktop", width: 1440, height: 900 },
   { name: "mobile", width: 375, height: 812 },

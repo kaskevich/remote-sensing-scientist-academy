@@ -6,6 +6,7 @@ import LearnerCurriculum, {
   type AcademyCurriculumModule,
   type AcademyLesson,
 } from "@/app/components/learner-curriculum";
+import RemoteSensingNavigator from "@/app/components/remote-sensing-navigator";
 import { module1Overview, reviewedLessonDetails } from "@/lib/module1-pedagogy";
 import {
   module2ChapterPractica,
@@ -866,14 +867,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="signal-strip" aria-label="Curriculum scope">
-          {content.signalStrip.map((signal, index) => (
-            <Fragment key={signal}>
-              <span>{signal}</span>
-              {index < content.signalStrip.length - 1 && <i />}
-            </Fragment>
-          ))}
-        </section>
+        <RemoteSensingNavigator />
 
         {content.pathsSection.visible && (
           <section className="section paths-section" id="paths">

@@ -706,6 +706,493 @@ h1 em {
   border-radius: 50%;
 }
 
+.remote-sensing-navigator {
+  background: #edf0e7;
+  border-bottom: 1px solid var(--line);
+}
+
+.remote-sensing-navigator-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 7vw;
+  align-items: end;
+  padding: 82px 7vw 44px;
+}
+
+.remote-sensing-navigator-heading .section-kicker {
+  margin-bottom: 16px;
+}
+
+.remote-sensing-navigator-heading h2 {
+  max-width: 820px;
+  font-size: clamp(38px, 4.3vw, 66px);
+}
+
+.remote-sensing-navigator-heading > p {
+  max-width: 520px;
+  margin: 0;
+  color: #4e5d6d;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.signal-strip-interactive {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  min-height: 0;
+  padding: 0 5vw;
+}
+
+.signal-strip-interactive button {
+  min-height: 70px;
+  padding: 16px 10px;
+  border: 0;
+  border-left: 1px solid rgba(11, 25, 48, 0.18);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: 800 10px/1.25 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-align: center;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.signal-strip-interactive button:last-child {
+  border-right: 1px solid rgba(11, 25, 48, 0.18);
+}
+
+.signal-strip-interactive button:hover {
+  background: rgba(11, 25, 48, 0.08);
+}
+
+.signal-strip-interactive button.is-selected {
+  background: var(--ink);
+  color: var(--lime);
+}
+
+.remote-sensing-topic-panels {
+  padding: 0 5vw;
+  background: var(--ink);
+  color: #f8f8f3;
+}
+
+.remote-sensing-topic-panel {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 54px 2vw 62px;
+  scroll-margin-top: 24px;
+}
+
+.remote-sensing-topic-panel[hidden] {
+  display: none;
+}
+
+.remote-sensing-topic-panel > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 38px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.topic-panel-label,
+.topic-learning-path > p,
+.topic-learning-path > div > section > p {
+  margin: 0 0 10px;
+  color: var(--lime);
+  font: 800 10px/1.35 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.13em;
+}
+
+.remote-sensing-topic-panel h3 {
+  margin: 0;
+  color: #fff;
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.topic-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.topic-statuses span {
+  padding: 7px 9px;
+  border: 1px solid rgba(200, 243, 61, 0.48);
+  color: var(--lime);
+  font: 750 9px/1.2 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+.topic-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.topic-facts-grid > section {
+  min-width: 0;
+  padding: 25px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.topic-facts-grid > section:first-child,
+.topic-facts-grid > section:nth-child(2),
+.topic-facts-grid > section.topic-limitations {
+  grid-column: span 2;
+}
+
+.topic-facts-grid h4,
+.topic-learning-path h4 {
+  margin: 0 0 13px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.topic-facts-grid p,
+.topic-facts-grid li {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.topic-facts-grid p,
+.topic-facts-grid ul {
+  margin: 0;
+}
+
+.topic-facts-grid ul {
+  padding-left: 18px;
+}
+
+.topic-facts-grid li + li {
+  margin-top: 6px;
+}
+
+.topic-facts-grid .topic-boundary {
+  display: inline-block;
+  margin: 14px 8px 0 0;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 120, 71, 0.55);
+  color: #ffb297;
+  font: 750 10px/1.35 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.topic-learning-path {
+  margin-top: 34px;
+}
+
+.topic-learning-path > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.topic-learning-path > div > section {
+  min-width: 0;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.topic-learning-path ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-learning-path a {
+  display: block;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.topic-learning-path a:hover {
+  border-color: var(--lime);
+  background: rgba(200, 243, 61, 0.07);
+}
+
+.topic-learning-path a strong,
+.topic-learning-path a span {
+  display: block;
+}
+
+.topic-learning-path a strong {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.topic-learning-path a span {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.topic-gap {
+  display: block;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.remote-sensing-comparison,
+.sensor-choice-exercise {
+  margin: 34px 7vw 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.remote-sensing-comparison summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 25px;
+  cursor: pointer;
+  font: 800 12px/1.25 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.remote-sensing-comparison summary::-webkit-details-marker {
+  display: none;
+}
+
+.remote-sensing-comparison[open] summary span {
+  transform: rotate(45deg);
+}
+
+.remote-sensing-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+
+.remote-sensing-comparison table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+}
+
+.remote-sensing-comparison caption {
+  padding: 18px 22px;
+  color: #536174;
+  font-size: 13px;
+  text-align: left;
+}
+
+.remote-sensing-comparison th,
+.remote-sensing-comparison td {
+  padding: 14px 16px;
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: left;
+  vertical-align: top;
+}
+
+.remote-sensing-comparison thead th {
+  background: #e6e9df;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comparison-note {
+  margin: 0;
+  padding: 16px 22px;
+  border-top: 1px solid var(--line);
+  color: #536174;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sensor-choice-exercise {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.48fr) minmax(0, 1fr);
+  gap: 20px 48px;
+  margin-bottom: 0;
+  padding: 36px;
+  transform: translateY(34px);
+}
+
+.sensor-choice-exercise header {
+  grid-row: span 3;
+}
+
+.sensor-choice-exercise h3 {
+  max-width: 320px;
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(30px, 3vw, 43px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.sensor-choice-prompt {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.sensor-choice-exercise fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sensor-choice-exercise legend {
+  margin-bottom: 12px;
+  color: #5b6777;
+  font-size: 12px;
+}
+
+.sensor-choice-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.sensor-choice-options label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sensor-choice-options label.is-selected {
+  border-color: var(--ink);
+  background: #e8edda;
+}
+
+.sensor-choice-options input {
+  accent-color: var(--ink);
+}
+
+.sensor-choice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sensor-choice-actions button {
+  padding: 11px 15px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sensor-choice-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.sensor-choice-actions .sensor-choice-next {
+  background: transparent;
+  color: var(--ink);
+}
+
+.sensor-choice-feedback {
+  grid-column: 2;
+  padding: 20px;
+  border-left: 4px solid var(--orange);
+  background: #f0eee5;
+}
+
+.sensor-choice-feedback > p {
+  margin: 0 0 15px;
+  font-size: 14px;
+}
+
+.sensor-choice-feedback > p.is-correct {
+  color: #315600;
+}
+
+.sensor-choice-feedback dl,
+.sensor-choice-feedback dl > div,
+.sensor-choice-feedback dd {
+  margin: 0;
+}
+
+.sensor-choice-feedback dl {
+  display: grid;
+  gap: 10px;
+}
+
+.sensor-choice-feedback dl > div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px;
+}
+
+.sensor-choice-feedback dt {
+  font: 800 10px/1.5 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sensor-choice-feedback dd {
+  color: #526071;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.remote-sensing-domain-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin: 0 0 34px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: #edf0e7;
+}
+
+.remote-sensing-domain-link > span {
+  color: #59687a;
+  font: 800 9px/1.3 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
+}
+
+.remote-sensing-domain-link a {
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .section {
   padding: 130px 7vw;
 }
@@ -7233,6 +7720,165 @@ footer > p {
   .uav-fact-strip,.practical-visual-grid { grid-template-columns: 1fr; }.uav-fact-strip div { border-right: 0; border-bottom: 1px solid var(--line); }
   .uav-flight-visual { min-height: 310px; }.sun-sensor-diagram,.ppk-diagram,.retrieval-diagram,.processing-toggle-diagram { flex-direction: column; }.field-uav-model > strong { transform: rotate(90deg); }
   .drone-checklist ul { columns: 1; }.field-lab-sequence { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 980px) {
+  .remote-sensing-navigator-heading {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .signal-strip-interactive {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .signal-strip-interactive button:nth-of-type(n) {
+    display: block;
+  }
+
+  .topic-facts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topic-facts-grid > section:first-child,
+  .topic-facts-grid > section:nth-child(2),
+  .topic-facts-grid > section.topic-limitations {
+    grid-column: span 1;
+  }
+
+  .topic-facts-grid > section.topic-limitations {
+    grid-column: 1 / -1;
+  }
+
+  .topic-learning-path > div {
+    grid-template-columns: 1fr;
+  }
+
+  .sensor-choice-exercise {
+    grid-template-columns: 1fr;
+  }
+
+  .sensor-choice-exercise header {
+    grid-row: auto;
+  }
+
+  .sensor-choice-exercise h3 {
+    max-width: none;
+  }
+
+  .sensor-choice-feedback {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .remote-sensing-navigator-heading {
+    padding: 58px 22px 32px;
+  }
+
+  .remote-sensing-navigator-heading h2 {
+    font-size: clamp(35px, 11vw, 48px);
+  }
+
+  .signal-strip-interactive {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0;
+  }
+
+  .signal-strip-interactive button {
+    min-height: 59px;
+    padding: 13px 8px;
+    border-bottom: 1px solid rgba(11, 25, 48, 0.18);
+    font-size: 9px;
+  }
+
+  .remote-sensing-topic-panels {
+    padding: 0;
+  }
+
+  .remote-sensing-topic-panel {
+    padding: 36px 22px 44px;
+  }
+
+  .remote-sensing-topic-panel > header {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .topic-statuses {
+    justify-content: flex-start;
+  }
+
+  .topic-facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-facts-grid > section,
+  .topic-facts-grid > section:first-child,
+  .topic-facts-grid > section:nth-child(2),
+  .topic-facts-grid > section.topic-limitations {
+    grid-column: 1;
+    padding: 20px;
+  }
+
+  .topic-learning-path > div > section {
+    padding: 18px;
+  }
+
+  .remote-sensing-comparison,
+  .sensor-choice-exercise {
+    margin-right: 22px;
+    margin-left: 22px;
+  }
+
+  .remote-sensing-comparison summary {
+    padding: 18px;
+  }
+
+  .sensor-choice-exercise {
+    gap: 18px;
+    padding: 24px 18px;
+  }
+
+  .sensor-choice-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sensor-choice-options label {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+
+  .sensor-choice-feedback dl > div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .remote-sensing-domain-link {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .remote-sensing-navigator-heading,
+  .remote-sensing-topic-panel {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .remote-sensing-comparison,
+  .sensor-choice-exercise {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .sensor-choice-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media print {

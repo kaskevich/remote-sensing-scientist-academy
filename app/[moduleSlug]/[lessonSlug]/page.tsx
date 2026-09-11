@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MarkdownContent } from "@/app/components/lesson-materials";
 import { JsonLd, SeoBreadcrumbs, SeoFooter, SeoHeader } from "@/app/components/seo-navigation";
+import RemoteSensingDomainLink from "@/app/components/remote-sensing-domain-link";
 import {
   academyName,
   getSeoLesson,
@@ -11,6 +12,7 @@ import {
 } from "@/lib/seo-curriculum";
 import { academyAssetUrl, academyHref, academyUrl } from "@/lib/site-paths";
 import { academyEntityId, creatorReference } from "@/lib/professional-identity";
+import { remoteSensingLessonDomains } from "@/lib/remote-sensing-topics";
 
 export function generateStaticParams() {
   return seoLessons.map((lesson) => ({
@@ -100,6 +102,9 @@ export default async function LessonPage({
               Open this lesson in the Academy workspace <span aria-hidden="true">→</span>
             </a>
           </header>
+          {remoteSensingLessonDomains[lesson.slug] && (
+            <RemoteSensingDomainLink topicId={remoteSensingLessonDomains[lesson.slug]} />
+          )}
           <div className="lesson-managed-content">
             <MarkdownContent
               lessonId={lesson.id}
