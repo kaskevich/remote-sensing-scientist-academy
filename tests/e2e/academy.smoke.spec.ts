@@ -108,6 +108,29 @@ test("Field Lab 10 publishes the hyperspectral cube-to-map workflow and interact
   await expect(page.getByRole("heading", { name: /Read a spectral cube/i, level: 1 })).toBeVisible();
 });
 
+test("the standalone advanced thermal lesson protects the radiance-to-inference chain", async ({ page }) => {
+  await page.goto("/lessons/advanced-thermal-remote-sensing/");
+  await expect(page.getByRole("heading", { name: /From emitted radiance/i, level: 1 })).toBeVisible();
+  await expect(page.locator(".thermal-workflow article")).toHaveCount(11);
+  await expect(page.getByText("Evidence boundary", { exact: true })).toBeVisible();
+
+  await page.getByLabel("Stored pixel value").fill("44947");
+  await expect(page.getByText("302.6 K", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: /valid surface-temperature product is 4 °C warmer/i }).click();
+  await expect(page.locator(".thermal-claim-check aside")).toContainText("Supported at the product's stated support");
+
+  await page.setViewportSize({ width: 768, height: 800 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await expect(page.getByRole("heading", { name: /From emitted radiance/i, level: 1 })).toBeVisible();
+
+  await page.goto("/#thermal");
+  await expect(page.locator("#thermal").getByRole("link", { name: "Advanced Thermal Remote Sensing" })).toBeVisible();
+});
+
 test("homepage Remote Sensing navigator opens all six topics with accessible state and deep links", async ({ page }) => {
   await page.goto("/#sar");
 

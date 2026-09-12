@@ -132,19 +132,20 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
       "Surface temperature is not air temperature; warm or cool does not automatically mean dry, healthy or stressed.",
     ],
     distinctions: ["Thermal ≠ reflectance.", "Colour palette ≠ thermal measurement."],
-    status: ["PARTIAL FOUNDATION", "FIELD LAB AVAILABLE", "STANDALONE ADVANCED LESSON COMING LATER"],
+    status: ["FOUNDATION AVAILABLE", "ADVANCED LESSON AVAILABLE", "FIELD LAB AVAILABLE"],
     links: {
       start: [
         { title: "UAV Remote Sensing Fundamentals", href: "/module-2/uav-remote-sensing-fundamentals/", context: "Module 2 · Lesson 2.18" },
         { title: "Sensors, Illumination and Radiometric Quality", href: "/module-2/sensors-illumination-and-radiometric-quality/", context: "Module 2 · Lesson 2.20" },
       ],
-      deeper: [],
+      deeper: [
+        { title: "Advanced Thermal Remote Sensing", href: "/lessons/advanced-thermal-remote-sensing/", context: "Radiance, emissivity, retrieval, QA and validation" },
+      ],
       practice: [
         { title: "Field Lab 07 · UAV Coastal Wetlands", href: "/field-labs/uav-coastal-wetlands/", context: "Thermal science and project context" },
         { title: "Drone Lab · eBee Post-flight and Pix4D Processing", href: "/field-labs/uav-coastal-wetlands/drone-lab/", context: "Duet T operational workflow" },
       ],
     },
-    practiceGap: "Thermal has a project workflow but no standalone advanced Academy lesson yet.",
   },
   {
     id: "hyperspectral",

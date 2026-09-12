@@ -49,7 +49,7 @@ describe("Academy SEO architecture", () => {
 
   it("generates a complete sitemap with no duplicate URLs", () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(11 + seoModules.length + seoLessons.length + habitatCodes.length + 2 + speciesRecords.length);
+    expect(entries).toHaveLength(12 + seoModules.length + seoLessons.length + habitatCodes.length + 2 + speciesRecords.length);
     expect(unique(entries.map((entry) => entry.url))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/curriculum/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/projects/track-recovery-after-fire/"))).toBe(true);
@@ -59,6 +59,7 @@ describe("Academy SEO architecture", () => {
     expect(entries.some((entry) => entry.url.endsWith("/field-labs/sar-wetland-inundation/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/field-labs/lidar-canopy-structure/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/field-labs/hyperspectral-signatures/"))).toBe(true);
+    expect(entries.some((entry) => entry.url.endsWith("/lessons/advanced-thermal-remote-sensing/"))).toBe(true);
     expect(entries.some((entry) => entry.url.endsWith("/species/"))).toBe(true);
     expect(entries.filter((entry) => entry.url.includes("/species/")).length).toBe(2 + habitatCodes.length + speciesRecords.length);
     expect(speciesRecords).toHaveLength(78);
