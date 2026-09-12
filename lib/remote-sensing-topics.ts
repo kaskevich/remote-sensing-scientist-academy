@@ -160,7 +160,7 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
       "Mixed spectra remain ambiguous: a spectral signature is not automatic species identification.",
     ],
     distinctions: ["Multispectral ≠ hyperspectral.", "Spectral signature ≠ automatic species ID."],
-    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "FIELD LAB COMING LATER"],
+    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "FIELD LAB AVAILABLE"],
     links: {
       start: [
         { title: "Optical Remote Sensing", href: "/module-2/optical-remote-sensing/", context: "Module 2 · Lesson 2.26" },
@@ -169,9 +169,10 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
         { title: "Hyperspectral Remote Sensing", href: "/module-2/hyperspectral-remote-sensing/", context: "Module 2 · Lesson 2.29" },
         { title: "Build a Defensible Satellite Evidence Package", href: "/module-2/build-a-defensible-satellite-evidence-package/", context: "Module 2 · Chapter 5 practicum" },
       ],
-      practice: [],
+      practice: [
+        { title: "Field Lab 10 · Hyperspectral Signatures", href: "/field-labs/hyperspectral-signatures/", context: "Cube QA, mixed spectra, modelling and validation" },
+      ],
     },
-    practiceGap: "A dedicated hyperspectral Field Lab is not yet available.",
   },
   {
     id: "spatial-analysis",

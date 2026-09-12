@@ -5,6 +5,7 @@ import { academyHref, academyUrl } from "@/lib/site-paths";
 import { uavFieldLabPath } from "@/lib/uav-field-lab";
 import { sarFieldLabPath } from "@/lib/sar-field-lab";
 import { lidarFieldLabPath } from "@/lib/lidar-field-lab";
+import { hyperspectralFieldLabPath } from "@/lib/hyperspectral-field-lab";
 
 const path = "/field-labs/";
 const url = academyUrl(path);
@@ -51,6 +52,15 @@ const labs = [
     href: lidarFieldLabPath,
     tags: ["LAS / LAZ", "Point QA", "DTM / CHM", "Height metrics", "Vertical accuracy"],
     className: "lidar",
+  },
+  {
+    number: "10",
+    eyebrow: "Imaging spectroscopy",
+    title: "Build a hyperspectral evidence pipeline",
+    description: "Audit cube metadata and bad bands, connect spectra to compatible reference samples, prevent leakage and publish predictions with uncertainty and applicability.",
+    href: hyperspectralFieldLabPath,
+    tags: ["Spectral cube", "Bad-band QA", "Mixed pixels", "Fold-safe features", "Applicability"],
+    className: "hyperspectral",
   },
 ] as const;
 

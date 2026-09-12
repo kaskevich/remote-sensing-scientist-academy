@@ -89,6 +89,25 @@ test("Field Lab 09 publishes the LiDAR point-to-structure workflow and QA intera
   await expect(page.getByRole("heading", { name: /Turn laser returns/i, level: 1 })).toBeVisible();
 });
 
+test("Field Lab 10 publishes the hyperspectral cube-to-map workflow and interactions", async ({ page }) => {
+  await page.goto("/field-labs/hyperspectral-signatures/");
+  await expect(page.getByRole("heading", { name: /Read a spectral cube/i, level: 1 })).toBeVisible();
+  await expect(page.locator(".hyper-workflow article")).toHaveCount(11);
+  await expect(page.getByText("Lab evidence boundary", { exact: true })).toBeVisible();
+
+  await page.getByRole("checkbox", { name: "Mask flagged bands" }).check();
+  await expect(page.locator(".hyper-explorer > aside")).toContainText("16 bands retained");
+  await page.getByRole("button", { name: /Spatial split → fit preprocessing/i }).click();
+  await expect(page.locator(".hyper-leakage aside")).toContainText("validation spectra do not inform");
+  await page.getByLabel("Dry-meadow fraction").fill("25");
+  await expect(page.getByText("25%", { exact: true })).toBeVisible();
+
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await expect(page.getByRole("heading", { name: /Read a spectral cube/i, level: 1 })).toBeVisible();
+});
+
 test("homepage Remote Sensing navigator opens all six topics with accessible state and deep links", async ({ page }) => {
   await page.goto("/#sar");
 
