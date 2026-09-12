@@ -71,6 +71,24 @@ test("Field Lab 08 publishes the complete SAR workflow and working decision labs
   await expect(page.getByRole("heading", { name: /Map wetland inundation/i, level: 1 })).toBeVisible();
 });
 
+test("Field Lab 09 publishes the LiDAR point-to-structure workflow and QA interactions", async ({ page }) => {
+  await page.goto("/field-labs/lidar-canopy-structure/");
+  await expect(page.getByRole("heading", { name: /Turn laser returns into structural evidence/i, level: 1 })).toBeVisible();
+  await expect(page.locator(".lidar-workflow article")).toHaveCount(10);
+  await expect(page.getByText("Lab evidence boundary", { exact: true })).toBeVisible();
+
+  await expect(page.locator(".lidar-profile-stage dd").first()).toContainText("10.56 m");
+  await page.getByRole("button", { name: "Flag P017 as an outlier" }).click();
+  await expect(page.locator(".lidar-profile-stage dd").first()).toContainText("0.71 m");
+  await page.getByRole("button", { name: "Maximum height" }).click();
+  await expect(page.locator(".lidar-metric-lab > aside")).toContainText("sensitive to one high outlier");
+
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await expect(page.getByRole("heading", { name: /Turn laser returns/i, level: 1 })).toBeVisible();
+});
+
 test("homepage Remote Sensing navigator opens all six topics with accessible state and deep links", async ({ page }) => {
   await page.goto("/#sar");
 

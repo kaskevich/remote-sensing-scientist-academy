@@ -4,6 +4,7 @@ import { creatorReference } from "@/lib/professional-identity";
 import { academyHref, academyUrl } from "@/lib/site-paths";
 import { uavFieldLabPath } from "@/lib/uav-field-lab";
 import { sarFieldLabPath } from "@/lib/sar-field-lab";
+import { lidarFieldLabPath } from "@/lib/lidar-field-lab";
 
 const path = "/field-labs/";
 const url = academyUrl(path);
@@ -41,6 +42,15 @@ const labs = [
     href: sarFieldLabPath,
     tags: ["Sentinel-1", "VV / VH", "Backscatter", "Validation", "Uncertainty"],
     className: "sar",
+  },
+  {
+    number: "09",
+    eyebrow: "Three-dimensional remote sensing",
+    title: "Build defensible LiDAR canopy structure",
+    description: "Audit point density and classification, establish terrain, normalize height, derive structural metrics and validate the final quantity at compatible support.",
+    href: lidarFieldLabPath,
+    tags: ["LAS / LAZ", "Point QA", "DTM / CHM", "Height metrics", "Vertical accuracy"],
+    className: "lidar",
   },
 ] as const;
 

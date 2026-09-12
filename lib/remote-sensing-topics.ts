@@ -103,7 +103,7 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
       "DSM is not DTM, and surface height is not automatically vegetation height.",
     ],
     distinctions: ["Photogrammetric point cloud ≠ LiDAR point cloud."],
-    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "LIDAR FIELD LAB COMING LATER"],
+    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "FIELD LAB AVAILABLE"],
     links: {
       start: [
         { title: "LiDAR and Point Clouds", href: "/module-2/lidar-and-point-clouds/", context: "Module 2 · Lesson 2.30" },
@@ -113,6 +113,7 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
         { title: "Build a Defensible Satellite Evidence Package", href: "/module-2/build-a-defensible-satellite-evidence-package/", context: "Module 2 · Chapter 5 practicum" },
       ],
       practice: [
+        { title: "Field Lab 09 · LiDAR Canopy Structure", href: "/field-labs/lidar-canopy-structure/", context: "Point QA, terrain, height and validation" },
         { title: "Field Lab 07 · Photogrammetric Structure", href: "/field-labs/uav-coastal-wetlands/", context: "Comparison context—not a LiDAR survey" },
       ],
     },

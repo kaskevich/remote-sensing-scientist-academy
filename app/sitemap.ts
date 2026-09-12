@@ -4,6 +4,7 @@ import { academyUrl } from "@/lib/site-paths";
 import { habitatCodes, habitatDefinitions, speciesRecords } from "@/lib/species-atlas";
 import { droneLabPath, uavFieldLabPath } from "@/lib/uav-field-lab";
 import { sarFieldLabPath } from "@/lib/sar-field-lab";
+import { lidarFieldLabPath } from "@/lib/lidar-field-lab";
 
 export const dynamic = "force-static";
 
@@ -26,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: academyUrl(uavFieldLabPath), lastModified: uavLastModified, changeFrequency: "monthly", priority: 0.95 },
     { url: academyUrl(droneLabPath), lastModified: uavLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl(sarFieldLabPath), lastModified: new Date("2026-09-12T00:00:00.000Z"), changeFrequency: "monthly", priority: 0.92 },
+    { url: academyUrl(lidarFieldLabPath), lastModified: new Date("2026-09-12T00:00:00.000Z"), changeFrequency: "monthly", priority: 0.92 },
     { url: academyUrl("/species/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl("/species/from-field-to-earth-observation/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: academyUrl("/data/baltic-coastal-meadow-2024/"), lastModified: atlasLastModified, changeFrequency: "monthly", priority: 0.85 },

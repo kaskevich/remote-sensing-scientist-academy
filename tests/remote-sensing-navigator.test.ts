@@ -13,6 +13,7 @@ const nonLessonRoutes = new Set([
   "/field-labs/uav-coastal-wetlands/",
   "/field-labs/uav-coastal-wetlands/drone-lab/",
   "/field-labs/sar-wetland-inundation/",
+  "/field-labs/lidar-canopy-structure/",
   "/species/from-field-to-earth-observation/",
 ]);
 
@@ -38,7 +39,7 @@ describe("Remote Sensing topic navigator", () => {
       ...topic.links.practice,
     ]);
 
-    expect(links).toHaveLength(27);
+    expect(links).toHaveLength(28);
     for (const link of links) {
       expect(lessonRoutes.has(link.href) || nonLessonRoutes.has(link.href), link.href).toBe(true);
     }
