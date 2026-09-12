@@ -3,13 +3,14 @@ import { JsonLd, SeoBreadcrumbs, SeoFooter, SeoHeader } from "@/app/components/s
 import { creatorReference } from "@/lib/professional-identity";
 import { academyHref, academyUrl } from "@/lib/site-paths";
 import { uavFieldLabPath } from "@/lib/uav-field-lab";
+import { sarFieldLabPath } from "@/lib/sar-field-lab";
 
 const path = "/field-labs/";
 const url = academyUrl(path);
 
 export const metadata: Metadata = {
   title: "Field Labs | Remote Sensing Scientist Academy",
-  description: "Applied Academy investigations in satellite change detection and UAV coastal-wetland mapping, each with reproducible evidence, QA and portfolio outputs.",
+  description: "Applied Academy investigations across satellite and UAV remote sensing, each with reproducible evidence, quality control and portfolio outputs.",
   alternates: { canonical: url },
 };
 
@@ -31,6 +32,15 @@ const labs = [
     href: uavFieldLabPath,
     tags: ["eBee X", "Sequoia + Duet T", "PPK / GCP", "Pix4D", "Mission → handoff"],
     className: "uav",
+  },
+  {
+    number: "08",
+    eyebrow: "Synthetic aperture radar",
+    title: "Map wetland inundation with Sentinel-1",
+    description: "Build a comparable SAR scene stack, preserve measurement scale, validate a candidate-inundation rule and communicate uncertainty without treating dark pixels as proof.",
+    href: sarFieldLabPath,
+    tags: ["Sentinel-1", "VV / VH", "Backscatter", "Validation", "Uncertainty"],
+    className: "sar",
   },
 ] as const;
 

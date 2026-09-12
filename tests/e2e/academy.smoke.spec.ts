@@ -47,6 +47,30 @@ test("homepage field-lab link opens the Field Labs collection", async ({ page })
   await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
 });
 
+test("Field Lab 08 publishes the complete SAR workflow and working decision labs", async ({ page }) => {
+  await page.goto("/field-labs/sar-wetland-inundation/");
+  await expect(page.getByRole("heading", { name: /Map wetland inundation/i, level: 1 })).toBeVisible();
+  await expect(page.locator(".sar-workflow-list > article")).toHaveCount(11);
+  await expect(page.getByText("Lab evidence boundary", { exact: true })).toBeVisible();
+
+  const decisionCards = page.locator(".sar-decision-grid > article");
+  await decisionCards.nth(0).getByRole("radio", { name: "accept", exact: true }).check();
+  await decisionCards.nth(1).getByRole("radio", { name: "accept", exact: true }).check();
+  await decisionCards.nth(2).getByRole("radio", { name: "review", exact: true }).check();
+  await decisionCards.nth(3).getByRole("radio", { name: "review", exact: true }).check();
+  await decisionCards.nth(4).getByRole("radio", { name: "reject", exact: true }).check();
+  await page.getByRole("button", { name: "Check all five decisions" }).click();
+  await expect(page.getByText("5 / 5 aligned with the QA record")).toBeVisible();
+
+  await page.getByRole("button", { name: /Permanent open water/i }).click();
+  await expect(page.locator(".sar-threshold-result")).toContainText("persistent water");
+
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.reload();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  await expect(page.getByRole("heading", { name: /Map wetland inundation/i, level: 1 })).toBeVisible();
+});
+
 test("homepage Remote Sensing navigator opens all six topics with accessible state and deep links", async ({ page }) => {
   await page.goto("/#sar");
 

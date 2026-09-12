@@ -76,7 +76,7 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
       "Backscatter combines moisture-sensitive dielectric effects, roughness, structure and geometry; it is not direct soil moisture.",
     ],
     distinctions: ["SAR is not an optical image shown with different colours.", "Backscatter ≠ one physical property."],
-    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "FIELD LAB COMING LATER"],
+    status: ["FOUNDATION AVAILABLE", "ADVANCED PRACTICE AVAILABLE", "FIELD LAB AVAILABLE"],
     links: {
       start: [
         { title: "SAR Fundamentals", href: "/module-2/sar-fundamentals/", context: "Module 2 · Lesson 2.28" },
@@ -84,9 +84,10 @@ export const remoteSensingTopics: RemoteSensingTopic[] = [
       deeper: [
         { title: "Build a Defensible Satellite Evidence Package", href: "/module-2/build-a-defensible-satellite-evidence-package/", context: "Module 2 · Chapter 5 practicum" },
       ],
-      practice: [],
+      practice: [
+        { title: "Field Lab 08 · Sentinel-1 Wetland Inundation", href: "/field-labs/sar-wetland-inundation/", context: "Scene comparability, classification and validation" },
+      ],
     },
-    practiceGap: "A dedicated SAR Field Lab is not yet available.",
   },
   {
     id: "lidar",
