@@ -8,6 +8,7 @@ describe("standalone advanced thermal lesson", () => {
     expect(thermalWorkflowSteps).toHaveLength(11);
     expect(thermalWorkflowSteps.every((step) => step.action.length >= 2 && step.check.length >= 2 && step.output && step.fail)).toBe(true);
     expect(existsSync("app/lessons/advanced-thermal-remote-sensing/page.tsx")).toBe(true);
+    expect(readFileSync("app/field-labs/page.tsx", "utf8")).toContain("href: advancedThermalLessonPath");
   });
 
   it("keeps measurement, retrieval and interpretation boundaries explicit", () => {

@@ -429,7 +429,8 @@ test("Field Lab 07 publishes the science route, interactive sensor explorer and 
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/field-labs/");
   await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
-  await expect(page.locator(".field-lab-card")).toHaveCount(2);
+  await expect(page.locator(".field-lab-card")).toHaveCount(6);
+  await expect(page.getByRole("link", { name: /Open advanced thermal lesson/ })).toHaveAttribute("href", "/lessons/advanced-thermal-remote-sensing/");
 
   await page.goto("/field-labs/uav-coastal-wetlands/");
   await expect(page.getByRole("heading", { name: "Plan, fly and process an eBee mission", level: 1 })).toBeVisible();
