@@ -47,6 +47,28 @@ test("homepage field-lab link opens the Field Labs collection", async ({ page })
   await expect(page.getByRole("heading", { name: "Field Labs", level: 1 })).toBeVisible();
 });
 
+test("homepage presents the Academy as always available with an accurate published inventory", async ({ page }) => {
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 375, height: 812 },
+    { width: 320, height: 700 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+
+    await expect(page.getByText("Always available online · Start any time", { exact: true })).toBeVisible();
+    await expect(page.getByText("96 lessons · 5 field labs", { exact: true })).toBeVisible();
+    await expect(page.getByText("12 practica + 2 capstones available · Self-paced portfolio pathway", { exact: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Browse the curriculum", exact: true })).toHaveAttribute("href", "#curriculum");
+    if (viewport.width >= 768) {
+      await expect(page.getByRole("link", { name: "Start learning", exact: true })).toHaveAttribute("href", "#curriculum");
+    }
+    await expect(page.locator("body")).not.toContainText(/Autumn cohort|Applications close|Apply for cohort|24 places/i);
+
+    expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+  }
+});
+
 test("Field Lab 08 publishes the complete SAR workflow and working decision labs", async ({ page }) => {
   await page.goto("/field-labs/sar-wetland-inundation/");
   await expect(page.getByRole("heading", { name: /Map wetland inundation/i, level: 1 })).toBeVisible();

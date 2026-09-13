@@ -50,7 +50,7 @@ export function SeoHeader({ current }: { current?: string }) {
           </nav>
         </details>
         {content.navigation.showApplyButton && (
-          <a className="header-cta" href={`${academyHref("/")}#apply`}>
+          <a className="header-cta" href={`${academyHref("/")}${content.navigation.applyHref}`}>
             {content.navigation.applyLabel} <span aria-hidden="true">↗</span>
           </a>
         )}

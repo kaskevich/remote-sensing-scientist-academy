@@ -36,13 +36,13 @@
         "visible": true
       }
     ],
-    "applyLabel": "Apply for cohort",
-    "applyHref": "#apply",
+    "applyLabel": "Start learning",
+    "applyHref": "#curriculum",
     "showApplyButton": true
   },
   "hero": {
     "admissionsOpen": true,
-    "eyebrow": "Admissions open · Autumn cohort",
+    "eyebrow": "Always available online · Start any time",
     "title": "Learn remote sensing",
     "accentTitle": "Work with real data",
     "intro": "Created by Volha Kaskevich, this practical online Academy teaches GIS, remote sensing and Earth Observation through real environmental data—from scientific Python and geospatial analysis to Google Earth Engine and machine learning.",
@@ -168,9 +168,9 @@
     "kicker": "Professional pathway",
     "titleLineOne": "Academy",
     "titleLineTwo": "Curriculum",
-    "cohortLabel": "AVAILABLE NOW",
-    "cohortDate": "Modules 1–2 + complete Module 3",
-    "cohortMeta": "95 lessons + 12 practica + Modules 2–3 capstones available · Portfolio pathway",
+    "cohortLabel": "ALWAYS AVAILABLE ONLINE",
+    "cohortDate": "96 lessons · 5 field labs",
+    "cohortMeta": "12 practica + 2 capstones available · Self-paced portfolio pathway",
     "modules": [
       {
         "id": "lesson-01",
@@ -397,33 +397,33 @@
     "description": "You will leave with a reviewed portfolio, a repeatable workflow, and the confidence to explain your results clearly.",
     "items": [
       {
+        "value": "96",
+        "label": "lessons available online"
+      },
+      {
+        "value": "05",
+        "label": "published field labs"
+      },
+      {
         "value": "12",
-        "label": "guided field labs"
+        "label": "chapter practica"
       },
       {
-        "value": "04",
-        "label": "portfolio projects"
-      },
-      {
-        "value": "30+",
-        "label": "satellite datasets"
-      },
-      {
-        "value": "01",
-        "label": "capstone defense"
+        "value": "02",
+        "label": "module capstones"
       }
     ]
   },
   "application": {
     "visible": true,
-    "kicker": "Applications are open",
-    "title": "Ready to start?",
-    "description": "Send a short note about what you want to learn and why you want to join.",
-    "buttonLabel": "Send your application",
-    "buttonHref": "mailto:volha.kaskevich@emu.ee",
+    "kicker": "Always available online",
+    "title": "Start learning today",
+    "description": "Open the curriculum or Field Labs and work at your own pace. No application or scheduled intake is required; contact Volha only if you have a question.",
+    "buttonLabel": "Browse the curriculum",
+    "buttonHref": "#curriculum",
     "openInNewTab": false,
-    "cohortMeta": "AUTUMN COHORT · 24 PLACES",
-    "deadlineMeta": "APPLICATIONS CLOSE 21 AUGUST"
+    "cohortMeta": "SELF-PACED · OPEN ONLINE",
+    "deadlineMeta": "START AT ANY TIME"
   },
   "footer": {
     "description": "Created by Volha Kaskevich: practical GIS, remote sensing and Earth Observation training with real data and clear results.",

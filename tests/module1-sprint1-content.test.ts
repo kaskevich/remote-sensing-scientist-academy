@@ -24,6 +24,10 @@ const site = JSON.parse(
     cohortMeta: string;
     modules: CurriculumLesson[];
   };
+  navigation: { applyLabel: string; applyHref: string };
+  hero: { eyebrow: string };
+  outcomes: { items: Array<{ value: string; label: string }> };
+  application: { kicker: string; description: string; cohortMeta: string; deadlineMeta: string };
 };
 
 const activeLessons = site.curriculum.modules;
@@ -59,8 +63,8 @@ describe("Module 1 pedagogical review", () => {
     expect(`${site.curriculum.titleLineOne} ${site.curriculum.titleLineTwo}`).toBe(
       "Academy Curriculum",
     );
-    expect(site.curriculum.cohortDate).toBe("Modules 1–2 + complete Module 3");
-    expect(site.curriculum.cohortMeta).toContain("95 lessons");
+    expect(site.curriculum.cohortDate).toBe("96 lessons · 5 field labs");
+    expect(site.curriculum.cohortMeta).toContain("12 practica + 2 capstones");
     expect(activeLessons.map(({ id, title }) => ({ id, title }))).toEqual([
       { id: "lesson-01", title: "Welcome to Scientific Programming" },
       { id: "lesson-02", title: "Variables and Scientific Data" },
@@ -75,6 +79,18 @@ describe("Module 1 pedagogical review", () => {
       { id: "lesson-11", title: "Join, Reshape and Visualise" },
       { id: "lesson-12", title: "Vegetation Data Explorer Project" },
     ]);
+  });
+
+  it("presents the Academy as continuously available with accurate published totals", () => {
+    expect(site.navigation).toEqual(expect.objectContaining({ applyLabel: "Start learning", applyHref: "#curriculum" }));
+    expect(site.hero.eyebrow).toBe("Always available online · Start any time");
+    expect(site.outcomes.items).toEqual([
+      { value: "96", label: "lessons available online" },
+      { value: "05", label: "published field labs" },
+      { value: "12", label: "chapter practica" },
+      { value: "02", label: "module capstones" },
+    ]);
+    expect([site.hero.eyebrow, site.application.kicker, site.application.description, site.application.cohortMeta, site.application.deadlineMeta].join(" ").toLowerCase()).not.toMatch(/autumn|cohort|applications close/);
   });
 
   it("structures Lesson 1 as seven beginner-sized active blocks", () => {
